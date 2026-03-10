@@ -556,7 +556,7 @@ export default function CPUHomepage(){
               <Phone size={13}/> 1800-1800-345
             </a> */}
             <button className="pulse-anim apply_now_btn bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-5 py-2 text-[13px] font-extrabold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
-              ✈ Apply Now
+               Apply Now
             </button>
             <button className="xl:hidden bg-blue-50 border-none text-[#00588b] cursor-pointer p-2.5 rounded-lg flex items-center justify-center" onClick={()=>setMenuOpen(true)}>
               <Menu size={21}/>
@@ -625,7 +625,7 @@ export default function CPUHomepage(){
                   <Download size={13}/> Download Brochure
                 </button>
                 <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-5 py-2 text-[13px] font-extrabold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
-                  ✈ Apply Now
+                   Apply Now
                 </button>
               </div>
             </div>
