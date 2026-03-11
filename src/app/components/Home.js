@@ -114,23 +114,21 @@ const COURSE_LIST = [
 ];
 
 const COLLABORATIONS = ["IIT Bombay","IIM Udaipur","AIIMS","WHO","UNESCO","NIT Hamirpur","Oxford","ISRO","DRDO","NASSCOM","CII","FICCI","AICTE","UGC"];
-const RECRUITERS     = [
-{img:"https://cpur.in/wp-content/uploads/2023/12/40-Just-Dial.webp"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/1-Amazon.png"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/2-Linkdin.png"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/5-Microsoft.webp"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/7-TCS.webp"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/22-Bajaj-Fin.webp"},
-
+const RECRUITERS = [
+  {img:"https://cpur.in/wp-content/uploads/2023/12/40-Just-Dial.webp"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/1-Amazon.png"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/2-Linkdin.png"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/5-Microsoft.webp"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/7-TCS.webp"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/22-Bajaj-Fin.webp"},
 ];
-const Personalities     = [
-{img:"https://cpur.in/wp-content/uploads/2023/12/1-min.png"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/2-min.png"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/3-min.png"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/4-min.png"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/5-min.png"},
-{img:"https://cpur.in/wp-content/uploads/2023/12/6-min.png"},
-
+const Personalities = [
+  {img:"https://cpur.in/wp-content/uploads/2023/12/1-min.png"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/2-min.png"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/3-min.png"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/4-min.png"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/5-min.png"},
+  {img:"https://cpur.in/wp-content/uploads/2023/12/6-min.png"},
 ];
 
 const PLACEMENT_SLIDES = [
@@ -155,10 +153,10 @@ const CAMPUS_COLS = [
 ];
 
 const ALUMNI = [
-  {name:"Aryan Mathuria",role:" BCA Class of 2018",  company:" evertz",    companyBg:"bg-green-600",     circleBg:"bg-teal-400",  img:"https://cpur.in/wp-content/uploads/2023/12/alumni_01.png"},
-  {name:"Kiran Bablani", role:"BCA Class of 2018 ", company:"zalando ",companyBg:"bg-pink-600",     circleBg:"bg-yellow-400",img:"https://cpur.in/wp-content/uploads/2023/12/alumni_02.png"},
-  {name:" Priya Lakhotiya", role:"MBA Class of 2021 ",   company:"upGrad",    companyBg:"bg-blue-900",     circleBg:"bg-red-500",   img:"https://cpur.in/wp-content/uploads/2023/12/alumni_03.png"},
-  {name:"Naman Nandwana ",  role:"MBA | Class of 2020",   company:"Quick Heal",   companyBg:"bg-amber-500",    circleBg:"bg-purple-400",img:"https://cpur.in/wp-content/uploads/2023/12/alumni_04.png"},
+  {name:"Aryan Mathuria",role:"BCA Class of 2018",  company:"evertz",    companyBg:"bg-green-600",  circleBg:"bg-teal-400",  img:"https://cpur.in/wp-content/uploads/2023/12/alumni_01.png"},
+  {name:"Kiran Bablani", role:"BCA Class of 2018",  company:"zalando",   companyBg:"bg-pink-600",   circleBg:"bg-yellow-400",img:"https://cpur.in/wp-content/uploads/2023/12/alumni_02.png"},
+  {name:"Priya Lakhotiya",role:"MBA Class of 2021", company:"upGrad",    companyBg:"bg-blue-900",   circleBg:"bg-red-500",   img:"https://cpur.in/wp-content/uploads/2023/12/alumni_03.png"},
+  {name:"Naman Nandwana", role:"MBA | Class of 2020",company:"Quick Heal",companyBg:"bg-amber-500", circleBg:"bg-purple-400",img:"https://cpur.in/wp-content/uploads/2023/12/alumni_04.png"},
 ];
 
 const RESEARCH_ITEMS = [
@@ -191,7 +189,6 @@ const SOCIAL_IMGS = [
 ];
 
 
-
 /* ─── COUNTER HOOK ─── */
 function useCounter(target, dur=1800, active=false) {
   const [v,setV]=useState(0);
@@ -220,15 +217,27 @@ function StatCard({value,suffix,label,icon:Icon,inView}){
   );
 }
 
-/* ─── SWIPER ─── */
-/* ─────────────────────────────────────────────────────────
-   ✅ FIXED SWIPER — correct transform calculation
-   Formula: translateX(calc(-idx * (100/perView)% - idx * gap/perView * px))
-   This correctly accounts for flex gap spacing between items.
-───────────────────────────────────────────────────────── */
-function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000, dark = false }) {
+/* ─── SWIPER — with responsive breakpoints support ─── */
+function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000, dark = false, breakpoints = null }) {
+
+  // ✅ Responsive perView via breakpoints
+  const [winW, setWinW] = useState(typeof window !== "undefined" ? window.innerWidth : 1200);
+  useEffect(() => {
+    const fn = () => setWinW(window.innerWidth);
+    window.addEventListener("resize", fn);
+    return () => window.removeEventListener("resize", fn);
+  }, []);
+
+  // Resolve perView from breakpoints e.g. { 0:1, 640:2, 1024:4 }
+  // Picks highest matching breakpoint
+  const resolvedPerView = breakpoints
+    ? Object.entries(breakpoints)
+        .filter(([bp]) => winW >= Number(bp))
+        .reduce((_, [, v]) => v, perView)
+    : perView;
+
   const [idx, setIdx] = useState(0);
-  const max = Math.max(0, items.length - perView);
+  const max = Math.max(0, items.length - resolvedPerView);
   const timerRef = useRef(null);
 
   const go = useCallback((n) => { setIdx(Math.max(0, Math.min(n, max))); }, [max]);
@@ -244,11 +253,11 @@ function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000
     return () => clearInterval(timerRef.current);
   }, [max, autoInterval]);
 
-  // ✅ FIXED: correct width and transform
-  // Each slide width = (100% - gap*(perView-1)) / perView
-  // Step size (one slide + one gap) = slideWidth + gap = 100%/perView + gap/perView
-  const slideWidth = `calc(${100 / perView}% - ${gap * (perView - 1) / perView}px)`;
-  const translateX = `calc(-${idx * (100 / perView)}% - ${idx * gap / perView}px)`;
+  // Clamp idx when perView changes on resize
+  useEffect(() => { setIdx(p => Math.min(p, max)); }, [max]);
+
+  const slideWidth = `calc(${100 / resolvedPerView}% - ${gap * (resolvedPerView - 1) / resolvedPerView}px)`;
+  const translateX = `calc(-${idx * (100 / resolvedPerView)}% - ${idx * gap / resolvedPerView}px)`;
 
   return (
     <div className="relative">
@@ -256,7 +265,7 @@ function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000
         <div
           className="flex"
           style={{
-            gap: gap,
+            gap,
             transform: `translateX(${translateX})`,
             transition: "transform 0.55s cubic-bezier(0.4,0,0.2,1)",
             willChange: "transform",
@@ -270,7 +279,7 @@ function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000
         </div>
       </div>
 
-      {/* Prev button */}
+      {/* Prev */}
       {idx > 0 && (
         <button
           onClick={() => resetTimer(idx - 1)}
@@ -280,7 +289,7 @@ function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000
         </button>
       )}
 
-      {/* Next button */}
+      {/* Next */}
       {idx < max && (
         <button
           onClick={() => resetTimer(idx + 1)}
@@ -296,10 +305,11 @@ function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000
           <button
             key={i}
             onClick={() => resetTimer(i)}
-            className={`h-2 rounded-full border-none cursor-pointer transition-all duration-300 ${i === idx
-              ? dark ? "bg-amber-400 w-6" : "bg-[#00588b] w-6"
-              : dark ? "bg-black/30 w-2" : "bg-gray-300 w-2"
-              }`}
+            className={`h-2 rounded-full border-none cursor-pointer transition-all duration-300 ${
+              i === idx
+                ? dark ? "bg-amber-400 w-6" : "bg-[#00588b] w-6"
+                : dark ? "bg-black/30 w-2" : "bg-gray-300 w-2"
+            }`}
           />
         ))}
       </div>
@@ -337,33 +347,33 @@ function HeroSwiper(){
       <div className="absolute inset-0 bg-gradient-to-r from-[#00121f]/90 via-[#002848]/72 to-[#00121f]/28" style={{zIndex:1}}/>
 
       {/* Content */}
-   <div className="relative max-w-7xl mx-auto px-5 py-24 flex items-center" style={{zIndex:2}}>
-  <div key={animKey} className="max-w-[660px] animate-heroUp">
-    <span className="inline-flex items-center gap-1.5 bg-amber-400 text-black text-xs font-extrabold px-4 py-1.5 rounded-full mb-5">{hs.badge}</span>
-    <p className="text-amber-400 font-bold text-xs uppercase tracking-[0.2em] mb-2.5">{hs.tagline}</p>
-    <h1 className="text-white font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] m-0">{hs.title}</h1>
-    <h1 className="text-amber-400 font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] mt-0 mb-6">{hs.subtitle}</h1>
-    <p className="text-white/80 text-base leading-[1.75] max-w-[520px] mb-8">{hs.desc}</p>
-    <div className="flex gap-3.5 flex-wrap">
-      <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3 text-[15px] font-extrabold cursor-pointer flex items-center gap-2 shadow-lg hover:scale-105 transition-transform">
-        Apply Now <ArrowRight size={15}/>
-      </button>
-      <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
-        Explore Programs
-      </button>
-      <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
-        <Play size={15}/> Watch Video
-      </button>
-    </div>
-  </div>
+      <div className="relative max-w-7xl mx-auto px-5 py-24 flex items-center" style={{zIndex:2}}>
+        <div key={animKey} className="max-w-[660px] animate-heroUp">
+          <span className="inline-flex items-center gap-1.5 bg-amber-400 text-black text-xs font-extrabold px-4 py-1.5 rounded-full mb-5">{hs.badge}</span>
+          <p className="text-amber-400 font-bold text-xs uppercase tracking-[0.2em] mb-2.5">{hs.tagline}</p>
+          <h1 className="text-white font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] m-0">{hs.title}</h1>
+          <h1 className="text-amber-400 font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] mt-0 mb-6">{hs.subtitle}</h1>
+          <p className="text-white/80 text-base leading-[1.75] max-w-[520px] mb-8">{hs.desc}</p>
+          <div className="flex gap-3.5 flex-wrap">
+            <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3 text-[15px] font-extrabold cursor-pointer flex items-center gap-2 shadow-lg hover:scale-105 transition-transform">
+              Apply Now <ArrowRight size={15}/>
+            </button>
+            <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
+              Explore Programs
+            </button>
+            <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
+              <Play size={15}/> Watch Video
+            </button>
+          </div>
+        </div>
 
-  {/* ✅ Only shows on slides where heroimg is defined */}
-  {hs.heroimg && (
-    <div className="hero_img animate-heroUp">
-      <img src={hs.heroimg} alt="img" className="ml-30 w-[80%] block m-auto rounded-2xl group-hover:scale-105 transition-transform duration-400"/>
-    </div>
-  )}
-</div>
+        {/* Only shows on slides where heroimg is defined */}
+        {hs.heroimg && (
+          <div className="hero_img animate-heroUp">
+            <img src={hs.heroimg} alt="img" className="ml-30 w-[80%] block m-auto rounded-2xl group-hover:scale-105 transition-transform duration-400"/>
+          </div>
+        )}
+      </div>
 
       {/* Dots */}
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 mb-5" style={{zIndex:3}}>
@@ -442,7 +452,6 @@ export default function CPUHomepage(){
         .dd-anim{animation:dropDown .18s ease}
         .mob-anim{animation:slideInLeft .26s ease}
         .pulse-anim{animation:pulseGlow 2.2s infinite}
-        /* campus col hover links */
         .campus-col .c-links{opacity:0;transform:translateY(14px);transition:all .32s}
         .campus-col:hover .c-links{opacity:1;transform:translateY(0)}
         .campus-col img{transition:transform .5s}
@@ -469,7 +478,7 @@ export default function CPUHomepage(){
               <Mail size={12}/> admissions@cpuniverse.ac.in
             </a>
             <span className="hidden sm:flex text-slate-300 text-xs items-center gap-1.5">
-             <Phone size={13}/> 1800-1800-345
+              <Phone size={13}/> 1800-1800-345
             </span>
           </div>
           <div className="flex gap-3 items-center">
@@ -488,11 +497,8 @@ export default function CPUHomepage(){
         </span>
       </div>
 
-      {/* ════════════════════════════════════════
-          NAVBAR
-      ════════════════════════════════════════ */}
+      {/* ════ NAVBAR ════ */}
       <nav ref={navRef} className={`sticky top-0 z-[5000] bg-white/98 backdrop-blur-xl transition-shadow duration-300 ${scrolled?"shadow-lg":"shadow-[0_1px_0_#e8f0f7]"}`}>
-      {/* <nav className="sticky top-0 z-[5000] transition-all duration-300 bg-white shadow-2xl"></nav> */}
         <div className="max-w-7xl mx-auto px-5 py-0 flex justify-between items-center gap-4">
 
           {/* LOGO */}
@@ -507,7 +513,6 @@ export default function CPUHomepage(){
                 if(fb)fb.style.display="flex";
               }}
             />
-            {/* Fallback */}
             <div className="hidden items-center gap-2">
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-black text-xs">CPU</div>
               <div>
@@ -552,9 +557,6 @@ export default function CPUHomepage(){
 
           {/* Right */}
           <div className="flex items-center gap-2.5 flex-shrink-0">
-            {/* <a href="tel:18001800345" className="hidden sm:flex text-[#00588b] font-bold text-xs no-underline items-center gap-1 hover:text-amber-500 transition-colors">
-              <Phone size={13}/> 1800-1800-345
-            </a> */}
             <button className="pulse-anim apply_now_btn bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-5 py-2 text-[13px] font-extrabold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
                Apply Now
             </button>
@@ -569,7 +571,6 @@ export default function CPUHomepage(){
           <div className="dd-anim fixed left-0 right-0 bg-white shadow-2xl border-t-[3px] border-[#00588b] z-[8999]"
             onMouseEnter={()=>setActiveMenu(activeMenu)} onMouseLeave={()=>setActiveMenu(null)}>
             <div className="max-w-[1200px] mx-auto grid grid-cols-3 gap-0 px-7 pt-6">
-              {/* Col 1: By Level */}
               <div className="pr-6 border-r border-gray-100">
                 <div className="flex items-center gap-2 text-[#00588b] text-[11px] font-black uppercase tracking-widest mb-3.5 pb-2 border-b-2 border-blue-100">
                   <Layers size={14}/> By Level
@@ -585,7 +586,6 @@ export default function CPUHomepage(){
                   </a>
                 ))}
               </div>
-              {/* Col 2: Schools */}
               <div className="px-6 border-r border-gray-100">
                 <div className="flex items-center gap-2 text-[#00588b] text-[11px] font-black uppercase tracking-widest mb-3.5 pb-2 border-b-2 border-blue-100">
                   <Building2 size={14}/> Schools
@@ -597,7 +597,6 @@ export default function CPUHomepage(){
                   </a>
                 ))}
               </div>
-              {/* Col 3: Top Courses */}
               <div className="pl-6">
                 <div className="flex items-center gap-2 text-[#00588b] text-[11px] font-black uppercase tracking-widest mb-3.5 pb-2 border-b-2 border-blue-100">
                   <Star size={14}/> Top Courses
@@ -615,7 +614,6 @@ export default function CPUHomepage(){
                 ))}
               </div>
             </div>
-            {/* Mega Footer */}
             <div className="bg-blue-50 border-t border-blue-100 px-7 py-3.5 mt-5">
               <div className="max-w-[1200px] mx-auto flex items-center gap-3 flex-wrap">
                 <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-5 py-2 text-[13px] font-bold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
@@ -763,34 +761,24 @@ export default function CPUHomepage(){
       <section id="programs" className="bg-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-black text-3xl text-gray-900 mb-8">Explore Our <span className="text-[#00588b]">70+ Programs</span> — Start Your Future-ready Career</h2>
-           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {PROGRAM_CARDS.map((card) => (
-                <div key={card.label} className="relative overflow-hidden rounded-xl cursor-pointer group">
-                  <img
-                    src={card.image}
-                    alt={card.label}
-                    className="block w-full h-[360px] object-cover group-hover:scale-105 transition-transform duration-400"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-[#00588b] text-white px-4 py-3.5 flex items-center justify-between">
-                    <span className="font-bold text-md">{card.label}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm opacity-85">{card.count}</span>
-                      <ArrowRight size={14} />
-                    </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {PROGRAM_CARDS.map((card) => (
+              <div key={card.label} className="relative overflow-hidden rounded-xl cursor-pointer group">
+                <img
+                  src={card.image}
+                  alt={card.label}
+                  className="block w-full h-[360px] object-cover group-hover:scale-105 transition-transform duration-400"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-[#00588b] text-white px-4 py-3.5 flex items-center justify-between">
+                  <span className="font-bold text-md">{card.label}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm opacity-85">{card.count}</span>
+                    <ArrowRight size={14} />
                   </div>
                 </div>
-              ))}
-            </div>
-          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 mt-8">
-            {COURSE_LIST.map(({title,dept,icon:Ic,count},i)=>(
-              <div key={i} className={`bg-white border border-gray-100 rounded-2xl p-4.5 cursor-pointer hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 border-t-[3px] ${i%2===0?"border-t-[#00588b]":"border-t-[#003a5c]"}`}>
-                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-2.5"><Ic size={18} className="text-[#00588b]"/></div>
-                <div className="font-extrabold text-[15px] text-gray-900 mb-0.5">{title}</div>
-                <div className="text-xs text-gray-400 mb-2.5">{dept}</div>
-                <span className="bg-blue-50 text-[#00588b] text-[11px] font-bold px-2.5 py-0.5 rounded-full">{count}</span>
               </div>
             ))}
-          </div> */}
+          </div>
           <div className="text-center mt-6">
             <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
               View All Programs <ArrowRight size={14}/>
@@ -800,7 +788,6 @@ export default function CPUHomepage(){
       </section>
 
       <div className="h-1 bg-gradient-to-r from-[#00588b] via-amber-400 to-[#00588b]"/>
-
 
       {/* ════ PLACEMENT ════ */}
       <section id="placement" className="bg-gradient-to-br from-[#00588b] to-[#003a5c] py-24 px-4 relative overflow-hidden">
@@ -814,7 +801,9 @@ export default function CPUHomepage(){
               <ArrowRight size={28} className="text-amber-400"/>
             </div>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Stats grid */}
          
               <div className="grid grid-cols-3 gap-0.5 rounded-2xl h-[100%]  overflow-hidden shadow-2xl">
@@ -829,10 +818,18 @@ export default function CPUHomepage(){
              
           
             </div>
-            {/* Placement swiper */}
-            <Swiper items={PLACEMENT_SLIDES} perView={2} gap={20} autoInterval={4000} dark={true}
+
+
+            {/* ✅ Placement slider — 1 slide mobile → 2 slides desktop */}
+            <Swiper
+              items={PLACEMENT_SLIDES}
+              perView={2}
+              gap={20}
+              autoInterval={4000}
+              dark={true}
+              breakpoints={{ 0: 1, 768: 2 }}
               renderSlide={(slide)=>(
-                <div className="rounded-2xl overflow-hidden relative h-[400px] shadow-2xl group">
+                <div className="rounded-2xl overflow-hidden relative h-[360px] sm:h-[400px] shadow-2xl group">
                   <img src={slide.img} alt={slide.name} className="w-full h-full object-cover object-top block group-hover:scale-105 transition-transform duration-400"/>
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85"/>
                   <div className="absolute bottom-0 left-0 right-0 p-3.5">
@@ -847,32 +844,31 @@ export default function CPUHomepage(){
         </div>
       </section>
 
-      {/* ════ COLLABORATIONS ════ */}
+      {/* ════ TOP RECRUITERS ════ */}
       <section className="bg-blue-50 py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="font-black text-3xl text-gray-900">Our Top <span className="text-[#00588b]"> Recruiters </span></h2>
+            <h2 className="font-black text-3xl text-gray-900">Our Top <span className="text-[#00588b]">Recruiters</span></h2>
             <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
           </div>
-      
-           <div className="mb-10">  
-         <Swiper items={RECRUITERS} perView={6} gap={14} autoInterval={4000} dark={true}
-              renderSlide={(slide)=>(
-                <div className="rounded-1xl overflow-hidden relative  shadow-2xl group">
-                  <img src={slide.img} alt={slide.name} className=" h-[40px] object-cover object-top block group-hover:scale-105 transition-transform duration-400"/>
-                </div>
-              )}
-            />
-                </div>
 
-
-    
+          {/* ✅ Recruiters slider — 2 mobile → 4 tablet → 6 desktop */}
+          <Swiper
+            items={RECRUITERS}
+            perView={6}
+            gap={14}
+            autoInterval={4000}
+            dark={true}
+            breakpoints={{ 0: 2, 640: 4, 1024: 6 }}
+            renderSlide={(slide)=>(
+              <div className="bg-white rounded-xl p-3 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
+                <img src={slide.img} alt="" className="h-10 w-full object-contain group-hover:scale-105 transition-transform duration-300"/>
+              </div>
+            )}
+          />
         </div>
       </section>
 
-
-
-      
       {/* ════ CAMPUS LIFE ════ */}
       <section id="campus" className="bg-blue-50">
         <div className="max-w-7xl mx-auto mb-9">
@@ -889,7 +885,7 @@ export default function CPUHomepage(){
             ))}
           </div>
         </div>
-        <div className="flex">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {CAMPUS_COLS.map((col,i)=>(
             <div key={i} className="campus-col relative overflow-hidden cursor-pointer flex-1">
               <img src={col.img} alt={col.bold} className="w-full h-[500px] object-cover block"/>
@@ -920,7 +916,15 @@ export default function CPUHomepage(){
             <h2 className="font-black text-[clamp(26px,3.5vw,44px)] text-white m-0">Our <span className="text-amber-400">Alumni</span> Leading the World</h2>
             <div className="w-14 h-0.5 bg-amber-400 rounded mt-3.5"/>
           </div>
-          <Swiper items={ALUMNI} perView={4} gap={18} autoInterval={4500} dark={true}
+
+          {/* ✅ Alumni slider — 1 mobile → 2 tablet → 4 desktop */}
+          <Swiper
+            items={ALUMNI}
+            perView={4}
+            gap={18}
+            autoInterval={4500}
+            dark={true}
+            breakpoints={{ 0: 1, 640: 2, 1024: 4 }}
             renderSlide={(alum)=>(
               <div className="relative overflow-hidden rounded-2xl cursor-pointer h-[400px] bg-gray-900 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
                 <div className={`absolute bottom-14 left-1/2 -translate-x-1/2 w-52 h-52 rounded-full ${alum.circleBg} opacity-90`}/>
@@ -938,24 +942,32 @@ export default function CPUHomepage(){
           />
         </div>
       </section>
-         <section id="Personalities_section" className="bg-blue-50 py-16 px-4">  
-           <div className="max-w-7xl mx-auto"> 
+
+      {/* ════ EMINENT PERSONALITIES ════ */}
+      <section id="Personalities_section" className="bg-blue-50 py-16 px-4">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="font-black text-3xl text-gray-900">Eminent 
- <span className="text-[#00588b]"> Personalities @ CPU</span></h2>
+            <h2 className="font-black text-3xl text-gray-900">Eminent <span className="text-[#00588b]">Personalities @ CPU</span></h2>
             <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
           </div>
- <div className="mb-">  
-         <Swiper items={Personalities} perView={4} gap={14} autoInterval={4000} dark={true}
-              renderSlide={(slide)=>(
-                <div className="rounded-1xl overflow-hidden relative  shadow-2xl group">
-                  <img src={slide.img} alt={slide.name} className=" w-[100%]  block group-hover:scale-105 transition-transform duration-400"/>
-                </div>
-              )}
-            />
-        </div>
+
+          {/* ✅ Personalities slider — 1 mobile → 2 tablet → 4 desktop */}
+          <Swiper
+            items={Personalities}
+            perView={4}
+            gap={14}
+            autoInterval={4000}
+            dark={true}
+            breakpoints={{ 0: 1, 640: 2, 1024: 4 }}
+            renderSlide={(slide)=>(
+              <div className="rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group bg-white">
+                <img src={slide.img} alt="" className="w-full block group-hover:scale-105 transition-transform duration-400 object-cover"/>
+              </div>
+            )}
+          />
         </div>
       </section>
+
       {/* ════ RESEARCH ════ */}
       <section id="research" className="bg-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
@@ -1010,7 +1022,7 @@ export default function CPUHomepage(){
         </div>
       </section>
 
-      {/* ════ SOCIAL WALL — 4 columns ════ */}
+      {/* ════ SOCIAL WALL ════ */}
       <section className="bg-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-7">
@@ -1066,7 +1078,6 @@ export default function CPUHomepage(){
       {/* ════ CTA ════ */}
       <section className="bg-gradient-to-br from-[#00588b] to-[#003a5c] py-20 px-4">
         <div className="max-w-[860px] mx-auto text-center">
-          {/* <GraduationCap size={56} className="text-white/22 mx-auto mb-4"/> */}
           <h2 className="text-white font-black text-3xl mb-3">Begin Your Journey at Career Point University</h2>
           <p className="text-white/80 text-base max-w-xl mx-auto mb-8 leading-[1.75]">Join 25,000+ students and experience world-class education, unmatched campus life, and extraordinary career opportunities in Kota.</p>
           <div className="flex justify-center gap-3.5 flex-wrap">

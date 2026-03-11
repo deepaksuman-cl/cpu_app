@@ -13,6 +13,12 @@ nav.sticky.top-0.shadow-lg {
     display: none;
 }
 nav.sticky.top-0.shadow-lg {
+
+}
+.hero_img {
+    display: none;
+}
+nav{
     padding: 7px 0;
 }
 }
