@@ -158,7 +158,7 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-2.5 flex-shrink-0">
-            <button className="pulse-anim bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-5 py-2 text-[13px] font-extrabold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
+            <button className="apply_now_btn pulse-anim bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-5 py-2 text-[13px] font-extrabold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
               Apply Now
             </button>
             <button className="xl:hidden bg-blue-50 border-none text-[#00588b] cursor-pointer p-2.5 rounded-lg flex items-center justify-center" onClick={()=>setMenuOpen(true)}>

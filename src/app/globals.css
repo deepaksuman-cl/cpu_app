@@ -13,7 +13,9 @@ nav.sticky.top-0.shadow-lg {
    .apply_now_btn{
     display: none;
 }
-
+nav img{
+    height: 20px!important;
+}
 .hero_img {
     display: none;
 }
