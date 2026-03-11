@@ -1,13 +1,20 @@
 @import "tailwindcss";
 @import "../app/assets/css/style.css";
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; } 
+body *{
+    font-weight: 500!important;
+}
 [id] { scroll-margin-top: 72px; } /* nav height offset */
 
 nav.sticky.top-0.shadow-lg {
     position: fixed;
     width: 100%;
     transition: all 0.3s;
+}
+
+ .relative a {
+    border: 0!important;
 }
 @media only screen and (max-width: 767px) {
    .apply_now_btn{
