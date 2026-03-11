@@ -8,7 +8,7 @@ import {
   Building2, Microscope, Zap, Heart, Facebook, Instagram,
   Youtube, Twitter, Linkedin, MessageCircle, Download,
   Plus, Minus, Play, CheckCircle, Calendar, ChevronDown,
-  Search, Layers
+  Search, Layers, BadgeCheck, Sparkles
 } from "lucide-react";
 
 
@@ -102,18 +102,6 @@ const PROGRAM_CARDS = [
   {id:4,label:"Diploma",        image:"https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80",count:"15+ Programs"},
 ];
 
-const COURSE_LIST = [
-  {title:"B.Tech / BE",  dept:"Engineering & Technology",  icon:Zap,         count:"10 Specializations"},
-  {title:"BBA / MBA",    dept:"Management & Commerce",     icon:Briefcase,   count:"7 Specializations"},
-  {title:"B.Sc Medical", dept:"Medical & Health Sciences", icon:Heart,       count:"5 Programs"},
-  {title:"LLB / LLM",   dept:"Law & Legal Studies",       icon:Award,       count:"3 Programs"},
-  {title:"B.Arch",       dept:"Architecture & Design",     icon:Building2,   count:"2 Programs"},
-  {title:"B.Pharm",      dept:"Pharmacy & Life Sciences",  icon:FlaskConical,count:"4 Programs"},
-  {title:"B.Ed / M.Ed",  dept:"Education & Training",      icon:BookOpen,    count:"3 Programs"},
-  {title:"BCA / MCA",   dept:"Computer Applications",     icon:Microscope,  count:"5 Programs"},
-];
-
-const COLLABORATIONS = ["IIT Bombay","IIM Udaipur","AIIMS","WHO","UNESCO","NIT Hamirpur","Oxford","ISRO","DRDO","NASSCOM","CII","FICCI","AICTE","UGC"];
 const RECRUITERS = [
   {img:"https://cpur.in/wp-content/uploads/2023/12/40-Just-Dial.webp"},
   {img:"https://cpur.in/wp-content/uploads/2023/12/1-Amazon.png"},
@@ -172,6 +160,52 @@ const HAPPENINGS = [
   {title:"Cultural Fest 'Utsav'",          date:"Apr 5, 2026", tag:"Cultural", icon:Star,      colorClass:"from-[#004a7a] to-[#002f4e]"},
 ];
 
+/* ─── TESTIMONIALS DATA ─── */
+const TESTIMONIALS = [
+  {
+    id:1, name:"Aryan Mathuria", course:"BCA Alumni", company:"Evertz Technologies",
+    package:"₹12 LPA", rating:5, batch:"Class of 2018",
+    quote:"CPU Kota gave me the technical foundation and confidence I needed. The faculty was always approachable, and the placement cell worked tirelessly to connect us with global companies. Proud to represent CPU at Evertz Technologies.",
+    img:"https://cpur.in/wp-content/uploads/2023/12/alumni_01.png",
+    tag:"BCA Alumni", tagColor:"bg-[#003a5c]",
+  },
+  {
+    id:2, name:"Kiran Bablani", course:"BCA Alumni", company:"Zalando",
+    package:"₹18 LPA", rating:5, batch:"Class of 2018",
+    quote:"Studying at Career Point University was a turning point in my life. The computer labs, project-based learning, and industry exposure prepared me for a global company like Zalando. CPU truly builds world-ready professionals.",
+    img:"https://cpur.in/wp-content/uploads/2023/12/alumni_02.png",
+    tag:"BCA Alumni", tagColor:"bg-pink-700",
+  },
+  {
+    id:3, name:"Priya Lakhotiya", course:"MBA Alumni", company:"upGrad",
+    package:"₹15 LPA", rating:5, batch:"Class of 2021",
+    quote:"The MBA program at CPU Kota is truly industry-aligned. Live projects, guest lectures from industry leaders, and the rigorous curriculum shaped my management thinking. upGrad recognized the CPU difference from day one.",
+    img:"https://cpur.in/wp-content/uploads/2023/12/alumni_03.png",
+    tag:"MBA Alumni", tagColor:"bg-blue-800",
+  },
+  {
+    id:4, name:"Naman Nandwana", course:"MBA Alumni", company:"Quick Heal Technologies",
+    package:"₹14 LPA", rating:5, batch:"Class of 2020",
+    quote:"CPU's campus in Kota is vibrant and full of learning opportunities beyond the classroom. The management faculty pushed us to think critically. My placement at Quick Heal was a result of three years of hard preparation backed by CPU's ecosystem.",
+    img:"https://cpur.in/wp-content/uploads/2023/12/alumni_04.png",
+    tag:"MBA Alumni", tagColor:"bg-amber-700",
+  },
+  {
+    id:5, name:"Abhinav Singh", course:"B.Sc HBHA Alumni", company:"Hyatt Regency",
+    package:"₹9.5 LPA", rating:4, batch:"Class of 2022",
+    quote:"Career Point University's hospitality program is one of the best in Rajasthan. The practical training, industry visits, and soft skills workshops gave me everything I needed to step confidently into Hyatt Regency.",
+    img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&q=80",
+    tag:"B.Sc HBHA Alumni", tagColor:"bg-emerald-700",
+  },
+  {
+    id:6, name:"Avneet Bagga", course:"B.Tech Food Tech Alumni", company:"ITC Limited",
+    package:"₹10 LPA", rating:4, batch:"Class of 2023",
+    quote:"The food technology labs at CPU are world-class. I had the opportunity to work on real product development projects during my degree. That hands-on experience is what got me placed at ITC Limited straight out of campus.",
+    img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80",
+    tag:"B.Tech Food Tech", tagColor:"bg-rose-700",
+  },
+];
+
 const FAQS = [
   {q:"What programs does Career Point University offer?",   a:"CPU offers 70+ programs across UG, PG, Doctoral and Diploma levels in Engineering, Management, Law, Pharmacy, Medical Sciences, and more."},
   {q:"What is the admission process at CPU?",               a:"Admissions are based on merit/entrance test scores (JEE, NEET, CAT, etc.). Apply online at cpuniverse.ac.in or call 1800-1800-345 for assistance."},
@@ -187,7 +221,6 @@ const SOCIAL_IMGS = [
   "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?w=600&q=80",
   "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80",
 ];
-
 
 /* ─── COUNTER HOOK ─── */
 function useCounter(target, dur=1800, active=false) {
@@ -217,10 +250,8 @@ function StatCard({value,suffix,label,icon:Icon,inView}){
   );
 }
 
-/* ─── SWIPER — with responsive breakpoints support ─── */
-function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000, dark = false, breakpoints = null }) {
-
-  // ✅ Responsive perView via breakpoints
+/* ─── SWIPER ─── */
+function Swiper({ items, renderSlide, perView=3, gap=16, autoInterval=4000, dark=false, breakpoints=null }) {
   const [winW, setWinW] = useState(typeof window !== "undefined" ? window.innerWidth : 1200);
   useEffect(() => {
     const fn = () => setWinW(window.innerWidth);
@@ -228,12 +259,8 @@ function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000
     return () => window.removeEventListener("resize", fn);
   }, []);
 
-  // Resolve perView from breakpoints e.g. { 0:1, 640:2, 1024:4 }
-  // Picks highest matching breakpoint
   const resolvedPerView = breakpoints
-    ? Object.entries(breakpoints)
-        .filter(([bp]) => winW >= Number(bp))
-        .reduce((_, [, v]) => v, perView)
+    ? Object.entries(breakpoints).filter(([bp]) => winW >= Number(bp)).reduce((_,[,v]) => v, perView)
     : perView;
 
   const [idx, setIdx] = useState(0);
@@ -241,7 +268,6 @@ function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000
   const timerRef = useRef(null);
 
   const go = useCallback((n) => { setIdx(Math.max(0, Math.min(n, max))); }, [max]);
-
   const resetTimer = useCallback((n) => {
     clearInterval(timerRef.current);
     go(n);
@@ -253,7 +279,6 @@ function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000
     return () => clearInterval(timerRef.current);
   }, [max, autoInterval]);
 
-  // Clamp idx when perView changes on resize
   useEffect(() => { setIdx(p => Math.min(p, max)); }, [max]);
 
   const slideWidth = `calc(${100 / resolvedPerView}% - ${gap * (resolvedPerView - 1) / resolvedPerView}px)`;
@@ -262,58 +287,199 @@ function Swiper({ items, renderSlide, perView = 3, gap = 16, autoInterval = 4000
   return (
     <div className="relative">
       <div className="overflow-hidden rounded-xl">
-        <div
-          className="flex"
-          style={{
-            gap,
-            transform: `translateX(${translateX})`,
-            transition: "transform 0.55s cubic-bezier(0.4,0,0.2,1)",
-            willChange: "transform",
-          }}
-        >
+        <div className="flex" style={{ gap, transform:`translateX(${translateX})`, transition:"transform 0.55s cubic-bezier(0.4,0,0.2,1)", willChange:"transform" }}>
           {items.map((item, i) => (
-            <div key={i} style={{ flexShrink: 0, width: slideWidth, minWidth: slideWidth }}>
+            <div key={i} style={{ flexShrink:0, width:slideWidth, minWidth:slideWidth }}>
               {renderSlide(item, i)}
             </div>
           ))}
         </div>
       </div>
-
-      {/* Prev */}
       {idx > 0 && (
-        <button
-          onClick={() => resetTimer(idx - 1)}
-          className={`absolute -left-5 top-[42%] -translate-y-1/2 w-10 h-10 rounded-full border-none cursor-pointer flex items-center justify-center shadow-xl z-10 transition-transform hover:scale-110 ${dark ? "bg-amber-400" : "bg-[#00588b]"}`}
-        >
-          <ChevronLeft size={18} className="text-white" />
+        <button onClick={() => resetTimer(idx-1)} className={`absolute -left-5 top-[42%] -translate-y-1/2 w-10 h-10 rounded-full border-none cursor-pointer flex items-center justify-center shadow-xl z-10 transition-transform hover:scale-110 ${dark?"bg-amber-400":"bg-[#00588b]"}`}>
+          <ChevronLeft size={18} className="text-white"/>
         </button>
       )}
-
-      {/* Next */}
       {idx < max && (
-        <button
-          onClick={() => resetTimer(idx + 1)}
-          className={`absolute -right-5 top-[42%] -translate-y-1/2 w-10 h-10 rounded-full border-none cursor-pointer flex items-center justify-center shadow-xl z-10 transition-transform hover:scale-110 ${dark ? "bg-amber-400" : "bg-[#00588b]"}`}
-        >
-          <ChevronRight size={18} className="text-white" />
+        <button onClick={() => resetTimer(idx+1)} className={`absolute -right-5 top-[42%] -translate-y-1/2 w-10 h-10 rounded-full border-none cursor-pointer flex items-center justify-center shadow-xl z-10 transition-transform hover:scale-110 ${dark?"bg-amber-400":"bg-[#00588b]"}`}>
+          <ChevronRight size={18} className="text-white"/>
         </button>
       )}
-
-      {/* Dots */}
       <div className="flex justify-center gap-1.5 mt-5">
-        {Array.from({ length: max + 1 }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => resetTimer(i)}
-            className={`h-2 rounded-full border-none cursor-pointer transition-all duration-300 ${
-              i === idx
-                ? dark ? "bg-amber-400 w-6" : "bg-[#00588b] w-6"
-                : dark ? "bg-black/30 w-2" : "bg-gray-300 w-2"
-            }`}
-          />
+        {Array.from({ length: max+1 }).map((_,i) => (
+          <button key={i} onClick={() => resetTimer(i)}
+            className={`h-2 rounded-full border-none cursor-pointer transition-all duration-300 ${i===idx ? dark?"bg-amber-400 w-6":"bg-[#00588b] w-6" : dark?"bg-black/30 w-2":"bg-gray-300 w-2"}`}/>
         ))}
       </div>
     </div>
+  );
+}
+
+/* ─── STAR RATING ─── */
+function StarRating({ rating, max=5 }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {Array.from({ length: max }).map((_,i) => (
+        <Star key={i} size={15} className={i < rating ? "text-amber-400 fill-amber-400" : "text-gray-300 fill-gray-200"}/>
+      ))}
+    </div>
+  );
+}
+
+/* ─── TESTIMONIAL SECTION ─── */
+function StudentTestimonials() {
+  const [active, setActive] = useState(0);
+  const [animKey, setAnimKey] = useState(0);
+  const timerRef = useRef(null);
+  const total = TESTIMONIALS.length;
+
+  const go = useCallback((n) => {
+    clearInterval(timerRef.current);
+    setActive((n + total) % total);
+    setAnimKey(k => k + 1);
+    timerRef.current = setInterval(() => { setActive(p => (p+1) % total); setAnimKey(k => k+1); }, 5000);
+  }, [total]);
+
+  useEffect(() => {
+    timerRef.current = setInterval(() => { setActive(p => (p+1) % total); setAnimKey(k => k+1); }, 5000);
+    return () => clearInterval(timerRef.current);
+  }, [total]);
+
+  const t = TESTIMONIALS[active];
+
+  return (
+    <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-20 px-4 overflow-hidden">
+      {/* Decorative blobs */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/40 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none"/>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-100/40 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none"/>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+
+        {/* Header */}
+        <div className="text-center mb-14">
+          <span className="inline-flex items-center gap-2 border border-blue-200 bg-white text-[#00588b] text-xs font-bold px-4 py-1.5 rounded-full mb-5 shadow-sm">
+            <Sparkles size={13} className="text-amber-400"/> STUDENT STORIES
+          </span>
+          <h2 className="font-black text-4xl md:text-5xl text-slate-900 leading-tight m-0">
+            Our Students <span className="text-[#00588b]">Speak</span>
+          </h2>
+          <p className="text-slate-500 text-sm mt-3 flex items-center justify-center gap-1.5">
+            <MapPin size={13} className="text-[#00588b]"/>
+            Career Point University, Kota, Rajasthan
+          </p>
+        </div>
+
+        {/* Main Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+          {/* LEFT — Stacked photo card */}
+          <div className="flex flex-col items-center">
+            <div key={`card-${animKey}`} className="relative w-72 md:w-80" style={{animation:"cardIn 0.55s cubic-bezier(.2,0,.2,1) both"}}>
+              <div className="absolute inset-0 bg-white rounded-3xl shadow-lg rotate-6 scale-95 translate-y-2 opacity-30"/>
+              <div className="absolute inset-0 bg-white rounded-3xl shadow-lg rotate-3 translate-y-1 opacity-55"/>
+              <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden -rotate-3">
+                <img src={t.img} alt={t.name} className="w-full h-80 md:h-96 object-cover object-top"/>
+                <div className={`absolute top-3.5 left-3.5 ${t.tagColor} text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wide`}>{t.tag}</div>
+                <div className="absolute top-3.5 right-3.5 bg-white/90 backdrop-blur rounded-xl px-2.5 py-1.5 shadow flex items-center gap-1">
+                  <StarRating rating={t.rating}/>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-4 pb-4 pt-10">
+                  <p className="text-white font-extrabold text-lg leading-tight">{t.name}</p>
+                  <p className="text-amber-400 text-xs font-bold mt-0.5 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"/>
+                    {t.company}
+                  </p>
+                  <p className="text-white/55 text-[11px] mt-0.5">{t.batch}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Dots + Arrows */}
+            <div className="flex items-center gap-3 mt-8">
+              <button onClick={() => go(active-1)}
+                className="w-9 h-9 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center hover:bg-[#00588b] hover:border-[#00588b] transition-all group shadow-sm">
+                <ChevronLeft size={16} className="text-slate-500 group-hover:text-white transition-colors"/>
+              </button>
+              <div className="flex items-center gap-1.5">
+                {TESTIMONIALS.map((_,i) => (
+                  <button key={i} onClick={() => go(i)}
+                    className={`h-2 rounded-full border-none cursor-pointer transition-all duration-300 ${i===active ? "w-6 bg-[#00588b]" : "w-2 bg-slate-300 hover:bg-slate-400"}`}/>
+                ))}
+              </div>
+              <button onClick={() => go(active+1)}
+                className="w-9 h-9 rounded-full bg-[#00588b] border-2 border-[#00588b] flex items-center justify-center hover:bg-[#003a5c] transition-all shadow">
+                <ChevronRight size={16} className="text-white"/>
+              </button>
+            </div>
+          </div>
+
+          {/* RIGHT — Quote panel */}
+          <div key={`quote-${animKey}`} style={{animation:"fadeSlideUp 0.5s cubic-bezier(.2,0,.2,1) both"}}>
+
+            {/* Nav arrows top-right */}
+            <div className="flex justify-end gap-2 mb-6">
+              {[{Icon:ChevronLeft,fn:()=>go(active-1)},{Icon:ChevronRight,fn:()=>go(active+1)}].map(({Icon,fn},i) => (
+                <button key={i} onClick={fn}
+                  className="w-9 h-9 rounded-lg border border-slate-200 bg-white flex items-center justify-center hover:bg-slate-100 transition-colors shadow-sm">
+                  <Icon size={15} className="text-slate-500"/>
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-5">
+              {/* Vertical accent */}
+              <div className="w-1 rounded-full bg-gradient-to-b from-[#00588b] to-blue-200 flex-shrink-0 self-stretch min-h-[180px]"/>
+
+              <div className="flex-1">
+                {/* Rating + verified */}
+                <div className="flex items-center gap-3 mb-5">
+                  <StarRating rating={t.rating}/>
+                  <span className="flex items-center gap-1 text-[#00588b] text-[11px] font-extrabold uppercase tracking-widest">
+                    <BadgeCheck size={13}/> Verified Student
+                  </span>
+                </div>
+
+                {/* Quote */}
+                <blockquote className="text-slate-700 text-lg md:text-xl font-semibold italic leading-relaxed mb-8 m-0">
+                  "{t.quote}"
+                </blockquote>
+
+                {/* Author row */}
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  <div className="flex items-center gap-3">
+                    <img src={t.img} alt={t.name} className="w-12 h-12 rounded-full object-cover object-top border-2 border-[#00588b]/25 shadow"/>
+                    <div>
+                      <p className="font-extrabold text-slate-900 text-sm leading-tight">{t.name}</p>
+                      <p className="text-slate-400 text-xs mt-0.5">
+                        {t.course}&nbsp;&nbsp;<span className="text-[#00588b] font-bold">{t.company}</span>
+                      </p>
+                      <p className="text-slate-300 text-[11px]">{t.batch} · CPU Kota</p>
+                    </div>
+                  </div>
+                  {/* Package badge */}
+                  <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-2.5 text-center min-w-[88px] shadow-sm">
+                    <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Package</p>
+                    <p className="text-[#00588b] font-black text-base leading-tight mt-0.5">{t.package}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Thumbnail strip */}
+        <div className="flex justify-end gap-2.5 mt-1 flex-wrap">
+          {TESTIMONIALS.map((item,i) => (
+            <button key={i} onClick={() => go(i)}
+              className={`rounded-2xl overflow-hidden flex-shrink-0 border-2 transition-all duration-300 ${i===active ? "border-[#00588b] scale-110 shadow-lg" : "border-transparent opacity-55 hover:opacity-90 hover:scale-105"}`}
+              style={{width:56,height:56}}>
+              <img src={item.img} alt={item.name} className="w-full h-full object-cover object-top"/>
+            </button>
+          ))}
+        </div>
+
+      </div>
+    </section>
   );
 }
 
@@ -339,14 +505,11 @@ function HeroSwiper(){
 
   return(
     <section className="relative overflow-hidden min-h-[680px]">
-      {/* BG crossfade */}
       {HERO_SLIDES.map((slide,i)=>(
         <div key={i} className="absolute inset-0 bg-cover bg-top transition-opacity duration-[900ms]"
           style={{backgroundImage:`url(${slide.bg})`,opacity:i===idx?1:0,zIndex:0}}/>
       ))}
       <div className="absolute inset-0 bg-gradient-to-r from-[#00121f]/90 via-[#002848]/72 to-[#00121f]/28" style={{zIndex:1}}/>
-
-      {/* Content */}
       <div className="relative max-w-7xl mx-auto px-5 py-24 flex items-center" style={{zIndex:2}}>
         <div key={animKey} className="max-w-[660px] animate-heroUp">
           <span className="inline-flex items-center gap-1.5 bg-amber-400 text-black text-xs font-extrabold px-4 py-1.5 rounded-full mb-5">{hs.badge}</span>
@@ -366,24 +529,18 @@ function HeroSwiper(){
             </button>
           </div>
         </div>
-
-        {/* Only shows on slides where heroimg is defined */}
         {hs.heroimg && (
           <div className="hero_img animate-heroUp">
-            <img src={hs.heroimg} alt="img" className="ml-30 w-[80%] block m-auto rounded-2xl group-hover:scale-105 transition-transform duration-400"/>
+            <img src={hs.heroimg} alt="img" className="ml-30 w-[80%] block m-auto rounded-2xl transition-transform duration-400"/>
           </div>
         )}
       </div>
-
-      {/* Dots */}
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 mb-5" style={{zIndex:3}}>
         {HERO_SLIDES.map((_,i)=>(
           <button key={i} onClick={()=>go(i)}
             className={`h-2.5 rounded-full border-none cursor-pointer transition-all duration-400 ${i===idx?"bg-amber-400 w-8":"bg-white/45 w-2.5"}`}/>
         ))}
       </div>
-
-      {/* Arrows */}
       <button onClick={()=>go((idx-1+HERO_SLIDES.length)%HERO_SLIDES.length)}
         className="absolute left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/15 border border-white/35 cursor-pointer flex items-center justify-center backdrop-blur hover:bg-white/28 transition-colors"
         style={{zIndex:3}}>
@@ -394,8 +551,6 @@ function HeroSwiper(){
         style={{zIndex:3}}>
         <ChevronRight size={20} className="text-white"/>
       </button>
-
-      {/* Wave */}
       <div className="absolute -bottom-0.5 left-0 right-0" style={{zIndex:2}}>
         <svg viewBox="0 0 1440 60" fill="none"><path d="M0,60 C360,0 1080,60 1440,20 L1440,60 Z" fill="white"/></svg>
       </div>
@@ -439,7 +594,6 @@ export default function CPUHomepage(){
 
   return(
     <div className="font-sans bg-white overflow-x-hidden">
-      {/* ── Global keyframes ── */}
       <style>{`
         html{scroll-behavior:smooth}
         @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
@@ -447,6 +601,8 @@ export default function CPUHomepage(){
         @keyframes dropDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
         @keyframes slideInLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
         @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(0,88,139,.45)}50%{box-shadow:0 0 0 14px rgba(0,88,139,0)}}
+        @keyframes fadeSlideUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes cardIn{from{opacity:0;transform:translateX(-20px) rotate(-3deg)}to{opacity:1;transform:translateX(0) rotate(-3deg)}}
         .ticker-run{animation:ticker 30s linear infinite;white-space:nowrap;display:inline-block}
         .animate-heroUp{animation:heroUp .75s cubic-bezier(.2,0,.2,1) both}
         .dd-anim{animation:dropDown .18s ease}
@@ -460,7 +616,7 @@ export default function CPUHomepage(){
         .campus-col:hover .c-overlay{background:linear-gradient(to bottom,rgba(0,40,70,.28) 0%,rgba(0,40,70,.96) 100%)}
       `}</style>
 
-      {/* ── LIGHTBOX ── */}
+      {/* LIGHTBOX */}
       {lightbox&&(
         <div onClick={()=>setLightbox(null)} className="fixed inset-0 bg-black/92 z-[99999] flex items-center justify-center p-5">
           <button onClick={()=>setLightbox(null)} className="absolute top-5 right-6 bg-white/10 border-none rounded-full w-11 h-11 flex items-center justify-center cursor-pointer">
@@ -470,7 +626,7 @@ export default function CPUHomepage(){
         </div>
       )}
 
-      {/* ── TOP BAR ── */}
+      {/* TOP BAR */}
       <div className="bg-[#002f4e] py-1.5 px-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-1.5">
           <div className="flex gap-5 flex-wrap">
@@ -490,29 +646,20 @@ export default function CPUHomepage(){
         </div>
       </div>
 
-      {/* ── TICKER ── */}
+      {/* TICKER */}
       <div className="bg-[#00588b] overflow-hidden py-1.5">
         <span className="ticker-run text-white text-[13px] font-medium">
           🎓 Admissions Open 2026–27 &nbsp;|&nbsp; 42 LPA Highest Package &nbsp;|&nbsp; NAAC A Rated &nbsp;|&nbsp; 25+ Years of Excellence &nbsp;|&nbsp; 70+ Programs &nbsp;|&nbsp; Apply Now: 1800-1800-345 &nbsp;|&nbsp; 20+ International Collaborations &nbsp;|&nbsp; 90% Placement Record 🎓
         </span>
       </div>
 
-      {/* ════ NAVBAR ════ */}
+      {/* NAVBAR */}
       <nav ref={navRef} className={`sticky top-0 z-[5000] bg-white/98 backdrop-blur-xl transition-shadow duration-300 ${scrolled?"shadow-lg":"shadow-[0_1px_0_#e8f0f7]"}`}>
         <div className="max-w-7xl mx-auto px-5 py-0 flex justify-between items-center gap-4">
-
-          {/* LOGO */}
           <a href="#" className="flex items-center no-underline flex-shrink-0">
-            <img
-              src="https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png"
-              alt="Career Point University"
+            <img src="https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png" alt="Career Point University"
               className="h-[30px] w-auto object-contain block"
-              onError={e=>{
-                e.target.style.display="none";
-                const fb=e.target.nextSibling;
-                if(fb)fb.style.display="flex";
-              }}
-            />
+              onError={e=>{e.target.style.display="none";const fb=e.target.nextSibling;if(fb)fb.style.display="flex";}}/>
             <div className="hidden items-center gap-2">
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-black text-xs">CPU</div>
               <div>
@@ -522,7 +669,6 @@ export default function CPUHomepage(){
             </div>
           </a>
 
-          {/* DESKTOP NAV */}
           <div className="hidden xl:flex items-center flex-1 justify-center">
             {NAV_DATA.map((item,idx)=>{
               const hasDD=item.submenu&&!item.mega, hasMega=!!item.mega, isOpen=activeMenu===idx;
@@ -530,15 +676,10 @@ export default function CPUHomepage(){
                 <div key={idx} className="relative"
                   onMouseEnter={()=>(hasDD||hasMega)&&setActiveMenu(idx)}
                   onMouseLeave={()=>setActiveMenu(null)}>
-                  <button
-                    className={`text-[#1a3a5c] text-[13.5px] font-semibold px-3 py-5.5 inline-flex items-center gap-1 cursor-pointer border-none bg-transparent font-sans whitespace-nowrap rounded-lg transition-all duration-200 hover:text-[#00588b] hover:bg-blue-50
-                      ${item.active?"border border-[#1a3a5c]":""}
-                      ${isOpen?"text-[#00588b] bg-blue-50":""}`}>
+                  <button className={`text-[#1a3a5c] text-[13.5px] font-semibold px-3 py-5.5 inline-flex items-center gap-1 cursor-pointer border-none bg-transparent font-sans whitespace-nowrap rounded-lg transition-all duration-200 hover:text-[#00588b] hover:bg-blue-50 ${item.active?"border border-[#1a3a5c]":""} ${isOpen?"text-[#00588b] bg-blue-50":""}`}>
                     {item.label}
                     {(hasDD||hasMega)&&<ChevronDown size={12} className={`transition-transform duration-200 ${isOpen?"rotate-180":""}`}/>}
                   </button>
-
-                  {/* Dropdown */}
                   {hasDD&&isOpen&&(
                     <div className="dd-anim absolute top-[calc(100%+0px)] left-0 min-w-[236px] bg-white rounded-2xl border border-blue-100 shadow-2xl z-[9000] overflow-hidden"
                       onMouseEnter={()=>setActiveMenu(idx)} onMouseLeave={()=>setActiveMenu(null)}>
@@ -555,10 +696,9 @@ export default function CPUHomepage(){
             })}
           </div>
 
-          {/* Right */}
           <div className="flex items-center gap-2.5 flex-shrink-0">
-            <button className="pulse-anim apply_now_btn bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-5 py-2 text-[13px] font-extrabold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
-               Apply Now
+            <button className="pulse-anim bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-5 py-2 text-[13px] font-extrabold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
+              Apply Now
             </button>
             <button className="xl:hidden bg-blue-50 border-none text-[#00588b] cursor-pointer p-2.5 rounded-lg flex items-center justify-center" onClick={()=>setMenuOpen(true)}>
               <Menu size={21}/>
@@ -572,14 +712,11 @@ export default function CPUHomepage(){
             onMouseEnter={()=>setActiveMenu(activeMenu)} onMouseLeave={()=>setActiveMenu(null)}>
             <div className="max-w-[1200px] mx-auto grid grid-cols-3 gap-0 px-7 pt-6">
               <div className="pr-6 border-r border-gray-100">
-                <div className="flex items-center gap-2 text-[#00588b] text-[11px] font-black uppercase tracking-widest mb-3.5 pb-2 border-b-2 border-blue-100">
-                  <Layers size={14}/> By Level
-                </div>
+                <div className="flex items-center gap-2 text-[#00588b] text-[11px] font-black uppercase tracking-widest mb-3.5 pb-2 border-b-2 border-blue-100"><Layers size={14}/> By Level</div>
                 {NAV_DATA[activeMenu].byLevel.map((row,i)=>(
                   <a key={i} href="#programs" className="flex items-center justify-between py-2 px-1.5 border-b border-gray-50 last:border-none no-underline rounded-lg hover:bg-blue-50 group transition-all hover:px-3">
                     <span className="flex items-center gap-2 text-[13.5px] text-gray-700 font-medium group-hover:text-[#00588b]">
-                      <span className="w-5 h-5 rounded bg-blue-50 flex items-center justify-center flex-shrink-0"><GraduationCap size={10} className="text-[#00588b]"/></span>
-                      {row.label}
+                      <span className="w-5 h-5 rounded bg-blue-50 flex items-center justify-center flex-shrink-0"><GraduationCap size={10} className="text-[#00588b]"/></span>{row.label}
                     </span>
                     {row.badge==="Popular"&&<span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#00588b] text-white">Popular</span>}
                     {row.badge==="New"&&<span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#003a5c] text-white">New</span>}
@@ -587,9 +724,7 @@ export default function CPUHomepage(){
                 ))}
               </div>
               <div className="px-6 border-r border-gray-100">
-                <div className="flex items-center gap-2 text-[#00588b] text-[11px] font-black uppercase tracking-widest mb-3.5 pb-2 border-b-2 border-blue-100">
-                  <Building2 size={14}/> Schools
-                </div>
+                <div className="flex items-center gap-2 text-[#00588b] text-[11px] font-black uppercase tracking-widest mb-3.5 pb-2 border-b-2 border-blue-100"><Building2 size={14}/> Schools</div>
                 {NAV_DATA[activeMenu].schools.map((row,i)=>(
                   <a key={i} href="#programs" className="flex items-center gap-2 py-2 px-1.5 border-b border-gray-50 last:border-none no-underline rounded-lg hover:bg-blue-50 group transition-all hover:px-3">
                     <span className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 ${row.active?"bg-blue-100":"bg-blue-50"}`}><BookOpen size={10} className="text-[#00588b]"/></span>
@@ -598,15 +733,11 @@ export default function CPUHomepage(){
                 ))}
               </div>
               <div className="pl-6">
-                <div className="flex items-center gap-2 text-[#00588b] text-[11px] font-black uppercase tracking-widest mb-3.5 pb-2 border-b-2 border-blue-100">
-                  <Star size={14}/> Top Courses
-                </div>
+                <div className="flex items-center gap-2 text-[#00588b] text-[11px] font-black uppercase tracking-widest mb-3.5 pb-2 border-b-2 border-blue-100"><Star size={14}/> Top Courses</div>
                 {NAV_DATA[activeMenu].topCourses.map((row,i)=>(
                   <a key={i} href="#programs" className="flex items-center justify-between py-2 px-1.5 border-b border-gray-50 last:border-none no-underline rounded-lg hover:bg-blue-50 group transition-all hover:px-3">
                     <span className={`flex items-center gap-2 text-[13.5px] font-medium group-hover:text-[#00588b] ${row.more?"text-[#00588b] font-semibold":"text-gray-700"}`}>
-                      {row.more
-                        ?<><Plus size={12} className="text-[#00588b]"/>{row.label}</>
-                        :<><span className="w-5 h-5 rounded bg-blue-50 flex items-center justify-center flex-shrink-0"><Zap size={10} className="text-[#00588b]"/></span>{row.label}</>}
+                      {row.more?<><Plus size={12} className="text-[#00588b]"/>{row.label}</>:<><span className="w-5 h-5 rounded bg-blue-50 flex items-center justify-center flex-shrink-0"><Zap size={10} className="text-[#00588b]"/></span>{row.label}</>}
                     </span>
                     {row.badge==="Hot"&&<span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white">Hot</span>}
                     {row.badge==="New"&&<span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#003a5c] text-white">New</span>}
@@ -616,31 +747,23 @@ export default function CPUHomepage(){
             </div>
             <div className="bg-blue-50 border-t border-blue-100 px-7 py-3.5 mt-5">
               <div className="max-w-[1200px] mx-auto flex items-center gap-3 flex-wrap">
-                <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-5 py-2 text-[13px] font-bold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
-                  <Layers size={14}/> All Programs
-                </button>
-                <button className="bg-transparent text-[#1a3a5c] border-2 border-[#1a3a5c] rounded-full px-5 py-[7px] text-[13px] font-bold cursor-pointer flex items-center gap-1.5 hover:bg-[#1a3a5c] hover:text-white transition-all">
-                  <Download size={13}/> Download Brochure
-                </button>
-                <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-5 py-2 text-[13px] font-extrabold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
-                   Apply Now
-                </button>
+                <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-5 py-2 text-[13px] font-bold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform"><Layers size={14}/> All Programs</button>
+                <button className="bg-transparent text-[#1a3a5c] border-2 border-[#1a3a5c] rounded-full px-5 py-[7px] text-[13px] font-bold cursor-pointer flex items-center gap-1.5 hover:bg-[#1a3a5c] hover:text-white transition-all"><Download size={13}/> Download Brochure</button>
+                <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-5 py-2 text-[13px] font-extrabold cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">Apply Now</button>
               </div>
             </div>
           </div>
         )}
       </nav>
 
-      {/* ── MOBILE DRAWER ── */}
+      {/* MOBILE DRAWER */}
       {menuOpen&&(
         <>
           <div className="fixed inset-0 bg-black/60 z-[10000] backdrop-blur-sm" onClick={()=>setMenuOpen(false)}/>
           <div className="mob-anim fixed top-0 left-0 bottom-0 w-80 max-w-[88vw] bg-[#001f35] z-[10100] flex flex-col overflow-hidden">
             <div className="bg-[#001428] px-4 py-3.5 flex items-center justify-between border-b border-white/8 flex-shrink-0">
               <img src="https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png" alt="CPU" className="h-7 object-contain brightness-0 invert" onError={e=>{e.target.style.display="none";}}/>
-              <button onClick={()=>setMenuOpen(false)} className="bg-white/10 border-none rounded-full w-8 h-8 flex items-center justify-center cursor-pointer">
-                <X size={16} className="text-white"/>
-              </button>
+              <button onClick={()=>setMenuOpen(false)} className="bg-white/10 border-none rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"><X size={16} className="text-white"/></button>
             </div>
             <div className="px-3.5 py-2.5 bg-[#002540] flex-shrink-0">
               <div className="flex items-center gap-2 bg-white/7 rounded-lg px-3 py-2 border border-white/10">
@@ -688,7 +811,7 @@ export default function CPUHomepage(){
               <a href="tel:18001800345" className="flex items-center gap-2 text-amber-400 font-bold text-[13px] no-underline mb-2"><Phone size={14}/> 1800-1800-345</a>
               <a href="mailto:admissions@cpuniverse.ac.in" className="flex items-center gap-2 text-blue-300 text-xs no-underline mb-3"><Mail size={13}/> admissions@cpuniverse.ac.in</a>
               <div className="flex gap-2.5">
-                {[{Ic:Facebook,c:"#1877F2"},{Ic:Instagram,c:"#E4405F"},{Ic:Youtube,c:"#FF0000"},{Ic:Twitter,c:"#1DA1F2"},{Ic:Linkedin,c:"#0A66C2"}].map(({Ic,c},i)=>(
+                {[{Ic:Facebook},{Ic:Instagram},{Ic:Youtube},{Ic:Twitter},{Ic:Linkedin}].map(({Ic},i)=>(
                   <a key={i} href="#" className="w-8 h-8 rounded-full bg-white/8 flex items-center justify-center no-underline border border-white/10 hover:opacity-80 transition-opacity"><Ic size={13} className="text-gray-400"/></a>
                 ))}
               </div>
@@ -745,12 +868,8 @@ export default function CPUHomepage(){
                 ))}
               </div>
               <div className="flex gap-3 flex-wrap">
-                <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
-                  Explore More <ArrowRight size={14}/>
-                </button>
-                <button className="bg-transparent border-2 border-[#00588b] text-[#00588b] rounded-full px-6 py-[11px] font-bold text-sm cursor-pointer flex items-center gap-1.5 hover:bg-[#00588b] hover:text-white transition-all">
-                  Download Brochure <Download size={14}/>
-                </button>
+                <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">Explore More <ArrowRight size={14}/></button>
+                <button className="bg-transparent border-2 border-[#00588b] text-[#00588b] rounded-full px-6 py-[11px] font-bold text-sm cursor-pointer flex items-center gap-1.5 hover:bg-[#00588b] hover:text-white transition-all">Download Brochure <Download size={14}/></button>
               </div>
             </div>
           </div>
@@ -762,27 +881,18 @@ export default function CPUHomepage(){
         <div className="max-w-7xl mx-auto">
           <h2 className="font-black text-3xl text-gray-900 mb-8">Explore Our <span className="text-[#00588b]">70+ Programs</span> — Start Your Future-ready Career</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {PROGRAM_CARDS.map((card) => (
+            {PROGRAM_CARDS.map((card)=>(
               <div key={card.label} className="relative overflow-hidden rounded-xl cursor-pointer group">
-                <img
-                  src={card.image}
-                  alt={card.label}
-                  className="block w-full h-[360px] object-cover group-hover:scale-105 transition-transform duration-400"
-                />
+                <img src={card.image} alt={card.label} className="block w-full h-[360px] object-cover group-hover:scale-105 transition-transform duration-400"/>
                 <div className="absolute bottom-0 left-0 right-0 bg-[#00588b] text-white px-4 py-3.5 flex items-center justify-between">
                   <span className="font-bold text-md">{card.label}</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm opacity-85">{card.count}</span>
-                    <ArrowRight size={14} />
-                  </div>
+                  <div className="flex items-center gap-2"><span className="text-sm opacity-85">{card.count}</span><ArrowRight size={14}/></div>
                 </div>
               </div>
             ))}
           </div>
           <div className="text-center mt-6">
-            <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
-              View All Programs <ArrowRight size={14}/>
-            </button>
+            <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">View All Programs <ArrowRight size={14}/></button>
           </div>
         </div>
       </section>
@@ -801,11 +911,8 @@ export default function CPUHomepage(){
               <ArrowRight size={28} className="text-amber-400"/>
             </div>
           </div>
-
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Stats grid */}
-         
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+           
               <div className="grid grid-cols-3 gap-0.5 rounded-2xl h-[100%]  overflow-hidden shadow-2xl">
                 {PLACEMENT_STATS.map(({val,label},i)=>(
                   <div key={i} className={`px-4 py-8 flex justify-center items-center text-center ${i<3?"bg-[#003252]":"bg-[#002340]"} border-r border-white/6`}>
@@ -818,16 +925,7 @@ export default function CPUHomepage(){
              
           
             </div>
-
-
-            {/* ✅ Placement slider — 1 slide mobile → 2 slides desktop */}
-            <Swiper
-              items={PLACEMENT_SLIDES}
-              perView={2}
-              gap={20}
-              autoInterval={4000}
-              dark={true}
-              breakpoints={{ 0: 1, 768: 2 }}
+            <Swiper items={PLACEMENT_SLIDES} perView={2} gap={20} autoInterval={4000} dark={true} breakpoints={{0:1,768:2}}
               renderSlide={(slide)=>(
                 <div className="rounded-2xl overflow-hidden relative h-[360px] sm:h-[400px] shadow-2xl group">
                   <img src={slide.img} alt={slide.name} className="w-full h-full object-cover object-top block group-hover:scale-105 transition-transform duration-400"/>
@@ -851,15 +949,7 @@ export default function CPUHomepage(){
             <h2 className="font-black text-3xl text-gray-900">Our Top <span className="text-[#00588b]">Recruiters</span></h2>
             <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
           </div>
-
-          {/* ✅ Recruiters slider — 2 mobile → 4 tablet → 6 desktop */}
-          <Swiper
-            items={RECRUITERS}
-            perView={6}
-            gap={14}
-            autoInterval={4000}
-            dark={true}
-            breakpoints={{ 0: 2, 640: 4, 1024: 6 }}
+          <Swiper items={RECRUITERS} perView={6} gap={14} autoInterval={4000} dark={true} breakpoints={{0:2,640:4,1024:6}}
             renderSlide={(slide)=>(
               <div className="bg-white rounded-xl p-3 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
                 <img src={slide.img} alt="" className="h-10 w-full object-contain group-hover:scale-105 transition-transform duration-300"/>
@@ -916,15 +1006,7 @@ export default function CPUHomepage(){
             <h2 className="font-black text-[clamp(26px,3.5vw,44px)] text-white m-0">Our <span className="text-amber-400">Alumni</span> Leading the World</h2>
             <div className="w-14 h-0.5 bg-amber-400 rounded mt-3.5"/>
           </div>
-
-          {/* ✅ Alumni slider — 1 mobile → 2 tablet → 4 desktop */}
-          <Swiper
-            items={ALUMNI}
-            perView={4}
-            gap={18}
-            autoInterval={4500}
-            dark={true}
-            breakpoints={{ 0: 1, 640: 2, 1024: 4 }}
+          <Swiper items={ALUMNI} perView={4} gap={18} autoInterval={4500} dark={true} breakpoints={{0:1,640:2,1024:4}}
             renderSlide={(alum)=>(
               <div className="relative overflow-hidden rounded-2xl cursor-pointer h-[400px] bg-gray-900 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
                 <div className={`absolute bottom-14 left-1/2 -translate-x-1/2 w-52 h-52 rounded-full ${alum.circleBg} opacity-90`}/>
@@ -950,15 +1032,7 @@ export default function CPUHomepage(){
             <h2 className="font-black text-3xl text-gray-900">Eminent <span className="text-[#00588b]">Personalities @ CPU</span></h2>
             <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
           </div>
-
-          {/* ✅ Personalities slider — 1 mobile → 2 tablet → 4 desktop */}
-          <Swiper
-            items={Personalities}
-            perView={4}
-            gap={14}
-            autoInterval={4000}
-            dark={true}
-            breakpoints={{ 0: 1, 640: 2, 1024: 4 }}
+          <Swiper items={Personalities} perView={4} gap={14} autoInterval={4000} dark={true} breakpoints={{0:1,640:2,1024:4}}
             renderSlide={(slide)=>(
               <div className="rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group bg-white">
                 <img src={slide.img} alt="" className="w-full block group-hover:scale-105 transition-transform duration-400 object-cover"/>
@@ -1048,6 +1122,9 @@ export default function CPUHomepage(){
         </div>
       </section>
 
+      {/* ════ OUR STUDENTS SPEAK — TESTIMONIALS ════ */}
+      <StudentTestimonials/>
+
       {/* ════ FAQ ════ */}
       <section className="bg-blue-50 py-16 px-4">
         <div className="max-w-[860px] mx-auto">
@@ -1133,7 +1210,7 @@ export default function CPUHomepage(){
                 ))}
               </div>
               <div className="flex gap-2.5">
-                {[{Ic:Facebook,c:"#1877F2"},{Ic:Instagram,c:"#E4405F"},{Ic:Youtube,c:"#FF0000"},{Ic:Linkedin,c:"#0A66C2"}].map(({Ic,c},i)=>(
+                {[{Ic:Facebook},{Ic:Instagram},{Ic:Youtube},{Ic:Linkedin}].map(({Ic},i)=>(
                   <a key={i} href="#" className="w-8 h-8 rounded-full bg-white/8 flex items-center justify-center no-underline border border-white/10 hover:opacity-80 transition-opacity"><Ic size={14} className="text-white"/></a>
                 ))}
               </div>
@@ -1150,7 +1227,7 @@ export default function CPUHomepage(){
         </div>
       </footer>
 
-      {/* ════ FLOATING BUTTONS ════ */}
+      {/* FLOATING BUTTONS */}
       <div className="fixed bottom-6 right-6 z-[6000] flex flex-col gap-3">
         <button className="pulse-anim w-12 h-12 rounded-full bg-gradient-to-br from-[#00588b] to-[#003a5c] border-none cursor-pointer flex items-center justify-center shadow-xl">
           <MessageCircle size={21} className="text-white"/>
