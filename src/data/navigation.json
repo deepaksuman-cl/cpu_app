@@ -1,0 +1,129 @@
+{
+  "logoUrl": "https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png",
+  "topBar": {
+    "phone1": "1800-123-1104",
+    "email": "info@cpur.in",
+    "topLinks": ["Student Login", "Alumni", "NIRF"]
+  },
+  "about": {
+    "promoImage": "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200",
+    "description": "Career Point University, Kota is one of the top self-financed private universities in Rajasthan, dedicated to academic excellence.",
+    "links": [
+      { "title": "Chairperson's Message", "href": "/about/chairperson" },
+      { "title": "President's Message", "href": "/about/president" },
+      { "title": "Vision & Mission", "href": "/about/vision-mission" },
+      { "title": "About CPU", "href": "/about/cpu" },
+      { "title": "Our Roots", "href": "/about/roots" },
+      { "title": "Organizational Structure", "href": "/about/structure" },
+      { "title": "UGC - University Grants Commission", "href": "/about/ugc" },
+      { "title": "AIU - Association of Indian Universities", "href": "/about/aiu" }
+    ],
+    "rightCards": [
+      {
+        "title": "Innovation and Incubation",
+        "desc": "If you have an innovative idea, we can show you the way ahead."
+      },
+      {
+        "title": "Social Impact/CSR",
+        "desc": "Social responsibility takes many forms from providing healthcare to education."
+      },
+      {
+        "title": "Why CPU?",
+        "desc": "Focus to develop both education and critical skills to help our students excel."
+      }
+    ]
+  },
+  "admissions": {
+    "links": [
+      { "title": "Apply Online", "href": "/admission/apply" },
+      { "title": "Fee Structure", "href": "/admission/fees" },
+      { "title": "Scholarship (For Indian Students)", "href": "/admission/scholarship" },
+      { "title": "Fee Deposition", "href": "/admission/fee-deposition" },
+      { "title": "Refund & Cancellation", "href": "/admission/refund" }
+    ]
+  },
+  "academics": {
+    "topLinks": [
+      { "prefix": "Diploma", "bold": "Programmes", "suffix": "After 10th/12th" },
+      { "prefix": "Under", "bold": "Graduate", "suffix": "Programmes" },
+      { "prefix": "Post", "bold": "Graduate", "suffix": "Programmes" },
+      { "prefix": "Integrated", "bold": "Programmes", "suffix": "Dual Degree" },
+      { "prefix": "Doctoral", "bold": "Programmes", "suffix": "Ph.D." },
+      { "prefix": "All", "bold": "Programmes", "suffix": "Explore All" }
+    ],
+    "schools": [
+      { "title": "School of Engineering & Technology", "href": "/schools/engineering" },
+      { "title": "School of Commerce and Management", "href": "/schools/commerce" },
+      { "title": "School of Computer Application & Technology", "href": "/schools/computer" },
+      { "title": "School of Legal Studies & Governance", "href": "/schools/legal" },
+      { "title": "School of Health & Allied Sciences", "href": "/schools/health" },
+      { "title": "School of Agricultural Sciences", "href": "/schools/agriculture" },
+      { "title": "School of Arts and Humanities", "href": "/schools/arts" },
+      { "title": "School of Basic & Applied Sciences", "href": "/schools/basic-applied" }
+    ],
+    "rightLinks": [
+      { "title": "Academic Calendar", "href": "/academic/calendar" },
+      { "title": "System of Grading", "href": "/academic/grading" },
+      { "title": "Degree Verification", "href": "/academic/degree-verification" },
+      { "title": "Academic Bank of Credits (ABC)", "href": "/academic/abc" },
+      { "title": "Code of Conduct for Student", "href": "/academic/student-conduct" },
+      { "title": "Exam Results", "href": "/academic/results" },
+      { "title": "Examination Schedule", "href": "/academic/exam-schedule" }
+    ]
+  },
+  "campusLife": [
+    {
+      "title": "Campus Facilities",
+      "img": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80",
+      "links": [
+        { "title": "Clubs", "href": "/campus-life/clubs" },
+        { "title": "Sports Facility", "href": "/campus-life/sports" },
+        { "title": "Campus Facilities", "href": "/campus-life/facilities" },
+        { "title": "Residential Facilities", "href": "/campus-life/residential" }
+      ]
+    },
+    {
+      "title": "News & Gallery",
+      "img": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
+      "links": [
+        { "title": "Photo Gallery", "href": "/campus-life/gallery" },
+        { "title": "CPU Campus Tour", "href": "/campus-life/tour" },
+        { "title": "News in Media", "href": "/campus-life/news" },
+        { "title": "Press Releases", "href": "/campus-life/press-releases" }
+      ]
+    },
+    {
+      "title": "Student Life",
+      "img": "https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=400&q=80",
+      "links": [
+        { "title": "Student Life 2023-24", "href": "/campus-life/2023-24" },
+        { "title": "Student Life 2022-23", "href": "/campus-life/2022-23" },
+        { "title": "Student Life 2021-22", "href": "/campus-life/2021-22" }
+      ]
+    },
+    {
+      "title": "Events",
+      "img": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=400&q=80",
+      "links": [
+        { "title": "IMMIX", "href": "/campus-life/events/immix" },
+        { "title": "Technovation", "href": "/campus-life/events/technovation" },
+        { "title": "Kheloutsav", "href": "/campus-life/events/kheloutsav" },
+        { "title": "Aagaaz", "href": "/campus-life/events/aagaaz" }
+      ]
+    }
+  ],
+  "sidebar": {
+    "placements": [
+      { "title": "Industry Advisory Board", "href": "/placement/iab" },
+      { "title": "Placement AY 2024-25", "href": "/placement/2024-25" },
+      { "title": "Placement Policy", "href": "/placement/policy" },
+      { "title": "Skill Xcelerator", "href": "/placement/skill-xcelerator" }
+    ],
+    "quickLinks": [
+      { "title": "Contact Us", "href": "/contact" },
+      { "title": "Programmes", "href": "/academic/all" },
+      { "title": "Testimonials", "href": "#" },
+      { "title": "NIRF", "href": "/nirf" }
+    ]
+  }
+}

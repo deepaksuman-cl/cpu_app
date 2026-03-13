@@ -1,0 +1,155 @@
+{
+  "stats": [
+    { "value": 25000, "suffix": "K+", "label": "Students Enrolled", "icon": "Users" },
+    { "value": 20, "suffix": "+", "label": "Countries", "icon": "Globe" },
+    { "value": 500, "suffix": "+", "label": "Expert Faculty", "icon": "GraduationCap" },
+    { "value": 400, "suffix": "+", "label": "Placement Companies", "icon": "Briefcase" },
+    { "value": 90, "suffix": "%", "label": "Placement Record", "icon": "TrendingUp" },
+    { "value": 70, "suffix": "+", "label": "Programs Offered", "icon": "BookOpen" }
+  ],
+  "heroSlides": [
+    {
+      "bg": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+      "tagline": "World-Class Infrastructure",
+      "title": "State-of-the-Art",
+      "subtitle": "Campus Life",
+      "desc": "Sprawling green campus with 300+ labs, smart classrooms, hostels, sports complex and innovation centers.",
+      "badge": "🏛️ 150+ Acres Green Campus"
+    },
+    {
+      "bg": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+      "tagline": "Rajasthan's Premier University",
+      "title": "100+ Programs",
+      "subtitle": "For Your Future",
+      "desc": "Build a future-ready career with industry-aligned programs across Engineering, Management, Law, Pharmacy & more.",
+      "badge": "🎓 NAAC A | 25+ Years of Excellence"
+    },
+    {
+      "bg": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1600&q=80",
+      "tagline": "Career Excellence",
+      "title": "42 LPA",
+      "subtitle": "Highest Package",
+      "heroimg": "https://cpur.in/wp-content/uploads/2023/12/aryan-mathuria.png",
+      "desc": "Our placement cell connects you with 400+ top recruiters including Amazon, Microsoft, TCS, Infosys & more.",
+      "badge": "💼 90% Placement Record"
+    }
+  ],
+  "programCards": [
+    { "id": 1, "label": "Under Graduate", "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80", "count": "30+ Programs" },
+    { "id": 2, "label": "Post Graduate", "image": "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&q=80", "count": "20+ Programs" },
+    { "id": 3, "label": "Doctoral", "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80", "count": "10+ Programs" },
+    { "id": 4, "label": "Diploma", "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80", "count": "15+ Programs" }
+  ],
+  "recruiters": [
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/40-Just-Dial.webp" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/1-Amazon.png" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/2-Linkdin.png" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/5-Microsoft.webp" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/7-TCS.webp" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/22-Bajaj-Fin.webp" }
+  ],
+  "personalities": [
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/1-min.png" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/2-min.png" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/3-min.png" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/4-min.png" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/5-min.png" },
+    { "img": "https://cpur.in/wp-content/uploads/2023/12/6-min.png" }
+  ],
+  "placementSlides": [
+    { "name": "Abhinav Singh", "course": "B.Sc HBHA", "company": "Hyatt Regency", "img": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" },
+    { "name": "Avneet Bagga", "course": "B.Tech Food Tech", "company": "ITC Limited", "img": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" },
+    { "name": "Manan Sethi", "course": "B.Tech Food Tech", "company": "GRG Health", "img": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" },
+    { "name": "Priya Sharma", "course": "MBA 2022", "company": "Amazon", "img": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=80" },
+    { "name": "Rahul Mehta", "course": "B.Tech CSE", "company": "Microsoft", "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" }
+  ],
+  "placementStats": [
+    { "val": "6500+", "label": "Placements" },
+    { "val": "27 LPA", "label": "Highest Offer" },
+    { "val": "5.5 LPA", "label": "Average Offer" },
+    { "val": "250+", "label": "Companies Hired" },
+    { "val": "150+", "label": "Companies Visited" },
+    { "val": "95%", "label": "Students Placed" }
+  ],
+  "campusCols": [
+    { "title": "Enriching the", "bold": "Intellect", "img": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80", "links": ["Classrooms", "Laboratories", "Libraries", "Auditoriums", "Learning Facilities", "Innovation & Incubation"] },
+    { "title": "Inspire Your", "bold": "Essence", "img": "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&q=80", "links": ["Accommodations", "Cafeteria", "Student Clubs & Societies", "Transportation", "Beyond Academics"] },
+    { "title": "Elevate Your", "bold": "Physical Fitness", "img": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80", "links": ["Sports Facilities", "Gymnasium"] },
+    { "title": "Adapt to", "bold": "Physical Wellness", "img": "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80", "links": ["Covid Readiness", "Medical Help", "Health and Safety"] }
+  ],
+  "alumni": [
+    { "name": "Aryan Mathuria", "role": "BCA Class of 2018", "company": "evertz", "companyBg": "bg-green-600", "circleBg": "bg-teal-400", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_01.png" },
+    { "name": "Kiran Bablani", "role": "BCA Class of 2018", "company": "zalando", "companyBg": "bg-pink-600", "circleBg": "bg-yellow-400", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_02.png" },
+    { "name": "Priya Lakhotiya", "role": "MBA Class of 2021", "company": "upGrad", "companyBg": "bg-blue-900", "circleBg": "bg-red-500", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_03.png" },
+    { "name": "Naman Nandwana", "role": "MBA | Class of 2020", "company": "Quick Heal", "companyBg": "bg-amber-500", "circleBg": "bg-purple-400", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_04.png" }
+  ],
+  "researchItems": [
+    { "title": "AI & Data Science Lab", "img": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80", "desc": "Cutting-edge research in artificial intelligence and machine learning.", "tag": "Technology" },
+    { "title": "Biotechnology Research Center", "img": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80", "desc": "Breakthrough research in genomics and pharmaceutical sciences.", "tag": "Life Sciences" },
+    { "title": "Sustainable Energy Lab", "img": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80", "desc": "Innovation in renewable energy and sustainable technologies.", "tag": "Engineering" }
+  ],
+  "happenings": [
+    { "title": "Annual Tech Fest Koshish 2026", "date": "Mar 18, 2026", "tag": "Event", "icon": "Zap", "colorClass": "from-[#00588b] to-[#003a5c]" },
+    { "title": "International Research Seminar", "date": "Mar 22, 2026", "tag": "Research", "icon": "Microscope", "colorClass": "from-[#003a5c] to-[#002040]" },
+    { "title": "Campus Placement Drive – MNCs", "date": "Mar 28, 2026", "tag": "Placement", "icon": "Briefcase", "colorClass": "from-[#005070] to-[#003a5c]" },
+    { "title": "Cultural Fest 'Utsav'", "date": "Apr 5, 2026", "tag": "Cultural", "icon": "Star", "colorClass": "from-[#004a7a] to-[#002f4e]" }
+  ],
+  "testimonials": [
+    {
+      "id": 1, "name": "Aryan Mathuria", "course": "BCA Alumni", "company": "Evertz Technologies",
+      "package": "₹12 LPA", "rating": 5, "batch": "Class of 2018",
+      "quote": "CPU Kota gave me the technical foundation and confidence I needed. The faculty was always approachable, and the placement cell worked tirelessly to connect us with global companies. Proud to represent CPU at Evertz Technologies.",
+      "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_01.png",
+      "tag": "BCA Alumni", "tagColor": "bg-[#003a5c]"
+    },
+    {
+      "id": 2, "name": "Kiran Bablani", "course": "BCA Alumni", "company": "Zalando",
+      "package": "₹18 LPA", "rating": 5, "batch": "Class of 2018",
+      "quote": "Studying at Career Point University was a turning point in my life. The computer labs, project-based learning, and industry exposure prepared me for a global company like Zalando. CPU truly builds world-ready professionals.",
+      "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_02.png",
+      "tag": "BCA Alumni", "tagColor": "bg-pink-700"
+    },
+    {
+      "id": 3, "name": "Priya Lakhotiya", "course": "MBA Alumni", "company": "upGrad",
+      "package": "₹15 LPA", "rating": 5, "batch": "Class of 2021",
+      "quote": "The MBA program at CPU Kota is truly industry-aligned. Live projects, guest lectures from industry leaders, and the rigorous curriculum shaped my management thinking. upGrad recognized the CPU difference from day one.",
+      "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_03.png",
+      "tag": "MBA Alumni", "tagColor": "bg-blue-800"
+    },
+    {
+      "id": 4, "name": "Naman Nandwana", "course": "MBA Alumni", "company": "Quick Heal Technologies",
+      "package": "₹14 LPA", "rating": 5, "batch": "Class of 2020",
+      "quote": "CPU's campus in Kota is vibrant and full of learning opportunities beyond the classroom. The management faculty pushed us to think critically. My placement at Quick Heal was a result of three years of hard preparation backed by CPU's ecosystem.",
+      "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_04.png",
+      "tag": "MBA Alumni", "tagColor": "bg-amber-700"
+    },
+    {
+      "id": 5, "name": "Abhinav Singh", "course": "B.Sc HBHA Alumni", "company": "Hyatt Regency",
+      "package": "₹9.5 LPA", "rating": 4, "batch": "Class of 2022",
+      "quote": "Career Point University's hospitality program is one of the best in Rajasthan. The practical training, industry visits, and soft skills workshops gave me everything I needed to step confidently into Hyatt Regency.",
+      "img": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&q=80",
+      "tag": "B.Sc HBHA Alumni", "tagColor": "bg-emerald-700"
+    },
+    {
+      "id": 6, "name": "Avneet Bagga", "course": "B.Tech Food Tech Alumni", "company": "ITC Limited",
+      "package": "₹10 LPA", "rating": 4, "batch": "Class of 2023",
+      "quote": "The food technology labs at CPU are world-class. I had the opportunity to work on real product development projects during my degree. That hands-on experience is what got me placed at ITC Limited straight out of campus.",
+      "img": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80",
+      "tag": "B.Tech Food Tech", "tagColor": "bg-rose-700"
+    }
+  ],
+  "faqs": [
+    { "q": "What programs does Career Point University offer?", "a": "CPU offers 70+ programs across UG, PG, Doctoral and Diploma levels in Engineering, Management, Law, Pharmacy, Medical Sciences, and more." },
+    { "q": "What is the admission process at CPU?", "a": "Admissions are based on merit/entrance test scores (JEE, NEET, CAT, etc.). Apply online at cpuniverse.ac.in or call 1800-1800-345 for assistance." },
+    { "q": "What are the placement opportunities?", "a": "CPU has a dedicated placement cell with 400+ recruiters. Highest package 42 LPA with 90% placement rate." },
+    { "q": "Does CPU offer scholarships?", "a": "Yes, CPU offers merit-based, need-based scholarships and Rajasthan government scholarships to eligible students." },
+    { "q": "What is the campus infrastructure like?", "a": "Sprawling campus in Kota with smart classrooms, labs, hostels, sports facilities, medical center, and more than 25 years of educational excellence." },
+    { "q": "Is there international exposure for students?", "a": "Yes, CPU has collaborations with 20+ countries and offers student exchange programs, international internships, and global certifications." }
+  ],
+  "socialImgs": [
+    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80",
+    "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80",
+    "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?w=600&q=80",
+    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80"
+  ]
+}
