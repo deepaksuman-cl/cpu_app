@@ -1,6 +1,7 @@
+import AdvanceCodingLabs from "../../../../components/pages/schools/computer/AdvanceCodingLabs";
+import TechLabs from "../../../../components/pages/schools/computer/TechLabs";
 import SchoolHero from "../../../../components/pages/schools/SchoolHero";
 import schoolsData from "../../../../data/schoolsData.json";
-import TechLabs from "../../../../components/pages/schools/computer/TechLabs";
 // 🔴 FIX 1: Function ke aage 'async' laga diya
 export default async function SchoolPage({ params }) {
   
@@ -34,6 +35,12 @@ export default async function SchoolPage({ params }) {
         <TechLabs />
       )}
       <SchoolHero data={data.hero} />
+      {currentSlug === "computer-applications-technology" && (
+        <AdvanceCodingLabs />
+      )}
+       {currentSlug === "computer-applications-technology" && (
+        <TechLabs />
+      )}
 
       {currentSlug === "computer-applications-technology" && (
         <section className="bg-gray-900 text-white p-10 my-5">

@@ -1,129 +1,267 @@
 {
-  "logoUrl": "https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png",
-  "topBar": {
-    "phone1": "1800-123-1104",
+  "topBarInfo": {
+    "phone": "1800-123-1104",
     "email": "info@cpur.in",
-    "topLinks": ["Student Login", "Alumni", "NIRF"]
-  },
-  "about": {
-    "promoImage": "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200",
-    "description": "Career Point University, Kota is one of the top self-financed private universities in Rajasthan, dedicated to academic excellence.",
-    "links": [
-      { "title": "Chairperson's Message", "href": "/about/chairperson" },
-      { "title": "President's Message", "href": "/about/president" },
-      { "title": "Vision & Mission", "href": "/about/vision-mission" },
-      { "title": "About CPU", "href": "/about/cpu" },
-      { "title": "Our Roots", "href": "/about/roots" },
-      { "title": "Organizational Structure", "href": "/about/structure" },
-      { "title": "UGC - University Grants Commission", "href": "/about/ugc" },
-      { "title": "AIU - Association of Indian Universities", "href": "/about/aiu" }
+    "topStripLinks": [
+      { "label": "Student Login", "slug": "/student-login" },
+      { "label": "Alumni", "slug": "/alumni" },
+      { "label": "NIRF", "slug": "/nirf" }
     ],
-    "rightCards": [
-      {
-        "title": "Innovation and Incubation",
-        "desc": "If you have an innovative idea, we can show you the way ahead."
-      },
-      {
-        "title": "Social Impact/CSR",
-        "desc": "Social responsibility takes many forms from providing healthcare to education."
-      },
-      {
-        "title": "Why CPU?",
-        "desc": "Focus to develop both education and critical skills to help our students excel."
-      }
+    "newsTicker": [
+      "⭐ Admissions Open for 2026 Batch | Highest Placement Package 60 LPA | NAAC Accredited University ⭐"
     ]
   },
-  "admissions": {
-    "links": [
-      { "title": "Apply Online", "href": "/admission/apply" },
-      { "title": "Fee Structure", "href": "/admission/fees" },
-      { "title": "Scholarship (For Indian Students)", "href": "/admission/scholarship" },
-      { "title": "Fee Deposition", "href": "/admission/fee-deposition" },
-      { "title": "Refund & Cancellation", "href": "/admission/refund" }
-    ]
-  },
-  "academics": {
-    "topLinks": [
-      { "prefix": "Diploma", "bold": "Programmes", "suffix": "After 10th/12th" },
-      { "prefix": "Under", "bold": "Graduate", "suffix": "Programmes" },
-      { "prefix": "Post", "bold": "Graduate", "suffix": "Programmes" },
-      { "prefix": "Integrated", "bold": "Programmes", "suffix": "Dual Degree" },
-      { "prefix": "Doctoral", "bold": "Programmes", "suffix": "Ph.D." },
-      { "prefix": "All", "bold": "Programmes", "suffix": "Explore All" }
-    ],
-    "schools": [
-      { "title": "School of Engineering & Technology", "href": "/schools/engineering" },
-      { "title": "School of Commerce and Management", "href": "/schools/commerce" },
-      { "title": "School of Computer Application & Technology", "href": "/schools/computer" },
-      { "title": "School of Legal Studies & Governance", "href": "/schools/legal" },
-      { "title": "School of Health & Allied Sciences", "href": "/schools/health" },
-      { "title": "School of Agricultural Sciences", "href": "/schools/agriculture" },
-      { "title": "School of Arts and Humanities", "href": "/schools/arts" },
-      { "title": "School of Basic & Applied Sciences", "href": "/schools/basic-applied" }
-    ],
-    "rightLinks": [
-      { "title": "Academic Calendar", "href": "/academic/calendar" },
-      { "title": "System of Grading", "href": "/academic/grading" },
-      { "title": "Degree Verification", "href": "/academic/degree-verification" },
-      { "title": "Academic Bank of Credits (ABC)", "href": "/academic/abc" },
-      { "title": "Code of Conduct for Student", "href": "/academic/student-conduct" },
-      { "title": "Exam Results", "href": "/academic/results" },
-      { "title": "Examination Schedule", "href": "/academic/exam-schedule" }
-    ]
-  },
-  "campusLife": [
+  "logoUrl": "https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png",
+  "topMenu": [
     {
-      "title": "Campus Facilities",
-      "img": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80",
-      "links": [
-        { "title": "Clubs", "href": "/campus-life/clubs" },
-        { "title": "Sports Facility", "href": "/campus-life/sports" },
-        { "title": "Campus Facilities", "href": "/campus-life/facilities" },
-        { "title": "Residential Facilities", "href": "/campus-life/residential" }
+      "title": "About",
+      "type": "mega-columns-with-image",
+      "promoImage": "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200",
+      "promoDescription": "Career Point University, Kota is one of the top self-financed private universities in Rajasthan, dedicated to academic excellence.",
+      "columns": [
+        {
+          "heading": "About Us",
+          "links": [
+            { "label": "Chairperson's Message", "slug": "/about/chairperson" },
+            { "label": "President's Message", "slug": "/about/president" },
+            { "label": "Vision & Mission", "slug": "/about/vision-mission" },
+            { "label": "About CPU", "slug": "/about/cpu" },
+            { "label": "Our Roots", "slug": "/about/roots" },
+            { "label": "Organizational Structure", "slug": "/about/structure" }
+          ]
+        },
+        {
+          "heading": "Recognition & Disclosures",
+          "links": [
+            { "label": "UGC – University Grants Commission", "slug": "/about/ugc" },
+            { "label": "AIU – Association of Indian Universities", "slug": "/about/aiu" },
+            { "label": "PCI Approval", "slug": "/about/pci" },
+            { "label": "NCTE Approval", "slug": "/about/ncte" },
+            { "label": "BAR Council of India", "slug": "/about/bar" },
+            { "label": "ICAR Accreditation", "slug": "/about/icar" },
+            { "label": "NIRF", "slug": "/about/nirf" },
+            { "label": "Internal Quality Assurance Cell", "slug": "/about/iqac" },
+            { "label": "RTI Cell", "slug": "/about/rti" }
+          ]
+        },
+        {
+          "heading": "University",
+          "links": [
+            { "label": "University Act", "slug": "/about/act" },
+            { "label": "University Statutes", "slug": "/about/statutes" },
+            { "label": "University Ordinance", "slug": "/about/ordinance" }
+          ]
+        }
       ]
     },
     {
-      "title": "News & Gallery",
-      "img": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
-      "links": [
-        { "title": "Photo Gallery", "href": "/campus-life/gallery" },
-        { "title": "CPU Campus Tour", "href": "/campus-life/tour" },
-        { "title": "News in Media", "href": "/campus-life/news" },
-        { "title": "Press Releases", "href": "/campus-life/press-releases" }
+      "title": "Academic",
+      "type": "mega-columns",
+      "columns": [
+        {
+          "heading": "Programme",
+          "links": [
+            { "label": "Diploma", "slug": "/academic/diploma", "subText": "After 10th/12th" },
+            { "label": "Under Graduate", "slug": "/academic/ug", "subText": "Programmes" },
+            { "label": "Integrated", "slug": "/academic/integrated", "subText": "Dual Degree" },
+            { "label": "Post Graduate", "slug": "/academic/pg", "subText": "Programmes" },
+            { "label": "Doctoral", "slug": "/academic/phd", "subText": "Ph.D." },
+            { "label": "All Programme", "slug": "/academic/all", "subText": "Explore All" }
+          ]
+        },
+        {
+          "heading": "Schools",
+          "links": [
+            { "label": "School of Education", "slug": "/schools/education" },
+            { "label": "School of Legal Studies & Governance", "slug": "/schools/legal-studies-governance" },
+            { "label": "School of Commerce and Management", "slug": "/schools/commerce-management" },
+            { "label": "School of Health & Allied Sciences", "slug": "/schools/health-allied-sciences" },
+            { "label": "School of Engineering & Technology", "slug": "/schools/engineering-technology" },
+            { "label": "School of Agricultural Sciences", "slug": "/schools/agricultural-sciences" },
+            { "label": "School of Arts and Humanities", "slug": "/schools/arts-humanities" },
+            { "label": "School of Computer Application & Technology", "slug": "/schools/computer-applications-technology" },
+            { "label": "School of Basic & Applied Sciences", "slug": "/schools/basic-applied-sciences" }
+          ]
+        },
+        {
+          "heading": "General Information",
+          "links": [
+            { "label": "Academic Calendar", "slug": "/academic/calendar" },
+            { "label": "Academic and Examination Evaluation System", "slug": "/academic/evaluation-system" },
+            { "label": "Code of Conduct for Student", "slug": "/academic/student-conduct" },
+            { "label": "Code of Conduct for Faculty and Staff", "slug": "/academic/faculty-conduct" },
+            { "label": "Exam Results", "slug": "/academic/exam-results" },
+            { "label": "Examination Schedule", "slug": "/academic/exam-schedule" },
+            { "label": "Examination Annual Report", "slug": "/academic/exam-annual-report" }
+          ]
+        },
+        {
+          "heading": "General Information",
+          "links": [
+            { "label": "System of Grading", "slug": "/academic/grading-system" },
+            { "label": "Degree Verification", "slug": "/academic/degree-verification" },
+            { "label": "National Academic Depository (NAD)", "slug": "/academic/nad" },
+            { "label": "Academic Bank of Credits (ABC)", "slug": "/academic/abc" },
+            { "label": "Programme Curricula", "slug": "/academic/programme-curricula" },
+            { "label": "Feedback", "slug": "/academic/feedback" }
+          ]
+        }
       ]
     },
     {
-      "title": "Student Life",
-      "img": "https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=400&q=80",
+      "title": "Admission",
+      "type": "split-action-menu",
+      "promoTitle": "Admissions 2026 Open",
+      "promoSubText": "Start your journey with Career Point University. Let's shape your future together.",
+      "actionButtonText": "APPLY ONLINE NOW",
+      "actionButtonLink": "/admission/apply",
+      "helpdeskTitle": "Admission HelpDesk",
+      "linksHeading": "Quick Admission Links",
       "links": [
-        { "title": "Student Life 2023-24", "href": "/campus-life/2023-24" },
-        { "title": "Student Life 2022-23", "href": "/campus-life/2022-23" },
-        { "title": "Student Life 2021-22", "href": "/campus-life/2021-22" }
+        { "label": "Apply Online", "slug": "/admission/apply" },
+        { "label": "Fee Structure", "slug": "/admission/fee-structure" },
+        { "label": "Scholarship (For Indian Students)", "slug": "/admission/scholarships" },
+        { "label": "Fee Deposition", "slug": "/admission/fee-deposition" },
+        { "label": "Refund & Cancellation", "slug": "/admission/refund-cancellation" }
       ]
     },
     {
-      "title": "Events",
-      "img": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=400&q=80",
-      "links": [
-        { "title": "IMMIX", "href": "/campus-life/events/immix" },
-        { "title": "Technovation", "href": "/campus-life/events/technovation" },
-        { "title": "Kheloutsav", "href": "/campus-life/events/kheloutsav" },
-        { "title": "Aagaaz", "href": "/campus-life/events/aagaaz" }
+      "title": "Training & Placement",
+      "type": "mega-columns",
+      "columns": [
+        {
+          "heading": "IAB",
+          "links": [
+            { "label": "Industry Advisory Board", "slug": "/placement/iab" }
+          ]
+        },
+        {
+          "heading": "Years",
+          "links": [
+            { "label": "Placement AY 2024-25", "slug": "/placement/2024-25" },
+            { "label": "Placement AY 2023-24", "slug": "/placement/2023-24" },
+            { "label": "Placement AY 2022-23", "slug": "/placement/2022-23" },
+            { "label": "Placement AY 2021-22", "slug": "/placement/2021-22" },
+            { "label": "Placement AY 2020-21", "slug": "/placement/2020-21" },
+            { "label": "Placement AY 2019-20", "slug": "/placement/2019-20" },
+            { "label": "Placement Percentage", "slug": "/placement/percentage" }
+          ]
+        },
+        {
+          "heading": "Policies",
+          "links": [
+            { "label": "Placement Policy", "slug": "/placement/policy" }
+          ]
+        },
+        {
+          "heading": "Career Counselling Department",
+          "links": [
+            { "label": "Skill Xcelerator", "slug": "/placement/skill-xcelerator" },
+            { "label": "Career Accelerator Program", "slug": "/placement/career-accelerator" },
+            { "label": "Center For Competitive Examination Preparation", "slug": "/placement/competitive-exams" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Campus Life",
+      "type": "mega-columns-with-images",
+      "columns": [
+        {
+          "heading": "Campus Facilities",
+          "image": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80",
+          "links": [
+            { "label": "Clubs", "slug": "/campus/clubs" },
+            { "label": "Sports Facility", "slug": "/campus/sports" },
+            { "label": "Campus Facilities", "slug": "/campus/facilities" },
+            { "label": "Residential Facilities & Living on Campus", "slug": "/campus/residential" }
+          ]
+        },
+        {
+          "heading": "News & Gallery",
+          "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
+          "links": [
+            { "label": "Photo Gallery", "slug": "/campus/gallery" },
+            { "label": "CPU Campus Tour", "slug": "/campus/tour" },
+            { "label": "News in Media", "slug": "/campus/news" },
+            { "label": "Press Releases", "slug": "/campus/press-releases" },
+            { "label": "Chronicles", "slug": "/campus/chronicles" }
+          ]
+        },
+        {
+          "heading": "Student Life At CPU",
+          "image": "https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=400&q=80",
+          "links": [
+            { "label": "Student Life At CPU 2023-24", "slug": "/campus/student-life-2023-24" },
+            { "label": "Student Life At CPU 2022-23", "slug": "/campus/student-life-2022-23" },
+            { "label": "Student Life At CPU 2021-22", "slug": "/campus/student-life-2021-22" },
+            { "label": "Student Life At CPU 2020-21", "slug": "/campus/student-life-2020-21" },
+            { "label": "Student Life At CPU 2019-20", "slug": "/campus/student-life-2019-20" }
+          ]
+        },
+        {
+          "heading": "Events",
+          "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=400&q=80",
+          "links": [
+            { "label": "IMMIX", "slug": "/campus/immix" },
+            { "label": "Technovation", "slug": "/campus/technovation" },
+            { "label": "Kheloutsav", "slug": "/campus/kheloutsav" },
+            { "label": "Aagaaz", "slug": "/campus/aagaaz" },
+            { "label": "Retrace", "slug": "/campus/retrace" }
+          ]
+        }
       ]
     }
   ],
-  "sidebar": {
-    "placements": [
-      { "title": "Industry Advisory Board", "href": "/placement/iab" },
-      { "title": "Placement AY 2024-25", "href": "/placement/2024-25" },
-      { "title": "Placement Policy", "href": "/placement/policy" },
-      { "title": "Skill Xcelerator", "href": "/placement/skill-xcelerator" }
+  "sideMenu": {
+    "exploreMore": [
+      {
+        "title": "Learning Resource",
+        "hasDropdown": true,
+        "type": "nested-dropdown",
+        "links": [
+          {
+            "label": "What's Happening",
+            "slug": "/library/whats-happening",
+            "subLinks": [
+              { "label": "T & P Events", "slug": "/library/tp-events" },
+              { "label": "IKS", "slug": "/library/iks" },
+              { "label": "Upcoming Events", "slug": "/library/upcoming-events" },
+              { "label": "Announcements", "slug": "/library/announcements" },
+              { "label": "News in Media", "slug": "/library/news-in-media" }
+            ]
+          },
+          {
+            "label": "Downloads",
+            "slug": "/library/downloads",
+            "subLinks": [
+              { "label": "CPU Brochure", "slug": "/library/brochure" },
+              { "label": "Information Booklet", "slug": "/library/booklet" },
+              { "label": "Conference Proceedings", "slug": "/library/proceedings" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Various Committees",
+        "hasDropdown": true,
+        "type": "simple-dropdown",
+        "links": [
+          { "label": "Internal Quality Assurance Cell (IQAC)", "slug": "/committees/iqac" },
+          { "label": "Proctorial Board", "slug": "/committees/proctorial-board" },
+          { "label": "Student Grievance Redressal Committee", "slug": "/committees/grievance" },
+          { "label": "Internal Complaints Committee (ICC)", "slug": "/committees/icc" },
+          { "label": "Anti Ragging Committee", "slug": "/committees/anti-ragging" },
+          { "label": "Equal Opportunities Commission", "slug": "/committees/equal-opportunities" }
+        ]
+      }
     ],
-    "quickLinks": [
-      { "title": "Contact Us", "href": "/contact" },
-      { "title": "Programmes", "href": "/academic/all" },
-      { "title": "Testimonials", "href": "#" },
-      { "title": "NIRF", "href": "/nirf" }
+    "directLinks": [
+      { "label": "International", "slug": "/international" },
+      { "label": "Research", "slug": "/research" },
+      { "label": "Alumni", "slug": "/alumni" },
+      { "label": "IQAC", "slug": "/iqac" },
+      { "label": "Contact", "slug": "/contact" }
     ]
   }
 }
