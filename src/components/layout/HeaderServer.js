@@ -2,17 +2,17 @@
 // 🔴 Yahan koi 'use client' nahi hai. Ye 100% Server Side Rendered (SSR) hai.
 
 import HeaderClient from './HeaderClient'; // Waiter ko bulaya
-import navigationData from '@/data/navigation.json'; // Database/JSON se data fetch kiya
+import { getNavigationData } from '@/lib/actions/navigation';
 
 export default async function HeaderServer() {
   
-  // Abhi hum data JSON se le rahe hain. 
-  // Baad me jab admin panel banega, toh hum yahan MongoDB ka API call laga denge.
-  // Example: const navigationData = await fetch('api/get-nav-data');
-  const data = navigationData;
-
-  // Data nikalne ke baad, usko Client component ko as a prop de diya
-  return (
-    <HeaderClient navData={data} />
-  );
+  // Fetch real-time data from MongoDB via Server Action
+  try {
+    const data = await getNavigationData();
+    return <HeaderClient navData={data} />;
+  } catch (error) {
+    console.error("Header Data Fetch Error:", error);
+    // Fallback to empty structure or handle error gracefully
+    return null; 
+  }
 }

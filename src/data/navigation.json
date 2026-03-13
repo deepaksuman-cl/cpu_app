@@ -1,17 +1,30 @@
 {
+  "siteConfig": {
+    "searchPlaceholder": "Search Career Point University...",
+    "topBar": {
+      "latestNewsLabel": "Latest News",
+      "helpdeskLabel": "Admission Helpline"
+    },
+    "sidebar": {
+      "closeLabel": "Close"
+    }
+  },
+
   "topBarInfo": {
     "phone": "1800-123-1104",
     "email": "info@cpur.in",
     "topStripLinks": [
       { "label": "Student Login", "slug": "/student-login" },
-      { "label": "Alumni", "slug": "/alumni" },
-      { "label": "NIRF", "slug": "/nirf" }
+      { "label": "Alumni",        "slug": "/alumni" },
+      { "label": "NIRF",          "slug": "/nirf" }
     ],
     "newsTicker": [
       "⭐ Admissions Open for 2026 Batch | Highest Placement Package 60 LPA | NAAC Accredited University ⭐"
     ]
   },
+
   "logoUrl": "https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png",
+
   "topMenu": [
     {
       "title": "About",
@@ -22,12 +35,12 @@
         {
           "heading": "About Us",
           "links": [
-            { "label": "Chairperson's Message", "slug": "/about/chairperson" },
-            { "label": "President's Message", "slug": "/about/president" },
-            { "label": "Vision & Mission", "slug": "/about/vision-mission" },
-            { "label": "About CPU", "slug": "/about/cpu" },
-            { "label": "Our Roots", "slug": "/about/roots" },
-            { "label": "Organizational Structure", "slug": "/about/structure" }
+            { "label": "Chairperson's Message",   "slug": "/about/chairperson" },
+            { "label": "President's Message",     "slug": "/about/president" },
+            { "label": "Vision & Mission",        "slug": "/about/vision-mission" },
+            { "label": "About CPU",               "slug": "/about/cpu" },
+            { "label": "Our Roots",               "slug": "/about/roots" },
+            { "label": "Organizational Structure","slug": "/about/structure" }
           ]
         },
         {
@@ -35,25 +48,26 @@
           "links": [
             { "label": "UGC – University Grants Commission", "slug": "/about/ugc" },
             { "label": "AIU – Association of Indian Universities", "slug": "/about/aiu" },
-            { "label": "PCI Approval", "slug": "/about/pci" },
-            { "label": "NCTE Approval", "slug": "/about/ncte" },
-            { "label": "BAR Council of India", "slug": "/about/bar" },
-            { "label": "ICAR Accreditation", "slug": "/about/icar" },
-            { "label": "NIRF", "slug": "/about/nirf" },
+            { "label": "PCI Approval",            "slug": "/about/pci" },
+            { "label": "NCTE Approval",           "slug": "/about/ncte" },
+            { "label": "BAR Council of India",    "slug": "/about/bar" },
+            { "label": "ICAR Accreditation",      "slug": "/about/icar" },
+            { "label": "NIRF",                    "slug": "/about/nirf" },
             { "label": "Internal Quality Assurance Cell", "slug": "/about/iqac" },
-            { "label": "RTI Cell", "slug": "/about/rti" }
+            { "label": "RTI Cell",                "slug": "/about/rti" }
           ]
         },
         {
           "heading": "University",
           "links": [
-            { "label": "University Act", "slug": "/about/act" },
-            { "label": "University Statutes", "slug": "/about/statutes" },
+            { "label": "University Act",       "slug": "/about/act" },
+            { "label": "University Statutes",  "slug": "/about/statutes" },
             { "label": "University Ordinance", "slug": "/about/ordinance" }
           ]
         }
       ]
     },
+
     {
       "title": "Academic",
       "type": "mega-columns",
@@ -61,53 +75,54 @@
         {
           "heading": "Programme",
           "links": [
-            { "label": "Diploma", "slug": "/academic/diploma", "subText": "After 10th/12th" },
-            { "label": "Under Graduate", "slug": "/academic/ug", "subText": "Programmes" },
-            { "label": "Integrated", "slug": "/academic/integrated", "subText": "Dual Degree" },
-            { "label": "Post Graduate", "slug": "/academic/pg", "subText": "Programmes" },
-            { "label": "Doctoral", "slug": "/academic/phd", "subText": "Ph.D." },
-            { "label": "All Programme", "slug": "/academic/all", "subText": "Explore All" }
+            { "label": "Diploma",        "slug": "/academic/diploma",      "subText": "After 10th/12th" },
+            { "label": "Under Graduate", "slug": "/academic/ug",           "subText": "Programmes" },
+            { "label": "Integrated",     "slug": "/academic/integrated",   "subText": "Dual Degree" },
+            { "label": "Post Graduate",  "slug": "/academic/pg",           "subText": "Programmes" },
+            { "label": "Doctoral",       "slug": "/academic/phd",          "subText": "Ph.D." },
+            { "label": "All Programme",  "slug": "/academic/all",          "subText": "Explore All" }
           ]
         },
         {
           "heading": "Schools",
           "links": [
-            { "label": "School of Education", "slug": "/schools/education" },
-            { "label": "School of Legal Studies & Governance", "slug": "/schools/legal-studies-governance" },
-            { "label": "School of Commerce and Management", "slug": "/schools/commerce-management" },
-            { "label": "School of Health & Allied Sciences", "slug": "/schools/health-allied-sciences" },
-            { "label": "School of Engineering & Technology", "slug": "/schools/engineering-technology" },
-            { "label": "School of Agricultural Sciences", "slug": "/schools/agricultural-sciences" },
-            { "label": "School of Arts and Humanities", "slug": "/schools/arts-humanities" },
+            { "label": "School of Education",                         "slug": "/schools/education" },
+            { "label": "School of Legal Studies & Governance",        "slug": "/schools/legal-studies-governance" },
+            { "label": "School of Commerce and Management",           "slug": "/schools/commerce-management" },
+            { "label": "School of Health & Allied Sciences",          "slug": "/schools/health-allied-sciences" },
+            { "label": "School of Engineering & Technology",          "slug": "/schools/engineering-technology" },
+            { "label": "School of Agricultural Sciences",             "slug": "/schools/agricultural-sciences" },
+            { "label": "School of Arts and Humanities",               "slug": "/schools/arts-humanities" },
             { "label": "School of Computer Application & Technology", "slug": "/schools/computer-applications-technology" },
-            { "label": "School of Basic & Applied Sciences", "slug": "/schools/basic-applied-sciences" }
+            { "label": "School of Basic & Applied Sciences",          "slug": "/schools/basic-applied-sciences" }
           ]
         },
         {
           "heading": "General Information",
           "links": [
-            { "label": "Academic Calendar", "slug": "/academic/calendar" },
+            { "label": "Academic Calendar",                       "slug": "/academic/calendar" },
             { "label": "Academic and Examination Evaluation System", "slug": "/academic/evaluation-system" },
-            { "label": "Code of Conduct for Student", "slug": "/academic/student-conduct" },
-            { "label": "Code of Conduct for Faculty and Staff", "slug": "/academic/faculty-conduct" },
-            { "label": "Exam Results", "slug": "/academic/exam-results" },
-            { "label": "Examination Schedule", "slug": "/academic/exam-schedule" },
-            { "label": "Examination Annual Report", "slug": "/academic/exam-annual-report" }
+            { "label": "Code of Conduct for Student",            "slug": "/academic/student-conduct" },
+            { "label": "Code of Conduct for Faculty and Staff",  "slug": "/academic/faculty-conduct" },
+            { "label": "Exam Results",                           "slug": "/academic/exam-results" },
+            { "label": "Examination Schedule",                   "slug": "/academic/exam-schedule" },
+            { "label": "Examination Annual Report",              "slug": "/academic/exam-annual-report" }
           ]
         },
         {
           "heading": "General Information",
           "links": [
-            { "label": "System of Grading", "slug": "/academic/grading-system" },
-            { "label": "Degree Verification", "slug": "/academic/degree-verification" },
+            { "label": "System of Grading",              "slug": "/academic/grading-system" },
+            { "label": "Degree Verification",            "slug": "/academic/degree-verification" },
             { "label": "National Academic Depository (NAD)", "slug": "/academic/nad" },
             { "label": "Academic Bank of Credits (ABC)", "slug": "/academic/abc" },
-            { "label": "Programme Curricula", "slug": "/academic/programme-curricula" },
-            { "label": "Feedback", "slug": "/academic/feedback" }
+            { "label": "Programme Curricula",            "slug": "/academic/programme-curricula" },
+            { "label": "Feedback",                       "slug": "/academic/feedback" }
           ]
         }
       ]
     },
+
     {
       "title": "Admission",
       "type": "split-action-menu",
@@ -118,13 +133,14 @@
       "helpdeskTitle": "Admission HelpDesk",
       "linksHeading": "Quick Admission Links",
       "links": [
-        { "label": "Apply Online", "slug": "/admission/apply" },
-        { "label": "Fee Structure", "slug": "/admission/fee-structure" },
-        { "label": "Scholarship (For Indian Students)", "slug": "/admission/scholarships" },
-        { "label": "Fee Deposition", "slug": "/admission/fee-deposition" },
-        { "label": "Refund & Cancellation", "slug": "/admission/refund-cancellation" }
+        { "label": "Apply Online",                         "slug": "/admission/apply" },
+        { "label": "Fee Structure",                        "slug": "/admission/fee-structure" },
+        { "label": "Scholarship (For Indian Students)",   "slug": "/admission/scholarships" },
+        { "label": "Fee Deposition",                       "slug": "/admission/fee-deposition" },
+        { "label": "Refund & Cancellation",               "slug": "/admission/refund-cancellation" }
       ]
     },
+
     {
       "title": "Training & Placement",
       "type": "mega-columns",
@@ -156,13 +172,14 @@
         {
           "heading": "Career Counselling Department",
           "links": [
-            { "label": "Skill Xcelerator", "slug": "/placement/skill-xcelerator" },
-            { "label": "Career Accelerator Program", "slug": "/placement/career-accelerator" },
+            { "label": "Skill Xcelerator",                         "slug": "/placement/skill-xcelerator" },
+            { "label": "Career Accelerator Program",               "slug": "/placement/career-accelerator" },
             { "label": "Center For Competitive Examination Preparation", "slug": "/placement/competitive-exams" }
           ]
         }
       ]
     },
+
     {
       "title": "Campus Life",
       "type": "mega-columns-with-images",
@@ -171,21 +188,21 @@
           "heading": "Campus Facilities",
           "image": "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80",
           "links": [
-            { "label": "Clubs", "slug": "/campus/clubs" },
-            { "label": "Sports Facility", "slug": "/campus/sports" },
-            { "label": "Campus Facilities", "slug": "/campus/facilities" },
-            { "label": "Residential Facilities & Living on Campus", "slug": "/campus/residential" }
+            { "label": "Clubs",                                        "slug": "/campus/clubs" },
+            { "label": "Sports Facility",                             "slug": "/campus/sports" },
+            { "label": "Campus Facilities",                           "slug": "/campus/facilities" },
+            { "label": "Residential Facilities & Living on Campus",  "slug": "/campus/residential" }
           ]
         },
         {
           "heading": "News & Gallery",
           "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
           "links": [
-            { "label": "Photo Gallery", "slug": "/campus/gallery" },
-            { "label": "CPU Campus Tour", "slug": "/campus/tour" },
-            { "label": "News in Media", "slug": "/campus/news" },
-            { "label": "Press Releases", "slug": "/campus/press-releases" },
-            { "label": "Chronicles", "slug": "/campus/chronicles" }
+            { "label": "Photo Gallery",    "slug": "/campus/gallery" },
+            { "label": "CPU Campus Tour",  "slug": "/campus/tour" },
+            { "label": "News in Media",    "slug": "/campus/news" },
+            { "label": "Press Releases",   "slug": "/campus/press-releases" },
+            { "label": "Chronicles",       "slug": "/campus/chronicles" }
           ]
         },
         {
@@ -203,16 +220,17 @@
           "heading": "Events",
           "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=400&q=80",
           "links": [
-            { "label": "IMMIX", "slug": "/campus/immix" },
-            { "label": "Technovation", "slug": "/campus/technovation" },
-            { "label": "Kheloutsav", "slug": "/campus/kheloutsav" },
-            { "label": "Aagaaz", "slug": "/campus/aagaaz" },
-            { "label": "Retrace", "slug": "/campus/retrace" }
+            { "label": "IMMIX",       "slug": "/campus/immix" },
+            { "label": "Technovation","slug": "/campus/technovation" },
+            { "label": "Kheloutsav",  "slug": "/campus/kheloutsav" },
+            { "label": "Aagaaz",      "slug": "/campus/aagaaz" },
+            { "label": "Retrace",     "slug": "/campus/retrace" }
           ]
         }
       ]
     }
   ],
+
   "sideMenu": {
     "exploreMore": [
       {
@@ -224,22 +242,33 @@
             "label": "What's Happening",
             "slug": "/library/whats-happening",
             "subLinks": [
-              { "label": "T & P Events", "slug": "/library/tp-events" },
-              { "label": "IKS", "slug": "/library/iks" },
-              { "label": "Upcoming Events", "slug": "/library/upcoming-events" },
-              { "label": "Announcements", "slug": "/library/announcements" },
-              { "label": "News in Media", "slug": "/library/news-in-media" }
+              { "label": "T & P Events",       "slug": "/library/tp-events" },
+              { "label": "IKS",                "slug": "/library/iks" },
+              { "label": "Upcoming Events",    "slug": "/library/upcoming-events" },
+              { "label": "Announcements",      "slug": "/library/announcements" },
+              { "label": "News in Media",      "slug": "/library/news-in-media" }
             ]
           },
           {
             "label": "Downloads",
             "slug": "/library/downloads",
             "subLinks": [
-              { "label": "CPU Brochure", "slug": "/library/brochure" },
-              { "label": "Information Booklet", "slug": "/library/booklet" },
-              { "label": "Conference Proceedings", "slug": "/library/proceedings" }
+              { "label": "CPU Brochure",             "slug": "/library/brochure" },
+              { "label": "Information Booklet",      "slug": "/library/booklet" },
+              { "label": "Conference Proceedings",   "slug": "/library/proceedings" }
             ]
           }
+        ]
+      },
+      {
+        "title": "University Features",
+        "hasDropdown": true,
+        "type": "simple-dropdown",
+        "links": [
+          { "label": "Smart Campus",         "slug": "/features/smart-campus" },
+          { "label": "E-Governance",         "slug": "/features/e-governance" },
+          { "label": "Incubation Center",    "slug": "/features/incubation" },
+          { "label": "International Linkage","slug": "/features/international" }
         ]
       },
       {
@@ -247,21 +276,87 @@
         "hasDropdown": true,
         "type": "simple-dropdown",
         "links": [
-          { "label": "Internal Quality Assurance Cell (IQAC)", "slug": "/committees/iqac" },
-          { "label": "Proctorial Board", "slug": "/committees/proctorial-board" },
-          { "label": "Student Grievance Redressal Committee", "slug": "/committees/grievance" },
-          { "label": "Internal Complaints Committee (ICC)", "slug": "/committees/icc" },
-          { "label": "Anti Ragging Committee", "slug": "/committees/anti-ragging" },
-          { "label": "Equal Opportunities Commission", "slug": "/committees/equal-opportunities" }
+          { "label": "Internal Quality Assurance Cell (IQAC)",  "slug": "/committees/iqac" },
+          { "label": "Proctorial Board",                        "slug": "/committees/proctorial-board" },
+          { "label": "Student Grievance Redressal Committee",   "slug": "/committees/grievance" },
+          { "label": "Internal Complaints Committee (ICC)",     "slug": "/committees/icc" },
+          { "label": "Anti Ragging Committee",                  "slug": "/committees/anti-ragging" },
+          { "label": "Equal Opportunities Commission",          "slug": "/committees/equal-opportunities" }
         ]
       }
     ],
     "directLinks": [
       { "label": "International", "slug": "/international" },
-      { "label": "Research", "slug": "/research" },
-      { "label": "Alumni", "slug": "/alumni" },
-      { "label": "IQAC", "slug": "/iqac" },
-      { "label": "Contact", "slug": "/contact" }
+      { "label": "Research",      "slug": "/research" },
+      { "label": "Alumni",        "slug": "/alumni" },
+      { "label": "IQAC",          "slug": "/iqac" },
+      { "label": "Contact",       "slug": "/contact" }
+    ]
+  },
+
+  "mobileConfig": {
+    "exploreMoreHeading": "Explore More",
+
+    "enquiryForm": {
+      "title": "Admission Enquiry",
+      "icon": "MessageSquare",
+      "fields": [
+        { "id": "fullName", "placeholder": "Full Name *",       "type": "text",  "required": true },
+        { "id": "email",    "placeholder": "Email Address *",   "type": "email", "required": true },
+        { "id": "phone",    "placeholder": "Mobile Number *",   "type": "tel",   "required": true }
+      ],
+      "submitLabel": "Submit Enquiry"
+    },
+
+    "bottomTabs": [
+      {
+        "key": "programmes",
+        "label": "Programmes",
+        "icon": "GraduationCap",
+        "type": "popup",
+        "panel": {
+          "type": "programmes",
+          "sourceMenu": "Academic",
+          "programmesColumn": "Programme",
+          "schoolsColumn": "Schools",
+          "schoolsSectionLabel": "Browse by School"
+        }
+      },
+      {
+        "key": "enquiry",
+        "label": "Enquiry",
+        "icon": "BookOpen",
+        "type": "popup",
+        "panel": { "type": "enquiry" }
+      },
+      {
+        "key": "admissions",
+        "label": "Admission",
+        "icon": "Building2",
+        "type": "popup",
+        "panel": {
+          "type": "admissions",
+          "sourceMenu": "Admission"
+        }
+      },
+      {
+        "key": "call",
+        "label": "Call Us",
+        "icon": "Phone",
+        "type": "tel",
+        "hrefField": "phone"
+      },
+      {
+        "key": "menu",
+        "label": "Menu",
+        "icon": "Menu",
+        "closeIcon": "X",
+        "type": "popup",
+        "panel": {
+          "type": "full-menu",
+          "excludeMenuTitles": ["Academic", "Admission"]
+        }
+      }
     ]
   }
 }
