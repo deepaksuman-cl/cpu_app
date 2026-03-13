@@ -21,8 +21,6 @@ const DATA = {
     label: "Stay Updated",
     title: "Latest",
     titleAccent: "News",
-    ctaText: "View All News",
-    ctaLink: "/news",
     items: [
       {
         id: 1,
@@ -132,62 +130,8 @@ export default function NewsVideoSection() {
     <>
       {/* ── Global Styles ───────────────────────────────────── */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@400;500;600;700&display=swap');
-
-        .nvs-wrap  { font-family: "Outfit", sans-serif; }
-        .nvs-serif { font-family: "Cormorant Garamond", serif; }
-
-        @keyframes nvsProg {
-          from { width: 0% }
-          to   { width: 100% }
-        }
-        @keyframes nvsShimmer {
-          0%   { background-position: -200% center; }
-          100% { background-position:  200% center; }
-        }
-        @keyframes nvsPulse {
-          0%,100% { box-shadow: 0 0 0 0   rgba(0,88,139,.40); }
-          60%     { box-shadow: 0 0 0 7px rgba(0,88,139,.00); }
-        }
-        @keyframes nvsFadeUp {
-          from { opacity:0; transform:translateY(10px); }
-          to   { opacity:1; transform:translateY(0);    }
-        }
-        @keyframes nvsFloat {
-          0%,100% { transform: translateY(0px);  }
-          50%     { transform: translateY(-6px); }
-        }
-
-        .nvs-shimmer {
-          background: linear-gradient(90deg, #0b1e2d 0%, #00588b 40%, #0093d0 60%, #0b1e2d 100%);
-          background-size: 200% auto;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: nvsShimmer 4s linear infinite;
-        }
-        .nvs-pulse-dot { animation: nvsPulse 2s ease infinite; }
-        .nvs-float     { animation: nvsFloat 4s ease-in-out infinite; }
-        .nvs-fade-up   { animation: nvsFadeUp .45s ease both; }
-
-        .nvs-prog {
-          animation: nvsProg ${INTERVAL}ms linear infinite;
-        }
-        .nvs-prog.stopped { animation-play-state: paused; }
-
-        .nvs-clamp2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        .nvs-glass {
-          background: rgba(255,255,255,.82);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-        }
-        .nvs-card-img { transition: transform .55s cubic-bezier(.4,0,.2,1); }
-        .nvs-card:hover .nvs-card-img { transform: scale(1.07); }
+ 
+}
       `}</style>
 
       {/* ── Section ─────────────────────────────────────────── */}
@@ -214,10 +158,7 @@ export default function NewsVideoSection() {
                   {video.label}
                 </span>
               </div>
-              <div className="flex items-center gap-1 text-[11px] font-medium text-[#6a90a8]">
-                <MapPin size={11} className="text-[#00588b]" />
-                {video.location}
-              </div>
+            
             </div>
 
             {/* Heading */}
@@ -243,13 +184,7 @@ export default function NewsVideoSection() {
                   className="h-full w-full border-0"
             referrerpolicy="no-referrer-when-downgrade">
         </iframe>
-              </div>
-
-              {/* Live badge */}
-              <div className="absolute left-4 top-4 z-20 flex items-center gap-1.5 rounded-lg bg-[#00588b] px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white shadow-lg">
-                <Play size={9} fill="white" strokeWidth={0} />
-                {video.badgeText}
-              </div>
+              </div>      
             </div>
 
             {/* Description */}
@@ -257,14 +192,7 @@ export default function NewsVideoSection() {
               {video.description}
             </p>
 
-            {/* CTA button */}
-            <a
-              href={video.ctaLink}
-              className="group inline-flex w-fit items-center gap-2 rounded-xl bg-[#00588b] px-6 py-3 text-sm font-semibold text-white shadow-[0_6px_24px_rgba(0,88,139,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#004d7a] hover:shadow-[0_10px_32px_rgba(0,88,139,0.42)]"
-            >
-              {video.ctaText}
-              <ChevronRight size={15} strokeWidth={2.5} className="transition-transform group-hover:translate-x-0.5" />
-            </a>
+           
           </div>
 
           {/* ══════════════════════════════════════
@@ -317,10 +245,7 @@ export default function NewsVideoSection() {
                   paused ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <div className="nvs-glass flex items-center gap-2 rounded-full border border-[#00588b]/20 px-4 py-2 text-xs font-bold text-[#00588b] shadow-xl">
-                  <PauseCircle size={14} strokeWidth={2.5} />
-                  Paused — hover to read
-                </div>
+               
               </div>
 
               {/* Slide track */}
@@ -362,18 +287,13 @@ export default function NewsVideoSection() {
                       <div className="flex flex-1 flex-col justify-center gap-1.5 overflow-hidden px-3.5 py-2.5">
 
                         {/* Meta row */}
-                        <div className="flex flex-wrap items-center gap-1.5">
-                
-                  
-          
-                        </div>
-
-                        {/* Title */}
-                        <h5 className="nvs-clamp2  text-[15px] font-semibold l text-[#0b1e2d]">
+                        <div className="flex flex-wrap items-center p-3 gap-1.5">
+                 {/* Title */}
+                        <h5 className="nvs-clamp2 nvs-clamp-title  text-[15px] font-semibold l text-[#0b1e2d]">
                           {item.title}
                         </h5>
                         
-                          <p className="nvs-clamp2 m-0 text-[12.5px] font-semibold leading-snug text-[#0b1e2d]">
+                          <p className="nvs-clamp2 nvs-clamp-dec m-0 text-[12.5px] font-semibold leading-snug text-[#0b1e2d]">
                           {item.description}
                         </p>
 
@@ -386,6 +306,11 @@ export default function NewsVideoSection() {
                             className="transition-transform group-hover:translate-x-0.5"
                           />
                         </span>
+                  
+          
+                        </div>
+
+                       
                       </div>
 
                       {/* Right external icon */}
@@ -421,18 +346,7 @@ export default function NewsVideoSection() {
               />
             </div>
 
-            {/* View all CTA */}
-            <a
-              href={news.ctaLink}
-              className="group inline-flex w-fit items-center gap-2 rounded-xl border border-[#00588b]/30 px-5 py-2.5 text-sm font-semibold text-[#00588b] shadow-sm transition-all duration-200 hover:border-[#00588b] hover:bg-[#00588b] hover:text-white hover:shadow-md"
-            >
-              {news.ctaText}
-              <ChevronRight
-                size={15}
-                strokeWidth={2.5}
-                className="transition-transform group-hover:translate-x-0.5"
-              />
-            </a>
+        
           </div>
         </div>
       </section>

@@ -1,0 +1,26 @@
+{
+  "computer-applications-technology": {
+    "hero": {
+      "title": "School of Computer Applications & Technology",
+      "subtitle": "Best Computer Application College in Kota",
+      "description": "The objective of the School of Computer Applications & Technology is to prepare young professionals for the IT industry by providing them with a strong foundation in computer applications and technology.",
+      "points": ["State-of-the-art Computer Labs", "Industry aligned curriculum"]
+    },
+    "alumni": [
+      { "name": "Akshat", "company": "Wipro", "image": "/assets/akshat.jpg" },
+      { "name": "Riya", "company": "TCS", "image": "/assets/riya.jpg" }
+    ]
+  },
+  "legal-studies-governance": {
+    "hero": {
+      "title": "School of Legal Studies & Governance",
+      "subtitle": "Best Law College in Kota",
+      "description": "The School of Legal Studies & Governance is committed to providing world-class legal education and preparing the next generation of legal luminaries, judges, and corporate lawyers.",
+      "points": ["Moot Court Facility", "Expert Legal Faculty"]
+    },
+    "alumni": [
+      { "name": "Pallavi", "company": "High Court", "image": "/assets/pallavi.jpg" },
+      { "name": "Suresh", "company": "Law Firm", "image": "/assets/suresh.jpg" }
+    ]
+  }
+}

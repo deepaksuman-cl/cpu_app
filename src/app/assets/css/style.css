@@ -1,12 +1,18 @@
 html { scroll-behavior: smooth; }
 [id] { scroll-margin-top: 72px; } /* nav height offset */
-
+body *{
+    font-weight: 400!important;
+}
 nav.sticky.top-0.shadow-lg {
     position: fixed;
     width: 100%;
     transition: all 0.3s;
 }
+
+
+/* //virtulallynews css */
 @media only screen and (max-width: 767px) {
+    
    .apply_now_btn{
     display: none;
 }
@@ -20,3 +26,6 @@ nav{
     padding: 7px 0;
 }
 }
+
+
+

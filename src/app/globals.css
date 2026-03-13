@@ -1,15 +1,27 @@
 @import "tailwindcss";
+  body * {
+    font-weight: 500;
+  }
 
+  
+/* virtulallynews css */
+.nvs-clamp-title, .nvs-clamp-dec{
+      display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  
+}
+
+/* //virtulallynews css */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-  
+
   [id] {
     scroll-margin-top: 72px; /* nav height offset */
   }
 
-  body * {
-    font-weight: 500;
-  }
-}
+
+}

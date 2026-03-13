@@ -58,7 +58,7 @@ const iconMapping = { Zap, Microscope, Briefcase: Zap, Star }; // Simplified map
 
 export function HappeningsSection() {
   return (
-    <section className="bg-blue-50 py-16 px-4 overflow-hidden">
+    <section className="bg-white py-16 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="font-black text-3xl text-gray-900">Happenings <span className="text-[#00588b]">@CPU</span></h2>
