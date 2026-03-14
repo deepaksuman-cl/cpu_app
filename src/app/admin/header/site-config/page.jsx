@@ -21,6 +21,10 @@ export default async function SiteConfigPage() {
       },
       sidebar: {
         closeLabel: formData.get('closeLabel'),
+      },
+      headerActionButton: {
+        text: formData.get('headerActionButtonText'),
+        link: formData.get('headerActionButtonLink'),
       }
     });
 
@@ -102,6 +106,24 @@ export default async function SiteConfigPage() {
                 name="closeLabel"
                 type="text" 
                 defaultValue={config.sidebar.closeLabel}
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#fec53a] focus:border-transparent outline-none transition-all"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Header Action Text</label>
+              <input 
+                name="headerActionButtonText"
+                type="text" 
+                defaultValue={config.headerActionButton?.text || 'APPLY NOW'}
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#fec53a] focus:border-transparent outline-none transition-all font-bold"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Header Action Link</label>
+              <input 
+                name="headerActionButtonLink"
+                type="text" 
+                defaultValue={config.headerActionButton?.link || '/admission'}
                 className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#fec53a] focus:border-transparent outline-none transition-all"
               />
             </div>

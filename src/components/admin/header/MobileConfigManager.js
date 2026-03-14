@@ -12,12 +12,18 @@ export default function MobileConfigManager({ initialData, initialMobileConfig }
   const [config, setConfig] = useState(initialMobileConfig);
   const [saving, setSaving] = useState(false);
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
     setSaving(true);
-    const result = await saveFullNavigationData({ ...initialData, mobileConfig: config });
-    if (result.success) alert('Mobile configuration updated!');
-    else alert('Error: ' + result.error);
-    setSaving(false);
+    try {
+      const payload = JSON.parse(JSON.stringify({ ...initialData, mobileConfig: config }));
+      const result = await saveFullNavigationData(payload);
+      if (result.success) alert('Mobile configuration updated successfully!');
+      else alert('Error: ' + result.error);
+    } catch (err) {
+      alert('Serialization Error: ' + err.message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const updateField = (field, value) => {
@@ -167,7 +173,30 @@ export default function MobileConfigManager({ initialData, initialMobileConfig }
                Mobile Enquiry Form Builder
                <button onClick={addFormField} className="text-[#fec53a] hover:underline">+ Add Field</button>
              </div>
-             <div className="p-6">
+             <div className="p-6 space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Form Title</label>
+                    <input 
+                      value={config.enquiryForm.title} 
+                      onChange={(e) => setConfig({ ...config, enquiryForm: { ...config.enquiryForm, title: e.target.value } })}
+                      className="w-full bg-gray-50 border border-transparent rounded-xl px-4 py-3 text-sm font-bold focus:bg-white focus:border-[#fec53a] outline-none transition-all" 
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Header Icon</label>
+                    <IconPicker 
+                      value={config.enquiryForm.icon} 
+                      onChange={(val) => setConfig({ ...config, enquiryForm: { ...config.enquiryForm, icon: val } })} 
+                    />
+                  </div>
+                </div>
+
+                <div className="bg-gray-50/50 p-4 rounded-xl border border-dashed border-gray-200">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Form Fields</span>
+                    <button onClick={addFormField} className="text-[#fec53a] text-xs font-bold hover:underline">+ Add Field</button>
+                  </div>
                 <div className="space-y-3">
                   {config.enquiryForm.fields.map((field, idx) => (
                     <div key={idx} className="flex gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50/50 group items-center">
@@ -202,6 +231,7 @@ export default function MobileConfigManager({ initialData, initialMobileConfig }
                     </div>
                   ))}
                 </div>
+              </div>
              </div>
           </div>
         </div>

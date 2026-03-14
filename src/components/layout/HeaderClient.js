@@ -124,36 +124,66 @@ function PanelImageCols({ menu }) {
   );
 }
 
-function PanelSplitAction({ menu, phone }) {
+function PanelSplitAction({ menu, phone, tollFree }) {
+  const promoTitle = menu.promoTitle || 'Admissions Open';
+  const promoSubText = menu.promoSubText || 'Join Career Point University and shape your career with excellence.';
+  const actionText = menu.actionButtonText || 'APPLY NOW';
+  const actionLink = menu.actionButtonLink || '/admission';
+  const helpdesk = menu.helpdeskTitle || 'Admission HelpDesk';
+  const linksHeading = menu.linksHeading || 'Quick Links';
+  const links = menu.links || [];
+
   return (
     <div className="p-6 xl:p-8 text-white">
       <div className="flex gap-6">
         <div className="w-[45%] border-r border-white/10 pr-5">
-          <h3 className="text-[22px] xl:text-[26px] font-bold mb-1 tracking-wide text-[#fec53a]">{menu.promoTitle}</h3>
-          <p className="text-[13px] text-gray-300 mb-6">{menu.promoSubText}</p>
-          <Link href={menu.actionButtonLink}>
-            <button className="bg-[#fec53a] hover:bg-white text-[#00588b] font-bold px-6 py-3 rounded-md shadow-md transition-colors w-full uppercase tracking-wider text-[13px]">{menu.actionButtonText}</button>
+          <h3 className="text-[22px] xl:text-[26px] font-bold mb-1 tracking-wide text-[#fec53a]">{promoTitle}</h3>
+          <p className="text-[13px] text-gray-300 mb-6">{promoSubText}</p>
+          <Link href={actionLink}>
+            <button className="bg-[#fec53a] hover:bg-white text-[#00588b] font-bold px-6 py-3 rounded-md shadow-md transition-colors w-full uppercase tracking-wider text-[13px]">{actionText}</button>
           </Link>
           <div className="bg-[#003b5e] border border-[#1c54a3] p-5 rounded-lg shadow-inner mt-8">
             <div className="flex items-center gap-3 mb-4">
-              <div className="bg-[#fec53a] p-2 rounded text-[#00588b]"><LucideIcons.MessageSquare size={18} /></div>
-              <span className="text-[16px] font-bold text-white tracking-wide">{menu.helpdeskTitle}</span>
+              <div className="bg-[#fec53a] p-2 rounded text-[#00588b]">
+                <DynIcon name={menu.helpdeskIcon || 'MessageSquare'} size={18} />
+              </div>
+              <span className="text-[16px] font-bold text-white tracking-wide">{helpdesk}</span>
             </div>
-            <div className="flex items-center gap-3 text-[14px]">
-              <LucideIcons.Phone className="text-[#fec53a] w-5 h-5" />
-              <a href={`tel:${phone}`} className="hover:text-[#fec53a] font-bold transition-colors">{phone}</a>
+            <div className="space-y-3">
+              {(menu.contacts && menu.contacts.length > 0) ? (
+                menu.contacts.map((c, i) => (
+                  <div key={i} className={`flex items-center gap-3 text-[14px] ${i > 0 ? 'pt-3 border-t border-white/10' : ''}`}>
+                    <div className="text-[#fec53a] flex-shrink-0"><DynIcon name={c.icon || 'Phone'} size={18} /></div>
+                    <div className="flex flex-col">
+                      {c.label && <span className="text-[10px] text-gray-400 uppercase tracking-widest">{c.label}</span>}
+                      {c.value?.includes('@') ? (
+                        <a href={`mailto:${c.value}`} className="hover:text-[#fec53a] font-bold transition-colors">{c.value}</a>
+                      ) : (
+                        <a href={`tel:${c.value}`} className="hover:text-[#fec53a] font-bold transition-colors">{c.value}</a>
+                      )}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                // Fallback: show global phone if no contacts configured
+                <div className="flex items-center gap-3 text-[14px]">
+                  <LucideIcons.Phone className="text-[#fec53a] w-5 h-5" />
+                  <a href={`tel:${phone}`} className="hover:text-[#fec53a] font-bold transition-colors">{phone}</a>
+                </div>
+              )}
             </div>
           </div>
         </div>
         <div className="w-[55%] pl-4">
-          <h4 className="text-[18px] font-bold mb-6 border-b border-white/10 pb-3 text-[#fec53a]">{menu.linksHeading}</h4>
+          <h4 className="text-[18px] font-bold mb-6 border-b border-white/10 pb-3 text-[#fec53a]">{linksHeading}</h4>
           <div className="grid grid-cols-2 gap-x-8 gap-y-2 max-h-[220px] desktop-mega-scroll pr-4">
-            {menu.links.map((l, i) => (
+            {links.map((l, i) => (
               <Link key={i} href={l.slug} className="group flex items-center justify-between py-2.5 border-b border-white/5 hover:border-[#fec53a] hover:text-[#fec53a] transition-colors text-[13px] xl:text-[14px] font-medium tracking-wide">
                 <span>{l.label}</span>
                 <LucideIcons.ChevronRight size={16} className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#fec53a]" />
               </Link>
             ))}
+            {links.length === 0 && <p className="text-gray-400 text-sm">No links configured</p>}
           </div>
         </div>
       </div>
@@ -172,12 +202,12 @@ function PanelCols({ menu }) {
             <ul className="space-y-2 max-h-[300px] desktop-mega-scroll pr-2">
               {col.links.map((l, j) => (
                 <li key={j}>
-                  <Link href={l.slug} className={`${T.megaLink} flex-col`}>
+                  <Link href={l.slug} className={`${T.megaLink} flex-col !items-start`}>
                     <div className="flex justify-between items-center w-full">
                       <span className="pr-2">{l.label}</span>
                       <LucideIcons.ChevronRight size={14} className={T.chevron} />
                     </div>
-                    {l.subText && <span className="text-[10px] text-gray-400 mt-0.5">{l.subText}</span>}
+                    {l.subText && <span className="text-[10px] text-gray-400 mt-1 ml-6">{l.subText}</span>}
                   </Link>
                 </li>
               ))}
@@ -203,8 +233,9 @@ function PanelImgTopCols({ menu }) {
             <ul className="space-y-1">
               {col.links.map((l, j) => (
                 <li key={j}>
-                  <Link href={l.slug} className="hover:text-[#fec53a] text-[13px] xl:text-[14px] text-gray-200 font-medium flex items-center justify-between py-1.5 transition-all group-hover:translate-x-1">
-                    {l.label}
+                  <Link href={l.slug} className="hover:text-[#fec53a] text-[13px] xl:text-[14px] text-gray-200 font-medium flex flex-col py-1.5 transition-all group-hover:translate-x-1">
+                    <span>{l.label}</span>
+                    {l.subText && <span className="text-[10px] text-gray-500 mt-0.5 ml-0">{l.subText}</span>}
                   </Link>
                 </li>
               ))}
@@ -217,10 +248,10 @@ function PanelImgTopCols({ menu }) {
 }
 
 /** Routes menu.type → correct desktop panel component */
-function DesktopMegaPanel({ menu, phone }) {
+function DesktopMegaPanel({ menu, phone, tollFree }) {
   switch (menu.type) {
     case 'mega-columns-with-image':   return <PanelImageCols menu={menu} />;
-    case 'split-action-menu':         return <PanelSplitAction menu={menu} phone={phone} />;
+    case 'split-action-menu':         return <PanelSplitAction menu={menu} phone={phone} tollFree={tollFree} />;
     case 'mega-columns':              return <PanelCols menu={menu} />;
     case 'mega-columns-with-images':  return <PanelImgTopCols menu={menu} />;
     default: return null;
@@ -649,6 +680,12 @@ export default function HeaderClient({ navData }) {
                 <Link key={l.slug} href={l.slug} className="hover:text-[#fec53a] px-4 border-r border-white/20 transition-colors h-full flex items-center">{l.label}</Link>
               ))}
               <span className="pl-4 flex items-center h-full">
+                {topBarInfo.tollFree && (
+                  <>
+                    <span className="opacity-70 mr-2">Toll Free:</span>
+                    <a href={`tel:${topBarInfo.tollFree}`} className="text-[#fec53a] font-bold mr-6 hover:text-white transition-colors">{topBarInfo.tollFree}</a>
+                  </>
+                )}
                 {siteConfig.topBar.helpdeskLabel}
                 <a href={`tel:${phone}`} className="ml-3 bg-[#fec53a] text-[#00588b] px-4 h-full flex items-center font-bold text-[13px] hover:bg-white transition-colors tracking-wide">{phone}</a>
               </span>
@@ -671,6 +708,13 @@ export default function HeaderClient({ navData }) {
                 ))}
                 <div className="flex items-center h-full border-l border-gray-300 ml-4 pl-4 text-[#00588b]"
                   onMouseEnter={() => dispatch({ type: 'SET_MEGA', key: null })}>
+                  
+                  {siteConfig.headerActionButton?.text && (
+                    <Link href={siteConfig.headerActionButton.link || '/admission'} className="hidden xl:flex items-center gap-2 bg-[#fec53a] text-gray-900 px-6 py-2.5 rounded-full font-bold text-[12px] hover:bg-[#00588b] hover:text-white transition-all transform hover:scale-[1.05] shadow-lg shadow-yellow-500/10 mr-4">
+                      {siteConfig.headerActionButton.text}
+                    </Link>
+                  )}
+
                   <button onClick={() => dispatch({ type: 'TOGGLE_SEARCH' })} className="px-2 h-full hover:text-[#fec53a] transition-colors flex items-center"><LucideIcons.Search size={22} strokeWidth={2.5} /></button>
                   <button onClick={() => dispatch({ type: 'TOGGLE_SIDEBAR' })} className="px-3 h-full hover:text-[#fec53a] flex flex-col gap-[5px] items-end justify-center transition-colors group">
                     <span className="w-6 h-[2.5px] bg-current block rounded-full" />
@@ -684,7 +728,7 @@ export default function HeaderClient({ navData }) {
               {topMenu.map(menu => (
                 <div key={menu.title}
                   className={`absolute top-[55px] right-0 w-[72vw] xl:w-[70vw] bg-[#004a75] shadow-[0_20px_40px_rgba(0,0,0,0.6)] border-t-[4px] border-[#fec53a] transition-all duration-300 ease-in-out origin-top z-40 rounded-b-lg overflow-hidden ${state.activeMegaMenu === menu.title.toLowerCase() ? 'opacity-100 visible translate-y-0 pointer-events-auto' : 'opacity-0 invisible translate-y-2 pointer-events-none'}`}>
-                  <DesktopMegaPanel menu={menu} phone={phone} />
+                  <DesktopMegaPanel menu={menu} phone={phone} tollFree={topBarInfo.tollFree} />
                 </div>
               ))}
             </div>

@@ -8,11 +8,20 @@ export default function TopBarManager({ initialData, initialTopBar }) {
   const [info, setInfo] = useState(initialTopBar);
   const [saving, setSaving] = useState(false);
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    // If e is an event, ignore it to avoid circular serialization
+    const isEvent = e && e.nativeEvent;
+    
     setSaving(true);
-    const result = await saveFullNavigationData({ ...initialData, topBarInfo: info });
-    if (result.success) alert('Top Bar settings updated!');
-    else alert('Error: ' + result.error);
+    // Deep clean payload for React 19 / Next 16 boundary
+    const payload = JSON.parse(JSON.stringify({ ...initialData, topBarInfo: info }));
+    const result = await saveFullNavigationData(payload);
+    
+    if (result.success) {
+      alert('Top Bar settings updated successfully!');
+    } else {
+      alert('Error: ' + result.error);
+    }
     setSaving(false);
   };
 
@@ -62,13 +71,22 @@ export default function TopBarManager({ initialData, initialTopBar }) {
             <div className="p-1 px-6 py-4 bg-gray-50 border-b border-gray-100 uppercase tracking-widest text-[10px] font-bold text-gray-400">
               Primary Contacts
             </div>
-            <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Phone Number</label>
                 <input 
                   value={info.phone} 
                   onChange={(e) => updateField('phone', e.target.value)}
                   className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-[#fec53a] outline-none" 
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Toll-Free Number</label>
+                <input 
+                  value={info.tollFree || ''} 
+                  onChange={(e) => updateField('tollFree', e.target.value)}
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-[#fec53a] outline-none" 
+                  placeholder="1800-XXX-XXXX"
                 />
               </div>
               <div className="space-y-2">
