@@ -12,6 +12,9 @@
   overflow: hidden;
   
 }
+a.flex.items-center.gap-4 {
+    display: inline-flex;
+}
 
 /* //virtulallynews css */
 @layer base {
