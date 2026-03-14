@@ -31,16 +31,16 @@ export default async function SchoolPage({ params }) {
   return (
     <main>
       {/* 🔴 MAGIC NUMBER 1: Sabse top par ye likha hai, toh ye Hero se upar aayega */}
-      {currentSlug === "computer-applications-technology" && (
+      {/* {currentSlug === "computer-applications-technology" && (
         <TechLabs />
-      )}
+      )} */}
       <SchoolHero data={data.hero} />
       {currentSlug === "computer-applications-technology" && (
         <AdvanceCodingLabs />
       )}
-       {currentSlug === "computer-applications-technology" && (
+       {/* {currentSlug === "computer-applications-technology" && (
         <TechLabs />
-      )}
+      )} */}
 
       {currentSlug === "computer-applications-technology" && (
         <section className="bg-gray-900 text-white p-10 my-5">

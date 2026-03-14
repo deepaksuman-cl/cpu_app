@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { 
   Plus, Trash2, ChevronDown, ChevronRight, Layout, 
   Link as LinkIcon, Save, GripVertical, FileText,
-  MousePointerClick, ListTree, Settings2
+  MousePointerClick, ListTree, Settings2, Grid, List
 } from 'lucide-react';
 import { saveFullNavigationData } from '@/lib/actions/navigation';
+import IconPicker from '../ui/IconPicker';
 
 export default function SidebarMenuManager({ initialData, initialSideMenu }) {
   const [data, setData] = useState(initialSideMenu);
@@ -33,8 +34,10 @@ export default function SidebarMenuManager({ initialData, initialSideMenu }) {
   const addExploreCategory = () => {
     const newCat = {
       title: 'New Category',
+      icon: 'Layout',
       hasDropdown: true,
       type: 'simple-dropdown',
+      columns: 1, // 1 for list, 2-3 for grid/horizontal
       links: []
     };
     setData({ ...data, exploreMore: [...data.exploreMore, newCat] });
@@ -168,23 +171,29 @@ export default function SidebarMenuManager({ initialData, initialSideMenu }) {
 
                 {expandedCat === catIdx && (
                   <div className="p-6 space-y-6 bg-white animate-in slide-in-from-top-2 duration-300">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-50 p-4 rounded-xl items-end">
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold text-gray-400 uppercase">Category Title</label>
                         <input value={cat.title} onChange={(e) => updateCategoryField(catIdx, 'title', e.target.value)} className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm font-bold outline-none focus:ring-2 focus:ring-[#fec53a]/20" />
                       </div>
                       <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase">Category Icon</label>
+                        <IconPicker value={cat.icon || 'Layout'} onChange={(val) => updateCategoryField(catIdx, 'icon', val)} />
+                      </div>
+                      <div className="space-y-1">
                         <label className="text-[10px] font-bold text-gray-400 uppercase">Display Type</label>
-                        <div className="flex gap-4 items-center">
-                          <select value={cat.type} onChange={(e) => updateCategoryField(catIdx, 'type', e.target.value)} className="flex-1 bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm font-bold outline-none">
-                            <option value="simple-dropdown">Simple List</option>
-                            <option value="nested-dropdown">Nested (3 Levels Support)</option>
-                          </select>
-                          <label className="flex items-center gap-2 cursor-pointer whitespace-nowrap">
-                            <input type="checkbox" checked={cat.hasDropdown} onChange={(e) => updateCategoryField(catIdx, 'hasDropdown', e.target.checked)} className="accent-[#fec53a]" />
-                            <span className="text-[10px] font-bold text-gray-400 uppercase">Show Chevron</span>
-                          </label>
-                        </div>
+                        <select value={cat.type} onChange={(e) => updateCategoryField(catIdx, 'type', e.target.value)} className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm font-bold outline-none">
+                          <option value="simple-dropdown">Simple List</option>
+                          <option value="nested-dropdown">Nested Support</option>
+                        </select>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase">Horizontal Columns</label>
+                        <select value={cat.columns || 1} onChange={(e) => updateCategoryField(catIdx, 'columns', parseInt(e.target.value))} className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm font-bold outline-none">
+                          <option value={1}>1 Column (List)</option>
+                          <option value={2}>2 Columns (Grid)</option>
+                          <option value={3}>3 Columns (Horizontal)</option>
+                        </select>
                       </div>
                     </div>
 

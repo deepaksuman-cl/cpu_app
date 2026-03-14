@@ -45,6 +45,31 @@ export default function TopBarManager({ initialData, initialTopBar }) {
     setInfo({ ...info, topStripLinks: updated });
   };
 
+  const addTickerItem = () => {
+    // Convert old string ticker to object array if necessary
+    const currentTicker = Array.isArray(info.newsTicker) && typeof info.newsTicker[0] === 'string' 
+      ? [{ text: info.newsTicker[0], link: '' }]
+      : info.newsTicker || [];
+    
+    setInfo({ ...info, newsTicker: [...currentTicker, { text: 'New Flash News', link: '' }] });
+  };
+
+  const removeTickerItem = (idx) => {
+    const updated = [...info.newsTicker];
+    updated.splice(idx, 1);
+    setInfo({ ...info, newsTicker: updated });
+  };
+
+  const updateTickerItem = (idx, field, value) => {
+    const updated = [...info.newsTicker];
+    // Ensure it's an object
+    if (typeof updated[idx] === 'string') {
+      updated[idx] = { text: updated[idx], link: '' };
+    }
+    updated[idx] = { ...updated[idx], [field]: value };
+    setInfo({ ...info, newsTicker: updated });
+  };
+
   return (
     <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-20">
       <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
@@ -102,17 +127,47 @@ export default function TopBarManager({ initialData, initialTopBar }) {
 
           {/* Ticker */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div className="p-1 px-6 py-4 bg-gray-50 border-b border-gray-100 uppercase tracking-widest text-[10px] font-bold text-gray-400 flex justify-between">
-              Scrolling News Ticker
-              <span className="text-[#fec53a]">Live</span>
+            <div className="p-1 px-6 py-4 bg-gray-50 border-b border-gray-100 uppercase tracking-widest text-[10px] font-bold text-gray-400 flex justify-between items-center">
+              <span>Smart News Ticker (Scrolling)</span>
+              <button onClick={addTickerItem} className="text-[#fec53a] hover:underline">+ Add Flash News</button>
             </div>
-            <div className="p-6">
-              <textarea 
-                value={info.newsTicker[0]}
-                onChange={(e) => updateField('newsTicker', [e.target.value])}
-                rows={3}
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-[#fec53a] outline-none leading-relaxed"
-              />
+            <div className="p-6 space-y-3">
+              {(Array.isArray(info.newsTicker) ? info.newsTicker : []).map((item, idx) => {
+                const isObj = typeof item === 'object' && item !== null;
+                const text = isObj ? item.text : item;
+                const link = isObj ? item.link : '';
+
+                return (
+                  <div key={idx} className="flex gap-4 p-4 rounded-xl border border-gray-50 bg-gray-50/30 group items-center">
+                    <div className="p-1 text-gray-200"><GripVertical size={16} /></div>
+                    <div className="flex-1 space-y-2">
+                       <input 
+                        value={text}
+                        onChange={(e) => updateTickerItem(idx, 'text', e.target.value)}
+                        placeholder="News Text (e.g. ⭐ Admissions Open...)"
+                        className="w-full bg-transparent border-b border-gray-200 text-sm font-medium outline-none focus:border-[#fec53a] py-1"
+                      />
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] text-gray-400 font-bold uppercase">Link:</span>
+                        <input 
+                          value={link}
+                          onChange={(e) => updateTickerItem(idx, 'link', e.target.value)}
+                          placeholder="/admission (optional)"
+                          className="flex-1 bg-transparent border-b border-gray-100 text-[12px] text-gray-500 outline-none focus:border-[#fec53a]"
+                        />
+                      </div>
+                    </div>
+                    <button onClick={() => removeTickerItem(idx)} className="text-gray-200 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
+                      <Trash2 size={20} />
+                    </button>
+                  </div>
+                );
+              })}
+              {(!info.newsTicker || info.newsTicker.length === 0) && (
+                <div className="text-center py-6 text-gray-300 italic text-sm border-2 border-dashed border-gray-50 rounded-xl">
+                  No news items added.
+                </div>
+              )}
             </div>
           </div>
 

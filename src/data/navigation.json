@@ -19,7 +19,9 @@
       { "label": "NIRF",          "slug": "/nirf" }
     ],
     "newsTicker": [
-      "⭐ Admissions Open for 2026 Batch | Highest Placement Package 60 LPA | NAAC Accredited University ⭐"
+      { "text": "⭐ Admissions Open for 2026 Batch", "link": "/admission" },
+      { "text": "Highest Placement Package 60 LPA", "link": "/placement" },
+      { "text": "NAAC Accredited University ⭐", "link": "/about/accreditation" }
     ]
   },
 
@@ -341,7 +343,8 @@
         "key": "programmes",
         "label": "Programmes",
         "icon": "GraduationCap",
-        "type": "popup",
+        "type": "drawer",
+        "path": "programmes",
         "panel": {
           "type": "programmes",
           "sourceMenu": "Academic",
@@ -353,33 +356,35 @@
       {
         "key": "enquiry",
         "label": "Enquiry",
-        "icon": "BookOpen",
-        "type": "popup",
-        "panel": { "type": "enquiry" }
+        "icon": "MessageSquare",
+        "type": "drawer",
+        "path": "enquiry"
       },
       {
         "key": "admissions",
         "label": "Admission",
         "icon": "Building2",
-        "type": "popup",
+        "type": "drawer",
+        "path": "admissions",
         "panel": {
           "type": "admissions",
-          "sourceMenu": "Admission"
+          "sourceMenu": "Admissions"
         }
       },
       {
         "key": "call",
         "label": "Call Us",
         "icon": "Phone",
-        "type": "tel",
-        "hrefField": "phone"
+        "type": "action",
+        "path": "call-admission"
       },
       {
         "key": "menu",
         "label": "Menu",
         "icon": "Menu",
         "closeIcon": "X",
-        "type": "popup",
+        "type": "drawer",
+        "path": "full-menu",
         "panel": {
           "type": "full-menu",
           "excludeMenuTitles": ["Academic", "Admission"]

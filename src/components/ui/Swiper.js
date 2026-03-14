@@ -11,11 +11,12 @@ export default function Swiper({
   dark = false,
   breakpoints = null,
 }) {
-  const [winW, setWinW] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1200
-  );
+  const [winW, setWinW] = useState(1200);
   
   useEffect(() => {
+    // Client-side only update after mount
+    setWinW(window.innerWidth);
+    
     const fn = () => setWinW(window.innerWidth);
     window.addEventListener("resize", fn);
     return () => window.removeEventListener("resize", fn);

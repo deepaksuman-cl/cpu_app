@@ -506,14 +506,22 @@ function MobPanelFullMenu({ config, navData, state, dispatch }) {
  * Admin: add new panel.type key in JSON → add matching case + component here
  */
 function MobPanelRouter({ tab, navData, state, dispatch }) {
-  if (!tab?.panel) return null;
-  const p = tab.panel;
-  switch (p.type) {
-    case 'programmes': return <MobPanelProgrammes config={p} navData={navData} />;
-    case 'admissions': return <MobPanelAdmissions config={p} navData={navData} />;
-    case 'enquiry':    return <MobPanelEnquiry formConfig={navData.mobileConfig.enquiryForm} />;
-    case 'full-menu':  return <MobPanelFullMenu config={p} navData={navData} state={state} dispatch={dispatch} />;
-    case 'links':      return <MobPanelLinks config={p} />;
+  const pType = tab?.panel?.type || tab?.path;
+  if (!pType) return null;
+
+  switch (pType) {
+    case 'programmes': 
+      return <MobPanelProgrammes config={tab.panel || { type: 'programmes', sourceMenu: 'Academic' }} navData={navData} />;
+    case 'admissions': 
+      return <MobPanelAdmissions config={tab.panel || { type: 'admissions', sourceMenu: 'Admissions' }} navData={navData} />;
+    case 'enquiry':    
+      return <MobPanelEnquiry formConfig={navData.mobileConfig.enquiryForm} />;
+    case 'open-enquiry': // Handle as drawer if configured as such
+      return <MobPanelEnquiry formConfig={navData.mobileConfig.enquiryForm} />;
+    case 'full-menu':  
+      return <MobPanelFullMenu config={tab.panel || { type: 'full-menu' }} navData={navData} state={state} dispatch={dispatch} />;
+    case 'links':      
+      return <MobPanelLinks config={tab.panel || { type: 'links' }} />;
     default: return null;
   }
 }
@@ -537,22 +545,29 @@ function DesktopSidebar({ navData, state, dispatch }) {
           <div className="w-2/3">
             {sideMenu.exploreMore.map(cat => (
               <div key={cat.title} className="mb-6">
-                <h2 className="text-[18px] font-bold text-[#00588b] mb-3 border-b pb-2 cursor-pointer flex justify-between items-center"
+                <h2 className="text-[18px] font-bold text-[#00588b] mb-3 border-b pb-2 cursor-pointer flex justify-between items-center group"
                   onClick={() => dispatch({ type: 'TOGGLE_SB_DROP', key: cat.title })}>
-                  {cat.title}
+                  <div className="flex items-center gap-3">
+                    <DynIcon name={cat.icon || 'Layout'} size={18} className="text-[#fec53a]" />
+                    {cat.title}
+                  </div>
                   {cat.hasDropdown && <LucideIcons.ChevronDown size={18} className={`transform transition-transform ${state.sidebarDropdown === cat.title ? 'rotate-180' : ''}`} />}
                 </h2>
-                <div className={`transition-all duration-300 overflow-hidden ${state.sidebarDropdown === cat.title ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <ul className="space-y-2 text-[14px] text-gray-700 font-medium pl-2">
+                <div className={`transition-all duration-300 overflow-hidden ${state.sidebarDropdown === cat.title ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <ul className={`grid gap-x-6 gap-y-2 text-[14px] text-gray-700 font-medium pl-2 ${
+                    cat.columns === 2 ? 'grid-cols-2' : 
+                    cat.columns === 3 ? 'grid-cols-3' : 
+                    'grid-cols-1'
+                  }`}>
                     {cat.links.map(link => (
-                      <li key={link.slug || link.label}>
+                      <li key={link.slug || link.label} className={cat.columns > 1 ? 'border-b border-gray-50 pb-1' : ''}>
                         {cat.type === 'nested-dropdown' && link.subLinks ? (
                           <div>
                             <div className="flex justify-between items-center cursor-pointer hover:text-[#1c54a3] py-1" onClick={() => dispatch({ type: 'TOGGLE_SB_NEST', key: link.label })}>
                               {link.label}
                               <LucideIcons.ChevronRight size={14} className={`transform transition-transform ${state.sidebarNestedDropdown === link.label ? 'rotate-90 text-[#fec53a]' : 'text-gray-400'}`} />
                             </div>
-                            <div className={`transition-all duration-300 overflow-hidden pl-4 border-l-2 border-gray-200 mt-1 ${state.sidebarNestedDropdown === link.label ? 'max-h-[200px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                            <div className={`transition-all duration-300 overflow-hidden pl-4 border-l-2 border-gray-200 mt-1 ${state.sidebarNestedDropdown === link.label ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'}`}>
                               <ul className="space-y-1">
                                 {link.subLinks.map(sub => (
                                   <li key={sub.slug}><Link href={sub.slug} className="text-[13px] text-gray-500 hover:text-[#fec53a] block py-1 transition-colors">{sub.label}</Link></li>
@@ -608,8 +623,8 @@ const CSS = `
   .desktop-mega-scroll::-webkit-scrollbar-thumb:hover{background:#d19e26}
   .hide-scrollbar{scrollbar-width:none;-ms-overflow-style:none}
   .hide-scrollbar::-webkit-scrollbar{display:none}
-  .news-ticker-container{overflow:hidden;white-space:nowrap;width:100%;max-width:450px;display:flex;align-items:center}
-  .news-ticker-content{display:inline-block;white-space:nowrap;animation:ticker 25s linear infinite}
+  .news-ticker-container{overflow:hidden;white-space:nowrap;width:100%;max-width:600px;display:flex;align-items:center;position:relative;z-index:10}
+  .news-ticker-content{display:inline-flex;align-items:center;white-space:nowrap;width:max-content;animation:ticker 40s linear infinite;pointer-events:auto}
   .news-ticker-content:hover{animation-play-state:paused}
   @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 `;
@@ -636,8 +651,47 @@ export default function HeaderClient({ navData }) {
   const activeTab = mobileConfig.bottomTabs.find(t => t.key === state.openTabKey);
 
   const getHref = tab => {
-    if (tab.type === 'tel') return `tel:${topBarInfo[tab.hrefField] || ''}`;
-    return tab.href || '#';
+    if (tab.type === 'link') return tab.path || '#';
+    return '#';
+  };
+
+  const runDynamicAction = (actionKey) => {
+    switch (actionKey) {
+      case 'open-search':
+        dispatch({ type: 'TOGGLE_SEARCH' });
+        break;
+      case 'open-menu':
+        // Find the tab that is the full menu to set it active
+        const menuTab = mobileConfig.bottomTabs.find(t => t.panel?.type === 'full-menu');
+        if (menuTab) dispatch({ type: 'SET_TAB', key: menuTab.key });
+        break;
+      case 'call-admission':
+        window.location.href = `tel:${phone}`;
+        break;
+      case 'open-enquiry':
+        const enquiryTab = mobileConfig.bottomTabs.find(t => t.panel?.type === 'enquiry');
+        if (enquiryTab) dispatch({ type: 'SET_TAB', key: enquiryTab.key });
+        break;
+      default:
+        console.warn(`Unknown action: ${actionKey}`);
+    }
+  };
+
+  const handleMobileTab = (tab) => {
+    switch (tab.type) {
+      case 'link':
+        if (tab.path) window.location.href = tab.path;
+        break;
+      case 'action':
+        runDynamicAction(tab.path);
+        break;
+      case 'drawer':
+        dispatch({ type: 'SET_TAB', key: tab.key });
+        break;
+      default:
+        // Fallback for old data types if any
+        if (tab.panel) dispatch({ type: 'SET_TAB', key: tab.key });
+    }
   };
 
   return (
@@ -671,8 +725,33 @@ export default function HeaderClient({ navData }) {
               <div className="bg-[#fec53a] text-[#00588b] font-bold px-4 h-full flex items-center shadow-sm z-10 uppercase tracking-wide">
                 {siteConfig.topBar.latestNewsLabel}
               </div>
-              <div className="news-ticker-container pl-4">
-                <div className="news-ticker-content text-[#fec53a] font-medium tracking-wide">{topBarInfo.newsTicker[0]}</div>
+              <div className="news-ticker-container pl-4 h-full">
+                <div className="news-ticker-content text-[#fec53a] font-medium tracking-wide gap-8 flex items-center h-full">
+                  {(topBarInfo.newsTicker || []).map((item, i) => {
+                    const isObj = typeof item === 'object' && item !== null;
+                    const text = isObj ? item.text : item;
+                    const link = isObj ? item.link : '';
+                    
+                    const content = (
+                      <span className={`whitespace-nowrap transition-all ${link ? 'hover:underline underline-offset-4 cursor-pointer' : ''}`}>
+                        {text}
+                      </span>
+                    );
+
+                    return (
+                      <div key={i} className="flex items-center gap-8 h-full">
+                        {link ? (
+                          <Link href={link} className="cursor-pointer flex items-center h-full relative z-20 hover:text-white transition-colors">
+                            {content}
+                          </Link>
+                        ) : (
+                          content
+                        )}
+                        {i < topBarInfo.newsTicker.length - 1 && <span className="opacity-40 select-none">|</span>}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
             <div className="flex items-center h-full">
@@ -750,21 +829,22 @@ export default function HeaderClient({ navData }) {
       <div className="fixed bottom-0 left-0 w-full bg-[#00588b] text-white z-[1000] lg:hidden flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.4)] pb-safe">
         {mobileConfig.bottomTabs.map(tab => {
           const isActive   = state.openTabKey === tab.key;
-          const isMenuTab  = tab.panel?.type === 'full-menu';
+          const isMenuTab  = tab.panel?.type === 'full-menu' || tab.path === 'full-menu';
           const baseClass  = `flex flex-col items-center justify-center py-2.5 transition-all ${isActive ? 'text-[#fec53a]' : 'text-gray-300'}`;
           const tabWidth   = `${100 / mobileConfig.bottomTabs.length}%`;
 
-          if (tab.type === 'tel' || tab.type === 'href') {
+          // If it's a direct link (functional for SEO/Browser behavior)
+          if (tab.type === 'link') {
             return (
-              <a key={tab.key} href={getHref(tab)} className={`${baseClass} hover:text-white`} style={{ width: tabWidth }}>
+              <Link key={tab.key} href={tab.path || '#'} className={`${baseClass} hover:text-white`} style={{ width: tabWidth }}>
                 <div className="mb-1"><DynIcon name={tab.icon} size={20} /></div>
                 <span className="text-[10px] font-medium tracking-wide">{tab.label}</span>
-              </a>
+              </Link>
             );
           }
 
           return (
-            <button key={tab.key} onClick={() => dispatch({ type: 'SET_TAB', key: tab.key })}
+            <button key={tab.key} onClick={() => handleMobileTab(tab)}
               className={baseClass} style={{ width: tabWidth }} aria-expanded={isActive} aria-label={tab.label}>
               <div className="mb-1">
                 {isMenuTab && isActive
