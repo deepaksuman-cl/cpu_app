@@ -105,7 +105,7 @@ export default function TestimonialSection() {
                     alt={t.name}
                     className="w-full h-80 md:h-96 object-cover object-top"
                   />
-                  <div
+                  {/* <div
                     className={`absolute top-3.5 left-3.5 ${t.tagColor} text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wide`}
                   >
                     {t.tag}
@@ -122,7 +122,7 @@ export default function TestimonialSection() {
                       {t.company}
                     </p>
                     <p className="text-white/55 text-[11px] mt-0.5">{t.batch}</p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
@@ -191,26 +191,22 @@ export default function TestimonialSection() {
                   </blockquote>
                   <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-3">
-                      <img
-                        src={t.img}
-                        alt={t.name}
-                        className="w-12 h-12 rounded-full object-cover object-top border-2 border-[#00588b]/25 shadow"
-                      />
+                   
                       <div>
-                        <p className="font-extrabold text-slate-900 text-sm leading-tight">
+                        <p className="font-extrabold text-slate-900 text-md leading-tight">
                           {t.name}
                         </p>
-                        <p className="text-slate-400 text-xs mt-0.5">
+                        <p className="text-slate-400 text-xs mt-1.5 mb-1.5">
                           {t.course}&nbsp;&nbsp;
-                          <span className="text-[#00588b] font-bold">{t.company}</span>
+                          <span className="text-[#000] font-bold">{t.company}</span>
                         </p>
-                        <p className="text-slate-300 text-[11px]">
+                        <p className="text-slate-800 text-[11px]">
                           {t.batch} · CPU Kota
                         </p>
                       </div>
                     </div>
                     <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-2.5 text-center min-w-[88px] shadow-sm">
-                      <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
+                      <p className="text-[10px] font-extrabold  text-slate-400 uppercase tracking-widest">
                         Package
                       </p>
                       <p className="text-[#00588b] font-black text-base leading-tight mt-0.5">
