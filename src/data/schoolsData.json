@@ -1,15 +1,209 @@
 {
   "computer-applications-technology": {
+    "slug": "computer-applications-technology",
+    "breadcrumb": [
+      { "label": "Home", "link": "/" },
+      { "label": "Schools & Departments", "link": "/schools" },
+      { "label": "School of Computer Applications & Technology", "link": "/schools/computer-applications-technology" }
+    ],
     "hero": {
-      "title": "School of Computer Applications & Technology",
-      "subtitle": "Best Computer Application College in Kota",
-      "description": "The objective of the School of Computer Applications & Technology is to prepare young professionals for the IT industry by providing them with a strong foundation in computer applications and technology.",
-      "points": ["State-of-the-art Computer Labs", "Industry aligned curriculum"]
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "badge": "Best Computer Application College in Kota",
+      "title": {
+        "main": "School of Computer Applications & Technology",
+        "highlight": "Computer",
+        "sky": "Technology"
+      },
+      "description": "Career Point University offers cutting-edge programs shaping future technologists, researchers, and industry-ready professionals in Kota.",
+      "cta": [
+        { "label": "Apply Now", "link": "#", "primary": true },
+        { "label": "Explore Programs", "link": "#programs", "primary": false }
+      ]
     },
-    "alumni": [
-      { "name": "Akshat", "company": "Wipro", "image": "/assets/akshat.jpg" },
-      { "name": "Riya", "company": "TCS", "image": "/assets/riya.jpg" }
-    ]
+    "stats": [
+      { "value": "75L", "label": "Highest Package", "icon": "TrendingUp" },
+      { "value": "3L", "label": "Avg Salary Package", "icon": "BarChart3" },
+      { "value": "20K", "label": "OJT Stipend/month", "icon": "Briefcase" }
+    ],
+    "about": {
+      "vision": {
+        "title": "Vision",
+        "label": "Our Purpose",
+        "icon": "Target",
+        "text": "To develop and deliver industry-relevant education to train students to be technically sound, research-driven innovators who can effectively meet the skills required by the industry both at national and global level.",
+        "highlights": [
+          { "value": "500+", "label": "Students" },
+          { "value": "95%", "label": "Placement" },
+          { "value": "20+", "label": "Partners" }
+        ]
+      },
+      "mission": {
+        "title": "Mission",
+        "label": "Our Goal",
+        "icon": "Lightbulb",
+        "points": [
+          "Improve academic practices that bridge theory and research.",
+          "Create a research-led teaching environment combining classroom learning-by-doing.",
+          "Impart collaborative resources to build a diverse intellectual space.",
+          "Nurture researchers and critical thinkers through emerging technologies.",
+          "Seek student solutions and critical thinking in a powerful environment."
+        ]
+      }
+    },
+    "programmes": {
+      "title": "Our Programme",
+      "subtitle": "Academic Programmes",
+      "description": "Over the years, Career Point University has earned several accolades for playing a dynamic role in elevating research and the learning process of the institution.",
+      "levels": [
+        {
+          "label": "After 12th Pass/ \"A\" Level",
+          "icon": "GraduationCap",
+          "courses": [
+            {
+              "name": "Bachelor of Computer Application (BCA)",
+              "link": "#",
+              "specializations": [
+                { "name": "Core", "link": "#" },
+                { "name": "Data Science", "link": "#" },
+                { "name": "Cloud Computing", "link": "#" },
+                { "name": "AI & ML", "link": "#" }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "After Graduation / Equivalent",
+          "icon": "BookOpen",
+          "courses": [
+            {
+              "name": "Master of Computer Application (MCA)",
+              "link": "#",
+              "specializations": [
+                { "name": "Core", "link": "#" },
+                { "name": "Data Science", "link": "#" }
+              ]
+            },
+            {
+              "name": "PG Diploma In Computer Application (PGDCA)",
+              "link": "#",
+              "specializations": [
+                { "name": "Core", "link": "#" }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "After Post Graduation / Equivalent",
+          "icon": "Microscope",
+          "courses": [
+            {
+              "name": "Ph.D. (All Subjects)",
+              "link": "#",
+              "description": "Research-focused doctoral programme"
+            }
+          ]
+        }
+      ]
+    },
+    "placements": {
+      "title": "Students Placed in Top Companies",
+      "label": "CPU Placement Records",
+      "subtitle": "Highest & best placement record in the region",
+      "list": [
+        { "name": "Siraj Ali", "company": "Course5 Intelligence", "pkg": "8 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png" },
+        { "name": "Tarun Jain", "company": "Appcino", "pkg": "10 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png" },
+        { "name": "Prateek Dhaman", "company": "TCS", "pkg": "9 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png" },
+        { "name": "Archana Kumari", "company": "Tech Mahindra", "pkg": "12 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png" },
+        { "name": "Kiran Daklani", "company": "Zalando", "pkg": "75 LPA", "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg" },
+        { "name": "Ravindra Singh", "company": "ATC", "pkg": "8 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png" },
+        { "name": "Priya Sharma", "company": "Infosys", "pkg": "7 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png" },
+        { "name": "Rahul Verma", "company": "Wipro", "pkg": "9 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png" }
+      ]
+    },
+    "alumni": {
+      "title": "Making an Impact Globally",
+      "label": "Our Alumni",
+      "list": [
+        { "name": "Hemant Sharma", "role": "Software Engineer", "company": "Leading Tech Co.", "img": "https://cpur.in/wp-content/uploads/2023/08/hemant.jpg" },
+        { "name": "Kiran Daklani", "role": "Senior Developer", "company": "Zalando – 75 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/kiran.jpg" },
+        { "name": "Aryan Mathuria", "role": "Software Engineer", "company": "Evertz, Canada", "img": "https://cpur.in/wp-content/uploads/2023/08/aryan.jpg" },
+        { "name": "Saloni Shukla", "role": "Business Analyst", "company": "Collabra", "img": "https://cpur.in/wp-content/uploads/2023/08/Saloni.jpg" },
+        { "name": "Harsh Bahir", "role": "Fintech Developer", "company": "InvestaX – Singapore", "img": "https://cpur.in/wp-content/uploads/2023/08/harsh.jpg" }
+      ]
+    },
+    "industry": {
+      "title": "Industry Tie Up's",
+      "label": "Collaborations",
+      "partners": [
+        { "name": "Tech Mahindra", "url": "https://cpur.in/wp-content/uploads/2023/08/tech-mahindra-as-Smart-Object-1.jpg" },
+        { "name": "TCS", "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg" },
+        { "name": "Infosys", "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg" },
+        { "name": "Wipro", "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg" },
+        { "name": "Vodafone", "url": "https://cpur.in/wp-content/uploads/2023/08/vodafone-as-Smart-Object-1.jpg" },
+        { "name": "Google", "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg" },
+        { "name": "J-Spiders", "url": "https://cpur.in/wp-content/uploads/2023/08/j-spiders-logo-as-Smart-Object-1.jpg" },
+        { "name": "JustDial", "url": "https://cpur.in/wp-content/uploads/2023/08/justdial-logo-as-Smart-Object-1.jpg" }
+      ]
+    },
+    "research": {
+      "title": "Research Excellence",
+      "label": "Eminence Research",
+      "gallery": [
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-7.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-12.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-4.jpg"
+      ],
+      "stats": [
+        { "value": "100+", "label": "Research Papers Published", "icon": "BookOpen" },
+        { "value": "30+", "label": "Conference Presentations", "icon": "Presentation" },
+        { "value": "5+", "label": "Books", "icon": "GraduationCap" },
+        { "value": "5+", "label": "Patents Published", "icon": "FlaskConical" }
+      ]
+    },
+    "community": {
+      "title": "Our Diverse Community",
+      "label": "Community",
+      "description": [
+        "The computer application community thrives on diversity, encompassing a dynamic range of individuals with varying backgrounds, perspectives, and expertise. This rich tapestry includes students, researchers, educators, and professionals, all contributing to a vibrant ecosystem of innovation and learning.",
+        "We are producing professionals with strong social ethics and moral values — involving integrating ethics education into the curriculum, fostering open discussions on ethical dilemmas, encouraging service-learning projects for community benefit, introducing established codes of ethics, and providing opportunities for interdisciplinary collaboration."
+      ],
+      "gallery": [
+        { "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-7-1.jpg", "caption": "Students in Computer Lab Session" },
+        { "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-12-1.jpg", "caption": "Tech Seminar & Workshop" }
+      ]
+    },
+    "infrastructure": {
+      "title": "World-Class Infrastructure",
+      "label": "Campus",
+      "list": [
+        { "title": "Modern Computer Labs", "desc": "State-of-the-art labs with latest hardware & software", "img": "https://img.freepik.com/free-photo/modern-computer-lab_1170-1.jpg" },
+        { "title": "High-Speed Internet", "desc": "Gigabit campus-wide Wi-Fi & LAN", "img": "https://img.freepik.com/free-photo/network-server-room_1048-2200.jpg" },
+        { "title": "Research & Innovation Hub", "desc": "Dedicated space for R&D and innovation", "img": "https://img.freepik.com/free-photo/scientists-working-laboratory_23-2149041483.jpg" },
+        { "title": "Smart Classrooms", "desc": "Interactive smart boards & AV systems", "img": "https://img.freepik.com/free-photo/modern-classroom-projector_1048-12346.jpg" }
+      ]
+    },
+    "testimonials": {
+      "title": "Our Students Speak",
+      "label": "Testimonials",
+      "list": [
+        { 
+          "name": "Archana Kumari", "batch": "BCA 2019", "company": "Tech Mahindra", "emoji": "👩‍💻", "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari-Tech-Mahindra.png",
+          "text": "Career Point University transformed my career. The faculty's dedication and industry-focused curriculum gave me the confidence to crack top MNC interviews." 
+        },
+        { 
+          "name": "Rahul Verma", "batch": "MCA 2021", "company": "Infosys", "emoji": "👨‍💻", "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
+          "text": "The research opportunities and cutting-edge labs at CPU are unmatched. I published 2 research papers during my MCA, which opened doors I never imagined." 
+        },
+        { 
+          "name": "Priya Sharma", "batch": "BCA 2020", "company": "Accenture", "emoji": "👩‍🏫", "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
+          "text": "From day one, the university prepared us for real-world challenges. The industry tie-ups and live projects gave hands-on experience. I landed my dream job." 
+        }
+      ]
+    }
   },
   "legal-studies-governance": {
     "hero": {
