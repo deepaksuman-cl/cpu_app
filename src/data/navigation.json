@@ -228,6 +228,34 @@
           ]
         }
       ]
+    },
+
+    {
+      "title": "Admissions",
+      "type": "split-action-menu",
+      "promoTitle": "Admissions 2026 Open",
+      "promoSubText": "Join Career Point University and shape your career with excellence.",
+      "actionButtonText": "APPLY NOW",
+      "actionButtonLink": "/admission",
+      "helpdeskTitle": "Admission HelpDesk",
+      "helpdeskIcon": "MessageSquare",
+      "linksHeading": "Quick Links",
+      "contacts": [
+        { "icon": "Phone", "label": "Admission Helpline", "value": "1800-123-1104" },
+        { "icon": "Headset", "label": "Toll Free", "value": "1800-123-1104" }
+      ],
+      "links": [
+        { "label": "Admission Process",          "slug": "/admission/process" },
+        { "label": "Eligibility & Criteria",     "slug": "/admission/eligibility" },
+        { "label": "How to Apply",               "slug": "/admission/how-to-apply" },
+        { "label": "Application Form",           "slug": "/admission/application-form" },
+        { "label": "Scholarship",                "slug": "/admission/scholarship" },
+        { "label": "Fee Structure",              "slug": "/admission/fee-structure" },
+        { "label": "International Students",     "slug": "/admission/international" },
+        { "label": "Lateral Entry",              "slug": "/admission/lateral-entry" },
+        { "label": "Hostel Registration",        "slug": "/admission/hostel" },
+        { "label": "Contact Admission Office",   "slug": "/admission/contact" }
+      ]
     }
   ],
 

@@ -9,6 +9,8 @@ import {
 } from 'lucide-react';
 import { saveFullNavigationData } from '@/lib/actions/navigation';
 import Modal from '../ui/Modal';
+import IconPicker from '../ui/IconPicker';
+import { Headset } from 'lucide-react';
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 const inputCls = `w-full bg-white px-3 py-2.5 text-[13px] text-gray-800 font-medium
@@ -21,7 +23,7 @@ const selectCls = inputCls + ' appearance-none cursor-pointer';
 const TYPE_META = {
   'mega-columns':             { label: 'Mega Columns',    bg: 'bg-blue-50   text-blue-600' },
   'mega-columns-with-image':  { label: 'Columns + Promo', bg: 'bg-violet-50 text-violet-600' },
-  'mega-columns-with-images': { label: 'Columns + Icons', bg: 'bg-teal-50   text-teal-600' },
+  'mega-columns-with-images': { label: 'Columns + Images', bg: 'bg-teal-50   text-teal-600' },
   'split-action-menu':        { label: 'Split Action',    bg: 'bg-amber-50  text-amber-600' },
 };
 
@@ -108,43 +110,90 @@ function ConfirmModal({ isOpen, onClose, onConfirm, itemName }) {
 // ─── Link Row ─────────────────────────────────────────────────────────────────
 function LinkRow({ link, onUpdate, onRemove }) {
   return (
-    <div className="group flex items-start gap-2 bg-white px-3 py-2.5 transition-all
+    <div className="group flex flex-col gap-3 bg-white px-3 py-3 transition-all
       shadow-sm hover:shadow-md ring-1 ring-gray-100 hover:ring-[#1c54a3]/25"
       style={{ borderRadius: 0 }}>
-      <GripVertical size={14} className="mt-0.5 text-gray-200 cursor-grab flex-shrink-0" />
-      <div className="flex-1 min-w-0 space-y-1">
-        <input
-          value={link.label}
-          placeholder="Link label"
-          onChange={(e) => onUpdate('label', e.target.value)}
-          className="w-full text-[13px] font-semibold text-gray-800 bg-transparent outline-none
-            border-b border-transparent focus:border-gray-200 placeholder:text-gray-300 transition-colors"
-        />
-        <div className="flex items-center gap-1">
-          <ExternalLink size={10} className="text-gray-300 flex-shrink-0" />
+      
+      <div className="flex items-start gap-2">
+        <GripVertical size={14} className="mt-0.5 text-gray-200 cursor-grab flex-shrink-0" />
+        <div className="flex-1 min-w-0 space-y-1">
           <input
-            value={link.slug}
-            placeholder="/path"
-            onChange={(e) => onUpdate('slug', e.target.value)}
-            className="w-full text-[11px] text-gray-400 bg-transparent outline-none font-mono
+            value={link.label}
+            placeholder="Link label"
+            onChange={(e) => onUpdate('label', e.target.value)}
+            className="w-full text-[13px] font-semibold text-gray-800 bg-transparent outline-none
               border-b border-transparent focus:border-gray-200 placeholder:text-gray-300 transition-colors"
           />
+          <div className="flex items-center gap-1">
+            <ExternalLink size={10} className="text-gray-300 flex-shrink-0" />
+            <input
+              value={link.slug}
+              placeholder="/path"
+              onChange={(e) => onUpdate('slug', e.target.value)}
+              className="w-full text-[11px] text-gray-400 bg-transparent outline-none font-mono
+                border-b border-transparent focus:border-gray-200 placeholder:text-gray-300 transition-colors"
+            />
+          </div>
         </div>
+        <button
+          onClick={onRemove}
+          className="mt-0.5 p-1 opacity-0 group-hover:opacity-100
+            text-gray-300 hover:text-red-400 hover:bg-red-50 transition-all"
+          style={{ borderRadius: 0 }}
+        >
+          <Trash2 size={13} />
+        </button>
       </div>
-      <button
-        onClick={onRemove}
-        className="mt-0.5 p-1 opacity-0 group-hover:opacity-100
-          text-gray-300 hover:text-red-400 hover:bg-red-50 transition-all"
-        style={{ borderRadius: 0 }}
-      >
-        <Trash2 size={13} />
-      </button>
+      
+      {/* Subtext only */}
+      <div className="pl-6 pb-2 border-t border-gray-50 pt-3">
+        <label className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Sub Link Description</label>
+        <input
+          value={link.subText || ''}
+          placeholder="e.g. Master's Degrees"
+          onChange={(e) => onUpdate('subText', e.target.value)}
+          className="w-full text-[11px] text-gray-600 bg-gray-50 px-3 py-2 rounded border border-gray-100 outline-none focus:bg-white focus:ring-1 focus:ring-blue-200 transition-all font-medium"
+        />
+      </div>
+    </div>
+  );
+}
+
+// ─── Contact Row (Special for Admissions) ───────────────────
+function ContactRow({ contact, onUpdate, onRemove }) {
+  return (
+    <div className="flex flex-col gap-3 bg-white px-3 py-3 ring-1 ring-gray-100 transition-all hover:ring-[#1c54a3]/25 shadow-sm group"
+      style={{ borderRadius: 0 }}>
+      <div className="flex items-start gap-3">
+        <GripVertical size={14} className="mt-1 text-gray-200 cursor-grab flex-shrink-0" />
+        <div className="flex-1 space-y-3">
+          <div className="space-y-1">
+            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Icon</label>
+            <IconPicker value={contact.icon || 'Headset'} onChange={(val) => onUpdate('icon', val)} />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Label</label>
+              <input value={contact.label || ''} onChange={(e) => onUpdate('label', e.target.value)}
+                className={inputCls} placeholder="e.g. Toll Free" style={{ borderRadius: 0 }} />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Value / Link</label>
+              <input value={contact.value || ''} onChange={(e) => onUpdate('value', e.target.value)}
+                className={inputCls} placeholder="1800-XXX-XXXX" style={{ borderRadius: 0 }} />
+            </div>
+          </div>
+        </div>
+        <button onClick={onRemove} className="mt-1 p-1 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 text-gray-300 hover:text-red-400 transition-all">
+          <Trash2 size={15} />
+        </button>
+      </div>
     </div>
   );
 }
 
 // ─── Column Card ─────────────────────────────────────────────────────────────
-function ColumnCard({ col, onUpdateHeading, onAddLink, onRemoveLink, onUpdateLink, onRemove }) {
+function ColumnCard({ col, showImageField, onUpdateHeading, onUpdateImage, onAddLink, onRemoveLink, onUpdateLink, onRemove }) {
   return (
     <div className="bg-white overflow-hidden group/col transition-all shadow-sm
       hover:shadow-md ring-1 ring-gray-100" style={{ borderRadius: 0 }}>
@@ -169,6 +218,19 @@ function ColumnCard({ col, onUpdateHeading, onAddLink, onRemoveLink, onUpdateLin
           <Trash2 size={13} />
         </button>
       </div>
+
+      {showImageField && (
+        <div className="p-4 bg-gray-50/50 border-b border-gray-100">
+          <Field label="Column Header Image (for Images panel)">
+            <div className="relative">
+              <input value={col.image || ''} onChange={(e) => onUpdateImage(e.target.value)}
+                className={inputCls + ' pl-9 text-[11px]'} placeholder="https://..." style={{ borderRadius: 0 }} />
+              <ImageIcon size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300" />
+            </div>
+          </Field>
+        </div>
+      )}
+
       {/* Links */}
       <div className="p-4 space-y-2">
         <div className="flex items-center justify-between mb-3">
@@ -203,14 +265,18 @@ function ColumnCard({ col, onUpdateHeading, onAddLink, onRemoveLink, onUpdateLin
 }
 
 // ─── Edit Modal Body ──────────────────────────────────────────────────────────
-function MenuEditContent({ m, onUpdateField, onAddColumn, onRemoveColumn,
-  onAddLink, onRemoveLink, onUpdateLink, onUpdateColumnHeading }) {
+function MenuEditContent({ 
+  m, onUpdateField, onAddColumn, onRemoveColumn, 
+  onAddLink, onRemoveLink, onUpdateLink, 
+  onUpdateColumnHeading, onUpdateColumnImage,
+  onAddContact, onRemoveContact, onUpdateContact
+}) {
   return (
     <div className="space-y-7">
       {/* Settings */}
       <div>
         <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Basic Settings</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-5 shadow-sm ring-1 ring-gray-100"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 bg-white p-6 shadow-sm ring-1 ring-gray-100"
           style={{ borderRadius: 0 }}>
           <Field label="Section Title">
             <input value={m.title} onChange={(e) => onUpdateField('title', e.target.value)}
@@ -221,56 +287,172 @@ function MenuEditContent({ m, onUpdateField, onAddColumn, onRemoveColumn,
               className={selectCls} style={{ borderRadius: 0 }}>
               <option value="mega-columns">Mega Columns (Standard)</option>
               <option value="mega-columns-with-image">Mega Columns + Promo Image</option>
-              <option value="mega-columns-with-images">Mega Columns + Icons/Images</option>
-              <option value="split-action-menu">Split Action Menu</option>
+              <option value="mega-columns-with-images">Mega Columns + Images</option>
+              <option value="split-action-menu">Split Action Menu (Admission style)</option>
             </select>
           </Field>
-          {(m.type === 'mega-columns-with-image' || m.type === 'split-action-menu') && (<>
-            <Field label="Promo Image URL">
-              <div className="relative">
-                <input value={m.promoImage || ''} onChange={(e) => onUpdateField('promoImage', e.target.value)}
-                  className={inputCls + ' pl-9'} placeholder="https://..." style={{ borderRadius: 0 }} />
-                <ImageIcon size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300" />
+
+          {/* Promo Image Settings (About/Split Style) */}
+          {(m.type === 'mega-columns-with-image') && (<>
+            <div className="col-span-full border-t border-gray-50 pt-4 mt-2">
+              <p className="text-[9px] font-bold text-blue-500 uppercase mb-3 tracking-widest">About Panel Promo Config</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Field label="Promo Image URL">
+                  <div className="relative">
+                    <input value={m.promoImage || ''} onChange={(e) => onUpdateField('promoImage', e.target.value)}
+                      className={inputCls + ' pl-9'} placeholder="https://..." style={{ borderRadius: 0 }} />
+                    <ImageIcon size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300" />
+                  </div>
+                </Field>
+                <Field label="Promo Description">
+                  <textarea value={m.promoDescription || ''} onChange={(e) => onUpdateField('promoDescription', e.target.value)}
+                    className={inputCls + ' resize-none'} rows={2} placeholder="Short description..."
+                    style={{ borderRadius: 0 }} />
+                </Field>
               </div>
-            </Field>
-            <Field label="Promo Description">
-              <textarea value={m.promoDescription || ''} onChange={(e) => onUpdateField('promoDescription', e.target.value)}
-                className={inputCls + ' resize-none'} rows={2} placeholder="Short description..."
-                style={{ borderRadius: 0 }} />
-            </Field>
+            </div>
+          </>)}
+
+          {/* Split Action Settings (Admission Style) */}
+          {m.type === 'split-action-menu' && (<>
+            <div className="col-span-full border-t border-gray-50 pt-4 mt-2 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="col-span-full flex items-center justify-between mb-2">
+                <p className="text-[9px] font-bold text-amber-600 uppercase tracking-widest">Admission Style Split Panel Config</p>
+              </div>
+              <Field label="Promo Title">
+                <input value={m.promoTitle || ''} onChange={(e) => onUpdateField('promoTitle', e.target.value)}
+                  className={inputCls} placeholder="Admissions 2026 Open" />
+              </Field>
+              <Field label="Promo Subtext">
+                <input value={m.promoSubText || ''} onChange={(e) => onUpdateField('promoSubText', e.target.value)}
+                  className={inputCls} placeholder="Start your journey..." />
+              </Field>
+              <Field label="Action Button Label">
+                <input value={m.actionButtonText || ''} onChange={(e) => onUpdateField('actionButtonText', e.target.value)}
+                  className={inputCls} placeholder="APPLY NOW" />
+              </Field>
+              <Field label="Action Button Link">
+                <input value={m.actionButtonLink || ''} onChange={(e) => onUpdateField('actionButtonLink', e.target.value)}
+                  className={inputCls} placeholder="/apply" />
+              </Field>
+              <Field label="Helpdesk Title">
+                <input value={m.helpdeskTitle || ''} onChange={(e) => onUpdateField('helpdeskTitle', e.target.value)}
+                  className={inputCls} placeholder="Admission HelpDesk" />
+              </Field>
+              <Field label="Helpdesk Title Icon">
+                <IconPicker value={m.helpdeskIcon || 'MessageSquare'} onChange={(val) => onUpdateField('helpdeskIcon', val)} />
+              </Field>
+              <Field label="Links Heading">
+                <input value={m.linksHeading || ''} onChange={(e) => onUpdateField('linksHeading', e.target.value)}
+                  className={inputCls} placeholder="Quick Links" />
+              </Field>
+            </div>
           </>)}
         </div>
       </div>
 
-      {/* Columns */}
+      {/* Modal Content - Columns or Root Links */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-            Columns — {m.columns?.length || 0}
-          </p>
-          <button onClick={onAddColumn} style={{ borderRadius: 0 }}
-            className="flex items-center gap-1.5 text-[12px] font-bold text-[#1c54a3]
-              bg-blue-50 hover:bg-blue-100 px-3 py-1.5 transition-all">
-            <Plus size={13} /> Add Column
-          </button>
-        </div>
-        {(!m.columns || m.columns.length === 0) ? (
-          <div className="text-center py-10 bg-white text-[12px] text-gray-300 ring-1 ring-gray-100"
-            style={{ borderRadius: 0 }}>
-            No columns yet — click Add Column
+        {m.type === 'split-action-menu' ? (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                Admission Links — {m.links?.length || 0}
+              </p>
+              <button 
+                onClick={() => onAddLink(null)} 
+                style={{ borderRadius: 0 }}
+                className="flex items-center gap-1.5 text-[12px] font-bold text-[#1c54a3]
+                  bg-blue-50 hover:bg-blue-100 px-3 py-1.5 transition-all"
+              >
+                <Plus size={13} /> Add Link
+              </button>
+            </div>
+            
+            <div className="bg-white p-6 shadow-sm ring-1 ring-gray-100 space-y-3">
+              {(m.links || []).length === 0 ? (
+                <div className="text-center py-10 text-[12px] text-gray-300">No links added yet</div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {(m.links || []).map((link, lIdx) => (
+                    <LinkRow 
+                      key={lIdx} 
+                      link={link} 
+                      onUpdate={(field, val) => onUpdateLink(null, lIdx, field, val)}
+                      onRemove={() => onRemoveLink(null, lIdx)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* CONTACTS AREA (Helpdesk Numbers/Emails) */}
+            <div className="mt-8 pt-8 border-t border-gray-100">
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                  Helpdesk Contacts — {m.contacts?.length || 0}
+                </p>
+                <button 
+                  onClick={onAddContact} 
+                  style={{ borderRadius: 0 }}
+                  className="flex items-center gap-1.5 text-[12px] font-bold text-amber-600
+                    bg-amber-50 hover:bg-amber-100 px-3 py-1.5 transition-all"
+                >
+                  <Plus size={13} /> Add Contact
+                </button>
+              </div>
+              
+              <div className="bg-white p-6 shadow-sm ring-1 ring-gray-100 space-y-3">
+                {(m.contacts || []).length === 0 ? (
+                  <div className="text-center py-10 text-[12px] text-gray-300">No contact entries added yet. These will appear in the Admissions help box.</div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {m.contacts.map((contact, coIdx) => (
+                      <ContactRow 
+                        key={coIdx} 
+                        contact={contact} 
+                        onUpdate={(field, val) => onUpdateContact(coIdx, field, val)}
+                        onRemove={() => onRemoveContact(coIdx)}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            {m.columns.map((col, cIdx) => (
-              <ColumnCard key={cIdx} col={col}
-                onUpdateHeading={(val) => onUpdateColumnHeading(cIdx, val)}
-                onAddLink={() => onAddLink(cIdx)}
-                onRemoveLink={(lIdx) => onRemoveLink(cIdx, lIdx)}
-                onUpdateLink={(lIdx, field, val) => onUpdateLink(cIdx, lIdx, field, val)}
-                onRemove={() => onRemoveColumn(cIdx)}
-              />
-            ))}
-          </div>
+          <>
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                Columns — {m.columns?.length || 0}
+              </p>
+              <button onClick={onAddColumn} style={{ borderRadius: 0 }}
+                className="flex items-center gap-1.5 text-[12px] font-bold text-[#1c54a3]
+                  bg-blue-50 hover:bg-blue-100 px-3 py-1.5 transition-all">
+                <Plus size={13} /> Add Column
+              </button>
+            </div>
+            {(!m.columns || m.columns.length === 0) ? (
+              <div className="text-center py-10 bg-white text-[12px] text-gray-300 ring-1 ring-gray-100"
+                style={{ borderRadius: 0 }}>
+                No columns yet — click Add Column
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                {m.columns.map((col, cIdx) => (
+                  <ColumnCard key={cIdx} col={col}
+                    showImageField={m.type === 'mega-columns-with-images'}
+                    onUpdateHeading={(val) => onUpdateColumnHeading(cIdx, val)}
+                    onUpdateImage={(val) => onUpdateColumnImage(cIdx, val)}
+                    onAddLink={() => onAddLink(cIdx)}
+                    onRemoveLink={(lIdx) => onRemoveLink(cIdx, lIdx)}
+                    onUpdateLink={(lIdx, field, val) => onUpdateLink(cIdx, lIdx, field, val)}
+                    onRemove={() => onRemoveColumn(cIdx)}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
@@ -291,9 +473,14 @@ export default function DesktopMenuManager({ initialData, initialTopMenu }) {
   };
 
   // ── save ──
-  const saveAll = async () => {
+  const saveAll = async (targetMenu = null) => {
     setSaving(true);
-    const result = await saveFullNavigationData({ ...initialData, topMenu: menu });
+    // If targetMenu is an Event (from onClick), ignore it
+    const menuToSave = (targetMenu && !targetMenu.nativeEvent) ? targetMenu : menu;
+    
+    // Deep clone to strip React proxies/metadata
+    const payload = JSON.parse(JSON.stringify({ ...initialData, topMenu: menuToSave }));
+    const result = await saveFullNavigationData(payload);
     setSaving(false);
     if (result.success) showToast('Navigation saved successfully!', 'success');
     else showToast('Error: ' + result.error, 'error');
@@ -301,31 +488,168 @@ export default function DesktopMenuManager({ initialData, initialTopMenu }) {
 
   // ── menu crud ──
   const addMenu = () => {
-    const newMenu = { title: 'New Menu', type: 'mega-columns',
-      columns: [{ heading: 'New Column', links: [{ label: 'New Link', slug: '/' }] }] };
-    setMenu(prev => { setEditingIndex(prev.length); return [...prev, newMenu]; });
+    const newMenu = { 
+      title: 'New Menu', 
+      type: 'mega-columns',
+      columns: [{ heading: 'New Column', links: [{ label: 'New Link', slug: '/' }] }],
+      contacts: [] 
+    };
+    setMenu(prev => {
+      const updated = [...prev, newMenu];
+      // Side effects like setEditingIndex should happen outside the updater if possible, 
+      // but since we need the new length, we'll handle it carefully or use useEffect.
+      // For now, let's just make the menu update pure and set index after.
+      return updated;
+    });
+    setEditingIndex(menu.length);
   };
 
   const confirmDelete = (idx) => setDeleteTarget({ idx, name: menu[idx]?.title || 'Untitled' });
 
-  const doDelete = () => {
+  const doDelete = async () => {
     if (deleteTarget === null) return;
     const updated = [...menu];
     updated.splice(deleteTarget.idx, 1);
     setMenu(updated);
     if (editingIndex === deleteTarget.idx) setEditingIndex(null);
     setDeleteTarget(null);
+    
+    // Auto-save delete to database
+    await saveAll(updated);
   };
 
-  const updateMenuField = (idx, field, value) => {
-    setMenu(prev => { const u = [...prev]; u[idx] = { ...u[idx], [field]: value }; return u; });
+  const updateMenuField = (mIdx, field, value) => {
+    setMenu(prev => prev.map((m, i) => i === mIdx ? { ...m, [field]: value } : m));
   };
-  const addColumn    = (mIdx) => setMenu(prev => { const u=[...prev]; u[mIdx].columns=[...(u[mIdx].columns||[]),{heading:'New Column',links:[]}]; return u; });
-  const removeColumn = (mIdx, cIdx) => setMenu(prev => { const u=[...prev]; u[mIdx].columns.splice(cIdx,1); return u; });
-  const addLink      = (mIdx, cIdx) => setMenu(prev => { const u=[...prev]; u[mIdx].columns[cIdx].links=[...u[mIdx].columns[cIdx].links,{label:'New Link',slug:'/'}]; return u; });
-  const removeLink   = (mIdx, cIdx, lIdx) => setMenu(prev => { const u=[...prev]; u[mIdx].columns[cIdx].links.splice(lIdx,1); return u; });
-  const updateLink   = (mIdx, cIdx, lIdx, field, value) => setMenu(prev => { const u=[...prev]; u[mIdx].columns[cIdx].links[lIdx]={...u[mIdx].columns[cIdx].links[lIdx],[field]:value}; return u; });
-  const updateColumnHeading = (mIdx, cIdx, value) => setMenu(prev => { const u=[...prev]; u[mIdx].columns[cIdx].heading=value; return u; });
+
+  const addColumn = (mIdx) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx || m.type === 'split-action-menu') return m;
+      return {
+        ...m,
+        columns: [...(m.columns || []), { heading: 'New Column', links: [] }]
+      };
+    }));
+  };
+
+  const removeColumn = (mIdx, cIdx) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx) return m;
+      return {
+        ...m,
+        columns: (m.columns || []).filter((_, ci) => ci !== cIdx)
+      };
+    }));
+  };
+  
+  const addLink = (mIdx, cIdx) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx) return m;
+      if (m.type === 'split-action-menu') {
+        const newLinks = [...(m.links || []), { label: 'New Link', slug: '/' }];
+        return { ...m, links: newLinks };
+      }
+      const newCols = (m.columns || []).map((col, ci) => {
+        if (ci !== cIdx) return col;
+        return {
+          ...col,
+          links: [...(col.links || []), { label: 'New Link', slug: '/' }]
+        };
+      });
+      return { ...m, columns: newCols };
+    }));
+  };
+
+  const removeLink = (mIdx, cIdx, lIdx) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx) return m;
+      if (m.type === 'split-action-menu') {
+        return {
+          ...m,
+          links: (m.links || []).filter((_, li) => li !== lIdx)
+        };
+      }
+      return {
+        ...m,
+        columns: (m.columns || []).map((col, ci) => {
+          if (ci !== cIdx) return col;
+          return {
+            ...col,
+            links: (col.links || []).filter((_, li) => li !== lIdx)
+          };
+        })
+      };
+    }));
+  };
+
+  const updateLink = (mIdx, cIdx, lIdx, field, value) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx) return m;
+      if (m.type === 'split-action-menu') {
+        const newLinks = [...(m.links || [])];
+        newLinks[lIdx] = { ...newLinks[lIdx], [field]: value };
+        return { ...m, links: newLinks };
+      }
+      return {
+        ...m,
+        columns: (m.columns || []).map((col, ci) => {
+          if (ci !== cIdx) return col;
+          const newLinks = [...(col.links || [])];
+          newLinks[lIdx] = { ...newLinks[lIdx], [field]: value };
+          return { ...col, links: newLinks };
+        })
+      };
+    }));
+  };
+
+  const updateColumnHeading = (mIdx, cIdx, value) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx) return m;
+      return {
+        ...m,
+        columns: (m.columns || []).map((col, ci) => ci === cIdx ? { ...col, heading: value } : col)
+      };
+    }));
+  };
+
+  const updateColumnImage = (mIdx, cIdx, value) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx) return m;
+      return {
+        ...m,
+        columns: (m.columns || []).map((col, ci) => ci === cIdx ? { ...col, image: value } : col)
+      };
+    }));
+  };
+
+  const addContact = (mIdx) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx) return m;
+      return {
+        ...m,
+        contacts: [...(m.contacts || []), { icon: 'Headset', label: 'Toll Free', value: '1800-XXX-XXXX' }]
+      };
+    }));
+  };
+
+  const removeContact = (mIdx, coIdx) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx) return m;
+      return {
+        ...m,
+        contacts: (m.contacts || []).filter((_, ci) => ci !== coIdx)
+      };
+    }));
+  };
+
+  const updateContact = (mIdx, coIdx, field, value) => {
+    setMenu(prev => prev.map((m, i) => {
+      if (i !== mIdx) return m;
+      const newContacts = [...(m.contacts || [])];
+      newContacts[coIdx] = { ...newContacts[coIdx], [field]: value };
+      return { ...m, contacts: newContacts };
+    }));
+  };
 
   const editingMenu = editingIndex !== null ? menu[editingIndex] : null;
 
@@ -378,7 +702,9 @@ export default function DesktopMenuManager({ initialData, initialTopMenu }) {
             </button>
           </div>
         ) : menu.map((m, mIdx) => {
-          const totalLinks = m.columns?.reduce((a, c) => a + (c.links?.length || 0), 0) || 0;
+          const totalLinks = m.type === 'split-action-menu' 
+            ? (m.links?.length || 0)
+            : (m.columns?.reduce((a, c) => a + (c.links?.length || 0), 0) || 0);
           return (
             <div key={mIdx}
               className="group bg-white shadow-sm hover:shadow-md transition-all overflow-hidden"
@@ -474,6 +800,10 @@ export default function DesktopMenuManager({ initialData, initialTopMenu }) {
             onRemoveLink={(cIdx, lIdx) => removeLink(editingIndex, cIdx, lIdx)}
             onUpdateLink={(cIdx, lIdx, f, val) => updateLink(editingIndex, cIdx, lIdx, f, val)}
             onUpdateColumnHeading={(cIdx, val) => updateColumnHeading(editingIndex, cIdx, val)}
+            onUpdateColumnImage={(cIdx, val) => updateColumnImage(editingIndex, cIdx, val)}
+            onAddContact={() => addContact(editingIndex)}
+            onRemoveContact={(coIdx) => removeContact(editingIndex, coIdx)}
+            onUpdateContact={(coIdx, f, val) => updateContact(editingIndex, coIdx, f, val)}
           />
         </Modal>
       )}

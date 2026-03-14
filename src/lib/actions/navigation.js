@@ -13,7 +13,7 @@ import path from 'path';
 export async function getNavigationData() {
   try {
     await connectToDatabase();
-    let navDoc = await Navigation.findOne({ documentName: 'main_header' });
+    let navDoc = await Navigation.findOne({ documentName: 'main_header' }).lean();
 
     if (!navDoc) {
       console.log("Database is empty. Seeding from navigation.json...");
@@ -27,11 +27,12 @@ export async function getNavigationData() {
       });
     }
 
-    // Return plain object for Server Components
+    // Return plain object for Server Components with deep cleaning
     return JSON.parse(JSON.stringify(navDoc.data));
   } catch (error) {
     console.error("Error fetching navigation data:", error);
-    throw new Error("Failed to fetch navigation data");
+    // Return empty config instead of throwing to prevent total page crash
+    return { topMenu: [], siteConfig: {}, topBarInfo: {} }; 
   }
 }
 
@@ -42,17 +43,18 @@ export async function getNavigationData() {
  */
 export async function updateNavigationData(nodePath, payload) {
   try {
+    const cleanPayload = JSON.parse(JSON.stringify(payload));
     await connectToDatabase();
     
     // Update using MongoDB dot notation
     const updateQuery = {};
-    updateQuery[`data.${nodePath}`] = payload;
+    updateQuery[`data.${nodePath}`] = cleanPayload;
 
     const updated = await Navigation.findOneAndUpdate(
       { documentName: 'main_header' },
       { $set: updateQuery },
       { new: true }
-    );
+    ).lean();
 
     if (!updated) {
       throw new Error("Navigation document not found");
@@ -73,13 +75,16 @@ export async function updateNavigationData(nodePath, payload) {
  */
 export async function saveFullNavigationData(fullData) {
   try {
+    // CRITICAL: Clean fullData to remove React 19 Proxies/Temporary Client References
+    const cleanData = JSON.parse(JSON.stringify(fullData));
+    
     await connectToDatabase();
     
     const updated = await Navigation.findOneAndUpdate(
       { documentName: 'main_header' },
-      { $set: { data: fullData } },
+      { $set: { data: cleanData } },
       { new: true }
-    );
+    ).lean();
 
     revalidatePath('/admin/header');
     revalidatePath('/');

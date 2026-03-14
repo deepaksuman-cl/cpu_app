@@ -13,13 +13,20 @@ export default function SidebarMenuManager({ initialData, initialSideMenu }) {
   const [saving, setSaving] = useState(false);
   const [expandedCat, setExpandedCat] = useState(null);
 
-  const saveAll = async () => {
+  const saveAll = async (e) => {
     setSaving(true);
-    const result = await saveFullNavigationData({ ...initialData, sideMenu: data });
-    if (result.success) alert('Sidebar menus updated!');
-    else alert('Error: ' + result.error);
-    setSaving(false);
+    try {
+      const payload = JSON.parse(JSON.stringify({ ...initialData, sideMenu: data }));
+      const result = await saveFullNavigationData(payload);
+      if (result.success) alert('Sidebar menus updated successfully!');
+      else alert('Error: ' + result.error);
+    } catch (err) {
+      alert('Serialization Error: ' + err.message);
+    } finally {
+      setSaving(false);
+    }
   };
+   
 
   // --- EXPLORE MORE ACTIONS ---
 
