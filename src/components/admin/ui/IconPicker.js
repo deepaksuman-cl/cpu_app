@@ -5,12 +5,15 @@ import * as LucideIcons from 'lucide-react';
 import { Search, X, Check, HelpCircle } from 'lucide-react';
 
 // Extract valid icon names more robustly
-const allIconNames = Object.keys(LucideIcons).filter(name => 
-  typeof LucideIcons[name] === 'function' && 
-  /^[A-Z]/.test(name) && // Icons usually start with Uppercase
-  name !== 'createLucideIcon' &&
-  name !== 'LucideIcon'
-);
+const allIconNames = Object.keys(LucideIcons).filter(name => {
+  const icon = LucideIcons[name];
+  return (
+    (typeof icon === 'function' || typeof icon === 'object') && 
+    /^[A-Z]/.test(name) && 
+    name !== 'createLucideIcon' &&
+    name !== 'LucideIcon'
+  );
+});
 
 export default function IconPicker({ value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
