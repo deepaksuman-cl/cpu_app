@@ -22,6 +22,7 @@ import CourseScholarships from "@/components/pages/courses/CourseScholarships";
 import CourseWhyJoin from "@/components/pages/courses/CourseWhyJoin";
 import CourseUniqueFeatures from "@/components/pages/courses/CourseUniqueFeatures";
 import CourseApplySteps from "@/components/pages/courses/CourseApplySteps";
+import CourseFAQ from "@/components/pages/courses/CourseFAQ";
 
 // Lucide icons for the Accomplishments card
 import {
@@ -117,6 +118,9 @@ export default function CourseSlugPage({ params }) {
 
       {/* ── How to Apply (BG2 dark slider) ── */}
       <CourseApplySteps data={courseData.applySteps} />
+
+      {/* ── FAQ ── */}
+      <CourseFAQ data={courseData.faq} />
 
       {/* ── Placements ── */}
       <SchoolPlacements data={courseData.placements} />

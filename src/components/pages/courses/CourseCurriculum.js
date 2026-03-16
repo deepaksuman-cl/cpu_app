@@ -1,14 +1,9 @@
 "use client";
-import React, { useState } from "react";
-import { Star, ChevronRight, ChevronDown, ChevronLeft, CheckCircle } from "lucide-react";
-import {
-  Building2, FlaskConical,
-} from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Star, CheckCircle, Plus, Minus, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { Building2, FlaskConical } from "lucide-react";
 
-// Map icon strings from JSON → Lucide components
 const ICON_MAP = { Building2, FlaskConical, Star };
-
-const BG2 = "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg";
 
 /* ── Shared Section Title ── */
 function SectionTitle({ children, subtitle, center = true }) {
@@ -27,104 +22,198 @@ function SectionTitle({ children, subtitle, center = true }) {
   );
 }
 
-/* ── Accordion Item ── */
-function AccordionItem({ title }) {
-  const [open, setOpen] = useState(false);
+/* ── Full-Width Accordion (matches test/page.js exactly) ── */
+function CourseAccordion({ sections, courseStructure }) {
+  const [openId, setOpenId] = useState(null);
+  const toggle = (id) => setOpenId(prev => prev === id ? null : id);
+
   return (
-    <div className="border border-gray-200 rounded-xl mb-2 overflow-hidden shadow-sm">
-      <button
-        className="w-full flex items-center justify-between px-5 py-3 bg-white hover:bg-blue-50 transition-all text-left"
-        onClick={() => setOpen(!open)}
-      >
-        <span className="font-semibold text-[#00588b] flex items-center gap-2 text-sm">
-          <span className="w-6 h-6 rounded-full bg-[#ffb900]/20 flex items-center justify-center flex-shrink-0">
-            <ChevronRight size={13} className={`transition-transform text-[#ffb900] ${open ? "rotate-90" : ""}`} />
-          </span>
-          {title}
-        </span>
-        <ChevronDown size={15} className={`transition-transform text-gray-400 flex-shrink-0 ${open ? "rotate-180" : ""}`} />
-      </button>
-      {open && (
-        <div className="px-5 py-4 text-gray-600 text-sm bg-blue-50/50 border-t border-gray-100">
-          Curriculum details for <strong className="text-[#00588b]">{title}</strong> — contact the department for the full syllabus and timetable.
-        </div>
-      )}
+    <div className="w-full border border-gray-200 rounded-2xl overflow-hidden shadow-lg">
+      {sections.map((section, idx) => {
+        const isOpen = openId === section.id;
+        return (
+          <div key={section.id} className={idx !== 0 ? "border-t border-gray-200" : ""}>
+            {/* Header */}
+            <button
+              onClick={() => toggle(section.id)}
+              className={`w-full flex items-center justify-between px-6 py-4 text-left transition-all duration-200 ${
+                isOpen ? "bg-[#00588b] text-white" : "bg-white hover:bg-blue-50 text-gray-800"
+              }`}
+            >
+              <span className="flex items-center gap-3 font-semibold text-sm md:text-base">
+                <span className={`w-7 h-7 rounded flex items-center justify-center flex-shrink-0 transition-colors ${
+                  isOpen ? "bg-white/20" : "bg-[#00588b]/10"
+                }`}>
+                  {isOpen
+                    ? <Minus size={15} className="text-white" />
+                    : <Plus  size={15} className="text-[#00588b]" />
+                  }
+                </span>
+                {section.title}
+              </span>
+              <ChevronDown
+                size={18}
+                className={`flex-shrink-0 transition-transform duration-300 ${
+                  isOpen ? "rotate-180 text-white" : "text-gray-400"
+                }`}
+              />
+            </button>
+
+            {/* Body */}
+            {isOpen && (
+              <div className="bg-white border-t border-gray-100 px-6 py-6">
+                {section.content.split("\n\n").map((para, i) => (
+                  <p key={i} className="text-gray-700 text-sm leading-relaxed mb-4">{para}</p>
+                ))}
+
+                {/* Embedded table for Course Structure row */}
+                {section.hasTable && courseStructure && (
+                  <div className="overflow-x-auto rounded-xl shadow border border-gray-100 mt-2">
+                    <table className="w-full text-sm min-w-[520px]">
+                      <thead>
+                        <tr className="bg-[#00588b] text-white">
+                          <th className="px-5 py-3 text-left font-bold">Category</th>
+                          <th className="px-5 py-3 text-left font-bold">Short Name</th>
+                          <th className="px-5 py-3 text-left font-bold">Description</th>
+                          <th className="px-5 py-3 text-center font-bold w-24">Credits</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {courseStructure.map((row, i) => (
+                          <tr key={i} className={`${i % 2 === 0 ? "bg-white" : "bg-blue-50/50"} hover:bg-[#ffb900]/5 transition-colors`}>
+                            <td className="px-5 py-3 font-semibold text-[#00588b] text-xs">{row.category}</td>
+                            <td className="px-5 py-3 text-gray-500 text-xs font-semibold">{row.shortName}</td>
+                            <td className="px-5 py-3 text-gray-700">{row.description}</td>
+                            <td className="px-5 py-3 text-center font-extrabold text-[#ffb900] text-base">{row.credits ?? "—"}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
 
-/* ── Dept Slider ── */
+/* ── Upgraded Department Slider (matches test/page.js exactly) ── */
 function DeptSlider({ slides }) {
   const [active, setActive] = useState(0);
+  const [hovered, setHovered] = useState(null);
   const len = slides.length;
+  const BG2 = "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg";
+
+  // Auto-rotate
+  useEffect(() => {
+    const t = setInterval(() => setActive(i => (i + 1) % len), 4000);
+    return () => clearInterval(t);
+  }, [len]);
 
   return (
     <div>
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-7">
         {slides.map((slide, idx) => {
           const isActive = idx === active;
+          const isHov    = hovered === idx;
+          const highlight = isActive || isHov;
           const Icon = ICON_MAP[slide.icon] || Building2;
           return (
             <div
               key={slide.title}
               onClick={() => setActive(idx)}
-              className={`rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ${
-                isActive ? "ring-4 ring-[#ffb900] shadow-2xl scale-[1.03]" : "opacity-70 hover:opacity-90 shadow-md"
-              }`}
-              style={{ background: "linear-gradient(145deg,#00588b,#003d61)" }}
+              onMouseEnter={() => setHovered(idx)}
+              onMouseLeave={() => setHovered(null)}
+              className="relative rounded-2xl overflow-hidden cursor-pointer group"
+              style={{
+                boxShadow: highlight
+                  ? "0 0 0 3px #ffb900, 0 24px 48px rgba(0,88,139,0.35)"
+                  : "0 8px 32px rgba(0,88,139,0.18)",
+                transform: highlight ? "translateY(-8px) scale(1.02)" : "translateY(0) scale(1)",
+                transition: "all 0.45s cubic-bezier(0.34,1.56,0.64,1)",
+              }}
             >
+              {/* Background */}
+              <div className="absolute inset-0" style={{ backgroundImage: `url(${BG2})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+              {/* Teal gradient overlay */}
               <div
-                className="relative p-6 pb-4"
-                style={{ backgroundImage: `url(${BG2})`, backgroundSize: "cover", backgroundPosition: "center" }}
-              >
-                <div className="absolute inset-0 bg-[#00588b]/80" />
-                <div className="relative z-10 flex items-center gap-3">
-                  <div className="bg-[#ffb900] rounded-xl p-2 shadow-lg flex-shrink-0">
-                    <Icon size={22} className="text-[#00588b]" />
-                  </div>
-                  <h3 className="font-extrabold text-white text-sm leading-tight">{slide.title}</h3>
-                </div>
+                className="absolute inset-0"
+                style={{
+                  background: highlight
+                    ? "linear-gradient(160deg, rgba(0,70,110,0.93) 0%, rgba(0,50,80,0.97) 100%)"
+                    : "linear-gradient(160deg, rgba(0,70,110,0.87) 0%, rgba(0,50,80,0.93) 100%)",
+                  transition: "background 0.4s ease",
+                }}
+              />
+              {/* Watermark icon */}
+              <div className="absolute right-4 bottom-20 opacity-[0.06] pointer-events-none">
+                <Icon size={120} className="text-white" />
               </div>
-              <div className="p-5">
-                <ul className="space-y-2 mb-5">
-                  {slide.items.map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-blue-100">
-                      <CheckCircle size={13} className="text-[#ffb900] flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <button className="w-full bg-[#ffb900] text-[#00588b] font-extrabold text-xs py-2.5 rounded-full hover:bg-yellow-300 transition">
-                  {slide.cta}
-                </button>
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Header row */}
+                <div className="flex items-center gap-3 px-6 pt-6 pb-5">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
+                    style={{ background: highlight ? "#ffb900" : "rgba(255,185,0,0.85)", transition: "background 0.3s" }}
+                  >
+                    <Icon size={24} className="text-[#00588b]" />
+                  </div>
+                  <h3 className="font-extrabold text-white text-base leading-tight">{slide.title}</h3>
+                </div>
+
+                {/* Gold divider */}
+                <div className="mx-6 mb-5 h-px" style={{ background: "rgba(255,185,0,0.25)" }} />
+
+                {/* List + CTA */}
+                <div className="px-6 pb-6 flex-1">
+                  <ul className="space-y-3 mb-6">
+                    {slide.items.map((item, i) => (
+                      <li key={i} className="flex items-center gap-2.5">
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full border border-[#ffb900]/60 flex items-center justify-center">
+                          <CheckCircle size={12} className="text-[#ffb900]" />
+                        </span>
+                        <span
+                          className="text-sm font-medium leading-tight"
+                          style={{ color: highlight ? "#ffffff" : "rgba(255,255,255,0.85)", transition: "color 0.3s" }}
+                        >
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    className="w-full py-3 rounded-xl font-extrabold text-sm tracking-widest uppercase transition-all duration-300"
+                    style={{
+                      background: highlight ? "#ffb900" : "rgba(255,185,0,0.75)",
+                      color: "#00588b",
+                      letterSpacing: "0.12em",
+                      boxShadow: highlight ? "0 4px 20px rgba(255,185,0,0.4)" : "none",
+                    }}
+                  >
+                    {slide.cta}
+                  </button>
+                </div>
               </div>
             </div>
           );
         })}
       </div>
-      {/* Nav */}
-      <div className="flex items-center justify-center gap-4 mt-8">
-        <button
-          onClick={() => setActive((active - 1 + len) % len)}
-          className="w-10 h-10 rounded-full border-2 border-[#00588b] flex items-center justify-center hover:bg-[#00588b] hover:text-white transition text-[#00588b]"
-        >
-          <ChevronLeft size={18} />
-        </button>
-        <div className="flex gap-2">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              className={`rounded-full transition-all duration-300 ${i === active ? "w-7 h-3 bg-[#00588b]" : "w-3 h-3 bg-gray-300 hover:bg-gray-400"}`}
-            />
-          ))}
-        </div>
-        <button
-          onClick={() => setActive((active + 1) % len)}
-          className="w-10 h-10 rounded-full border-2 border-[#00588b] flex items-center justify-center hover:bg-[#00588b] hover:text-white transition text-[#00588b]"
-        >
-          <ChevronRight size={18} />
-        </button>
+
+      {/* Dot navigation */}
+      <div className="flex items-center justify-center gap-3 mt-10">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className="transition-all duration-400 rounded-full"
+            style={{ width: i === active ? "32px" : "10px", height: "10px", background: i === active ? "#00588b" : "#d1d5db" }}
+          />
+        ))}
       </div>
     </div>
   );
@@ -134,91 +223,86 @@ function DeptSlider({ slides }) {
 
 export function CourseCurriculum({ data }) {
   if (!data) return null;
-  return (
-    <section className="max-w-7xl mx-auto px-4 py-20">
-      <SectionTitle subtitle={data.subtitle}>{data.sectionTitle}</SectionTitle>
 
-      {/* Intro note */}
-      <div className="bg-gradient-to-r from-[#00588b]/8 to-blue-50 border-l-4 border-[#00588b] rounded-r-2xl p-6 mb-10 text-sm text-gray-700 leading-relaxed">
-        <strong className="text-[#00588b]">Course Structure:</strong> {data.introNote}
+  return (
+    <section className="w-full py-20">
+      <div className="max-w-7xl mx-auto px-4 mb-10">
+        <SectionTitle subtitle={data.subtitle}>{data.sectionTitle}</SectionTitle>
       </div>
 
-      {/* Course Structure Table */}
-      <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-100 mb-10">
-        <table className="w-full text-sm min-w-[580px]">
-          <thead>
-            <tr className="bg-[#00588b] text-white">
-              <th className="px-5 py-3.5 text-left font-bold">Category</th>
-              <th className="px-5 py-3.5 text-left font-bold">Short Name</th>
-              <th className="px-5 py-3.5 text-left font-bold">Description</th>
-              <th className="px-5 py-3.5 text-center font-bold w-24">Credits</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.courseStructure?.map((row, i) => (
-              <tr key={i} className={`${i % 2 === 0 ? "bg-white" : "bg-blue-50/40"} hover:bg-[#ffb900]/5 transition-colors`}>
-                <td className="px-5 py-3 font-semibold text-[#00588b] text-xs">{row.category}</td>
-                <td className="px-5 py-3 text-gray-500 text-xs">{row.shortName}</td>
-                <td className="px-5 py-3 text-gray-700">{row.description}</td>
-                <td className="px-5 py-3 text-center font-extrabold text-[#ffb900] text-base">{row.credits ?? "—"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* Full-width accordion */}
+      <div className="px-4 md:px-8 lg:px-16">
+        <CourseAccordion
+          sections={data.accordionSections || []}
+          courseStructure={data.courseStructure}
+        />
       </div>
 
       {/* Value Added Courses */}
-      <div className="bg-gradient-to-r from-[#ffb900]/15 to-yellow-50 border border-[#ffb900]/50 rounded-2xl p-6 mb-10">
-        <h3 className="text-[#00588b] font-extrabold text-base mb-5 flex items-center gap-2">
-          <Star size={18} className="text-[#ffb900]" /> Value Added Courses for all UG (VAC) — Non Mandatory
-        </h3>
-        <div className="overflow-x-auto rounded-xl overflow-hidden shadow">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-[#00588b] text-white">
-                <th className="px-4 py-2.5 text-left">Course Name</th>
-                <th className="px-4 py-2.5 text-center w-24">Credits</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.valueAddedCourses?.map((c, i) => (
-                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-yellow-50"}>
-                  <td className="px-4 py-2.5 text-gray-700">{c.name}</td>
-                  <td className="px-4 py-2.5 text-center font-extrabold text-[#00588b]">{c.credits}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {data.valueAddedCourses && (
+        <div className="max-w-7xl mx-auto px-4 mt-10">
+          <div className="bg-gradient-to-r from-[#ffb900]/15 to-yellow-50 border border-[#ffb900]/50 rounded-2xl p-6">
+            <h3 className="text-[#00588b] font-extrabold text-base mb-5 flex items-center gap-2">
+              <Star size={18} className="text-[#ffb900]" /> Value Added Courses for all UG (VAC) — Non Mandatory
+            </h3>
+            <div className="overflow-x-auto rounded-xl overflow-hidden shadow">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-[#00588b] text-white">
+                    <th className="px-4 py-2.5 text-left">Course Name</th>
+                    <th className="px-4 py-2.5 text-center w-24">Credits</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.valueAddedCourses.map((c, i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-yellow-50"}>
+                      <td className="px-4 py-2.5 text-gray-700">{c.name}</td>
+                      <td className="px-4 py-2.5 text-center font-extrabold text-[#00588b]">{c.credits}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <p className="text-gray-500 text-sm mb-8 italic">{data.outroNote}</p>
-
-      {/* Semester Accordions */}
-      <div className="grid md:grid-cols-2 gap-3">
-        {data.semesters?.map(sem => <AccordionItem key={sem} title={sem} />)}
-      </div>
+      )}
     </section>
   );
 }
 
 export function CourseDeptSlider({ data, slides }) {
-  // Accept either `data` (full section obj with title/subtitle + slides key) or raw `slides` array
-  const slideData = slides || data?.slides || data;
+  const slideData = slides || data?.slides || [];
   const sectionTitle = data?.sectionTitle || "Explore Our Department";
   const subtitle = data?.subtitle || "Discover what makes our department exceptional";
-  const bgImage = data?.bgImage || BG2;
+  const BG1 = "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp";
 
-  if (!slideData) return null;
+  if (!slideData.length) return null;
 
   return (
-    <section
-      className="relative py-20"
-      style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center" }}
-    >
-      <div className="absolute inset-0 bg-white/93" />
+    <section className="relative py-24 overflow-hidden" style={{ background: "#f4f2ed" }}>
+      {/* Subtle bg watermark */}
+      <div
+        className="absolute inset-0 opacity-[0.06]"
+        style={{ backgroundImage: `url(${BG1})`, backgroundSize: "cover", backgroundPosition: "center", filter: "grayscale(60%)" }}
+      />
+      {/* Decorative watermark icons */}
+      <div className="absolute -left-12 top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
+        <Building2 size={320} className="text-[#00588b]" />
+      </div>
+      <div className="absolute -right-12 top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
+        <Star size={260} className="text-[#ffb900]" />
+      </div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-4">
-        <SectionTitle subtitle={subtitle}>{sectionTitle}</SectionTitle>
+        <div className="text-center mb-14">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#00588b] mb-3">{sectionTitle}</h2>
+          <p className="text-gray-500 text-sm">{subtitle}</p>
+          <div className="flex justify-center gap-1 mt-4">
+            <div className="h-1 w-14 rounded-full bg-[#ffb900]" />
+            <div className="h-1 w-5 rounded-full bg-[#00588b]" />
+            <div className="h-1 w-2 rounded-full bg-[#ffb900]" />
+          </div>
+        </div>
         <DeptSlider slides={slideData} />
       </div>
     </section>
