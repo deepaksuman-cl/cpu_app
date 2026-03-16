@@ -205,16 +205,275 @@
       ]
     }
   },
-  "legal-studies-governance": {
-    "hero": {
-      "title": "School of Legal Studies & Governance",
-      "subtitle": "Best Law College in Kota",
-      "description": "The School of Legal Studies & Governance is committed to providing world-class legal education and preparing the next generation of legal luminaries, judges, and corporate lawyers.",
-      "points": ["Moot Court Facility", "Expert Legal Faculty"]
+ "legal-studies-governance": {
+  "slug": "legal-studies-governance",
+  "breadcrumb": [
+    { "label": "Home", "link": "/" },
+    { "label": "Schools & Departments", "link": "/schools" },
+    { "label": "School of Legal Studies & Governance", "link": "/schools/legal-studies-governance" }
+  ],
+
+  "hero": {
+    "bgImage": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f",
+    "badge": "Top Law School in Kota",
+    "title": {
+      "main": "School of Legal Studies & Governance",
+      "highlight": "Legal",
+      "sky": "Governance"
     },
-    "alumni": [
-      { "name": "Pallavi", "company": "High Court", "image": "/assets/pallavi.jpg" },
-      { "name": "Suresh", "company": "Law Firm", "image": "/assets/suresh.jpg" }
+    "description": "Career Point University nurtures future legal professionals, policy makers and governance experts through world-class legal education, research and practical courtroom training.",
+    "cta": [
+      { "label": "Apply Now", "link": "#", "primary": true },
+      { "label": "Explore Programs", "link": "#programs", "primary": false }
+    ]
+  },
+
+  "stats": [
+    { "value": "12L", "label": "Highest Package", "icon": "TrendingUp" },
+    { "value": "5L", "label": "Avg Salary Package", "icon": "BarChart3" },
+    { "value": "50+", "label": "Legal Internships", "icon": "Briefcase" }
+  ],
+
+  "about": {
+    "vision": {
+      "title": "Vision",
+      "label": "Our Purpose",
+      "icon": "Target",
+      "text": "To become a leading center for legal education and governance studies that produces ethical lawyers, policy experts, and justice leaders who contribute to national and global legal systems.",
+      "highlights": [
+        { "value": "400+", "label": "Students" },
+        { "value": "90%", "label": "Internship Placement" },
+        { "value": "25+", "label": "Legal Partners" }
+      ]
+    },
+
+    "mission": {
+      "title": "Mission",
+      "label": "Our Goal",
+      "icon": "Lightbulb",
+      "points": [
+        "Deliver high quality legal education aligned with global standards.",
+        "Promote research in law, governance and public policy.",
+        "Provide practical exposure through moot courts and internships.",
+        "Develop ethical and socially responsible legal professionals.",
+        "Encourage interdisciplinary learning in law and governance."
+      ]
+    }
+  },
+
+  "programmes": {
+    "title": "Our Programme",
+    "subtitle": "Academic Programmes",
+    "description": "Career Point University offers a wide range of law programmes designed to prepare students for careers in judiciary, corporate law, public policy, and legal research.",
+
+    "levels": [
+      {
+        "label": "After 12th Pass",
+        "icon": "GraduationCap",
+        "courses": [
+          {
+            "name": "BA LL.B (Integrated)",
+            "link": "#",
+            "specializations": [
+              { "name": "Corporate Law", "link": "#" },
+              { "name": "Criminal Law", "link": "#" },
+              { "name": "Constitutional Law", "link": "#" }
+            ]
+          }
+        ]
+      },
+
+      {
+        "label": "After Graduation",
+        "icon": "BookOpen",
+        "courses": [
+          {
+            "name": "LL.B",
+            "link": "#",
+            "specializations": [
+              { "name": "Corporate Law", "link": "#" },
+              { "name": "Criminal Law", "link": "#" }
+            ]
+          },
+          {
+            "name": "LL.M",
+            "link": "#",
+            "specializations": [
+              { "name": "International Law", "link": "#" },
+              { "name": "Business Law", "link": "#" }
+            ]
+          }
+        ]
+      },
+
+      {
+        "label": "After Post Graduation",
+        "icon": "Microscope",
+        "courses": [
+          {
+            "name": "Ph.D. in Law",
+            "link": "#",
+            "description": "Advanced legal research programme focusing on constitutional law, governance and public policy."
+          }
+        ]
+      }
+    ]
+  },
+
+  "placements": {
+    "title": "Students Placed in Top Legal Firms",
+    "label": "CPU Placement Records",
+    "subtitle": "Successful placements in legal and corporate sectors",
+
+    "list": [
+      {
+        "name": "Ankit Sharma",
+        "company": "AZB & Partners",
+        "pkg": "10 LPA",
+        "img": "https://randomuser.me/api/portraits/men/32.jpg"
+      },
+      {
+        "name": "Neha Gupta",
+        "company": "Khaitan & Co",
+        "pkg": "12 LPA",
+        "img": "https://randomuser.me/api/portraits/women/44.jpg"
+      },
+      {
+        "name": "Rahul Jain",
+        "company": "Supreme Court Advocate",
+        "pkg": "8 LPA",
+        "img": "https://randomuser.me/api/portraits/men/52.jpg"
+      },
+      {
+        "name": "Priya Mehta",
+        "company": "Legal Advisor – Corporate Firm",
+        "pkg": "9 LPA",
+        "img": "https://randomuser.me/api/portraits/women/47.jpg"
+      }
+    ]
+  },
+
+  "alumni": {
+    "title": "Our Alumni in Legal Profession",
+    "label": "Our Alumni",
+    "list": [
+      {
+        "name": "Rohit Verma",
+        "role": "Advocate",
+        "company": "Delhi High Court",
+        "img": "https://randomuser.me/api/portraits/men/12.jpg"
+      },
+      {
+        "name": "Sneha Sharma",
+        "role": "Legal Consultant",
+        "company": "Corporate Law Firm",
+        "img": "https://randomuser.me/api/portraits/women/33.jpg"
+      },
+      {
+        "name": "Arjun Mehta",
+        "role": "Public Policy Analyst",
+        "company": "Think Tank India",
+        "img": "https://randomuser.me/api/portraits/men/21.jpg"
+      }
+    ]
+  },
+
+  "industry": {
+    "title": "Industry & Legal Partnerships",
+    "label": "Collaborations",
+    "partners": [
+      { "name": "Bar Council of India", "url": "https://upload.wikimedia.org/wikipedia/en/6/6e/Bar_Council_of_India_Logo.png" },
+      { "name": "AZB & Partners", "url": "https://upload.wikimedia.org/wikipedia/en/a/a8/AZB_Partners_logo.png" },
+      { "name": "Khaitan & Co", "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Khaitan_logo.png" },
+      { "name": "Supreme Court of India", "url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Supreme_Court_of_India_logo.svg" }
+    ]
+  },
+
+  "research": {
+    "title": "Legal Research Excellence",
+    "label": "Eminence Research",
+
+    "gallery": [
+      "https://images.unsplash.com/photo-1589994965851-a8f479c573a9",
+      "https://images.unsplash.com/photo-1589391886645-d51941baf7fb",
+      "https://images.unsplash.com/photo-1607748851687-ba9a10438621"
+    ],
+
+    "stats": [
+      { "value": "80+", "label": "Research Papers", "icon": "BookOpen" },
+      { "value": "20+", "label": "Law Conferences", "icon": "Presentation" },
+      { "value": "10+", "label": "Books Published", "icon": "GraduationCap" },
+      { "value": "6+", "label": "Policy Papers", "icon": "FlaskConical" }
+    ]
+  },
+
+  "community": {
+    "title": "Legal Community",
+    "label": "Community",
+    "description": [
+      "The School of Legal Studies & Governance brings together students, researchers, and professionals committed to justice, law and governance.",
+      "Through moot courts, debates, legal aid camps and policy research initiatives, students actively contribute to society and strengthen legal awareness."
+    ],
+
+    "gallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1589391886645-d51941baf7fb",
+        "caption": "Moot Court Practice"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1607748851687-ba9a10438621",
+        "caption": "Legal Seminar"
+      }
+    ]
+  },
+
+  "infrastructure": {
+    "title": "World-Class Infrastructure",
+    "label": "Campus",
+
+    "list": [
+      {
+        "title": "Moot Court Hall",
+        "desc": "Real courtroom simulation for legal practice and competitions.",
+        "img": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f"
+      },
+      {
+        "title": "Law Library",
+        "desc": "Extensive collection of law journals, case studies and digital legal databases.",
+        "img": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da"
+      },
+      {
+        "title": "Research Center",
+        "desc": "Dedicated space for policy research and legal studies.",
+        "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+      }
+    ]
+  },
+
+  "testimonials": {
+    "title": "What Our Law Students Say",
+    "label": "Testimonials",
+
+    "list": [
+      {
+        "name": "Kunal Sharma",
+        "batch": "BA LL.B 2022",
+        "company": "Law Intern – Supreme Court",
+        "emoji": "⚖️",
+        "rating": 5,
+        "photo": "https://randomuser.me/api/portraits/men/61.jpg",
+        "text": "The moot court training and internships helped me gain real courtroom experience and confidence."
+      },
+      {
+        "name": "Ritika Jain",
+        "batch": "LLM 2023",
+        "company": "Corporate Legal Associate",
+        "emoji": "📚",
+        "rating": 5,
+        "photo": "https://randomuser.me/api/portraits/women/65.jpg",
+        "text": "The faculty and research environment at CPU prepared me for a successful career in corporate law."
+      }
     ]
   }
+}
 }
