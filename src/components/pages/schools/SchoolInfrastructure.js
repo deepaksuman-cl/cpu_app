@@ -13,7 +13,9 @@ export default function SchoolInfrastructure({ data }) {
             {label}
           </span>
           <h2 className="font-black mt-1 text-[#0a1628]" style={{ fontSize: "clamp(1.8rem,3.5vw,2.8rem)" }}>
-             World-Class <span className="text-[#00588b]">Infrastructure</span>
+            {title.main.split(title.highlight)[0]}
+            <span className="text-[#00588b]">{title.highlight}</span>
+            {title.main.split(title.highlight)[1]}
           </h2>
         </div>
 

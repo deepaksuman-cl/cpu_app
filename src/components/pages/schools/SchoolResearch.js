@@ -14,7 +14,9 @@ export default function SchoolResearch({ data }) {
             {label}
           </span>
           <h2 className="font-black text-white mt-1" style={{ fontSize: "clamp(1.8rem,3.5vw,2.8rem)" }}>
-            Research <span className="text-[#ffb900]">Excellence</span>
+            {title.main.split(title.highlight)[0]}
+            <span className="text-[#ffb900]">{title.highlight}</span>
+            {title.main.split(title.highlight)[1]}
           </h2>
         </div>
 

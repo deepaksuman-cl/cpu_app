@@ -1,18 +1,21 @@
+// File: src/components/pages/schools/SchoolProgrammes.js
 "use client";
 import React, { useState } from "react";
 import * as LucideIcons from "lucide-react";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
-export default function SchoolProgrammes({ data }) {
+export default function SchoolProgrammes({ data, schoolSlug }) {
   const [activeTab, setActiveTab] = useState(0);
-  if (!data) return null;
+  
+  if (!data || !data.levels || data.levels.length === 0) return null;
 
   const currentLevel = data.levels[activeTab];
 
   return (
     <section id="programs" className="relative py-24 overflow-hidden">
       <div className="absolute inset-0">
-        <img src="https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg" alt="Campus" className="w-full h-full object-cover object-center" />
+        <img src={data.bgImage || "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg"} alt="Campus" className="w-full h-full object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-br from-[#001e46]/93 to-[#003c78]/88" />
       </div>
       
@@ -22,7 +25,9 @@ export default function SchoolProgrammes({ data }) {
             {data.subtitle}
           </span>
           <h2 className="font-black text-white" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>
-            {data.title.split('Programme')[0]} <span className="text-[#ffb900]">Programme</span>
+            {data.title.main.split(data.title.highlight)[0]}
+            <span className="text-[#ffb900]">{data.title.highlight}</span>
+            {data.title.main.split(data.title.highlight)[1]}
           </h2>
           <p className="mt-3 max-w-2xl mx-auto text-sm lg:text-base leading-relaxed text-white/65">
             {data.description}
@@ -63,29 +68,41 @@ export default function SchoolProgrammes({ data }) {
             {/* Content per tab */}
             <div className="flex-1 px-8 py-8 overflow-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {currentLevel.courses.map((course, ci) => (
-                  <div key={ci} className="p-4 rounded-2xl bg-[#00588b]/4 border border-[#00588b]/10">
-                    <a href={course.link} className="flex items-center gap-0.5 group no-underline">
-                      <ChevronRight className="w-3.5 h-3.5 text-[#00588b]" />
-                      <ChevronRight className="w-3.5 h-3.5 text-[#00588b] -ml-2" />
-                      <span className="ml-1 font-semibold text-sm text-[#0a1628] group-hover:text-[#00588b] transition-colors">{course.name}</span>
-                    </a>
-                    {course.specializations?.length > 0 && (
-                      <div className="mt-3 flex flex-wrap items-center gap-x-0.5 gap-y-1">
-                        <span className="text-xs font-bold text-slate-700 mr-1">Specialization:</span>
-                        {course.specializations.map((sp, si) => (
-                          <React.Fragment key={si}>
-                            <a href={sp.link} className="text-xs font-semibold text-[#00588b] hover:underline no-underline">{sp.name}</a>
-                            {si < course.specializations.length - 1 && <span className="text-slate-400 text-xs mx-0.5">,</span>}
-                          </React.Fragment>
-                        ))}
-                      </div>
-                    )}
-                    {course.description && (
-                       <p className="text-xs mt-2 text-slate-500 font-medium">{course.description}</p>
-                    )}
-                  </div>
-                ))}
+                {currentLevel.courses?.map((course, ci) => {
+                  // 🔴 YAHAN MAGIC HAI: Ab URL theek banega
+                  const courseUrl = `/schools/${schoolSlug}/${course.slug}`;
+
+                  return (
+                    <div key={ci} className="p-4 rounded-2xl bg-[#00588b]/4 border border-[#00588b]/10">
+                      <Link href={courseUrl} className="flex items-center gap-0.5 group no-underline">
+                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b]" />
+                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b] -ml-2" />
+                        <span className="ml-1 font-semibold text-sm text-[#0a1628] group-hover:text-[#00588b] transition-colors">
+                          {course.name}
+                        </span>
+                      </Link>
+                      
+                      {course.specializations?.length > 0 && (
+                        <div className="mt-3 flex flex-wrap items-center gap-x-0.5 gap-y-1">
+                          <span className="text-xs font-bold text-slate-700 mr-1">Specialization:</span>
+                          {course.specializations.map((sp, si) => (
+                            <React.Fragment key={si}>
+                              {/* Isko abhi ke liye `#` rakhte hain jab tak specializations ke alag page na banayein */}
+                              <Link href="#" className="text-xs font-semibold text-[#00588b] hover:underline no-underline">
+                                {sp.name}
+                              </Link>
+                              {si < course.specializations.length - 1 && <span className="text-slate-400 text-xs mx-0.5">,</span>}
+                            </React.Fragment>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {course.description && (
+                        <p className="text-xs mt-2 text-slate-500 font-medium">{course.description}</p>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

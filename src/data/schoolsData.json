@@ -3,7 +3,7 @@
     "slug": "computer-applications-technology",
     "breadcrumb": [
       { "label": "Home", "link": "/" },
-      { "label": "Schools & Departments", "link": "/schools" },
+      { "label": "Schools & Departments", "link": "/schools/computer-applications-technology" },
       { "label": "School of Computer Applications & Technology", "link": "/schools/computer-applications-technology" }
     ],
     "hero": {
@@ -12,7 +12,7 @@
       "title": {
         "main": "School of Computer Applications & Technology",
         "highlight": "Computer",
-        "sky": "Technology"
+        "skyHighlight": "Technology"
       },
       "description": "Career Point University offers cutting-edge programs shaping future technologists, researchers, and industry-ready professionals in Kota.",
       "cta": [
@@ -51,7 +51,11 @@
       }
     },
     "programmes": {
-      "title": "Our Programme",
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "title": {
+        "main": "Our Programme",
+        "highlight": "Programme"
+      },
       "subtitle": "Academic Programmes",
       "description": "Over the years, Career Point University has earned several accolades for playing a dynamic role in elevating research and the learning process of the institution.",
       "levels": [
@@ -61,12 +65,12 @@
           "courses": [
             {
               "name": "Bachelor of Computer Application (BCA)",
-              "link": "#",
+              "slug": "bca",
               "specializations": [
-                { "name": "Core", "link": "#" },
-                { "name": "Data Science", "link": "#" },
-                { "name": "Cloud Computing", "link": "#" },
-                { "name": "AI & ML", "link": "#" }
+                { "name": "Core", "slug": "core" },
+                { "name": "Data Science", "slug": "data-science" },
+                { "name": "Cloud Computing", "slug": "cloud-computing" },
+                { "name": "AI & ML", "slug": "ai-ml" }
               ]
             }
           ]
@@ -77,17 +81,17 @@
           "courses": [
             {
               "name": "Master of Computer Application (MCA)",
-              "link": "#",
+              "slug": "mca",
               "specializations": [
-                { "name": "Core", "link": "#" },
-                { "name": "Data Science", "link": "#" }
+                { "name": "Core", "slug": "core" },
+                { "name": "Data Science", "slug": "data-science" }
               ]
             },
             {
               "name": "PG Diploma In Computer Application (PGDCA)",
-              "link": "#",
+              "slug": "pgdca",
               "specializations": [
-                { "name": "Core", "link": "#" }
+                { "name": "Core", "slug": "core" }
               ]
             }
           ]
@@ -98,15 +102,44 @@
           "courses": [
             {
               "name": "Ph.D. (All Subjects)",
-              "link": "#",
+              "slug": "phd",
               "description": "Research-focused doctoral programme"
             }
           ]
         }
       ]
     },
+    "courseDetails": {
+      "mca": {
+        "title": "Master of Computer Application (MCA)",
+        "duration": "2 Years",
+        "eligibility": "Graduation with 50% marks",
+        "description": "Detailed description about MCA goes here..."
+      },
+      "bca": {
+        "title": "Bachelor of Computer Application (BCA)",
+        "duration": "3 Years",
+        "eligibility": "10+2 with minimum 50% marks",
+        "description": "The BCA program focuses on preparing students for roles pertaining to computer applications and IT industry."
+      },
+      "pgdca": {
+        "title": "PG Diploma In Computer Application (PGDCA)",
+        "duration": "1 Year",
+        "eligibility": "Graduation from a recognized university",
+        "description": "A postgraduate diploma focused on advanced computer applications."
+      },
+       "phd": {
+        "title": "Ph.D. in Computer Science",
+        "duration": "Min 3 Years",
+        "eligibility": "Post Graduation in relevant field",
+        "description": "A research-oriented doctoral degree."
+      }
+    },
     "placements": {
-      "title": "Students Placed in Top Companies",
+      "title": {
+        "main": "Students Placed in Top Companies",
+        "highlight": "Top Companies"
+      },
       "label": "CPU Placement Records",
       "subtitle": "Highest & best placement record in the region",
       "list": [
@@ -121,7 +154,10 @@
       ]
     },
     "alumni": {
-      "title": "Making an Impact Globally",
+      "title": {
+        "main": "Making an Impact Globally",
+        "highlight": "Impact"
+      },
       "label": "Our Alumni",
       "list": [
         { "name": "Hemant Sharma", "role": "Software Engineer", "company": "Leading Tech Co.", "img": "https://cpur.in/wp-content/uploads/2023/08/hemant.jpg" },
@@ -132,7 +168,10 @@
       ]
     },
     "industry": {
-      "title": "Industry Tie Up's",
+      "title": {
+        "main": "Industry Tie Up's",
+        "highlight": "Tie Up's"
+      },
       "label": "Collaborations",
       "partners": [
         { "name": "Tech Mahindra", "url": "https://cpur.in/wp-content/uploads/2023/08/tech-mahindra-as-Smart-Object-1.jpg" },
@@ -146,7 +185,10 @@
       ]
     },
     "research": {
-      "title": "Research Excellence",
+      "title": {
+        "main": "Research Excellence",
+        "highlight": "Excellence"
+      },
       "label": "Eminence Research",
       "gallery": [
         "https://cpur.in/wp-content/uploads/2023/07/gallery-7.jpg",
@@ -162,7 +204,10 @@
       ]
     },
     "community": {
-      "title": "Our Diverse Community",
+      "title": {
+        "main": "Our Diverse Community",
+        "highlight": "Diverse"
+      },
       "label": "Community",
       "description": [
         "The computer application community thrives on diversity, encompassing a dynamic range of individuals with varying backgrounds, perspectives, and expertise. This rich tapestry includes students, researchers, educators, and professionals, all contributing to a vibrant ecosystem of innovation and learning.",
@@ -174,7 +219,10 @@
       ]
     },
     "infrastructure": {
-      "title": "World-Class Infrastructure",
+      "title": {
+        "main": "World-Class Infrastructure",
+        "highlight": "Infrastructure"
+      },
       "label": "Campus",
       "list": [
         { "title": "Modern Computer Labs", "desc": "State-of-the-art labs with latest hardware & software", "img": "https://img.freepik.com/free-photo/modern-computer-lab_1170-1.jpg" },
@@ -184,7 +232,10 @@
       ]
     },
     "testimonials": {
-      "title": "Our Students Speak",
+      "title": {
+        "main": "Our Students Speak",
+        "highlight": "Speak"
+      },
       "label": "Testimonials",
       "list": [
         { 
@@ -206,15 +257,45 @@
     }
   },
   "legal-studies-governance": {
+    "slug": "legal-studies-governance",
+    "breadcrumb": [
+      { "label": "Home", "link": "/" },
+      { "label": "Schools & Departments", "link": "/schools/legal-studies-governance" },
+      { "label": "School of Legal Studies & Governance", "link": "/schools/legal-studies-governance" }
+    ],
     "hero": {
-      "title": "School of Legal Studies & Governance",
-      "subtitle": "Best Law College in Kota",
-      "description": "The School of Legal Studies & Governance is committed to providing world-class legal education and preparing the next generation of legal luminaries, judges, and corporate lawyers.",
-      "points": ["Moot Court Facility", "Expert Legal Faculty"]
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "badge": "Best Law College in Kota",
+      "title": {
+        "main": "School of Legal Studies & Governance",
+        "highlight": "Legal",
+        "skyHighlight": "Governance"
+      },
+      "description": "The School of Legal Studies & Governance is committed to providing world-class legal education and preparing the next generation of legal luminaries.",
+      "cta": [
+        { "label": "Apply Now", "link": "#", "primary": true },
+        { "label": "Explore Programs", "link": "#programs", "primary": false }
+      ]
     },
-    "alumni": [
-      { "name": "Pallavi", "company": "High Court", "image": "/assets/pallavi.jpg" },
-      { "name": "Suresh", "company": "Law Firm", "image": "/assets/suresh.jpg" }
-    ]
+    "customSections": [
+      {
+        "type": "alert",
+        "title": "Moot Court Practice Area",
+        "content": "This is a custom section specifically for Law students.",
+        "bgClass": "bg-amber-100",
+        "borderClass": "border-amber-800"
+      }
+    ],
+    "alumni": {
+      "title": {
+        "main": "Our Alumni Impact",
+        "highlight": "Impact"
+      },
+      "label": "Our Alumni",
+      "list": [
+        { "name": "Pallavi", "role": "Advocate", "company": "High Court", "img": "/assets/pallavi.jpg" },
+        { "name": "Suresh", "role": "Legal Consultant", "company": "Law Firm", "img": "/assets/suresh.jpg" }
+      ]
+    }
   }
 }

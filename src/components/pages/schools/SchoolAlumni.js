@@ -31,7 +31,9 @@ export default function SchoolAlumni({ data }) {
             {label}
           </span>
           <h2 className="font-black mt-1 text-[#0a1628]" style={{ fontSize: "clamp(1.8rem,3.5vw,2.8rem)" }}>
-            {title.split('Impact')[0]} <span className="text-[#00588b]">Impact</span> Globally
+            {title.main.split(title.highlight)[0]}
+            <span className="text-[#00588b]">{title.highlight}</span>
+            {title.main.split(title.highlight)[1]}
           </h2>
         </div>
 

@@ -34,9 +34,12 @@ export default function SchoolHero({ data }) {
           <h1 className="font-black text-white leading-tight mb-6" style={{ fontSize: "clamp(2.4rem,4.5vw,3.8rem)" }}>
             {data.title.main.split(data.title.highlight)[0]}
             <span className="text-[#ffb900]">{data.title.highlight}</span>
-            {data.title.main.split(data.title.highlight)[1].split(data.title.sky)[0]}
-            <span className="text-sky-300">{data.title.sky}</span>
-            {data.title.main.split(data.title.sky)[1]}
+            {data.title.main.split(data.title.highlight)[1]?.split(data.title.skyHighlight)[0]}
+            {data.title.skyHighlight && (
+              <span className="text-sky-300">{data.title.skyHighlight}</span>
+            )}
+            {data.title.skyHighlight && data.title.main.split(data.title.skyHighlight)[1]}
+            {!data.title.skyHighlight && data.title.main.split(data.title.highlight)[1]}
           </h1>
 
           <p className="text-blue-100/90 text-lg leading-relaxed mb-10 max-w-xl">

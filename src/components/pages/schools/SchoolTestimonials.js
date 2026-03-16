@@ -18,7 +18,9 @@ export default function SchoolTestimonials({ data }) {
             {label}
           </span>
           <h2 className="font-black text-white" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>
-            Our Students <span className="text-[#ffb900]">Speak</span>
+            {title.main.split(title.highlight)[0]}
+            <span className="text-[#ffb900]">{title.highlight}</span>
+            {title.main.split(title.highlight)[1]}
           </h2>
         </div>
 
