@@ -1,6 +1,10 @@
+// File: next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb', // 🔴 Ye line add karni hai
+    },
+  },
 };
-
 export default nextConfig;
