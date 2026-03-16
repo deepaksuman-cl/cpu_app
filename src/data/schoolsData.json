@@ -2084,10 +2084,642 @@
         }
       },
       "phd": {
-        "title": "Ph.D. in Computer Science",
+        "title": "Ph.D. in Computer Science (Ph.D.)",
         "duration": "Min 3 Years",
         "eligibility": "Post Graduation in relevant field",
-        "description": "A research-oriented doctoral degree."
+        "description": "A research-oriented doctoral degree.",
+        "hero": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "badge": "Min 3-Year Doctoral Programme",
+          "title": {
+            "main": "Ph.D. in Computer Science",
+            "highlight": "Computer",
+            "line1": "Ph.D. in",
+            "line2": "Computer",
+            "line3": "Application"
+          },
+          "description": "Comprehensive foundation in computer science with hands-on training in programming, AI, data science, cybersecurity & emerging technologies.",
+          "cta": [
+            {
+              "label": "Apply Now",
+              "link": "#apply",
+              "primary": true
+            },
+            {
+              "label": "Explore Programme",
+              "link": "#overview",
+              "primary": false
+            }
+          ],
+          "quickStats": [
+            {
+              "value": "3800+",
+              "label": "Placements"
+            },
+            {
+              "value": "60L+",
+              "label": "Highest Pkg"
+            },
+            {
+              "value": "10,000+",
+              "label": "Students Trust"
+            }
+          ]
+        },
+        "accomplishments": {
+          "heading": "University's Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 10,000+ Students",
+          "stats": [
+            {
+              "icon": "Users",
+              "value": "3800+",
+              "label": "Placements So Far"
+            },
+            {
+              "icon": "BookOpen",
+              "value": "60 L",
+              "label": "Highest Package"
+            },
+            {
+              "icon": "Award",
+              "value": "18",
+              "label": "Startups"
+            },
+            {
+              "icon": "FileText",
+              "value": "130",
+              "label": "Papers Published"
+            },
+            {
+              "icon": "Globe",
+              "value": "1250+",
+              "label": "Google Fellowships"
+            },
+            {
+              "icon": "Star",
+              "value": "905",
+              "label": "Alumni Achieved"
+            }
+          ]
+        },
+        "overview": {
+          "sectionTitle": "Overview",
+          "subtitle": "What is the Ph.D. Programme?",
+          "paragraphs": [
+            "Ph.D. Programme is a three-year, six-semester program that offers holistic knowledge of fundamentals in computational applications technology enabling efficient solutions for industries and business problems — fostering creativity and resolution-thinking by addressing AI-enhanced tools with IoT industry for providing real-time solutions efficiently.",
+            "Overall, Ph.D. programme enables students with a comprehensive understanding of computer science principles, practical skills in computer programming, and opportunities for career growth in the dynamic and evolving field of information technology."
+          ],
+          "tags": [
+            "3 Years Duration",
+            "6 Semesters",
+            "Industry Aligned",
+            "Placement Support"
+          ],
+          "gridCards": [
+            {
+              "icon": "Code2",
+              "label": "Programming",
+              "sub": "C, C++, Java, Python"
+            },
+            {
+              "icon": "Database",
+              "label": "Database",
+              "sub": "MySQL, Oracle, NoSQL"
+            },
+            {
+              "icon": "Network",
+              "label": "Networking",
+              "sub": "CN, Cybersecurity"
+            },
+            {
+              "icon": "Brain",
+              "label": "AI & Data",
+              "sub": "ML, Data Analytics"
+            }
+          ]
+        },
+        "scope": {
+          "sectionTitle": "Scope of Ph.D. in Computer Science (Ph.D.)",
+          "subtitle": "Expanding opportunities in the world of technology",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "body": "The Ph.D. program is a comprehensive three-year undertaking that produces students with a solid foundation in computer science and its applications. The curriculum encompasses a wide range of subjects, spanning programming languages such as C, C++, Java, data structures, database management systems, software engineering, web development, and computer networks. Additionally, students learn to leverage data, machine learning, AI research, writing skills, and skill development. Graduates can pursue roles as software developers, database administrators, system analysts, IT consultants, and cybersecurity professionals."
+        },
+        "curriculum": {
+          "sectionTitle": "Course Structure Ph.D.",
+          "subtitle": "A well-structured curriculum designed for excellence",
+          "introNote": "The Ph.D. programme is a comprehensive curriculum providing students with a solid foundation in computer science, spanning programming languages (C, C++, Java), data structures, database management, software engineering, web development, and computer networks.",
+          "outroNote": "Graduates of Ph.D. are well prepared for diverse career specialization in the IT industry, including roles such as software developers, system analysts, IT consultants, database administrators, and cybersecurity professionals.",
+          "courseStructure": [
+            {
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Discipline Specific Core Courses (DSC)",
+              "credits": 62
+            },
+            {
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Project / Dissertation / Field Study / Survey",
+              "credits": 6
+            },
+            {
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Seminar",
+              "credits": 2
+            },
+            {
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Internship / on Job Experience",
+              "credits": 4
+            },
+            {
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Research Credit Course",
+              "credits": 0
+            },
+            {
+              "category": "Departmental Elective",
+              "shortName": "DE",
+              "description": "Discipline Specific Elective Courses (DSE)",
+              "credits": 32
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Additional Languages",
+              "credits": 2
+            },
+            {
+              "name": "Professional and Business Ethics",
+              "credits": 2
+            },
+            {
+              "name": "National and Professional Issues (NPI)",
+              "credits": 2
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure",
+              "content": "The Ph.D. in Computer Sciences (Ph.D.) program at Career Point University is a comprehensive three-year undergraduate course designed to provide students with a solid foundation in computer science and its applications. The curriculum encompasses a wide range of subjects, including programming languages such as C, C++, and Java, data structures, database management systems, software engineering, web development, and computer networks. In addition to these core topics, the program offers specialized modules in emerging fields like data science, machine learning, statistical analysis, and big data technologies, ensuring that students are well-versed in current industry trends.\n\nThe following table outlines the comprehensive course structure of the Ph.D. program. It is organized into core, elective, interdisciplinary, and skill enhancement components. Each category specifies the type of courses, their descriptions, and the corresponding credits, ensuring a well-rounded academic experience with a balance of foundational knowledge, research exposure, and professional ethics:",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Subjects covered in Semester 1 include: Programming Fundamentals (C Language), Mathematics I, Digital Electronics, Introduction to IT, and Communication Skills. Total Credits: 22"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Subjects covered in Semester 2 include: Data Structures, Mathematics II, Object Oriented Programming (C++), Web Technology Basics, and Environmental Studies. Total Credits: 22"
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Subjects covered in Semester 3 include: Database Management Systems, Java Programming, Operating Systems, Computer Networks, and Elective I. Total Credits: 22"
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Subjects covered in Semester 4 include: Advanced Java, Software Engineering, Computer Architecture, Elective II, and Minor Project. Total Credits: 22"
+            },
+            {
+              "id": "s5",
+              "title": "Semester-5",
+              "content": "Subjects covered in Semester 5 include: Machine Learning, Data Science, Mobile Application Development, Elective III, and Internship. Total Credits: 22"
+            },
+            {
+              "id": "s6",
+              "title": "Semester-6",
+              "content": "Subjects covered in Semester 6 include: Artificial Intelligence, Cyber Security, Cloud Computing, Major Project, and Professional Ethics. Total Credits: 22"
+            },
+            {
+              "id": "uc",
+              "title": "University Core",
+              "content": "University Core courses include: Environmental Science, Human Values & Professional Ethics, Indian Constitution & Traditional Knowledge, and Sports/NSS/NCC activities."
+            },
+            {
+              "id": "de",
+              "title": "Departmental Elective",
+              "content": "Departmental Elective options include: Advanced Database Systems, Internet of Things (IoT), Blockchain Technology, AR/VR Development, Big Data Analytics, and Natural Language Processing."
+            }
+          ]
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "3 Guest Experts/year",
+              "IEEE Collaboration",
+              "Modern Lab Facilities",
+              "Specializations & Electives",
+              "Industry Collaborations",
+              "Student Programs",
+              "Placement Assistance",
+              "Exclusive Lab Activities"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Labs",
+            "icon": "FlaskConical",
+            "items": [
+              "Microsoft Innovation Centre",
+              "Microsoft MTAC",
+              "Oracle Innovation Lab",
+              "Oracle Industry Lab",
+              "Artificial Intelligence Lab"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Achievements",
+              "Pharmacy",
+              "Research",
+              "Latest Updates",
+              "Activities",
+              "Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "admissionFee": {
+          "sectionTitle": "Admission & Fee Details",
+          "subtitle": "Simple admission process and transparent fee structure",
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "color": "#00588b",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "link": "Click here"
+            },
+            {
+              "color": "#ffb900",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "link": "Click Here"
+            }
+          ],
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,900/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "21,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Development Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ]
+        },
+        "scholarships": {
+          "sectionTitle": "Scholarship Criteria",
+          "subtitle": "Scholarship for Session 2026-27",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% with term",
+                "Till 16th paid",
+                "Till 3rd paid",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "90%",
+                "50%",
+                "35%",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "85%",
+                "50%",
+                "35%",
+                "No Use"
+              ]
+            }
+          ],
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "notes": [
+            "Merit scholarship is offered to students based on previous class.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated (A+ or equivalent year).",
+            "A 50% scholarship is given to students in the merit scholarship.",
+            "If a valid scholarship / subject scholarship fees are 50% off and student fails to continue, they may be eligible for cancellation scholarship.",
+            "To avail merit scholarship, student has to submit supporting documents in original along with 1 set of photocopies."
+          ]
+        },
+        "whyJoin": {
+          "sectionTitle": "Why Join Ph.D. in Computer Science (Ph.D.)?",
+          "subtitle": "Unlock your potential with a Ph.D. degree",
+          "reasons": [
+            {
+              "icon": "TrendingUp",
+              "title": "Gateway to the IT Industry",
+              "desc": "Ph.D. serves as a gateway to the vast IT industry. The program equips students with foundational knowledge and practical skills in software development, web design, database administration, networking, and other IT areas."
+            },
+            {
+              "icon": "Briefcase",
+              "title": "Diverse Career Opportunities",
+              "desc": "Ph.D. graduates have opportunities across IT companies, software firms, government agencies, finance, healthcare, and educational institutions. The versatile degree allows exploring diverse career paths."
+            },
+            {
+              "icon": "BookOpen",
+              "title": "In-demand Skills",
+              "desc": "The curriculum covers programming languages, database management, software engineering, and computer applications — highly demanded across multiple industries."
+            },
+            {
+              "icon": "Target",
+              "title": "Practical Training & Hands-On Exp.",
+              "desc": "Ph.D. programs emphasize practical training through projects, internships, and industry collaborations. Students apply theoretical knowledge to real-world problems."
+            },
+            {
+              "icon": "Brain",
+              "title": "Opportunities for Specialization",
+              "desc": "Many Ph.D. programs offer specialization in data science, machine learning, cybersecurity, AI, and mobile application development."
+            }
+          ]
+        },
+        "uniqueFeatures": {
+          "sectionTitle": "What makes Department of Ph.D. unique?",
+          "subtitle": "Setting us apart from the rest",
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "icon": "Users",
+              "title": "Support Services",
+              "desc": "Ph.D. departments provide entrepreneurship and career support services, merit reviews, internship opportunities, and mentoring for student entrepreneurs."
+            },
+            {
+              "num": "07",
+              "icon": "Globe",
+              "title": "Interdisciplinary Approach",
+              "desc": "Ph.D. departments collaborate with academic and industry partners to promote interdisciplinary research, joint projects, and knowledge exchange."
+            },
+            {
+              "num": "08",
+              "icon": "Brain",
+              "title": "Research & Development",
+              "desc": "The department focuses on holistic development offering professional skills, skill training, career readiness programs, and competitive preparation."
+            },
+            {
+              "num": "09",
+              "icon": "Building2",
+              "title": "Community Engagement",
+              "desc": "Ph.D. departments engage with the local community, industry stakeholders through community programs and promote social responsibility among students."
+            }
+          ]
+        },
+        "applySteps": {
+          "sectionTitle": "How to Apply",
+          "subtitle": "Simple 5-step process to join the Ph.D. programme",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "guideLabel": "Guide to Register Online",
+          "ctaLabel": "Start Your Application",
+          "ctaLink": "#",
+          "steps": [
+            {
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself",
+              "desc": "Create your account on the portal with your basic personal details and email address."
+            },
+            {
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details",
+              "desc": "Confirm your identity, educational background, and upload the necessary documents."
+            },
+            {
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online",
+              "desc": "Complete the online application form with all required academic and personal information."
+            },
+            {
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee",
+              "desc": "Securely pay the application processing fee online via net banking, UPI, or card."
+            },
+            {
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application",
+              "desc": "Review your complete application and submit it for processing and review."
+            }
+          ]
+        },
+        "faq": {
+          "sectionTitle": "Frequently Asked Questions",
+          "subtitle": "Everything you need to know about the Ph.D. programme",
+          "items": [
+            {
+              "q": "What is the eligibility criteria for Ph.D. admission?",
+              "a": "Candidates must have passed 10+2 (or equivalent) from a recognized board with a minimum of 50% marks in aggregate. Science/Commerce/Arts stream students are all eligible."
+            },
+            {
+              "q": "What is the duration and fee structure of the Ph.D. programme?",
+              "a": "Ph.D. is a 3-year (6 semester) programme. The tuition fee is ₹21,000 per semester. Additional charges include examination fee (₹2,500), development fee (₹2,500), and a one-time admission fee of ₹8,900."
+            },
+            {
+              "q": "What specializations are available in Ph.D. at Career Point University?",
+              "a": "Students can choose electives in Data Science, Artificial Intelligence & Machine Learning, Cloud Computing, Cybersecurity, Mobile App Development, and IoT. These are offered as Discipline Specific Electives (DSE)."
+            },
+            {
+              "q": "What kind of placements can I expect after completing Ph.D.?",
+              "a": "Career Point University has a strong placement record. Ph.D. graduates have been placed at companies like TCS, Infosys, Tech Mahindra, Wipro, and Zalando with packages ranging from 6 LPA up to 75 LPA (highest)."
+            },
+            {
+              "q": "Is there any scholarship available for Ph.D. students?",
+              "a": "Yes. Merit-based scholarships of up to 100% on tuition fees are available for students scoring above 90% in their qualifying examination. Early admission also offers an additional one-time benefit of up to ₹3,000."
+            },
+            {
+              "q": "What is the admission process for Ph.D.?",
+              "a": "Admissions are done through the DPM-SAT (Merit & Scholarship Test). After registration, candidates appear for the test, submit documents, pay the application fee, and receive their admission offer letter."
+            },
+            {
+              "q": "What labs and infrastructure are available for Ph.D. students?",
+              "a": "Ph.D. students have access to the Microsoft Innovation Centre, Microsoft MTAC, Oracle Innovation Lab, Oracle Industry Lab, and an Artificial Intelligence Lab. Modern computer labs with the latest hardware and software are also available."
+            },
+            {
+              "q": "Can I pursue higher studies after completing Ph.D.?",
+              "a": "Yes. Ph.D. graduates can pursue MCA (Master of Computer Applications), MBA in IT, M.Sc. in Computer Science, or directly enter the industry. Career Point University also offers an MCA programme with Data Science specialization."
+            }
+          ]
+        },
+        "placements": {
+          "title": {
+            "main": "Students Placed in Top Companies",
+            "highlight": "Top Companies"
+          },
+          "label": "Ph.D. Placement Records",
+          "subtitle": "Highest & best placement record in the region",
+          "list": [
+            {
+              "name": "Siraj Ali",
+              "company": "Course5 Intelligence",
+              "pkg": "8 LPA",
+              "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
+            },
+            {
+              "name": "Tarun Jain",
+              "company": "Appcino",
+              "pkg": "10 LPA",
+              "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
+            },
+            {
+              "name": "Prateek Dhaman",
+              "company": "TCS",
+              "pkg": "9 LPA",
+              "img": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png"
+            },
+            {
+              "name": "Archana Kumari",
+              "company": "Tech Mahindra",
+              "pkg": "12 LPA",
+              "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+            },
+            {
+              "name": "Kiran Daklani",
+              "company": "Zalando",
+              "pkg": "75 LPA",
+              "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg"
+            },
+            {
+              "name": "Ravindra Singh",
+              "company": "ATC",
+              "pkg": "8 LPA",
+              "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
+            },
+            {
+              "name": "Priya Sharma",
+              "company": "Infosys",
+              "pkg": "7 LPA",
+              "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+            },
+            {
+              "name": "Rahul Verma",
+              "company": "Wipro",
+              "pkg": "9 LPA",
+              "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
+            }
+          ]
+        },
+        "industry": {
+          "title": {
+            "main": "Industry Tie Up's",
+            "highlight": "Tie Up's"
+          },
+          "label": "Ph.D. Collaborations",
+          "partners": [
+            {
+              "name": "Tech Mahindra",
+              "url": "https://cpur.in/wp-content/uploads/2023/08/tech-mahindra-as-Smart-Object-1.jpg"
+            },
+            {
+              "name": "TCS",
+              "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg"
+            },
+            {
+              "name": "Infosys",
+              "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg"
+            },
+            {
+              "name": "Wipro",
+              "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg"
+            },
+            {
+              "name": "Vodafone",
+              "url": "https://cpur.in/wp-content/uploads/2023/08/vodafone-as-Smart-Object-1.jpg"
+            },
+            {
+              "name": "Google",
+              "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg"
+            },
+            {
+              "name": "J-Spiders",
+              "url": "https://cpur.in/wp-content/uploads/2023/08/j-spiders-logo-as-Smart-Object-1.jpg"
+            },
+            {
+              "name": "JustDial",
+              "url": "https://cpur.in/wp-content/uploads/2023/08/justdial-logo-as-Smart-Object-1.jpg"
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Ph.D. Students Speak",
+            "highlight": "Students"
+          },
+          "label": "Ph.D. Testimonials",
+          "list": [
+            {
+              "name": "Archana Kumari",
+              "batch": "Ph.D. 2019",
+              "company": "Tech Mahindra",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari-Tech-Mahindra.png",
+              "text": "Career Point University transformed my career. The faculty's dedication and industry-focused curriculum gave me the confidence to crack top MNC interviews."
+            },
+            {
+              "name": "Rahul Verma",
+              "batch": "Ph.D. 2021",
+              "company": "Infosys",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
+              "text": "The research opportunities and cutting-edge labs at CPU are unmatched. I published 2 research papers during my Ph.D., which opened doors I never imagined."
+            },
+            {
+              "name": "Priya Sharma",
+              "batch": "Ph.D. 2020",
+              "company": "Accenture",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
+              "text": "From day one, the university prepared us for real-world challenges. The industry tie-ups and live projects gave hands-on experience. I landed my dream job."
+            }
+          ]
+        }
       }
     },
     "placements": {
