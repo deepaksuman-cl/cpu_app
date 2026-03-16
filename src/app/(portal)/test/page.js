@@ -5,45 +5,56 @@ import {
   CheckCircle, Star, FlaskConical, Building2, Globe,
   Phone, Mail, MapPin, ArrowRight, Play, Briefcase,
   Code2, Database, Network, Brain, Target, TrendingUp,
-  FileText, CreditCard, Info, ChevronLeft,
-  UserCheck, ClipboardList, IndianRupee, BadgeCheck,
+  FileText, CreditCard, Info, ChevronLeft, X,
+  UserCheck, ClipboardList, IndianRupee, BadgeCheck, Plus, Minus,
 } from "lucide-react";
 
 // ── IMAGES ────────────────────────────────────────────────────────────────────
 const BG1 = "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp";
 const BG2 = "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg";
+const CAMPUS_IMG = "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
 const stats = [
-  { icon: Users,    value: "3800+", label: "Placements So Far" },
-  { icon: BookOpen, value: "60 L",  label: "Highest Package"   },
-  { icon: Award,    value: "18",    label: "Startups"          },
-  { icon: FileText, value: "130",   label: "Papers Published"  },
-  { icon: Globe,    value: "1250+", label: "Google Fellowships"},
-  { icon: Star,     value: "905",   label: "Alumni Achieved"   },
+  { icon: Users,    value: "3800+", label: "Placements So Far"  },
+  { icon: BookOpen, value: "60 L",  label: "Highest Package"    },
+  { icon: Award,    value: "18",    label: "Startups"           },
+  { icon: FileText, value: "130",   label: "Papers Published"   },
+  { icon: Globe,    value: "1250+", label: "Google Fellowships" },
+  { icon: Star,     value: "905",   label: "Alumni Achieved"    },
 ];
 
+// ── Correct data from screenshot ──────────────────────────────────────────────
 const courseStructure = [
-  { category:"Department Core",     shortName:"BC",             description:"Academic Qualifying Data Science (BCS)",            credits:4   },
-  { category:"Department Core",     shortName:"BC",             description:"Project / Dissertation / Field Study / Internship", credits:6   },
-  { category:"Department Core",     shortName:"BC",             description:"Research & Skill Courses",                          credits:6   },
-  { category:"Department Core",     shortName:"BC",             description:"Discipline Specific Electives (DSE/DC)",            credits:12  },
-  { category:"Programme Elective",  shortName:"PE",             description:"Open Course Electives (Generic/OE CM)",             credits:4   },
-  { category:"Generic Elective",    shortName:"GE",             description:"Generic Electives (Minor Courses)",                 credits:3   },
-  { category:"Ability Enhancement", shortName:"AEC",            description:"English / MIL Courses",                             credits:null},
-  { category:"Value Added Courses", shortName:"VAC (Non-Mand.)",description:"Non Mandatory",                                     credits:null},
-  { category:"University Core",     shortName:"—",              description:"As per university norms",                           credits:null},
+  { category:"Departmental Core",    shortName:"DC", description:"Discipline Specific Core Courses (DSC)",    credits:62 },
+  { category:"Departmental Core",    shortName:"DC", description:"Project / Dissertation / Field Study / Survey", credits:6 },
+  { category:"Departmental Core",    shortName:"DC", description:"Seminar",                                   credits:2  },
+  { category:"Departmental Core",    shortName:"DC", description:"Internship / on Job Experience",            credits:4  },
+  { category:"Departmental Core",    shortName:"DC", description:"Research Credit Course",                    credits:0  },
+  { category:"Departmental Elective",shortName:"DE", description:"Discipline Specific Elective Courses (DSE)", credits:32 },
 ];
 
 const valueAddedCourses = [
-  { name:"Additional Languages",                 credits:2 },
-  { name:"Professional and Business Ethics",      credits:2 },
-  { name:"National and Professional Issues (NPI)",credits:2 },
+  { name:"Additional Languages",                  credits:2 },
+  { name:"Professional and Business Ethics",       credits:2 },
+  { name:"National and Professional Issues (NPI)", credits:2 },
 ];
 
-const semesters = [
-  "Semester 1","Semester 2","Semester 3","Semester 4",
-  "Semester 5","Semester 6","University Core","Departmental Elective",
+const accordionSections = [
+  {
+    id:"cs",
+    title:"Course Structure",
+    content: `The Bachelor of Computer Applications (BCA) program at Career Point University is a comprehensive three-year undergraduate course designed to provide students with a solid foundation in computer science and its applications. The curriculum encompasses a wide range of subjects, including programming languages such as C, C++, and Java, data structures, database management systems, software engineering, web development, and computer networks. In addition to these core topics, the program offers specialized modules in emerging fields like data science, machine learning, statistical analysis, and big data technologies, ensuring that students are well-versed in current industry trends.\n\nThe following table outlines the comprehensive course structure of the BCA program. It is organized into core, elective, interdisciplinary, and skill enhancement components. Each category specifies the type of courses, their descriptions, and the corresponding credits, ensuring a well-rounded academic experience with a balance of foundational knowledge, research exposure, and professional ethics:`,
+    hasTable: true,
+  },
+  { id:"s1",  title:"Semester-1", content:"Subjects covered in Semester 1 include: Programming Fundamentals (C Language), Mathematics I, Digital Electronics, Introduction to IT, and Communication Skills. Total Credits: 22" },
+  { id:"s2",  title:"Semester-2", content:"Subjects covered in Semester 2 include: Data Structures, Mathematics II, Object Oriented Programming (C++), Web Technology Basics, and Environmental Studies. Total Credits: 22" },
+  { id:"s3",  title:"Semester-3", content:"Subjects covered in Semester 3 include: Database Management Systems, Java Programming, Operating Systems, Computer Networks, and Elective I. Total Credits: 22" },
+  { id:"s4",  title:"Semester-4", content:"Subjects covered in Semester 4 include: Advanced Java, Software Engineering, Computer Architecture, Elective II, and Minor Project. Total Credits: 22" },
+  { id:"s5",  title:"Semester-5", content:"Subjects covered in Semester 5 include: Machine Learning, Data Science, Mobile Application Development, Elective III, and Internship. Total Credits: 22" },
+  { id:"s6",  title:"Semester-6", content:"Subjects covered in Semester 6 include: Artificial Intelligence, Cyber Security, Cloud Computing, Major Project, and Professional Ethics. Total Credits: 22" },
+  { id:"uc",  title:"University Core", content:"University Core courses include: Environmental Science, Human Values & Professional Ethics, Indian Constitution & Traditional Knowledge, and Sports/NSS/NCC activities." },
+  { id:"de",  title:"Departmental Elective", content:"Departmental Elective options include: Advanced Database Systems, Internet of Things (IoT), Blockchain Technology, AR/VR Development, Big Data Analytics, and Natural Language Processing." },
 ];
 
 const deptSlides = [
@@ -72,7 +83,7 @@ const feeDetails = [
   { label:"Caution Money (one-time)", amount:"3,000/- (Refundable)"           },
 ];
 
-const dateHeaders  = ["Till 31st June","Till 13th July","Till 31st July","After 31st July"];
+const dateHeaders   = ["Till 31st June","Till 13th July","Till 31st July","After 31st July"];
 const scholarshipRows = [
   { range:"Above 90%", values:["100% with term","Till 16th paid","Till 3rd paid","No Offer"] },
   { range:"75% – 89%", values:["90%","50%","35%","No Use"] },
@@ -89,18 +100,18 @@ const scholarshipNotes = [
 ];
 
 const whyJoinReasons = [
-  { icon:TrendingUp, title:"Gateway to the IT Industry",        desc:"BCA serves as a gateway to the vast IT industry. The program equips students with foundational knowledge and practical skills in software development, web design, database administration, networking, and other IT areas." },
-  { icon:Briefcase,  title:"Diverse Career Opportunities",      desc:"BCA graduates have opportunities across IT companies, software firms, government agencies, finance, healthcare, and educational institutions. The versatile degree allows exploring diverse career paths." },
-  { icon:BookOpen,   title:"In-demand Skills",                  desc:"The curriculum covers programming languages, database management, software engineering, and computer applications — highly demanded across multiple industries." },
-  { icon:Target,     title:"Practical Training & Hands-On Exp.",desc:"BCA programs emphasize practical training through projects, internships, and industry collaborations. Students apply theoretical knowledge to real-world problems." },
-  { icon:Brain,      title:"Opportunities for Specialization",  desc:"Many BCA programs offer specialization in data science, machine learning, cybersecurity, AI, and mobile application development." },
+  { icon:TrendingUp, title:"Gateway to the IT Industry",         desc:"BCA serves as a gateway to the vast IT industry. The program equips students with foundational knowledge and practical skills in software development, web design, database administration, networking, and other IT areas." },
+  { icon:Briefcase,  title:"Diverse Career Opportunities",       desc:"BCA graduates have opportunities across IT companies, software firms, government agencies, finance, healthcare, and educational institutions. The versatile degree allows exploring diverse career paths." },
+  { icon:BookOpen,   title:"In-demand Skills",                   desc:"The curriculum covers programming languages, database management, software engineering, and computer applications — highly demanded across multiple industries." },
+  { icon:Target,     title:"Practical Training & Hands-On Exp.", desc:"BCA programs emphasize practical training through projects, internships, and industry collaborations. Students apply theoretical knowledge to real-world problems." },
+  { icon:Brain,      title:"Opportunities for Specialization",   desc:"Many BCA programs offer specialization in data science, machine learning, cybersecurity, AI, and mobile application development." },
 ];
 
 const uniqueFeatures = [
-  { num:"06", icon:Users,    title:"Support Services",         desc:"BCA departments provide entrepreneurship and career support services, merit reviews, internship opportunities, and mentoring for student entrepreneurs." },
-  { num:"07", icon:Globe,    title:"Interdisciplinary Approach",desc:"BCA departments collaborate with academic and industry partners to promote interdisciplinary research, joint projects, and knowledge exchange." },
-  { num:"08", icon:Brain,    title:"Research & Development",   desc:"The department focuses on holistic development offering professional skills, skill training, career readiness programs, and competitive preparation." },
-  { num:"09", icon:Building2,title:"Community Engagement",     desc:"BCA departments engage with the local community, industry stakeholders through community programs and promote social responsibility among students." },
+  { num:"06", icon:Users,    title:"Support Services",          desc:"BCA departments provide entrepreneurship and career support services, merit reviews, internship opportunities, and mentoring for student entrepreneurs." },
+  { num:"07", icon:Globe,    title:"Interdisciplinary Approach", desc:"BCA departments collaborate with academic and industry partners to promote interdisciplinary research, joint projects, and knowledge exchange." },
+  { num:"08", icon:Brain,    title:"Research & Development",    desc:"The department focuses on holistic development offering professional skills, skill training, career readiness programs, and competitive preparation." },
+  { num:"09", icon:Building2,title:"Community Engagement",      desc:"BCA departments engage with the local community, industry stakeholders through community programs and promote social responsibility among students." },
 ];
 
 const applySteps = [
@@ -110,6 +121,174 @@ const applySteps = [
   { icon:IndianRupee,  step:"04", label:"Pay Application Fee",     desc:"Securely pay the application processing fee online via net banking, UPI, or card." },
   { icon:BadgeCheck,   step:"05", label:"Submit Application",      desc:"Review your complete application and submit it for processing and review." },
 ];
+
+// ── YOUTUBE LIGHTBOX ─────────────────────────────────────────────────────────
+function YouTubeLightbox({ videoId, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ background:"rgba(0,0,0,0.92)" }}
+      onClick={onClose}
+    >
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 border border-white/30 flex items-center justify-center text-white hover:bg-[#ffb900] hover:text-[#00588b] hover:border-[#ffb900] transition-all z-10"
+      >
+        <X size={22} />
+      </button>
+
+      {/* Video container */}
+      <div
+        className="relative w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl"
+        style={{ aspectRatio:"16/9" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <iframe
+          className="w-full h-full"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+          title="Admission Process Video"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+
+      <style>{`
+        @keyframes lightboxIn {
+          from { opacity:0; transform:scale(0.92); }
+          to   { opacity:1; transform:scale(1); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ── PLAY BUTTON WITH INFINITE RIPPLE WAVES ────────────────────────────────────
+function PlayButtonRipple({ onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="relative flex items-center justify-center focus:outline-none group"
+      aria-label="Watch video"
+    >
+      {/* Wave rings */}
+      <span className="absolute w-24 h-24 rounded-full bg-[#ffb900]/25 animate-[ripple1_2s_ease-out_infinite]" />
+      <span className="absolute w-32 h-32 rounded-full bg-[#ffb900]/15 animate-[ripple2_2s_ease-out_infinite_0.4s]" />
+      <span className="absolute w-40 h-40 rounded-full bg-[#ffb900]/08 animate-[ripple3_2s_ease-out_infinite_0.8s]" />
+
+      {/* Main circle */}
+      <span className="relative z-10 w-20 h-20 rounded-full bg-[#ffb900] flex items-center justify-center shadow-2xl group-hover:bg-yellow-300 group-hover:scale-110 transition-all duration-300">
+        <Play size={30} className="text-[#00588b] ml-1.5" fill="#00588b" />
+      </span>
+
+      <style>{`
+        @keyframes ripple1 {
+          0%   { transform: scale(0.8); opacity: 0.8; }
+          100% { transform: scale(2.2); opacity: 0;   }
+        }
+        @keyframes ripple2 {
+          0%   { transform: scale(0.8); opacity: 0.6; }
+          100% { transform: scale(2.6); opacity: 0;   }
+        }
+        @keyframes ripple3 {
+          0%   { transform: scale(0.8); opacity: 0.4; }
+          100% { transform: scale(3.0); opacity: 0;   }
+        }
+      `}</style>
+    </button>
+  );
+}
+
+// ── FULL-WIDTH ACCORDION ──────────────────────────────────────────────────────
+function CourseAccordion() {
+  const [openId, setOpenId] = useState(null);
+  const toggle = (id) => setOpenId(prev => prev === id ? null : id);
+
+  return (
+    <div className="w-full border border-gray-200 rounded-2xl overflow-hidden shadow-lg">
+      {accordionSections.map((section, idx) => {
+        const isOpen = openId === section.id;
+        return (
+          <div key={section.id} className={`${idx !== 0 ? "border-t border-gray-200" : ""}`}>
+            {/* Header */}
+            <button
+              onClick={() => toggle(section.id)}
+              className={`w-full flex items-center justify-between px-6 py-4 text-left transition-all duration-200 ${
+                isOpen
+                  ? "bg-[#00588b] text-white"
+                  : "bg-white hover:bg-blue-50 text-gray-800"
+              }`}
+            >
+              <span className="flex items-center gap-3 font-semibold text-sm md:text-base">
+                <span className={`w-7 h-7 rounded flex items-center justify-center flex-shrink-0 transition-colors ${
+                  isOpen ? "bg-white/20" : "bg-[#00588b]/10"
+                }`}>
+                  {isOpen
+                    ? <Minus size={15} className="text-white" />
+                    : <Plus  size={15} className="text-[#00588b]" />
+                  }
+                </span>
+                {section.title}
+              </span>
+              <ChevronDown
+                size={18}
+                className={`flex-shrink-0 transition-transform duration-300 ${
+                  isOpen ? "rotate-180 text-white" : "text-gray-400"
+                }`}
+              />
+            </button>
+
+            {/* Body */}
+            {isOpen && (
+              <div className="bg-white border-t border-gray-100 px-6 py-6">
+                {section.content.split("\n\n").map((para, i) => (
+                  <p key={i} className="text-gray-700 text-sm leading-relaxed mb-4">{para}</p>
+                ))}
+
+                {/* Table for Course Structure */}
+                {section.hasTable && (
+                  <div className="overflow-x-auto rounded-xl shadow border border-gray-100 mt-2">
+                    <table className="w-full text-sm min-w-[520px]">
+                      <thead>
+                        <tr className="bg-[#00588b] text-white">
+                          <th className="px-5 py-3 text-left font-bold">Category</th>
+                          <th className="px-5 py-3 text-left font-bold">Short Name</th>
+                          <th className="px-5 py-3 text-left font-bold">Description</th>
+                          <th className="px-5 py-3 text-center font-bold w-24">Credits</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {courseStructure.map((row, i) => (
+                          <tr key={i} className={`${i % 2 === 0 ? "bg-white" : "bg-blue-50/50"} hover:bg-[#ffb900]/5 transition-colors`}>
+                            <td className="px-5 py-3 font-semibold text-[#00588b] text-xs">{row.category}</td>
+                            <td className="px-5 py-3 text-gray-500 text-xs font-semibold">{row.shortName}</td>
+                            <td className="px-5 py-3 text-gray-700">{row.description}</td>
+                            <td className="px-5 py-3 text-center font-extrabold text-[#ffb900] text-base">{row.credits}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 function SectionTitle({ children, subtitle, light = false, center = true }) {
@@ -125,34 +304,9 @@ function SectionTitle({ children, subtitle, light = false, center = true }) {
       )}
       <div className={`flex gap-1 mt-3 ${center ? "justify-center" : ""}`}>
         <div className="h-1 w-14 rounded-full bg-[#ffb900]" />
-        <div className="h-1 w-5 rounded-full bg-[#00588b]" />
-        <div className="h-1 w-2 rounded-full bg-[#ffb900]" />
+        <div className="h-1 w-5  rounded-full bg-[#00588b]" />
+        <div className="h-1 w-2  rounded-full bg-[#ffb900]" />
       </div>
-    </div>
-  );
-}
-
-function AccordionItem({ title }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="border border-gray-200 rounded-xl mb-2 overflow-hidden shadow-sm">
-      <button
-        className="w-full flex items-center justify-between px-5 py-3 bg-white hover:bg-blue-50 transition-all text-left"
-        onClick={() => setOpen(!open)}
-      >
-        <span className="font-semibold text-[#00588b] flex items-center gap-2 text-sm">
-          <span className="w-6 h-6 rounded-full bg-[#ffb900]/20 flex items-center justify-center flex-shrink-0">
-            <ChevronRight size={13} className={`transition-transform text-[#ffb900] ${open ? "rotate-90" : ""}`} />
-          </span>
-          {title}
-        </span>
-        <ChevronDown size={15} className={`transition-transform text-gray-400 flex-shrink-0 ${open ? "rotate-180" : ""}`} />
-      </button>
-      {open && (
-        <div className="px-5 py-4 text-gray-600 text-sm bg-blue-50/50 border-t border-gray-100">
-          Curriculum details for <strong className="text-[#00588b]">{title}</strong> — contact the department for the full syllabus and timetable.
-        </div>
-      )}
     </div>
   );
 }
@@ -160,65 +314,139 @@ function AccordionItem({ title }) {
 // ── DEPARTMENT SLIDER ─────────────────────────────────────────────────────────
 function DeptSlider() {
   const [active, setActive] = useState(0);
+  const [hovered, setHovered] = useState(null);
   const len = deptSlides.length;
+
+  // Auto-rotate
+  useEffect(() => {
+    const t = setInterval(() => setActive(i => (i + 1) % len), 4000);
+    return () => clearInterval(t);
+  }, []);
+
   return (
     <div>
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-7">
         {deptSlides.map((slide, idx) => {
           const isActive = idx === active;
+          const isHov    = hovered === idx;
+          const highlight = isActive || isHov;
           return (
             <div
               key={slide.title}
               onClick={() => setActive(idx)}
-              className={`rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ${
-                isActive ? "ring-4 ring-[#ffb900] shadow-2xl scale-[1.03]" : "opacity-70 hover:opacity-90 shadow-md"
-              }`}
-              style={{ background:"linear-gradient(145deg,#00588b,#003d61)" }}
+              onMouseEnter={() => setHovered(idx)}
+              onMouseLeave={() => setHovered(null)}
+              className="relative rounded-2xl overflow-hidden cursor-pointer group"
+              style={{
+                boxShadow: highlight
+                  ? "0 0 0 3px #ffb900, 0 24px 48px rgba(0,88,139,0.35)"
+                  : "0 8px 32px rgba(0,88,139,0.18)",
+                transform: highlight ? "translateY(-8px) scale(1.02)" : "translateY(0) scale(1)",
+                transition: "all 0.45s cubic-bezier(0.34,1.56,0.64,1)",
+              }}
             >
-              <div className="relative p-6 pb-4"
-                style={{ backgroundImage:`url(${BG2})`, backgroundSize:"cover", backgroundPosition:"center" }}
-              >
-                <div className="absolute inset-0 bg-[#00588b]/80" />
-                <div className="relative z-10 flex items-center gap-3">
-                  <div className="bg-[#ffb900] rounded-xl p-2 shadow-lg flex-shrink-0">
-                    <slide.icon size={22} className="text-[#00588b]" />
-                  </div>
-                  <h3 className="font-extrabold text-white text-sm leading-tight">{slide.title}</h3>
-                </div>
+              {/* Background: BG2 image + dark teal overlay — exactly like screenshot */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage:`url(${BG2})`,
+                  backgroundSize:"cover",
+                  backgroundPosition:"center",
+                }}
+              />
+              {/* Teal gradient overlay */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: highlight
+                    ? "linear-gradient(160deg, rgba(0,70,110,0.93) 0%, rgba(0,50,80,0.97) 100%)"
+                    : "linear-gradient(160deg, rgba(0,70,110,0.87) 0%, rgba(0,50,80,0.93) 100%)",
+                  transition:"background 0.4s ease",
+                }}
+              />
+
+              {/* Decorative watermark icon */}
+              <div className="absolute right-4 bottom-20 opacity-[0.06] pointer-events-none">
+                <slide.icon size={120} className="text-white" />
               </div>
-              <div className="p-5">
-                <ul className="space-y-2 mb-5">
-                  {slide.items.map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-blue-100">
-                      <CheckCircle size={13} className="text-[#ffb900] flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <button className="w-full bg-[#ffb900] text-[#00588b] font-extrabold text-xs py-2.5 rounded-full hover:bg-yellow-300 transition">
-                  {slide.cta}
-                </button>
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Header row */}
+                <div className="flex items-center gap-3 px-6 pt-6 pb-5">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
+                    style={{
+                      background: highlight ? "#ffb900" : "rgba(255,185,0,0.85)",
+                      transition:"background 0.3s",
+                    }}
+                  >
+                    <slide.icon size={24} className="text-[#00588b]" />
+                  </div>
+                  <h3 className="font-extrabold text-white text-base leading-tight">{slide.title}</h3>
+                </div>
+
+                {/* Divider */}
+                <div
+                  className="mx-6 mb-5 h-px"
+                  style={{ background:"rgba(255,185,0,0.25)" }}
+                />
+
+                {/* List */}
+                <div className="px-6 pb-6 flex-1">
+                  <ul className="space-y-3 mb-6">
+                    {slide.items.map((item, i) => (
+                      <li key={i} className="flex items-center gap-2.5 group/item">
+                        {/* Custom check icon matching screenshot */}
+                        <span className="flex-shrink-0 w-5 h-5 rounded-full border border-[#ffb900]/60 flex items-center justify-center">
+                          <CheckCircle size={12} className="text-[#ffb900]" />
+                        </span>
+                        <span
+                          className="text-sm font-medium leading-tight"
+                          style={{
+                            color: highlight ? "#ffffff" : "rgba(255,255,255,0.85)",
+                            transition:"color 0.3s",
+                          }}
+                        >
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA Button */}
+                  <button
+                    className="w-full py-3 rounded-xl font-extrabold text-sm tracking-widest uppercase transition-all duration-300"
+                    style={{
+                      background: highlight ? "#ffb900" : "rgba(255,185,0,0.75)",
+                      color: "#00588b",
+                      letterSpacing:"0.12em",
+                      boxShadow: highlight ? "0 4px 20px rgba(255,185,0,0.4)" : "none",
+                    }}
+                  >
+                    {slide.cta}
+                  </button>
+                </div>
               </div>
             </div>
           );
         })}
       </div>
-      {/* Nav */}
-      <div className="flex items-center justify-center gap-4 mt-8">
-        <button onClick={() => setActive((active - 1 + len) % len)}
-          className="w-10 h-10 rounded-full border-2 border-[#00588b] flex items-center justify-center hover:bg-[#00588b] hover:text-white transition text-[#00588b]">
-          <ChevronLeft size={18} />
-        </button>
-        <div className="flex gap-2">
-          {deptSlides.map((_, i) => (
-            <button key={i} onClick={() => setActive(i)}
-              className={`rounded-full transition-all duration-300 ${i === active ? "w-7 h-3 bg-[#00588b]" : "w-3 h-3 bg-gray-300 hover:bg-gray-400"}`} />
-          ))}
-        </div>
-        <button onClick={() => setActive((active + 1) % len)}
-          className="w-10 h-10 rounded-full border-2 border-[#00588b] flex items-center justify-center hover:bg-[#00588b] hover:text-white transition text-[#00588b]">
-          <ChevronRight size={18} />
-        </button>
+
+      {/* Dot Navigation */}
+      <div className="flex items-center justify-center gap-3 mt-10">
+        {deptSlides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className="transition-all duration-400 rounded-full"
+            style={{
+              width:  i === active ? "32px" : "10px",
+              height: "10px",
+              background: i === active ? "#00588b" : "#d1d5db",
+            }}
+          />
+        ))}
       </div>
     </div>
   );
@@ -230,8 +458,6 @@ function ApplySlider() {
   const len = applySteps.length;
   const prev = () => setActive(i => (i - 1 + len) % len);
   const next = () => setActive(i => (i + 1) % len);
-
-  // Auto-play
   useEffect(() => {
     const t = setTimeout(next, 3500);
     return () => clearTimeout(t);
@@ -239,9 +465,7 @@ function ApplySlider() {
 
   return (
     <div>
-      {/* ── Desktop Progress Steps ── */}
       <div className="hidden md:flex items-start relative mb-10">
-        {/* Background line */}
         <div className="absolute top-8 left-8 right-8 h-px bg-white/15 z-0" />
         {applySteps.map((step, idx) => {
           const isActive = idx === active;
@@ -249,11 +473,10 @@ function ApplySlider() {
           return (
             <div key={step.step}
               onClick={() => setActive(idx)}
-              className={`flex-1 flex flex-col items-center relative z-10 cursor-pointer transition-all duration-400`}
+              className="flex-1 flex flex-col items-center relative z-10 cursor-pointer"
             >
-              {/* Circle */}
               <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-3 transition-all duration-500 shadow-lg border-2 ${
-                isActive ? "bg-[#ffb900] border-white scale-115 ring-4 ring-[#ffb900]/30"
+                isActive ? "bg-[#ffb900] border-white scale-110 ring-4 ring-[#ffb900]/30"
                 : isDone  ? "bg-white/25 border-white/50"
                            : "bg-white/10 border-white/20"
               }`}>
@@ -262,20 +485,16 @@ function ApplySlider() {
                   : <step.icon size={26} className={isActive ? "text-[#00588b]" : "text-white/70"} />
                 }
               </div>
-              {/* Step # */}
-              <span className={`text-xs font-black tracking-widest mb-1 transition-colors ${isActive ? "text-[#ffb900]" : "text-white/40"}`}>
+              <span className={`text-xs font-black tracking-widest mb-1 ${isActive ? "text-[#ffb900]" : "text-white/40"}`}>
                 STEP {step.step}
               </span>
-              {/* Label */}
-              <span className={`text-xs font-bold text-center leading-tight px-1 transition-colors ${isActive ? "text-white" : "text-white/60"}`}>
+              <span className={`text-xs font-bold text-center leading-tight px-1 ${isActive ? "text-white" : "text-white/60"}`}>
                 {step.label}
               </span>
             </div>
           );
         })}
       </div>
-
-      {/* ── Active Card (Desktop) ── */}
       <div className="hidden md:block">
         {applySteps.map((step, idx) => idx === active ? (
           <div key={step.step}
@@ -288,7 +507,6 @@ function ApplySlider() {
             <div className="text-[#ffb900] font-black text-xs tracking-widest mb-2">STEP {step.step} OF {len}</div>
             <h3 className="text-white font-extrabold text-xl mb-3">{step.label}</h3>
             <p className="text-blue-100 text-sm leading-relaxed mb-6">{step.desc}</p>
-            {/* Mini progress bar */}
             <div className="w-full bg-white/20 rounded-full h-1.5 overflow-hidden">
               <div className="bg-[#ffb900] h-full rounded-full transition-all duration-500"
                 style={{ width:`${((active + 1) / len) * 100}%` }} />
@@ -298,12 +516,10 @@ function ApplySlider() {
         ) : null)}
       </div>
 
-      {/* ── Mobile Slider ── */}
+      {/* Mobile */}
       <div className="md:hidden">
         {applySteps.map((step, idx) => idx === active ? (
-          <div key={step.step}
-            className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-8 text-center"
-          >
+          <div key={step.step} className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-8 text-center">
             <div className="w-20 h-20 bg-[#ffb900] rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl">
               <step.icon size={32} className="text-[#00588b]" />
             </div>
@@ -314,7 +530,6 @@ function ApplySlider() {
         ) : null)}
       </div>
 
-      {/* ── Navigation ── */}
       <div className="flex items-center justify-center gap-5 mt-8">
         <button onClick={prev}
           className="w-11 h-11 rounded-full bg-white/10 border border-white/30 flex items-center justify-center text-white hover:bg-[#ffb900] hover:text-[#00588b] hover:border-[#ffb900] transition">
@@ -344,6 +559,10 @@ function ApplySlider() {
 
 // ── MAIN PAGE ─────────────────────────────────────────────────────────────────
 export default function BCACoursePage() {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  // Replace with your actual YouTube video ID
+  const YT_VIDEO_ID = "dQw4w9WgXcQ";
+
   return (
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden">
 
@@ -358,7 +577,6 @@ export default function BCACoursePage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-24 w-full">
           <div className="flex flex-col lg:flex-row items-center gap-14">
-            {/* Left */}
             <div className="flex-1">
               <span className="inline-flex items-center gap-2 bg-[#ffb900] text-[#00588b] text-xs font-extrabold uppercase px-4 py-1.5 rounded-full mb-6 tracking-widest shadow-lg">
                 <GraduationCap size={14} /> 3-Year Undergraduate Programme
@@ -379,7 +597,6 @@ export default function BCACoursePage() {
                   <Play size={18} /> Explore Programme
                 </a>
               </div>
-              {/* Quick stats */}
               <div className="flex flex-wrap gap-8 mt-12 pt-6 border-t border-white/20">
                 {[{ v:"3800+", l:"Placements" }, { v:"60L+", l:"Highest Pkg" }, { v:"10,000+", l:"Students Trust" }].map((s, i) => (
                   <div key={i}>
@@ -389,8 +606,6 @@ export default function BCACoursePage() {
                 ))}
               </div>
             </div>
-
-            {/* Right: Stats card */}
             <div className="flex-1 max-w-sm w-full">
               <div className="bg-white/10 backdrop-blur-md rounded-3xl p-7 border border-white/20 shadow-2xl">
                 <h3 className="text-[#ffb900] font-extrabold text-sm mb-5 text-center flex items-center justify-center gap-2">
@@ -412,8 +627,6 @@ export default function BCACoursePage() {
             </div>
           </div>
         </div>
-
-        {/* Wave */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg">
             <path d="M0,28 C360,56 1080,0 1440,28 L1440,56 L0,56 Z" fill="white"/>
@@ -477,83 +690,71 @@ export default function BCACoursePage() {
         </div>
       </section>
 
-      {/* ══════════════ COURSE STRUCTURE ══════════════ */}
-      <section className="max-w-7xl mx-auto px-4 py-20">
-        <SectionTitle subtitle="A well-structured curriculum designed for excellence">
-          Course Structure BCA
-        </SectionTitle>
-
-        <div className="bg-gradient-to-r from-[#00588b]/8 to-blue-50 border-l-4 border-[#00588b] rounded-r-2xl p-6 mb-10 text-sm text-gray-700 leading-relaxed">
-          <strong className="text-[#00588b]">Course Structure:</strong> The BCA programme is a comprehensive curriculum providing students with a solid foundation in computer science, spanning programming languages (C, C++, Java), data structures, database management, software engineering, web development, and computer networks.
+      {/* ══════════════ COURSE STRUCTURE — FULL WIDTH ══════════════ */}
+      <section className="w-full py-20">
+        <div className="max-w-7xl mx-auto px-4 mb-10">
+          <SectionTitle subtitle="A well-structured curriculum designed for excellence">
+            Course Structure BCA
+          </SectionTitle>
         </div>
 
-        <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-100 mb-10">
-          <table className="w-full text-sm min-w-[580px]">
-            <thead>
-              <tr className="bg-[#00588b] text-white">
-                <th className="px-5 py-3.5 text-left font-bold">Category</th>
-                <th className="px-5 py-3.5 text-left font-bold">Short Name</th>
-                <th className="px-5 py-3.5 text-left font-bold">Description</th>
-                <th className="px-5 py-3.5 text-center font-bold w-24">Credits</th>
-              </tr>
-            </thead>
-            <tbody>
-              {courseStructure.map((row, i) => (
-                <tr key={i} className={`${i % 2 === 0 ? "bg-white" : "bg-blue-50/40"} hover:bg-[#ffb900]/5 transition-colors`}>
-                  <td className="px-5 py-3 font-semibold text-[#00588b] text-xs">{row.category}</td>
-                  <td className="px-5 py-3 text-gray-500 text-xs">{row.shortName}</td>
-                  <td className="px-5 py-3 text-gray-700">{row.description}</td>
-                  <td className="px-5 py-3 text-center font-extrabold text-[#ffb900] text-base">{row.credits ?? "—"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        {/* Full-width accordion — no max-width container */}
+        <div className="px-4 md:px-8 lg:px-16">
+          <CourseAccordion />
         </div>
 
-        {/* Value Added */}
-        <div className="bg-gradient-to-r from-[#ffb900]/15 to-yellow-50 border border-[#ffb900]/50 rounded-2xl p-6 mb-10">
-          <h3 className="text-[#00588b] font-extrabold text-base mb-5 flex items-center gap-2">
-            <Star size={18} className="text-[#ffb900]" /> Value Added Courses for all UG (VAC) — Non Mandatory
-          </h3>
-          <div className="overflow-x-auto rounded-xl overflow-hidden shadow">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-[#00588b] text-white">
-                  <th className="px-4 py-2.5 text-left">Course Name</th>
-                  <th className="px-4 py-2.5 text-center w-24">Credits</th>
-                </tr>
-              </thead>
-              <tbody>
-                {valueAddedCourses.map((c, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-yellow-50"}>
-                    <td className="px-4 py-2.5 text-gray-700">{c.name}</td>
-                    <td className="px-4 py-2.5 text-center font-extrabold text-[#00588b]">{c.credits}</td>
+        {/* Value Added Courses */}
+        <div className="max-w-7xl mx-auto px-4 mt-10">
+          <div className="bg-gradient-to-r from-[#ffb900]/15 to-yellow-50 border border-[#ffb900]/50 rounded-2xl p-6">
+            <h3 className="text-[#00588b] font-extrabold text-base mb-5 flex items-center gap-2">
+              <Star size={18} className="text-[#ffb900]" /> Value Added Courses for all UG (VAC) — Non Mandatory
+            </h3>
+            <div className="overflow-x-auto rounded-xl overflow-hidden shadow">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-[#00588b] text-white">
+                    <th className="px-4 py-2.5 text-left">Course Name</th>
+                    <th className="px-4 py-2.5 text-center w-24">Credits</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {valueAddedCourses.map((c, i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-yellow-50"}>
+                      <td className="px-4 py-2.5 text-gray-700">{c.name}</td>
+                      <td className="px-4 py-2.5 text-center font-extrabold text-[#00588b]">{c.credits}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-
-        <p className="text-gray-500 text-sm mb-8 italic">
-          Graduates of BCA are well prepared for diverse career specialization in the IT industry, including roles such as software developers, system analysts, IT consultants, database administrators, and cybersecurity professionals.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-3">
-          {semesters.map(sem => <AccordionItem key={sem} title={sem} />)}
         </div>
       </section>
 
       {/* ══════════════ DEPT SLIDER — BG2 ══════════════ */}
-      <section
-        className="relative py-20"
-        style={{ backgroundImage:`url(${BG2})`, backgroundSize:"cover", backgroundPosition:"center" }}
-      >
-        <div className="absolute inset-0 bg-white/93" />
+      <section className="relative py-24 overflow-hidden" style={{ background:"#f4f2ed" }}>
+        {/* Subtle bg watermark */}
+        <div className="absolute inset-0 opacity-[0.06]"
+          style={{ backgroundImage:`url(${BG1})`, backgroundSize:"cover", backgroundPosition:"center", filter:"grayscale(60%)" }} />
+        {/* Decorative watermark icons */}
+        <div className="absolute -left-12 top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
+          <Building2 size={320} className="text-[#00588b]" />
+        </div>
+        <div className="absolute -right-12 top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
+          <Star size={260} className="text-[#ffb900]" />
+        </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4">
-          <SectionTitle subtitle="Discover what makes our department exceptional">
-            Explore Our Department
-          </SectionTitle>
+          <div className="text-center mb-14">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[#00588b] mb-3">
+              Explore Our Department
+            </h2>
+            <p className="text-gray-500 text-sm">Discover what makes our department exceptional</p>
+            <div className="flex justify-center gap-1 mt-4">
+              <div className="h-1 w-14 rounded-full bg-[#ffb900]" />
+              <div className="h-1 w-5 rounded-full bg-[#00588b]" />
+              <div className="h-1 w-2 rounded-full bg-[#ffb900]" />
+            </div>
+          </div>
           <DeptSlider />
         </div>
       </section>
@@ -583,17 +784,25 @@ export default function BCACoursePage() {
                 </div>
               ))}
             </div>
-            {/* Video */}
+
+            {/* ── VIDEO THUMBNAIL WITH RIPPLE PLAY BUTTON ── */}
             <div
-              className="relative rounded-2xl overflow-hidden aspect-video shadow-xl cursor-pointer group"
-              style={{ backgroundImage:`url(${BG1})`, backgroundSize:"cover", backgroundPosition:"center" }}
+              className="relative rounded-2xl overflow-hidden shadow-xl cursor-pointer group"
+              style={{
+                backgroundImage:`url(${CAMPUS_IMG})`,
+                backgroundSize:"cover",
+                backgroundPosition:"center",
+                aspectRatio:"16/9"
+              }}
+              onClick={() => setLightboxOpen(true)}
             >
-              <div className="absolute inset-0 bg-[#00588b]/70 group-hover:bg-[#00588b]/60 transition" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                <div className="w-16 h-16 bg-[#ffb900] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl">
-                  <Play size={28} className="text-[#00588b] ml-1" />
-                </div>
-                <p className="text-blue-100 text-sm">Watch Admission Process Video</p>
+              {/* Dark overlay */}
+              <div className="absolute inset-0 bg-[#00588b]/65 group-hover:bg-[#00588b]/55 transition-all duration-300" />
+
+              {/* Ripple play button centered */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                <PlayButtonRipple onClick={() => setLightboxOpen(true)} />
+             
               </div>
             </div>
           </div>
@@ -628,7 +837,6 @@ export default function BCACoursePage() {
         <div className="absolute inset-0 bg-[#00588b]/93" />
         <div className="relative z-10 max-w-7xl mx-auto px-4">
           <SectionTitle light subtitle="Scholarship for Session 2026-27">Scholarship Criteria</SectionTitle>
-
           <div className="bg-white rounded-2xl overflow-hidden shadow-2xl mb-8">
             <div className="bg-[#ffb900] px-5 py-3 font-extrabold text-[#00588b] flex items-center gap-2">
               <Award size={18} /> Scholarship on Tuition Fees
@@ -662,7 +870,6 @@ export default function BCACoursePage() {
               </table>
             </div>
           </div>
-
           <div className="bg-white/10 backdrop-blur rounded-2xl border border-white/20 p-6">
             <h4 className="font-extrabold text-[#ffb900] mb-4 flex items-center gap-2">
               <Info size={18} /> Notes:
@@ -734,15 +941,12 @@ export default function BCACoursePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#00588b]/97 via-[#004e7c]/96 to-[#002f4d]/95" />
         <div className="absolute inset-0 opacity-[0.05]"
           style={{ backgroundImage:"radial-gradient(#fff 1.5px,transparent 1.5px)", backgroundSize:"30px 30px" }} />
-
         <div className="relative z-10 max-w-5xl mx-auto px-4">
           <SectionTitle light subtitle="Simple 5-step process to join the BCA programme">
             How to Apply
           </SectionTitle>
           <p className="text-blue-200 text-center text-sm -mt-6 mb-12">Guide to Register Online</p>
-
           <ApplySlider />
-
           <div className="text-center mt-14">
             <a href="#" className="inline-flex items-center gap-2 bg-[#ffb900] text-[#00588b] font-extrabold text-base px-10 py-4 rounded-full shadow-2xl hover:bg-yellow-300 hover:scale-105 transition-all">
               Start Your Application <ArrowRight size={20} />
@@ -751,6 +955,14 @@ export default function BCACoursePage() {
         </div>
       </section>
 
+
+      {/* ══════════════ YOUTUBE LIGHTBOX ══════════════ */}
+      {lightboxOpen && (
+        <YouTubeLightbox
+          videoId={YT_VIDEO_ID}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
     </div>
   );
 }
