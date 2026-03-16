@@ -114,7 +114,7 @@ export default function Footer() {
       </footer>
 
       {/* FLOATING BUTTONS */}
-      <div className="fixed bottom-6 right-6 flex flex-col gap-4 z-[9999]">
+      {/* <div className="fixed bottom-6 right-6 flex flex-col gap-4 z-[9999]">
         {FOOTER_DATA.floatingButtons.map((btn, i) => {
           const Icon = IconMap[btn.icon];
           return (
@@ -123,7 +123,7 @@ export default function Footer() {
             </a>
           );
         })}
-      </div>
+      </div> */}
     </>
   );
 }
