@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { ZoomIn, X, ChevronLeft, ChevronRight } from "lucide-react";
+import StructuredTitle from "@/components/common/StructuredTitle";
 
 export default function SchoolCommunity({ data }) {
   const [lightboxIdx, setLightboxIdx] = useState(null);
@@ -15,16 +16,18 @@ export default function SchoolCommunity({ data }) {
             {label}
           </span>
           <h2 className="font-black mt-1 text-[#0a1628]" style={{ fontSize: "clamp(1.8rem,3.5vw,2.8rem)" }}>
-            {title.main.split(title.highlight)[0]}
-            <span className="text-[#00588b]">{title.highlight}</span>
-            {title.main.split(title.highlight)[1]}
+            <StructuredTitle title={title} highlightClass="text-[#00588b]" />
           </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="space-y-4">
             {description?.map((p, i) => (
-              <p key={i} className="text-base leading-relaxed text-slate-500 text-justify">{p}</p>
+              <div 
+                key={i} 
+                className="text-base leading-relaxed text-slate-500 prose prose-slate prose-sm max-w-none"
+                dangerouslySetInnerHTML={{ __html: p }}
+              />
             ))}
           </div>
 

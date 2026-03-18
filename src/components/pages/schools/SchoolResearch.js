@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import * as LucideIcons from "lucide-react";
+import StructuredTitle from "@/components/common/StructuredTitle";
 
 export default function SchoolResearch({ data }) {
   if (!data) return null;
@@ -14,9 +15,7 @@ export default function SchoolResearch({ data }) {
             {label}
           </span>
           <h2 className="font-black text-white mt-1" style={{ fontSize: "clamp(1.8rem,3.5vw,2.8rem)" }}>
-            {title.main.split(title.highlight)[0]}
-            <span className="text-[#ffb900]">{title.highlight}</span>
-            {title.main.split(title.highlight)[1]}
+            <StructuredTitle title={title} highlightClass="text-[#ffb900]" />
           </h2>
         </div>
 

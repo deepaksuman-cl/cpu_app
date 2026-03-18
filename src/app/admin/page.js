@@ -1,7 +1,7 @@
 // File: src/app/admin/page.js (Testing ke liye)
 'use client';
-import { useState } from 'react';
 import RichTextEditor from '@/components/admin/RichTextEditor';
+import { useState } from 'react';
 
 export default function AdminDashboard() {
   const [content, setContent] = useState('');
@@ -14,7 +14,7 @@ export default function AdminDashboard() {
       <RichTextEditor 
         value={content} 
         onChange={setContent} 
-        placeholder="Write your course description here..."
+        placeholder="Write your Content here..."
       />
 
       {/* Ye dikhayega ki background me data kaisa save hota hai */}

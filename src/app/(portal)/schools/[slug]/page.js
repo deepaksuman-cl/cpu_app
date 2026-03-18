@@ -1,56 +1,67 @@
-import SchoolAbout from "@/components/pages/schools/SchoolAbout";
-import SchoolAlumni from "@/components/pages/schools/SchoolAlumni";
-import SchoolCommunity from "@/components/pages/schools/SchoolCommunity";
-import SchoolHero from "@/components/pages/schools/SchoolHero";
-import SchoolInfrastructure from "@/components/pages/schools/SchoolInfrastructure";
-import SchoolPartners from "@/components/pages/schools/SchoolPartners";
-import SchoolPlacements from "@/components/pages/schools/SchoolPlacements";
-import SchoolProgrammes from "@/components/pages/schools/SchoolProgrammes";
-import SchoolResearch from "@/components/pages/schools/SchoolResearch";
-import SchoolStats from "@/components/pages/schools/SchoolStats";
-import SchoolTestimonials from "@/components/pages/schools/SchoolTestimonials";
+import { notFound } from 'next/navigation';
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import schoolsData from "@/data/schoolsData.json";
+import SchoolHero from "@/components/pages/schools/SchoolHero";
+import SchoolStats from "@/components/pages/schools/SchoolStats";
+import SchoolAbout from "@/components/pages/schools/SchoolAbout";
+import SchoolProgrammes from "@/components/pages/schools/SchoolProgrammes";
+import SchoolPlacements from "@/components/pages/schools/SchoolPlacements";
+import SchoolAlumni from "@/components/pages/schools/SchoolAlumni";
+import SchoolPartners from "@/components/pages/schools/SchoolPartners";
+import SchoolExploreDepartment from "@/components/pages/schools/SchoolExploreDepartment";
+import SchoolResearch from "@/components/pages/schools/SchoolResearch";
+import SchoolCommunity from "@/components/pages/schools/SchoolCommunity";
+import SchoolInfrastructure from "@/components/pages/schools/SchoolInfrastructure";
+import SchoolTestimonials from "@/components/pages/schools/SchoolTestimonials";
+import { getSchoolBySlug } from "@/lib/actions/schoolActions";
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const { data: school } = await getSchoolBySlug(slug);
+
+  return {
+    title: school?.metaTitle || `${school?.name || 'School'} | CP University`,
+    description: school?.metaDescription || `Explore programs and campus life at ${school?.name || 'CP University'}.`,
+  };
+}
 
 export default async function SchoolPage({ params }) {
   const resolvedParams = await params;
   const currentSlug = resolvedParams.slug;
-  const data = schoolsData[currentSlug];
 
-  if (!data) {
-    return (
-      <div className="flex flex-col h-screen items-center justify-center bg-gray-50 p-10 text-center">
-        <h1 className="text-3xl font-bold text-red-600 mb-4">🚨 Error: School Not Found!</h1>
-        <p className="text-lg mb-6">The school slug <strong className="bg-yellow-200 px-2">{currentSlug}</strong> is not defined in our data.</p>
-        <a href="/" className="bg-[#00588b] text-white px-6 py-2 rounded-lg font-bold">Go Back Home</a>
-      </div>
-    );
+  // Fetch only from DB
+  const { data: school } = await getSchoolBySlug(currentSlug);
+
+  if (!school) {
+    notFound();
   }
 
+  // Render components using structured fields
   return (
     <main className="min-h-screen bg-white">
-     <Breadcrumb paths={data.breadcrumb} />
+      <Breadcrumb paths={school.breadcrumb || [
+        { label: "Home", link: "/" },
+        { label: "Schools & Departments", link: "/schools" },
+        { label: school.name || school.hero?.title?.main, link: `/schools/${currentSlug}` }
+      ]} />
+      
+      {school.hero && <SchoolHero data={school.hero} />}
+      {school.stats && <SchoolStats data={school.stats} />}
+      {school.about && <SchoolAbout data={school.about} />}
+      
+      {/* Programmes section links to courses, uses school.programmes header data */}
+      {school.programmes && (
+        <SchoolProgrammes data={school.programmes} schoolSlug={currentSlug} />
+      )}
 
-      {/* Modularized Sections */}
-      <SchoolHero data={data.hero} />
-      <SchoolStats data={data.stats} />
-      <SchoolAbout data={data.about} />
-      <SchoolProgrammes data={data.programmes}  schoolSlug={currentSlug}/>
-      <SchoolPlacements data={data.placements} />
-      <SchoolAlumni data={data.alumni} />
-      <SchoolPartners data={data.industry} />
-      <SchoolResearch data={data.research} />
-      <SchoolCommunity data={data.community} />
-      <SchoolInfrastructure data={data.infrastructure} />
-      <SchoolTestimonials data={data.testimonials} />
-
-      {/* Custom Section Rendering (CMS-ready) */}
-      {data.customSections?.map((section, idx) => (
-        <section key={idx} className={`${section.bgClass} p-10 my-5 border-l-4 ${section.borderClass}`}>
-           <h2 className="text-3xl font-bold">{section.title}</h2>
-           <p>{section.content}</p>
-        </section>
-      ))}
+      {school.placements && <SchoolPlacements data={school.placements} />}
+      {school.alumni && <SchoolAlumni data={school.alumni} />}
+      {school.industry && <SchoolPartners data={school.industry} />}
+      {school.research && <SchoolResearch data={school.research} />}
+      {school.community && <SchoolCommunity data={school.community} />}
+      {school.infrastructure && <SchoolInfrastructure data={school.infrastructure} />}
+      {school.testimonials && <SchoolTestimonials data={school.testimonials} />}
+      {school.exploreDepartment && <SchoolExploreDepartment data={school.exploreDepartment} />}
     </main>
   );
 }
+

@@ -1,15 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Star, CheckCircle, Plus, Minus, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { Building2, FlaskConical } from "lucide-react";
-
-const ICON_MAP = { Building2, FlaskConical, Star };
+import * as LucideIcons from "lucide-react";
+import { Star, CheckCircle, Plus, Minus, ChevronDown, ChevronLeft, ChevronRight, Building2, FlaskConical } from "lucide-react";
+import StructuredTitle from "@/components/common/StructuredTitle";
 
 /* ── Shared Section Title ── */
 function SectionTitle({ children, subtitle, center = true }) {
   return (
     <div className={`mb-10 ${center ? "text-center" : ""}`}>
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-[#00588b]">{children}</h2>
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-[#00588b]">
+        <StructuredTitle title={children} />
+      </h2>
       {subtitle && (
         <p className={`text-sm max-w-2xl ${center ? "mx-auto" : ""} text-gray-500`}>{subtitle}</p>
       )}
@@ -30,12 +31,13 @@ function CourseAccordion({ sections, courseStructure }) {
   return (
     <div className="w-full border border-gray-200 rounded-2xl overflow-hidden shadow-lg">
       {sections.map((section, idx) => {
-        const isOpen = openId === section.id;
+        const sectionKey = section.id || `sem-${idx}`;
+        const isOpen = openId === sectionKey;
         return (
-          <div key={section.id} className={idx !== 0 ? "border-t border-gray-200" : ""}>
+          <div key={sectionKey} className={idx !== 0 ? "border-t border-gray-200" : ""}>
             {/* Header */}
             <button
-              onClick={() => toggle(section.id)}
+              onClick={() => toggle(sectionKey)}
               className={`w-full flex items-center justify-between px-6 py-4 text-left transition-all duration-200 ${
                 isOpen ? "bg-[#00588b] text-white" : "bg-white hover:bg-blue-50 text-gray-800"
               }`}
@@ -62,9 +64,13 @@ function CourseAccordion({ sections, courseStructure }) {
             {/* Body */}
             {isOpen && (
               <div className="bg-white border-t border-gray-100 px-6 py-6">
-                {section.content.split("\n\n").map((para, i) => (
-                  <p key={i} className="text-gray-700 text-sm leading-relaxed mb-4">{para}</p>
-                ))}
+                {typeof section.content === 'string' && section.content.includes('<') ? (
+                  <div className="text-gray-700 text-sm leading-relaxed prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: section.content }} />
+                ) : (
+                  section.content?.toString().split("\n\n").map((para, i) => (
+                    <p key={i} className="text-gray-700 text-sm leading-relaxed mb-4">{para}</p>
+                  ))
+                )}
 
                 {/* Embedded table for Course Structure row */}
                 {section.hasTable && courseStructure && (
@@ -120,7 +126,7 @@ function DeptSlider({ slides }) {
           const isActive = idx === active;
           const isHov    = hovered === idx;
           const highlight = isActive || isHov;
-          const Icon = ICON_MAP[slide.icon] || Building2;
+          const Icon = LucideIcons[slide.icon] || Building2;
           return (
             <div
               key={slide.title}
@@ -228,6 +234,12 @@ export function CourseCurriculum({ data }) {
     <section className="w-full py-20">
       <div className="max-w-7xl mx-auto px-4 mb-10">
         <SectionTitle subtitle={data.subtitle}>{data.sectionTitle}</SectionTitle>
+        {data.introNote && (
+          <div 
+            className="mt-6 text-gray-600 leading-relaxed text-sm prose prose-sm max-w-none"
+            dangerouslySetInnerHTML={{ __html: data.introNote }}
+          />
+        )}
       </div>
 
       {/* Full-width accordion */}
@@ -238,34 +250,51 @@ export function CourseCurriculum({ data }) {
         />
       </div>
 
-      {/* Value Added Courses */}
-      {data.valueAddedCourses && (
-        <div className="max-w-7xl mx-auto px-4 mt-10">
-          <div className="bg-gradient-to-r from-[#ffb900]/15 to-yellow-50 border border-[#ffb900]/50 rounded-2xl p-6">
-            <h3 className="text-[#00588b] font-extrabold text-base mb-5 flex items-center gap-2">
-              <Star size={18} className="text-[#ffb900]" /> Value Added Courses for all UG (VAC) — Non Mandatory
+      {/* Value Added Courses and Outro Note */}
+      <div className="max-w-7xl mx-auto px-4 mt-12 space-y-10">
+        {data.outroNote && (
+          <div 
+            className="text-gray-600 leading-relaxed text-sm prose prose-sm max-w-none border-t border-gray-100 pt-8"
+            dangerouslySetInnerHTML={{ __html: data.outroNote }}
+          />
+        )}
+        {data.valueAddedCourses && data.valueAddedCourses.length > 0 && (
+          <div className="bg-gradient-to-br from-[#00588b]/5 via-white to-[#ffb900]/5 border border-[#00588b]/10 rounded-3xl p-8 shadow-xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#ffb900]/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-[#ffb900]/20 transition-colors" />
+            <h3 className="text-[#00588b] font-black text-xl mb-8 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#ffb900] flex items-center justify-center shadow-lg shadow-[#ffb900]/20">
+                <Star size={20} className="text-[#00588b]" />
+              </div>
+              Value Added Courses for all UG (VAC) — Non Mandatory
             </h3>
-            <div className="overflow-x-auto rounded-xl overflow-hidden shadow">
+            <div className="overflow-x-auto rounded-2xl border border-gray-100 shadow-sm">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-[#00588b] text-white">
-                    <th className="px-4 py-2.5 text-left">Course Name</th>
-                    <th className="px-4 py-2.5 text-center w-24">Credits</th>
+                    <th className="px-6 py-4 text-left font-black uppercase tracking-wider">Course Name</th>
+                    <th className="px-6 py-4 text-left font-black uppercase tracking-wider">Category</th>
+                    <th className="px-6 py-4 text-center w-24 font-black uppercase tracking-wider">Credits</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-gray-100 bg-white">
                   {data.valueAddedCourses.map((c, i) => (
-                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-yellow-50"}>
-                      <td className="px-4 py-2.5 text-gray-700">{c.name}</td>
-                      <td className="px-4 py-2.5 text-center font-extrabold text-[#00588b]">{c.credits}</td>
+                    <tr key={i} className="hover:bg-blue-50/50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="font-bold text-gray-900">{c.name}</div>
+                        {c.description && <div className="text-[11px] text-gray-500 mt-0.5 italic">{c.description}</div>}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="px-3 py-1 bg-blue-100 text-[#00588b] text-[10px] font-black rounded-full uppercase tracking-widest">{c.category || 'VAC'}</span>
+                      </td>
+                      <td className="px-6 py-4 text-center font-black text-[#ffb900] text-lg">{c.credits}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }
@@ -295,7 +324,9 @@ export function CourseDeptSlider({ data, slides }) {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4">
         <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#00588b] mb-3">{sectionTitle}</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#00588b] mb-3">
+            <StructuredTitle title={sectionTitle} />
+          </h2>
           <p className="text-gray-500 text-sm">{subtitle}</p>
           <div className="flex justify-center gap-1 mt-4">
             <div className="h-1 w-14 rounded-full bg-[#ffb900]" />

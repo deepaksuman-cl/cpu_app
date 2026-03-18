@@ -1,18 +1,20 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import * as LucideIcons from "lucide-react";
 import {
   UserCheck, FileText, ClipboardList, IndianRupee, BadgeCheck,
   CheckCircle, ChevronLeft, ChevronRight, ArrowRight,
 } from "lucide-react";
 
-const ICON_MAP = {
-  UserCheck, FileText, ClipboardList, IndianRupee, BadgeCheck,
-};
+import StructuredTitle from "@/components/common/StructuredTitle";
+
 
 function SectionTitle({ children, subtitle }) {
   return (
     <div className="mb-10 text-center">
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">{children}</h2>
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">
+        <StructuredTitle title={children} highlightClass="text-[#ffb900]" />
+      </h2>
       {subtitle && <p className="text-sm max-w-2xl mx-auto text-blue-200">{subtitle}</p>}
       <div className="flex gap-1 mt-3 justify-center">
         <div className="h-1 w-14 rounded-full bg-[#ffb900]" />
@@ -44,7 +46,7 @@ function ApplySlider({ steps }) {
         {steps.map((step, idx) => {
           const isActive = idx === active;
           const isDone = idx < active;
-          const Icon = ICON_MAP[step.icon] || FileText;
+          const Icon = LucideIcons[step.icon] || FileText;
           return (
             <div
               key={step.step}
@@ -82,7 +84,7 @@ function ApplySlider({ steps }) {
       <div className="hidden md:block">
         {steps.map((step, idx) => {
           if (idx !== active) return null;
-          const Icon = ICON_MAP[step.icon] || FileText;
+          const Icon = LucideIcons[step.icon] || FileText;
           return (
             <div
               key={step.step}
@@ -112,7 +114,7 @@ function ApplySlider({ steps }) {
       <div className="md:hidden">
         {steps.map((step, idx) => {
           if (idx !== active) return null;
-          const Icon = ICON_MAP[step.icon] || FileText;
+          const Icon = LucideIcons[step.icon] || FileText;
           return (
             <div key={step.step} className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-8 text-center">
               <div className="w-20 h-20 bg-[#ffb900] rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl">

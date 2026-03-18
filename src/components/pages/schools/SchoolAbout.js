@@ -2,6 +2,7 @@
 import React from "react";
 import * as LucideIcons from "lucide-react";
 import { ChevronRight } from "lucide-react";
+import StructuredTitle from "@/components/common/StructuredTitle";
 
 export default function SchoolAbout({ data }) {
   if (!data) return null;
@@ -24,13 +25,16 @@ export default function SchoolAbout({ data }) {
               </div>
               <div>
                 <p className="text-xs font-bold tracking-widest uppercase text-[#ffb900]">{vision.label}</p>
-                <h3 className="font-black text-white text-2xl" style={{ fontFamily: "Georgia,serif" }}>{vision.title}</h3>
+                <h3 className="font-black text-white text-2xl" style={{ fontFamily: "Georgia,serif" }}>
+                  <StructuredTitle title={vision.title} highlightClass="text-sky-300" />
+                </h3>
               </div>
             </div>
             <div className="w-12 h-1 rounded-full mb-6 bg-gradient-to-r from-[#ffb900] to-orange-500" />
-            <p className="text-base leading-relaxed text-white/75">
-              {vision.text}
-            </p>
+            <div 
+              className="text-base leading-relaxed text-white/75 prose prose-invert prose-sm max-w-none"
+              dangerouslySetInnerHTML={{ __html: vision.text }}
+            />
             <div className="flex flex-wrap gap-3 mt-8">
               {vision.highlights?.map((h, i) => (
                 <div key={i} className="rounded-xl px-4 py-2 text-center bg-white/7 border border-white/12">
@@ -52,20 +56,16 @@ export default function SchoolAbout({ data }) {
               </div>
               <div>
                 <p className="text-xs font-bold tracking-widest uppercase text-[#00588b]">{mission.label}</p>
-                <h3 className="font-black text-2xl text-[#0a1628]" style={{ fontFamily: "Georgia,serif" }}>{mission.title}</h3>
+                <h3 className="font-black text-2xl text-[#0a1628]" style={{ fontFamily: "Georgia,serif" }}>
+                  <StructuredTitle title={mission.title} highlightClass="text-[#00588b]" />
+                </h3>
               </div>
             </div>
             <div className="w-12 h-1 rounded-full mb-6 bg-gradient-to-r from-[#00588b] to-[#007abf]" />
-            <ul className="space-y-3">
-              {mission.points?.map((pt, j) => (
-                <li key={j} className="flex items-start gap-3 text-sm leading-relaxed text-slate-600">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 bg-[#00588b]/10">
-                    <ChevronRight className="w-3 h-3 text-[#00588b]" />
-                  </div>
-                  {pt}
-                </li>
-              ))}
-            </ul>
+            <div 
+              className="text-sm leading-relaxed text-slate-600 prose prose-sm max-w-none"
+              dangerouslySetInnerHTML={{ __html: mission.points?.join('') }}
+            />
           </div>
         </div>
       </div>

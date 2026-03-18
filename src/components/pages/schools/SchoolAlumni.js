@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import StructuredTitle from "@/components/common/StructuredTitle";
 
 export default function SchoolAlumni({ data }) {
   const [active, setActive] = useState(0);
@@ -31,9 +32,7 @@ export default function SchoolAlumni({ data }) {
             {label}
           </span>
           <h2 className="font-black mt-1 text-[#0a1628]" style={{ fontSize: "clamp(1.8rem,3.5vw,2.8rem)" }}>
-            {title.main.split(title.highlight)[0]}
-            <span className="text-[#00588b]">{title.highlight}</span>
-            {title.main.split(title.highlight)[1]}
+            <StructuredTitle title={title} highlightClass="text-[#00588b]" />
           </h2>
         </div>
 

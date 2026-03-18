@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import * as LucideIcons from 'lucide-react';
-import { Search, X, Check, HelpCircle } from 'lucide-react';
+import { Search, HelpCircle } from 'lucide-react';
 
 // Extract valid icon names more robustly
 const allIconNames = Object.keys(LucideIcons).filter(name => {
@@ -31,38 +31,46 @@ export default function IconPicker({ value, onChange }) {
 
   return (
     <div className="relative">
+      {/* Trigger Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-xl hover:border-[#fec53a] transition-all w-full text-left group shadow-sm focus:ring-2 focus:ring-[#fec53a]/20 outline-none"
+        className="flex items-center gap-3 px-3 py-2 bg-white border border-gray-300 hover:border-[#00588b] transition-colors w-full text-left group shadow-sm focus:outline-none focus:border-[#00588b] focus:ring-1 focus:ring-[#00588b]"
       >
-        <div className="p-2 bg-gray-50 rounded-lg text-gray-700 group-hover:text-[#fec53a] transition-colors">
-          <SelectedIcon size={20} />
+        <div className="p-1.5 bg-gray-50 text-gray-700 group-hover:text-[#00588b] transition-colors border border-gray-200">
+          <SelectedIcon size={18} />
         </div>
-        <span className="text-sm font-bold text-gray-700">{value || 'Select Icon'}</span>
+        <span className="text-sm font-semibold text-gray-700 flex-1 truncate">
+          {value || 'Select Icon'}
+        </span>
       </button>
 
+      {/* Dropdown Menu */}
       {isOpen && (
         <>
           {/* Backdrop to close */}
           <div className="fixed inset-0 z-[90]" onClick={() => setIsOpen(false)} />
           
-          <div className="absolute z-[100] mt-2 left-0 right-0 md:w-80 bg-white border border-gray-100 rounded-2xl shadow-2xl p-4 animate-in fade-in zoom-in-95 duration-200">
-            <div className="relative mb-4">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+          {/* 🔴 FIX: Changed left-0 to right-0, added top-full, and set a fixed safe width */}
+          <div className="absolute z-[100] top-full mt-1 right-0 w-[280px] bg-white border border-gray-300 shadow-xl p-3 animate-in fade-in zoom-in-95 duration-200 origin-top-right">
+            
+            {/* Search Input */}
+            <div className="relative mb-3">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
               <input
                 type="text"
-                placeholder="Search 1000+ icons..."
+                placeholder="Search icons..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 autoComplete="off"
-                className="w-full bg-gray-50 border border-gray-100 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-[#fec53a] outline-none"
+                className="w-full bg-white border border-gray-300 pl-8 pr-3 py-2 text-sm focus:outline-none focus:border-[#00588b] focus:ring-1 focus:ring-[#00588b] transition-colors"
                 autoFocus
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
 
-            <div className="grid grid-cols-5 gap-2 max-h-64 overflow-y-auto pr-2 custom-scroll scrollbar-thin scrollbar-thumb-[#fec53a]">
+            {/* Icons Grid */}
+            <div className="grid grid-cols-5 gap-1 max-h-60 overflow-y-auto pr-1 custom-scroll scrollbar-thin scrollbar-thumb-gray-300">
               {filteredIcons.map((name) => {
                 const Icon = LucideIcons[name];
                 const isSelected = value === name;
@@ -77,27 +85,26 @@ export default function IconPicker({ value, onChange }) {
                       setIsOpen(false);
                       setSearchTerm('');
                     }}
-                    className={`p-2 rounded-lg flex items-center justify-center transition-all ${
+                    className={`p-2 flex items-center justify-center transition-colors border ${
                       isSelected 
-                        ? 'bg-[#fec53a] text-[#00588b] ring-2 ring-[#fec53a]/20' 
-                        : 'hover:bg-gray-100 text-gray-500 hover:text-gray-900'
+                        ? 'bg-[#fec53a] border-[#fec53a] text-[#00588b]' 
+                        : 'bg-transparent border-transparent hover:bg-gray-100 text-gray-600 hover:text-gray-900'
                     }`}
                   >
-                    <Icon size={20} />
+                    <Icon size={18} />
                   </button>
                 );
               })}
             </div>
 
+            {/* Empty State */}
             {filteredIcons.length === 0 && (
-              <div className="text-center py-10">
-                <div className="bg-gray-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Search size={20} className="text-gray-300" />
-                </div>
-                <p className="text-sm font-bold text-gray-400">No icons for "{searchTerm}"</p>
+              <div className="text-center py-8 border border-dashed border-gray-300 mt-2 bg-gray-50">
+                <Search size={18} className="text-gray-400 mx-auto mb-2" />
+                <p className="text-xs font-semibold text-gray-500">No icons found for "{searchTerm}"</p>
                 <button 
                   onClick={() => setSearchTerm('')}
-                  className="mt-2 text-xs text-blue-600 font-bold hover:underline"
+                  className="mt-2 text-xs text-[#00588b] font-bold hover:underline"
                 >
                   Clear search
                 </button>

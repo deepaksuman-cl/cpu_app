@@ -6,7 +6,7 @@ import {
   LayoutDashboard, PanelTop, Globe, Phone, Monitor, Layout, Smartphone,
   Database, FileText, ImageIcon, GraduationCap, Scale, Briefcase, 
   ShieldCheck, Users, Key, Settings, BookOpen, ChevronDown,
-  PanelLeftClose, PanelLeftOpen, CornerDownRight
+  PanelLeftClose, PanelLeftOpen, CornerDownRight, Building, Library
 } from 'lucide-react';
 
 const SIDEBAR_MENUS = [
@@ -37,20 +37,17 @@ const SIDEBAR_MENUS = [
     ]
   },
   {
-    category: 'ACADEMIC MANAGEMENT',
+    category: 'ACADEMICS',
     items: [
       { 
-        name: 'Schools & Faculties', 
-        icon: Briefcase, 
+        name: 'Academics', 
+        icon: Building, 
         isCollapsible: true,
         subItems: [
-          { name: 'School of Engineering', href: '/admin/schools/engineering' },
-          { name: 'School of Law', href: '/admin/schools/law' },
-          { name: 'School of Commerce', href: '/admin/schools/commerce' },
-          { name: 'Basic & Applied Sciences', href: '/admin/schools/sciences' },
+          { name: 'School Management', href: '/admin/schools' },
+          { name: 'Course Management', href: '/admin/courses' },
         ]
-      },
-      { name: 'All Programs', href: '/admin/programs', icon: BookOpen },
+      }
     ]
   },
   {

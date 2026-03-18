@@ -1,6 +1,5 @@
 "use client";
-import { ArrowRight, MapPin, Phone, Mail, ExternalLink, GraduationCap, ChevronRight, Facebook, Instagram, Youtube, Twitter, Linkedin } from "lucide-react";
-import Image from "next/image";
+import { ChevronRight, Facebook, GraduationCap, Instagram, Linkedin, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react";
 import FOOTER_DATA from "../../data/footer.json";
 
 const IconMap = {

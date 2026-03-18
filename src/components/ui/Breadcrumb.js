@@ -19,7 +19,7 @@ export default function Breadcrumb({ paths }) {
                 // Last item is plain text (not a link) because we are already on this page
                 <span className="flex items-center gap-1.5 font-bold text-slate-800">
                   {index === 0 && <Home className="w-3.5 h-3.5" />}
-                  {item.label}
+                  {typeof item.label === 'object' ? item.label.main : item.label}
                 </span>
               ) : (
                 // Previous items are clickable links
@@ -28,7 +28,7 @@ export default function Breadcrumb({ paths }) {
                   className="flex items-center gap-1.5 font-medium no-underline hover:text-blue-800 text-[#00588b] transition-colors"
                 >
                   {index === 0 && <Home className="w-3.5 h-3.5" />}
-                  {item.label}
+                  {typeof item.label === 'object' ? item.label.main : item.label}
                 </Link>
               )}
               

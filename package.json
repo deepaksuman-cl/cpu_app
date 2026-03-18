@@ -9,10 +9,7 @@
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
-    "@tiptap/extension-link": "^3.20.2",
-    "@tiptap/extension-underline": "^3.20.2",
-    "@tiptap/react": "^3.20.2",
-    "@tiptap/starter-kit": "^3.20.2",
+    "@tinymce/tinymce-react": "^6.3.0",
     "cloudflared": "^0.7.1",
     "lucide-react": "^0.577.0",
     "mongoose": "^9.3.0",

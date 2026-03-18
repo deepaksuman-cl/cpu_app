@@ -1,16 +1,20 @@
 "use client";
 import React from "react";
+import * as LucideIcons from "lucide-react";
 import {
   TrendingUp, Briefcase, BookOpen, Target, Brain,
   Users, Globe, Building2,
 } from "lucide-react";
 
-const ICON_MAP = { TrendingUp, Briefcase, BookOpen, Target, Brain, Users, Globe, Building2 };
+import StructuredTitle from "@/components/common/StructuredTitle";
+
 
 function SectionTitle({ children, subtitle }) {
   return (
     <div className="mb-10 text-center">
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-[#00588b]">{children}</h2>
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-[#00588b]">
+        <StructuredTitle title={children} />
+      </h2>
       {subtitle && <p className="text-sm max-w-2xl mx-auto text-gray-500">{subtitle}</p>}
       <div className="flex gap-1 mt-3 justify-center">
         <div className="h-1 w-14 rounded-full bg-[#ffb900]" />
@@ -30,7 +34,7 @@ export default function CourseWhyJoin({ data }) {
       <SectionTitle subtitle={subtitle}>{sectionTitle}</SectionTitle>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {reasons?.map((reason, i) => {
-          const Icon = ICON_MAP[reason.icon] || Brain;
+          const Icon = LucideIcons[reason.icon] || Brain;
           return (
             <div
               key={i}

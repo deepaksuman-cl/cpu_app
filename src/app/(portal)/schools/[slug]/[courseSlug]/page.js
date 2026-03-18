@@ -1,38 +1,39 @@
-"use client";
-
-import { use } from "react";
-import schoolsData from "@/data/schoolsData.json";
+// Course detail page - DB-first with static JSON fallback
+import Breadcrumb from "@/components/ui/Breadcrumb";
 import { notFound } from "next/navigation";
 
-// UI
-import Breadcrumb from "@/components/ui/Breadcrumb";
-
-// Shared School components (now powered by children prop on Hero)
+// Shared School components
 import SchoolHero from "@/components/pages/schools/SchoolHero";
-import SchoolPlacements from "@/components/pages/schools/SchoolPlacements";
 import SchoolPartners from "@/components/pages/schools/SchoolPartners";
+import SchoolPlacements from "@/components/pages/schools/SchoolPlacements";
 import SchoolTestimonials from "@/components/pages/schools/SchoolTestimonials";
 
 // Modular Course components
-import CourseOverview from "@/components/pages/courses/CourseOverview";
-import CourseScope from "@/components/pages/courses/CourseScope";
-import { CourseCurriculum, CourseDeptSlider } from "@/components/pages/courses/CourseCurriculum";
 import CourseAdmissionFee from "@/components/pages/courses/CourseAdmissionFee";
-import CourseScholarships from "@/components/pages/courses/CourseScholarships";
-import CourseWhyJoin from "@/components/pages/courses/CourseWhyJoin";
-import CourseUniqueFeatures from "@/components/pages/courses/CourseUniqueFeatures";
 import CourseApplySteps from "@/components/pages/courses/CourseApplySteps";
+import { CourseCurriculum, CourseDeptSlider } from "@/components/pages/courses/CourseCurriculum";
 import CourseFAQ from "@/components/pages/courses/CourseFAQ";
+import CourseOverview from "@/components/pages/courses/CourseOverview";
+import CourseScholarships from "@/components/pages/courses/CourseScholarships";
+import CourseScope from "@/components/pages/courses/CourseScope";
+import CourseUniqueFeatures from "@/components/pages/courses/CourseUniqueFeatures";
+import CourseWhyJoin from "@/components/pages/courses/CourseWhyJoin";
+import { getCourseBySlug } from "@/lib/actions/courseActions";
 
-// Lucide icons for the Accomplishments card
-import {
-  Users, BookOpen, Award, FileText, Globe, Star,
-} from "lucide-react";
+export async function generateMetadata({ params }) {
+  const { slug, courseSlug } = await params;
+  const { data: course } = await getCourseBySlug(courseSlug);
 
-/* ── Icon resolver for the Accomplishments stat grid ── */
-const STAT_ICONS = { Users, BookOpen, Award, FileText, Globe, Star };
+  return {
+    title: course?.metaTitle || `${course?.name || 'Course'} | CP University`,
+    description: course?.metaDescription || `Read about eligibility, fee structure and syllabus for ${course?.name || 'this course'} at CP University.`,
+  };
+}
 
-/* ── "University's Accomplishments & Impact" right-side card (injected as children into SchoolHero) ── */
+import * as LucideIcons from "lucide-react";
+import { Award, Star } from "lucide-react";
+
+/* ── "University's Accomplishments & Impact" right-side card ── */
 function AccomplishmentsCard({ data }) {
   if (!data) return null;
   return (
@@ -42,12 +43,9 @@ function AccomplishmentsCard({ data }) {
       </h3>
       <div className="grid grid-cols-3 gap-3">
         {data.stats?.map((s, i) => {
-          const Icon = STAT_ICONS[s.icon] || Star;
+          const Icon = LucideIcons[s.icon] || Star;
           return (
-            <div
-              key={i}
-              className="bg-white/10 rounded-2xl p-3 text-center hover:bg-white/20 transition cursor-default"
-            >
+            <div key={i} className="bg-white/10 rounded-2xl p-3 text-center hover:bg-white/20 transition cursor-default">
               <Icon size={18} className="mx-auto mb-1.5 text-[#ffb900]" />
               <div className="text-white font-black text-sm leading-tight">{s.value}</div>
               <div className="text-blue-200 text-[10px] mt-0.5 leading-tight">{s.label}</div>
@@ -63,73 +61,55 @@ function AccomplishmentsCard({ data }) {
 }
 
 /* ══════════ PAGE ══════════ */
-export default function CourseSlugPage({ params }) {
-  const { slug, courseSlug } = use(params);
+export default async function CourseSlugPage({ params }) {
+  const resolvedParams = await params;
+  const { slug, courseSlug } = resolvedParams;
 
-  // 1. Resolve school
-  const schoolData = schoolsData[slug];
-  if (!schoolData) notFound();
+  // Fetch from DB
+  const { data: course } = await getCourseBySlug(courseSlug);
 
-  // 2. Resolve course within courseDetails
-  const courseData = schoolData.courseDetails?.[courseSlug];
-  if (!courseData) notFound();
+  if (!course) {
+    notFound();
+  }
+  
+  // Breadcrumb logic
+  const schoolName = course.schoolId?.name || "School";
+  const schoolSlug = course.schoolId?.slug || slug;
 
-  // 3. Build breadcrumb
   const breadcrumbPaths = [
     { label: "Home", link: "/" },
     { label: "Schools & Departments", link: "/schools" },
-    { label: schoolData.hero?.title?.main || slug, link: `/schools/${slug}` },
-    { label: courseData.title || courseSlug, link: `/schools/${slug}/${courseSlug}` },
+    { label: schoolName, link: `/schools/${schoolSlug}` },
+    { label: course.name || course.hero?.title?.main, link: `/schools/${schoolSlug}/${courseSlug}` },
   ];
 
   return (
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden">
-      {/* ── Breadcrumb ── */}
       <Breadcrumb paths={breadcrumbPaths} />
+      
+      {course.hero && (
+        <SchoolHero data={course.hero}>
+          {course.accomplishments && <AccomplishmentsCard data={course.accomplishments} />}
+        </SchoolHero>
+      )}
 
-      {/* ── Hero  (Accomplishments card injected as children) ── */}
-      <SchoolHero data={courseData.hero}>
-        <AccomplishmentsCard data={courseData.accomplishments} />
-      </SchoolHero>
+      {course.overview && <CourseOverview data={course.overview} />}
+      {course.scope && <CourseScope data={course.scope} />}
+      {course.curriculum && <CourseCurriculum data={course.curriculum} />}
+      {course.exploreDepartment && <CourseDeptSlider data={course.exploreDepartment} />}
+      {course.admissionFee && <CourseAdmissionFee data={course.admissionFee} />}
+      {course.scholarships && <CourseScholarships data={course.scholarships} />}
+      {course.whyJoin && <CourseWhyJoin data={course.whyJoin} />}
+      {course.uniqueFeatures && <CourseUniqueFeatures data={course.uniqueFeatures} />}
+      {course.applySteps && <CourseApplySteps data={course.applySteps} />}
+      {course.faq && <CourseFAQ data={course.faq} />}
+    
 
-      {/* ── Overview ── */}
-      <CourseOverview data={courseData.overview} />
-
-      {/* ── Scope (BG2 dark section) ── */}
-      <CourseScope data={courseData.scope} />
-
-      {/* ── Curriculum: Course Structure + Value Added + Semester Accordions ── */}
-      <CourseCurriculum data={courseData.curriculum} />
-
-      {/* ── Department Slider (BG2 washed section) ── */}
-      <CourseDeptSlider slides={courseData.deptSlides} />
-
-      {/* ── Admission & Fee ── */}
-      <CourseAdmissionFee data={courseData.admissionFee} />
-
-      {/* ── Scholarships ── */}
-      <CourseScholarships data={courseData.scholarships} />
-
-      {/* ── Why Join ── */}
-      <CourseWhyJoin data={courseData.whyJoin} />
-
-      {/* ── Unique Features (BG1 washed section) ── */}
-      <CourseUniqueFeatures data={courseData.uniqueFeatures} />
-
-      {/* ── How to Apply (BG2 dark slider) ── */}
-      <CourseApplySteps data={courseData.applySteps} />
-
-      {/* ── FAQ ── */}
-      <CourseFAQ data={courseData.faq} />
-
-      {/* ── Placements ── */}
-      <SchoolPlacements data={courseData.placements} />
-
-      {/* ── Industry Partners ── */}
-      <SchoolPartners data={courseData.industry} />
-
-      {/* ── Testimonials ── */}
-      <SchoolTestimonials data={courseData.testimonials} />
+      {/* Course specific versions of common sections if available */}
+      {course.placements && <SchoolPlacements data={course.placements} />}
+      {course.industry && <SchoolPartners data={course.industry} />}
+      {course.testimonials && <SchoolTestimonials data={course.testimonials} />}
     </div>
   );
 }
+

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import * as LucideIcons from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import StructuredTitle from "@/components/common/StructuredTitle";
 
 export default function SchoolProgrammes({ data, schoolSlug }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -25,13 +26,12 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
             {data.subtitle}
           </span>
           <h2 className="font-black text-white" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>
-            {data.title.main.split(data.title.highlight)[0]}
-            <span className="text-[#ffb900]">{data.title.highlight}</span>
-            {data.title.main.split(data.title.highlight)[1]}
+            <StructuredTitle title={data.title} highlightClass="text-[#ffb900]" />
           </h2>
-          <p className="mt-3 max-w-2xl mx-auto text-sm lg:text-base leading-relaxed text-white/65">
-            {data.description}
-          </p>
+          <div 
+            className="mt-3 max-w-2xl mx-auto text-sm lg:text-base leading-relaxed text-white/65 prose prose-invert prose-sm" 
+            dangerouslySetInnerHTML={{ __html: data.description }}
+          />
         </div>
 
         <div className="rounded-3xl overflow-hidden bg-white/97 shadow-[0_32px_80px_rgba(0,0,0,0.45)]">

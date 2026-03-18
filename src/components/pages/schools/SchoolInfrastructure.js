@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import StructuredTitle from "@/components/common/StructuredTitle";
 
 export default function SchoolInfrastructure({ data }) {
   if (!data) return null;
@@ -13,9 +14,7 @@ export default function SchoolInfrastructure({ data }) {
             {label}
           </span>
           <h2 className="font-black mt-1 text-[#0a1628]" style={{ fontSize: "clamp(1.8rem,3.5vw,2.8rem)" }}>
-            {title.main.split(title.highlight)[0]}
-            <span className="text-[#00588b]">{title.highlight}</span>
-            {title.main.split(title.highlight)[1]}
+            <StructuredTitle title={title} highlightClass="text-[#00588b]" />
           </h2>
         </div>
 

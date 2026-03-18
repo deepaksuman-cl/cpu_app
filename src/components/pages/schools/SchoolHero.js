@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
+import * as LucideIcons from "lucide-react";
 import { Star, ArrowRight } from "lucide-react";
+import StructuredTitle from "@/components/common/StructuredTitle";
 
 export default function SchoolHero({ data, children }) {
   if (!data) return null;
@@ -33,26 +35,27 @@ export default function SchoolHero({ data, children }) {
               </div>
             )}
 
-            <h1 className="font-black text-white leading-tight mb-6" style={{ fontSize: "clamp(2.4rem,4.5vw,3.8rem)" }}>
-              {data.title.line1 ? (
+            <h1 className="font-black text-white leading-tight mb-4" style={{ fontSize: "clamp(2.4rem,4.5vw,3.8rem)" }}>
+              {data.title?.line1 ? (
                 <>
                   {data.title.line1}<br />
                   <span className="text-[#ffb900]">{data.title.line2}</span><br />
                   {data.title.line3}
                 </>
               ) : (
-                <>
-                  {data.title.main.split(data.title.highlight)[0]}
-                  <span className="text-[#ffb900]">{data.title.highlight}</span>
-                  {data.title.main.split(data.title.highlight)[1]?.split(data.title.skyHighlight)[0]}
-                  {data.title.skyHighlight && (
-                    <span className="text-sky-300">{data.title.skyHighlight}</span>
-                  )}
-                  {data.title.skyHighlight && data.title.main.split(data.title.skyHighlight)[1]}
-                  {!data.title.skyHighlight && data.title.main.split(data.title.highlight)[1]}
-                </>
+                <StructuredTitle 
+                  title={data.title} 
+                  highlightClass="text-[#ffb900]"
+                  skyHighlightClass="text-sky-300"
+                />
               )}
             </h1>
+
+            {data.subtitle && (
+              <p className="text-[#ffb900] text-xl font-black uppercase tracking-widest mb-6 opacity-90 drop-shadow-md">
+                {data.subtitle}
+              </p>
+            )}
 
             <p className="text-blue-100/90 text-lg leading-relaxed mb-10 max-w-xl">
               {data.description}
@@ -83,12 +86,20 @@ export default function SchoolHero({ data, children }) {
             {/* Optional quick stats row (course pages) */}
             {data.quickStats && (
               <div className="flex flex-wrap gap-8 mt-12 pt-6 border-t border-white/20">
-                {data.quickStats.map((s, i) => (
-                  <div key={i}>
-                    <div className="text-[#ffb900] font-black text-2xl">{s.value}</div>
-                    <div className="text-blue-200 text-xs mt-0.5">{s.label}</div>
-                  </div>
-                ))}
+                {data.quickStats.map((s, i) => {
+                  const Icon = LucideIcons[s.icon] || Star;
+                  return (
+                    <div key={i} className="flex items-center gap-3 group">
+                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-[#ffb900] group-hover:bg-[#ffb900]/20 transition-colors">
+                        <Icon size={20} />
+                      </div>
+                      <div>
+                        <div className="text-[#ffb900] font-black text-2xl leading-none">{s.value}</div>
+                        <div className="text-blue-200 text-[10px] uppercase font-bold tracking-wider mt-1">{s.label}</div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

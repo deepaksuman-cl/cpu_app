@@ -1,11 +1,14 @@
 "use client";
 import React from "react";
 import { Award, Info } from "lucide-react";
+import StructuredTitle from "@/components/common/StructuredTitle";
 
 function SectionTitle({ children, subtitle }) {
   return (
     <div className="mb-10 text-center">
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">{children}</h2>
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">
+        <StructuredTitle title={children} highlightClass="text-[#ffb900]" />
+      </h2>
       {subtitle && <p className="text-sm max-w-2xl mx-auto text-blue-200">{subtitle}</p>}
       <div className="flex gap-1 mt-3 justify-center">
         <div className="h-1 w-14 rounded-full bg-[#ffb900]" />
@@ -30,34 +33,34 @@ export default function CourseScholarships({ data }) {
         <SectionTitle subtitle={subtitle}>{sectionTitle}</SectionTitle>
 
         {/* Scholarship Table */}
-        <div className="bg-white rounded-2xl overflow-hidden shadow-2xl mb-8">
-          <div className="bg-[#ffb900] px-5 py-3 font-extrabold text-[#00588b] flex items-center gap-2">
-            <Award size={18} /> Scholarship on Tuition Fees
+        <div className="bg-white rounded-2xl overflow-hidden shadow-2xl mb-12">
+          <div className="bg-[#ffb900] px-5 py-4 font-extrabold text-[#00588b] flex items-center gap-2 border-b border-[#00588b]/10">
+            <Award size={20} className="text-[#00588b]" /> Scholarship on Tuition Fees
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm min-w-[540px]">
+            <table className="w-full text-sm min-w-[640px]">
               <thead>
-                <tr className="bg-[#00588b]/8">
-                  <th className="px-4 py-3 text-left text-[#00588b] font-extrabold">% in Graduation</th>
+                <tr className="bg-[#00588b]/5">
+                  <th className="px-6 py-4 text-left text-[#00588b] font-black uppercase tracking-wider">Scholarship Slab</th>
                   {dateHeaders?.map((d, i) => (
-                    <th key={i} className="px-3 py-3 text-center text-[#00588b] font-extrabold text-xs">{d}</th>
+                    <th key={i} className="px-4 py-4 text-center text-[#00588b] font-black text-xs uppercase tracking-wider">{d}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-100">
                 {rows?.map((row, i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-blue-50/50"}>
-                    <td className="px-4 py-3 font-bold text-gray-700">{row.range}</td>
+                  <tr key={i} className="hover:bg-blue-50/30 transition-colors">
+                    <td className="px-6 py-4 font-bold text-gray-800 border-r border-gray-100">{row.range}</td>
                     {row.values.map((v, j) => (
-                      <td key={j} className="px-3 py-3 text-center font-extrabold text-[#ffb900]">{v}</td>
+                      <td key={j} className="px-4 py-4 text-center font-black text-[#00588b] text-base">{v}</td>
                     ))}
                   </tr>
                 ))}
-                {earlyBird && (
-                  <tr className="bg-[#ffb900]/15 border-t-2 border-[#ffb900]">
-                    <td className="px-4 py-3 font-bold text-[#00588b] text-xs">{earlyBird.label}</td>
+                {earlyBird && earlyBird.label && (
+                  <tr className="bg-[#ffb900]/10 border-t-2 border-[#ffb900]/30 shadow-inner">
+                    <td className="px-6 py-4 font-black text-[#00588b] uppercase tracking-tighter italic">{earlyBird.label}</td>
                     {earlyBird.values.map((v, j) => (
-                      <td key={j} className="px-3 py-3 text-center font-extrabold text-[#00588b]">{v}</td>
+                      <td key={j} className="px-4 py-4 text-center font-black text-[#00588b] text-base">{v}</td>
                     ))}
                   </tr>
                 )}
@@ -67,22 +70,35 @@ export default function CourseScholarships({ data }) {
         </div>
 
         {/* Notes */}
-        {notes && (
-          <div className="bg-white/10 backdrop-blur rounded-2xl border border-white/20 p-6">
-            <h4 className="font-extrabold text-[#ffb900] mb-4 flex items-center gap-2">
-              <Info size={18} /> Notes:
+        {notes && notes.length > 0 && (
+          <div className="bg-[#001f33]/40 backdrop-blur-md rounded-3xl border border-white/10 p-8 shadow-2xl">
+            <h4 className="font-black text-[#ffb900] mb-8 flex items-center gap-3 text-lg uppercase tracking-widest">
+              <div className="w-8 h-8 rounded-lg bg-[#ffb900]/20 flex items-center justify-center">
+                <Info size={18} />
+              </div>
+              Important Notes:
             </h4>
-            <ul className="space-y-2">
-              {notes.map((note, i) => (
-                <li key={i} className="flex items-start gap-2 text-blue-100 text-sm">
-                  <span className="text-[#ffb900] font-black flex-shrink-0 mt-0.5">{i + 1}.</span>
-                  {note}
-                </li>
-              ))}
-            </ul>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {notes.map((note, i) => {
+                const isString = typeof note === 'string';
+                const Icon = !isString && LucideIcons[note.icon] ? LucideIcons[note.icon] : Info;
+                return (
+                  <div key={i} className="flex items-start gap-4 group p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-[#ffb900]/15 flex items-center justify-center flex-shrink-0 text-[#ffb900] group-hover:scale-110 transition-transform">
+                      {isString ? <span className="font-black text-xs">{i + 1}</span> : <Icon size={20} />}
+                    </div>
+                    <div className="text-blue-100/90 text-[13px] leading-relaxed font-medium">
+                      {isString ? note : note.text}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
     </section>
   );
 }
+
+import * as LucideIcons from "lucide-react";
