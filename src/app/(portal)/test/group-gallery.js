@@ -451,7 +451,10 @@ export default function GroupGallery() {
   return (
     <div className="gg-page min-h-screen bg-[#dce9f3]">
       <style>{`
-
+      body .gg-detail {
+    position: relative;
+    z-index: 9999;
+}
         @keyframes gg-fadein {
           from { opacity: 0; transform: translateY(10px); }
           to   { opacity: 1; transform: translateY(0); }

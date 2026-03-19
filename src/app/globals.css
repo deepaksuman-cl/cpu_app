@@ -3,7 +3,10 @@
     font-weight: 500;
   }
 
-  
+  .gg-detail {
+    position: relative!important;
+    z-index: 9999!important;
+}
 /* virtulallynews css */
 .nvs-clamp-title, .nvs-clamp-dec{
   display: -webkit-box;
