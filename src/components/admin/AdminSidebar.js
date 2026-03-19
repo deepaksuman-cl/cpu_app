@@ -47,6 +47,7 @@ const SIDEBAR_MENUS = [
         subItems: [
           { name: 'School Management', href: '/admin/schools' },
           { name: 'Course Management', href: '/admin/courses' },
+           { name: 'Academic Catalog', href: '/admin/programmes' },
         ]
       }
     ]

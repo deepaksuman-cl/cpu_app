@@ -17,11 +17,17 @@ const StatsItemSchema = new mongoose.Schema({
   value: { type: String },
   icon: { type: String }
 });
+const GalleryItemSchema=new mongoose.Schema({
+  image: { type: String },
+  title: { type: String },
+  category: { type: String },
+  
+});
 
 const BlockSchema = new mongoose.Schema({
   blockType: { 
     type: String, 
-    enum: ['RichTextFull', 'SplitLayout', 'Accordion', 'ProfileGrid', 'StatsGrid', 'SingleImage'],
+    enum: ['RichTextFull', 'SplitLayout', 'Accordion', 'ProfileGrid', 'StatsGrid', 'SingleImage','GalleryBlock'],
     required: true 
   },
   content: { type: String },
@@ -36,9 +42,16 @@ const BlockSchema = new mongoose.Schema({
     width: String, 
     align: { type: String, enum: ['left', 'center', 'right'], default: 'center' } 
   },
+  galleryHeading: {
+    badge: String,
+    title: String,
+    highlight: String,
+    description: String
+  },
   accordionItems: [AccordionItemSchema],
   profileItems: [ProfileItemSchema],
-  statsItems: [StatsItemSchema]
+  statsItems: [StatsItemSchema],
+  galleryItems: [GalleryItemSchema]
 });
 
 const PageSchema = new mongoose.Schema({

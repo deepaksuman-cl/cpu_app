@@ -1,5 +1,6 @@
 import AccordionClient from './AccordionClient';
 import * as LucideIcons from 'lucide-react';
+import GalleryClient from './GalleryClient';
 
 export default function BlockRenderer({ block }) {
   const { blockType } = block;
@@ -114,7 +115,7 @@ export default function BlockRenderer({ block }) {
             {block.statsItems.map((stat, idx) => {
               const Icon = stat.icon ? LucideIcons[stat.icon] : null;
               return (
-                <div key={idx} className="p-6 text-center transform hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center justify-center">
+                <div key={idx} className="p-6 text-center transform hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center justify-center border border-gray-200 rounded-lg">
                   <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-5 border border-white/20">
                     {Icon ? <Icon size={28} className="text-[#ffb900]" /> : <div className="text-[#ffb900] font-black text-xl">#</div>}
                   </div>
@@ -151,6 +152,10 @@ export default function BlockRenderer({ block }) {
         </div>
       </div>
     );
+  }
+  // 7. Interactive Gallery Block
+  if (blockType === 'GalleryBlock') {
+    return <GalleryClient items={block.galleryItems} heading={block.galleryHeading} />;
   }
 
   return null;

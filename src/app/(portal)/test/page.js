@@ -626,7 +626,6 @@ export default function CoursePage() {
               </button>
             </div>
           </div>
-
         </main>
       </div>
     </div>

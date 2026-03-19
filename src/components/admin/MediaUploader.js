@@ -74,6 +74,7 @@ export default function MediaUploader({ category = 'schools', onUploadSuccess })
       <div className="flex border-b border-gray-200 mb-5">
         {[ { id:'file', label:'File Upload', icon:FileUp }, { id:'url', label:'Paste URL', icon:Link2 } ].map(t => (
           <button 
+            type="button"
             key={t.id} 
             onClick={() => { reset(); setTab(t.id); }}
             className={`flex-1 flex items-center justify-center gap-2 text-sm font-semibold py-2 transition-colors rounded-none ${
@@ -136,6 +137,7 @@ export default function MediaUploader({ category = 'schools', onUploadSuccess })
       {/* Action Button */}
       {(!uploadedUrl && !error) && (
         <button 
+          type="button"
           onClick={handleSubmit} 
           disabled={uploading || (!file && !url)}
           className="bg-[#00588b] text-white px-4 py-2 text-sm font-bold flex items-center justify-center gap-2 w-full hover:bg-[#004570] transition-colors rounded-none disabled:opacity-50 disabled:bg-gray-400 disabled:cursor-not-allowed"
@@ -156,6 +158,7 @@ export default function MediaUploader({ category = 'schools', onUploadSuccess })
             className="w-full text-xs text-gray-700 bg-white p-2 border border-green-200 outline-none rounded-none font-mono"
           />
           <button 
+            type="button"
             onClick={reset}
             className="w-full text-center text-[#00588b] text-xs font-bold mt-3 hover:underline"
           >
@@ -174,6 +177,7 @@ export default function MediaUploader({ category = 'schools', onUploadSuccess })
             {error}
           </p>
           <button 
+            type="button"
             onClick={reset}
             className="w-full text-center text-red-600 text-xs font-bold mt-3 hover:underline"
           >

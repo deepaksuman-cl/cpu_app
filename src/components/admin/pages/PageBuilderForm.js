@@ -4,7 +4,7 @@ import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import { createPage, updatePage } from '@/lib/actions/pageActions';
-import { AlertTriangle, ArrowDown, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Layout, Loader2, Plus, Save, Trash2, Type, Users } from 'lucide-react';
+import { AlertTriangle, ArrowDown, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Plus, Save, Trash2, Type, Users } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -14,14 +14,16 @@ const BLOCK_DEFINITIONS = [
   { type: 'Accordion', label: 'Accordion (FAQ)', icon: GripVertical },
   { type: 'ProfileGrid', label: 'Profiles Directory Grid', icon: Users },
   { type: 'StatsGrid', label: 'Statistics / Metrics Grid', icon: BarChart3 },
-  { type: 'SingleImage', label: 'Single Image', icon: ImageIcon }
+  { type: 'SingleImage', label: 'Single Image', icon: ImageIcon },
+  { type: 'GalleryBlock', label: 'Interactive Gallery', icon: Images }
 ];
 
 const getEmptyBlock = (type) => {
-  const base = { blockType: type, content: '', image: '', imageHeight: '', imageWidth: '', isReversed: false, splitConfig: '50-50', singleImage: { path: '', height: '', width: '', align: 'center' }, accordionItems: [], profileItems: [], statsItems: [] };
+  const base = { blockType: type, content: '', image: '', imageHeight: '', imageWidth: '', isReversed: false, splitConfig: '50-50', singleImage: { path: '', height: '', width: '', align: 'center' }, galleryHeading: { badge: '', title: '', highlight: '', description: '' }, accordionItems: [], profileItems: [], statsItems: [] };
   if (type === 'Accordion') base.accordionItems = [{ title: '', content: '' }];
   if (type === 'ProfileGrid') base.profileItems = [{ name: '', designation: '', company: '', image: '' }];
   if (type === 'StatsGrid') base.statsItems = [{ label: '', value: '', icon: '' }];
+  if (type === 'GalleryBlock') base.galleryItems = [{ image: '', title: '', category: '' }];
   return base;
 };
 
@@ -173,7 +175,17 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
               </div>
             </div>
           </div>
-          <div className="border border-dashed border-gray-300 p-4 bg-gray-50 flex flex-col items-center justify-center">
+          <div className="border border-gray-200 p-4">
+            <label className="block text-xs font-bold text-gray-700 uppercase mb-2">Hero Image Media</label>
+            <div className="mb-4">
+              {hero.bgImage ? (
+                <img src={hero.bgImage} className="w-full h-48 object-cover border border-gray-300 shadow-sm" alt="Hero Banner Preview" />
+              ) : (
+                <div className="w-full h-48 bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center text-gray-400">
+                  <ImageIcon size={32} />
+                </div>
+              )}
+            </div>
             <MediaUploader category="pages" onUploadSuccess={(url) => setHero({...hero, bgImage: url})} />
           </div>
         </div>
@@ -422,6 +434,78 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                           <option value="right">Right</option>
                         </select>
                       </div>
+                    </div>
+                  </div>
+                )}
+                {block.blockType === 'GalleryBlock' && (
+                  <div>
+                    <div className="bg-white border text-gray-800 border-gray-300 p-4 mb-6 relative">
+                      <div className="absolute top-0 left-0 w-1 h-full bg-[#ffb900]"></div>
+                      <h3 className="text-xs font-bold text-[#00588b] uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">Gallery Header Configuration</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-500 uppercase">Top Badge Text</label>
+                          <input type="text" value={block.galleryHeading?.badge || ''} onChange={e => updateBlock(index, 'galleryHeading', { ...block.galleryHeading, badge: e.target.value })} className="w-full border border-gray-300 p-1.5 text-sm outline-none" placeholder="e.g. Our Gallery" />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-500 uppercase">Main Title</label>
+                          <input type="text" value={block.galleryHeading?.title || ''} onChange={e => updateBlock(index, 'galleryHeading', { ...block.galleryHeading, title: e.target.value })} className="w-full border border-gray-300 p-1.5 text-sm outline-none" placeholder="e.g. Explore Our" />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-500 uppercase">Highlighted Highlight Word</label>
+                          <input type="text" value={block.galleryHeading?.highlight || ''} onChange={e => updateBlock(index, 'galleryHeading', { ...block.galleryHeading, highlight: e.target.value })} className="w-full border border-gray-300 p-1.5 text-sm outline-none" placeholder="e.g. Visual World" />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-500 uppercase">Subtext Description</label>
+                          <textarea value={block.galleryHeading?.description || ''} onChange={e => updateBlock(index, 'galleryHeading', { ...block.galleryHeading, description: e.target.value })} className="w-full border border-gray-300 p-1.5 text-sm outline-none h-10 resize-y" placeholder="Brief intro to the gallery..." />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mb-4 flex justify-between items-end border-b border-gray-200 pb-2">
+                      <label className="block text-xs font-bold text-gray-700 uppercase">Interactive Gallery Images</label>
+                      <button type="button" onClick={() => addArrayItem(index, 'galleryItems', { image: '', title: '', category: '' })} className="text-xs font-bold bg-[#00588b] text-white px-3 py-1.5 hover:bg-[#004570] transition-colors flex gap-1 items-center">
+                        <Plus size={14} /> Add Image
+                      </button>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {block.galleryItems?.map((item, gIdx) => (
+                        <div key={gIdx} className="border border-gray-300 p-4 bg-gray-50 relative group flex flex-col gap-3">
+                          
+                          {/* Delete Button */}
+                          <button type="button" onClick={() => removeArrayItem(index, 'galleryItems', gIdx)} className="absolute top-2 right-2 text-red-500 hover:text-red-700 p-1 bg-white border border-red-100 shadow-sm z-10">
+                            <Trash2 size={14} />
+                          </button>
+
+                          {/* Image Uploader Area */}
+                          <div>
+                            {item.image ? (
+                              <img src={item.image} className="w-full h-32 object-cover border border-gray-300 mb-2" alt={item.title || 'Gallery Preview'} />
+                            ) : (
+                              <div className="w-full h-32 bg-gray-200 flex items-center justify-center text-gray-400 border-dashed border-2 border-gray-300 mb-2">
+                                <ImageIcon size={24} />
+                              </div>
+                            )}
+                            <div className="scale-90 origin-top-left w-[111%]">
+                                <MediaUploader category="pages" onUploadSuccess={url => updateArrayItem(index, 'galleryItems', gIdx, 'image', url)} />
+                            </div>
+                          </div>
+
+                          {/* Text Inputs */}
+                          <div className="space-y-2">
+                            <div>
+                              <label className="block text-[10px] font-bold text-gray-500 uppercase">Image Title</label>
+                              <input type="text" value={item.title} onChange={e => updateArrayItem(index, 'galleryItems', gIdx, 'title', e.target.value)} className="w-full border border-gray-300 p-1.5 text-sm outline-none bg-white" placeholder="e.g. Campus View" />
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-bold text-gray-500 uppercase">Category</label>
+                              <input type="text" value={item.category} onChange={e => updateArrayItem(index, 'galleryItems', gIdx, 'category', e.target.value)} className="w-full border border-gray-300 p-1.5 text-sm outline-none bg-white" placeholder="e.g. Infrastructure" />
+                            </div>
+                          </div>
+
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}

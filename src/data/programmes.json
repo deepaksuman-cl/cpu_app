@@ -1,0 +1,33 @@
+{
+  "programmeTypes": [
+    { "label": "Diploma", "count": 6 },
+    { "label": "Under Graduate", "count": 7 },
+    { "label": "Integrated", "count": 5 },
+    { "label": "Post Graduate", "count": 6 },
+    { "label": "Doctoral", "count": 6 }
+  ],
+  "sidebarLinks": [
+    { "icon": "MessageSquareQuote", "label": "Testimonials", "slug": "/testimonials", "colorClass": "text-[#00588b] bg-[#00588b]/10" },
+    { "icon": "Phone", "label": "Contact", "slug": "/contact-us", "colorClass": "text-red-500 bg-red-50" },
+    { "icon": "Images", "label": "Image Gallery", "slug": "/gallery", "colorClass": "text-green-600 bg-green-50" }
+  ],
+  "courses": {
+    "Diploma": [
+      { "id": "d1", "title": "Engineering Technology", "school": "School of Engineering & Technology", "icon": "Wrench", "colorHex": "#e53e3e", "iconBg": "bg-red-50", "textColor": "text-red-600", "borderHover": "hover:border-red-300", "programs": ["Diploma in Civil Engg.", "Diploma in Mechanical Engg.", "Diploma in Electrical Engg."], "badge": { "label": "Popular", "cls": "bg-red-50 text-red-600" } },
+      { "id": "d3", "title": "Computer Science", "school": "School of Computer Applications", "icon": "Code2", "colorHex": "#00588b", "iconBg": "bg-sky-50", "textColor": "text-[#00588b]", "borderHover": "hover:border-sky-300", "programs": ["Diploma in CS", "Diploma in Web Development", "Diploma in Cyber Security"], "badge": { "label": "Trending", "cls": "bg-blue-50 text-blue-700" } }
+    ],
+    "Under Graduate": [
+      { "id": "ug1", "title": "Engineering", "school": "School of Engineering & Technology", "icon": "Monitor", "colorHex": "#e53e3e", "iconBg": "bg-red-50", "textColor": "text-red-600", "borderHover": "hover:border-red-300", "programs": ["B.Tech in CSE", "AI & Machine Learning", "Software Product Engineering"], "badge": { "label": "Popular", "cls": "bg-red-50 text-red-600" } },
+      { "id": "ug4", "title": "Computer Applications", "school": "School of Computer Applications & Technology", "icon": "Cpu", "colorHex": "#00588b", "iconBg": "bg-sky-50", "textColor": "text-[#00588b]", "borderHover": "hover:border-sky-300", "programs": ["BCA", "BCA In Data Science", "BCA In AI & ML", "BCA In Cloud Computing"], "badge": { "label": "Trending", "cls": "bg-blue-50 text-blue-700" } }
+    ],
+    "Integrated": [
+      { "id": "int1", "title": "Integrated Engineering", "school": "School of Engineering & Technology", "icon": "Monitor", "colorHex": "#e53e3e", "iconBg": "bg-red-50", "textColor": "text-red-600", "borderHover": "hover:border-red-300", "programs": ["B.Tech + M.Tech (CSE)", "B.Tech + MBA", "B.Tech + M.Tech (AI/ML)"], "badge": { "label": "Popular", "cls": "bg-red-50 text-red-600" } }
+    ],
+    "Post Graduate": [
+      { "id": "pg1", "title": "M.Tech Programmes", "school": "School of Engineering & Technology", "icon": "Brain", "colorHex": "#e53e3e", "iconBg": "bg-red-50", "textColor": "text-red-600", "borderHover": "hover:border-red-300", "programs": ["M.Tech – CSE", "M.Tech – AI & Data Science", "M.Tech – VLSI Design", "M.Tech – Robotics"], "badge": { "label": "Popular", "cls": "bg-red-50 text-red-600" } }
+    ],
+    "Doctoral": [
+      { "id": "dr1", "title": "Ph.D – Engineering", "school": "School of Engineering & Technology", "icon": "Telescope", "colorHex": "#e53e3e", "iconBg": "bg-red-50", "textColor": "text-red-600", "borderHover": "hover:border-red-300", "programs": ["Ph.D in CSE", "Ph.D in Electronics", "Ph.D in Mechanical Engg.", "Ph.D in Civil Engg."], "badge": { "label": "Research", "cls": "bg-purple-50 text-purple-700" } }
+    ]
+  }
+}
