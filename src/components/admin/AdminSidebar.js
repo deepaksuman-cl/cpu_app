@@ -6,7 +6,7 @@ import {
   LayoutDashboard, PanelTop, Globe, Phone, Monitor, Layout, Smartphone,
   Database, FileText, ImageIcon, GraduationCap, Scale, Briefcase, 
   ShieldCheck, Users, Key, Settings, BookOpen, ChevronDown,
-  PanelLeftClose, PanelLeftOpen, CornerDownRight, Building, Library
+  PanelLeftClose, PanelLeftOpen, CornerDownRight, Building, Library, PanelBottom
 } from 'lucide-react';
 
 const SIDEBAR_MENUS = [
@@ -32,6 +32,7 @@ const SIDEBAR_MENUS = [
           { name: 'Mobile Config', href: '/admin/header/mobile-config' },
         ]
       },
+      { name: 'Footer Settings', href: '/admin/footer-manager', icon: PanelBottom },
       { name: 'Page Builder', href: '/admin/pages', icon: FileText },
       { name: 'Media Library', href: '/admin/media', icon: ImageIcon },
     ]
