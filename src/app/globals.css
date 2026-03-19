@@ -7,6 +7,11 @@
     position: relative!important;
     z-index: 9999!important;
 }
+
+.gg-detail.animate-gg-fadein {
+    Z-INDEX: 9999;
+    POSITION: RELATIVE;
+}
 /* virtulallynews css */
 .nvs-clamp-title, .nvs-clamp-dec{
   display: -webkit-box;

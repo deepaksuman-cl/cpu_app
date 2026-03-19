@@ -2,10 +2,19 @@
 'use client';
 
 import { Editor } from '@tinymce/tinymce-react';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function RichTextEditor({ value, onChange, placeholder = 'Write your content here...' }) {
+  const [mounted, setMounted] = useState(false);
   const editorRef = useRef(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="min-h-[500px] border border-gray-300 animate-pulse bg-gray-50 w-full rounded-sm" />;
+  }
 
   return (
     <div className="border border-gray-300 rounded-sm overflow-hidden bg-white w-full">
