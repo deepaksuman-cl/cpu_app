@@ -1,13 +1,22 @@
 'use client';
+
+import {
+  Building,
+  ChevronDown,
+  Database, FileText, ImageIcon,
+  Key,
+  LayoutDashboard,
+  PanelBottom,
+  PanelLeftClose,
+  PanelLeftOpen,
+  PanelTop,
+  Settings,
+  ShieldCheck, Users,
+  X
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import { 
-  LayoutDashboard, PanelTop, Globe, Phone, Monitor, Layout, Smartphone,
-  Database, FileText, ImageIcon, GraduationCap, Scale, Briefcase, 
-  ShieldCheck, Users, Key, Settings, BookOpen, ChevronDown,
-  PanelLeftClose, PanelLeftOpen, CornerDownRight, Building, Library, PanelBottom
-} from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const SIDEBAR_MENUS = [
   {
@@ -47,7 +56,7 @@ const SIDEBAR_MENUS = [
         subItems: [
           { name: 'School Management', href: '/admin/schools' },
           { name: 'Course Management', href: '/admin/courses' },
-           { name: 'Academic Catalog', href: '/admin/programmes' },
+          { name: 'Academic Catalog', href: '/admin/programmes' },
         ]
       }
     ]
@@ -78,49 +87,36 @@ const SIDEBAR_MENUS = [
 ];
 
 // ─── Sub Item Tree Row ────────────────────────────────────────────────────────
-// Renders each sub-item with:
-//  • A vertical trunk line (top-half + bottom-half), blue when active path passes through
-//  • A stylish ↳ arrow connector
-//  • An active pill highlight
 function SubItem({ sub, index, total, activeSubIndex, isMobile, setMobileMenuOpen }) {
   const pathname = usePathname();
   const isSubActive = pathname === sub.href || pathname.startsWith(sub.href + '/');
 
-  // Color the trunk segment blue if the active item is at or below this row
-  const topLineBlue  = index <= activeSubIndex;
-  // Bottom segment blue if there is a later active item (never on last item)
+  const topLineBlue = index <= activeSubIndex;
   const bottomLineBlue = index < activeSubIndex;
   const isLast = index === total - 1;
 
-  // Colors
-  const TRUNK_BLUE   = '#1c54a3';
-  const TRUNK_GRAY   = '#cbd5e1';
-  const trunkTop    = topLineBlue  ? TRUNK_BLUE : TRUNK_GRAY;
+  const TRUNK_BLUE = 'var(--color-primary)'; 
+  const TRUNK_GRAY = 'var(--border-default)'; 
+  const trunkTop = topLineBlue ? TRUNK_BLUE : TRUNK_GRAY;
   const trunkBottom = bottomLineBlue ? TRUNK_BLUE : TRUNK_GRAY;
-  const arrowColor  = isSubActive   ? TRUNK_BLUE : (topLineBlue ? TRUNK_BLUE : TRUNK_GRAY);
+  const arrowColor = isSubActive ? TRUNK_BLUE : (topLineBlue ? TRUNK_BLUE : TRUNK_GRAY);
 
-  // Left offset for the trunk: aligned with parent icon center
-  const TRUNK_X = 28;
+  const TRUNK_X = 26;
 
   return (
-    <li className="relative m-0 p-0 list-none">
-
-      {/* ── Trunk: top half (connects from previous row / parent) ── */}
+    <li className="relative m-0 p-0 list-none group">
       <div
-        className="absolute w-[2px] z-10 transition-colors duration-200"
+        className="absolute w-[2px] z-10 transition-colors duration-300 rounded-none"
         style={{
           left: TRUNK_X,
-          // On first item, reach up 24px to overlap the parent row's bottom
           top: index === 0 ? '-24px' : '0px',
           bottom: '50%',
           backgroundColor: trunkTop,
         }}
       />
-
-      {/* ── Trunk: bottom half (connects to next row) ── */}
       {!isLast && (
         <div
-          className="absolute w-[2px] z-10 transition-colors duration-200"
+          className="absolute w-[2px] z-10 transition-colors duration-300 rounded-none"
           style={{
             left: TRUNK_X,
             top: '50%',
@@ -129,65 +125,39 @@ function SubItem({ sub, index, total, activeSubIndex, isMobile, setMobileMenuOpe
           }}
         />
       )}
-
-      {/* ── Corner Arrow ↳ ── */}
-      {/*
-        We draw a small L-shaped path: vertical stub down then horizontal to the label.
-        Using a crisp SVG for pixel-perfect rendering.
-      */}
       <svg
         className="absolute z-20 pointer-events-none"
-        style={{
-          left: TRUNK_X,
-          top: '50%',
-          transform: 'translateY(-50%)',
-          width: 20,
-          height: 20,
-          overflow: 'visible',
-        }}
-        viewBox="0 0 20 20"
-        fill="none"
+        style={{ left: TRUNK_X, top: '50%', transform: 'translateY(-50%)', width: 18, height: 18, overflow: 'visible' }}
+        viewBox="0 0 20 20" fill="none"
       >
-        {/* Horizontal arm of the arrow */}
-        <path
-          d="M1 10 H16"
-          stroke={arrowColor}
-          strokeWidth="2"
-          strokeLinecap="round"
-          className="transition-all duration-200"
-        />
-        {/* Arrowhead */}
-        <path
-          d="M12 6 L16 10 L12 14"
-          stroke={arrowColor}
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="transition-all duration-200"
-        />
+        <path d="M1 10 H16" stroke={arrowColor} strokeWidth="2" className="transition-all duration-300" />
       </svg>
-
-      {/* ── Label Link ── */}
+      
       <Link
         href={sub.href}
         onClick={() => isMobile && setMobileMenuOpen(false)}
         className={`
-          flex items-center gap-2
-          ml-[52px] mr-3 my-[2px]
-          py-[7px] px-3 rounded-lg
-          text-[13px] transition-all duration-200 select-none
+          relative flex items-center gap-3
+          ml-[48px] mr-0 my-0
+          py-2.5 px-4 rounded-none border-l-2
+          text-[13px] transition-all duration-300 select-none
           ${isSubActive
-            ? 'bg-[#1c54a3]/10 text-[#1c54a3] font-semibold ring-1 ring-[#1c54a3]/20'
-            : 'text-[#5C6C75] hover:bg-[#f1f5f9] hover:text-[#1c54a3] font-medium'
+            ? 'bg-[var(--color-primary-lighter)] text-[var(--color-primary-dark)] font-bold border-[var(--color-primary)]'
+            : 'text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] hover:text-[var(--text-primary)] font-medium border-transparent'
           }
         `}
       >
-        {/* Small dot indicator */}
         <span
-          className={`inline-block w-[6px] h-[6px] rounded-full flex-shrink-0 transition-colors duration-200 ${
-            isSubActive ? 'bg-[#1c54a3]' : 'bg-transparent border border-[#cbd5e1]'
-          }`}
-        />
+          className={`relative flex h-1.5 w-1.5 shrink-0 items-center justify-center rounded-none transition-all duration-300`}
+          style={{ backgroundColor: isSubActive ? 'var(--color-primary)' : 'var(--color-gray-300)' }}
+        >
+          {isSubActive && (
+            <span 
+              className="absolute inline-flex h-full w-full animate-ping rounded-none opacity-40"
+              style={{ backgroundColor: 'var(--color-primary-light)' }}
+            ></span>
+          )}
+        </span>
         {sub.name}
       </Link>
     </li>
@@ -200,16 +170,16 @@ export default function AdminSidebar({
 }) {
   const pathname = usePathname();
   const [expandedGroups, setExpandedGroups] = useState({});
-  const [expandedItems, setExpandedItems]   = useState({}); 
+  const [expandedItems, setExpandedItems] = useState({}); 
   
   useEffect(() => {
     const initialGroups = {};
-    const initialItems  = {};
+    const initialItems = {};
     
     SIDEBAR_MENUS.forEach(group => {
       let hasActiveChild = false;
       group.items.forEach(item => {
-        const isDirectActive  = item.href && (item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href));
+        const isDirectActive = item.href && (item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href));
         const isSubItemActive = item.subItems?.some(sub => pathname.startsWith(sub.href));
         if (isDirectActive || isSubItemActive) hasActiveChild = true;
         if (isSubItemActive) initialItems[item.name] = true;
@@ -226,175 +196,217 @@ export default function AdminSidebar({
   }, [pathname]);
 
   const toggleGroup = (category) => {
-    if (!isPinned && !isHovered) setIsPinned(true);
+    if (!isPinned && !isHovered && !isMobile) setIsPinned(true);
     setExpandedGroups(prev => ({ ...prev, [category]: !prev[category] }));
   };
 
-  const isExpanded = isMobile ? mobileMenuOpen : (isPinned || isHovered);
+  const isExpanded = isMobile ? true : (isPinned || isHovered);
 
   const handleClickItem = (e, item) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!isExpanded) setIsPinned(true);
+    if (!isExpanded && !isMobile) setIsPinned(true);
     setExpandedItems(prev => ({ ...prev, [item.name]: !prev[item.name] }));
   };
 
   return (
-    <aside 
-      onMouseEnter={() => !isPinned && !isMobile && setIsHovered(true)}
-      onMouseLeave={() => !isPinned && !isMobile && setIsHovered(false)}
-      className={`
-        bg-white border-r border-gray-200 flex flex-col h-screen fixed left-0 top-0 z-50 
-        transition-all duration-300 ease-in-out font-sans
-        ${isMobile
-          ? (mobileMenuOpen ? 'w-[260px] translate-x-0' : 'w-[260px] -translate-x-full')
-          : (isExpanded ? 'w-[260px]' : 'w-[72px]')}
-        ${!isPinned && isHovered ? 'shadow-[10px_0_30px_rgba(0,0,0,0.06)]' : ''}
-      `}
-    >
-      {/* ── Brand Header ── */}
-      <div className="flex flex-col border-b border-gray-100 bg-white">
-        <div className={`px-5 pt-4 pb-1 overflow-hidden transition-all duration-300 ${!isExpanded ? 'opacity-0 h-0 p-0' : 'opacity-100'}`}>
-          <p className="text-[10px] font-bold text-[#5C6C75] uppercase tracking-widest">Organization</p>
+    <>
+      {/* ── Mobile Overlay Backdrop ── */}
+      {isMobile && mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-[var(--bg-overlay)] z-40 transition-opacity duration-300"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* ── Main Sidebar Container ── */}
+      <aside 
+        onMouseEnter={() => !isPinned && !isMobile && setIsHovered(true)}
+        onMouseLeave={() => !isPinned && !isMobile && setIsHovered(false)}
+        className={`
+          bg-[var(--bg-surface)] border-r border-[var(--border-light)] flex flex-col h-screen fixed left-0 top-0 z-50 
+          transition-all duration-300 ease-in-out font-sans rounded-none
+          ${isMobile
+            ? (mobileMenuOpen ? 'w-[280px] translate-x-0 shadow-[var(--shadow-lg)]' : 'w-[280px] -translate-x-full')
+            : (isExpanded ? 'w-[294px]' : 'w-[76px]')}
+          ${!isPinned && isHovered && !isMobile ? 'shadow-[var(--shadow-lg)]' : ''}
+        `}
+      >
+        {/* ── Brand Header with Smart Logo Integration ── */}
+        <div className="flex border-b border-[var(--border-light)] bg-[var(--bg-surface)] rounded-none relative h-[72px] shrink-0 items-center overflow-hidden">
+          
+          {/* Mobile Close Button */}
+          {isMobile && (
+            <button 
+              onClick={() => setMobileMenuOpen(false)}
+              className="absolute right-4 p-1.5 text-[var(--text-muted)] hover:bg-[var(--bg-muted)] hover:text-[var(--color-danger)] transition-colors rounded-none z-20"
+            >
+              <X size={20} strokeWidth={2} />
+            </button>
+          )}
+
+          {/* Logo Container */}
+          <Link href="/admin" className="relative w-full h-full flex items-center cursor-pointer">
+            
+            {/* 1. Collapsed Icon (Shows only when sidebar is narrow) */}
+            <div 
+              className={`absolute left-0 w-[76px] h-full flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                isExpanded ? 'opacity-0 scale-50 pointer-events-none' : 'opacity-100 scale-100 delay-100'
+              }`}
+            >
+              <img 
+                src="/icon.png" 
+                alt="CPU Icon" 
+                className="w-10 h-10 object-contain drop-shadow-sm" 
+              />
+            </div>
+
+            {/* 2. Expanded Full Logo (Shows when sidebar is wide) */}
+            <div 
+              className={`absolute left-6 pr-4 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-left ${
+                !isExpanded ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100 delay-100'
+              }`}
+            >
+              <img 
+                src="https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png" 
+                alt="Career Point University" 
+                className="max-h-[44px] w-auto object-contain"
+              />
+            </div>
+
+          </Link>
         </div>
-        <div className={`flex items-center gap-3 px-5 py-3 cursor-pointer group hover:bg-gray-50 transition-colors ${!isExpanded ? 'justify-center py-4' : ''}`}>
-          <div className="w-7 h-7 rounded-md bg-[#1c54a3] flex items-center justify-center shrink-0 shadow-sm">
-            <span className="text-white font-bold text-[14px]">U</span>
-          </div>
-          <div className={`flex-1 overflow-hidden transition-all duration-300 ${!isExpanded ? 'w-0 opacity-0 hidden' : 'w-auto opacity-100'}`}>
-            <h2 className="text-[14px] font-bold text-[#1C2D38] truncate group-hover:text-[#1c54a3] transition-colors">CPU Admin</h2>
-            <p className="text-[12px] text-[#5C6C75] truncate">Management Cloud</p>
-          </div>
-        </div>
-      </div>
 
-      {/* ── Navigation ── */}
-      <nav className="flex-1 py-4 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        {SIDEBAR_MENUS.map((group) => {
-          const isOpen = expandedGroups[group.category] && isExpanded;
+        {/* ── Navigation ── */}
+        <nav className="flex-1 py-4 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {SIDEBAR_MENUS.map((group) => {
+            const isOpen = expandedGroups[group.category] && isExpanded;
 
-          return (
-            <div key={group.category} className="mb-4">
-              {/* Category Header */}
-              <button 
-                onClick={() => toggleGroup(group.category)}
-                className={`w-full flex items-center justify-between px-5 py-2 hover:bg-gray-50 transition-colors group ${!isExpanded ? 'justify-center' : ''}`}
-              >
-                <span className={`text-[11px] font-bold text-[#5C6C75] tracking-widest uppercase group-hover:text-[#1C2D38] transition-colors whitespace-nowrap overflow-hidden ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 hidden'}`}>
-                  {group.category}
-                </span>
-                {!isExpanded && <div className="w-5 h-[2px] bg-gray-200 rounded-full my-2" />}
-              </button>
+            return (
+              <div key={group.category} className="mb-2">
+                <button 
+                  onClick={() => toggleGroup(group.category)}
+                  className={`w-full flex items-center justify-between px-6 py-3 bg-[var(--bg-body)] border-y border-[var(--border-light)] hover:bg-[var(--color-gray-200)] transition-colors group rounded-none ${!isExpanded ? 'justify-center px-0' : ''}`}
+                >
+                  <span className={`text-[11px] font-bold text-[var(--text-secondary)] tracking-[0.15em] uppercase group-hover:text-[var(--text-primary)] transition-colors whitespace-nowrap overflow-hidden ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 hidden'}`}>
+                    {group.category}
+                  </span>
+                  
+                  {isExpanded && (
+                    <ChevronDown
+                      size={15}
+                      strokeWidth={2.5}
+                      className={`text-[var(--color-gray-400)] group-hover:text-[var(--color-gray-600)] transition-transform duration-300 ${isOpen ? 'rotate-180 text-[var(--color-primary)]' : ''}`}
+                    />
+                  )}
+                  {!isExpanded && <div className="w-5 h-[2px] bg-[var(--border-default)] rounded-none group-hover:bg-[var(--border-dark)] transition-colors" />}
+                </button>
 
-              {/* Items */}
-              <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${isOpen || !isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
-                <div className="overflow-hidden">
-                  <ul className="py-1 space-y-1">
-                    {group.items.map((item) => {
-                      const isChildActive  = item.subItems?.some(s => pathname.startsWith(s.href));
-                      const isDirectActive = item.href && (item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href));
-                      const isActive       = isDirectActive || isChildActive;
-                      const isItemExpanded = expandedItems[item.name];
-                      const Icon           = item.icon;
+                <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${isOpen || !isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                  <div className="overflow-hidden">
+                    <ul className="py-2 flex flex-col m-0">
+                      {group.items.map((item) => {
+                        const isChildActive = item.subItems?.some(s => pathname.startsWith(s.href));
+                        const isDirectActive = item.href && (item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href));
+                        const isActive = isDirectActive || isChildActive;
+                        const isItemExpanded = expandedItems[item.name];
+                        const Icon = item.icon;
 
-                      // Which sub-item index is active? (for trunk coloring)
-                      const activeSubIndex = item.subItems
-                        ? item.subItems.findIndex(s => pathname === s.href || pathname.startsWith(s.href + '/'))
-                        : -1;
+                        const activeSubIndex = item.subItems
+                          ? item.subItems.findIndex(s => pathname === s.href || pathname.startsWith(s.href + '/'))
+                          : -1;
 
-                      const itemClasses = [
-                        'flex items-center justify-between py-[10px] text-[13px] transition-all cursor-pointer relative group',
-                        isExpanded ? 'px-5 border-l-[3px]' : 'justify-center mx-2 rounded-lg px-3',
-                        isActive
-                          ? isExpanded
-                            ? 'border-[#1c54a3] bg-[#f1f5f9] text-[#1c54a3] font-bold'
-                            : 'bg-[#1c54a3]/10 text-[#1c54a3]'
-                          : isExpanded
-                            ? 'border-transparent text-[#1C2D38] hover:bg-[#f8fafc] font-medium'
-                            : 'text-[#1C2D38] hover:bg-gray-50',
-                      ].join(' ');
+                        const itemClasses = [
+                          'group relative flex items-center justify-between py-3 px-6 rounded-none text-[14px] transition-all duration-200 cursor-pointer overflow-hidden border-l-[3px]',
+                          !isExpanded && 'justify-center w-full px-0',
+                          isActive
+                            ? 'border-[var(--color-primary)] bg-[var(--color-primary-lighter)] text-[var(--color-primary-dark)] font-semibold'
+                            : 'border-transparent text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] hover:border-[var(--border-default)] hover:text-[var(--text-primary)] font-medium',
+                        ].filter(Boolean).join(' ');
 
-                      const itemContent = (
-                        <div
-                          onClick={(e) => item.isCollapsible && handleClickItem(e, item)}
-                          className={itemClasses}
-                        >
-                          <div className="flex items-center gap-3">
-                            <Icon
-                              size={18}
-                              strokeWidth={isActive ? 2 : 1.5}
-                              className={`flex-shrink-0 transition-colors ${isActive ? 'text-[#1c54a3]' : 'text-[#5C6C75] group-hover:text-[#1c54a3]'}`}
-                            />
-                            <span className={`whitespace-nowrap transition-all duration-300 ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 hidden'}`}>
-                              {item.name}
-                            </span>
-                          </div>
-
-                          {item.isCollapsible && isExpanded && (
-                            <ChevronDown
-                              size={15}
-                              strokeWidth={2}
-                              className={`transition-transform duration-300 flex-shrink-0 ${isItemExpanded ? 'rotate-180 text-[#1c54a3]' : 'text-[#9ca3af]'}`}
-                            />
-                          )}
-                        </div>
-                      );
-
-                      return (
-                        <li key={item.name} className="relative">
-                          {item.isCollapsible ? (
-                            <div className="flex flex-col">
-                              {itemContent}
-
-                              {/* Accordion sub-items */}
-                              {isExpanded && (
-                                <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${isItemExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
-                                  <div className="overflow-hidden">
-                                    <ul className="relative flex flex-col m-0 p-0 pb-2">
-                                      {item.subItems.map((sub, index) => (
-                                        <SubItem
-                                          key={sub.href}
-                                          sub={sub}
-                                          index={index}
-                                          total={item.subItems.length}
-                                          activeSubIndex={activeSubIndex}
-                                          isMobile={isMobile}
-                                          setMobileMenuOpen={setMobileMenuOpen}
-                                        />
-                                      ))}
-                                    </ul>
-                                  </div>
-                                </div>
-                              )}
+                        const itemContent = (
+                          <div
+                            onClick={(e) => item.isCollapsible && handleClickItem(e, item)}
+                            className={itemClasses}
+                            title={!isExpanded ? item.name : undefined}
+                          >
+                            <div className="flex items-center gap-4">
+                              <Icon
+                                size={20}
+                                strokeWidth={isActive ? 2 : 1.5}
+                                className={`flex-shrink-0 transition-colors duration-200 ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--text-muted)] group-hover:text-[var(--text-secondary)]'}`}
+                              />
+                              <span className={`whitespace-nowrap transition-all duration-300 ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 hidden'}`}>
+                                {item.name}
+                              </span>
                             </div>
-                          ) : (
-                            <Link href={item.href} onClick={() => isMobile && setMobileMenuOpen(false)}>
-                              {itemContent}
-                            </Link>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
+
+                            {item.isCollapsible && isExpanded && (
+                              <ChevronDown
+                                size={16}
+                                strokeWidth={2}
+                                className={`transition-transform duration-300 flex-shrink-0 ${isItemExpanded ? 'rotate-180 text-[var(--color-primary)]' : 'text-[var(--color-gray-400)] group-hover:text-[var(--color-gray-600)]'}`}
+                              />
+                            )}
+                          </div>
+                        );
+
+                        return (
+                          <li key={item.name} className="relative rounded-none">
+                            {item.isCollapsible ? (
+                              <div className="flex flex-col">
+                                {itemContent}
+                                {isExpanded && (
+                                  <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${isItemExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                                    <div className="overflow-hidden">
+                                      <ul className="relative flex flex-col m-0 p-0 pb-1 bg-[var(--bg-body)]">
+                                        {item.subItems.map((sub, index) => (
+                                          <SubItem
+                                            key={sub.href} sub={sub} index={index}
+                                            total={item.subItems.length} activeSubIndex={activeSubIndex}
+                                            isMobile={isMobile} setMobileMenuOpen={setMobileMenuOpen}
+                                          />
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            ) : (
+                              <Link href={item.href} onClick={() => isMobile && setMobileMenuOpen(false)}>
+                                {itemContent}
+                              </Link>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </nav>
+            );
+          })}
+        </nav>
 
-      {/* ── Collapse Toggle ── */}
-      {!isMobile && (
-        <div className={`p-3 border-t border-gray-100 bg-white flex items-center transition-all ${isExpanded ? 'justify-end' : 'justify-center'}`}>
-          <button
-            onClick={() => setIsPinned(!isPinned)}
-            className="p-1.5 text-[#5C6C75] hover:text-[#1c54a3] hover:bg-[#1c54a3]/10 rounded-md transition-colors"
-            title={isPinned ? 'Collapse sidebar' : 'Expand sidebar'}
-          >
-            {isPinned ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
-          </button>
-        </div>
-      )}
-    </aside>
+        {/* ── Zero Radius Collapse Toggle (Desktop Only) ── */}
+        {!isMobile && (
+          <div className={`border-t border-[var(--border-light)] bg-[var(--bg-surface)] flex items-center transition-all duration-300 rounded-none ${isExpanded ? 'justify-end' : 'justify-center'}`}>
+            <button
+              onClick={() => setIsPinned(!isPinned)}
+              className={`
+                w-full flex items-center justify-center py-4 px-6 rounded-none transition-all duration-200
+                ${isPinned 
+                  ? 'bg-[var(--bg-body)] text-[var(--text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-lighter)] justify-end' 
+                  : 'bg-[var(--bg-surface)] text-[var(--text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--bg-body)]'
+                }
+              `}
+              title={isPinned ? 'Collapse sidebar' : 'Expand sidebar'}
+            >
+              {isPinned ? <PanelLeftClose size={20} strokeWidth={2} /> : <PanelLeftOpen size={20} strokeWidth={2} />}
+            </button>
+          </div>
+        )}
+      </aside>
+    </>
   );
 }

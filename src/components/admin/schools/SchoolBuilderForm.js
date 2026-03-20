@@ -5,47 +5,47 @@ import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { Pencil, Save, CheckCircle2, AlertCircle, Plus, Trash2, ChevronDown, ChevronUp, Image as ImageIcon } from 'lucide-react';
+import { Pencil, Save, CheckCircle2, AlertCircle, Plus, Trash2, ChevronDown, ChevronUp, Image as ImageIcon, Settings } from 'lucide-react';
 import { createSchool, updateSchool } from '@/lib/actions/schoolActions';
 
 // --- Shared Internal Components ---
 
 const TitleEditor = ({ label, value = {}, onChange }) => (
-  <div className="space-y-3 p-4 bg-blue-50/50 border border-blue-100 mb-4">
-    <p className="text-[10px] font-black text-blue-800 uppercase tracking-widest">{label}</p>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div className="space-y-3 p-4 bg-[var(--bg-muted)] border-l-2 border-[var(--color-primary)] mb-4">
+    <p className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">{label}</p>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
       <div>
-        <label className="block text-[10px] text-gray-400 uppercase mb-1">Main Title</label>
-        <input type="text" value={value.main || ''} onChange={e => onChange({...value, main: e.target.value})} className="w-full border border-gray-300 p-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="e.g. Course Overview" />
+        <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Main Title</label>
+        <input type="text" value={value.main || ''} onChange={e => onChange({...value, main: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" placeholder="e.g. Course Overview" />
       </div>
       <div>
-        <label className="block text-[10px] text-gray-400 uppercase mb-1">Highlight Word</label>
-        <input type="text" value={value.highlight || ''} onChange={e => onChange({...value, highlight: e.target.value})} className="w-full border border-gray-300 p-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="e.g. Overview" />
+        <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Highlight Word</label>
+        <input type="text" value={value.highlight || ''} onChange={e => onChange({...value, highlight: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" placeholder="e.g. Overview" />
       </div>
       <div>
-        <label className="block text-[10px] text-gray-400 uppercase mb-1">Sky Highlight</label>
-        <input type="text" value={value.skyHighlight || ''} onChange={e => onChange({...value, skyHighlight: e.target.value})} className="w-full border border-gray-300 p-2 text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Optional" />
+        <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Sky Highlight</label>
+        <input type="text" value={value.skyHighlight || ''} onChange={e => onChange({...value, skyHighlight: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" placeholder="Optional" />
       </div>
     </div>
   </div>
 );
 
 const StringListEditor = ({ value = [], onChange, label }) => (
-  <div className="space-y-2 mt-4">
-    <label className="block text-[10px] text-gray-400 uppercase mb-1">{label}</label>
-    <div className="space-y-2 border-l-2 border-blue-100 pl-4 py-2">
+  <div className="space-y-2 mt-3">
+    <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">{label}</label>
+    <div className="space-y-2 border-l border-[var(--border-light)] pl-3">
       {value.map((item, idx) => (
-        <div key={idx} className="flex gap-2">
+        <div key={idx} className="flex flex-col sm:flex-row gap-2">
           <input type="text" value={item} onChange={e => {
             const newList = [...value]; newList[idx] = e.target.value; onChange(newList);
-          }} className="flex-1 border border-gray-200 p-2 text-xs outline-none focus:border-blue-500" placeholder="List item text..." />
-          <button onClick={() => onChange(value.filter((_, i) => i !== idx))} className="text-red-300 hover:text-red-500 transition-colors">
+          }} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" placeholder="List item text..." />
+          <button onClick={() => onChange(value.filter((_, i) => i !== idx))} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1.5 transition-colors border border-[var(--border-default)] hover:border-[var(--color-danger-light)] hover:bg-[var(--color-danger-light)] rounded-none flex justify-center items-center">
             <Trash2 size={16} />
           </button>
         </div>
       ))}
-      <button onClick={() => onChange([...value, ''])} className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:text-blue-800">
-        <Plus size={14} /> ADD {label.toUpperCase() || 'ITEM'}
+      <button onClick={() => onChange([...value, ''])} className="inline-flex items-center gap-1 text-[10px] font-bold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] uppercase tracking-wide mt-1">
+        <Plus size={14} strokeWidth={2} /> ADD ITEM
       </button>
     </div>
   </div>
@@ -53,22 +53,22 @@ const StringListEditor = ({ value = [], onChange, label }) => (
 
 const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate }) => (
   <div className="space-y-4">
-    <div className="flex justify-between items-center border-b pb-2">
-      <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest">{label}</h4>
-      <button onClick={() => onUpdate([...items, newItemTemplate])} className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:text-blue-800">
-        <Plus size={14} /> ADD {label.toUpperCase()}
+    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 border-b border-[var(--border-light)] pb-2">
+      <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">{label}</h4>
+      <button onClick={() => onUpdate([...items, newItemTemplate])} className="flex items-center gap-1 text-[10px] font-bold text-[var(--text-inverse)] bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] transition-colors px-2 py-1 uppercase tracking-wide rounded-none">
+        <Plus size={14} /> ADD
       </button>
     </div>
     <div className="space-y-3">
       {items.map((item, idx) => (
-        <div key={idx} className="border border-gray-200 bg-white p-4 relative group">
-          <button onClick={() => onUpdate(items.filter((_, i) => i !== idx))} className="absolute top-2 right-2 text-red-400 hover:text-red-600">
+        <div key={idx} className="border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 relative group hover:border-[var(--border-dark)] transition-colors rounded-none">
+          <button onClick={() => onUpdate(items.filter((_, i) => i !== idx))} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 transition-colors bg-[var(--bg-surface)] border border-transparent hover:border-[var(--color-danger-light)] rounded-none">
             <Trash2 size={16} />
           </button>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
             {fields.map(field => (
-              <div key={field.key}>
-                <label className="block text-[10px] text-gray-400 uppercase mb-1">{field.label}</label>
+              <div key={field.key} className={field.type === 'richText' || field.type === 'stringList' ? 'md:col-span-2' : ''}>
+                <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">{field.label}</label>
                 {field.type === 'icon' ? (
                   <IconPicker 
                     value={item[field.key]} 
@@ -77,37 +77,35 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                     }} 
                   />
                 ) : field.type === 'image' ? (
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <input type="text" value={item[field.key] || ''} onChange={e => {
                       const newItems = [...items]; newItems[idx][field.key] = e.target.value; onUpdate(newItems);
-                    }} className="flex-1 border border-gray-300 p-2 text-xs outline-none" />
-                    <MediaUploader category="schools" onUploadSuccess={url => {
-                      const newItems = [...items]; newItems[idx][field.key] = url; onUpdate(newItems);
-                    }} />
+                    }} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="Image URL..." />
+                    <div className="w-full sm:w-auto shrink-0">
+                      <MediaUploader category="schools" onUploadSuccess={url => {
+                        const newItems = [...items]; newItems[idx][field.key] = url; onUpdate(newItems);
+                      }} />
+                    </div>
                   </div>
                 ) : field.type === 'richText' ? (
-                  <div className="md:col-span-2">
-                    <RichTextEditor 
-                      value={item[field.key] || ''} 
-                      onChange={val => {
-                        const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
-                      }} 
-                    />
-                  </div>
+                  <RichTextEditor 
+                    value={item[field.key] || ''} 
+                    onChange={val => {
+                      const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
+                    }} 
+                  />
                 ) : field.type === 'stringList' ? (
-                  <div className="md:col-span-2">
-                    <StringListEditor 
-                      label={field.label} 
-                      value={item[field.key] || []} 
-                      onChange={val => {
-                        const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
-                      }} 
-                    />
-                  </div>
+                  <StringListEditor 
+                    label={field.label} 
+                    value={item[field.key] || []} 
+                    onChange={val => {
+                      const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
+                    }} 
+                  />
                 ) : (
                   <input type={field.type || 'text'} value={item[field.key] || ''} onChange={e => {
                     const newItems = [...items]; newItems[idx][field.key] = e.target.value; onUpdate(newItems);
-                  }} className="w-full border border-gray-300 p-2 text-xs outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                  }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" />
                 )}
               </div>
             ))}
@@ -127,11 +125,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [formData, setFormData] = useState(initialData || {
-    name: '',
-    slug: '',
-    metaTitle: '',
-    metaDescription: '',
-    breadcrumb: [],
+    name: '', slug: '', metaTitle: '', metaDescription: '', breadcrumb: [],
     hero: { bgImage: '', badge: '', title: { main: '', highlight: '', skyHighlight: '' }, subtitle: '', description: '', cta: [], quickStats: [] },
     stats: [],
     exploreDepartment: { sectionTitle: { main: 'Explore Our Department', highlight: 'Department' }, subtitle: 'Discover our specialized wings', items: [] },
@@ -172,52 +166,53 @@ export default function SchoolBuilderForm({ initialData = null }) {
   };
 
   const SectionCard = ({ id, title, description, isComplete }) => (
-    <div className="border border-gray-300 bg-white p-5 flex justify-between items-center group hover:border-blue-500 transition-all shadow-sm">
-      <div className="flex items-center gap-4">
-        <div className={`p-2 rounded-none ${isComplete ? 'bg-green-50 text-green-600' : 'bg-gray-50 text-gray-400'}`}>
-          {isComplete ? <CheckCircle2 size={24} /> : <AlertCircle size={24} />}
+    <div className="border border-[var(--border-default)] bg-[var(--bg-surface)] p-3 flex flex-col sm:flex-row justify-between sm:items-center gap-3 hover:border-[var(--color-primary)] transition-all rounded-none group shadow-[var(--shadow-sm)]">
+      <div className="flex items-center gap-3">
+        <div className={`w-8 h-8 flex items-center justify-center rounded-none shrink-0 ${isComplete ? 'bg-[var(--color-success-light)] text-[var(--color-success-dark)]' : 'bg-[var(--bg-muted)] text-[var(--text-muted)]'}`}>
+          {isComplete ? <CheckCircle2 size={16} strokeWidth={2.5} /> : <AlertCircle size={16} strokeWidth={2} />}
         </div>
         <div>
-          <h3 className="font-bold text-gray-900">{title}</h3>
-          <p className="text-sm text-gray-500">{description}</p>
+          <h3 className="font-bold text-[var(--text-primary)] text-[12px] uppercase tracking-wide leading-tight">{title}</h3>
+          <p className="text-[10px] text-[var(--text-secondary)] mt-0.5">{description}</p>
         </div>
       </div>
       <button 
         onClick={() => { setActiveSection(id); setIsModalOpen(true); }}
-        className="flex items-center gap-2 px-4 py-2 border border-blue-600 text-blue-600 font-bold text-xs hover:bg-blue-600 hover:text-white transition-all rounded-none"
+        className="w-full sm:w-auto px-3 py-1.5 border border-[var(--border-dark)] text-[var(--text-secondary)] font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--text-primary)] hover:border-[var(--text-primary)] hover:text-[var(--bg-surface)] transition-all rounded-none flex items-center justify-center gap-1.5"
       >
-        <Pencil size={14} /> EDIT SECTION
+        <Pencil size={12} strokeWidth={2} /> EDIT
       </button>
     </div>
   );
 
   return (
-    <div className="max-w-5xl mx-auto pb-32 space-y-8">
-      {/* Basic Configuration */}
-      <div className="bg-white border border-gray-300 p-8 shadow-sm space-y-6">
-        <h2 className="text-xl font-black text-gray-900 uppercase tracking-tight border-b-2 border-gray-200 pb-4">School Configuration</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="w-[98%] lg:w-[95%] xl:w-[92%] mx-auto pb-28 space-y-6 px-4 mt-6">
+      
+      {/* ── Basic Configuration ── */}
+      <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 shadow-[var(--shadow-sm)] space-y-5 rounded-none">
+        <div className="flex items-center gap-2 border-b border-[var(--border-light)] pb-3">
+          <Settings size={18} className="text-[var(--color-primary)]" />
+          <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide">Base Config</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-black text-gray-500 uppercase mb-2">School Name</label>
-            <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-blue-600 outline-none rounded-none bg-gray-50" />
+            <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">School Name *</label>
+            <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" placeholder="e.g. School of Engineering" />
           </div>
           <div>
-            <label className="block text-xs font-black text-gray-500 uppercase mb-2">Slug</label>
-            <input type="text" value={formData.slug} onChange={(e) => setFormData({...formData, slug: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-blue-600 outline-none rounded-none bg-gray-50 font-mono" />
+            <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Slug</label>
+            <input type="text" value={formData.slug} onChange={(e) => setFormData({...formData, slug: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-muted)] font-mono" placeholder="engineering" />
           </div>
-          <div>
-            <label className="block text-xs font-black text-gray-500 uppercase mb-2">Meta Title</label>
-            <input type="text" placeholder="e.g. School of Computer Applications | CP University" value={formData.metaTitle} onChange={(e) => setFormData({...formData, metaTitle: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-blue-600 outline-none rounded-none bg-gray-50" />
+          <div className="md:col-span-2 pt-3 border-t border-[var(--border-light)]">
+            <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Meta Title</label>
+            <input type="text" value={formData.metaTitle} onChange={(e) => setFormData({...formData, metaTitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)] mb-3" placeholder="SEO Title..." />
+            <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Meta Description</label>
+            <textarea value={formData.metaDescription} onChange={(e) => setFormData({...formData, metaDescription: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs h-20 focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)] resize-none" placeholder="SEO Description..." />
           </div>
-          <div className="md:col-span-2">
-            <label className="block text-xs font-black text-gray-500 uppercase mb-2">Meta Description</label>
-            <textarea placeholder="e.g. Learn about our industry-aligned programs, expert faculty, and state-of-the-art labs..." value={formData.metaDescription} onChange={(e) => setFormData({...formData, metaDescription: e.target.value})} className="w-full border border-gray-300 p-3 text-sm h-24 focus:border-blue-600 outline-none rounded-none bg-gray-50 resize-none" />
-          </div>
-          
-          <div className="md:col-span-2 pt-4 border-t border-gray-100">
+          <div className="md:col-span-2 pt-3 border-t border-[var(--border-light)]">
             <NestedListEditor 
               label="Breadcrumb Paths"
-              items={formData.breadcrumb}
+              items={formData.breadcrumb || []}
               newItemTemplate={{ label: '', link: '' }}
               fields={[{key: 'label', label: 'Label'}, {key: 'link', label: 'Link (e.g. /schools)'}]}
               onUpdate={items => setFormData({...formData, breadcrumb: items})}
@@ -226,99 +221,113 @@ export default function SchoolBuilderForm({ initialData = null }) {
         </div>
       </div>
 
-      {/* Structured Sections List */}
+      {/* ── Structured Sections List ── */}
       <div className="space-y-4">
-        <h2 className="text-xl font-black text-gray-900 uppercase tracking-tight px-2">Page Content Sections</h2>
-        <div className="grid grid-cols-1 gap-3">
-          <SectionCard id="hero" title="Hero Section" description="Banner, main title, CTAs and background image." isComplete={!!formData.hero?.title?.main} />
-          <SectionCard id="stats" title="Quick Stats" description="University-wide numbers and statistics icons." isComplete={formData.stats?.length > 0} />
-          <SectionCard id="about" title="Vision & Mission" description="School's core values, vision text and mission points." isComplete={!!formData.about?.vision?.text} />
-          <SectionCard id="programmes" title="Programmes" description="Manage course levels and associated programs." isComplete={formData.programmes?.levels?.length > 0} />
-          <SectionCard id="placements" title="Placements" description="Placement statistics and student list." isComplete={formData.placements?.list?.length > 0} />
-          <SectionCard id="alumni" title="Alumni" description="Voice of our successful graduates." isComplete={formData.alumni?.list?.length > 0} />
-          <SectionCard id="industry" title="Industry Partners" description="Logos and names of corporate tie-ups." isComplete={formData.industry?.partners?.length > 0} />
-          <SectionCard id="research" title="Research & Development" description="Patents, papers and research highlights." isComplete={formData.research?.stats?.length > 0} />
-          <SectionCard id="community" title="Community & Culture" description="Social life, events and campus vibe." isComplete={formData.community?.description?.length > 0} />
-          <SectionCard id="infrastructure" title="Infrastructure" description="Labs, classrooms and facility highlights." isComplete={formData.infrastructure?.list?.length > 0} />
-          <SectionCard id="testimonials" title="Testimonials" description="Student reviews and feedback." isComplete={formData.testimonials?.list?.length > 0} />
-          <SectionCard id="exploreDepartment" title="Explore Department" description="Manage Quick Links, Highlights and specialized wings for this department." isComplete={formData.exploreDepartment?.items?.length > 0} />
+        <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide border-b border-[var(--border-light)] pb-2">Page Layout Sections</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <SectionCard id="hero" title="Hero Header" description="Top banner & title." isComplete={!!formData.hero?.title?.main} />
+          <SectionCard id="stats" title="Quick Stats" description="University numbers." isComplete={formData.stats?.length > 0} />
+          <SectionCard id="about" title="Vision & Mission" description="School's core values." isComplete={!!formData.about?.vision?.text} />
+          <SectionCard id="programmes" title="Programmes" description="Course levels & links." isComplete={formData.programmes?.levels?.length > 0} />
+          <SectionCard id="placements" title="Placements" description="Student placement list." isComplete={formData.placements?.list?.length > 0} />
+          <SectionCard id="alumni" title="Alumni" description="Alumni success stories." isComplete={formData.alumni?.list?.length > 0} />
+          <SectionCard id="industry" title="Industry Partners" description="Logos of tie-ups." isComplete={formData.industry?.partners?.length > 0} />
+          <SectionCard id="research" title="Research & Dev" description="Patents and stats." isComplete={formData.research?.stats?.length > 0} />
+          <SectionCard id="community" title="Community" description="Campus vibe & gallery." isComplete={formData.community?.description?.length > 0} />
+          <SectionCard id="infrastructure" title="Infrastructure" description="Labs & facilities." isComplete={formData.infrastructure?.list?.length > 0} />
+          <SectionCard id="testimonials" title="Testimonials" description="Student feedback." isComplete={formData.testimonials?.list?.length > 0} />
+          <SectionCard id="exploreDepartment" title="Department" description="Specialized wings." isComplete={formData.exploreDepartment?.items?.length > 0} />
         </div>
       </div>
 
-      {/* Save Button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-300 p-6 shadow-2xl z-12 flex justify-end px-12">
-        <button onClick={handleSave} disabled={isSaving} className="bg-blue-600 text-white px-12 py-4 font-black text-sm uppercase tracking-widest hover:bg-blue-800 transition-all disabled:opacity-50 flex items-center gap-3 rounded-none shadow-lg">
-          {isSaving ? 'Saving...' : <><Save size={20} /> Save School</>}
-        </button>
+      {/* ── Minimal Floating Save Bar ── */}
+      <div className="fixed bottom-6 right-6 z-50 flex items-center justify-end">
+        <div className="bg-[var(--bg-surface)] border border-[var(--border-dark)] p-2 shadow-2xl flex items-center gap-3 rounded-none">
+          <div className="hidden sm:flex flex-col text-right px-3 border-r border-[var(--border-light)]">
+            <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Status</span>
+            <span className="text-[11px] font-black text-[var(--color-primary)] uppercase">{isSaving ? 'Processing...' : 'Draft Unsaved'}</span>
+          </div>
+          <button 
+            onClick={handleSave} 
+            disabled={isSaving} 
+            className="bg-[var(--color-primary)] text-[var(--text-inverse)] px-6 py-2.5 font-bold text-[11px] uppercase tracking-widest hover:bg-[var(--color-primary-dark)] transition-all disabled:opacity-50 flex items-center justify-center gap-2 rounded-none"
+          >
+            {isSaving ? <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" /> : <Save size={16} strokeWidth={2.5} />}
+            {isSaving ? 'SAVING' : 'SAVE CHANGES'}
+          </button>
+        </div>
       </div>
 
-      {/* Edit Modal */}
+      {/* ── Edit Modal ── */}
       <Modal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
         title={`Edit ${activeSection?.toUpperCase()}`}
         footer={
-          <>
-            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Draft changes preserved inside modal</p>
-            <button onClick={() => setIsModalOpen(false)} className="bg-gray-900 text-white px-8 py-2 font-black text-xs uppercase hover:bg-black transition-all rounded-none">
-              APPLY CHANGES
+          <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4">
+            <p className="text-[9px] text-[var(--text-muted)] font-bold uppercase tracking-widest w-full sm:w-auto text-center sm:text-left">Changes apply to draft on Done</p>
+            <button onClick={() => setIsModalOpen(false)} className="w-full sm:w-auto bg-[var(--text-primary)] text-[var(--bg-surface)] px-10 py-2.5 font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--text-secondary)] transition-colors rounded-none">
+              DONE EDITING
             </button>
-          </>
+          </div>
         }
       >
+        <div className="p-2 pb-8">
+          
           {activeSection === 'hero' && (
             <div className="space-y-6">
               <TitleEditor label="Hero Title" value={formData.hero.title} onChange={val => updateSection('hero', {...formData.hero, title: val})} />
               <div>
-                <label className="block text-xs font-black text-gray-500 uppercase mb-2">Hero Subtitle</label>
-                <input type="text" value={formData.hero.subtitle} onChange={e => updateSection('hero', {...formData.hero, subtitle: e.target.value})} className="w-full border border-gray-300 p-3 bg-white focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Shaping the Future of Tech" />
+                <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Hero Subtitle</label>
+                <input type="text" value={formData.hero.subtitle} onChange={e => updateSection('hero', {...formData.hero, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="e.g. Shaping the Future of Tech" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-black text-gray-500 uppercase mb-2">Badge Text</label>
-                  <input type="text" value={formData.hero.badge} onChange={e => updateSection('hero', {...formData.hero, badge: e.target.value})} className="w-full border border-gray-300 p-3 bg-white" />
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Badge Text</label>
+                  <input type="text" value={formData.hero.badge} onChange={e => updateSection('hero', {...formData.hero, badge: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
                 </div>
                 <div>
-                   <label className="block text-xs font-black text-gray-500 uppercase mb-2">Background Image URL</label>
-                   <div className="flex gap-2">
-                     <input type="text" value={formData.hero.bgImage} onChange={e => updateSection('hero', {...formData.hero, bgImage: e.target.value})} className="flex-1 border border-gray-300 p-3 bg-white" />
-                     <MediaUploader category="schools" onUploadSuccess={url => updateSection('hero', {...formData.hero, bgImage: url})} />
+                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Background Image URL</label>
+                   <div className="flex flex-col sm:flex-row gap-2">
+                     <input type="text" value={formData.hero.bgImage} onChange={e => updateSection('hero', {...formData.hero, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                     <div className="w-full sm:w-auto shrink-0"><MediaUploader category="schools" onUploadSuccess={url => updateSection('hero', {...formData.hero, bgImage: url})} /></div>
                    </div>
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-black text-gray-500 uppercase mb-2">Description</label>
-                <textarea value={formData.hero.description} onChange={e => updateSection('hero', {...formData.hero, description: e.target.value})} className="w-full border border-gray-300 p-3 bg-white h-24" />
+                <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Description</label>
+                <textarea value={formData.hero.description} onChange={e => updateSection('hero', {...formData.hero, description: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs h-20 outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none resize-none" />
               </div>
-              <NestedListEditor 
-                label="Call to Action Buttons"
-                items={formData.hero.cta}
-                newItemTemplate={{ label: '', link: '#', primary: false }}
-                fields={[{key: 'label', label: 'Button Label'}, {key: 'link', label: 'Link URL'}, {key: 'primary', label: 'Is Primary? (true/false)'}]}
-                onUpdate={items => updateSection('hero', {...formData.hero, cta: items})}
-              />
-
-              <div className="pt-4 border-t border-gray-200">
-                <p className="text-[10px] font-black text-gray-400 uppercase mb-3">Hero Quick Stats (Course Pages)</p>
-                <div className="space-y-4">
+              <div className="pt-5 border-t border-[var(--border-light)]">
+                <NestedListEditor 
+                  label="Call to Action Buttons"
+                  items={formData.hero.cta}
+                  newItemTemplate={{ label: '', link: '#', primary: false }}
+                  fields={[{key: 'label', label: 'Button Label'}, {key: 'link', label: 'Link URL'}, {key: 'primary', label: 'Is Primary? (true/false)'}]}
+                  onUpdate={items => updateSection('hero', {...formData.hero, cta: items})}
+                />
+              </div>
+              <div className="pt-5 border-t border-[var(--border-light)]">
+                <p className="text-[11px] font-bold text-[var(--text-secondary)] uppercase mb-3 tracking-widest">Hero Quick Stats</p>
+                <div className="space-y-3">
                   {formData.hero.quickStats?.map((s, idx) => (
-                    <div key={idx} className="flex gap-4 items-end bg-white p-3 border border-dashed">
-                      <div className="flex-1">
-                        <label className="text-[10px] block mb-1">Value</label>
-                        <input type="text" value={s.value} onChange={e => { const n = [...formData.hero.quickStats]; n[idx].value = e.target.value; updateSection('hero', {...formData.hero, quickStats: n})}} className="w-full border p-2 text-xs" />
+                    <div key={idx} className="flex flex-col sm:flex-row gap-3 items-end bg-[var(--bg-surface)] p-3 border border-[var(--border-default)] rounded-none group hover:border-[var(--border-dark)] transition-colors relative">
+                      <div className="flex-1 w-full">
+                        <label className="text-[9px] text-[var(--text-muted)] font-bold uppercase block mb-1">Value</label>
+                        <input type="text" value={s.value} onChange={e => { const n = [...formData.hero.quickStats]; n[idx].value = e.target.value; updateSection('hero', {...formData.hero, quickStats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
-                      <div className="flex-1">
-                        <label className="text-[10px] block mb-1">Label</label>
-                        <input type="text" value={s.label} onChange={e => { const n = [...formData.hero.quickStats]; n[idx].label = e.target.value; updateSection('hero', {...formData.hero, quickStats: n})}} className="w-full border p-2 text-xs" />
+                      <div className="flex-1 w-full">
+                        <label className="text-[9px] text-[var(--text-muted)] font-bold uppercase block mb-1">Label</label>
+                        <input type="text" value={s.label} onChange={e => { const n = [...formData.hero.quickStats]; n[idx].label = e.target.value; updateSection('hero', {...formData.hero, quickStats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
-                      <div className="w-40">
-                        <label className="text-[10px] block mb-1">Icon</label>
+                      <div className="w-full sm:w-40">
+                        <label className="text-[9px] text-[var(--text-muted)] font-bold uppercase block mb-1">Icon</label>
                         <IconPicker value={s.icon} onChange={val => { const n = [...formData.hero.quickStats]; n[idx].icon = val; updateSection('hero', {...formData.hero, quickStats: n})}} />
                       </div>
-                      <button onClick={() => updateSection('hero', {...formData.hero, quickStats: formData.hero.quickStats.filter((_, i) => i !== idx)})} className="text-red-400 p-2"><Trash2 size={16} /></button>
+                      <button onClick={() => updateSection('hero', {...formData.hero, quickStats: formData.hero.quickStats.filter((_, i) => i !== idx)})} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1.5 transition-colors absolute top-2 right-2 sm:static"><Trash2 size={16} /></button>
                     </div>
                   ))}
-                  <button onClick={() => updateSection('hero', {...formData.hero, quickStats: [...(formData.hero.quickStats || []), { icon: 'Star', value: '', label: '' }]})} className="text-[10px] font-bold text-blue-600 flex items-center gap-1"><Plus size={14} /> ADD STAT</button>
+                  <button onClick={() => updateSection('hero', {...formData.hero, quickStats: [...(formData.hero.quickStats || []), { icon: 'Star', value: '', label: '' }]})} className="text-[10px] font-bold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] uppercase tracking-widest transition-colors flex items-center gap-1.5 mt-2"><Plus size={14} strokeWidth={2.5}/> ADD STAT</button>
                 </div>
               </div>
             </div>
@@ -328,48 +337,48 @@ export default function SchoolBuilderForm({ initialData = null }) {
             <div className="space-y-6">
               <div className="space-y-4">
                 {formData.stats?.map((s, idx) => (
-                  <div key={idx} className="bg-white border p-4 group relative">
-                    <button onClick={() => updateSection('stats', formData.stats.filter((_, i) => i !== idx))} className="absolute top-2 right-2 text-red-300 opacity-0 group-hover:opacity-100"><Trash2 size={16} /></button>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div key={idx} className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 relative group hover:border-[var(--border-dark)] transition-colors rounded-none">
+                    <button onClick={() => updateSection('stats', formData.stats.filter((_, i) => i !== idx))} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 transition-colors"><Trash2 size={16} /></button>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
                       <div>
-                        <label className="block text-[10px] text-gray-400 uppercase mb-1">Value (e.g. 50+)</label>
-                        <input type="text" value={s.value} onChange={e => { const ns = [...formData.stats]; ns[idx].value = e.target.value; updateSection('stats', ns); }} className="w-full border p-2 text-sm" />
+                        <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Value (e.g. 50+)</label>
+                        <input type="text" value={s.value} onChange={e => { const ns = [...formData.stats]; ns[idx].value = e.target.value; updateSection('stats', ns); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
                       <div>
-                        <label className="block text-[10px] text-gray-400 uppercase mb-1">Label (e.g. Labs)</label>
-                        <input type="text" value={s.label} onChange={e => { const ns = [...formData.stats]; ns[idx].label = e.target.value; updateSection('stats', ns); }} className="w-full border p-2 text-sm" />
+                        <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Label (e.g. Labs)</label>
+                        <input type="text" value={s.label} onChange={e => { const ns = [...formData.stats]; ns[idx].label = e.target.value; updateSection('stats', ns); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
                       <div className="z-[60]">
-                        <label className="block text-[10px] text-gray-400 uppercase mb-1">Icon</label>
+                        <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Icon</label>
                         <IconPicker value={s.icon} onChange={val => { const ns = [...formData.stats]; ns[idx].icon = val; updateSection('stats', ns); }} />
                       </div>
                     </div>
                   </div>
                 ))}
-                <button onClick={() => updateSection('stats', [...formData.stats, { value: '', label: '', icon: 'BarChart' }])} className="w-full border-2 border-dashed border-gray-200 p-4 text-gray-400 hover:text-blue-500 hover:border-blue-200 transition-all font-bold text-xs">
-                  + ADD NEW STAT CARD
+                <button onClick={() => updateSection('stats', [...formData.stats, { value: '', label: '', icon: 'BarChart' }])} className="w-full border border-dashed border-[var(--border-dark)] p-3 text-[10px] font-bold text-[var(--text-primary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-lighter)] transition-all uppercase tracking-widest rounded-none flex justify-center items-center gap-2">
+                  <Plus size={14} strokeWidth={2.5} /> ADD NEW STAT CARD
                 </button>
               </div>
             </div>
           )}
 
           {activeSection === 'about' && (
-            <div className="space-y-8">
-              <div className="bg-white p-6 border border-gray-200">
-                <h3 className="font-bold text-blue-900 border-b pb-2 mb-4">Vision Section</h3>
+            <div className="space-y-6">
+              <div className="bg-[var(--bg-surface)] p-5 border border-[var(--border-default)] rounded-none">
+                <h3 className="font-bold text-[13px] text-[var(--color-primary)] uppercase tracking-widest border-b border-[var(--border-light)] pb-2 mb-4">Vision Section</h3>
                 <TitleEditor label="Vision Title" value={formData.about.vision.title} onChange={val => updateSection('about', {...formData.about, vision: {...formData.about.vision, title: val}})} />
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div className="flex-1">
-                    <label className="text-[10px] block mb-1 font-bold">Label</label>
-                    <input type="text" placeholder="Label" value={formData.about.vision.label} onChange={e => updateSection('about', {...formData.about, vision: {...formData.about.vision, label: e.target.value}})} className="w-full border p-2" />
+                    <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Label</label>
+                    <input type="text" placeholder="Label" value={formData.about.vision.label} onChange={e => updateSection('about', {...formData.about, vision: {...formData.about.vision, label: e.target.value}})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                   </div>
                   <div className="flex-1">
-                    <label className="text-[10px] block mb-1 font-bold">Icon</label>
+                    <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Icon</label>
                     <IconPicker value={formData.about.vision.icon} onChange={val => updateSection('about', {...formData.about, vision: {...formData.about.vision, icon: val}})} />
                   </div>
                 </div>
-                <div className="bg-white border p-4 shadow-sm mb-4">
-                  <label className="block text-[10px] font-black text-blue-900 uppercase mb-4">Vision Statement (Rich Text)</label>
+                <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 rounded-none mb-4">
+                  <label className="block text-[10px] font-black text-[var(--text-primary)] uppercase mb-3 tracking-widest">Vision Statement (Rich Text)</label>
                   <RichTextEditor 
                     value={formData.about.vision.text} 
                     onChange={content => updateSection('about', {...formData.about, vision: {...formData.about.vision, text: content}})} 
@@ -383,36 +392,33 @@ export default function SchoolBuilderForm({ initialData = null }) {
                   onUpdate={items => updateSection('about', {...formData.about, vision: {...formData.about.vision, highlights: items}})}
                 />
               </div>
-              <div className="bg-white p-6 border border-gray-200">
-                <h3 className="font-bold text-orange-900 border-b pb-2 mb-4">Mission Section</h3>
+              <div className="bg-[var(--bg-surface)] p-5 border border-[var(--border-default)] rounded-none">
+                <h3 className="font-bold text-[13px] text-[var(--color-warning-dark)] uppercase tracking-widest border-b border-[var(--border-light)] pb-2 mb-4">Mission Section</h3>
                 <TitleEditor label="Mission Title" value={formData.about.mission.title} onChange={val => updateSection('about', {...formData.about, mission: {...formData.about.mission, title: val}})} />
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div className="flex-1">
-                    <label className="text-[10px] block mb-1 font-bold">Label</label>
-                    <input type="text" placeholder="Label" value={formData.about.mission.label} onChange={e => updateSection('about', {...formData.about, mission: {...formData.about.mission, label: e.target.value}})} className="w-full border p-2" />
+                    <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Label</label>
+                    <input type="text" placeholder="Label" value={formData.about.mission.label} onChange={e => updateSection('about', {...formData.about, mission: {...formData.about.mission, label: e.target.value}})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                   </div>
                   <div className="flex-1">
-                    <label className="text-[10px] block mb-1 font-bold">Icon</label>
+                    <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Icon</label>
                     <IconPicker value={formData.about.mission.icon} onChange={val => updateSection('about', {...formData.about, mission: {...formData.about.mission, icon: val}})} />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-orange-900 uppercase mb-4 tracking-widest leading-relaxed">
+                  <label className="block text-[10px] font-black text-[var(--text-primary)] uppercase mb-3 tracking-widest">
                     Our Mission Statement (Full Rich Text Editor)
                   </label>
-                  <div className="bg-white border shadow-sm rounded-none overflow-hidden">
+                  <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none">
                     <RichTextEditor 
                       value={formData.about.mission.points?.join('') || ''}
                       onChange={content => updateSection('about', {
                         ...formData.about, 
-                        mission: {
-                          ...formData.about.mission, 
-                          points: [content]
-                        }
+                        mission: { ...formData.about.mission, points: [content] }
                       })}
                     />
                   </div>
-                  <p className="mt-2 text-[9px] text-gray-400 italic px-1">Note: Use the editor to add bullet points, bold text, etc. This replaces the old line-by-line list.</p>
+                  <p className="mt-2 text-[9px] text-[var(--text-muted)] italic">Note: Use the editor to add bullet points, bold text, etc.</p>
                 </div>
               </div>
             </div>
@@ -421,45 +427,45 @@ export default function SchoolBuilderForm({ initialData = null }) {
           {activeSection === 'programmes' && (
             <div className="space-y-6">
               <TitleEditor label="Section Title" value={formData.programmes.title} onChange={val => updateSection('programmes', {...formData.programmes, title: val})} />
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex-1">
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Section Subtitle</label>
-                  <input type="text" placeholder="Subtitle" value={formData.programmes.subtitle} onChange={e => updateSection('programmes', {...formData.programmes, subtitle: e.target.value})} className="border p-2 w-full" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Section Subtitle</label>
+                  <input type="text" placeholder="Subtitle" value={formData.programmes.subtitle} onChange={e => updateSection('programmes', {...formData.programmes, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
                 </div>
-                <div className="flex-1">
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Background Image</label>
-                  <div className="flex gap-2">
-                    <input type="text" placeholder="BG Image URL" value={formData.programmes.bgImage} onChange={e => updateSection('programmes', {...formData.programmes, bgImage: e.target.value})} className="border p-2 flex-1" />
-                    <MediaUploader category="schools" onUploadSuccess={url => updateSection('programmes', {...formData.programmes, bgImage: url})} />
+                <div>
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Background Image</label>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input type="text" placeholder="BG Image URL" value={formData.programmes.bgImage} onChange={e => updateSection('programmes', {...formData.programmes, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                    <div className="w-full sm:w-auto shrink-0"><MediaUploader category="schools" onUploadSuccess={url => updateSection('programmes', {...formData.programmes, bgImage: url})} /></div>
                   </div>
                 </div>
               </div>
-              <div className="bg-white p-4 border shadow-sm">
-                <label className="block text-xs font-black text-gray-800 uppercase mb-4">Programme Overview (Rich Text)</label>
+              <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
+                <label className="block text-[11px] font-black text-[var(--text-secondary)] uppercase mb-3 tracking-widest">Programme Overview (Rich Text)</label>
                 <RichTextEditor 
                   value={formData.programmes.description} 
                   onChange={content => updateSection('programmes', {...formData.programmes, description: content})} 
                 />
               </div>
               
-              <div className="mt-8 border-t pt-4">
-                <div className="flex justify-between items-center mb-4">
-                  <h4 className="font-black text-gray-900 uppercase text-xs">Edit Qualification Levels</h4>
-                  <button onClick={() => updateSection('programmes', {...formData.programmes, levels: [...formData.programmes.levels, { label: '', icon: 'GraduationCap', courses: [] }]})} className="bg-blue-600 text-white px-3 py-1 text-[10px] font-bold">ADD LEVEL</button>
+              <div className="mt-8 border-t border-[var(--border-light)] pt-5">
+                <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-4">
+                  <h4 className="font-black text-[var(--text-primary)] uppercase text-[12px] tracking-widest">Edit Qualification Levels</h4>
+                  <button onClick={() => updateSection('programmes', {...formData.programmes, levels: [...formData.programmes.levels, { label: '', icon: 'GraduationCap', courses: [] }]})} className="bg-[var(--color-primary)] text-[var(--text-inverse)] px-4 py-2 text-[10px] font-bold uppercase tracking-wide hover:bg-[var(--color-primary-dark)] transition-colors rounded-none w-full sm:w-auto text-center">ADD LEVEL</button>
                 </div>
                 <div className="space-y-4">
                   {formData.programmes.levels.map((level, lIdx) => (
-                    <div key={lIdx} className="bg-white border p-4 shadow-sm">
-                      <div className="flex gap-2 mb-4">
+                    <div key={lIdx} className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 rounded-none group relative">
+                      <button onClick={() => updateSection('programmes', {...formData.programmes, levels: formData.programmes.levels.filter((_, i) => i !== lIdx)})} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] transition-colors p-1"><Trash2 size={18}/></button>
+                      <div className="flex flex-col sm:flex-row gap-3 mb-5 mt-4 sm:mt-0">
                         <input type="text" placeholder="Level Label (e.g. Undergrad)" value={level.label} onChange={e => {
                           const nl = [...formData.programmes.levels]; nl[lIdx].label = e.target.value; updateSection('programmes', {...formData.programmes, levels: nl});
-                        }} className="border p-2 text-sm flex-1 font-bold" />
-                        <div className="w-48">
+                        }} className="border border-[var(--border-default)] p-2.5 text-sm flex-1 font-bold outline-none focus:border-[var(--color-primary)] rounded-none" />
+                        <div className="w-full sm:w-48">
                           <IconPicker value={level.icon} onChange={val => {
                              const nl = [...formData.programmes.levels]; nl[lIdx].icon = val; updateSection('programmes', {...formData.programmes, levels: nl});
                           }} />
                         </div>
-                        <button onClick={() => updateSection('programmes', {...formData.programmes, levels: formData.programmes.levels.filter((_, i) => i !== lIdx)})} className="text-red-500 font-bold p-2"><Trash2 size={18}/></button>
                       </div>
                       <NestedListEditor 
                         label={`Courses in ${level.label || 'this level'}`}
@@ -475,12 +481,12 @@ export default function SchoolBuilderForm({ initialData = null }) {
                         }}
                       />
                       {/* Specializations Editor */}
-                      <div className="mt-4 pt-4 border-t">
-                        <p className="text-[10px] font-black uppercase text-gray-400 mb-3">Course Specializations (Comma Separated)</p>
+                      <div className="mt-5 pt-4 border-t border-[var(--border-light)]">
+                        <p className="text-[10px] font-black uppercase text-[var(--text-muted)] mb-3 tracking-widest">Course Specializations (Comma Separated)</p>
                         <div className="space-y-3">
                           {level.courses.map((c, ci) => (
-                            <div key={ci} className="bg-slate-50 p-2 border">
-                              <label className="text-[10px] block mb-1 font-bold">{c.name}</label>
+                            <div key={ci} className="bg-[var(--bg-muted)] p-3 border border-[var(--border-light)] rounded-none">
+                              <label className="text-[10px] block mb-1.5 font-bold uppercase text-[var(--text-primary)]">{c.name}</label>
                               <input 
                                 type="text" 
                                 placeholder="Core, AI & ML, Data Science..."
@@ -491,7 +497,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                                   nl[lIdx].courses[ci].specializations = specs;
                                   updateSection('programmes', {...formData.programmes, levels: nl});
                                 }}
-                                className="w-full border p-2 text-xs"
+                                className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none"
                               />
                             </div>
                           ))}
@@ -507,14 +513,14 @@ export default function SchoolBuilderForm({ initialData = null }) {
           {activeSection === 'placements' && (
             <div className="space-y-6">
               <TitleEditor label="Placement Section Title" value={formData.placements.title} onChange={val => updateSection('placements', {...formData.placements, title: val})} />
-              <div className="grid grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Badge Label</label>
-                  <input type="text" placeholder="e.g. Placements" value={formData.placements.label} onChange={e => updateSection('placements', {...formData.placements, label: e.target.value})} className="w-full border p-2" />
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
+                  <input type="text" placeholder="e.g. Placements" value={formData.placements.label} onChange={e => updateSection('placements', {...formData.placements, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                 </div>
                 <div>
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Section Subtitle</label>
-                  <input type="text" placeholder="e.g. CPU Placement Records" value={formData.placements.subtitle} onChange={e => updateSection('placements', {...formData.placements, subtitle: e.target.value})} className="w-full border p-2" />
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Section Subtitle</label>
+                  <input type="text" placeholder="e.g. CPU Placement Records" value={formData.placements.subtitle} onChange={e => updateSection('placements', {...formData.placements, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                 </div>
               </div>
               <NestedListEditor 
@@ -537,8 +543,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
             <div className="space-y-6">
                <TitleEditor label="Alumni Section Title" value={formData.alumni.title} onChange={val => updateSection('alumni', {...formData.alumni, title: val})} />
                <div>
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Badge Label</label>
-                  <input type="text" placeholder="e.g. Our Alumni" value={formData.alumni.label} onChange={e => updateSection('alumni', {...formData.alumni, label: e.target.value})} className="w-full border p-2 mb-4" />
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
+                  <input type="text" placeholder="e.g. Our Alumni" value={formData.alumni.label} onChange={e => updateSection('alumni', {...formData.alumni, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                </div>
                <NestedListEditor 
                 label="Alumni Success"
@@ -559,8 +565,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
             <div className="space-y-6">
                <TitleEditor label="Industry Section Title" value={formData.industry.title} onChange={val => updateSection('industry', {...formData.industry, title: val})} />
                <div>
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Badge Label</label>
-                  <input type="text" placeholder="e.g. Collaborations" value={formData.industry.label} onChange={e => updateSection('industry', {...formData.industry, label: e.target.value})} className="w-full border p-2 mb-4" />
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
+                  <input type="text" placeholder="e.g. Collaborations" value={formData.industry.label} onChange={e => updateSection('industry', {...formData.industry, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                </div>
                <NestedListEditor 
                 label="Industry Partners (Logos)"
@@ -576,39 +582,35 @@ export default function SchoolBuilderForm({ initialData = null }) {
             <div className="space-y-6">
                 <TitleEditor label="Research Section Title" value={formData.research.title} onChange={val => updateSection('research', {...formData.research, title: val})} />
                 <div>
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Badge Label</label>
-                  <input type="text" placeholder="e.g. Eminence Research" value={formData.research.label} onChange={e => updateSection('research', {...formData.research, label: e.target.value})} className="w-full border p-2 mb-4" />
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
+                  <input type="text" placeholder="e.g. Eminence Research" value={formData.research.label} onChange={e => updateSection('research', {...formData.research, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                 </div>
                 
-                <div className="space-y-4">
-                  <p className="text-[10px] font-black uppercase text-gray-400">Research Statistics</p>
+                <div className="space-y-4 pt-4 border-t border-[var(--border-light)]">
+                  <p className="text-[11px] font-black uppercase tracking-widest text-[var(--text-secondary)] mb-3">Research Statistics</p>
                   {formData.research.stats?.map((s, idx) => (
-                    <div key={idx} className="flex gap-4 items-end bg-white p-3 border">
-                      <div className="flex-1">
-                        <label className="text-[10px] block mb-1">Value</label>
-                        <input type="text" value={s.value} onChange={e => { const n = [...formData.research.stats]; n[idx].value = e.target.value; updateSection('research', {...formData.research, stats: n})}} className="w-full border p-2 text-xs" />
+                    <div key={idx} className="flex flex-col sm:flex-row gap-3 items-end bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] relative group hover:border-[var(--border-dark)] transition-colors rounded-none">
+                      <button onClick={() => updateSection('research', {...formData.research, stats: formData.research.stats.filter((_, i) => i !== idx)})} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 sm:static"><Trash2 size={16} /></button>
+                      <div className="w-full sm:flex-1">
+                        <label className="text-[9px] block mb-1 uppercase font-bold text-[var(--text-muted)]">Value</label>
+                        <input type="text" value={s.value} onChange={e => { const n = [...formData.research.stats]; n[idx].value = e.target.value; updateSection('research', {...formData.research, stats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
-                      <div className="flex-1">
-                        <label className="text-[10px] block mb-1">Label</label>
-                        <input type="text" value={s.label} onChange={e => { const n = [...formData.research.stats]; n[idx].label = e.target.value; updateSection('research', {...formData.research, stats: n})}} className="w-full border p-2 text-xs" />
+                      <div className="w-full sm:flex-1">
+                        <label className="text-[9px] block mb-1 uppercase font-bold text-[var(--text-muted)]">Label</label>
+                        <input type="text" value={s.label} onChange={e => { const n = [...formData.research.stats]; n[idx].label = e.target.value; updateSection('research', {...formData.research, stats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
-                      <div className="w-40">
-                        <label className="text-[10px] block mb-1">Icon</label>
+                      <div className="w-full sm:w-40">
+                        <label className="text-[9px] block mb-1 uppercase font-bold text-[var(--text-muted)]">Icon</label>
                         <IconPicker value={s.icon} onChange={val => { const n = [...formData.research.stats]; n[idx].icon = val; updateSection('research', {...formData.research, stats: n})}} />
                       </div>
-                      <button onClick={() => updateSection('research', {...formData.research, stats: formData.research.stats.filter((_, i) => i !== idx)})} className="text-red-400 p-2"><Trash2 size={16} /></button>
                     </div>
                   ))}
-                  <button onClick={() => updateSection('research', {...formData.research, stats: [...formData.research.stats, { value: '', label: '', icon: 'Search' }]})} className="text-[10px] font-bold text-blue-600 flex items-center gap-1"><Plus size={14} /> ADD RESEARCH STAT</button>
+                  <button onClick={() => updateSection('research', {...formData.research, stats: [...(formData.research.stats || []), { value: '', label: '', icon: 'Search' }]})} className="text-[10px] font-bold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] uppercase tracking-widest transition-colors flex items-center gap-1.5"><Plus size={14} strokeWidth={2.5} /> ADD RESEARCH STAT</button>
                 </div>
 
-                <div className="mt-6">
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="block text-[10px] text-gray-400 uppercase font-black">Research Gallery</label>
-                    <button onClick={() => updateSection('research', {...formData.research, gallery: [...(formData.research.gallery || []), '']})} className="text-[10px] font-bold text-blue-600 flex items-center gap-1"><Plus size={14} /> ADD IMAGE</button>
-                  </div>
+                <div className="mt-6 pt-6 border-t border-[var(--border-light)]">
                   <NestedListEditor 
-                    label="Link Icons"
+                    label="Research Gallery / Links"
                     items={formData.research.gallery}
                     newItemTemplate={{ icon: 'FileText', label: '', link: '', slug: '' }}
                     fields={[
@@ -627,11 +629,11 @@ export default function SchoolBuilderForm({ initialData = null }) {
             <div className="space-y-6">
               <TitleEditor label="Community Section Title" value={formData.community.title} onChange={val => updateSection('community', {...formData.community, title: val})} />
                <div>
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Badge Label</label>
-                  <input type="text" placeholder="e.g. Community" value={formData.community.label} onChange={e => updateSection('community', {...formData.community, label: e.target.value})} className="w-full border p-2 mb-4" />
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
+                  <input type="text" placeholder="e.g. Community" value={formData.community.label} onChange={e => updateSection('community', {...formData.community, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                </div>
-                <div className="bg-white border p-4 shadow-sm mb-6">
-                  <label className="block text-xs font-black text-gray-800 uppercase mb-4">Community Description (Rich Text)</label>
+                <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 shadow-sm mb-6 rounded-none">
+                  <label className="block text-[11px] font-black text-[var(--text-secondary)] uppercase mb-3 tracking-widest">Community Description (Rich Text)</label>
                   <RichTextEditor 
                     value={formData.community.description?.join('\n')} 
                     onChange={content => updateSection('community', {...formData.community, description: [content]})} 
@@ -651,8 +653,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
             <div className="space-y-6">
                 <TitleEditor label="Infrastructure Section Title" value={formData.infrastructure.title} onChange={val => updateSection('infrastructure', {...formData.infrastructure, title: val})} />
                 <div>
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Badge Label</label>
-                  <input type="text" placeholder="e.g. Campus" value={formData.infrastructure.label} onChange={e => updateSection('infrastructure', {...formData.infrastructure, label: e.target.value})} className="w-full border p-2 mb-4" />
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
+                  <input type="text" placeholder="e.g. Campus" value={formData.infrastructure.label} onChange={e => updateSection('infrastructure', {...formData.infrastructure, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                 </div>
                 <NestedListEditor 
                 label="Infrastructure Items"
@@ -673,8 +675,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
             <div className="space-y-6">
                 <TitleEditor label="Testimonials Section Title" value={formData.testimonials.title} onChange={val => updateSection('testimonials', {...formData.testimonials, title: val})} />
                 <div>
-                  <label className="text-[10px] block mb-1 font-bold uppercase">Badge Label</label>
-                  <input type="text" placeholder="e.g. Testimonials" value={formData.testimonials.label} onChange={e => updateSection('testimonials', {...formData.testimonials, label: e.target.value})} className="w-full border p-2 mb-4" />
+                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
+                  <input type="text" placeholder="e.g. Testimonials" value={formData.testimonials.label} onChange={e => updateSection('testimonials', {...formData.testimonials, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                 </div>
                 <NestedListEditor 
                   label="Testimonials"
@@ -693,12 +695,13 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 />
             </div>
           )}
+          
           {activeSection === 'exploreDepartment' && (
             <div className="space-y-6">
               <TitleEditor label="Explore Department Title" value={formData.exploreDepartment.sectionTitle} onChange={val => updateSection('exploreDepartment', {...formData.exploreDepartment, sectionTitle: val})} />
               <div>
-                <label className="block text-[10px] text-gray-400 uppercase mb-2">Subtitle</label>
-                <input type="text" value={formData.exploreDepartment.subtitle} onChange={e => updateSection('exploreDepartment', {...formData.exploreDepartment, subtitle: e.target.value})} className="w-full border p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Discover our specialized wings" />
+                <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Subtitle</label>
+                <input type="text" value={formData.exploreDepartment.subtitle} onChange={e => updateSection('exploreDepartment', {...formData.exploreDepartment, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none" placeholder="e.g. Discover our specialized wings" />
               </div>
               <NestedListEditor 
                 label="Department Items"
@@ -717,6 +720,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
             </div>
           )}
 
+        </div>
       </Modal>
     </div>
   );

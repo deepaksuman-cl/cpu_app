@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminTopbar from '@/components/admin/AdminTopbar';
+import ScrollToTop from '@/components/admin/ui/ScrollToTop';
 import '@/app/globals.css';
 
 export default function AdminLayout({ children }) {
@@ -30,8 +31,8 @@ export default function AdminLayout({ children }) {
   }, []);
 
   // MAGIC: Calculate margins based on state
-  // Agar pinned hai toh 260px jagah lega, warna sirf 72px. Hover hone pe content shift nahi hoga (overlay banega).
-  const contentMargin = isMobile ? '0px' : (isPinned ? '260px' : '72px');
+  // Agar pinned hai toh 294px jagah lega, warna sirf 76px. Hover hone pe content shift nahi hoga (overlay banega).
+  const contentMargin = isMobile ? '0px' : (isPinned ? '294px' : '76px');
 
   return (
     <html lang="en">
@@ -53,9 +54,9 @@ export default function AdminLayout({ children }) {
             className="flex-1 flex flex-col transition-all duration-300 ease-in-out min-h-screen relative"
             style={{ marginLeft: contentMargin }}
           >
-            <AdminTopbar toggleMobileSidebar={() => setMobileMenuOpen(!mobileMenuOpen)} />
+            <AdminTopbar setMobileMenuOpen={setMobileMenuOpen} />
             
-            <main className="flex-1 p-6 lg:p-8 overflow-auto bg-white">
+            <main className="flex-1 overflow-auto bg-[var(--bg-body)]">
               {children}
             </main>
           </div>
@@ -67,6 +68,9 @@ export default function AdminLayout({ children }) {
               onClick={() => setMobileMenuOpen(false)}
             />
           )}
+
+          {/* Global Scroll To Top */}
+          <ScrollToTop />
         </div>
       </body>
     </html>

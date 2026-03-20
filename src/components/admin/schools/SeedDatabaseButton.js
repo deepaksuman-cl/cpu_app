@@ -34,15 +34,15 @@ export default function SeedDatabaseButton() {
     <button
       onClick={handleSeed}
       disabled={isSeeding}
-      className={`px-4 py-2 flex items-center gap-2 rounded-none transition-colors border shadow-sm text-sm font-semibold
+      className={`h-[32px] px-3 flex items-center justify-center gap-1.5 rounded-sm transition-colors border text-[10px] font-bold shadow-sm uppercase tracking-widest shrink-0
         ${isSeeding 
-          ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed' 
-          : 'bg-white text-emerald-700 border-emerald-600 hover:bg-emerald-50'
+          ? 'bg-[var(--bg-muted)] text-[var(--text-muted)] border-[var(--border-default)] cursor-not-allowed' 
+          : 'bg-[var(--bg-surface)] text-[var(--color-warning-dark)] border-[var(--border-default)] hover:border-[var(--color-warning-dark)] hover:bg-[var(--color-warning-lighter)]'
         }`}
       title="Seed Data from JSON"
     >
-      {isSeeding ? <Loader2 size={16} className="animate-spin" /> : <Database size={16} />}
-      {isSeeding ? 'Seeding...' : 'Seed Data from JSON'}
+      {isSeeding ? <Loader2 size={14} className="animate-spin" /> : <Database size={14} strokeWidth={2} />}
+      <span className="hidden sm:block">{isSeeding ? 'Seeding...' : 'Seed Database'}</span>
     </button>
   );
 }

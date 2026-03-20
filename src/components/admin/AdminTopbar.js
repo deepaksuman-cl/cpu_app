@@ -1,110 +1,118 @@
-// File: src/components/admin/AdminTopbar.js
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { Search, ChevronDown } from 'lucide-react';
+import { Bell, ChevronDown, LogOut, Menu, Settings, User } from 'lucide-react';
+import { useState } from 'react';
 
-export default function AdminTopbar() {
-  const [profileOpen, setProfileOpen] = useState(false);
-  const profileRef = useRef();
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (profileRef.current && !profileRef.current.contains(e.target)) {
-        setProfileOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+export default function TopHeader({ setMobileMenuOpen }) {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [hasNotification, setHasNotification] = useState(true); // Isko API ya state se manage kar sakte hain
 
   return (
-    <header className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-6">
+    <header className="h-[72px] bg-[var(--bg-surface)] border-b border-[var(--border-light)] flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-40 transition-all duration-300">
+      
+      {/* ── Left Section: Mobile Toggle & Page Title ── */}
+      <div className="flex items-center gap-4">
+        {/* Mobile Hamburger Menu (Shows only on small screens) */}
+        <button
+          onClick={() => setMobileMenuOpen(true)}
+          className="lg:hidden p-2 text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] hover:text-[var(--color-primary)] transition-colors rounded-none border border-transparent hover:border-[var(--border-default)]"
+        >
+          <Menu size={24} />
+        </button>
 
-      {/* Left - Page Title */}
-      <div className="flex items-center gap-6">
-        <h1 className="text-base font-semibold text-gray-800">
-          Dashboard
-        </h1>
-
-        {/* Breadcrumb */}
-        <div className="hidden md:flex items-center text-sm text-gray-500 gap-2">
-          <span>Admin</span>
-          <span>/</span>
-          <span className="text-gray-700 font-medium">Dashboard</span>
+        {/* Dynamic Greeting / Breadcrumb */}
+        <div className="hidden sm:flex flex-col">
+          <h1 className="text-[18px] font-bold text-[var(--text-primary)] leading-tight tracking-wide">
+            Dashboard
+          </h1>
+          <p className="text-[12px] text-[var(--text-muted)] font-medium mt-0.5">
+            Welcome back, Admin
+          </p>
         </div>
       </div>
 
-      {/* Center - Search */}
-      <div className="hidden md:flex items-center w-[400px] relative">
-        <Search size={16} className="absolute left-3 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search content..."
-          className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-300"
-        />
-      </div>
+      {/* ── Right Section: Notifications & Profile ── */}
+      <div className="flex items-center gap-2 sm:gap-4">
+        
+        {/* Notification Bell */}
+        <button 
+          className="relative p-2.5 text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] hover:text-[var(--color-primary)] transition-all duration-200 rounded-none border border-transparent hover:border-[var(--border-light)] group"
+          title="Notifications"
+        >
+          <Bell size={20} className="transition-transform group-hover:rotate-12" />
+          
+          {/* Unread Pinging Badge */}
+          {hasNotification && (
+            <span className="absolute top-2 right-2 flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-none bg-[var(--color-danger)] opacity-75"></span>
+              <span className="relative inline-flex rounded-none h-2 w-2 bg-[var(--color-danger)]"></span>
+            </span>
+          )}
+        </button>
 
-      {/* Right - Profile */}
-      <div className="flex items-center gap-4">
+        {/* Vertical Divider */}
+        <div className="h-8 w-[2px] bg-[var(--border-light)] hidden sm:block mx-1"></div>
 
-        {/* Profile */}
-        <div className="relative" ref={profileRef}>
-          <button
-            onClick={() => setProfileOpen(!profileOpen)}
-            className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-gray-50 transition"
+        {/* User Profile Dropdown */}
+        <div className="relative">
+          <button 
+            onClick={() => setIsProfileOpen(!isProfileOpen)}
+            className={`flex items-center gap-3 p-1.5 transition-colors duration-200 rounded-none border ${isProfileOpen ? 'bg-[var(--bg-muted)] border-[var(--border-default)]' : 'border-transparent hover:bg-[var(--bg-muted)] hover:border-[var(--border-light)]'}`}
           >
-            {/* Avatar */}
-            <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-sm font-medium text-gray-700">
-              SA
+            {/* Avatar Box (Zero Radius) */}
+            <div className="w-9 h-9 bg-[var(--color-primary)] flex items-center justify-center shrink-0 rounded-none border border-[var(--color-primary-dark)] shadow-sm">
+              <span className="text-[var(--color-white)] font-bold text-[14px]">A</span>
+            </div>
+            
+            {/* Name & Role (Hidden on Mobile) */}
+            <div className="hidden md:flex flex-col text-left pr-1">
+              <span className="text-[13px] font-bold text-[var(--text-primary)] leading-none tracking-wide">Admin User</span>
+              <span className="text-[11px] text-[var(--text-muted)] mt-1 font-medium">Super Admin</span>
             </div>
 
-            {/* Name */}
-            <div className="hidden sm:block text-left">
-              <p className="text-sm font-medium text-gray-800 leading-none">
-                Super Admin
-              </p>
-              <p className="text-xs text-gray-500">
-                Administrator
-              </p>
-            </div>
-
-            <ChevronDown size={16} className="text-gray-400" />
+            {/* Dropdown Arrow */}
+            <ChevronDown 
+              size={16} 
+              strokeWidth={2.5}
+              className={`text-[var(--text-muted)] transition-transform duration-300 hidden sm:block ${isProfileOpen ? 'rotate-180 text-[var(--color-primary)]' : ''}`} 
+            />
           </button>
 
-          {/* Dropdown */}
-          {profileOpen && (
-            <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-sm">
+          {/* Dropdown Menu Popup */}
+          {isProfileOpen && (
+            <>
+              {/* Invisible Overlay to close dropdown when clicked outside */}
+              <div className="fixed inset-0 z-40" onClick={() => setIsProfileOpen(false)}></div>
+              
+              <div className="absolute right-0 mt-3 w-56 bg-[var(--bg-surface)] border border-[var(--border-light)] shadow-[var(--shadow-lg)] z-50 rounded-none py-1 origin-top-right transition-all animate-in fade-in slide-in-from-top-2 duration-200">
+                
+                <div className="px-4 py-3 border-b border-[var(--border-light)] bg-[var(--bg-body)]">
+                  <p className="text-[11px] uppercase tracking-widest text-[var(--text-muted)] font-bold mb-1">Signed in as</p>
+                  <p className="text-[13px] text-[var(--text-primary)] font-bold truncate">admin@cpur.in</p>
+                </div>
+                
+                <div className="py-2 flex flex-col">
+                  <a href="#profile" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] hover:text-[var(--color-primary)] hover:border-l-[3px] border-transparent hover:border-[var(--color-primary)] transition-all">
+                    <User size={16} />
+                    My Profile
+                  </a>
+                  <a href="#settings" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] hover:text-[var(--color-primary)] hover:border-l-[3px] border-transparent hover:border-[var(--color-primary)] transition-all">
+                    <Settings size={16} />
+                    Account Settings
+                  </a>
+                </div>
+                
+                <div className="border-t border-[var(--border-light)] py-2">
+                  <button className="w-full flex items-center gap-3 px-4 py-2 text-[13px] font-bold text-[var(--color-danger)] hover:bg-[var(--color-danger-light)] hover:border-l-[3px] border-transparent hover:border-[var(--color-danger)] transition-all">
+                    <LogOut size={16} />
+                    Sign Out
+                  </button>
+                </div>
 
-              <div className="px-4 py-3 border-b">
-                <p className="text-sm font-medium text-gray-800">
-                  Super Admin
-                </p>
-                <p className="text-xs text-gray-500">
-                  admin@cms.com
-                </p>
               </div>
-
-              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50">
-                Account Settings
-              </button>
-
-              <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50">
-                Preferences
-              </button>
-
-              <div className="border-t">
-                <button className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50">
-                  Sign out
-                </button>
-              </div>
-
-            </div>
+            </>
           )}
         </div>
-
       </div>
     </header>
   );
