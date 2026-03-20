@@ -654,50 +654,49 @@ export default function DesktopMenuManager({ initialData, initialTopMenu }) {
   const editingMenu = editingIndex !== null ? menu[editingIndex] : null;
 
   return (
-    <div className="min-h-screen bg-[#f7f8fc] pb-24">
+    <div className="relative w-full min-h-[calc(100vh-72px)] bg-[var(--bg-body)] text-left flex flex-col gap-0 justify-start pb-24">
 
-      {/* ── PAGE HEADER ── */}
-      <div className="bg-white px-8 py-5 sticky top-0 z-30 shadow-sm border-b border-gray-100">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#1c54a3]/8" style={{ borderRadius: 0 }}>
-              <Monitor size={17} className="text-[#1c54a3]" />
-            </div>
-            <div>
-              <h1 className="text-[15px] font-bold text-[#1C2D38]">Desktop Mega Menus</h1>
-              <p className="text-[12px] text-gray-400 mt-0.5">
-                {menu.length} section{menu.length !== 1 ? 's' : ''} configured
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <button onClick={addMenu} style={{ borderRadius: 0 }}
-              className="flex items-center gap-2 text-[13px] font-semibold text-gray-600
-                bg-gray-100 hover:bg-gray-200 px-4 py-2.5 transition-all">
-              <Plus size={15} /> Add Menu
-            </button>
-            <button onClick={saveAll} disabled={saving} style={{ borderRadius: 0 }}
-              className="flex items-center gap-2 bg-[#1c54a3] text-white text-[13px] font-bold
-                px-5 py-2.5 hover:bg-[#174a94] active:scale-95 transition-all shadow-md disabled:opacity-60">
-              {saving
-                ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                : <Save size={15} />}
-              {saving ? 'Saving…' : 'Save Changes'}
-            </button>
-          </div>
+      {/* ── Fixed/Sticky Header (Exactly 44px Height) ── */}
+      <div className="sticky top-0 z-[30] flex items-center justify-between h-[44px] w-full bg-[var(--bg-surface)] border-b border-[var(--border-default)] shadow-sm" style={{ position: 'sticky', top: 0, marginTop: 0 }}>
+        
+        {/* Left: Title */}
+        <div className="flex items-center h-full px-4 gap-3">
+          <Monitor size={14} className="text-[var(--text-muted)] hidden sm:block" strokeWidth={2.5} />
+          <h1 className="text-[13px] font-black text-[var(--text-primary)] uppercase tracking-wider">
+            Desktop Mega Menus
+          </h1>
+          <div className="hidden md:block w-[1px] h-4 bg-[var(--border-default)]"></div>
+          <span className="hidden md:inline-block text-[12px] text-[var(--text-secondary)] font-bold tracking-wide truncate max-w-[200px] lg:max-w-[500px]">
+             {menu.length} section{menu.length !== 1 ? 's' : ''} configured
+          </span>
+        </div>
+
+        {/* Right: Actions */}
+        <div className="flex items-center h-full px-4 gap-2.5">
+          <button onClick={addMenu}
+            className="flex items-center justify-center h-[32px] px-3 sm:px-4 bg-[var(--bg-muted)] hover:bg-[var(--bg-hover)] text-[var(--text-primary)] transition-colors rounded-none border border-[var(--border-default)] uppercase tracking-widest text-[11px] font-bold">
+            <Plus size={14} strokeWidth={2.5} className="md:mr-1.5" /> 
+            <span className="hidden sm:block">Add Menu</span>
+          </button>
+          
+          <button onClick={saveAll} disabled={saving}
+            className="flex items-center justify-center h-[32px] px-3 sm:px-4 bg-[var(--color-success)] hover:bg-[var(--color-success-dark)] text-[var(--text-inverse)] transition-colors rounded-none shadow-sm uppercase tracking-widest text-[11px] font-bold disabled:opacity-50">
+            {saving ? <div className="w-3.5 h-3.5 border-2 border-[var(--bg-surface)] border-t-[var(--text-inverse)] rounded-full animate-spin md:mr-1.5" /> : <Save size={14} strokeWidth={2.5} className="md:mr-1.5" />}
+            <span className="hidden sm:block">{saving ? 'Saving...' : 'Save Changes'}</span>
+          </button>
         </div>
       </div>
 
       {/* ── MENU LIST ── */}
-      <div className="max-w-5xl mx-auto px-8 pt-8 space-y-2">
+      <div className="w-[98%] lg:w-[95%] xl:w-[92%] mx-auto p-4 sm:p-6 space-y-4">
         {menu.length === 0 ? (
-          <div className="text-center py-20 bg-white shadow-sm" style={{ borderRadius: 0 }}>
-            <Monitor size={32} className="text-gray-200 mx-auto mb-3" />
-            <p className="text-[14px] font-semibold text-gray-400">No menus yet</p>
-            <p className="text-[12px] text-gray-300 mb-5">Add your first menu section to get started</p>
+          <div className="text-center py-20 bg-[var(--bg-surface)] shadow-sm border border-[var(--border-default)]" style={{ borderRadius: 0 }}>
+            <Monitor size={32} className="text-[var(--text-muted)] mx-auto mb-3" />
+            <p className="text-[14px] font-semibold text-[var(--text-secondary)]">No menus yet</p>
+            <p className="text-[12px] text-[var(--text-muted)] mb-5">Add your first menu section to get started</p>
             <button onClick={addMenu} style={{ borderRadius: 0 }}
-              className="inline-flex items-center gap-2 bg-[#1c54a3] text-white
-                text-[13px] font-bold px-5 py-2.5 hover:bg-[#174a94] transition-all">
+              className="inline-flex items-center gap-2 bg-[var(--color-primary)] text-[var(--text-inverse)]
+                text-[13px] font-bold px-5 py-2.5 hover:bg-[var(--color-primary-dark)] transition-all uppercase tracking-widest">
               <Plus size={15} /> Add First Menu
             </button>
           </div>
@@ -707,48 +706,48 @@ export default function DesktopMenuManager({ initialData, initialTopMenu }) {
             : (m.columns?.reduce((a, c) => a + (c.links?.length || 0), 0) || 0);
           return (
             <div key={mIdx}
-              className="group bg-white shadow-sm hover:shadow-md transition-all overflow-hidden"
+              className="group bg-[var(--bg-surface)] shadow-sm hover:shadow-md transition-all border border-[var(--border-default)] overflow-hidden"
               style={{ borderRadius: 0 }}>
-              <div className="flex items-center gap-4 px-5 py-4">
-                <GripVertical size={15} className="text-gray-200 cursor-grab flex-shrink-0" />
-                <div className="p-2 bg-gray-50 flex-shrink-0" style={{ borderRadius: 0 }}>
-                  <Settings2 size={14} className="text-gray-400" />
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 px-5 py-4">
+                <GripVertical size={15} className="text-[var(--text-muted)] cursor-grab flex-shrink-0 hidden sm:block" />
+                <div className="p-2 bg-[var(--bg-muted)] border border-[var(--border-default)] flex-shrink-0" style={{ borderRadius: 0 }}>
+                  <Settings2 size={14} className="text-[var(--text-secondary)]" />
                 </div>
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 w-full sm:w-auto">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[14px] font-bold text-[#1C2D38] truncate">
+                    <span className="text-[14px] font-bold text-[var(--text-primary)] truncate">
                       {m.title || 'Untitled Menu'}
                     </span>
                     <TypeBadge type={m.type} />
                   </div>
-                  <p className="text-[11px] text-gray-400 mt-0.5">
+                  <p className="text-[11px] text-[var(--text-secondary)] mt-0.5">
                     {m.columns?.length || 0} columns · {totalLinks} links
                   </p>
                 </div>
-                <div className="flex items-center gap-1 flex-shrink-0">
+                <div className="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto justify-end mt-3 sm:mt-0">
                   <button
                     onClick={() => confirmDelete(mIdx)}
                     style={{ borderRadius: 0 }}
-                    className="p-2 text-gray-200 hover:text-red-400 hover:bg-red-50
-                      transition-all opacity-0 group-hover:opacity-100">
+                    className="p-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] hover:bg-red-50/50
+                      transition-all sm:opacity-0 sm:group-hover:opacity-100 border border-transparent hover:border-red-100/50">
                     <Trash2 size={15} />
                   </button>
                   <button
                     onClick={() => setEditingIndex(mIdx)}
                     style={{ borderRadius: 0 }}
-                    className="flex items-center gap-2 text-[12px] font-bold text-[#1c54a3]
-                      bg-blue-50 hover:bg-blue-100 px-3.5 py-2 transition-all">
+                    className="flex items-center gap-2 text-[12px] font-bold text-[var(--color-primary)]
+                      bg-blue-50/40 hover:bg-blue-50/80 border border-blue-100/50 px-3.5 py-2 transition-all uppercase tracking-widest">
                     <Pencil size={13} /> Edit
                   </button>
                 </div>
               </div>
               {m.columns?.length > 0 && (
-                <div className="flex items-center gap-2 px-5 pb-3 flex-wrap">
+                <div className="flex items-center gap-2 px-5 pb-4 flex-wrap">
                   {m.columns.map((col, cIdx) => (
                     <span key={cIdx}
-                      className="inline-flex items-center gap-1 text-[11px] text-gray-400 bg-gray-50 px-2.5 py-1"
+                      className="inline-flex items-center gap-1 text-[11px] text-[var(--text-secondary)] bg-[var(--bg-muted)] border border-[var(--border-default)] px-2.5 py-1"
                       style={{ borderRadius: 0 }}>
-                      <Layers size={10} className="text-gray-300" />
+                      <Layers size={10} className="text-[var(--text-muted)]" />
                       {col.heading || 'Unnamed'} · {col.links?.length || 0}
                     </span>
                   ))}
@@ -768,27 +767,27 @@ export default function DesktopMenuManager({ initialData, initialTopMenu }) {
           subtitle="Configure columns, links, and panel settings"
           size="xl"
           footer={
-            <>
-              <div className="text-[11px] text-gray-400">
+            <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="text-[11px] text-[var(--text-secondary)] font-medium">
                 {editingMenu.columns?.length || 0} columns ·&nbsp;
                 {editingMenu.columns?.reduce((a,c) => a + (c.links?.length||0), 0) || 0} links
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
                 <button onClick={() => setEditingIndex(null)} style={{ borderRadius: 0 }}
-                  className="px-5 py-2.5 text-[13px] font-semibold text-gray-600
-                    bg-gray-100 hover:bg-gray-200 transition-all">
+                  className="px-5 py-2.5 text-[12px] font-bold text-[var(--text-primary)]
+                    bg-[var(--bg-muted)] border border-[var(--border-default)] hover:bg-[var(--bg-hover)] transition-all uppercase tracking-widest">
                   Close
                 </button>
                 <button onClick={saveAll} disabled={saving} style={{ borderRadius: 0 }}
-                  className="flex items-center gap-2 px-6 py-2.5 text-[13px] font-bold
-                    text-white bg-[#1c54a3] hover:bg-[#174a94] transition-all shadow-sm disabled:opacity-60">
+                  className="flex items-center gap-2 px-6 py-2.5 text-[12px] font-bold
+                    text-[var(--text-inverse)] bg-[var(--color-success)] hover:bg-[var(--color-success-dark)] transition-all shadow-sm disabled:opacity-60 uppercase tracking-widest">
                   {saving
-                    ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ? <div className="w-3.5 h-3.5 border-2 border-[var(--bg-surface)] border-t-[var(--text-inverse)] rounded-full animate-spin" />
                     : <Save size={14} />}
                   {saving ? 'Saving…' : 'Save Changes'}
                 </button>
               </div>
-            </>
+            </div>
           }
         >
           <MenuEditContent

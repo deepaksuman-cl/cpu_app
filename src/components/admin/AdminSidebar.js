@@ -257,7 +257,7 @@ export default function AdminSidebar({
               <img 
                 src="/icon.png" 
                 alt="CPU Icon" 
-                className="w-10 h-10 object-contain drop-shadow-sm" 
+                className="w-10 h-10 object-contain drop-shadow-sm rounded-full" 
               />
             </div>
 

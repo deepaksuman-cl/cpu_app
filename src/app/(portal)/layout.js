@@ -29,6 +29,10 @@ export const metadata = {
   ],
   authors: [{ name: "Career Point University" }],
   creator: "Career Point University",
+  icons: {
+    icon: [{ url: '/icon.png', type: 'image/png' }],
+    apple: [{ url: '/icon.png' }],
+  },
   openGraph: {
     title: "Career Point University, Kota",
     description:
@@ -38,7 +42,6 @@ export const metadata = {
     locale: "en_IN",
     type: "website",
   },
-  
 };
 
 export default function RootLayout({ children }) {
@@ -47,7 +50,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <HeaderServer /> 
         
-        <main className="pt-[110px] lg:pt-[120px]">
+        <main className="pt-[110px] lg:pt-[112px]">
           {children}
         </main>
 

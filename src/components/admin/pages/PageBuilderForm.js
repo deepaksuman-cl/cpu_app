@@ -4,7 +4,7 @@ import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import { createPage, updatePage } from '@/lib/actions/pageActions';
-import { AlertTriangle, ArrowDown, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Plus, Save, Trash2, Type, Users } from 'lucide-react';
+import { AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Plus, Save, Trash2, Type, Users } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -95,94 +95,129 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
     setBlocks(newBlocks);
   };
 
+  const pageTitle = initialData?.title || 'New Page';
+  const pageSlug = initialData?.slug || '';
+
   return (
-    <form onSubmit={handleSave} className="space-y-8 pb-32">
+    <div className="relative w-full min-h-[calc(100vh-72px)] bg-[var(--bg-body)] flex flex-col">
+
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-[30] flex items-center justify-between h-[44px] w-full bg-[var(--bg-surface)] border-b border-[var(--border-default)] shadow-sm" style={{ position: 'sticky', top: 0, marginTop: 0 }}>
+        <div className="flex items-center h-full px-4 gap-3">
+          <a href="/admin/pages" className="flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors text-[11px] font-bold uppercase tracking-widest">
+            <ArrowLeft size={14} strokeWidth={2.5} />
+            <span className="hidden sm:block">Back to Pages</span>
+          </a>
+          <div className="w-[1px] h-4 bg-[var(--border-default)]"></div>
+          <Layout size={14} className="text-[var(--text-muted)] hidden sm:block" strokeWidth={2.5} />
+          <h1 className="text-[13px] font-black text-[var(--text-primary)] uppercase tracking-wider">
+            {mode === 'edit' ? `Edit: ${pageTitle}` : 'Create New Page'}
+          </h1>
+          {pageSlug && (
+            <>
+              <div className="hidden md:block w-[1px] h-4 bg-[var(--border-default)]"></div>
+              <span className="hidden md:inline-block text-[11px] text-[var(--text-muted)] font-mono">/{pageSlug}</span>
+            </>
+          )}
+        </div>
+        <div className="flex items-center h-full px-4 gap-2">
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={loading}
+            className="flex items-center justify-center h-[32px] px-3 sm:px-4 bg-[var(--color-success)] hover:bg-[var(--color-success-dark)] text-[var(--text-inverse)] transition-colors rounded-none shadow-sm uppercase tracking-widest text-[11px] font-bold gap-1.5 disabled:opacity-50"
+          >
+            {loading ? <div className="w-3.5 h-3.5 border-2 border-[var(--bg-surface)] border-t-[var(--text-inverse)] rounded-full animate-spin" /> : <Save size={13} strokeWidth={2.5} />}
+            <span className="hidden sm:block">{loading ? 'Saving...' : (mode === 'edit' ? 'Commit Changes' : 'Publish Page')}</span>
+          </button>
+        </div>
+      </div>
+
+      <form onSubmit={handleSave} className="w-[98%] lg:w-[95%] xl:w-[92%] mx-auto py-6 pb-32 space-y-5">
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 text-sm font-semibold text-red-700 flex items-center gap-2">
+        <div className="bg-[var(--bg-surface)] border-l-4 border-[var(--color-danger)] p-4 text-sm font-semibold text-[var(--color-danger)] flex items-center gap-2">
           <AlertTriangle size={18} /> {error}
         </div>
       )}
 
       {/* CORE CONFIGURATION */}
-      <div className="bg-gray-50 border border-gray-300 p-6 rounded-none">
-        <h2 className="text-lg font-bold text-[#00588b] mb-4">Core Core Identity & SEO</h2>
+      <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 rounded-none">
+        <h2 className="text-[10px] font-black text-[var(--text-primary)] uppercase tracking-widest mb-4 border-b border-[var(--border-light)] pb-2">Page Identity & SEO</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Internal Reference Title *</label>
+            <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">Internal Reference Title *</label>
             <input 
               type="text" required value={title} onChange={e => setTitle(e.target.value)} 
-              className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[#00588b] rounded-none" 
+              className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)] rounded-none" 
               placeholder="e.g. Placement Policy 2026" 
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-700 uppercase mb-1">URL Slug *</label>
+            <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">URL Slug *</label>
             <div className="flex">
-              <span className="bg-gray-200 border-y border-l border-gray-300 px-3 py-2 text-gray-500 text-sm font-mono leading-none flex items-center">/</span>
+              <span className="bg-[var(--bg-muted)] border border-[var(--border-default)] border-r-0 px-3 text-[var(--text-muted)] text-sm font-mono flex items-center">/</span>
               <input 
                 type="text" required value={slug} onChange={e => setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))} 
-                className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[#00588b] rounded-none font-mono" 
+                className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)] rounded-none font-mono" 
                 placeholder="placement-policy" 
               />
             </div>
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-700 uppercase mb-1">SEO Meta Title</label>
+            <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">SEO Meta Title</label>
             <input 
               type="text" value={meta.title} onChange={e => setMeta({...meta, title: e.target.value})} 
-              className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[#00588b] rounded-none" 
+              className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)] rounded-none" 
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-700 uppercase mb-1">SEO Meta Description</label>
+            <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">SEO Meta Description</label>
             <input 
               type="text" value={meta.description} onChange={e => setMeta({...meta, description: e.target.value})} 
-              className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[#00588b] rounded-none" 
+              className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)] rounded-none" 
             />
           </div>
         </div>
       </div>
 
       {/* HERO SECTION */}
-      <div className="bg-white border text-gray-800 border-gray-300 p-6 rounded-none shadow-sm">
-        <h2 className="text-lg font-bold text-[#00588b] mb-4 border-b border-gray-200 pb-2">Top Banner / Hero Configuration</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 rounded-none shadow-sm">
+        <h2 className="text-[10px] font-black text-[var(--text-primary)] uppercase tracking-widest mb-4 border-b border-[var(--border-light)] pb-2">Top Banner / Hero Configuration</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Display Main Heading (H1)</label>
+              <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">Display Main Heading (H1)</label>
               <input 
                 type="text" value={hero.title} onChange={e => setHero({...hero, title: e.target.value})} 
-                className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[#00588b] rounded-none" 
+                className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)] rounded-none" 
                 placeholder="e.g. Discover Engineering" 
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Badge Tagline (Optional)</label>
+              <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">Badge Tagline (Optional)</label>
               <input 
                 type="text" value={hero.badge} onChange={e => setHero({...hero, badge: e.target.value})} 
-                className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[#00588b] rounded-none" 
+                className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)] rounded-none" 
                 placeholder="e.g. ADMISSIONS 2026" 
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Hero Background Image</label>
-              <div className="flex gap-2">
-                <input 
-                  type="text" value={hero.bgImage} readOnly 
-                  className="w-full border border-gray-300 bg-gray-50 p-2 text-sm outline-none rounded-none text-gray-500" 
-                  placeholder="Upload via Media Uploader ->" 
-                />
-              </div>
+              <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">Hero Background Image URL</label>
+              <input 
+                type="text" value={hero.bgImage} readOnly 
+                className="w-full bg-[var(--bg-muted)] border border-[var(--border-default)] px-3 py-2.5 text-sm text-[var(--text-muted)] outline-none rounded-none" 
+                placeholder="Upload via Media Uploader ->" 
+              />
             </div>
           </div>
-          <div className="border border-gray-200 p-4">
-            <label className="block text-xs font-bold text-gray-700 uppercase mb-2">Hero Image Media</label>
+          <div className="border border-[var(--border-default)] p-4 bg-[var(--bg-muted)]">
+            <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-2">Hero Image Media</label>
             <div className="mb-4">
               {hero.bgImage ? (
-                <img src={hero.bgImage} className="w-full h-48 object-cover border border-gray-300 shadow-sm" alt="Hero Banner Preview" />
+                <img src={hero.bgImage} className="w-full h-40 object-cover border border-[var(--border-default)] shadow-sm" alt="Hero Banner Preview" />
               ) : (
-                <div className="w-full h-48 bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center text-gray-400">
-                  <ImageIcon size={32} />
+                <div className="w-full h-40 bg-[var(--bg-body)] border border-dashed border-[var(--border-default)] flex items-center justify-center text-[var(--text-muted)]">
+                  <ImageIcon size={28} />
                 </div>
               )}
             </div>
@@ -193,25 +228,23 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
 
       {/* BLOCK CANVAS */}
       <div className="space-y-4">
-        <div className="flex items-center justify-between border-b-2 border-gray-800 pb-2 mb-4">
-          <h2 className="text-xl font-black text-gray-900 uppercase">Structural Content Blocks Canvas</h2>
-          <div className="flex items-center gap-2">
-            <select 
-              className="border border-gray-300 bg-white text-sm font-semibold p-2 rounded-none outline-none focus:border-[#00588b]"
-              onChange={(e) => { addBlock(e.target.value); e.target.value = ""; }}
-              defaultValue=""
-            >
-              <option value="" disabled>-- Append New Block --</option>
-              {BLOCK_DEFINITIONS.map(bd => <option key={bd.type} value={bd.type}>{bd.label}</option>)}
-            </select>
-          </div>
+        <div className="flex items-center justify-between border-b border-[var(--border-default)] pb-3">
+          <h2 className="text-[10px] font-black text-[var(--text-primary)] uppercase tracking-widest">Content Blocks Canvas</h2>
+          <select 
+            className="bg-[var(--bg-body)] border border-[var(--border-default)] text-[var(--text-primary)] text-sm font-semibold px-3 py-2 rounded-none outline-none focus:border-[var(--color-primary)] h-[32px]"
+            onChange={(e) => { addBlock(e.target.value); e.target.value = ""; }}
+            defaultValue=""
+          >
+            <option value="" disabled>+ Append New Block</option>
+            {BLOCK_DEFINITIONS.map(bd => <option key={bd.type} value={bd.type}>{bd.label}</option>)}
+          </select>
         </div>
 
         {blocks.length === 0 && (
-          <div className="p-12 text-center border-2 border-dashed border-gray-300 bg-gray-50 text-gray-500 rounded-none">
-            <Layout className="mx-auto mb-3 text-gray-400" size={32} />
-            <p className="font-semibold">Canvas is empty.</p>
-            <p className="text-sm">Select a block structural type from the dropdown above to start assembling this page.</p>
+          <div className="py-12 text-center border-2 border-dashed border-[var(--border-default)] bg-[var(--bg-surface)] text-[var(--text-muted)] rounded-none">
+            <Layout className="mx-auto mb-3" size={28} />
+            <p className="font-semibold text-sm">Canvas is empty.</p>
+            <p className="text-xs mt-1">Select a block type above to start building this page.</p>
           </div>
         )}
 
@@ -220,19 +253,19 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
           const BlockIcon = typeDef.icon;
 
           return (
-            <div key={index} className="bg-white border border-gray-300 rounded-none shadow-sm duration-150 relative group">
+            <div key={index} className="bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none shadow-sm duration-150 relative group">
               
               {/* Block Header */}
-              <div className="bg-gray-100 border-b border-gray-300 px-4 py-3 flex items-center justify-between">
+              <div className="bg-[var(--bg-muted)] border-b border-[var(--border-default)] px-4 py-2.5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="bg-[#00588b] text-white p-1 rounded-sm"><BlockIcon size={16} /></div>
-                  <span className="font-bold text-gray-800 uppercase text-sm tracking-wide">Block #{index + 1}: {typeDef.label}</span>
+                  <div className="bg-[var(--color-primary)] text-white p-1"><BlockIcon size={14} /></div>
+                  <span className="font-bold text-[var(--text-primary)] uppercase text-[11px] tracking-widest">Block #{index + 1}: {typeDef.label}</span>
                 </div>
                 <div className="flex gap-1">
-                  <button type="button" onClick={() => moveBlock(index, -1)} disabled={index === 0} className="p-1.5 text-gray-600 hover:bg-gray-200 disabled:opacity-30 transition-colors border border-transparent"><ArrowUp size={16} /></button>
-                  <button type="button" onClick={() => moveBlock(index, 1)} disabled={index === blocks.length - 1} className="p-1.5 text-gray-600 hover:bg-gray-200 disabled:opacity-30 transition-colors border border-transparent"><ArrowDown size={16} /></button>
-                  <div className="w-px h-6 bg-gray-300 mx-1"></div>
-                  <button type="button" onClick={() => removeBlock(index)} className="p-1.5 text-red-600 hover:bg-red-100 transition-colors border border-transparent"><Trash2 size={16} /></button>
+                  <button type="button" onClick={() => moveBlock(index, -1)} disabled={index === 0} className="p-1.5 text-[var(--text-muted)] hover:bg-[var(--bg-hover)] disabled:opacity-30 transition-colors"><ArrowUp size={14} /></button>
+                  <button type="button" onClick={() => moveBlock(index, 1)} disabled={index === blocks.length - 1} className="p-1.5 text-[var(--text-muted)] hover:bg-[var(--bg-hover)] disabled:opacity-30 transition-colors"><ArrowDown size={14} /></button>
+                  <div className="w-px h-5 bg-[var(--border-default)] mx-1"></div>
+                  <button type="button" onClick={() => removeBlock(index)} className="p-1.5 text-[var(--color-danger)] hover:bg-red-50 transition-colors"><Trash2 size={14} /></button>
                 </div>
               </div>
 
@@ -516,21 +549,7 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
         })}
       </div>
 
-      {/* FIXED ACTION BAR */}
-      <div className="fixed bottom-0 left-0 right-0 md:left-[280px] bg-white border-t border-gray-300 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50 flex items-center justify-between">
-        <div className="text-sm font-semibold text-gray-600">
-          Status: {loading ? <span className="text-blue-600">Syncing with server...</span> : <span className="text-green-600">Ready</span>}
-        </div>
-        <button 
-          type="submit" 
-          disabled={loading} 
-          className="bg-green-600 text-white px-8 py-2.5 text-sm font-bold flex items-center justify-center gap-2 hover:bg-green-700 transition-colors rounded-none shadow-sm disabled:opacity-50"
-        >
-          {loading ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
-          {mode === 'edit' ? 'Commit Changes to Server' : 'Publish New Page'}
-        </button>
-      </div>
-
-    </form>
+      </form>
+    </div>
   );
 }
