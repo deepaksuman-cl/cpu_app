@@ -1,4 +1,4 @@
-'use client';
+'use client'; 
 
 /**
  * ╔══════════════════════════════════════════════════════════════════╗
@@ -24,7 +24,7 @@
  * ║  sideMenu.exploreMore[]          → Desktop sidebar left column  ║
  * ║  sideMenu.directLinks[]          → Desktop sidebar right links  ║
  * ║  mobileConfig.exploreMoreHeading → "Explore More" heading       ║
- * ║  mobileConfig.enquiryForm.*      → Enquiry form fields/labels   ║
+ * ║  mobileConfig.enquiryForm.* → Enquiry form fields/labels   ║
  * ║  mobileConfig.bottomTabs[]       → Mobile bottom nav tabs       ║
  * ║    tab.type: "popup"  → opens a panel (defined in tab.panel)   ║
  * ║    tab.type: "tel"    → phone call (hrefField refs topBarInfo)  ║
@@ -60,12 +60,31 @@ const INIT = {
 
 function reducer(s, a) {
   switch (a.type) {
-    case 'SCROLL': return {
-      ...s,
-      isScrolled: a.y > 50,
-      showTopBar: a.y < 50 ? true : a.y > s.lastScrollY ? false : true,
-      lastScrollY: a.y,
-    };
+    case 'SCROLL': {
+      const currentY = a.y;
+      const isScrolled = currentY > 50;
+      
+      // Top 50px par hamesha dikhega
+      if (currentY <= 50) {
+        return { ...s, isScrolled, showTopBar: true, lastScrollY: currentY };
+      }
+
+      let newShowTopBar = s.showTopBar;
+      
+      // Fast scroll detection (5px threshold)
+      if (currentY - s.lastScrollY > 5) {
+        newShowTopBar = false; // Scroll Down -> Hide
+      } else if (s.lastScrollY - currentY > 5) {
+        newShowTopBar = true;  // Scroll Up -> Show
+      }
+
+      return {
+        ...s,
+        isScrolled,
+        showTopBar: newShowTopBar,
+        lastScrollY: currentY <= 0 ? 0 : currentY,
+      };
+    }
     case 'SET_MEGA': return { ...s, activeMegaMenu: a.key };
     case 'SET_TAB':  return { ...s, openTabKey: s.openTabKey === a.key ? null : a.key, mobileAccordion: null, mobileSubAccordion: null };
     case 'CLOSE_TAB': return { ...s, openTabKey: null };
@@ -636,9 +655,18 @@ export default function HeaderClient({ navData }) {
   const [state, dispatch] = useReducer(reducer, INIT);
 
   useEffect(() => {
-    const fn = () => dispatch({ type: 'SCROLL', y: window.scrollY });
-    window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          dispatch({ type: 'SCROLL', y: window.scrollY });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -715,11 +743,12 @@ export default function HeaderClient({ navData }) {
       {/* DESKTOP SIDEBAR */}
       <DesktopSidebar navData={navData} state={state} dispatch={dispatch} />
 
-      {/* DESKTOP HEADER */}
-      <header className="hidden lg:block w-[100vw] z-[1000] fixed top-0 transition-all duration-300 ease-in-out shadow-md bg-white"
+      {/* DESKTOP HEADER - TRANSFORM SLIDE UP INSTEAD OF HEIGHT ANIMATION */}
+      <header className={`hidden lg:block w-[100vw] z-[1000] fixed top-0 transition-transform duration-300 ease-out shadow-md bg-white ${state.showTopBar ? 'translate-y-0' : '-translate-y-[38px]'}`}
         onMouseLeave={() => dispatch({ type: 'SET_MEGA', key: null })}>
-        {/* Top bar */}
-        <div className={`bg-[#00588b] w-full flex items-center text-white text-[12px] font-light transition-all duration-300 overflow-hidden ${state.showTopBar ? 'h-[38px] opacity-100 border-b border-[#1c54a3]' : 'h-0 opacity-0'}`}>
+        
+        {/* Top bar - OPACITY FADE OUT, FIXED HEIGHT */}
+        <div className={`bg-[#00588b] w-full flex items-center h-[38px] text-white text-[12px] font-light transition-opacity duration-300 ease-out border-b border-[#1c54a3] ${state.showTopBar ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           <div className="mx-auto w-[98vw] h-full flex justify-between items-center">
             <div className="flex items-center h-full">
               <div className="bg-[#fec53a] text-[#00588b] font-bold px-4 h-full flex items-center shadow-sm z-10 uppercase tracking-wide">
@@ -773,8 +802,14 @@ export default function HeaderClient({ navData }) {
         </div>
 
         {/* Main nav */}
-        <div className={`mx-auto w-[98vw] relative flex justify-between items-center transition-all duration-300 ${state.isScrolled ? 'py-2' : 'py-3'}`}>
-          <Link href="/"><img src={navData.logoUrl} alt="Logo" className={`transition-all duration-300 object-contain ${state.isScrolled ? 'h-[50px]' : 'h-[40px]'}`} /></Link>
+        <div className={`mx-auto w-[98vw] relative flex justify-between items-center transition-all duration-300 ease-out ${state.isScrolled ? 'py-1.5' : 'py-3'}`}>
+         <Link href="/" className="flex items-center h-[50px]">
+  <img 
+    src={navData.logoUrl} 
+    alt="Logo" 
+    className={`h-full w-auto object-contain transition-transform duration-300 ease-in-out origin-left ${state.isScrolled ? 'scale-[0.8]' : 'scale-100'}`} 
+  />
+</Link>
           <div className="flex flex-col items-end relative w-full" onMouseLeave={() => dispatch({ type: 'SET_MEGA', key: null })}>
             <div className="relative flex items-center justify-end w-full">
               <nav className="flex items-center h-[50px] z-50">
@@ -816,16 +851,16 @@ export default function HeaderClient({ navData }) {
       </header>
 
       {/* MOBILE TOP HEADER */}
-      <header className={`lg:hidden fixed top-0 w-full z-[1000] p-3 flex justify-between items-center shadow-md bg-white transition-transform duration-300 ${!state.showTopBar ? '-translate-y-full' : 'translate-y-0'}`}>
+      <header className={`lg:hidden fixed top-0 w-full z-[1000] p-3 flex justify-between items-center shadow-md bg-white transition-transform duration-300 ease-out ${!state.showTopBar ? '-translate-y-full' : 'translate-y-0'}`}>
         <Link href="/"><img src={navData.logoUrl} alt="Logo" className="h-10 object-contain" /></Link>
         <button onClick={() => dispatch({ type: 'TOGGLE_SEARCH' })} className="text-[#00588b] p-2 hover:bg-gray-100 rounded-full transition-colors"><LucideIcons.Search size={24} strokeWidth={2.5} /></button>
       </header>
 
       {/* ─────────────────────────────────────────────────
-          MOBILE BOTTOM NAV
-          100% driven by mobileConfig.bottomTabs[] in JSON.
-          To add/remove/reorder tabs → edit navigation.json only.
-          ───────────────────────────────────────────────── */}
+         MOBILE BOTTOM NAV
+         100% driven by mobileConfig.bottomTabs[] in JSON.
+         To add/remove/reorder tabs → edit navigation.json only.
+         ───────────────────────────────────────────────── */}
       <div className="fixed bottom-0 left-0 w-full bg-[#00588b] text-white z-[1000] lg:hidden flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.4)] pb-safe">
         {mobileConfig.bottomTabs.map(tab => {
           const isActive   = state.openTabKey === tab.key;

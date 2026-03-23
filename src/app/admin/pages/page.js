@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'; 
 import { getAllPages } from '@/lib/actions/pageActions';
 import { Edit, FileText, Plus } from 'lucide-react';
 import DeletePageButton from '@/components/admin/pages/DeletePageButton';

@@ -1,10 +1,11 @@
 // File: src/app/admin/layout.js
 'use client';
 
-import { useState, useEffect } from 'react';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminTopbar from '@/components/admin/AdminTopbar';
 import ScrollToTop from '@/components/admin/ui/ScrollToTop';
+import { useEffect, useState } from 'react';
+
 import '@/app/globals.css';
 
 export default function AdminLayout({ children }) {

@@ -25,34 +25,38 @@ export default async function DynamicCMSPage(props) {
   return (
     <main className="min-h-screen bg-white font-[Poppins,sans-serif]">
       {/* Dynamic Hero Section */}
-      {page.hero && (page.hero.title || page.hero.bgImage) ? (
-        <section 
-          className="relative w-full h-[50vh] min-h-[400px] max-h-[600px] flex items-center justify-center bg-slate-900 border-b-[5px] border-[#ffb900] overflow-hidden"
-          style={page.hero.bgImage ? { backgroundImage: `url(${page.hero.bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' } : {}}
-        >
-          {/* Subtle gradient dark overlay for text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30 z-0" />
-          
-          <div className="relative z-10 max-w-[56rem] mx-auto px-6 text-center space-y-4">
-            {page.hero.badge && (
-              <span className="inline-block px-5 py-2 bg-[#ffb900] text-[#5c4200] font-black text-xs tracking-widest uppercase shadow-xl ring-2 ring-white/20">
-                {page.hero.badge}
-              </span>
-            )}
-            {page.hero.title && (
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.15] drop-shadow-2xl">
-                {page.hero.title}
-              </h1>
-            )}
-          </div>
-        </section>
-      ) : (
-        /* Fallback Title Header if no hero image configured */
-        <section className="bg-gray-50 border-b border-gray-200 py-16 px-6">
-          <div className="max-w-[56rem] mx-auto">
-             <h1 className="text-4xl font-black text-[#00588b] leading-tight">{page.title}</h1>
-          </div>
-        </section>
+      {!page.hero?.hideHero && (
+        <>
+          {page.hero && (page.hero.title || page.hero.bgImage) ? (
+            <section 
+              className="relative w-full h-[50vh] min-h-[400px] max-h-[600px] flex items-center justify-center bg-slate-900 border-b-[5px] border-[#ffb900] overflow-hidden"
+              style={page.hero.bgImage ? { backgroundImage: `url(${page.hero.bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' } : {}}
+            >
+              {/* Subtle gradient dark overlay for text contrast */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30 z-0" />
+              
+              <div className="relative z-10 max-w-[56rem] mx-auto px-6 text-center space-y-4">
+                {page.hero.badge && (
+                  <span className="inline-block px-5 py-2 bg-[#ffb900] text-[#5c4200] font-black text-xs tracking-widest uppercase shadow-xl ring-2 ring-white/20">
+                    {page.hero.badge}
+                  </span>
+                )}
+                {page.hero.title && (
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.15] drop-shadow-2xl">
+                    {page.hero.title}
+                  </h1>
+                )}
+              </div>
+            </section>
+          ) : (
+            /* Fallback Title Header if no hero image configured */
+            <section className="bg-gray-50 border-b border-gray-200 py-16 px-6">
+              <div className="max-w-[56rem] mx-auto">
+                 <h1 className="text-4xl font-black text-[#00588b] leading-tight">{page.title}</h1>
+              </div>
+            </section>
+          )}
+        </>
       )}
 
       {/* Dynamic Blocks Assembly Loop */}

@@ -4,9 +4,26 @@ import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import { createPage, updatePage } from '@/lib/actions/pageActions';
-import { AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Plus, Save, Trash2, Type, Users } from 'lucide-react';
+import { AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Megaphone, Plus, Save, Trash2, Type, Users, CheckCircle2, AlertCircle, X, Mail, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
+
+// --- Toast Notification Pattern ---
+function Toast({ msg, type, onClose }) {
+  return (
+    <div className={`fixed bottom-6 right-6 z-[200] flex items-center gap-3 px-5 py-3.5 shadow-xl text-[13px] font-semibold bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none ${
+      type === 'success'
+        ? 'text-[var(--color-success-dark)] border-l-[3px] border-l-[var(--color-success)]'
+        : 'text-[var(--color-danger)] border-l-[3px] border-l-[var(--color-danger)]'
+    }`}>
+      {type === 'success'
+        ? <CheckCircle2 size={16} className="text-[var(--color-success)] flex-shrink-0" />
+        : <AlertCircle size={16} className="text-[var(--color-danger)] flex-shrink-0" />}
+      {msg}
+      <button onClick={onClose} className="ml-2 text-[var(--text-muted)] hover:text-[var(--text-secondary)]"><X size={14} /></button>
+    </div>
+  );
+}
 
 const BLOCK_DEFINITIONS = [
   { type: 'RichTextFull', label: 'Rich Text Paragraph', icon: Type },
@@ -15,7 +32,10 @@ const BLOCK_DEFINITIONS = [
   { type: 'ProfileGrid', label: 'Profiles Directory Grid', icon: Users },
   { type: 'StatsGrid', label: 'Statistics / Metrics Grid', icon: BarChart3 },
   { type: 'SingleImage', label: 'Single Image', icon: ImageIcon },
-  { type: 'GalleryBlock', label: 'Interactive Gallery', icon: Images }
+  { type: 'GalleryBlock', label: 'Interactive Gallery', icon: Images },
+  { type: 'HeroWithStats', label: 'Hero Section with Stats', icon: Layout },
+  { type: 'LeaderProfile', label: 'Leader Profile & Message', icon: Users },
+  { type: 'CTABanner', label: 'Call-to-Action Banner', icon: Megaphone }
 ];
 
 const getEmptyBlock = (type) => {
@@ -24,18 +44,37 @@ const getEmptyBlock = (type) => {
   if (type === 'ProfileGrid') base.profileItems = [{ name: '', designation: '', company: '', image: '' }];
   if (type === 'StatsGrid') base.statsItems = [{ label: '', value: '', icon: '' }];
   if (type === 'GalleryBlock') base.galleryItems = [{ image: '', title: '', category: '' }];
+  
+  if (type === 'HeroWithStats') base.heroStats = { badgeText: '', titleMain: '', titleHighlight: '', subtitle: '', stats: [] };
+  if (type === 'LeaderProfile') base.leaderProfile = { image: '', name: '', role: '', organization: '', qualifications: [], greeting: '', welcomeHeadline: '', messageHTML: '', visionQuote: '', signatureQuals: '' };
+  if (type === 'CTABanner') base.ctaBanner = { badgeText: '', titleMain: '', titleHighlight: '', primaryBtnText: '', primaryBtnUrl: '', primaryBtnIcon: 'ChevronRight', secondaryBtnText: '', secondaryBtnUrl: '', secondaryBtnIcon: 'Mail' };
+
   return base;
 };
 
 export default function PageBuilderForm({ mode = 'create', initialData = null }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = useCallback((msg, type = 'success') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3500);
+  }, []);
   const [error, setError] = useState(null);
 
   const [title, setTitle] = useState(initialData?.title || '');
   const [slug, setSlug] = useState(initialData?.slug || '');
-  const [meta, setMeta] = useState(initialData?.meta || { title: '', description: '' });
-  const [hero, setHero] = useState(initialData?.hero || { title: '', bgImage: '', badge: '' });
+  const [meta, setMeta] = useState({
+    title: initialData?.meta?.title || '',
+    description: initialData?.meta?.description || ''
+  });
+  const [hero, setHero] = useState({
+    title: initialData?.hero?.title || '',
+    bgImage: initialData?.hero?.bgImage || '',
+    badge: initialData?.hero?.badge || '',
+    hideHero: initialData?.hero?.hideHero || false
+  });
   const [blocks, setBlocks] = useState(initialData?.blocks || []);
 
   const handleSave = async (e) => {
@@ -53,47 +92,70 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
       : await createPage(payload);
 
     if (res.success) {
+      showToast('Page configuration saved successfully!');
       setLoading(false);
-      router.push('/admin/pages');
-      router.refresh();
+      setTimeout(() => {
+        router.push('/admin/pages');
+        router.refresh();
+      }, 1000);
     } else {
-      setError(res.error || 'Failed to save page configuration.');
+      showToast('Error saving: ' + (res.error || 'Unknown error'), 'error');
       setLoading(false);
     }
   };
 
-  const addBlock = (type) => setBlocks([...blocks, getEmptyBlock(type)]);
-  const removeBlock = (index) => setBlocks(blocks.filter((_, i) => i !== index));
+  const addBlock = useCallback((type) => setBlocks(prev => [...prev, getEmptyBlock(type)]), []);
   
-  const moveBlock = (index, dir) => {
-    if ((dir === -1 && index === 0) || (dir === 1 && index === blocks.length - 1)) return;
-    const newBlocks = [...blocks];
-    [newBlocks[index], newBlocks[index + dir]] = [newBlocks[index + dir], newBlocks[index]];
-    setBlocks(newBlocks);
-  };
+  const removeBlock = useCallback((index) => setBlocks(prev => prev.filter((_, i) => i !== index)), []);
+  
+  const moveBlock = useCallback((index, dir) => {
+    setBlocks(prev => {
+      if ((dir === -1 && index === 0) || (dir === 1 && index === prev.length - 1)) return prev;
+      const newBlocks = [...prev];
+      [newBlocks[index], newBlocks[index + dir]] = [newBlocks[index + dir], newBlocks[index]];
+      return newBlocks;
+    });
+  }, []);
 
-  const updateBlock = (index, field, value) => {
-    const newBlocks = [...blocks];
-    newBlocks[index][field] = value;
-    setBlocks(newBlocks);
-  };
+  const updateBlock = useCallback((index, field, value) => {
+    setBlocks(prev => {
+      const newBlocks = [...prev];
+      newBlocks[index] = { ...newBlocks[index], [field]: value };
+      return newBlocks;
+    });
+  }, []);
 
   // Array Managers
-  const addArrayItem = (blockIndex, arrayField, emptyItem) => {
-    const newBlocks = [...blocks];
-    newBlocks[blockIndex][arrayField].push(emptyItem);
-    setBlocks(newBlocks);
-  };
-  const removeArrayItem = (blockIndex, arrayField, itemIndex) => {
-    const newBlocks = [...blocks];
-    newBlocks[blockIndex][arrayField].splice(itemIndex, 1);
-    setBlocks(newBlocks);
-  };
-  const updateArrayItem = (blockIndex, arrayField, itemIndex, field, value) => {
-    const newBlocks = [...blocks];
-    newBlocks[blockIndex][arrayField][itemIndex][field] = value;
-    setBlocks(newBlocks);
-  };
+  const addArrayItem = useCallback((blockIndex, arrayField, emptyItem) => {
+    setBlocks(prev => {
+      const newBlocks = [...prev];
+      newBlocks[blockIndex] = { 
+        ...newBlocks[blockIndex], 
+        [arrayField]: [...newBlocks[blockIndex][arrayField], emptyItem] 
+      };
+      return newBlocks;
+    });
+  }, []);
+
+  const removeArrayItem = useCallback((blockIndex, arrayField, itemIndex) => {
+    setBlocks(prev => {
+      const newBlocks = [...prev];
+      const newArray = [...newBlocks[blockIndex][arrayField]];
+      newArray.splice(itemIndex, 1);
+      newBlocks[blockIndex] = { ...newBlocks[blockIndex], [arrayField]: newArray };
+      return newBlocks;
+    });
+  }, []);
+
+  const updateArrayItem = useCallback((blockIndex, arrayField, itemIndex, field, value) => {
+    setBlocks(prev => {
+      const newBlocks = [...prev];
+      const newArray = [...newBlocks[blockIndex][arrayField]];
+      newArray[itemIndex] = { ...newArray[itemIndex], [field]: value };
+      newBlocks[blockIndex] = { ...newBlocks[blockIndex], [arrayField]: newArray };
+      return newBlocks;
+    });
+  }, []);
 
   const pageTitle = initialData?.title || 'New Page';
   const pageSlug = initialData?.slug || '';
@@ -182,8 +244,20 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
 
       {/* HERO SECTION */}
       <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 rounded-none shadow-sm">
-        <h2 className="text-[10px] font-black text-[var(--text-primary)] uppercase tracking-widest mb-4 border-b border-[var(--border-light)] pb-2">Top Banner / Hero Configuration</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-2 mb-4">
+          <h2 className="text-[10px] font-black text-[var(--text-primary)] uppercase tracking-widest ">Top Banner / Hero Configuration</h2>
+          <label className="flex items-center gap-2 cursor-pointer group">
+            <input 
+              type="checkbox" 
+              checked={hero.hideHero} 
+              onChange={e => setHero({...hero, hideHero: e.target.checked})} 
+              className="w-3.5 h-3.5 accent-[var(--color-primary)] cursor-pointer" 
+            />
+            <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest group-hover:text-[var(--text-primary)] transition-colors">Hide Hero on Page</span>
+          </label>
+        </div>
+        {!hero.hideHero ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="space-y-4">
             <div>
               <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">Display Main Heading (H1)</label>
@@ -224,6 +298,11 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
             <MediaUploader category="pages" onUploadSuccess={(url) => setHero({...hero, bgImage: url})} />
           </div>
         </div>
+        ) : (
+          <div className="py-8 text-center bg-[var(--bg-muted)] border border-dashed border-[var(--border-default)]">
+            <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-[0.2em]">Hero Section is currently disabled for this page</p>
+          </div>
+        )}
       </div>
 
       {/* BLOCK CANVAS */}
@@ -543,6 +622,235 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                   </div>
                 )}
 
+                {block.blockType === 'HeroWithStats' && (
+                  <div className="space-y-6">
+                    <div className="bg-white border-l-4 border-[var(--color-primary)] p-5 shadow-sm space-y-4">
+                      <h3 className="text-[11px] font-bold text-[var(--color-primary)] uppercase tracking-wider border-b border-gray-100 pb-2">Hero Header & Typography</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Badge / Tagline</label>
+                          <input type="text" value={block.heroStats?.badgeText || ''} onChange={e => updateBlock(index, 'heroStats', { ...block.heroStats, badgeText: e.target.value })} className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[var(--color-primary)]" placeholder="e.g. ESTABLISHED 1993" />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Main Title (Normal)</label>
+                          <input type="text" value={block.heroStats?.titleMain || ''} onChange={e => updateBlock(index, 'heroStats', { ...block.heroStats, titleMain: e.target.value })} className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[var(--color-primary)]" placeholder="e.g. Leading the way in" />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Title Highlight (Bold/Color)</label>
+                          <input type="text" value={block.heroStats?.titleHighlight || ''} onChange={e => updateBlock(index, 'heroStats', { ...block.heroStats, titleHighlight: e.target.value })} className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[var(--color-primary)] font-bold text-[var(--color-primary)]" placeholder="e.g. Global Education" />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Hero Subtitle</label>
+                          <input type="text" value={block.heroStats?.subtitle || ''} onChange={e => updateBlock(index, 'heroStats', { ...block.heroStats, subtitle: e.target.value })} className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[var(--color-primary)]" placeholder="A brief catchphrase..." />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-50 border border-gray-200 p-5">
+                      <div className="flex justify-between items-center mb-4 border-b border-gray-200 pb-2">
+                        <label className="block text-xs font-bold text-gray-700 uppercase">Interactive Hero Stats</label>
+                        <button type="button" 
+                          onClick={() => {
+                            const newStats = [...(block.heroStats?.stats || []), { icon: 'Star', value: '', label: '' }];
+                            updateBlock(index, 'heroStats', { ...block.heroStats, stats: newStats });
+                          }} 
+                          className="text-xs font-bold bg-[var(--color-primary)] text-white px-3 py-1.5 hover:opacity-90 transition-colors flex gap-1 items-center">
+                          <Plus size={14} /> Add Hero Stat
+                        </button>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {(block.heroStats?.stats || []).map((stat, sIdx) => (
+                          <div key={sIdx} className="bg-white border border-gray-300 p-4 relative group shadow-sm">
+                            <button type="button" 
+                              onClick={() => {
+                                const newStats = block.heroStats.stats.filter((_, i) => i !== sIdx);
+                                updateBlock(index, 'heroStats', { ...block.heroStats, stats: newStats });
+                              }}
+                              className="absolute top-1 right-1 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1 bg-white border border-red-100 shadow-sm z-10">
+                              <Trash2 size={12} />
+                            </button>
+                            <div className="space-y-3">
+                              <div>
+                                <label className="block text-[9px] font-bold text-gray-400 uppercase">Icon</label>
+                                <IconPicker value={stat.icon} onChange={val => {
+                                  const newStats = [...block.heroStats.stats];
+                                  newStats[sIdx].icon = val;
+                                  updateBlock(index, 'heroStats', { ...block.heroStats, stats: newStats });
+                                }} />
+                              </div>
+                              <div>
+                                <label className="block text-[9px] font-bold text-gray-400 uppercase">Large Value</label>
+                                <input type="text" value={stat.value} 
+                                  onChange={e => {
+                                    const newStats = [...block.heroStats.stats];
+                                    newStats[sIdx].value = e.target.value;
+                                    updateBlock(index, 'heroStats', { ...block.heroStats, stats: newStats });
+                                  }}
+                                  className="w-full border border-gray-200 p-1.5 text-lg font-black text-[var(--color-primary)] outline-none text-center font-mono" placeholder="30+" />
+                              </div>
+                              <div>
+                                <label className="block text-[9px] font-bold text-gray-400 uppercase">Subtext Label</label>
+                                <input type="text" value={stat.label} 
+                                  onChange={e => {
+                                    const newStats = [...block.heroStats.stats];
+                                    newStats[sIdx].label = e.target.value;
+                                    updateBlock(index, 'heroStats', { ...block.heroStats, stats: newStats });
+                                  }}
+                                  className="w-full border border-gray-200 p-1.5 text-xs font-bold text-gray-600 outline-none text-center" placeholder="Years Excellence" />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {block.blockType === 'LeaderProfile' && (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                    {/* Left Column: Visual & Qualifications */}
+                    <div className="space-y-6">
+                      <div className="border border-gray-200 p-5 bg-white shadow-sm">
+                        <label className="block text-xs font-bold text-[#00588b] uppercase tracking-wider mb-4 border-b pb-2">Profile Card Configuration</label>
+                        <div className="flex gap-4">
+                          <div className="w-1/3">
+                            <div className="aspect-[3/4] bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center text-gray-400 mb-2 overflow-hidden">
+                              {block.leaderProfile?.image ? (
+                                <img src={block.leaderProfile.image} className="w-full h-full object-cover" alt="Profile" />
+                              ) : <ImageIcon size={32} />}
+                            </div>
+                            <div className="scale-90 origin-top-left w-[111%]">
+                              <MediaUploader category="leaders" onUploadSuccess={url => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, image: url })} />
+                            </div>
+                          </div>
+                          <div className="w-2/3 space-y-3">
+                            <input type="text" value={block.leaderProfile?.name || ''} onChange={e => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, name: e.target.value })} className="w-full border-b border-gray-300 p-2 text-sm outline-none font-bold" placeholder="Leader's Full Name" />
+                            <input type="text" value={block.leaderProfile?.role || ''} onChange={e => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, role: e.target.value })} className="w-full border-b border-gray-300 p-2 text-xs outline-none uppercase tracking-wide text-gray-500" placeholder="Role (e.g. Honorable Chancellor)" />
+                            <input type="text" value={block.leaderProfile?.organization || ''} onChange={e => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, organization: e.target.value })} className="w-full border-b border-gray-300 p-2 text-xs outline-none text-[#00588b] font-semibold" placeholder="Organization (e.g. CPU Kota)" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="border border-gray-200 p-5 bg-gray-50">
+                        <div className="flex justify-between items-center mb-4">
+                          <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Academic Qualifications</label>
+                          <button type="button" 
+                            onClick={() => {
+                              const newQuals = [...(block.leaderProfile?.qualifications || []), { icon: 'GraduationCap', degree: '', institute: '' }];
+                              updateBlock(index, 'leaderProfile', { ...block.leaderProfile, qualifications: newQuals });
+                            }}
+                            className="text-[10px] bg-gray-200 px-2 py-1 rounded hover:bg-gray-300 transition-colors uppercase font-bold">+ Add Qual</button>
+                        </div>
+                        <div className="space-y-3">
+                          {(block.leaderProfile?.qualifications || []).map((qual, qIdx) => (
+                            <div key={qIdx} className="bg-white border border-gray-200 p-3 flex gap-2 items-center relative group">
+                              <IconPicker value={qual.icon} onChange={val => {
+                                const newQuals = [...block.leaderProfile.qualifications];
+                                newQuals[qIdx].icon = val;
+                                updateBlock(index, 'leaderProfile', { ...block.leaderProfile, qualifications: newQuals });
+                              }} />
+                              <input type="text" value={qual.degree} onChange={e => {
+                                const newQuals = [...block.leaderProfile.qualifications];
+                                newQuals[qIdx].degree = e.target.value;
+                                updateBlock(index, 'leaderProfile', { ...block.leaderProfile, qualifications: newQuals });
+                              }} className="flex-1 text-xs border-none outline-none font-bold" placeholder="Degree (e.g. Ph.D.)" />
+                              <input type="text" value={qual.institute} onChange={e => {
+                                const newQuals = [...block.leaderProfile.qualifications];
+                                newQuals[qIdx].institute = e.target.value;
+                                updateBlock(index, 'leaderProfile', { ...block.leaderProfile, qualifications: newQuals });
+                              }} className="flex-1 text-[11px] border-none outline-none text-gray-500 italic" placeholder="Institution" />
+                              <button type="button" onClick={() => {
+                                const newQuals = block.leaderProfile.qualifications.filter((_, i) => i !== qIdx);
+                                updateBlock(index, 'leaderProfile', { ...block.leaderProfile, qualifications: newQuals });
+                              }} className="text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 size={12} /></button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Column: Greetings & Rich Message */}
+                    <div className="space-y-6">
+                      <div className="bg-white border border-gray-200 p-5 shadow-sm space-y-4">
+                        <label className="block text-xs font-bold text-[#00588b] uppercase tracking-wider border-b pb-2 mb-2">Welcome Content Area</label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1">Greeting Text</label>
+                            <input type="text" value={block.leaderProfile?.greeting || ''} onChange={e => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, greeting: e.target.value })} className="w-full border border-gray-300 p-2 text-sm outline-none" placeholder="e.g. A Hearty Welcome" />
+                          </div>
+                          <div>
+                            <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1">Welcome Headline</label>
+                            <input type="text" value={block.leaderProfile?.welcomeHeadline || ''} onChange={e => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, welcomeHeadline: e.target.value })} className="w-full border border-gray-300 p-2 text-sm outline-none" placeholder="e.g. From the Chancellor's Desk" />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-400 uppercase mb-2">Rich Text Message HTML</label>
+                          <RichTextEditor value={block.leaderProfile?.messageHTML || ''} onChange={val => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, messageHTML: val })} />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1">Vision Quote / Bottom Line</label>
+                          <textarea value={block.leaderProfile?.visionQuote || ''} onChange={e => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, visionQuote: e.target.value })} className="w-full border border-gray-300 p-2 text-xs outline-none italic text-[#00588b] mb-4" placeholder="e.g. My vision is to nurture world-class leaders..." />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1">Academic Signature Sub-line (Under Name)</label>
+                          <input type="text" value={block.leaderProfile?.signatureQuals || ''} onChange={e => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, signatureQuals: e.target.value })} className="w-full border border-gray-300 p-2 text-[11px] outline-none text-gray-500 font-medium" placeholder="e.g. B.Tech., IIT Delhi • OPM, Harvard Business School" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {block.blockType === 'CTABanner' && (
+                  <div className="bg-[#00588b] p-8 border border-[#1c54a3] shadow-md space-y-6">
+                    <div className="flex gap-1 border-b border-[#ffffff33] pb-3 mb-2">
+                       <Megaphone size={16} className="text-[#fec53a]" />
+                       <h3 className="text-white text-xs font-black uppercase tracking-widest">Call-To-Action Banner Editor</h3>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div>
+                        <label className="block text-[10px] font-bold text-blue-200 uppercase mb-1">Banner Badge</label>
+                        <input type="text" value={block.ctaBanner?.badgeText || ''} onChange={e => updateBlock(index, 'ctaBanner', { ...block.ctaBanner, badgeText: e.target.value })} className="w-full bg-[#1c54a3] border border-[#2a6dbd] p-2.5 text-sm outline-none text-white focus:border-[#fec53a]" placeholder="ADMISSIONS 2026" />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold text-blue-200 uppercase mb-1">Main Title</label>
+                        <input type="text" value={block.ctaBanner?.titleMain || ''} onChange={e => updateBlock(index, 'ctaBanner', { ...block.ctaBanner, titleMain: e.target.value })} className="w-full bg-[#1c54a3] border border-[#2a6dbd] p-2.5 text-sm outline-none text-white focus:border-[#fec53a]" placeholder="Your Journey Starts" />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold text-blue-200 uppercase mb-1">Highlight Word</label>
+                        <input type="text" value={block.ctaBanner?.titleHighlight || ''} onChange={e => updateBlock(index, 'ctaBanner', { ...block.ctaBanner, titleHighlight: e.target.value })} className="w-full bg-[#1c54a3] border border-[#2a6dbd] p-2.5 text-sm outline-none text-[#fec53a] font-bold focus:border-[#fec53a]" placeholder="Right Here" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#ffffff11]">
+                       <div className="space-y-3">
+                          <label className="block text-[10px] font-bold text-[#fec53a] uppercase tracking-widest">Primary Action Button</label>
+                          <div className="grid grid-cols-1 gap-2">
+                             <div className="grid grid-cols-2 gap-2">
+                                <input type="text" value={block.ctaBanner?.primaryBtnText || ''} onChange={e => updateBlock(index, 'ctaBanner', { ...block.ctaBanner, primaryBtnText: e.target.value })} className="w-full bg-white border-none p-2 text-xs outline-none font-bold" placeholder="Button Text (e.g. Apply Now)" />
+                                <input type="text" value={block.ctaBanner?.primaryBtnUrl || ''} onChange={e => updateBlock(index, 'ctaBanner', { ...block.ctaBanner, primaryBtnUrl: e.target.value })} className="w-full bg-white border-none p-2 text-xs outline-none" placeholder="Button Link (/apply)" />
+                             </div>
+                             <div className="bg-[#1c54a3] p-1.5 flex items-center gap-3">
+                                <span className="text-[9px] font-bold text-blue-200 uppercase">Button Icon</span>
+                                <div className="flex-1"><IconPicker value={block.ctaBanner?.primaryBtnIcon || 'ChevronRight'} onChange={val => updateBlock(index, 'ctaBanner', { ...block.ctaBanner, primaryBtnIcon: val })} /></div>
+                             </div>
+                          </div>
+                       </div>
+                       <div className="space-y-3">
+                          <label className="block text-[10px] font-bold text-gray-300 uppercase tracking-widest">Secondary Outline Button (Mail/Contact)</label>
+                          <div className="grid grid-cols-1 gap-2">
+                             <div className="grid grid-cols-2 gap-2">
+                                <input type="text" value={block.ctaBanner?.secondaryBtnText || ''} onChange={e => updateBlock(index, 'ctaBanner', { ...block.ctaBanner, secondaryBtnText: e.target.value })} className="w-full bg-transparent border border-[#ffffff44] p-2 text-xs outline-none text-white font-bold" placeholder="Button Text" />
+                                <input type="text" value={block.ctaBanner?.secondaryBtnUrl || ''} onChange={e => updateBlock(index, 'ctaBanner', { ...block.ctaBanner, secondaryBtnUrl: e.target.value })} className="w-full bg-transparent border border-[#ffffff44] p-2 text-xs outline-none text-white" placeholder="Link URL" />
+                             </div>
+                             <div className="bg-[#1c54a3] p-1.5 flex items-center gap-3">
+                                <span className="text-[9px] font-bold text-blue-200 uppercase">Button Icon</span>
+                                <div className="flex-1"><IconPicker value={block.ctaBanner?.secondaryBtnIcon || 'Mail'} onChange={val => updateBlock(index, 'ctaBanner', { ...block.ctaBanner, secondaryBtnIcon: val })} /></div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                  </div>
+                )}
+
               </div>
             </div>
           );
@@ -550,6 +858,7 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
       </div>
 
       </form>
+      {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
     </div>
   );
 }

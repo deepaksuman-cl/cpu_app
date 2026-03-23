@@ -2,9 +2,9 @@
 'use client';
 
 import { Editor } from '@tinymce/tinymce-react';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, memo } from 'react';
 
-export default function RichTextEditor({ value, onChange, placeholder = 'Write your content here...' }) {
+function RichTextEditor({ value, onChange, placeholder = 'Write your content here...' }) {
   const [mounted, setMounted] = useState(false);
   const editorRef = useRef(null);
 
@@ -94,3 +94,5 @@ export default function RichTextEditor({ value, onChange, placeholder = 'Write y
     </div>
   );
 }
+
+export default memo(RichTextEditor);

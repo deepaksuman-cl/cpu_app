@@ -17,17 +17,34 @@ const StatsItemSchema = new mongoose.Schema({
   value: { type: String },
   icon: { type: String }
 });
-const GalleryItemSchema=new mongoose.Schema({
+
+const GalleryItemSchema = new mongoose.Schema({
   image: { type: String },
   title: { type: String },
-  category: { type: String },
-  
+  category: { type: String }
+});
+
+const QualificationSchema = new mongoose.Schema({
+  icon: { type: String },
+  degree: { type: String },
+  institute: { type: String }
 });
 
 const BlockSchema = new mongoose.Schema({
   blockType: { 
     type: String, 
-    enum: ['RichTextFull', 'SplitLayout', 'Accordion', 'ProfileGrid', 'StatsGrid', 'SingleImage','GalleryBlock'],
+    enum: [
+      'RichTextFull', 
+      'SplitLayout', 
+      'Accordion', 
+      'ProfileGrid', 
+      'StatsGrid', 
+      'SingleImage',
+      'GalleryBlock',
+      'HeroWithStats',
+      'LeaderProfile',
+      'CTABanner'
+    ],
     required: true 
   },
   content: { type: String },
@@ -48,6 +65,37 @@ const BlockSchema = new mongoose.Schema({
     highlight: String,
     description: String
   },
+  // Advanced Block Structures
+  heroStats: {
+    badgeText: String,
+    titleMain: String,
+    titleHighlight: String,
+    subtitle: String,
+    stats: [StatsItemSchema]
+  },
+  leaderProfile: {
+    image: String,
+    name: String,
+    role: String,
+    organization: String,
+    qualifications: [QualificationSchema],
+    greeting: String,
+    welcomeHeadline: String,
+    messageHTML: String,
+    visionQuote: String,
+    signatureQuals: String
+  },
+  ctaBanner: {
+    badgeText: String,
+    titleMain: String,
+    titleHighlight: String,
+    primaryBtnText: String,
+    primaryBtnUrl: String,
+    primaryBtnIcon: String,
+    secondaryBtnText: String,
+    secondaryBtnUrl: String,
+    secondaryBtnIcon: String
+  },
   accordionItems: [AccordionItemSchema],
   profileItems: [ProfileItemSchema],
   statsItems: [StatsItemSchema],
@@ -64,10 +112,16 @@ const PageSchema = new mongoose.Schema({
   hero: { 
     title: { type: String }, 
     bgImage: { type: String }, 
-    badge: { type: String } 
+    badge: { type: String },
+    hideHero: { type: Boolean, default: false }
   },
   blocks: [BlockSchema]
 }, { timestamps: true });
 
-const Page = mongoose.models.Page || mongoose.model('Page', PageSchema);
+// Force re-compile to pick up schema changes in development
+if (mongoose.models.Page) {
+  delete mongoose.models.Page;
+}
+
+const Page = mongoose.model('Page', PageSchema);
 export default Page;

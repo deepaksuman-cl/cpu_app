@@ -51,32 +51,46 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   // Settings Form State
   const [settingsForm, setSettingsForm] = useState(initialSettings || {});
   const [activeTab, setActiveTab] = useState('courses'); // courses | links | settings
+  const [courseFilter, setCourseFilter] = useState('all');
 
   // --- Handlers ---
   const handleAddCategory = async (e) => {
     e.preventDefault();
+    if (!catLabel) return;
     setLoading(true);
-    await createCategory({ label: catLabel, order: initialCategories.length + 1 });
-    setCatLabel('');
-    setCatModalOpen(false);
+    const res = await createCategory({ label: catLabel, order: initialCategories.length + 1 });
     setLoading(false);
-    showToast('Category created successfully!');
-    router.refresh();
+    if (res.success) {
+      setCatLabel('');
+      setCatModalOpen(false);
+      showToast('Category created successfully!');
+      router.refresh();
+    } else {
+      showToast('Error creating category: ' + res.error, 'error');
+    }
   };
 
   const handleDeleteCategory = async (id) => {
     if(!confirm("Warning: Deleting this category will also delete ALL courses inside it. Are you sure?")) return;
     setLoading(true);
-    await deleteCategory(id);
+    const res = await deleteCategory(id);
     setLoading(false);
-    showToast('Category deleted successfully!');
-    router.refresh();
+    if (res.success) {
+      showToast('Category deleted successfully!');
+      router.refresh();
+    } else {
+      showToast('Error deleting category: ' + res.error, 'error');
+    }
   };
 
   const handleSaveCourse = async (e) => {
     e.preventDefault();
+    if (!courseForm.title || !courseForm.school || !courseForm.categoryId) {
+      showToast('Please fill in title, school and category!', 'error');
+      return;
+    }
+
     setLoading(true);
-    
     const payload = {
       title: courseForm.title,
       school: courseForm.school,
@@ -91,19 +105,23 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
       badge: courseForm.badgeLabel ? { label: courseForm.badgeLabel, bgHex: courseForm.badgeBgHex, textHex: courseForm.badgeTextHex } : null
     };
 
+    let res;
     if (editingCourseId) {
-      await updateCourse(editingCourseId, payload);
-      showToast('Course updated successfully!');
+      res = await updateCourse(editingCourseId, payload);
     } else {
-      await createCourse(payload);
-      showToast('Course created successfully!');
+      res = await createCourse(payload);
     }
     
-    setCourseModalOpen(false);
-    setEditingCourseId(null);
-    setCourseForm({ title: '', school: '', categoryId: '', icon: 'Monitor', colorHex: '#1c54a3', iconBg: 'bg-blue-50', textColor: 'text-[#1c54a3]', borderHover: 'hover:border-[#1c54a3]', programs: '', badgeLabel: '', badgeBgHex: '#fee2e2', badgeTextHex: '#dc2626', detailsSlug: '#' });
     setLoading(false);
-    router.refresh();
+    if (res.success) {
+      showToast(editingCourseId ? 'Course updated successfully!' : 'Course created successfully!');
+      setCourseModalOpen(false);
+      setEditingCourseId(null);
+      setCourseForm({ title: '', school: '', categoryId: '', icon: 'Monitor', colorHex: '#1c54a3', iconBg: 'bg-blue-50', textColor: 'text-[#1c54a3]', borderHover: 'hover:border-[#1c54a3]', programs: '', badgeLabel: '', badgeBgHex: '#fee2e2', badgeTextHex: '#dc2626', detailsSlug: '#' });
+      router.refresh();
+    } else {
+      showToast('Error saving course: ' + res.error, 'error');
+    }
   };
 
   const openEditCourse = (course) => {
@@ -129,27 +147,48 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const handleDeleteCourse = async (id) => {
     if(!confirm("Are you sure you want to delete this course?")) return;
     setLoading(true);
-    await deleteCourse(id);
+    const res = await deleteCourse(id);
     setLoading(false);
-    showToast('Course deleted successfully!');
-    router.refresh();
+    if (res.success) {
+      showToast('Course deleted successfully!');
+      router.refresh();
+    } else {
+      showToast('Error deleting course: ' + res.error, 'error');
+    }
   };
 
   const handleSaveLink = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    if (editingLinkId) {
-      await updateSidebarLink(editingLinkId, linkForm);
-      showToast('Link updated successfully!');
-    } else {
-      await createSidebarLink({ ...linkForm, order: initialLinks.length + 1 });
-      showToast('Link created successfully!');
+    if (!linkForm.label || !linkForm.slug || !linkForm.icon || !linkForm.colorClass) {
+      showToast('Please fill in all required link fields!', 'error');
+      return;
     }
-    setLinkModalOpen(false);
-    setEditingLinkId(null);
-    setLinkForm({ label: '', icon: '', slug: '', colorClass: '' });
+
+    setLoading(true);
+    let res;
+    if (editingLinkId) {
+      res = await updateSidebarLink(editingLinkId, linkForm);
+      if (res.success) {
+        showToast('Link updated successfully!');
+        setLinkModalOpen(false);
+        setEditingLinkId(null);
+        setLinkForm({ label: '', icon: '', slug: '', colorClass: '' });
+      } else {
+        showToast('Error updating link: ' + res.error, 'error');
+      }
+    } else {
+      res = await createSidebarLink({ ...linkForm, order: initialLinks.length + 1 });
+      if (res.success) {
+        showToast('Link created successfully!');
+        setLinkModalOpen(false);
+        setEditingLinkId(null);
+        setLinkForm({ label: '', icon: '', slug: '', colorClass: '' });
+      } else {
+        showToast('Error creating link: ' + res.error, 'error');
+      }
+    }
     setLoading(false);
-    router.refresh();
+    if (res.success) router.refresh();
   };
 
   const openEditLink = (link) => {
@@ -166,10 +205,14 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const handleDeleteLink = async (id) => {
     if(!confirm("Are you sure you want to delete this link?")) return;
     setLoading(true);
-    await deleteSidebarLink(id);
+    const res = await deleteSidebarLink(id);
     setLoading(false);
-    showToast('Link deleted successfully!');
-    router.refresh();
+    if (res.success) {
+      showToast('Link deleted successfully!');
+      router.refresh();
+    } else {
+      showToast('Error deleting link: ' + res.error, 'error');
+    }
   };
 
   const handleSeedData = async () => {
@@ -197,6 +240,10 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const generateSlug = (label) => {
     return label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   };
+
+  const filteredCourses = courseFilter === 'all' 
+    ? initialCourses 
+    : initialCourses.filter(c => (c.categoryId?._id || c.categoryId) === courseFilter);
 
   return (
     <>
@@ -397,9 +444,24 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
       <div className="space-y-4">
         
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 shadow-sm rounded-none">
-          <h2 className="text-[15px] font-black flex items-center gap-2 text-[var(--text-primary)] uppercase tracking-wide">
-            <Monitor size={18} className="text-[var(--color-primary)]" strokeWidth={2.5} /> All Master Courses
-          </h2>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <h2 className="text-[15px] font-black flex items-center gap-2 text-[var(--text-primary)] uppercase tracking-wide">
+              <Monitor size={18} className="text-[var(--color-primary)]" strokeWidth={2.5} /> All Master Courses
+            </h2>
+            <div className="flex items-center gap-2 bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-1.5 rounded-none">
+              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest whitespace-nowrap">Filter By:</span>
+              <select 
+                value={courseFilter} 
+                onChange={(e) => setCourseFilter(e.target.value)}
+                className="bg-transparent border-none text-[11px] font-bold text-[var(--color-primary)] outline-none cursor-pointer"
+              >
+                <option value="all">All Categories</option>
+                {initialCategories.map(cat => (
+                  <option key={cat._id} value={cat._id}>{cat.label}</option>
+                ))}
+              </select>
+            </div>
+          </div>
           <button onClick={() => { setEditingCourseId(null); setCourseForm({ title: '', school: '', categoryId: '', icon: 'Monitor', colorHex: '#1c54a3', iconBg: 'bg-blue-50', textColor: 'text-[#1c54a3]', borderHover: 'hover:border-[#1c54a3]', programs: '', badgeLabel: '', badgeBgHex: '#fee2e2', badgeTextHex: '#dc2626', detailsSlug: '#' }); setCourseModalOpen(true); }} disabled={initialCategories.length === 0} className="bg-[var(--color-success)] disabled:opacity-50 text-[var(--text-inverse)] px-4 py-2 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-[var(--color-success-dark)] transition-colors rounded-none shadow-sm uppercase tracking-widest w-full md:w-auto">
             <Plus size={14} strokeWidth={2.5} /> Add New Course
           </button>
@@ -423,17 +485,19 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
                 </tr>
               </thead>
               <tbody className="block md:table-row-group divide-y divide-[var(--border-light)]">
-                {initialCourses.length === 0 ? (
+                {filteredCourses.length === 0 ? (
                   <tr className="block md:table-row">
                     <td colSpan="3" className="block md:table-cell py-10 text-center">
                       <div className="flex flex-col items-center gap-2">
                          <Monitor size={24} className="text-[var(--text-muted)]" strokeWidth={1.5} />
-                         <span className="text-[11px] font-bold text-[var(--text-muted)] uppercase tracking-widest">No courses added yet</span>
+                         <span className="text-[11px] font-bold text-[var(--text-muted)] uppercase tracking-widest">
+                           {courseFilter === 'all' ? 'No courses added yet' : 'No courses found in this category'}
+                         </span>
                       </div>
                     </td>
                   </tr>
                 ) : (
-                  initialCourses.map(course => (
+                  filteredCourses.map(course => (
                     <tr key={course._id} className="block md:table-row hover:bg-[var(--bg-muted)] transition-colors group p-4 md:p-0">
                       <td className="block md:table-cell py-1 md:py-3 px-0 md:px-4 border-none md:border-r border-[var(--border-light)] mb-2 md:mb-0">
                         <span className="md:hidden text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest block mb-0.5">Course / School</span>

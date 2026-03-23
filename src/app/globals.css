@@ -145,6 +145,7 @@ a.flex.items-center.gap-4 {
   --transition-fast: 0.2s ease;
   --transition-medium: 0.3s ease;
 }
+
 *::-webkit-scrollbar-button,
 ::-webkit-scrollbar-button,
 ::-webkit-scrollbar-button:single-button,

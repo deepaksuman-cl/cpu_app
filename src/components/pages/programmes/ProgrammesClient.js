@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import * as LucideIcons from "lucide-react";
 import { BookMarked, Layers, Search, CheckCircle2, ChevronRight, Microscope, HelpCircle } from "lucide-react";
@@ -11,34 +11,38 @@ const getDynamicIcon = (lucideName, size, className, style) => {
   return <IconCmp size={size} className={className} style={style} />;
 };
 
-export default function ProgrammesClient({ categories = [], courses = [], links = [], settings = {} }) {
+export default function ProgrammesClient({ categories = [], courses = [], links = [], settings = {}, activeType = "", searchTerm: initialSearch = "", categoryCounts = {} }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
-  
-  // Sort categories by order if exists
-  const sortedCategories = [...categories].sort((a, b) => (a.order || 0) - (b.order || 0));
-  const defaultType = searchParams.get("type") || (sortedCategories.length > 0 ? sortedCategories[0].label : "");
-  
-  const [activeType, setActiveType] = useState(defaultType);
-  const [searchTerm, setSearchTerm] = useState("");
+
+  const [localSearch, setLocalSearch] = useState(initialSearch);
   const [hoveredCard, setHoveredCard] = useState(null);
 
-  useEffect(() => {
-    const typeFromUrl = searchParams.get("type");
-    if (typeFromUrl) setActiveType(typeFromUrl);
-  }, [searchParams]);
+  // URL Update helper
+  const updateUrl = useCallback((updates) => {
+    const params = new URLSearchParams(searchParams.toString());
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+      else params.delete(key);
+    });
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  }, [router, pathname, searchParams]);
 
-  const activeCategory = sortedCategories.find(c => c.label === activeType);
-  
-  const activeCourses = activeCategory 
-    ? courses.filter(c => c.categoryId === activeCategory._id)
-    : [];
-    
-  // Calculate specialisations (Raw HTML string fallback check)
-  const filtered = activeCourses.filter(
-    (c) =>
-      c.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.programs?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Debounced search
+  useEffect(() => {
+    if (localSearch === initialSearch) return;
+    const timer = setTimeout(() => {
+      updateUrl({ search: localSearch });
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [localSearch, updateUrl, initialSearch]);
+
+  // Handle category click
+  const handleCategoryClick = (label) => {
+    updateUrl({ type: label, search: "" });
+    setLocalSearch("");
+  };
 
   const sidebarCta = settings?.sidebarCta || { icon: 'GraduationCap', title: 'Need Guidance?', description: 'Talk to our admissions counsellor for personalised guidance.', buttonText: 'Book Free Counselling', buttonLink: '/contact' };
   const mainCta = settings?.mainCta || { icon: 'TrendingUp', badgeText: 'Admissions 2025–26 Open', title: 'Start Your Academic Journey Today', description: 'Limited seats available. Apply before 30th June 2025.', primaryBtnText: 'Apply Now', primaryBtnLink: '/apply', secondaryBtnText: 'Download Brochure', secondaryBtnLink: '/brochure' };
@@ -56,12 +60,12 @@ export default function ProgrammesClient({ categories = [], courses = [], links 
               Programme Type
             </h3>
             <div className="flex flex-col gap-1">
-              {sortedCategories.map((cat) => {
-                const count = courses.filter(c => c.categoryId === cat._id).length;
+              {categories.map((cat) => {
+                const count = categoryCounts[cat._id] || 0;
                 return (
                   <button
                     key={cat._id}
-                    onClick={() => { setActiveType(cat.label); setSearchTerm(""); }}
+                    onClick={() => handleCategoryClick(cat.label)}
                     className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-left border-l-[3px] transition-all
                       ${activeType === cat.label ? "bg-[#00588b]/8 border-[#00588b]" : "bg-transparent border-transparent hover:bg-[#f0f6fb]"}`}
                   >
@@ -89,8 +93,12 @@ export default function ProgrammesClient({ categories = [], courses = [], links 
               </h3>
               <div className="flex flex-col gap-2">
                 {links.map((link) => (
-                  <Link key={link._id} href={link.slug} className={`flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-50 hover:bg-[#f0f6fb] transition w-full text-left group border border-transparent hover:border-gray-200 ${link.colorClass}`}>
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white shadow-sm group-hover:scale-110 transition-transform">
+                  <Link 
+                    key={link._id} 
+                    href={link.slug} 
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-50 hover:bg-[#f0f6fb] transition w-full text-left group border border-transparent hover:border-gray-200 ${link.colorClass}`}
+                  >
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white shadow-sm group-hover:scale-110 transition-transform shrink-0">
                       {getDynamicIcon(link.icon, 15)}
                     </div>
                     <span className="text-sm font-semibold text-slate-700">{link.label}</span>
@@ -122,16 +130,21 @@ export default function ProgrammesClient({ categories = [], courses = [], links 
           <div className="flex items-center justify-between mb-5 gap-3 flex-wrap">
             <div>
               <h2 className="text-xl font-extrabold text-slate-800">{activeType} Programmes</h2>
-              <p className="text-xs text-slate-500 mt-0.5">{filtered.length} matching programmes listed</p>
+              <p className="text-xs text-slate-500 mt-0.5">{courses.length} matching programmes listed</p>
             </div>
             <div className="relative">
               <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-              <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search programmes…" className="pl-8 pr-4 h-10 border border-[#e2ecf4] rounded-xl text-sm text-slate-700 bg-white outline-none focus:border-[#00588b] w-52 transition shadow-sm focus:shadow-md" />
+              <input 
+                value={localSearch} 
+                onChange={(e) => setLocalSearch(e.target.value)} 
+                placeholder="Search programmes…" 
+                className="pl-8 pr-4 h-10 border border-[#e2ecf4] rounded-xl text-sm text-slate-700 bg-white outline-none focus:border-[#00588b] w-52 transition shadow-sm focus:shadow-md" 
+              />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5">
-            {filtered.map((course) => {
+            {courses.map((course) => {
               const isHov = hoveredCard === course._id;
               
               // Helper to inject our checkmarks securely into raw HTML
@@ -176,7 +189,7 @@ export default function ProgrammesClient({ categories = [], courses = [], links 
             })}
           </div>
 
-          {filtered.length === 0 && (
+          {courses.length === 0 && (
             <div className="text-center py-20 bg-white rounded-2xl border border-dashed border-gray-300 mt-5">
               <Microscope size={44} className="mx-auto mb-3 text-slate-300" />
               <h3 className="text-base font-bold text-slate-500">No programmes match your search</h3>

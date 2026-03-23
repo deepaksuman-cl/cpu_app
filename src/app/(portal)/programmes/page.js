@@ -12,17 +12,56 @@ export async function generateMetadata() {
   };
 }
 
-export default async function ProgrammesPage() {
+export default async function ProgrammesPage({ searchParams }) {
+  const params = await searchParams;
+  const activeType = params.type || '';
+  const searchTerm = params.search || '';
+
   const [catRes, courseRes, linkRes, setRes] = await Promise.all([
     getCategories(),
     getCourses(),
     getSidebarLinks(),
     getProgrammeSettings()
   ]);
+  
   const categories = catRes.success ? catRes.data : [];
-  const courses = courseRes.success ? courseRes.data : [];
+  const allCourses = courseRes.success ? courseRes.data : [];
   const links = linkRes.success ? linkRes.data : [];
   const settings = setRes.success && setRes.data ? setRes.data : {};
+
+  // Sort categories
+  const sortedCategories = [...categories].sort((a, b) => (a.order || 0) - (b.order || 0));
+  
+  // Define "All Categories" option
+  const allCategory = { _id: 'all', label: 'All Categories' };
+  const categoriesWithAll = [allCategory, ...sortedCategories];
+
+  // Determine active category
+  const currentType = activeType || (categoriesWithAll.length > 0 ? categoriesWithAll[0].label : "");
+  const activeCategory = categoriesWithAll.find(c => c.label === currentType) || categoriesWithAll[0];
+
+  // Server-side filtering logic
+  let filteredCourses = activeCategory._id === 'all' 
+    ? allCourses 
+    : allCourses.filter(c => (c.categoryId?._id || c.categoryId) === activeCategory._id);
+
+  // Calculate counts for sidebar (based on full list)
+  const categoryCounts = categoriesWithAll.reduce((acc, cat) => {
+    acc[cat._id] = cat._id === 'all' 
+      ? allCourses.length 
+      : allCourses.filter(c => (c.categoryId?._id || c.categoryId) === cat._id).length;
+    return acc;
+  }, {});
+
+  if (searchTerm) {
+    const term = searchTerm.toLowerCase();
+    filteredCourses = filteredCourses.filter(
+      (c) =>
+        c.title?.toLowerCase().includes(term) ||
+        c.programs?.toLowerCase().includes(term) ||
+        c.school?.toLowerCase().includes(term)
+    );
+  }
 
   const breadcrumbs = settings.breadcrumbs?.length > 0
     ? settings.breadcrumbs
@@ -53,7 +92,15 @@ export default async function ProgrammesPage() {
 
       {/* ── Interactive Client Component ── */}
       <Suspense fallback={<div className="p-20 text-center font-bold text-[#00588b]">Loading Programmes...</div>}>
-        <ProgrammesClient categories={categories} courses={courses} links={links} settings={settings} />
+        <ProgrammesClient 
+          categories={categoriesWithAll} 
+          courses={filteredCourses} 
+          links={links} 
+          settings={settings}
+          activeType={activeCategory.label}
+          searchTerm={searchTerm}
+          categoryCounts={categoryCounts}
+        />
       </Suspense>
 
     </div>

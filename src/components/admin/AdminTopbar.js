@@ -20,15 +20,7 @@ export default function TopHeader({ setMobileMenuOpen }) {
           <Menu size={24} />
         </button>
 
-        {/* Dynamic Greeting / Breadcrumb */}
-        <div className="hidden sm:flex flex-col">
-          <h1 className="text-[18px] font-bold text-[var(--text-primary)] leading-tight tracking-wide">
-            Dashboard
-          </h1>
-          <p className="text-[12px] text-[var(--text-muted)] font-medium mt-0.5">
-            Welcome back, Admin
-          </p>
-        </div>
+       
       </div>
 
       {/* ── Right Section: Notifications & Profile ── */}

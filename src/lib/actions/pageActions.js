@@ -2,6 +2,7 @@
 
 import { connectToDatabase } from '@/lib/db';
 import Page from '@/models/Page';
+import { revalidatePath } from 'next/cache';
 
 /**
  * Helper to serialize Mongoose documents for Server Components
@@ -42,6 +43,8 @@ export async function createPage(data) {
     await connectToDatabase();
     const newPage = new Page(data);
     await newPage.save();
+    revalidatePath('/admin/pages');
+    revalidatePath(`/${data.slug}`);
     return { success: true, data: serializeDoc(newPage.toObject()) };
   } catch (error) {
     console.error('createPage Error:', error);
@@ -58,6 +61,19 @@ export async function updatePage(id, data) {
       data,
       { new: true, runValidators: true }
     ).lean();
+    
+    // Multi-path revalidation to ensure all related pages are fresh.
+    // Wrapped in try/catch to prevent non-fatal revalidation errors from blocking the response.
+    try {
+      const pageId = String(id);
+      revalidatePath('/admin/pages');
+      revalidatePath(`/admin/pages/edit/${pageId}`);
+      if (data.slug) {
+        revalidatePath(`/${data.slug}`);
+      }
+    } catch (revalidateError) {
+      console.error('Revalidation error (non-fatal):', revalidateError);
+    }
     
     if (!updatedPage) {
       return { success: false, error: 'Page not found' };
