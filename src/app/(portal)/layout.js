@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <HeaderServer /> 
         
-        <main className="pt-[110px] lg:pt-[120px]">
+        <main className="min-h-screen">
           {children}
         </main>
 

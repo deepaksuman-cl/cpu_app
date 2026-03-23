@@ -11,15 +11,15 @@ export default function ProgramsSection() {
             Explore Our <span className="text-[#00588b]">70+ Programs</span> — Start Your
             Future-ready Career
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 [@media(max-width:476px)]:grid-cols-1 md:grid-cols-4 gap-4">
             {HOME_DATA.programCards.map((card) => (
               <div key={card.label} className="relative overflow-hidden rounded-xl cursor-pointer group">
                 <img
                   src={card.image}
                   alt={card.label}
-                  className="block w-full h-[360px] object-cover group-hover:scale-105 transition-transform duration-400"
+                  className="block w-full object-cover group-hover:scale-105 transition-transform duration-400"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-[#00588b] text-white px-4 py-3.5 flex items-center justify-between">
+                <div className="bg-[#00588b] text-white px-4 py-3.5 flex items-center justify-between">
                   <span className="font-bold text-md">{card.label}</span>
                   <div className="flex items-center gap-2">
                     <span className="text-sm opacity-85">{card.count}</span>

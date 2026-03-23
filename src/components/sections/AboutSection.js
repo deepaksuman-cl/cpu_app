@@ -48,8 +48,7 @@ export default function AboutSection() {
               ].map(({ icon: Ic, t, s }, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3.5 bg-white rounded-2xl p-4 shadow-sm border border-blue-50 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300"
-                >
+                  className="[@media(max-width:476px)]:block  flex items-start gap-3.5 bg-white rounded-2xl p-4 shadow-sm border border-blue-50 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
                   <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
                     <Ic size={18} className="text-[#00588b]" />
                   </div>

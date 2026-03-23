@@ -31,7 +31,7 @@ export default function CampusLifeSection() {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
+      <div className="[@media(max-width:476px)]:block grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
         {HOME_DATA.campusCols.map((col, i) => (
           <div
             key={i}

@@ -535,7 +535,7 @@ function DesktopSidebar({ navData, state, dispatch }) {
     <div className={`fixed inset-y-0 right-0 w-full max-w-[800px] bg-white shadow-2xl z-[9999] transform transition-transform duration-500 ease-in-out ${state.desktopSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
       <div className="p-8 h-full flex flex-col overflow-y-auto desktop-mega-scroll">
         <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
-          <img src={navData.logoUrl} alt="Logo" className="h-10 object-contain" />
+          <img src={navData.logoUrl} alt="Logo" className="h-10 object-contain d_logo" />
           <button onClick={() => dispatch({ type: 'CLOSE_SIDEBAR' })} className="flex items-center gap-2 group text-gray-500 hover:text-[#00588b] transition-colors">
             <span className="font-bold text-[13px] tracking-wider uppercase">{siteConfig.sidebar.closeLabel}</span>
             <div className="p-1.5 bg-gray-100 rounded-full group-hover:bg-[#00588b] group-hover:text-white transition-colors"><LucideIcons.X size={18} /></div>
@@ -716,8 +716,14 @@ export default function HeaderClient({ navData }) {
       <DesktopSidebar navData={navData} state={state} dispatch={dispatch} />
 
       {/* DESKTOP HEADER */}
-      <header className="hidden lg:block w-[100vw] z-[1000] fixed top-0 transition-all duration-300 ease-in-out shadow-md bg-white"
-        onMouseLeave={() => dispatch({ type: 'SET_MEGA', key: null })}>
+      {/* <header className="hidden lg:block w-[100vw] z-[1000] fixed top-0 transition-all duration-300 ease-in-out shadow-md bg-white"
+        onMouseLeave={() => dispatch({ type: 'SET_MEGA', key: null })}> */}
+
+          <header className={`hidden lg:block w-[100vw] z-[1000] transition-all duration-300 ease-in-out shadow-md bg-white ${
+    state.isScrolled ? "fixed top-0" : "relative"
+  }`}
+  onMouseLeave={() => dispatch({ type: 'SET_MEGA', key: null })}>
+
         {/* Top bar */}
         <div className={`bg-[#00588b] w-full flex items-center text-white text-[12px] font-light transition-all duration-300 overflow-hidden ${state.showTopBar ? 'h-[38px] opacity-100 border-b border-[#1c54a3]' : 'h-0 opacity-0'}`}>
           <div className="mx-auto w-[98vw] h-full flex justify-between items-center">
@@ -817,7 +823,7 @@ export default function HeaderClient({ navData }) {
 
       {/* MOBILE TOP HEADER */}
       <header className={`lg:hidden fixed top-0 w-full z-[1000] p-3 flex justify-between items-center shadow-md bg-white transition-transform duration-300 ${!state.showTopBar ? '-translate-y-full' : 'translate-y-0'}`}>
-        <Link href="/"><img src={navData.logoUrl} alt="Logo" className="h-10 object-contain" /></Link>
+        <Link href="/"><img src={navData.logoUrl} alt="Logo" className="h-10 object-contain m_logo" /></Link>
         <button onClick={() => dispatch({ type: 'TOGGLE_SEARCH' })} className="text-[#00588b] p-2 hover:bg-gray-100 rounded-full transition-colors"><LucideIcons.Search size={24} strokeWidth={2.5} /></button>
       </header>
 
