@@ -1,45 +1,66 @@
 'use client';
 
 import { useState } from 'react';
-import { Save, Plus, Trash2, RefreshCw, Globe, Phone, Mail, MapPin, Building2, ExternalLink } from 'lucide-react';
+import { Save, Plus, Trash2, RefreshCw, Globe, Phone, Mail, MapPin, Building2, ExternalLink, CheckCircle2, AlertCircle, X } from 'lucide-react';
 import MediaUploader from '@/components/admin/MediaUploader';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import { updateFooter, seedFooterFromJson } from '@/lib/actions/footerActions';
 
+// --- Toast Notification ---
+function Toast({ msg, type, onClose }) {
+  return (
+    <div className={`fixed bottom-6 right-6 z-[200] flex items-center gap-3 px-5 py-3.5 shadow-xl text-[13px] font-semibold bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none ${
+      type === 'success'
+        ? 'text-[var(--color-success-dark)] border-l-[3px] border-l-[var(--color-success)]'
+        : 'text-[var(--color-danger)] border-l-[3px] border-l-[var(--color-danger)]'
+    }`}>
+      {type === 'success'
+        ? <CheckCircle2 size={16} className="text-[var(--color-success)] flex-shrink-0" />
+        : <AlertCircle size={16} className="text-[var(--color-danger)] flex-shrink-0" />}
+      {msg}
+      <button onClick={onClose} className="ml-2 text-[var(--text-muted)] hover:text-[var(--text-secondary)]"><X size={14} /></button>
+    </div>
+  );
+}
+
 // --- Internal Helper Components ---
 
-const Card = ({ title, children }) => (
-  <div className="bg-white border border-gray-300 rounded-none shadow-sm mb-6 overflow-hidden">
-    <div className="bg-gray-50 border-b border-gray-300 px-6 py-3 flex justify-between items-center">
-      <h3 className="text-xs font-black text-gray-900 uppercase tracking-widest">{title}</h3>
+const Card = ({ title, icon, children, action }) => (
+  <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none shadow-sm mb-5 overflow-hidden">
+    <div className="bg-[var(--bg-muted)] border-b border-[var(--border-default)] px-5 py-3 flex justify-between items-center">
+      <h3 className="text-[10px] font-black text-[var(--text-primary)] uppercase tracking-widest flex items-center gap-2">
+        {icon && <span className="text-[var(--color-primary)]">{icon}</span>}
+        {title}
+      </h3>
+      {action}
     </div>
-    <div className="p-6 space-y-4">
+    <div className="p-5 space-y-4">
       {children}
     </div>
   </div>
 );
 
 const Input = ({ label, type = "text", value, onChange, placeholder = "" }) => (
-  <div className="space-y-1">
-    {label && <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{label}</label>}
+  <div className="space-y-1.5">
+    {label && <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">{label}</label>}
     <input 
       type={type} 
       value={value || ''} 
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full border border-gray-300 rounded-none p-3 text-sm focus:ring-0 focus:border-blue-500 outline-none transition-all"
+      className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] rounded-none px-3 py-2.5 text-sm text-[var(--text-primary)] focus:border-[var(--color-primary)] outline-none transition-colors"
     />
   </div>
 );
 
 const Select = ({ label, value, onChange, options }) => (
-  <div className="space-y-1">
-    {label && <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{label}</label>}
+  <div className="space-y-1.5">
+    {label && <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">{label}</label>}
     <select 
       value={value} 
       onChange={(e) => onChange(e.target.value)}
-      className="w-full border border-gray-300 rounded-none p-3 text-sm focus:ring-0 focus:border-blue-500 outline-none transition-all bg-white"
+      className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] rounded-none px-3 py-2.5 text-sm text-[var(--text-primary)] focus:border-[var(--color-primary)] outline-none transition-colors"
     >
       {options.map(opt => (
         <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -64,18 +85,24 @@ export default function FooterManagerForm({ initialData }) {
   });
   const [isSaving, setIsSaving] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (msg, type = 'success') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3500);
+  };
 
   const handleSave = async () => {
     setIsSaving(true);
     try {
       const result = await updateFooter(formData);
       if (result.success) {
-        alert('Footer configuration saved successfully!');
+        showToast('Footer configuration saved successfully!');
       } else {
-        alert('Error: ' + result.error);
+        showToast('Error: ' + result.error, 'error');
       }
     } catch (err) {
-      alert('Failed to save: ' + err.message);
+      showToast('Failed to save: ' + err.message, 'error');
     } finally {
       setIsSaving(false);
     }
@@ -87,13 +114,13 @@ export default function FooterManagerForm({ initialData }) {
     try {
       const result = await seedFooterFromJson();
       if (result.success) {
-        alert('Synced from JSON! Page will reload.');
-        window.location.reload();
+        showToast('Synced from JSON successfully! Reloading...');
+        setTimeout(() => window.location.reload(), 1500);
       } else {
-        alert('Error: ' + result.error);
+        showToast('Error: ' + result.error, 'error');
       }
     } catch (err) {
-      alert('Failed to sync: ' + err.message);
+      showToast('Failed to sync: ' + err.message, 'error');
     } finally {
       setIsSyncing(false);
     }
@@ -145,103 +172,98 @@ export default function FooterManagerForm({ initialData }) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-6 pb-32">
+    <div className="relative w-full min-h-[calc(100vh-72px)] bg-[var(--bg-body)] text-left flex flex-col gap-0 justify-start">
+
       {/* Sticky Header */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-300 -mx-6 px-6 py-4 flex justify-between items-center mb-10 shadow-sm">
-        <div>
-          <h1 className="text-xl font-black text-gray-900 uppercase tracking-tighter">Footer Manager</h1>
-          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Enterprise CMS</p>
+      <div className="sticky top-0 z-[30] flex items-center justify-between h-[44px] w-full bg-[var(--bg-surface)] border-b border-[var(--border-default)] shadow-sm" style={{ position: 'sticky', top: 0, marginTop: 0 }}>
+        <div className="flex items-center h-full px-4 gap-3">
+          <Globe size={14} className="text-[var(--text-muted)] hidden sm:block" strokeWidth={2.5} />
+          <h1 className="text-[13px] font-black text-[var(--text-primary)] uppercase tracking-wider">Footer Manager</h1>
+          <div className="hidden md:block w-[1px] h-4 bg-[var(--border-default)]"></div>
+          <span className="hidden md:inline-block text-[12px] text-[var(--text-secondary)] font-bold tracking-wide">Branding, links, columns & SEO</span>
         </div>
-        <div className="flex gap-3">
+        <div className="flex items-center h-full px-4 gap-2">
           <button 
             onClick={handleSync}
             disabled={isSyncing}
-            className="bg-white text-gray-900 border border-gray-300 px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-gray-50 transition-all rounded-none flex items-center gap-2"
+            className="flex items-center justify-center h-[32px] px-3 sm:px-4 bg-[var(--bg-muted)] hover:bg-[var(--bg-hover)] text-[var(--text-primary)] border border-[var(--border-default)] transition-colors rounded-none text-[11px] font-bold uppercase tracking-widest gap-1.5 disabled:opacity-50"
           >
-            {isSyncing ? 'Syncing...' : <><RefreshCw size={16} /> Sync from JSON</>}
+            {isSyncing ? <div className="w-3.5 h-3.5 border-2 border-[var(--border-default)] border-t-[var(--text-primary)] rounded-full animate-spin" /> : <RefreshCw size={13} strokeWidth={2.5} />}
+            <span className="hidden sm:block">{isSyncing ? 'Syncing...' : 'Sync JSON'}</span>
           </button>
           <button 
             onClick={handleSave}
             disabled={isSaving}
-            className="bg-black text-white px-8 py-3 text-xs font-black uppercase tracking-widest hover:bg-gray-800 transition-all rounded-none flex items-center gap-2"
+            className="flex items-center justify-center h-[32px] px-3 sm:px-4 bg-[var(--color-success)] hover:bg-[var(--color-success-dark)] text-[var(--text-inverse)] transition-colors rounded-none shadow-sm uppercase tracking-widest text-[11px] font-bold gap-1.5 disabled:opacity-50"
           >
-            {isSaving ? 'Saving...' : <><Save size={16} /> Save Changes</>}
+            {isSaving ? <div className="w-3.5 h-3.5 border-2 border-[var(--bg-surface)] border-t-[var(--text-inverse)] rounded-full animate-spin" /> : <Save size={13} strokeWidth={2.5} />}
+            <span className="hidden sm:block">{isSaving ? 'Saving...' : 'Save Changes'}</span>
           </button>
         </div>
       </div>
 
+      <div className="w-[98%] lg:w-[95%] xl:w-[92%] mx-auto py-6 pb-32">
+
       {/* Card 1: Branding */}
-      <Card title="Card 1 (Branding)">
-        <div className="space-y-4">
-          <div>
-            <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter mb-2">Logo</label>
-            
-            {/* Show Current Logo Preview */}
+      <Card title="Branding" icon={<Building2 size={13} />}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Logo URL</label>
+              <Input value={formData.logo} onChange={(url) => updateField('logo', url)} placeholder="https://..." />
+            </div>
             {formData.logo && (
-              <div className="mb-4 p-4 border border-dashed border-gray-300 bg-gray-50 flex flex-col items-center">
-                <img src={formData.logo} alt="Current Logo" className="max-h-20 object-contain mb-2" />
-                <span className="text-[10px] text-gray-400 font-mono break-all">{formData.logo}</span>
+              <div className="p-4 border border-dashed border-[var(--border-default)] bg-[var(--bg-muted)] flex flex-col items-center gap-2">
+                <img src={formData.logo} alt="Logo Preview" className="max-h-16 object-contain" />
+                <span className="text-[9px] text-[var(--text-muted)] font-mono break-all text-center">{formData.logo}</span>
               </div>
             )}
-            
-            <Input 
-              label="Direct Image URL (Paste here to override)" 
-              value={formData.logo} 
-              onChange={(url) => updateField('logo', url)} 
-            />
-            
-            <div className="my-4 text-center text-[10px] text-gray-400 uppercase font-bold tracking-widest border-t border-gray-100 pt-4">OR Upload New File to Server</div>
-
-            <MediaUploader 
-              category="footer"
-              onUploadSuccess={(url) => updateField('logo', url)} 
-            />
+            <div className="border-t border-[var(--border-light)] pt-4">
+              <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest mb-2">Or Upload File</p>
+              <MediaUploader category="footer" onUploadSuccess={(url) => updateField('logo', url)} />
+            </div>
           </div>
-          <div className="space-y-1">
-            <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter">About Text</label>
+          <div className="space-y-1.5">
+            <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">About / Tagline Text</label>
             <textarea 
               value={formData.aboutText} 
               onChange={(e) => updateField('aboutText', e.target.value)}
-              className="w-full border border-gray-300 rounded-none p-4 text-sm focus:ring-0 focus:border-blue-500 outline-none min-h-[120px]"
-              placeholder="Footer description..."
+              className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] rounded-none px-3 py-2.5 text-sm text-[var(--text-primary)] focus:border-[var(--color-primary)] outline-none min-h-[140px]"
+              placeholder="Footer description shown beneath logo..."
             />
           </div>
         </div>
       </Card>
 
       {/* Card 2: Social Links */}
-      <Card title="Card 2 (Social Links)">
-        <div className="space-y-3">
+      <Card title="Social Links" icon={<ExternalLink size={13} />}
+        action={
+          <button onClick={addSocial} className="flex items-center gap-1 text-[10px] font-black text-[var(--color-primary)] hover:underline uppercase tracking-widest">
+            <Plus size={12} /> Add
+          </button>
+        }
+      >
+        <div className="space-y-2">
           {formData.socialLinks?.map((social, idx) => (
-            <div key={idx} className="flex gap-4 items-end bg-gray-50 p-4 border border-gray-200">
-              <div className="w-1/3">
-                <label className="block text-[10px] font-bold text-gray-400 uppercase mb-2">Icon</label>
-                <IconPicker 
-                  value={social.icon} 
-                  onChange={(icon) => updateSocial(idx, { icon })} 
-                />
+            <div key={idx} className="flex gap-3 items-end bg-[var(--bg-body)] p-3 border border-[var(--border-default)]">
+              <div className="w-40 shrink-0">
+                <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">Icon</label>
+                <IconPicker value={social.icon} onChange={(icon) => updateSocial(idx, { icon })} />
               </div>
               <div className="flex-1">
-                <Input 
-                  label="URL" 
-                  value={social.url} 
-                  onChange={(val) => updateSocial(idx, { url: val })} 
-                />
+                <Input label="URL" value={social.url} onChange={(val) => updateSocial(idx, { url: val })} />
               </div>
               <button 
                 onClick={() => removeSocial(idx)}
-                className="p-3 text-red-500 hover:bg-red-50 transition-all border border-transparent hover:border-red-200"
+                className="p-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] transition-colors border border-transparent hover:border-red-200"
               >
-                <Trash2 size={18} />
+                <Trash2 size={16} />
               </button>
             </div>
           ))}
-          <button 
-            onClick={addSocial}
-            className="w-full py-4 border-2 border-dashed border-gray-200 text-gray-400 text-[10px] font-black uppercase tracking-widest hover:border-blue-500 hover:text-blue-500 transition-all flex items-center justify-center gap-2"
-          >
-            <Plus size={16} /> Add Social Link
-          </button>
+          {(!formData.socialLinks || formData.socialLinks.length === 0) && (
+            <p className="text-[11px] text-[var(--text-muted)] text-center py-3 italic">No social links yet. Click "Add" to create one.</p>
+          )}
         </div>
       </Card>
 
@@ -250,25 +272,17 @@ export default function FooterManagerForm({ initialData }) {
         <Card 
           key={colIdx} 
           title={`Column ${colIdx + 1}: ${col.title || 'Untitled Section'}`}
-        >
-          <div className="flex justify-end mb-4 -mt-2">
+          action={
             <button 
-              onClick={() => {
-                const newList = formData.columns.filter((_, i) => i !== colIdx);
-                updateField('columns', newList);
-              }}
-              className="text-red-500 hover:text-red-700 flex items-center gap-1 text-[10px] font-black uppercase tracking-widest"
+              onClick={() => updateField('columns', formData.columns.filter((_, i) => i !== colIdx))}
+              className="text-[var(--color-danger)] hover:text-red-700 flex items-center gap-1 text-[10px] font-black uppercase tracking-widest"
             >
-              <Trash2 size={14} /> Remove Column
+              <Trash2 size={13} /> Remove
             </button>
-          </div>
-
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            <Input 
-              label="Column Title" 
-              value={col.title || ''} 
-              onChange={(val) => updateColumn(colIdx, { title: val })} 
-            />
+          }
+        >
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <Input label="Column Title" value={col.title || ''} onChange={(val) => updateColumn(colIdx, { title: val })} />
             <Select 
               label="Column Type"
               value={col.columnType || 'links'}
@@ -281,94 +295,72 @@ export default function FooterManagerForm({ initialData }) {
             />
           </div>
 
-          {/* Conditional Rendering based on Column Type */}
           {col.columnType === 'links' && (
-            <div className="space-y-3">
-              <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Links Manager</label>
-              <div className="space-y-2 border-l-2 border-gray-200 pl-4 py-2">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-2">
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Links</label>
+                <button 
+                  onClick={() => updateColumn(colIdx, { links: [...(col.links || []), { label: '', url: '' }] })}
+                  className="text-[10px] font-black text-[var(--color-primary)] uppercase flex items-center gap-1 hover:underline tracking-widest"
+                >
+                  <Plus size={12} /> Add Link
+                </button>
+              </div>
+              <div className="space-y-2">
                 {col.links?.map((link, lIdx) => (
                   <div key={lIdx} className="flex gap-2">
                     <input 
-                      className="flex-1 border border-gray-300 rounded-none p-2 text-xs outline-none focus:border-blue-500"
+                      className="flex-1 bg-[var(--bg-body)] border border-[var(--border-default)] rounded-none px-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)]"
                       placeholder="Label" value={link.label} 
-                      onChange={(e) => {
-                        const newLinks = [...col.links];
-                        newLinks[lIdx].label = e.target.value;
-                        updateColumn(colIdx, { links: newLinks });
-                      }}
+                      onChange={(e) => { const nl = [...col.links]; nl[lIdx].label = e.target.value; updateColumn(colIdx, { links: nl }); }}
                     />
                     <input 
-                      className="flex-1 border border-gray-300 rounded-none p-2 text-xs outline-none focus:border-blue-500"
-                      placeholder="URL" value={link.url} 
-                      onChange={(e) => {
-                        const newLinks = [...col.links];
-                        newLinks[lIdx].url = e.target.value;
-                        updateColumn(colIdx, { links: newLinks });
-                      }}
+                      className="flex-1 bg-[var(--bg-body)] border border-[var(--border-default)] rounded-none px-3 py-2 text-xs text-[var(--text-secondary)] outline-none focus:border-[var(--color-primary)]"
+                      placeholder="/url" value={link.url} 
+                      onChange={(e) => { const nl = [...col.links]; nl[lIdx].url = e.target.value; updateColumn(colIdx, { links: nl }); }}
                     />
-                    <button 
-                      onClick={() => {
-                        const newLinks = col.links.filter((_, i) => i !== lIdx);
-                        updateColumn(colIdx, { links: newLinks });
-                      }}
-                      className="text-red-400 hover:text-red-600 p-2"
-                    >
+                    <button onClick={() => updateColumn(colIdx, { links: col.links.filter((_, i) => i !== lIdx) })} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] p-2">
                       <Trash2 size={14} />
                     </button>
                   </div>
                 ))}
-                <button 
-                  onClick={() => {
-                    const existing = col.links || [];
-                    updateColumn(colIdx, { links: [...existing, { label: '', url: '' }] });
-                  }}
-                  className="text-[10px] font-black text-blue-600 uppercase mt-2 flex items-center gap-1 hover:text-blue-800"
-                >
-                  <Plus size={14} /> Add Link
-                </button>
               </div>
             </div>
           )}
 
           {col.columnType === 'contact' && (
-            <div className="space-y-4">
-              <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Contact Items Manager</label>
-              <div className="space-y-3">
-                {formData.contact?.map((item, cIdx) => (
-                  <div key={cIdx} className="bg-gray-50 p-4 border border-gray-200 space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-[10px] font-black uppercase text-gray-400">Item #{cIdx + 1}</span>
-                      <button onClick={() => removeContact(cIdx)} className="text-red-500 hover:text-red-700">
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <Input label="Label (e.g. Phone)" value={item.label} onChange={(val) => updateContact(cIdx, { label: val })} />
-                      <div className="w-full">
-                        <label className="block text-[10px] font-bold text-gray-400 uppercase mb-2">Icon</label>
-                        <IconPicker value={item.icon} onChange={(icon) => updateContact(cIdx, { icon })} />
-                      </div>
-                    </div>
-                    <Input label="Text/Value" value={item.text} onChange={(val) => updateContact(cIdx, { text: val })} />
-                  </div>
-                ))}
-                <button 
-                  onClick={addContact}
-                  className="w-full py-4 border-2 border-dashed border-gray-200 text-gray-400 text-[10px] font-black uppercase tracking-widest hover:border-blue-500 hover:text-blue-500 transition-all flex items-center justify-center gap-2"
-                >
-                  <Plus size={16} /> Add Contact Item
+            <div className="space-y-3">
+              <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-2">
+                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Contact Items</label>
+                <button onClick={addContact} className="text-[10px] font-black text-[var(--color-primary)] uppercase flex items-center gap-1 hover:underline tracking-widest">
+                  <Plus size={12} /> Add
                 </button>
               </div>
+              {formData.contact?.map((item, cIdx) => (
+                <div key={cIdx} className="bg-[var(--bg-body)] p-4 border border-[var(--border-default)] space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black uppercase text-[var(--text-muted)] tracking-widest">Item #{cIdx + 1}</span>
+                    <button onClick={() => removeContact(cIdx)} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1">
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Input label="Label (e.g. Phone)" value={item.label} onChange={(val) => updateContact(cIdx, { label: val })} />
+                    <div>
+                      <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">Icon</label>
+                      <IconPicker value={item.icon} onChange={(icon) => updateContact(cIdx, { icon })} />
+                    </div>
+                  </div>
+                  <Input label="Text / Value" value={item.text} onChange={(val) => updateContact(cIdx, { text: val })} />
+                </div>
+              ))}
             </div>
           )}
 
           {col.columnType === 'text' && (
             <div>
-              <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter mb-2">Content</label>
-              <RichTextEditor 
-                value={col.content || ''} 
-                onChange={(content) => updateColumn(colIdx, { content })} 
-              />
+              <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-2">Content (Rich Text)</label>
+              <RichTextEditor value={col.content || ''} onChange={(content) => updateColumn(colIdx, { content })} />
             </div>
           )}
         </Card>
@@ -376,71 +368,54 @@ export default function FooterManagerForm({ initialData }) {
 
       {/* Add Column Button */}
       <button 
-        onClick={() => {
-          updateField('columns', [...formData.columns, { title: 'New Section', columnType: 'links', links: [], order: formData.columns.length + 1 }]);
-        }}
-        className="w-full py-8 border-2 border-dashed border-gray-200 text-gray-400 text-xs font-black uppercase tracking-[0.2em] hover:border-black hover:text-black transition-all flex items-center justify-center gap-3 mb-10"
+        onClick={() => updateField('columns', [...formData.columns, { title: 'New Section', columnType: 'links', links: [], order: formData.columns.length + 1 }])}
+        className="w-full py-6 border-2 border-dashed border-[var(--border-default)] text-[var(--text-muted)] text-[10px] font-black uppercase tracking-[0.2em] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-all flex items-center justify-center gap-3 mb-6"
       >
-        <Plus size={20} /> Add Footer Column
+        <Plus size={18} /> Add Footer Column
       </button>
 
-      {/* Card 7: Bottom Bar */}
-      <Card title="Card 7 (Bottom Bar)">
+      {/* Bottom Bar */}
+      <Card title="Bottom Bar / Copyright">
         <div className="space-y-4">
-          <Input 
-            label="Copyright Text" 
-            value={formData.copyright?.text} 
-            onChange={(val) => updateNestedField('copyright', 'text', val)} 
-          />
+          <Input label="Copyright Text" value={formData.copyright?.text} onChange={(val) => updateNestedField('copyright', 'text', val)} />
           <div className="space-y-2">
-            <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Bottom Links</label>
-            <div className="space-y-2 border-l-2 border-gray-200 pl-4 py-2">
+            <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-2">
+              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Bottom Links</label>
+              <button 
+                onClick={() => updateNestedField('copyright', 'links', [...(formData.copyright.links || []), { label: '', url: '' }])}
+                className="text-[10px] font-black text-[var(--color-primary)] uppercase flex items-center gap-1 hover:underline tracking-widest"
+              >
+                <Plus size={12} /> Add Link
+              </button>
+            </div>
+            <div className="space-y-2">
               {formData.copyright?.links?.map((link, lIdx) => (
                 <div key={lIdx} className="flex gap-2">
                   <input 
-                    className="flex-1 border border-gray-300 rounded-none p-2 text-xs outline-none focus:border-blue-500"
+                    className="flex-1 bg-[var(--bg-body)] border border-[var(--border-default)] rounded-none px-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)]"
                     placeholder="Label" value={link.label} 
-                    onChange={(e) => {
-                      const newLinks = [...formData.copyright.links];
-                      newLinks[lIdx].label = e.target.value;
-                      updateNestedField('copyright', 'links', newLinks);
-                    }}
+                    onChange={(e) => { const nl = [...formData.copyright.links]; nl[lIdx].label = e.target.value; updateNestedField('copyright', 'links', nl); }}
                   />
                   <input 
-                    className="flex-1 border border-gray-300 rounded-none p-2 text-xs outline-none focus:border-blue-500"
-                    placeholder="URL" value={link.url} 
-                    onChange={(e) => {
-                      const newLinks = [...formData.copyright.links];
-                      newLinks[lIdx].url = e.target.value;
-                      updateNestedField('copyright', 'links', newLinks);
-                    }}
+                    className="flex-1 bg-[var(--bg-body)] border border-[var(--border-default)] rounded-none px-3 py-2 text-xs text-[var(--text-secondary)] outline-none focus:border-[var(--color-primary)]"
+                    placeholder="/url" value={link.url} 
+                    onChange={(e) => { const nl = [...formData.copyright.links]; nl[lIdx].url = e.target.value; updateNestedField('copyright', 'links', nl); }}
                   />
                   <button 
-                    onClick={() => {
-                      const newLinks = formData.copyright.links.filter((_, i) => i !== lIdx);
-                      updateNestedField('copyright', 'links', newLinks);
-                    }}
-                    className="text-red-400 hover:text-red-600 p-2"
+                    onClick={() => updateNestedField('copyright', 'links', formData.copyright.links.filter((_, i) => i !== lIdx))}
+                    className="text-[var(--text-muted)] hover:text-[var(--color-danger)] p-2"
                   >
                     <Trash2 size={14} />
                   </button>
                 </div>
               ))}
-              <button 
-                onClick={() => {
-                  const existing = formData.copyright.links || [];
-                  updateNestedField('copyright', 'links', [...existing, { label: '', url: '' }]);
-                }}
-                className="text-[10px] font-black text-blue-600 uppercase mt-2 flex items-center gap-1 hover:text-blue-800"
-              >
-                <Plus size={14} /> Add Link
-              </button>
             </div>
           </div>
         </div>
       </Card>
-      {/* Card 8: SEO Settings */}
-      <Card title="Card 8 (Global SEO Settings)">
+
+      {/* Global SEO Settings */}
+      <Card title="Global SEO Settings">
         <div className="space-y-4">
           <Input 
             label="Meta Title" 
@@ -448,13 +423,13 @@ export default function FooterManagerForm({ initialData }) {
             onChange={(val) => updateNestedField('seo', 'metaTitle', val)} 
             placeholder="e.g., Career Point University | Best University in Rajasthan"
           />
-          <div className="space-y-1">
-            <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Meta Description</label>
+          <div className="space-y-1.5">
+            <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Meta Description</label>
             <textarea 
               value={formData.seo?.metaDescription} 
               onChange={(e) => updateNestedField('seo', 'metaDescription', e.target.value)}
-              className="w-full border border-gray-300 rounded-none p-4 text-sm focus:ring-0 focus:border-blue-500 outline-none min-h-[100px]"
-              placeholder="A brief description of the website for search engines..."
+              className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] rounded-none px-3 py-2.5 text-sm text-[var(--text-primary)] focus:border-[var(--color-primary)] outline-none min-h-[90px]"
+              placeholder="A brief description for search engines..."
             />
           </div>
           <Input 
@@ -465,6 +440,9 @@ export default function FooterManagerForm({ initialData }) {
           />
         </div>
       </Card>
+
+      </div>
+      {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
     </div>
   );
 }

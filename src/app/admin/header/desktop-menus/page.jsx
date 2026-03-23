@@ -6,8 +6,6 @@ export default async function DesktopMenusPage() {
   const data = await getNavigationData();
   
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <DesktopMenuManager initialData={data} initialTopMenu={data.topMenu} />
-    </div>
+    <DesktopMenuManager initialData={data} initialTopMenu={data.topMenu} />
   );
 }

@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import HeaderServer from '../../components/layout/HeaderServer';
 import Footer from "../../components/layout/Footer";
+import HeaderServer from '../../components/layout/HeaderServer';
 import "../globals.css";
 
 
@@ -29,6 +29,10 @@ export const metadata = {
   ],
   authors: [{ name: "Career Point University" }],
   creator: "Career Point University",
+  icons: {
+    icon: [{ url: '/icon.png', type: 'image/png' }],
+    apple: [{ url: '/icon.png' }],
+  },
   openGraph: {
     title: "Career Point University, Kota",
     description:
@@ -46,7 +50,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <HeaderServer /> 
         
-        <main className="min-h-screen">
+        <main className="pt-[110px] lg:pt-[112px]">
           {children}
         </main>
 

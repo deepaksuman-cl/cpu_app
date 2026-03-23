@@ -5,8 +5,6 @@ export default async function MobileConfigPage() {
   const data = await getNavigationData();
   
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 pb-20">
-      <MobileConfigManager initialData={data} initialMobileConfig={data.mobileConfig} />
-    </div>
+    <MobileConfigManager initialData={data} initialMobileConfig={data.mobileConfig} />
   );
 }

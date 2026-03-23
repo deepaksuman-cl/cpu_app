@@ -13,8 +13,6 @@ export default async function FooterManagerPage() {
   const initialData = result.success ? result.data : {};
 
   return (
-    <div className="min-h-screen bg-gray-50 border-l border-gray-200">
-      <FooterManagerForm initialData={initialData} />
-    </div>
+    <FooterManagerForm initialData={initialData} />
   );
 }
