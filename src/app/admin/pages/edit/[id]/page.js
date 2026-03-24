@@ -10,7 +10,7 @@ export default async function EditPage(props) {
   const id = params.id;
 
   await connectToDatabase();
-  const rawPage = await Page.findById(id).lean();
+  const rawPage = await Page.findByPk(id);
   
   if (!rawPage) {
     return notFound();

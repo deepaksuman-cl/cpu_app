@@ -33,7 +33,7 @@ export default async function ProgrammesPage({ searchParams }) {
   const sortedCategories = [...categories].sort((a, b) => (a.order || 0) - (b.order || 0));
   
   // Define "All Categories" option
-  const allCategory = { _id: 'all', label: 'All Categories' };
+  const allCategory = { id: 'all', label: 'All Categories' };
   const categoriesWithAll = [allCategory, ...sortedCategories];
 
   // Determine active category
@@ -41,15 +41,15 @@ export default async function ProgrammesPage({ searchParams }) {
   const activeCategory = categoriesWithAll.find(c => c.label === currentType) || categoriesWithAll[0];
 
   // Server-side filtering logic
-  let filteredCourses = activeCategory._id === 'all' 
+  let filteredCourses = activeCategory.id === 'all' 
     ? allCourses 
-    : allCourses.filter(c => (c.categoryId?._id || c.categoryId) === activeCategory._id);
+    : allCourses.filter(c => (c.categoryId?.id || c.categoryId) === activeCategory.id);
 
   // Calculate counts for sidebar (based on full list)
   const categoryCounts = categoriesWithAll.reduce((acc, cat) => {
-    acc[cat._id] = cat._id === 'all' 
+    acc[cat.id] = cat.id === 'all' 
       ? allCourses.length 
-      : allCourses.filter(c => (c.categoryId?._id || c.categoryId) === cat._id).length;
+      : allCourses.filter(c => (c.categoryId?.id || c.categoryId) === cat.id).length;
     return acc;
   }, {});
 

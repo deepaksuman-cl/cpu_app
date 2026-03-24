@@ -19,7 +19,7 @@ const sequelize = new Sequelize('cpu_database', 'root', '', {
   },
 });
 
-export const connectDB = async () => {
+export const connectToDatabase = async () => {
   try {
     await sequelize.authenticate();
     console.log('✅ MariaDB connected via Sequelize');

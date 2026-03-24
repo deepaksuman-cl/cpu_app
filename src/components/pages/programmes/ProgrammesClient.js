@@ -61,10 +61,10 @@ export default function ProgrammesClient({ categories = [], courses = [], links 
             </h3>
             <div className="flex flex-col gap-1">
               {categories.map((cat) => {
-                const count = categoryCounts[cat._id] || 0;
+                const count = categoryCounts[cat.id] || 0;
                 return (
                   <button
-                    key={cat._id}
+                    key={cat.id}
                     onClick={() => handleCategoryClick(cat.label)}
                     className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-left border-l-[3px] transition-all
                       ${activeType === cat.label ? "bg-[#00588b]/8 border-[#00588b]" : "bg-transparent border-transparent hover:bg-[#f0f6fb]"}`}
@@ -94,7 +94,7 @@ export default function ProgrammesClient({ categories = [], courses = [], links 
               <div className="flex flex-col gap-2">
                 {links.map((link) => (
                   <Link 
-                    key={link._id} 
+                    key={link.id} 
                     href={link.slug} 
                     className={`flex items-center gap-3 px-3 py-2.5 rounded-xl bg-slate-50 hover:bg-[#f0f6fb] transition w-full text-left group border border-transparent hover:border-gray-200 ${link.colorClass}`}
                   >
@@ -145,13 +145,13 @@ export default function ProgrammesClient({ categories = [], courses = [], links 
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5">
             {courses.map((course) => {
-              const isHov = hoveredCard === course._id;
+              const isHov = hoveredCard === course.id;
               
               // Helper to inject our checkmarks securely into raw HTML
               const finalHtml = (course.programs || '').replace(/<li>/g, '<li class="flex items-start gap-2 mb-2 text-sm text-slate-600 font-medium"><svg class="w-4 h-4 mt-0.5 shrink-0 text-[#00588b]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg><span class="leading-snug">');
               
               return (
-                <div key={course._id} onMouseEnter={() => setHoveredCard(course._id)} onMouseLeave={() => setHoveredCard(null)} className={`group bg-white rounded-2xl border-[1.5px] cursor-pointer flex flex-col overflow-hidden transition-all duration-300 transform relative shadow-sm hover:shadow-xl hover:shadow-[#00588b]/5 hover:border-slate-300 hover:-translate-y-1`}>
+                <div key={course.id} onMouseEnter={() => setHoveredCard(course.id)} onMouseLeave={() => setHoveredCard(null)} className={`group bg-white rounded-2xl border-[1.5px] cursor-pointer flex flex-col overflow-hidden transition-all duration-300 transform relative shadow-sm hover:shadow-xl hover:shadow-[#00588b]/5 hover:border-slate-300 hover:-translate-y-1`}>
                   
                   {/* Top colored strip */}
                   <div className="absolute top-0 left-0 right-0 h-1.5 transition-opacity duration-300 opacity-80 group-hover:opacity-100" style={{ backgroundColor: course.colorHex }} />

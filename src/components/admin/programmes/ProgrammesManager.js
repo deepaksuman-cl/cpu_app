@@ -198,7 +198,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
       slug: link.slug,
       colorClass: link.colorClass
     });
-    setEditingLinkId(link._id);
+    setEditingLinkId(link.id);
     setLinkModalOpen(true);
   };
 

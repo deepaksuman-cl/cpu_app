@@ -43,7 +43,7 @@ export default async function AllSchoolsPage() {
               const title = school.name;
 
               return (
-                <div key={school._id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group flex flex-col">
+                <div key={school.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group flex flex-col">
                   {/* Card Image */}
                   <div className="h-48 relative overflow-hidden">
                     <div className="absolute inset-0 bg-[#001e46]/20 group-hover:bg-transparent transition-colors z-10" />
