@@ -14,6 +14,7 @@ import CourseApplySteps from "@/components/pages/courses/CourseApplySteps";
 import { CourseCurriculum, CourseDeptSlider } from "@/components/pages/courses/CourseCurriculum";
 import CourseFAQ from "@/components/pages/courses/CourseFAQ";
 import CourseOverview from "@/components/pages/courses/CourseOverview";
+import CourseRoadmap from "@/components/pages/courses/CourseRoadmap";
 import CourseScholarships from "@/components/pages/courses/CourseScholarships";
 import CourseScope from "@/components/pages/courses/CourseScope";
 import CourseUniqueFeatures from "@/components/pages/courses/CourseUniqueFeatures";
@@ -96,6 +97,7 @@ export default async function CourseSlugPage({ params }) {
       {course.overview && <CourseOverview data={course.overview} />}
       {course.scope && <CourseScope data={course.scope} />}
       {course.curriculum && <CourseCurriculum data={course.curriculum} />}
+      <CourseRoadmap data={course.roadmap} />
       {course.exploreDepartment && <CourseDeptSlider data={course.exploreDepartment} />}
       {course.admissionFee && <CourseAdmissionFee data={course.admissionFee} />}
       {course.scholarships && <CourseScholarships data={course.scholarships} />}

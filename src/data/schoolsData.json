@@ -174,15 +174,15 @@
         "duration": "2 Years",
         "eligibility": "Graduation with 50% marks",
         "description": "Detailed description about MCA goes here...",
+        "metaTitle": "",
+        "metaDescription": "",
         "hero": {
           "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
           "badge": "2-Year Postgraduate Programme",
           "title": {
             "main": "Master of Computer Application",
             "highlight": "Computer",
-            "line1": "Master of",
-            "line2": "Computer",
-            "line3": "Application"
+            "skyHighlight": ""
           },
           "description": "Comprehensive foundation in computer science with hands-on training in programming, AI, data science, cybersecurity & emerging technologies.",
           "cta": [
@@ -249,7 +249,11 @@
           ]
         },
         "overview": {
-          "sectionTitle": "Overview",
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          },
           "subtitle": "What is the MCA Programme?",
           "paragraphs": [
             "MCA Programme is a three-year, six-semester program that offers holistic knowledge of fundamentals in computational applications technology enabling efficient solutions for industries and business problems — fostering creativity and resolution-thinking by addressing AI-enhanced tools with IoT industry for providing real-time solutions efficiently.",
@@ -285,13 +289,21 @@
           ]
         },
         "scope": {
-          "sectionTitle": "Scope of Master of Computer Application (MCA)",
+          "sectionTitle": {
+            "main": "Scope of Master of Computer Application (MCA)",
+            "highlight": "",
+            "skyHighlight": ""
+          },
           "subtitle": "Expanding opportunities in the world of technology",
           "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
           "body": "The MCA program is a comprehensive three-year undertaking that produces students with a solid foundation in computer science and its applications. The curriculum encompasses a wide range of subjects, spanning programming languages such as C, C++, Java, data structures, database management systems, software engineering, web development, and computer networks. Additionally, students learn to leverage data, machine learning, AI research, writing skills, and skill development. Graduates can pursue roles as software developers, database administrators, system analysts, IT consultants, and cybersecurity professionals."
         },
         "curriculum": {
-          "sectionTitle": "Course Structure MCA",
+          "sectionTitle": {
+            "main": "Course Structure MCA",
+            "highlight": "",
+            "skyHighlight": ""
+          },
           "subtitle": "A well-structured curriculum designed for excellence",
           "introNote": "The MCA programme is a comprehensive curriculum providing students with a solid foundation in computer science, spanning programming languages (C, C++, Java), data structures, database management, software engineering, web development, and computer networks.",
           "outroNote": "Graduates of MCA are well prepared for diverse career specialization in the IT industry, including roles such as software developers, system analysts, IT consultants, database administrators, and cybersecurity professionals.",
@@ -396,50 +408,12 @@
             }
           ]
         },
-        "deptSlides": [
-          {
-            "title": "Department at a Glance",
-            "icon": "Building2",
-            "items": [
-              "3 Guest Experts/year",
-              "IEEE Collaboration",
-              "Modern Lab Facilities",
-              "Specializations & Electives",
-              "Industry Collaborations",
-              "Student Programs",
-              "Placement Assistance",
-              "Exclusive Lab Activities"
-            ],
-            "cta": "VIEW MORE"
-          },
-          {
-            "title": "Exclusive Labs",
-            "icon": "FlaskConical",
-            "items": [
-              "Microsoft Innovation Centre",
-              "Microsoft MTAC",
-              "Oracle Innovation Lab",
-              "Oracle Industry Lab",
-              "Artificial Intelligence Lab"
-            ],
-            "cta": "VIEW MORE"
-          },
-          {
-            "title": "Your Department in a Nutshell",
-            "icon": "Star",
-            "items": [
-              "Achievements",
-              "Pharmacy",
-              "Research",
-              "Latest Updates",
-              "Activities",
-              "Links"
-            ],
-            "cta": "START NOW"
-          }
-        ],
         "admissionFee": {
-          "sectionTitle": "Admission & Fee Details",
+          "sectionTitle": {
+            "main": "Admission & Fee Details",
+            "highlight": "",
+            "skyHighlight": ""
+          },
           "subtitle": "Simple admission process and transparent fee structure",
           "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
           "youtubeVideoId": "dQw4w9WgXcQ",
@@ -479,7 +453,11 @@
           ]
         },
         "scholarships": {
-          "sectionTitle": "Scholarship Criteria",
+          "sectionTitle": {
+            "main": "Scholarship Criteria",
+            "highlight": "",
+            "skyHighlight": ""
+          },
           "subtitle": "Scholarship for Session 2026-27",
           "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
           "dateHeaders": [
@@ -527,15 +505,34 @@
             ]
           },
           "notes": [
-            "Merit scholarship is offered to students based on previous class.",
-            "Tuition and fees may be net once your scholarship criteria is evaluated (A+ or equivalent year).",
-            "A 50% scholarship is given to students in the merit scholarship.",
-            "If a valid scholarship / subject scholarship fees are 50% off and student fails to continue, they may be eligible for cancellation scholarship.",
-            "To avail merit scholarship, student has to submit supporting documents in original along with 1 set of photocopies."
+            {
+              "icon": "Info",
+              "text": "Merit scholarship is offered to students based on previous class."
+            },
+            {
+              "icon": "Info",
+              "text": "Tuition and fees may be net once your scholarship criteria is evaluated (A+ or equivalent year)."
+            },
+            {
+              "icon": "Info",
+              "text": "A 50% scholarship is given to students in the merit scholarship."
+            },
+            {
+              "icon": "Info",
+              "text": "If a valid scholarship / subject scholarship fees are 50% off and student fails to continue, they may be eligible for cancellation scholarship."
+            },
+            {
+              "icon": "Info",
+              "text": "To avail merit scholarship, student has to submit supporting documents in original along with 1 set of photocopies."
+            }
           ]
         },
         "whyJoin": {
-          "sectionTitle": "Why Join Master of Computer Application (MCA)?",
+          "sectionTitle": {
+            "main": "Why Join Master of Computer Application (MCA)?",
+            "highlight": "",
+            "skyHighlight": ""
+          },
           "subtitle": "Unlock your potential with a MCA degree",
           "reasons": [
             {
@@ -566,7 +563,11 @@
           ]
         },
         "uniqueFeatures": {
-          "sectionTitle": "What makes Department of MCA unique?",
+          "sectionTitle": {
+            "main": "What makes Department of MCA unique?",
+            "highlight": "",
+            "skyHighlight": ""
+          },
           "subtitle": "Setting us apart from the rest",
           "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
           "features": [
@@ -597,7 +598,11 @@
           ]
         },
         "applySteps": {
-          "sectionTitle": "How to Apply",
+          "sectionTitle": {
+            "main": "How to Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          },
           "subtitle": "Simple 5-step process to join the MCA programme",
           "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
           "guideLabel": "Guide to Register Online",
@@ -637,7 +642,11 @@
           ]
         },
         "faq": {
-          "sectionTitle": "Frequently Asked Questions",
+          "sectionTitle": {
+            "main": "Frequently Asked Questions",
+            "highlight": "",
+            "skyHighlight": ""
+          },
           "subtitle": "Everything you need to know about the MCA programme",
           "items": [
             {
@@ -674,135 +683,163 @@
             }
           ]
         },
-        "placements": {
-          "title": {
-            "main": "Students Placed in Top Companies",
-            "highlight": "Top Companies"
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "3 Guest Experts/year",
+              "IEEE Collaboration",
+              "Modern Lab Facilities",
+              "Specializations & Electives",
+              "Industry Collaborations",
+              "Student Programs",
+              "Placement Assistance",
+              "Exclusive Lab Activities"
+            ],
+            "cta": "VIEW MORE"
           },
-          "label": "MCA Placement Records",
-          "subtitle": "Highest & best placement record in the region",
-          "list": [
-            {
-              "name": "Siraj Ali",
-              "company": "Course5 Intelligence",
-              "pkg": "8 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
-            },
-            {
-              "name": "Tarun Jain",
-              "company": "Appcino",
-              "pkg": "10 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
-            },
-            {
-              "name": "Prateek Dhaman",
-              "company": "TCS",
-              "pkg": "9 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png"
-            },
-            {
-              "name": "Archana Kumari",
-              "company": "Tech Mahindra",
-              "pkg": "12 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
-            },
-            {
-              "name": "Kiran Daklani",
-              "company": "Zalando",
-              "pkg": "75 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg"
-            },
-            {
-              "name": "Ravindra Singh",
-              "company": "ATC",
-              "pkg": "8 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
-            },
-            {
-              "name": "Priya Sharma",
-              "company": "Infosys",
-              "pkg": "7 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
-            },
-            {
-              "name": "Rahul Verma",
-              "company": "Wipro",
-              "pkg": "9 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
-            }
-          ]
-        },
-        "industry": {
-          "title": {
-            "main": "Industry Tie Up's",
-            "highlight": "Tie Up's"
+          {
+            "title": "Exclusive Labs",
+            "icon": "FlaskConical",
+            "items": [
+              "Microsoft Innovation Centre",
+              "Microsoft MTAC",
+              "Oracle Innovation Lab",
+              "Oracle Industry Lab",
+              "Artificial Intelligence Lab"
+            ],
+            "cta": "VIEW MORE"
           },
-          "label": "MCA Collaborations",
-          "partners": [
-            {
-              "name": "Tech Mahindra",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/tech-mahindra-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "TCS",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "Infosys",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "Wipro",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "Vodafone",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/vodafone-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "Google",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "J-Spiders",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/j-spiders-logo-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "JustDial",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/justdial-logo-as-Smart-Object-1.jpg"
-            }
-          ]
-        },
-        "testimonials": {
-          "title": {
-            "main": "MCA Students Speak",
-            "highlight": "Students"
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Achievements",
+              "Pharmacy",
+              "Research",
+              "Latest Updates",
+              "Activities",
+              "Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "Career Point University 2 Year Learning",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
           },
-          "label": "MCA Testimonials",
-          "list": [
+          "subtitle": "Your intensive journey to becoming a Master of Computer Applications.",
+          "years": [
             {
-              "name": "Archana Kumari",
-              "batch": "MCA 2019",
-              "company": "Tech Mahindra",
-              "rating": 5,
-              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari-Tech-Mahindra.png",
-              "text": "Career Point University transformed my career. The faculty's dedication and industry-focused curriculum gave me the confidence to crack top MNC interviews."
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Core Foundations",
+              "contentTitle": "Advanced Programming & Systems",
+              "contentDesc": "Master advanced data structures, algorithms, and full-stack development foundations.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Java",
+                "Python",
+                "Node.js",
+                "SQL",
+                "Data Structures"
+              ],
+              "aiTools": [
+                {
+                  "name": "ChatGPT",
+                  "desc": "Assisted Code Generation",
+                  "icon": "Bot",
+                  "color": "#0b1bf4",
+                  "size": "26px"
+                },
+                {
+                  "name": "GitHub Copilot",
+                  "desc": "AI Pair Programmer",
+                  "icon": "Code2",
+                  "color": "#000",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Advanced Java",
+                  "desc": "Enterprise application development",
+                  "icon": "☕"
+                },
+                {
+                  "title": "Database Management",
+                  "desc": "Relational & NoSQL systems",
+                  "icon": "🗄️"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Inventory System",
+                  "desc": "Full-stack management solution",
+                  "companies": "TCS · Wipro",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Advanced Algorithms",
+                "Web Technologies",
+                "Operating Systems",
+                "Software Engineering"
+              ]
             },
             {
-              "name": "Rahul Verma",
-              "batch": "MCA 2021",
-              "company": "Infosys",
-              "rating": 5,
-              "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
-              "text": "The research opportunities and cutting-edge labs at CPU are unmatched. I published 2 research papers during my MCA, which opened doors I never imagined."
-            },
-            {
-              "name": "Priya Sharma",
-              "batch": "MCA 2020",
-              "company": "Accenture",
-              "rating": 5,
-              "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
-              "text": "From day one, the university prepared us for real-world challenges. The industry tie-ups and live projects gave hands-on experience. I landed my dream job."
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Specialization",
+              "contentTitle": "AI, ML & Industry Ready",
+              "contentDesc": "Specialize in emerging technologies and complete your industry capstone project.",
+              "badge": "YEAR-2",
+              "skills": [
+                "TensorFlow",
+                "React",
+                "AWS",
+                "Big Data",
+                "MLOps"
+              ],
+              "aiTools": [
+                {
+                  "name": "Gemini",
+                  "desc": "Advanced AI Reasoning",
+                  "icon": "Brain",
+                  "color": "#e87211",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Cloud Computing",
+                  "desc": "Scalable infrastructure on AWS",
+                  "icon": "☁️"
+                },
+                {
+                  "title": "Machine Learning",
+                  "desc": "Predictive modeling & Data Science",
+                  "icon": "🧠"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "AI Recommendation Engine",
+                  "desc": "Personalized user experiences",
+                  "companies": "Amazon · Netflix",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Big Data Analytics",
+                "Machine Learning",
+                "Cloud Security",
+                "Software Testing",
+                "Capstone Project"
+              ]
             }
           ]
         }
@@ -2982,4 +3019,4 @@
       ]
     }
   }
-} 
+}

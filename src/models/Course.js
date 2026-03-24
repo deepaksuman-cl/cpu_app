@@ -183,6 +183,45 @@ const ExploreDepartmentSchema = new mongoose.Schema({
     slug: String
   }, { _id: false })]
 }, { _id: false });
+// --- New Roadmap Schema ---
+const RoadmapYearSchema = new mongoose.Schema({
+  id: { type: Number },
+  tabLabel: String,
+  tabTitle: String,
+  contentTitle: String,
+  contentDesc: String,
+  badge: String,
+  skills: [String],
+  aiTools: [new mongoose.Schema({
+    name: String,
+    desc: String,
+    icon: String, // e.g. "fa-robot"
+    color: String,
+    size: { type: String, default: "26px" }
+  }, { _id: false })],
+  concepts: [new mongoose.Schema({
+    title: String,
+    desc: String,
+    icon: String // e.g. "🖥️"
+  }, { _id: false })],
+  projects: [new mongoose.Schema({
+    name: String,
+    desc: String,
+    companies: String,
+    color: String
+  }, { _id: false })],
+  subjects: [String]
+}, { _id: false });
+const RoadmapConfigSchema = new mongoose.Schema({
+  sectionTitle: { type: String, default: "Career Point University 4 Year Learning Roadmap" },
+  labels: {
+    whatYouWillLearn: { type: String, default: "What you'll learn" },
+    aiTools: { type: String, default: "AI Tools & Technologies" },
+    inClassroom: { type: String, default: "In Classroom Concepts" },
+    projects: { type: String, default: "Projects You'll Work On" },
+    viewAllSubjects: { type: String, default: "View All Subjects" }
+  }
+}, { _id: false });
 
 // --- Main Course Schema ---
 
@@ -208,6 +247,11 @@ const CourseSchema = new mongoose.Schema({
   overview: OverviewSchema,
   scope: ScopeSchema,
   curriculum: CurriculumSchema,
+  roadmap: {
+    sectionTitle: TitleHighlightSchema,
+    subtitle: String,
+    years: [RoadmapYearSchema]
+  },
   admissionFee: AdmissionFeeSchema,
   scholarships: ScholarshipsSchema,
   whyJoin: WhyJoinSchema,

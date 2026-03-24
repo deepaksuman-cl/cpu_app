@@ -138,6 +138,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
     applySteps: { sectionTitle: { main: 'Apply' }, subtitle: '', bgImage: '', guideLabel: '', ctaLabel: '', ctaLink: '', steps: [] },
     faq: { sectionTitle: { main: 'FAQ' }, subtitle: '', items: [] },
     exploreDepartment: { sectionTitle: { main: 'Explore Our Department', highlight: 'Department' }, subtitle: 'Discover our specialized wings', slides: [] },
+    roadmap: { sectionTitle: { main: '4 Year Learning Roadmap', highlight: 'Roadmap' }, subtitle: 'Your journey from foundation to industry expert.', years: [] },
     breadcrumb: []
   });
 
@@ -246,6 +247,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
           <SectionCard id="applySteps" title="How to Apply" description="Step-by-step guide." isComplete={formData.applySteps?.steps?.length > 0} />
           <SectionCard id="faq" title="FAQs" description="Common questions." isComplete={formData.faq?.items?.length > 0} />
           <SectionCard id="exploreDepartment" title="Department" description="Related facilities." isComplete={formData.exploreDepartment?.slides?.length > 0} />
+          <SectionCard id="roadmap" title="Roadmap" description="Yearly learning flow." isComplete={formData.roadmap?.years?.length > 0} />
         </div>
       </div>
 
@@ -629,39 +631,39 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                               <input type="text" placeholder="Amount" value={row.values[hIdx] || ''} onChange={e => {
                                 const nr = [...formData.scholarships.rows]; 
                                 const newValues = [...nr[rIdx].values];
-                                newValues[hIdx] = e.target.value;
-                                nr[rIdx].values = newValues;
-                                updateSection('scholarships', {...formData.scholarships, rows: nr});
-                              }} className="w-full border border-[var(--border-default)] p-2 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" />
-                            </div>
-                          ))}
-                        </div>
-                     </div>
-                   ))}
-                 </div>
+                              newValues[hIdx] = e.target.value;
+                              nr[rIdx].values = newValues;
+                              updateSection('scholarships', {...formData.scholarships, rows: nr});
+                            }} className="w-full border border-[var(--border-default)] p-2 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" />
+                          </div>
+                        ))}
+                      </div>
+                   </div>
+                 ))}
                </div>
+             </div>
 
-               <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
-                 <h4 className="font-bold text-[11px] uppercase tracking-widest text-[var(--color-primary)] mb-4 pb-3 border-b border-[var(--border-light)]">Early Bird / Special Offer</h4>
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Label (e.g. Early Bird)</label>
-                      <input type="text" value={formData.scholarships.earlyBird?.label || ''} onChange={e => updateSection('scholarships', {...formData.scholarships, earlyBird: {...formData.scholarships.earlyBird, label: e.target.value}})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" />
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      {formData.scholarships.dateHeaders.map((header, hIdx) => (
-                        <div key={hIdx}>
-                          <label className="block text-[9px] uppercase font-bold text-[var(--text-muted)] mb-1 truncate">{header}</label>
-                          <input type="text" value={formData.scholarships.earlyBird?.values?.[hIdx] || ''} onChange={e => {
-                            const newValues = [...(formData.scholarships.earlyBird?.values || [])];
-                            newValues[hIdx] = e.target.value;
-                            updateSection('scholarships', {...formData.scholarships, earlyBird: {...formData.scholarships.earlyBird, values: newValues}});
-                          }} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" />
-                        </div>
-                      ))}
-                    </div>
-                 </div>
+             <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
+               <h4 className="font-bold text-[11px] uppercase tracking-widest text-[var(--color-primary)] mb-4 pb-3 border-b border-[var(--border-light)]">Early Bird / Special Offer</h4>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Label (e.g. Early Bird)</label>
+                    <input type="text" value={formData.scholarships.earlyBird?.label || ''} onChange={e => updateSection('scholarships', {...formData.scholarships, earlyBird: {...formData.scholarships.earlyBird, label: e.target.value}})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {formData.scholarships.dateHeaders.map((header, hIdx) => (
+                      <div key={hIdx}>
+                        <label className="block text-[9px] uppercase font-bold text-[var(--text-muted)] mb-1 truncate">{header}</label>
+                        <input type="text" value={formData.scholarships.earlyBird?.values?.[hIdx] || ''} onChange={e => {
+                          const newValues = [...(formData.scholarships.earlyBird?.values || [])];
+                          newValues[hIdx] = e.target.value;
+                          updateSection('scholarships', {...formData.scholarships, earlyBird: {...formData.scholarships.earlyBird, values: newValues}});
+                        }} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" />
+                      </div>
+                    ))}
+                  </div>
                </div>
+             </div>
 
                <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
                  <h4 className="font-bold text-[11px] uppercase tracking-widest text-[var(--text-secondary)] mb-4">Important Notes</h4>
@@ -816,6 +818,117 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                   </div>
                 ))}
                 <button onClick={() => updateSection('applySteps', {...formData.applySteps, steps: [...(formData.applySteps.steps || []), { icon: 'UserCheck', step: '1', label: '', desc: '' }]})} className="text-[10px] font-bold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] uppercase tracking-widest transition-colors flex items-center gap-1.5"><Plus size={14} strokeWidth={2.5}/> ADD STEP</button>
+              </div>
+            </div>
+          )}
+
+          {/* ROADMAP */}
+          {activeSection === 'roadmap' && (
+            <div className="space-y-6">
+              <TitleEditor 
+                label="Roadmap Section Title" 
+                value={formData.roadmap.sectionTitle} 
+                onChange={val => updateSection('roadmap', {...formData.roadmap, sectionTitle: val})} 
+              />
+              <div>
+                <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Section Subtitle</label>
+                <input 
+                  type="text" 
+                  value={formData.roadmap.subtitle} 
+                  onChange={e => updateSection('roadmap', {...formData.roadmap, subtitle: e.target.value})} 
+                  className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" 
+                  placeholder="e.g. Your journey from foundation to industry expert."
+                />
+              </div>
+
+              <div className="flex justify-between items-center border-b border-[var(--border-light)] pt-6 pb-3">
+                <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Yearly Learning Roadmap</h4>
+                <button 
+                  onClick={() => updateSection('roadmap', {
+                    ...formData.roadmap,
+                    years: [...(formData.roadmap.years || []), { 
+                      id: Date.now(), tabLabel: `YEAR ${formData.roadmap.years?.length + 1}`, tabTitle: 'New Year', 
+                      contentTitle: 'Year Heading', contentDesc: 'Year Description', badge: `YEAR-${formData.roadmap.years?.length + 1}`,
+                      skills: [], aiTools: [], concepts: [], projects: [], subjects: [] 
+                    }]
+                  })} 
+                  className="bg-[var(--text-primary)] text-[var(--bg-surface)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide hover:bg-[var(--text-secondary)] transition-colors rounded-none"
+                >
+                  ADD YEAR
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {(formData.roadmap.years || []).map((year, yIdx) => (
+                  <div key={yIdx} className="border border-[var(--border-default)] bg-[var(--bg-muted)] p-5 relative rounded-none">
+                    <button 
+                      onClick={() => updateSection('roadmap', {
+                        ...formData.roadmap,
+                        years: formData.roadmap.years.filter((_, i) => i !== yIdx)
+                      })} 
+                      className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-5 pb-5 border-b border-[var(--border-light)]">
+                      <div>
+                        <label className="text-[9px] font-bold text-[var(--text-muted)] uppercase block mb-1">Tab Label (e.g. YEAR 1)</label>
+                        <input type="text" value={year.tabLabel} onChange={e => { const n = [...formData.roadmap.years]; n[yIdx].tabLabel = e.target.value; updateSection('roadmap', {...formData.roadmap, years: n}); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                      </div>
+                      <div>
+                        <label className="text-[9px] font-bold text-[var(--text-muted)] uppercase block mb-1">Tab Title (e.g. Foundation)</label>
+                        <input type="text" value={year.tabTitle} onChange={e => { const n = [...formData.roadmap.years]; n[yIdx].tabTitle = e.target.value; updateSection('roadmap', {...formData.roadmap, years: n}); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                      </div>
+                      <div>
+                        <label className="text-[9px] font-bold text-[var(--text-muted)] uppercase block mb-1">Badge (e.g. YEAR-1)</label>
+                        <input type="text" value={year.badge} onChange={e => { const n = [...formData.roadmap.years]; n[yIdx].badge = e.target.value; updateSection('roadmap', {...formData.roadmap, years: n}); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                      </div>
+                      <div className="lg:col-span-2">
+                        <label className="text-[9px] font-bold text-[var(--text-muted)] uppercase block mb-1">Content Title (Main Heading)</label>
+                        <input type="text" value={year.contentTitle} onChange={e => { const n = [...formData.roadmap.years]; n[yIdx].contentTitle = e.target.value; updateSection('roadmap', {...formData.roadmap, years: n}); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                      </div>
+                      <div className="md:col-span-2 lg:col-span-3">
+                        <label className="text-[9px] font-bold text-[var(--text-muted)] uppercase block mb-1">Content Description</label>
+                        <textarea value={year.contentDesc} onChange={e => { const n = [...formData.roadmap.years]; n[yIdx].contentDesc = e.target.value; updateSection('roadmap', {...formData.roadmap, years: n}); }} className="w-full border border-[var(--border-default)] p-2 text-xs h-16 outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none resize-none" />
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      <StringListEditor label="Skills (Tags)" value={year.skills || []} onChange={val => { const n = [...formData.roadmap.years]; n[yIdx].skills = val; updateSection('roadmap', {...formData.roadmap, years: n}); }} />
+                      <div className="pt-4 border-t border-[var(--border-light)]">
+                        <NestedListEditor 
+                          label="AI Tools" 
+                          items={year.aiTools || []} 
+                          newItemTemplate={{ name: '', desc: '', icon: 'Bot', color: '#000' }}
+                          fields={[{key: 'name', label: 'Name'}, {key: 'desc', label: 'Description'}, {key: 'icon', label: 'Icon', type: 'icon'}, {key: 'color', label: 'Color', type: 'color'}]}
+                          onUpdate={items => { const n = [...formData.roadmap.years]; n[yIdx].aiTools = items; updateSection('roadmap', {...formData.roadmap, years: n}); }}
+                        />
+                      </div>
+                      <div className="pt-4 border-t border-[var(--border-light)]">
+                        <NestedListEditor 
+                          label="Classroom Concepts" 
+                          items={year.concepts || []} 
+                          newItemTemplate={{ title: '', desc: '', icon: '🖥️' }}
+                          fields={[{key: 'title', label: 'Title'}, {key: 'desc', label: 'Description'}, {key: 'icon', label: 'Emoji/Icon'}]}
+                          onUpdate={items => { const n = [...formData.roadmap.years]; n[yIdx].concepts = items; updateSection('roadmap', {...formData.roadmap, years: n}); }}
+                        />
+                      </div>
+                      <div className="pt-4 border-t border-[var(--border-light)]">
+                        <NestedListEditor 
+                          label="Projects" 
+                          items={year.projects || []} 
+                          newItemTemplate={{ name: '', desc: '', companies: '', color: '#3ccc8b' }}
+                          fields={[{key: 'name', label: 'Project Name'}, {key: 'desc', label: 'Description'}, {key: 'companies', label: 'Target Companies'}, {key: 'color', label: 'Accent Color', type: 'color'}]}
+                          onUpdate={items => { const n = [...formData.roadmap.years]; n[yIdx].projects = items; updateSection('roadmap', {...formData.roadmap, years: n}); }}
+                        />
+                      </div>
+                      <div className="pt-4 border-t border-[var(--border-light)]">
+                        <StringListEditor label="View All Subjects List" value={year.subjects || []} onChange={val => { const n = [...formData.roadmap.years]; n[yIdx].subjects = val; updateSection('roadmap', {...formData.roadmap, years: n}); }} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

@@ -3,10 +3,63 @@
 import { connectToDatabase } from '@/lib/db';
 import Course from '@/models/Course';
 import School from '@/models/School'; // Imported to ensure populate() works
+import fs from 'fs';
+import path from 'path';
 
 // Helper function to safely serialize Mongoose documents for Server Actions
 function serializeDocument(doc) {
   return JSON.parse(JSON.stringify(doc));
+}
+
+/**
+ * Syncs a course document from the database back to src/data/schoolsData.json
+ */
+async function syncCourseToSeedFile(course, schoolSlug) {
+  try {
+    const filePath = path.join(process.cwd(), 'src/data/schoolsData.json');
+    if (!fs.existsSync(filePath)) return { success: false, error: 'File not found' };
+    
+    const fileData = fs.readFileSync(filePath, 'utf8');
+    const schoolsData = JSON.parse(fileData);
+
+    if (!schoolsData[schoolSlug]) return { success: false, error: 'School not found' };
+
+    // Map DB fields back to JSON structure
+    const jsonCourse = {
+      title: course.name,
+      duration: course.duration,
+      eligibility: course.eligibility,
+      description: course.description,
+      metaTitle: course.metaTitle,
+      metaDescription: course.metaDescription,
+      hero: course.hero,
+      accomplishments: course.accomplishments,
+      overview: course.overview,
+      scope: course.scope,
+      curriculum: course.curriculum,
+      admissionFee: course.admissionFee,
+      scholarships: course.scholarships,
+      whyJoin: course.whyJoin,
+      uniqueFeatures: course.uniqueFeatures,
+      applySteps: course.applySteps,
+      faq: course.faq,
+      deptSlides: course.exploreDepartment?.slides || [],
+      roadmap: {
+        sectionTitle: course.roadmap?.sectionTitle,
+        subtitle: course.roadmap?.subtitle,
+        years: course.roadmap?.years || []
+      }
+    };
+
+    if (!schoolsData[schoolSlug].courseDetails) schoolsData[schoolSlug].courseDetails = {};
+    schoolsData[schoolSlug].courseDetails[course.slug] = jsonCourse;
+
+    fs.writeFileSync(filePath, JSON.stringify(schoolsData, null, 2), 'utf8');
+    return { success: true };
+  } catch (error) {
+    console.error('Sync Error:', error);
+    return { success: false, error: error.message };
+  }
 }
 
 // Formats a course document by converting ObjectIds to strings
@@ -97,6 +150,11 @@ export async function createCourse(data) {
     const newCourse = await Course.create({ ...data, slug });
     await newCourse.populate('schoolId', 'name slug');
     
+    // Sync to JSON
+    if (newCourse.schoolId?.slug) {
+      await syncCourseToSeedFile(newCourse.toObject(), newCourse.schoolId.slug);
+    }
+    
     return { success: true, data: serializeDocument(formatCourse(newCourse.toObject())) };
   } catch (error) {
     return { success: false, error: error.message };
@@ -118,6 +176,11 @@ export async function updateCourse(id, data) {
     
     if (!updatedCourse) {
       return { success: false, error: 'Course not found' };
+    }
+
+    // Sync to JSON
+    if (updatedCourse.schoolId?.slug) {
+      await syncCourseToSeedFile(updatedCourse, updatedCourse.schoolId.slug);
     }
     
     return { success: true, data: serializeDocument(formatCourse(updatedCourse)) };

@@ -155,12 +155,17 @@ export async function seedDatabase() {
               ...courseData.faq,
               sectionTitle: ensureStructuredTitle(courseData.faq?.sectionTitle)
             },
-            exploreDepartment: {
-              sectionTitle: { main: 'Explore Our Department', highlight: 'Department' },
-              subtitle: 'Discover what makes our department exceptional',
-              slides: courseData.deptSlides || []
-            }
-          };
+              exploreDepartment: {
+                sectionTitle: { main: 'Explore Our Department', highlight: 'Department' },
+                subtitle: 'Discover what makes our department exceptional',
+                slides: courseData.deptSlides || []
+              },
+              roadmap: {
+                sectionTitle: ensureStructuredTitle(courseData.roadmap?.sectionTitle || "4 Year Learning Roadmap"),
+                subtitle: courseData.roadmap?.subtitle || "Your journey from foundation to industry expert.",
+                years: Array.isArray(courseData.roadmap) ? courseData.roadmap : (courseData.roadmap?.years || [])
+              }
+            };
 
           await Course.create(coursePayload);
         }
