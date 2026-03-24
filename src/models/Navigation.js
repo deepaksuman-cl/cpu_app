@@ -1,4 +1,7 @@
-// File: src/models/Navigation.js
+import { DataTypes } from 'sequelize';
+import sequelize from '../lib/db.js';
+
+/*
 import mongoose from 'mongoose';
 
 const NavigationSchema = new mongoose.Schema(
@@ -17,7 +20,28 @@ const NavigationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Next.js me dev mode me model overwrite na ho isliye ye check lagate hain
 const Navigation = mongoose.models.Navigation || mongoose.model('Navigation', NavigationSchema);
+export default Navigation;
+*/
+
+const Navigation = sequelize.define('Navigation', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  documentName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    defaultValue: 'main_header',
+  },
+  data: {
+    type: DataTypes.JSON,
+    allowNull: false,
+  },
+}, {
+  timestamps: true,
+});
 
 export default Navigation;

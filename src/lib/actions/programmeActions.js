@@ -1,6 +1,5 @@
 'use server';
 
-import { connectToDatabase } from '@/lib/db';
 import ProgrammeCategory from '@/models/ProgrammeCategory';
 import ProgrammeCourse from '@/models/ProgrammeCourse';
 import AcademicSidebarLink from '@/models/AcademicSidebarLink';
@@ -8,172 +7,174 @@ import ProgrammeSettings from '@/models/ProgrammeSettings';
 import fs from 'fs';
 import path from 'path';
 
-// Helper function to serialize MongoDB objects to plain JSON
-const serialize = (doc) => JSON.parse(JSON.stringify(doc));
-
 /* ═══════════════════════════════════════════════════════════════
    📂 CATEGORY ACTIONS
-═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════ */
 export async function getCategories() {
   try {
-    await connectToDatabase();
-    const categories = await ProgrammeCategory.find().sort({ order: 1 });
-    return { success: true, data: serialize(categories) };
+    const categories = await ProgrammeCategory.findAll({
+      order: [['order', 'ASC']]
+    });
+    return { success: true, data: JSON.parse(JSON.stringify(categories)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function createCategory(data) {
   try {
-    await connectToDatabase();
     const newCategory = await ProgrammeCategory.create(data);
-    return { success: true, data: serialize(newCategory) };
+    return { success: true, data: JSON.parse(JSON.stringify(newCategory)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function deleteCategory(id) {
   try {
-    await connectToDatabase();
-    // Also delete courses linked to this category to keep DB clean
-    await ProgrammeCourse.deleteMany({ categoryId: id });
-    await ProgrammeCategory.findByIdAndDelete(id);
-    return { success: true };
+    await ProgrammeCategory.destroy({
+      where: { id }
+    });
+    return { success: true, error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════
    🎓 COURSE ACTIONS
-═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════ */
 export async function getCourses() {
   try {
-    await connectToDatabase();
-    // Populate se hume Category ka naam bhi mil jayega ID ke sath
-    const courses = await ProgrammeCourse.find().populate('categoryId');
-    return { success: true, data: serialize(courses) };
+    const courses = await ProgrammeCourse.findAll({
+      include: [{
+        model: ProgrammeCategory,
+        as: 'category'
+      }]
+    });
+    return { success: true, data: JSON.parse(JSON.stringify(courses)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function createCourse(data) {
   try {
-    await connectToDatabase();
     const newCourse = await ProgrammeCourse.create(data);
-    return { success: true, data: serialize(newCourse) };
+    return { success: true, data: JSON.parse(JSON.stringify(newCourse)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function updateCourse(id, data) {
   try {
-    await connectToDatabase();
-    const updated = await ProgrammeCourse.findByIdAndUpdate(id, data, { new: true });
-    return { success: true, data: serialize(updated) };
+    await ProgrammeCourse.update(data, {
+      where: { id }
+    });
+    const updated = await ProgrammeCourse.findByPk(id);
+    return { success: true, data: JSON.parse(JSON.stringify(updated)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function deleteCourse(id) {
   try {
-    await connectToDatabase();
-    await ProgrammeCourse.findByIdAndDelete(id);
-    return { success: true };
+    await ProgrammeCourse.destroy({
+      where: { id }
+    });
+    return { success: true, error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════
    🔗 SIDEBAR LINKS ACTIONS
-═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════ */
 export async function getSidebarLinks() {
   try {
-    await connectToDatabase();
-    const links = await AcademicSidebarLink.find().sort({ order: 1 });
-    return { success: true, data: serialize(links) };
+    const links = await AcademicSidebarLink.findAll({
+      order: [['order', 'ASC']]
+    });
+    return { success: true, data: JSON.parse(JSON.stringify(links)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function createSidebarLink(data) {
   try {
-    await connectToDatabase();
     const newLink = await AcademicSidebarLink.create(data);
-    return { success: true, data: serialize(newLink) };
+    return { success: true, data: JSON.parse(JSON.stringify(newLink)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function updateSidebarLink(id, data) {
   try {
-    await connectToDatabase();
-    const updated = await AcademicSidebarLink.findByIdAndUpdate(id, data, { new: true });
-    return { success: true, data: serialize(updated) };
+    await AcademicSidebarLink.update(data, {
+      where: { id }
+    });
+    const updated = await AcademicSidebarLink.findByPk(id);
+    return { success: true, data: JSON.parse(JSON.stringify(updated)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function deleteSidebarLink(id) {
   try {
-    await connectToDatabase();
-    await AcademicSidebarLink.findByIdAndDelete(id);
-    return { success: true };
+    await AcademicSidebarLink.destroy({
+      where: { id }
+    });
+    return { success: true, error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════
    ⚙️ SETTINGS ACTIONS
-═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════ */
 export async function getProgrammeSettings() {
   try {
-    await connectToDatabase();
-    // Assuming we only keep exactly ONE settings document
     let settings = await ProgrammeSettings.findOne();
     if (!settings) {
-      settings = await ProgrammeSettings.create({}); // Generate default if missing
+      settings = await ProgrammeSettings.create({});
     }
-    return { success: true, data: serialize(settings) };
+    return { success: true, data: JSON.parse(JSON.stringify(settings)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function updateProgrammeSettings(id, data) {
   try {
-    await connectToDatabase();
-    const updated = await ProgrammeSettings.findByIdAndUpdate(id, data, { new: true, upsert: true });
-    return { success: true, data: serialize(updated) };
+    await ProgrammeSettings.update(data, {
+      where: { id }
+    });
+    const updated = await ProgrammeSettings.findByPk(id);
+    return { success: true, data: JSON.parse(JSON.stringify(updated)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════
    🌱 SEED FROM JSON
-═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════ */
 export async function seedProgrammesData() {
   try {
-    await connectToDatabase();
-    
     // Clear existing
-    await ProgrammeCategory.deleteMany({});
-    await ProgrammeCourse.deleteMany({});
-    await AcademicSidebarLink.deleteMany({});
-    await ProgrammeSettings.deleteMany({});
+    await ProgrammeCourse.destroy({ where: {}, truncate: false });
+    await ProgrammeCategory.destroy({ where: {}, truncate: false });
+    await AcademicSidebarLink.destroy({ where: {}, truncate: false });
+    await ProgrammeSettings.destroy({ where: {}, truncate: false });
     
-    // Create Default Settings block
+    // Create Default Settings
     await ProgrammeSettings.create({});
     
     // Read JSON
@@ -181,9 +182,11 @@ export async function seedProgrammesData() {
     const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
     
     // Insert Categories
-    let order = 1;
+    let orderNum = 1;
     for (const type of jsonData.programmeTypes) {
-      const cat = await ProgrammeCategory.create({ label: type.label, order: order++ });
+      const cat = await ProgrammeCategory.create({ 
+        label: type.label, order: orderNum++ 
+      });
       
       // Insert courses for this category
       const courses = jsonData.courses[type.label] || [];
@@ -204,7 +207,7 @@ export async function seedProgrammesData() {
         await ProgrammeCourse.create({
           title: course.title,
           school: course.school,
-          categoryId: cat._id,
+          categoryId: cat.id,
           icon: course.icon,
           colorHex: course.colorHex,
           iconBg: course.iconBg,
@@ -229,9 +232,9 @@ export async function seedProgrammesData() {
       });
     }
 
-    return { success: true, message: "Data seeded successfully!" };
+    return { success: true, message: "Data seeded successfully!", error: null };
   } catch (error) {
     console.error("Seed error:", error);
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }

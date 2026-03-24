@@ -1,15 +1,9 @@
 'use server';
 
-import { connectToDatabase } from '@/lib/db';
 import Course from '@/models/Course';
-import School from '@/models/School'; // Imported to ensure populate() works
+import School from '@/models/School';
 import fs from 'fs';
 import path from 'path';
-
-// Helper function to safely serialize Mongoose documents for Server Actions
-function serializeDocument(doc) {
-  return JSON.parse(JSON.stringify(doc));
-}
 
 /**
  * Syncs a course document from the database back to src/data/schoolsData.json
@@ -62,145 +56,140 @@ async function syncCourseToSeedFile(course, schoolSlug) {
   }
 }
 
-// Formats a course document by converting ObjectIds to strings
-function formatCourse(course) {
-  if (!course) return null;
-  
-  const formatted = { ...course, _id: course._id.toString() };
-  
-  // Safely stringify populated or unpopulated schoolId
-  if (formatted.schoolId) {
-    if (typeof formatted.schoolId === 'object' && formatted.schoolId._id) {
-      formatted.schoolId = {
-        ...formatted.schoolId,
-        _id: formatted.schoolId._id.toString()
-      };
-    } else {
-      formatted.schoolId = formatted.schoolId.toString();
-    }
-  }
-  
-  return formatted;
-}
-
 export async function getCourses(schoolId = null) {
   try {
-    await connectToDatabase();
+    const where = schoolId ? { schoolId } : {};
+    const courses = await Course.findAll({
+      where,
+      include: [{
+        model: School,
+        as: 'school',
+        attributes: ['name', 'slug']
+      }],
+      order: [['createdAt', 'DESC']]
+    });
     
-    const query = schoolId ? { schoolId } : {};
-    const courses = await Course.find(query)
-      .populate('schoolId', 'name slug')
-      .sort({ createdAt: -1 })
-      .lean();
-    
-    // Explicitly convert _id and populated ObjectIds to strings
-    const formattedCourses = courses.map(formatCourse);
-    
-    return { success: true, data: serializeDocument(formattedCourses) };
+    return { success: true, data: JSON.parse(JSON.stringify(courses)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function getCourseBySlug(slug) {
   try {
-    await connectToDatabase();
-    
-    const course = await Course.findOne({ slug })
-      .populate('schoolId', 'name slug')
-      .lean();
+    const course = await Course.findOne({
+      where: { slug },
+      include: [{
+        model: School,
+        as: 'school',
+        attributes: ['name', 'slug']
+      }]
+    });
     
     if (!course) {
-      return { success: false, error: 'Course not found' };
+      return { success: false, data: null, error: 'Course not found' };
     }
     
-    return { success: true, data: serializeDocument(formatCourse(course)) };
+    return { success: true, data: JSON.parse(JSON.stringify(course)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function getCourseById(id) {
   try {
-    await connectToDatabase();
-    
-    const course = await Course.findById(id)
-      .populate('schoolId', 'name slug')
-      .lean();
+    const course = await Course.findByPk(id, {
+      include: [{
+        model: School,
+        as: 'school',
+        attributes: ['name', 'slug']
+      }]
+    });
     
     if (!course) {
-      return { success: false, error: 'Course not found' };
+      return { success: false, data: null, error: 'Course not found' };
     }
     
-    return { success: true, data: serializeDocument(formatCourse(course)) };
+    return { success: true, data: JSON.parse(JSON.stringify(course)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function createCourse(data) {
   try {
-    await connectToDatabase();
-    
     let slug = data.slug;
     if (!slug && data.name) {
       slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
     }
     
     const newCourse = await Course.create({ ...data, slug });
-    await newCourse.populate('schoolId', 'name slug');
+    
+    // Fetch with school to sync
+    const courseWithSchool = await Course.findByPk(newCourse.id, {
+      include: [{
+        model: School,
+        as: 'school',
+        attributes: ['name', 'slug']
+      }]
+    });
     
     // Sync to JSON
-    if (newCourse.schoolId?.slug) {
-      await syncCourseToSeedFile(newCourse.toObject(), newCourse.schoolId.slug);
+    if (courseWithSchool?.school?.slug) {
+      await syncCourseToSeedFile(courseWithSchool, courseWithSchool.school.slug);
     }
     
-    return { success: true, data: serializeDocument(formatCourse(newCourse.toObject())) };
+    return { success: true, data: JSON.parse(JSON.stringify(courseWithSchool)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function updateCourse(id, data) {
   try {
-    await connectToDatabase();
-    
     // Auto-generate slug if name is updated and slug is missing
     if (data.name && !data.slug) {
       data.slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
     }
 
-    const updatedCourse = await Course.findByIdAndUpdate(id, data, { new: true, runValidators: true })
-      .populate('schoolId', 'name slug')
-      .lean();
+    await Course.update(data, {
+      where: { id }
+    });
+    
+    const updatedCourse = await Course.findByPk(id, {
+      include: [{
+        model: School,
+        as: 'school',
+        attributes: ['name', 'slug']
+      }]
+    });
     
     if (!updatedCourse) {
-      return { success: false, error: 'Course not found' };
+      return { success: false, data: null, error: 'Course not found' };
     }
 
     // Sync to JSON
-    if (updatedCourse.schoolId?.slug) {
-      await syncCourseToSeedFile(updatedCourse, updatedCourse.schoolId.slug);
+    if (updatedCourse.school?.slug) {
+      await syncCourseToSeedFile(updatedCourse, updatedCourse.school.slug);
     }
     
-    return { success: true, data: serializeDocument(formatCourse(updatedCourse)) };
+    return { success: true, data: JSON.parse(JSON.stringify(updatedCourse)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 export async function deleteCourse(id) {
   try {
-    await connectToDatabase();
+    const course = await Course.findByPk(id);
+    if (!course) return { success: false, error: 'Course not found' };
     
-    const deletedCourse = await Course.findByIdAndDelete(id).lean();
+    await Course.destroy({
+      where: { id }
+    });
     
-    if (!deletedCourse) {
-      return { success: false, error: 'Course not found' };
-    }
-    
-    return { success: true, data: serializeDocument(formatCourse(deletedCourse)) };
+    return { success: true, data: JSON.parse(JSON.stringify(course)), error: null };
   } catch (error) {
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }

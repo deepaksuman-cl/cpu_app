@@ -151,7 +151,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
     if (!formData.name) return alert("Course name is required.");
     setIsSaving(true);
     try {
-      const result = initialData?._id ? await updateCourse(initialData._id, formData) : await createCourse(formData);
+      const result = initialData?.id ? await updateCourse(initialData.id, formData) : await createCourse(formData);
       if (result.success) {
         router.push('/admin/courses');
         router.refresh();
@@ -197,9 +197,13 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="md:col-span-3">
             <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Parent School *</label>
-            <select value={formData.schoolId?._id || formData.schoolId} onChange={(e) => setFormData({...formData, schoolId: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]">
+            <select 
+              value={typeof formData.schoolId === 'object' ? formData.schoolId?.id : formData.schoolId} 
+              onChange={(e) => setFormData({...formData, schoolId: e.target.value})} 
+              className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]"
+            >
               <option value="">Select School</option>
-              {schools.map(s => <option key={s._id} value={s._id}>{s.name}</option>)}
+              {schools.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
           </div>
           <div>

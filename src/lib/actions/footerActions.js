@@ -1,16 +1,7 @@
 'use server';
 
-import { connectToDatabase } from '@/lib/db';
 import Footer from '@/models/Footer';
 import defaultFooterData from '@/data/footer.json';
-
-// Helper to serialize Mongoose documents for Server Components
-function serializeFooter(doc) {
-  if (!doc) return null;
-  const serialized = JSON.parse(JSON.stringify(doc));
-  if (serialized._id) serialized._id = serialized._id.toString();
-  return serialized;
-}
 
 /**
  * Fetches the global footer configuration.
@@ -18,9 +9,7 @@ function serializeFooter(doc) {
  */
 export async function getFooter() {
   try {
-    await connectToDatabase();
-    
-    const footer = await Footer.findOne({}).lean();
+    const footer = await Footer.findOne();
     
     if (!footer) {
       // Fallback to static JSON but transform it to match the structured schema
@@ -62,32 +51,34 @@ export async function getFooter() {
       };
     }
     
-    return { success: true, data: serializeFooter(footer) };
+    return { success: true, data: JSON.parse(JSON.stringify(footer)), error: null };
   } catch (error) {
     console.error('getFooter Error:', error);
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
 /**
  * Updates or creates the global footer configuration.
- * Since there is only one footer, we always update the same record.
  */
 export async function updateFooter(data) {
   try {
-    await connectToDatabase();
+    const existing = await Footer.findOne();
     
-    // We use findOneAndUpdate with {} so it finds any existing footer (or creates one)
-    const updatedFooter = await Footer.findOneAndUpdate(
-      {}, 
-      data, 
-      { upsert: true, new: true, runValidators: true }
-    ).lean();
+    let updatedFooter;
+    if (existing) {
+      await Footer.update(data, {
+        where: { id: existing.id }
+      });
+      updatedFooter = await Footer.findByPk(existing.id);
+    } else {
+      updatedFooter = await Footer.create(data);
+    }
     
-    return { success: true, data: serializeFooter(updatedFooter) };
+    return { success: true, data: JSON.parse(JSON.stringify(updatedFooter)), error: null };
   } catch (error) {
     console.error('updateFooter Error:', error);
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }
 
@@ -96,9 +87,7 @@ export async function updateFooter(data) {
  */
 export async function seedFooterFromJson() {
   try {
-    await connectToDatabase();
-    
-    // Transform flat JSON structure to the new Mongoose schema with columns
+    // Transform flat JSON structure to the new schema with columns
     const mappedData = {
       ...defaultFooterData,
       columns: [
@@ -120,7 +109,6 @@ export async function seedFooterFromJson() {
           links: [],
           order: 3
         }
-        // We can add more defaults if needed, but these are the main ones from footer.json
       ],
       contact: [
         { label: 'Address', text: defaultFooterData.contact?.address, icon: 'MapPin' },
@@ -129,19 +117,24 @@ export async function seedFooterFromJson() {
       ]
     };
 
-    // Remove legacy keys if they exist in the payload (Mongoose will ignore them anyway but cleaner)
     delete mappedData.quickLinks;
     delete mappedData.programs;
 
-    const seeded = await Footer.findOneAndUpdate(
-      {}, 
-      mappedData, 
-      { upsert: true, new: true }
-    ).lean();
+    const existing = await Footer.findOne();
     
-    return { success: true, data: serializeFooter(seeded) };
+    let seeded;
+    if (existing) {
+      await Footer.update(mappedData, {
+        where: { id: existing.id }
+      });
+      seeded = await Footer.findByPk(existing.id);
+    } else {
+      seeded = await Footer.create(mappedData);
+    }
+    
+    return { success: true, data: JSON.parse(JSON.stringify(seeded)), error: null };
   } catch (error) {
     console.error('seedFooterFromJson Error:', error);
-    return { success: false, error: error.message };
+    return { success: false, data: null, error: error.message };
   }
 }

@@ -50,18 +50,18 @@ export default async function PagesManager() {
             </thead>
             <tbody>
               {pages.map(page => (
-                <tr key={page._id} className="border-b border-[var(--border-light)] hover:bg-[var(--bg-muted)] transition-colors">
+                <tr key={page.id} className="border-b border-[var(--border-light)] hover:bg-[var(--bg-muted)] transition-colors">
                   <td className="px-4 py-3 font-semibold text-[var(--text-primary)] text-sm">{page.title}</td>
                   <td className="px-4 py-3 text-xs text-[var(--text-muted)] font-mono hidden sm:table-cell">/{page.slug}</td>
                   <td className="px-4 py-3 flex gap-1.5 justify-end">
                     <Link
-                      href={`/admin/pages/edit/${page._id}`}
+                      href={`/admin/pages/edit/${page.id}`}
                       title="Edit Page"
                       className="p-2 text-[var(--color-primary)] hover:bg-[var(--bg-body)] border border-transparent hover:border-[var(--border-default)] rounded-none transition-colors"
                     >
                       <Edit size={15} />
                     </Link>
-                    <DeletePageButton id={page._id} title={page.title} />
+                    <DeletePageButton id={page.id} title={page.title} />
                   </td>
                 </tr>
               ))}

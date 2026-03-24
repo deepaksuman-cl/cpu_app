@@ -74,7 +74,7 @@ export default async function CoursesPage() {
                     </tr>
                   ) : (
                     courses.map((course) => (
-                      <tr key={course._id} className="block md:table-row hover:bg-[var(--bg-muted)] transition-colors group p-4 md:p-0">
+                      <tr key={course.id} className="block md:table-row hover:bg-[var(--bg-muted)] transition-colors group p-4 md:p-0">
                         
                         {/* Course Name */}
                         <td className="block md:table-cell py-1 md:py-2 px-0 md:px-4 border-none md:border-r border-[var(--border-light)] mb-2 md:mb-0">
@@ -104,7 +104,7 @@ export default async function CoursesPage() {
                         <td className="block md:table-cell py-2 md:py-2 px-0 md:px-4 border-t border-[var(--border-light)] pt-3 md:border-none md:pt-0">
                           <div className="flex justify-start md:justify-center items-center gap-3 md:gap-2">
                             <Link 
-                              href={`/admin/courses/edit/${course._id}`}
+                              href={`/admin/courses/edit/${course.id}`}
                               className="p-2 md:p-1 bg-[var(--bg-body)] text-[var(--text-secondary)] hover:bg-[var(--color-primary)] hover:text-[var(--text-inverse)] border border-[var(--border-default)] transition-colors rounded-none flex items-center justify-center"
                               title="Edit"
                             >
@@ -114,7 +114,7 @@ export default async function CoursesPage() {
                             
                             {/* Backend Delete functionality intact */}
                             <div className="flex items-center justify-center">
-                              <DeleteCourseButton id={course._id} />
+                              <DeleteCourseButton id={course.id} />
                             </div>
                           </div>
                         </td>

@@ -1,6 +1,8 @@
-import mongoose from 'mongoose';
+import { DataTypes } from 'sequelize';
+import sequelize from '../lib/db.js';
 
-// --- Sub-Schemas for Strict Structure ---
+/*
+import mongoose from 'mongoose';
 
 const LabelLinkSchema = new mongoose.Schema({
   label: String,
@@ -13,16 +15,11 @@ const TitleHighlightSchema = new mongoose.Schema({
   skyHighlight: String
 }, { _id: false });
 
-// A flexible schema that can be either a String or a TitleHighlightSchema
-// However, Mongoose doesn't support easy "or" types for sub-schemas without Mixed.
-// So we will use the Object structure as the standard, but handle mapping in seeder if needed.
-// Actually, let's just use TitleHighlightSchema for everything that's failing.
-
 const HeroSchema = new mongoose.Schema({
   bgImage: String,
   badge: String,
   title: TitleHighlightSchema,
-  subtitle: String, // Added subtitle
+  subtitle: String,
   description: String,
   cta: [new mongoose.Schema({
     label: String,
@@ -35,159 +32,7 @@ const HeroSchema = new mongoose.Schema({
   }, { _id: false })]
 }, { _id: false });
 
-const StatItemSchema = new mongoose.Schema({
-  value: String,
-  label: String,
-  icon: String
-}, { _id: false });
-
-const ExploreDepartmentSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  items: [new mongoose.Schema({
-    icon: String,
-    title: String,
-    description: String,
-    items: [String],
-    link: String,
-    slug: String
-  }, { _id: false })]
-}, { _id: false });
-
-const AboutSchema = new mongoose.Schema({
-  vision: {
-    title: TitleHighlightSchema, // Standardized
-    label: String,
-    icon: String,
-    text: String,
-    highlights: [new mongoose.Schema({
-      value: String,
-      label: String
-    }, { _id: false })]
-  },
-  mission: {
-    title: TitleHighlightSchema, // Standardized
-    label: String,
-    icon: String,
-    points: [String]
-  }
-}, { _id: false });
-
-const ProgrammeCourseSchema = new mongoose.Schema({
-  name: String,
-  slug: String,
-  description: String,
-  specializations: [new mongoose.Schema({
-    name: String,
-    slug: String
-  }, { _id: false })]
-}, { _id: false });
-
-const LevelSchema = new mongoose.Schema({
-  label: String,
-  icon: String,
-  courses: [ProgrammeCourseSchema]
-}, { _id: false });
-
-const ProgrammesHeaderSchema = new mongoose.Schema({
-  bgImage: String,
-  title: TitleHighlightSchema,
-  subtitle: String,
-  description: String,
-  levels: [LevelSchema]
-}, { _id: false });
-
-const PlacementItemSchema = new mongoose.Schema({
-  name: String,
-  company: String,
-  pkg: String,
-  img: String,
-  slug: String // Added slug
-}, { _id: false });
-
-const PlacementsSchema = new mongoose.Schema({
-  title: {
-    main: String,
-    highlight: String
-  },
-  label: String,
-  subtitle: String,
-  list: [PlacementItemSchema]
-}, { _id: false });
-
-const AlumniItemSchema = new mongoose.Schema({
-  name: String,
-  role: String,
-  company: String,
-  img: String,
-  slug: String // Added slug
-}, { _id: false });
-
-const AlumniSchema = new mongoose.Schema({
-  title: TitleHighlightSchema,
-  label: String,
-  list: [AlumniItemSchema]
-}, { _id: false });
-
-const IndustryPartnerSchema = new mongoose.Schema({
-  name: String,
-  url: String,
-  slug: String // Added slug
-}, { _id: false });
-
-const IndustrySchema = new mongoose.Schema({
-  title: TitleHighlightSchema,
-  label: String,
-  partners: [IndustryPartnerSchema]
-}, { _id: false });
-
-const ResearchSchema = new mongoose.Schema({
-  title: TitleHighlightSchema,
-  label: String,
-  gallery: [String],
-  stats: [StatItemSchema]
-}, { _id: false });
-
-const CommunitySchema = new mongoose.Schema({
-  title: TitleHighlightSchema,
-  label: String,
-  description: [String],
-  gallery: [new mongoose.Schema({
-    src: String,
-    caption: String
-  }, { _id: false })]
-}, { _id: false });
-
-const InfraItemSchema = new mongoose.Schema({
-  title: String,
-  desc: String,
-  img: String,
-  slug: String // Added slug
-}, { _id: false });
-
-const InfrastructureSchema = new mongoose.Schema({
-  title: TitleHighlightSchema,
-  label: String,
-  list: [InfraItemSchema]
-}, { _id: false });
-
-const TestimonialItemSchema = new mongoose.Schema({
-  name: String,
-  batch: String,
-  company: String,
-  emoji: String,
-  rating: Number,
-  photo: String,
-  text: String
-}, { _id: false });
-
-const TestimonialsSchema = new mongoose.Schema({
-  title: TitleHighlightSchema,
-  label: String,
-  list: [TestimonialItemSchema]
-}, { _id: false });
-
-// --- Main School Schema ---
+// ... other schemas ...
 
 const SchoolSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -206,14 +51,75 @@ const SchoolSchema = new mongoose.Schema({
   community: CommunitySchema,
   infrastructure: InfrastructureSchema,
   testimonials: TestimonialsSchema,
-  exploreDepartment: ExploreDepartmentSchema // Added exploreDepartment
+  exploreDepartment: ExploreDepartmentSchema
 }, { timestamps: true });
 
-// Force re-compile to pick up schema changes in development
-if (mongoose.models.School) {
-  delete mongoose.models.School;
-}
-
 const School = mongoose.model('School', SchoolSchema);
+export default School;
+*/
+
+const School = sequelize.define('School', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  metaTitle: {
+    type: DataTypes.STRING,
+  },
+  metaDescription: {
+    type: DataTypes.TEXT,
+  },
+  breadcrumb: {
+    type: DataTypes.JSON,
+  },
+  hero: {
+    type: DataTypes.JSON,
+  },
+  stats: {
+    type: DataTypes.JSON,
+  },
+  about: {
+    type: DataTypes.JSON,
+  },
+  programmes: {
+    type: DataTypes.JSON,
+  },
+  placements: {
+    type: DataTypes.JSON,
+  },
+  alumni: {
+    type: DataTypes.JSON,
+  },
+  industry: {
+    type: DataTypes.JSON,
+  },
+  research: {
+    type: DataTypes.JSON,
+  },
+  community: {
+    type: DataTypes.JSON,
+  },
+  infrastructure: {
+    type: DataTypes.JSON,
+  },
+  testimonials: {
+    type: DataTypes.JSON,
+  },
+  exploreDepartment: {
+    type: DataTypes.JSON,
+  },
+}, {
+  timestamps: true,
+});
 
 export default School;

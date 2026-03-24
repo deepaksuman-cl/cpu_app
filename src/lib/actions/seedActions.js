@@ -1,8 +1,13 @@
 'use server';
 
-import { connectToDatabase } from '@/lib/db';
+import sequelize from '@/lib/db';
 import School from '@/models/School';
 import Course from '@/models/Course';
+import Page from '@/models/Page';
+import Footer from '@/models/Footer';
+import Navigation from '@/models/Navigation';
+import { seedFooterFromJson } from './footerActions';
+import { seedProgrammesData } from './programmeActions';
 import schoolsData from '@/data/schoolsData.json';
 
 /**
@@ -18,18 +23,49 @@ const ensureStructuredTitle = (title) => {
   };
 };
 
+/**
+ * Task 7: Database Cleanup
+ * Drops legacy Prisma tables that were created with singular names.
+ */
+async function cleanupPrismaTables() {
+  const prismaTables = [
+    'course', 'school', 'footer', 'page', 'navigation', 
+    'programmecategory', 'programmecourse', 'academicsidebarlink', 
+    'programmesettings', '_prisma_migrations'
+  ];
+  
+  console.log("🧹 Cleaning up old Prisma tables...");
+  for (const table of prismaTables) {
+    try {
+      await sequelize.query(`DROP TABLE IF EXISTS \`${table}\``);
+    } catch (err) {
+      console.warn(`Could not drop table ${table}:`, err.message);
+    }
+  }
+}
+
 export async function seedDatabase() {
   try {
-    await connectToDatabase();
+    console.log("🚀 Starting Database Seed (Sequelize Edition)...");
 
-    // 1. Clear existing data
-    await School.deleteMany({});
-    await Course.deleteMany({});
+    // 1. Task 7: Cleanup old Prisma tables
+    await cleanupPrismaTables();
 
-    // 2. Iterate over schoolsData
+    // 2. Task 6: Clear existing data in Sequelize tables
+    console.log("🗑️ Clearing existing Sequelize data...");
+    // We use destroy with truncate: true or just sync({ force: true }) if we want a total wipe.
+    // But truncate: true is safer for 'Sync with alter' mindset.
+    // Order matters for child records
+    await Course.destroy({ where: {}, truncate: false }); 
+    await School.destroy({ where: {}, truncate: false });
+    await Page.destroy({ where: {}, truncate: false });
+    await Footer.destroy({ where: {}, truncate: false });
+    await Navigation.destroy({ where: {}, truncate: false });
+
+    // 3. Seed Schools and Courses from schoolsData.json
+    console.log("🌱 Seeding Schools and Courses...");
     for (const [slug, data] of Object.entries(schoolsData)) {
-      // Map school data to structured fields with title normalization
-      const schoolData = {
+      const schoolPayload = {
         name: data.hero?.title?.main || data.name || slug,
         slug: slug,
         metaTitle: data.metaTitle || '',
@@ -96,15 +132,15 @@ export async function seedDatabase() {
         }
       };
 
-      const newSchool = await School.create(schoolData);
+      const newSchool = await School.create(schoolPayload);
 
-      // 3. Seed courses for each school
+      // Seed courses for each school
       if (data.courseDetails) {
         for (const [courseSlug, courseData] of Object.entries(data.courseDetails)) {
           const coursePayload = {
             name: courseData.title || courseData.name || courseSlug,
             slug: courseSlug,
-            schoolId: newSchool._id,
+            schoolId: newSchool.id,
             metaTitle: courseData.metaTitle || '',
             metaDescription: courseData.metaDescription || '',
             title: courseData.title,
@@ -155,24 +191,36 @@ export async function seedDatabase() {
               ...courseData.faq,
               sectionTitle: ensureStructuredTitle(courseData.faq?.sectionTitle)
             },
-              exploreDepartment: {
-                sectionTitle: { main: 'Explore Our Department', highlight: 'Department' },
-                subtitle: 'Discover what makes our department exceptional',
-                slides: courseData.deptSlides || []
-              },
-              roadmap: {
-                sectionTitle: ensureStructuredTitle(courseData.roadmap?.sectionTitle || "4 Year Learning Roadmap"),
-                subtitle: courseData.roadmap?.subtitle || "Your journey from foundation to industry expert.",
-                years: Array.isArray(courseData.roadmap) ? courseData.roadmap : (courseData.roadmap?.years || [])
-              }
-            };
+            exploreDepartment: {
+              sectionTitle: { main: 'Explore Our Department', highlight: 'Department' },
+              subtitle: 'Discover what makes our department exceptional',
+              slides: courseData.deptSlides || []
+            },
+            roadmap: {
+              sectionTitle: ensureStructuredTitle(courseData.roadmap?.sectionTitle || "4 Year Learning Roadmap"),
+              subtitle: courseData.roadmap?.subtitle || "Your journey from foundation to industry expert.",
+              years: Array.isArray(courseData.roadmap) ? courseData.roadmap : (courseData.roadmap?.years || [])
+            }
+          };
 
           await Course.create(coursePayload);
         }
       }
     }
 
-    return { success: true, message: 'Database Seeded with normalized structured data!' };
+    // 4. Seed Global Layouts
+    console.log("⭐ Seeding Footer and Navigation...");
+    await seedFooterFromJson();
+    
+    // 5. Seed Academic Catalog
+    console.log("🎓 Seeding Academic Programmes...");
+    await seedProgrammesData();
+
+    return { 
+      success: true, 
+      message: 'Database Seeded successfully in MariaDB! Legacy tables purged.', 
+      data: null 
+    };
   } catch (error) {
     console.error('Seed Error:', error);
     return { success: false, error: error.message };

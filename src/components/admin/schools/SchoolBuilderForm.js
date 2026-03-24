@@ -151,7 +151,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
     if (!formData.name) return alert("School name is required.");
     setIsSaving(true);
     try {
-      const result = initialData?._id ? await updateSchool(initialData._id, formData) : await createSchool(formData);
+      const result = initialData?.id ? await updateSchool(initialData.id, formData) : await createSchool(formData);
       if (result.success) {
         router.push('/admin/schools');
         router.refresh();

@@ -1,229 +1,9 @@
+import { DataTypes } from 'sequelize';
+import sequelize from '../lib/db.js';
+import School from './School.js';
+
+/*
 import mongoose from 'mongoose';
-
-// --- Sub-Schemas for Course Structure ---
-
-const TitleHighlightSchema = new mongoose.Schema({
-  main: String,
-  highlight: String,
-  skyHighlight: String
-}, { _id: false });
-
-const CTASchema = new mongoose.Schema({
-  label: String,
-  link: String,
-  primary: Boolean
-}, { _id: false });
-
-const ValueLabelSchema = new mongoose.Schema({
-  value: String,
-  label: String
-}, { _id: false });
-
-const HeroSchema = new mongoose.Schema({
-  bgImage: String,
-  badge: String,
-  title: TitleHighlightSchema,
-  description: String,
-  cta: [CTASchema],
-  quickStats: [ValueLabelSchema]
-}, { _id: false });
-
-const AccomplishmentsSchema = new mongoose.Schema({
-  heading: String,
-  trustBadge: String,
-  stats: [new mongoose.Schema({
-    icon: String,
-    value: String,
-    label: String,
-    suffix: String
-  }, { _id: false })]
-}, { _id: false });
-
-const OverviewSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  paragraphs: [String],
-  tags: [String],
-  gridCards: [new mongoose.Schema({
-    icon: String,
-    label: String,
-    sub: String,
-    color: String
-  }, { _id: false })]
-}, { _id: false });
-
-const ScopeSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  bgImage: String,
-  body: String
-}, { _id: false });
-
-const CurriculumSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  introNote: String,
-  outroNote: String,
-  courseStructure: [new mongoose.Schema({
-    category: String,
-    shortName: String,
-    description: String,
-    credits: Number
-  }, { _id: false })],
-  valueAddedCourses: [new mongoose.Schema({
-    name: String,
-    credits: Number,
-    category: String,
-    description: String
-  }, { _id: false })],
-  accordionSections: [new mongoose.Schema({
-    id: String,
-    title: String,
-    content: mongoose.Schema.Types.Mixed, // High priority for curriculum content
-    hasTable: Boolean
-  }, { _id: false })]
-}, { _id: false });
-
-const DeptSlideSchema = new mongoose.Schema({
-  title: String,
-  icon: String,
-  items: [String],
-  cta: String
-}, { _id: false });
-
-const AdmissionFeeSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  bgImage: String,
-  youtubeVideoId: String,
-  admissionCriteria: [new mongoose.Schema({
-    color: String,
-    text: String,
-    link: String
-  }, { _id: false })],
-  feeDetails: [new mongoose.Schema({
-    label: String,
-    amount: String
-  }, { _id: false })]
-}, { _id: false });
-
-const ScholarshipsSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  bgImage: String,
-  dateHeaders: [String],
-  rows: [new mongoose.Schema({
-    range: String,
-    values: [String]
-  }, { _id: false })],
-  earlyBird: {
-    label: String,
-    values: [String]
-  },
-  notes: [new mongoose.Schema({
-    icon: String,
-    text: String
-  }, { _id: false })]
-}, { _id: false });
-
-const WhyJoinSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  reasons: [new mongoose.Schema({
-    icon: String,
-    title: String,
-    desc: String
-  }, { _id: false })]
-}, { _id: false });
-
-const UniqueFeatureSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  bgImage: String,
-  features: [new mongoose.Schema({
-    num: String,
-    icon: String,
-    title: String,
-    desc: String
-  }, { _id: false })]
-}, { _id: false });
-
-const ApplyStepsSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  bgImage: String,
-  guideLabel: String,
-  ctaLabel: String,
-  ctaLink: String,
-  steps: [new mongoose.Schema({
-    icon: String,
-    step: String,
-    label: String,
-    desc: String
-  }, { _id: false })]
-}, { _id: false });
-
-const FAQSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  items: [new mongoose.Schema({
-    q: String,
-    a: String
-  }, { _id: false })]
-}, { _id: false });
-
-const ExploreDepartmentSchema = new mongoose.Schema({
-  sectionTitle: TitleHighlightSchema,
-  subtitle: String,
-  items: [new mongoose.Schema({
-    icon: String,
-    title: String,
-    description: String,
-    link: String,
-    slug: String
-  }, { _id: false })]
-}, { _id: false });
-// --- New Roadmap Schema ---
-const RoadmapYearSchema = new mongoose.Schema({
-  id: { type: Number },
-  tabLabel: String,
-  tabTitle: String,
-  contentTitle: String,
-  contentDesc: String,
-  badge: String,
-  skills: [String],
-  aiTools: [new mongoose.Schema({
-    name: String,
-    desc: String,
-    icon: String, // e.g. "fa-robot"
-    color: String,
-    size: { type: String, default: "26px" }
-  }, { _id: false })],
-  concepts: [new mongoose.Schema({
-    title: String,
-    desc: String,
-    icon: String // e.g. "🖥️"
-  }, { _id: false })],
-  projects: [new mongoose.Schema({
-    name: String,
-    desc: String,
-    companies: String,
-    color: String
-  }, { _id: false })],
-  subjects: [String]
-}, { _id: false });
-const RoadmapConfigSchema = new mongoose.Schema({
-  sectionTitle: { type: String, default: "Career Point University 4 Year Learning Roadmap" },
-  labels: {
-    whatYouWillLearn: { type: String, default: "What you'll learn" },
-    aiTools: { type: String, default: "AI Tools & Technologies" },
-    inClassroom: { type: String, default: "In Classroom Concepts" },
-    projects: { type: String, default: "Projects You'll Work On" },
-    viewAllSubjects: { type: String, default: "View All Subjects" }
-  }
-}, { _id: false });
-
-// --- Main Course Schema ---
 
 const CourseSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -236,7 +16,6 @@ const CourseSchema = new mongoose.Schema({
   metaTitle: String,
   metaDescription: String,
   
-  // Structured Data
   title: String,
   duration: String,
   eligibility: String,
@@ -258,18 +37,99 @@ const CourseSchema = new mongoose.Schema({
   uniqueFeatures: UniqueFeatureSchema,
   applySteps: ApplyStepsSchema,
   faq: FAQSchema,
-  exploreDepartment: {
-    sectionTitle: TitleHighlightSchema,
-    subtitle: String,
-    slides: [DeptSlideSchema]
-  }
+  exploreDepartment: ExploreDepartmentSchema
 }, { timestamps: true });
 
-// Force re-compile to pick up schema changes in development
-if (mongoose.models.Course) {
-  delete mongoose.models.Course;
-}
-
 const Course = mongoose.model('Course', CourseSchema);
+export default Course;
+*/
+
+const Course = sequelize.define('Course', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  schoolId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    references: {
+      model: 'Schools',
+      key: 'id',
+    },
+  },
+  metaTitle: {
+    type: DataTypes.STRING,
+  },
+  metaDescription: {
+    type: DataTypes.TEXT,
+  },
+  title: {
+    type: DataTypes.STRING,
+  },
+  duration: {
+    type: DataTypes.STRING,
+  },
+  eligibility: {
+    type: DataTypes.STRING,
+  },
+  description: {
+    type: DataTypes.TEXT,
+  },
+  hero: {
+    type: DataTypes.JSON,
+  },
+  accomplishments: {
+    type: DataTypes.JSON,
+  },
+  overview: {
+    type: DataTypes.JSON,
+  },
+  scope: {
+    type: DataTypes.JSON,
+  },
+  curriculum: {
+    type: DataTypes.JSON,
+  },
+  roadmap: {
+    type: DataTypes.JSON,
+  },
+  admissionFee: {
+    type: DataTypes.JSON,
+  },
+  scholarships: {
+    type: DataTypes.JSON,
+  },
+  whyJoin: {
+    type: DataTypes.JSON,
+  },
+  uniqueFeatures: {
+    type: DataTypes.JSON,
+  },
+  applySteps: {
+    type: DataTypes.JSON,
+  },
+  faq: {
+    type: DataTypes.JSON,
+  },
+  exploreDepartment: {
+    type: DataTypes.JSON,
+  },
+}, {
+  timestamps: true,
+});
+
+// Relationships
+School.hasMany(Course, { foreignKey: 'schoolId', as: 'courses' });
+Course.belongsTo(School, { foreignKey: 'schoolId', as: 'school' });
 
 export default Course;

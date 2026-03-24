@@ -1,8 +1,34 @@
+import { DataTypes } from 'sequelize';
+import sequelize from '../lib/db.js';
+
+/*
 import mongoose from 'mongoose';
 
 const ProgrammeCategorySchema = new mongoose.Schema({
-  label: { type: String, required: true, unique: true }, // e.g., "Under Graduate"
-  order: { type: Number, default: 0 } // Taaki tum decide kar sako pehle kaunsa type dikhega
+  label: { type: String, required: true, unique: true },
+  order: { type: Number, default: 0 }
 }, { timestamps: true });
 
 export default mongoose.models.ProgrammeCategory || mongoose.model('ProgrammeCategory', ProgrammeCategorySchema);
+*/
+
+const ProgrammeCategory = sequelize.define('ProgrammeCategory', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  label: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  order: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+}, {
+  timestamps: true,
+});
+
+export default ProgrammeCategory;

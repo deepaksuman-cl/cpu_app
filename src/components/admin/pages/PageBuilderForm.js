@@ -88,7 +88,7 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
     const payload = { title, slug, meta, hero, blocks };
     
     const res = mode === 'edit' 
-      ? await updatePage(initialData._id, payload)
+      ? await updatePage(initialData.id, payload)
       : await createPage(payload);
 
     if (res.success) {

@@ -128,7 +128,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     setCourseForm({
       title: course.title,
       school: course.school,
-      categoryId: course.categoryId?._id || course.categoryId,
+      categoryId: course.categoryId?.id || course.categoryId,
       icon: course.icon,
       colorHex: course.colorHex,
       iconBg: course.iconBg,
@@ -140,7 +140,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
       badgeBgHex: course.badge?.bgHex || '#fee2e2',
       badgeTextHex: course.badge?.textHex || '#dc2626'
     });
-    setEditingCourseId(course._id);
+    setEditingCourseId(course.id);
     setCourseModalOpen(true);
   };
 
@@ -231,7 +231,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const handleSaveSettings = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await updateProgrammeSettings(settingsForm._id, settingsForm);
+    await updateProgrammeSettings(settingsForm.id, settingsForm);
     setLoading(false);
     showToast('Global Page Settings successfully updated!');
     router.refresh();
@@ -243,7 +243,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
 
   const filteredCourses = courseFilter === 'all' 
     ? initialCourses 
-    : initialCourses.filter(c => (c.categoryId?._id || c.categoryId) === courseFilter);
+    : initialCourses.filter(c => (c.categoryId?.id || c.categoryId) === courseFilter);
 
   return (
     <>
@@ -389,17 +389,16 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
           </button>
         </div>
         <div className="flex flex-wrap gap-3">
-          {initialCategories.length === 0 && <span className="text-xs text-[var(--text-muted)] font-bold tracking-widest uppercase">No categories found.</span>}
           {initialCategories.map(cat => {
             const definedSlug = cat.slug || generateSlug(cat.label);
             return (
-            <div key={cat._id} className="bg-[var(--bg-body)] border border-[var(--border-default)] flex items-stretch rounded-none shadow-sm group">
+            <div key={cat.id} className="bg-[var(--bg-body)] border border-[var(--border-default)] flex items-stretch rounded-none shadow-sm group">
               <div className="px-3 py-2 flex flex-col justify-center">
                 <span className="font-bold text-[13px] text-[var(--text-primary)] uppercase tracking-wide leading-tight">{cat.label}</span>
                 {/* Dynamically displaying slug for referencing in Mega Menu */}
                 <span className="text-[10px] text-[var(--text-secondary)] font-mono mt-0.5" title="Use this in desktop menu slug">type={definedSlug}</span>
               </div>
-              <button title="Delete Category" onClick={() => handleDeleteCategory(cat._id)} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] bg-[var(--bg-muted)] hover:bg-[var(--color-danger-light)] px-3 border-l border-[var(--border-default)] transition-colors">
+              <button title="Delete Category" onClick={() => handleDeleteCategory(cat.id)} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] bg-[var(--bg-muted)] hover:bg-[var(--color-danger-light)] px-3 border-l border-[var(--border-default)] transition-colors">
                 <Trash2 size={14} />
               </button>
             </div>
@@ -421,14 +420,14 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
         <div className="flex flex-wrap gap-4">
           {initialLinks.length === 0 && <span className="text-xs text-[var(--text-muted)] font-bold tracking-widest uppercase">No quick links configured.</span>}
           {initialLinks.map(link => (
-            <div key={link._id} className="bg-[var(--bg-body)] border border-[var(--border-default)] p-3 flex flex-col gap-2 min-w-[200px] hover:shadow-md transition-shadow rounded-none">
+            <div key={link.id} className="bg-[var(--bg-body)] border border-[var(--border-default)] p-3 flex flex-col gap-2 min-w-[200px] hover:shadow-md transition-shadow rounded-none">
               <div className="flex justify-between items-start">
                 <span className="font-bold text-xs uppercase tracking-wide text-[var(--text-primary)]">{link.label}</span>
                 <div className="flex gap-1">
                   <button onClick={() => openEditLink(link)} className="text-[var(--text-muted)] hover:text-[var(--color-primary)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-1.5 rounded-none transition-colors">
                     <Edit size={12} />
                   </button>
-                  <button onClick={() => handleDeleteLink(link._id)} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-1.5 rounded-none transition-colors">
+                  <button onClick={() => handleDeleteLink(link.id)} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-1.5 rounded-none transition-colors">
                     <Trash2 size={12} />
                   </button>
                 </div>
@@ -457,7 +456,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
               >
                 <option value="all">All Categories</option>
                 {initialCategories.map(cat => (
-                  <option key={cat._id} value={cat._id}>{cat.label}</option>
+                  <option key={cat.id} value={cat.id}>{cat.label}</option>
                 ))}
               </select>
             </div>
@@ -498,7 +497,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
                   </tr>
                 ) : (
                   filteredCourses.map(course => (
-                    <tr key={course._id} className="block md:table-row hover:bg-[var(--bg-muted)] transition-colors group p-4 md:p-0">
+                    <tr key={course.id} className="block md:table-row hover:bg-[var(--bg-muted)] transition-colors group p-4 md:p-0">
                       <td className="block md:table-cell py-1 md:py-3 px-0 md:px-4 border-none md:border-r border-[var(--border-light)] mb-2 md:mb-0">
                         <span className="md:hidden text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest block mb-0.5">Course / School</span>
                         <div className="font-bold text-[14px] md:text-[13px] flex flex-wrap items-center gap-2">
@@ -519,7 +518,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
                             <Edit size={15} className="md:w-3.5 md:h-3.5" />
                             <span className="md:hidden text-[10px] font-bold uppercase ml-2 tracking-widest">Edit</span>
                           </button>
-                          <button onClick={() => handleDeleteCourse(course._id)} className="bg-[var(--bg-body)] text-[var(--text-secondary)] hover:bg-[var(--color-danger)] hover:text-[var(--text-inverse)] p-2 md:p-1.5 border border-[var(--border-default)] transition-colors rounded-none flex items-center justify-center " title="Delete">
+                          <button onClick={() => handleDeleteCourse(course.id)} className="bg-[var(--bg-body)] text-[var(--text-secondary)] hover:bg-[var(--color-danger)] hover:text-[var(--text-inverse)] p-2 md:p-1.5 border border-[var(--border-default)] transition-colors rounded-none flex items-center justify-center " title="Delete">
                             <Trash2 size={15} className="md:w-3.5 md:h-3.5" />
                             <span className="md:hidden text-[10px] font-bold uppercase ml-2 tracking-widest">Delete</span>
                           </button>
@@ -586,7 +585,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
               <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase mb-1.5 tracking-widest">Category Type *</label>
               <select required value={courseForm.categoryId} onChange={e => setCourseForm({...courseForm, categoryId: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-sm outline-none focus:border-[var(--color-primary)] bg-[var(--bg-body)] rounded-none">
                 <option value="" disabled>Select Category</option>
-                {initialCategories.map(cat => <option key={cat._id} value={cat._id}>{cat.label}</option>)}
+                {initialCategories.map(cat => <option key={cat.id} value={cat.id}>{cat.label}</option>)}
               </select>
             </div>
             <div>

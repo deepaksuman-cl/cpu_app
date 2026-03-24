@@ -3,8 +3,9 @@
 const nextConfig = {
   experimental: {
     serverActions: {
-      bodySizeLimit: '10mb', // 🔴 Ye line add karni hai
+      bodySizeLimit: '10mb',
     },
+    serverExternalPackages: ['sequelize', 'mariadb'],
   },
 };
 export default nextConfig;

@@ -1,17 +1,16 @@
+import { DataTypes } from 'sequelize';
+import sequelize from '../lib/db.js';
+
+/*
 import mongoose from 'mongoose';
 
 const ProgrammeSettingsSchema = new mongoose.Schema({
-  // Global Metadata
   metaTitle: { type: String, default: "Programmes | Career Point University" },
   metaDescription: { type: String, default: "Explore our world-class Diploma, UG, PG, and Doctoral programmes." },
-
-  // Breadcrumbs Array
   breadcrumbs: [{
     label: { type: String },
     link: { type: String }
   }],
-
-  // Sidebar CTA Box
   sidebarCta: {
     icon: { type: String, default: "GraduationCap" },
     title: { type: String, default: "Need Guidance?" },
@@ -19,8 +18,6 @@ const ProgrammeSettingsSchema = new mongoose.Schema({
     buttonText: { type: String, default: "Book Free Counselling" },
     buttonLink: { type: String, default: "/contact" }
   },
-
-  // Main Bottom CTA Banner
   mainCta: {
     icon: { type: String, default: "TrendingUp" },
     badgeText: { type: String, default: "Admissions 2025–26 Open" },
@@ -34,3 +31,33 @@ const ProgrammeSettingsSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.models.ProgrammeSettings || mongoose.model('ProgrammeSettings', ProgrammeSettingsSchema);
+*/
+
+const ProgrammeSettings = sequelize.define('ProgrammeSettings', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  metaTitle: {
+    type: DataTypes.STRING,
+    defaultValue: "Programmes | Career Point University",
+  },
+  metaDescription: {
+    type: DataTypes.TEXT,
+    defaultValue: "Explore our world-class Diploma, UG, PG, and Doctoral programmes.",
+  },
+  breadcrumbs: {
+    type: DataTypes.JSON,
+  },
+  sidebarCta: {
+    type: DataTypes.JSON,
+  },
+  mainCta: {
+    type: DataTypes.JSON,
+  },
+}, {
+  timestamps: true,
+});
+
+export default ProgrammeSettings;
