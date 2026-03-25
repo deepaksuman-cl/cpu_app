@@ -30,11 +30,12 @@ const Footer = mongoose.model('Footer', FooterSchema);
 export default Footer;
 */
 
-const Footer = sequelize.define('Footer', {
+const Footer = sequelize.define('footers', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+     autoIncrement: true
+
   },
   logo: {
     type: DataTypes.STRING,

@@ -1,14 +1,19 @@
-import * as mariadb from 'mariadb';
-import { Sequelize } from 'sequelize';
+import * as mariadb from "mariadb";
+import { Sequelize } from "sequelize";
 
 const globalForSequelize = globalThis;
 
 const sequelize =
   globalForSequelize._sequelizeInstance ||
-  new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'mariadb',
+  new Sequelize({
+    username: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_NAME || "cpur",
+    host: process.env.DB_HOST || "localhost",
+    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 3306,
+    dialect: "mariadb",
     dialectModule: mariadb,
-    logging: process.env.NODE_ENV === 'development' ? console.log : false,
+    logging: process.env.NODE_ENV === "development" ? console.log : false,
     dialectOptions: {
       connectTimeout: 40000,
       allowPublicKeyRetrieval: true,
@@ -21,7 +26,7 @@ const sequelize =
     },
   });
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   globalForSequelize._sequelizeInstance = sequelize;
 }
 
@@ -58,3 +63,4 @@ export const connectToDatabase = async () => {
 
 
 export default sequelize;
+

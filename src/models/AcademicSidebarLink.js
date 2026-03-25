@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../lib/db.js';
+import { DataTypes } from "sequelize";
+import sequelize from "../lib/db.js";
 
 /*
 import mongoose from 'mongoose';
@@ -15,34 +15,38 @@ const AcademicSidebarLinkSchema = new mongoose.Schema({
 export default mongoose.models.AcademicSidebarLink || mongoose.model('AcademicSidebarLink', AcademicSidebarLinkSchema);
 */
 
-const AcademicSidebarLink = sequelize.define('AcademicSidebarLink', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
+const AcademicSidebarLink = sequelize.define(
+  "academicsidebarlinks",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    label: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    icon: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    slug: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    colorClass: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    order: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
   },
-  label: {
-    type: DataTypes.STRING,
-    allowNull: false,
+  {
+    timestamps: true,
   },
-  icon: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  slug: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  colorClass: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  order: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-  },
-}, {
-  timestamps: true,
-});
+);
 
 export default AcademicSidebarLink;

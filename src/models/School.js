@@ -58,11 +58,12 @@ const School = mongoose.model('School', SchoolSchema);
 export default School;
 */
 
-const School = sequelize.define('School', {
+const School = sequelize.define('schools', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
+     autoIncrement: true
   },
   name: {
     type: DataTypes.STRING,

@@ -26,11 +26,11 @@ const ProgrammeCourseSchema = new mongoose.Schema({
 export default mongoose.models.ProgrammeCourse || mongoose.model('ProgrammeCourse', ProgrammeCourseSchema);
 */
 
-const ProgrammeCourse = sequelize.define('ProgrammeCourse', {
+const ProgrammeCourse = sequelize.define('programmecourses', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+     autoIncrement: true
   },
   title: {
     type: DataTypes.STRING,

@@ -1,11 +1,12 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../lib/db.js';
 
-const Media = sequelize.define('Media', {
+const Media = sequelize.define('medias', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+     autoIncrement: true
+
   },
   displayName: {
     type: DataTypes.STRING,
