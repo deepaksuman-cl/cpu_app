@@ -36,7 +36,6 @@ const Page = sequelize.define('Page', {
   slug: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
   },
   meta: {
     type: DataTypes.JSON,
@@ -49,8 +48,16 @@ const Page = sequelize.define('Page', {
     allowNull: false,
     defaultValue: [],
   },
+  pageCssId: { type: DataTypes.STRING, allowNull: true },
+  pageCssClass: { type: DataTypes.STRING, allowNull: true },
 }, {
   timestamps: true,
+  indexes: [
+    {
+      unique: true,
+      fields: ['slug'],
+    },
+  ],
 });
 
 export default Page;

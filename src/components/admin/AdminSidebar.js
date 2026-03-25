@@ -3,7 +3,7 @@
 import {
   Building,
   ChevronDown,
-  Database, FileText, ImageIcon,
+  Database, FileText, Home, ImageIcon,
   Key,
   LayoutDashboard,
   PanelBottom,
@@ -42,6 +42,7 @@ const SIDEBAR_MENUS = [
         ]
       },
       { name: 'Footer Settings', href: '/admin/footer-manager', icon: PanelBottom },
+      { name: 'Home Page Setup', href: '/admin/home-setup', icon: Home },
       { name: 'Page Builder', href: '/admin/pages', icon: FileText },
       { name: 'Media Library', href: '/admin/media', icon: ImageIcon },
     ]

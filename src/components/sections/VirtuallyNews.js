@@ -9,73 +9,6 @@ import {
 } from "lucide-react";
 
 // ╔══════════════════════════════════════════════════════════╗
-// ║                     JSON DATA                            ║
-// ╚══════════════════════════════════════════════════════════╝
-const DATA = {
-  video: {
-    label: "Virtual Campus Tour",
-    title: "Career Point",
-    subtitle: "University Kota",
-  },
-  news: {
-    label: "Stay Updated",
-    title: "Latest",
-    titleAccent: "News",
-    items: [
-      {
-        id: 1,
-        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=700&q=80",
-        title: "Technovation 2026 at CPU",
-        description: "Career Point University, Kota recently hosted Technovation 2026, a prestigious event that showcased ",
-        link: "#",
-  
-      },
-      {
-        id: 2,
-        image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=700&q=80",
-        title: "Notice for 7th Convocation Ceremony at Career Point University Kota",
-        description: "Career Point University, Kota recently hosted Technovation 2026, a prestigious event that showcased ",
-        link: "#",
-
-      },
-      {
-        id: 3,
-        image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=700&q=80",
-        title: "Register for ICWA National Essay Writing Competition 2026",
-        description: "Career Point University, Kota recently hosted Technovation 2026, a prestigious event that showcased ",
-        link: "#",
-   
-      },
-      {
-        id: 4,
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=700&q=80",
-        title: "CPU Kota Students Win National Level Robotics Championship 2026",
-      description: "Career Point University, Kota recently hosted Technovation 2026, a prestigious event that showcased ",
-        link: "#",
-      },
-      {
-        id: 5,
-        image: "https://images.unsplash.com/photo-1562774053-701939374585?w=700&q=80",
-        title: "New Scholarship Programme Announced for Meritorious Students 2026",
-    description: "Career Point University, Kota recently hosted Technovation 2026, a prestigious event that showcased ",
-        link: "#",
-
-      },
-      {
-        id: 6,
-        image: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=700&q=80",
- 
-        title: "Annual Sports Meet 2026 Concludes with Record Student Participation",
-    description: "Career Point University, Kota recently hosted Technovation 2026, a prestigious event that showcased ",
-        link: "#",
-   
-      },
-    ],
-  },
-};
-
-
-// ╔══════════════════════════════════════════════════════════╗
 // ║               SLIDER CONSTANTS                           ║
 // ╚══════════════════════════════════════════════════════════╝
 const CARD_H   = 108;
@@ -88,9 +21,10 @@ const INTERVAL = 2600;
 // ╔══════════════════════════════════════════════════════════╗
 // ║                   MAIN COMPONENT                         ║
 // ╚══════════════════════════════════════════════════════════╝
-export default function NewsVideoSection() {
-  const { video, news } = DATA;
-  const items     = news.items;
+export default function NewsVideoSection({ data }) {
+  if (!data) return null;
+  const { video = {}, news = {} } = data;
+  const items = news.items || [];
   const loopItems = [...items, ...items, ...items];
 
   const [offset,  setOffset]  = useState(0);
@@ -178,7 +112,7 @@ export default function NewsVideoSection() {
 
               <div className="aspect-video bg-black">
                 <iframe 
-            src="https://www.google.com/maps/embed?pb=!4v1772717049780!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQ3NrcnFUWEE.!2m2!1d25.01089210285466!2d75.91354173593469!3f71.5101163864775!4f27.311898217757573!5f0.7820865974627469" 
+                  src={video.embedUrl} 
     
                allowFullScreen
                   className="h-full w-full border-0"

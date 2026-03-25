@@ -1,8 +1,8 @@
+import { connectToDatabase } from '@/lib/db';
 import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "../../components/layout/Footer";
 import HeaderServer from '../../components/layout/HeaderServer';
 import "../globals.css";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,7 +44,8 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  await connectToDatabase();
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>

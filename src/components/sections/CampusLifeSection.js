@@ -1,27 +1,21 @@
 "use client";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import HOME_DATA from "../../data/home.json";
 
-export default function CampusLifeSection() {
+export default function CampusLifeSection({ data }) {
+  if (!data) return null;
+  const { tagline, title, stats = [], cols: columns = [] } = data;
+
   return (
     <section id="campus" className="bg-blue-50 py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto mb-9 px-4">
         <div className="text-center mb-2.5">
           <p className="text-[#00588b] font-bold text-xs uppercase tracking-[.18em]">
-            Engage, Connect and Experience
+            {tagline}
           </p>
         </div>
-        <h2 className="text-center font-black text-3xl text-gray-900 mt-1.5">
-          the vibrant <span className="bg-blue-100 rounded-lg px-3.5 py-0.5">Life at CPU</span>
-        </h2>
+        <h2 className="text-center font-black text-3xl text-gray-900 mt-1.5" dangerouslySetInnerHTML={{ __html: title }} />
         <div className="flex justify-center gap-12 flex-wrap mt-7">
-          {[
-            { v: "150+", l: "Acres Green Campus" },
-            { v: "300+", l: "Labs" },
-            { v: "250+", l: "Smart Classrooms" },
-            { v: "30+", l: "Annual Events" },
-            { v: "25+", l: "Student Clubs" },
-          ].map(({ v, l }, i) => (
+          {stats.map(({ v, l }, i) => (
             <div key={i} className="text-center">
               <div className="font-black text-4xl text-[#00588b] leading-none">{v}</div>
               <div className="text-xs text-gray-500 mt-1.5 max-w-[90px] leading-snug">
@@ -32,7 +26,7 @@ export default function CampusLifeSection() {
         </div>
       </div>
       <div className="[@media(max-width:476px)]:block grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
-        {HOME_DATA.campusCols.map((col, i) => (
+        {columns.map((col, i) => (
           <div
             key={i}
             className="campus-col relative overflow-hidden cursor-pointer flex-1 group"

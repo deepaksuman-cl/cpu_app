@@ -4,6 +4,7 @@
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminTopbar from '@/components/admin/AdminTopbar';
 import ScrollToTop from '@/components/admin/ui/ScrollToTop';
+import { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 
 import '@/app/globals.css';
@@ -72,6 +73,7 @@ export default function AdminLayout({ children }) {
 
           {/* Global Scroll To Top */}
           <ScrollToTop />
+          <Toaster position="bottom-right" />
         </div>
       </body>
     </html>

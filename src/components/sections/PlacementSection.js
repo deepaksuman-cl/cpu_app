@@ -1,9 +1,19 @@
 "use client";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Swiper from "../ui/Swiper";
-import HOME_DATA from "../../data/home.json";
+import Icon from "../ui/Icon";
 
-export default function PlacementSection() {
+export default function PlacementSection({ data }) {
+  if (!data) return null;
+  const { 
+    stats = [], 
+    slides = [], 
+    recruiters = [], 
+    tagline = "Empower Your Future through Exceptional",
+    title = "Placement",
+    titleHighlight = "Opportunities at CPU"
+  } = data;
+
   return (
     <section
       id="placement"
@@ -15,19 +25,19 @@ export default function PlacementSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="mb-12">
           <h2 className="font-bold text-3xl text-white/85 m-0 mb-1 leading-snug">
-            Empower Your Future through Exceptional
+            {tagline}
           </h2>
           <div className="flex items-center gap-3.5 flex-wrap">
             <span className="bg-white/15 backdrop-blur border border-white/20 rounded-xl px-4 py-1 font-black text-4xl text-amber-400">
-              Placement
+              {title}
             </span>
-            <span className="font-bold text-4xl text-white">Opportunities at CPU</span>
+            <span className="font-bold text-4xl text-white">{titleHighlight}</span>
             <ArrowRight size={28} className="text-amber-400" />
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           <div className="grid grid-cols-3 gap-0.5 rounded-2xl h-[100%] overflow-hidden shadow-2xl">
-            {HOME_DATA.placementStats.map(({ val, label }, i) => (
+            {stats.map(({ val, label }, i) => (
               <div
                 key={i}
                 className={`px-4 py-8 flex justify-center items-center text-center ${
@@ -44,7 +54,7 @@ export default function PlacementSection() {
             ))}
           </div>
           <Swiper
-            items={HOME_DATA.placementSlides}
+            items={slides}
             perView={2}
             gap={20}
             autoInterval={4000}
@@ -73,6 +83,23 @@ export default function PlacementSection() {
             )}
           />
         </div>
+
+        {/* --- Recruiter Logos --- */}
+        {recruiters.length > 0 && (
+          <div className="mt-20 pt-10 border-t border-white/10">
+            <p className="text-white/50 text-[10px] font-bold uppercase tracking-[0.3em] text-center mb-8">Trusted by Global Industry Leaders</p>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
+              {recruiters.map((logo, idx) => (
+                <img 
+                  key={idx} 
+                  src={logo.img} 
+                  alt="Recruiter" 
+                  className="h-7 md:h-9 w-auto object-contain brightness-0 invert" 
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

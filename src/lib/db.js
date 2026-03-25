@@ -1,35 +1,49 @@
-import { Sequelize } from 'sequelize';
 import * as mariadb from 'mariadb';
+import { Sequelize } from 'sequelize';
 
-// ─── SEQUELIZE INSTANCE ───
-// We use 127.0.0.1 to avoid local DNS issues often found with 'localhost' in Node.js
-const sequelize = new Sequelize('cpu_database', 'root', '', {
-  host: '127.0.0.1',
-  dialect: 'mariadb',
-  dialectModule: mariadb, // Force the use of the 'mariadb' package
-  logging: false, // Set to console.log to see SQL queries during development
-  dialectOptions: {
-    connectTimeout: 60000,
-  },
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
-  },
-});
+const globalForSequelize = globalThis;
+
+const sequelize =
+  globalForSequelize._sequelizeInstance ||
+  new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'mariadb',
+    dialectModule: mariadb,
+    logging: process.env.NODE_ENV === 'development' ? console.log : false,
+    dialectOptions: {
+      connectTimeout: 40000,
+    },
+    pool: {
+      max: 15,
+      min: 0,
+      acquire: 60000,
+      idle: 10000,
+    },
+  });
+
+if (process.env.NODE_ENV !== 'production') {
+  globalForSequelize._sequelizeInstance = sequelize;
+}
+
+// 🔥 Important: cache connection
+let isConnected = false;
 
 export const connectToDatabase = async () => {
   try {
+    if (isConnected) return;
+
     await sequelize.authenticate();
-    console.log('✅ MariaDB connected via Sequelize');
-    
-    // Sync models (This will create tables if they don't exist)
-    // We use alter: true to update tables without dropping data if possible
-    await sequelize.sync({ alter: true });
-    console.log('✅ Models synchronized');
+    console.log('✅ DB connected');
+
+    await import('../models/Media.js');
+    await import('../models/HomePage.js');
+
+    if (process.env.NODE_ENV === 'development') {
+      await sequelize.sync({ alter: true });
+    }
+
+    isConnected = true;
   } catch (error) {
-    console.error('❌ Database connection failed:', error.message);
+    console.error('❌ DB error:', error.message);
   }
 };
 

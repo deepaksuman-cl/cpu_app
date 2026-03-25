@@ -8,7 +8,7 @@ export default function BlockRenderer({ block }) {
   // 1. Full Width Rich Text Container
   if (blockType === 'RichTextFull') {
     return (
-      <div className="w-full py-12 px-6">
+      <div id={block.cssId || undefined} className={`w-full py-12 px-6 ${block.cssClass || ''}`}>
         <div className="max-w-[100%] mx-auto">
           <div 
             className="university-prose prose-max-w-none"
@@ -34,7 +34,7 @@ export default function BlockRenderer({ block }) {
     }
 
     return (
-      <div className="w-full py-16 px-6 bg-white">
+      <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-white ${block.cssClass || ''}`}>
         <div className={`max-w-7xl mx-auto flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-16 items-center`}>
           <div className={`w-full ${textCol}`}>
              <div 
@@ -63,7 +63,7 @@ export default function BlockRenderer({ block }) {
   // 3. Accordion / FAQ Layout
   if (blockType === 'Accordion') {
     return (
-      <div className="w-full py-16 px-6 bg-gray-50 border-y border-gray-200">
+      <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-gray-50 border-y border-gray-200 ${block.cssClass || ''}`}>
         <div className="max-w-[56rem] mx-auto">
           <AccordionClient items={block.accordionItems} />
         </div>
@@ -74,7 +74,7 @@ export default function BlockRenderer({ block }) {
   // 4. Profiles Directory Grid
   if (blockType === 'ProfileGrid') {
     return (
-      <div className="w-full py-16 px-6 bg-white">
+      <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-white ${block.cssClass || ''}`}>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {block.profileItems.map((profile, idx) => (
@@ -109,7 +109,7 @@ export default function BlockRenderer({ block }) {
   // 5. Statistics / Emphasized Info Grid
   if (blockType === 'StatsGrid') {
     return (
-      <div className="w-full py-16 px-6 bg-[#00588b] text-white">
+      <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-[#00588b] text-white ${block.cssClass || ''}`}>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-[#004570]">
             {block.statsItems.map((stat, idx) => {
@@ -140,7 +140,7 @@ export default function BlockRenderer({ block }) {
     const alignClass = align === 'left' ? 'mr-auto' : (align === 'right' ? 'ml-auto' : 'mx-auto');
     
     return (
-      <div className="w-full py-12 px-6 bg-white overflow-hidden">
+      <div id={block.cssId || undefined} className={`w-full py-12 px-6 bg-white overflow-hidden ${block.cssClass || ''}`}>
         <div className="w-full">
           <img 
             src={path} 
@@ -155,14 +155,14 @@ export default function BlockRenderer({ block }) {
   }
   // 7. Interactive Gallery Block
   if (blockType === 'GalleryBlock') {
-    return <GalleryClient items={block.galleryItems} heading={block.galleryHeading} />;
+    return <GalleryClient items={block.galleryItems} heading={block.galleryHeading} id={block.cssId} className={block.cssClass} />;
   }
 
   // 8. Hero with Stats
   if (blockType === 'HeroWithStats' && block.heroStats) {
     const { badgeText, titleMain, titleHighlight, subtitle, stats } = block.heroStats;
     return (
-      <div className="w-full">
+      <div id={block.cssId || undefined} className={`w-full ${block.cssClass || ''}`}>
         <section className="relative bg-[#00588b] overflow-hidden py-20 px-6">
           <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-[#ffb900]/10" />
           <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-white/5" />
@@ -212,7 +212,7 @@ export default function BlockRenderer({ block }) {
   if (blockType === 'LeaderProfile' && block.leaderProfile) {
     const { image, name, role, organization, qualifications, greeting, welcomeHeadline, messageHTML, visionQuote, signatureQuals } = block.leaderProfile;
     return (
-      <section className="max-w-5xl mx-auto px-6 py-12">
+      <section id={block.cssId || undefined} className={`max-w-5xl mx-auto px-6 py-12 ${block.cssClass || ''}`}>
         <div className="bg-white rounded-3xl shadow-xl border border-[#00588b]/10 overflow-hidden">
           <div className="flex flex-col lg:flex-row">
             <div className="relative lg:w-80 shrink-0 bg-gradient-to-b from-[#00588b] to-[#003d63] flex flex-col items-center pt-12 pb-8 px-6">
@@ -282,7 +282,7 @@ export default function BlockRenderer({ block }) {
   if (blockType === 'CTABanner' && block.ctaBanner) {
     const { badgeText, titleMain, titleHighlight, primaryBtnText, primaryBtnUrl, primaryBtnIcon, secondaryBtnText, secondaryBtnUrl, secondaryBtnIcon } = block.ctaBanner;
     return (
-      <section className="max-w-5xl mx-auto px-6 py-12">
+      <section id={block.cssId || undefined} className={`max-w-5xl mx-auto px-6 py-12 ${block.cssClass || ''}`}>
         <div className="relative bg-[#00588b] rounded-3xl px-8 py-10 overflow-hidden text-center">
           <div className="absolute top-0 right-0 w-48 h-48 bg-[#ffb900]/10 rounded-full -translate-y-1/3 translate-x-1/3" />
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/3 -translate-x-1/3" />

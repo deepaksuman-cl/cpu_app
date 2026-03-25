@@ -383,7 +383,7 @@ function ImageCard({ image, colCount, index, onOpen }) {
 /* ═══════════════════════════════════════════════════════════════
    🏠 MAIN GALLERY SECTION 
 ═══════════════════════════════════════════════════════════════ */
-export default function GalleryClient({ items, heading }) {
+export default function GalleryClient({ items, heading, id, className }) {
   const [gridCols, setGridCols] = useState(3);
   const [lightbox, setLightbox] = useState({ open: false, index: 0 });
 
@@ -413,7 +413,7 @@ export default function GalleryClient({ items, heading }) {
   if (!items || items.length === 0) return null;
 
   return (
-    <div className="w-full py-16 px-6 bg-white border-y border-gray-200">
+    <div id={id || undefined} className={`w-full py-16 px-6 bg-white border-y border-gray-200 ${className || ''}`}>
       <div className="max-w-7xl mx-auto">
         
         {/* ── Section Title ───────────────────────────────── */}

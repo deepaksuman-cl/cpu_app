@@ -1,7 +1,6 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Sparkles, Star, BadgeCheck } from "lucide-react";
-import HOME_DATA from "../../data/home.json";
 
 function StarRating({ rating, max = 5 }) {
   return (
@@ -19,8 +18,8 @@ function StarRating({ rating, max = 5 }) {
   );
 }
 
-export default function TestimonialSection() {
-  const testimonials = HOME_DATA.testimonials;
+export default function TestimonialSection({ data }) {
+  const testimonials = data?.testimonials || [];
   const [active, setActive] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const timerRef = useRef(null);
@@ -28,6 +27,7 @@ export default function TestimonialSection() {
 
   const go = useCallback(
     (n) => {
+      if (total === 0) return;
       clearInterval(timerRef.current);
       setActive((n + total) % total);
       setAnimKey((k) => k + 1);
@@ -40,12 +40,15 @@ export default function TestimonialSection() {
   );
 
   useEffect(() => {
+    if (total === 0) return;
     timerRef.current = setInterval(() => {
       setActive((p) => (p + 1) % total);
       setAnimKey((k) => k + 1);
     }, 5000);
     return () => clearInterval(timerRef.current);
   }, [total]);
+
+  if (total === 0) return null;
 
   const t = testimonials[active];
 
@@ -79,14 +82,12 @@ export default function TestimonialSection() {
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-14">
             <span className="inline-flex items-center gap-2 border border-blue-200 bg-white text-[#00588b] text-xs font-bold px-4 py-1.5 rounded-full mb-5 shadow-sm">
-              <Sparkles size={13} className="text-amber-400" /> STUDENT STORIES
+              <Sparkles size={13} className="text-amber-400" /> {data?.tagline || "STUDENT STORIES"}
             </span>
-            <h2 className="font-black text-4xl md:text-5xl text-slate-900 leading-tight m-0">
-              Our Students <span className="text-[#00588b]">Speak</span>
-            </h2>
+            <h2 className="font-black text-4xl md:text-5xl text-slate-900 leading-tight m-0" dangerouslySetInnerHTML={{ __html: data?.title || "Our Students Speak" }} />
             <p className="text-slate-500 text-sm mt-3 flex items-center justify-center gap-1.5">
               <MapPin size={13} className="text-[#00588b]" />
-              Career Point University, Kota, Rajasthan
+              {data?.location || "Career Point University, Kota, Rajasthan"}
             </p>
           </div>
 

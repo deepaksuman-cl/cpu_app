@@ -5,7 +5,8 @@ import { Save, Plus, Trash2, RefreshCw, Globe, Phone, Mail, MapPin, Building2, E
 import MediaUploader from '@/components/admin/MediaUploader';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import RichTextEditor from '@/components/admin/RichTextEditor';
-import { updateFooter, seedFooterFromJson } from '@/lib/actions/footerActions';
+import { updateFooter } from '@/lib/actions/footerActions';
+import { seedDatabase } from '@/lib/actions/seedActions';
 
 // --- Toast Notification ---
 function Toast({ msg, type, onClose }) {
@@ -112,7 +113,7 @@ export default function FooterManagerForm({ initialData }) {
     if (!confirm('This will overwrite current DB settings with footer.json. Continue?')) return;
     setIsSyncing(true);
     try {
-      const result = await seedFooterFromJson();
+      const result = await seedDatabase();
       if (result.success) {
         showToast('Synced from JSON successfully! Reloading...');
         setTimeout(() => window.location.reload(), 1500);

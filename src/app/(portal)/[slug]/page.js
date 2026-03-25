@@ -23,7 +23,10 @@ export default async function DynamicCMSPage(props) {
   }
 
   return (
-    <main className="min-h-screen bg-white font-[Poppins,sans-serif]">
+    <main 
+      id={page.pageCssId || undefined} 
+      className={`min-h-screen bg-white font-[Poppins,sans-serif] ${page.pageCssClass || ''}`}
+    >
       {/* Dynamic Hero Section */}
       {!page.hero?.hideHero && (
         <>

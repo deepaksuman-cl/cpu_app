@@ -1,19 +1,28 @@
 "use client";
 import { ArrowRight } from "lucide-react";
-import HOME_DATA from "../../data/home.json";
 
-export default function ProgramsSection() {
+export default function ProgramsSection({ data }) {
+  const cards = data?.cards || [];
+  if (cards.length === 0) return null;
+
   return (
     <>
       <section id="programs" className="bg-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
+          <p className="text-[#00588b] font-bold text-xs uppercase tracking-[.18em] mb-2">
+            {data?.tagline || "ONE OF THE"}
+          </p>
           <h2 className="font-black text-3xl text-gray-900 mb-8">
-            Explore Our <span className="text-[#00588b]">70+ Programs</span> — Start Your
+            {data?.title || "Explore Our"} <span className="text-[#00588b]">{data?.titleHighlight || "70+ Programs"}</span> — Start Your
             Future-ready Career
           </h2>
           <div className="grid grid-cols-2 [@media(max-width:476px)]:grid-cols-1 md:grid-cols-4 gap-4">
-            {HOME_DATA.programCards.map((card) => (
-              <div key={card.label} className="relative overflow-hidden rounded-xl cursor-pointer group">
+            {cards.map((card) => (
+              <a 
+                key={card.label} 
+                href={card.link || "#"}
+                className="relative overflow-hidden rounded-xl cursor-pointer group no-underline block"
+              >
                 <img
                   src={card.image}
                   alt={card.label}
@@ -26,7 +35,7 @@ export default function ProgramsSection() {
                     <ArrowRight size={14} />
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
           <div className="text-center mt-6">

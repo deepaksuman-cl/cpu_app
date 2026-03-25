@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Users, Globe, GraduationCap, Briefcase, TrendingUp, BookOpen } from "lucide-react";
-import HOME_DATA from "../../data/home.json";
 
 function useCounter(target, dur = 1800, active = false) {
   const [v, setV] = useState(0);
@@ -41,7 +40,8 @@ function StatCard({ value, suffix, label, icon: IconName, inView }) {
   );
 }
 
-export default function StatsSection() {
+export default function StatsSection({ data }) {
+  const stats = data?.stats || [];
   const [statsInView, setStatsInView] = useState(false);
   const statsRef = useRef(null);
 
@@ -56,11 +56,13 @@ export default function StatsSection() {
     return () => obs.disconnect();
   }, []);
 
+  if (stats.length === 0) return null;
+
   return (
     <>
       <section ref={statsRef} className="py-14 px-4 bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {HOME_DATA.stats.map((s, i) => (
+          {stats.map((s, i) => (
             <StatCard
               key={i}
               value={s.value}

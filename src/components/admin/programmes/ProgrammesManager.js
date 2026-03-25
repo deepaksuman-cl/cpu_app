@@ -3,8 +3,9 @@
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import Modal from '@/components/admin/ui/Modal';
-import { createCategory, createCourse, createSidebarLink, deleteCategory, deleteCourse, deleteSidebarLink, seedProgrammesData, updateCourse, updateProgrammeSettings, updateSidebarLink } from '@/lib/actions/programmeActions';
-import { AlertCircle, AlertTriangle, BookMarked, CheckCircle2, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Settings, Trash2, X } from 'lucide-react';
+import { createCategory, createCourse, createSidebarLink, deleteCategory, deleteCourse, deleteSidebarLink, updateCourse, updateProgrammeSettings, updateSidebarLink } from '@/lib/actions/programmeActions';
+import { seedDatabase } from '@/lib/actions/seedActions';
+import { AlertCircle, AlertTriangle, BookMarked, CheckCircle2, ChevronRight, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Settings, Trash2, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -52,6 +53,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const [settingsForm, setSettingsForm] = useState(initialSettings || {});
   const [activeTab, setActiveTab] = useState('courses'); // courses | links | settings
   const [courseFilter, setCourseFilter] = useState('all');
+  const [showFilterMenu, setShowFilterMenu] = useState(false);
 
   // --- Handlers ---
   const handleAddCategory = async (e) => {
@@ -218,15 +220,16 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const handleSeedData = async () => {
     if(!confirm("WARNING! Seeding data will wipe out all existing Catalogue records in the database and replace them exactly with the contents of src/data/programmes.json. Proceed?")) return;
     setLoading(true);
-    const res = await seedProgrammesData();
+    const res = await seedDatabase();
     setLoading(false);
     if(res.success) {
-      showToast('Database seeded successfully!', 'success');
+      showToast(res.message || 'Database seeded successfully!', 'success');
       router.refresh();
     } else {
       showToast("Error seeding data: " + res.error, 'error');
     }
   };
+
 
   const handleSaveSettings = async (e) => {
     e.preventDefault();
@@ -243,7 +246,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
 
   const filteredCourses = courseFilter === 'all' 
     ? initialCourses 
-    : initialCourses.filter(c => (c.categoryId?.id || c.categoryId) === courseFilter);
+    : initialCourses.filter(c => (c.category?.id || c.categoryId) === courseFilter);
 
   return (
     <>
@@ -433,7 +436,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
                 </div>
               </div>
               <div className="text-[10px] text-[var(--text-secondary)] font-mono break-all bg-[var(--bg-surface)] px-1.5 py-0.5 border border-[var(--border-light)] self-start">{link.slug}</div>
-              <div className="text-[9px] font-black text-[var(--color-primary)] bg-[var(--color-primary-light)] px-1.5 py-0.5 inline-block self-start rounded-none tracking-widest uppercase">ICON: {link.icon}</div>
+              <div className="text-[9px] font-black text-white bg-[var(--color-primary)] px-1.5 py-0.5 inline-block self-start rounded-none tracking-widest uppercase">ICON: {link.icon}</div>
             </div>
           ))}
         </div>
@@ -447,18 +450,52 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
             <h2 className="text-[15px] font-black flex items-center gap-2 text-[var(--text-primary)] uppercase tracking-wide">
               <Monitor size={18} className="text-[var(--color-primary)]" strokeWidth={2.5} /> All Master Courses
             </h2>
-            <div className="flex items-center gap-2 bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-1.5 rounded-none">
-              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest whitespace-nowrap">Filter By:</span>
-              <select 
-                value={courseFilter} 
-                onChange={(e) => setCourseFilter(e.target.value)}
-                className="bg-transparent border-none text-[11px] font-bold text-[var(--color-primary)] outline-none cursor-pointer"
+            <div className="relative">
+              <button 
+                type="button"
+                onClick={() => setShowFilterMenu(!showFilterMenu)}
+                className="flex items-center gap-2 h-[34px] px-4 bg-[var(--bg-body)] border border-[var(--border-default)] hover:border-[var(--color-primary)] text-[var(--color-primary)] transition-all shadow-sm rounded-none text-[11px] font-bold uppercase tracking-widest whitespace-nowrap min-w-[160px] justify-between"
               >
-                <option value="all">All Categories</option>
-                {initialCategories.map(cat => (
-                  <option key={cat.id} value={cat.id}>{cat.label}</option>
-                ))}
-              </select>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] text-[var(--text-muted)]">Show:</span>
+                  <span>{courseFilter === 'all' ? 'All Categories' : initialCategories.find(c => c.id === courseFilter)?.label}</span>
+                </div>
+                <ChevronRight size={14} className={`transition-transform ${showFilterMenu ? 'rotate-90' : ''}`} />
+              </button>
+
+              {showFilterMenu && (
+                <>
+                  <div className="fixed inset-0 z-[40]" onClick={() => setShowFilterMenu(false)}></div>
+                  <div className="absolute left-0 top-full mt-1.5 z-[50] w-[220px] bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-xl p-1 animate-in fade-in slide-in-from-top-1 duration-200">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCourseFilter('all');
+                        setShowFilterMenu(false);
+                      }}
+                      className={`flex items-center gap-3 w-full px-3 py-2 text-left transition-colors border border-transparent uppercase tracking-wider text-[10px] font-bold ${courseFilter === 'all' ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]' : 'hover:bg-[var(--bg-muted)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+                    >
+                      All Categories
+                    </button>
+                    <div className="h-px bg-[var(--border-light)] my-1"></div>
+                    <div className="max-h-[250px] overflow-y-auto custom-scrollbar">
+                      {initialCategories.map(cat => (
+                        <button
+                          key={cat.id}
+                          type="button"
+                          onClick={() => {
+                            setCourseFilter(cat.id);
+                            setShowFilterMenu(false);
+                          }}
+                          className={`flex items-center gap-3 w-full px-3 py-2 text-left transition-colors border border-transparent uppercase tracking-wider text-[10px] font-bold mb-0.5 ${courseFilter === cat.id ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]' : 'hover:bg-[var(--bg-muted)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+                        >
+                          {cat.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <button onClick={() => { setEditingCourseId(null); setCourseForm({ title: '', school: '', categoryId: '', icon: 'Monitor', colorHex: '#1c54a3', iconBg: 'bg-blue-50', textColor: 'text-[#1c54a3]', borderHover: 'hover:border-[#1c54a3]', programs: '', badgeLabel: '', badgeBgHex: '#fee2e2', badgeTextHex: '#dc2626', detailsSlug: '#' }); setCourseModalOpen(true); }} disabled={initialCategories.length === 0} className="bg-[var(--color-success)] disabled:opacity-50 text-[var(--text-inverse)] px-4 py-2 text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-[var(--color-success-dark)] transition-colors rounded-none shadow-sm uppercase tracking-widest w-full md:w-auto">
@@ -508,8 +545,8 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
                       </td>
                       <td className="block md:table-cell py-1 md:py-3 px-0 md:px-4 border-none md:border-r border-[var(--border-light)] mb-3 md:mb-0">
                         <span className="md:hidden text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest block mb-1">Category</span>
-                        <span className="font-mono text-[11px] md:text-[10px] bg-[var(--bg-body)] px-1.5 py-0.5 border border-[var(--border-default)] text-[var(--text-muted)] inline-block">
-                          {course.categoryId?.label || 'Unknown'}
+                        <span className="font-mono text-[11px] md:text-[10px] bg-[var(--bg-body)] border border-[var(--border-default)] text-[var(--text-muted)] inline-block uppercase tracking-widest px-2 py-0.5">
+                          {course.category?.label || 'Unknown'}
                         </span>
                       </td>
                       <td className="block md:table-cell py-2 md:py-3 px-0 md:px-4 border-t border-[var(--border-light)] pt-3 md:border-none md:pt-0">

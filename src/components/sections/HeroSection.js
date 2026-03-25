@@ -1,15 +1,16 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { ArrowRight, Play, ChevronLeft, ChevronRight } from "lucide-react";
-import HOME_DATA from "../../data/home.json";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Icon from "../ui/Icon";
 
-export default function HeroSection() {
+export default function HeroSection({ data }) {
+  const slides = data?.slides || [];
   const [idx, setIdx] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const timerRef = useRef(null);
-  const slides = HOME_DATA.heroSlides;
 
   const go = useCallback((n) => {
+    if (slides.length === 0) return;
     clearInterval(timerRef.current);
     setIdx(n % slides.length);
     setAnimKey((k) => k + 1);
@@ -20,12 +21,15 @@ export default function HeroSection() {
   }, [slides.length]);
 
   useEffect(() => {
+    if (slides.length === 0) return;
     timerRef.current = setInterval(() => {
       setIdx((p) => (p + 1) % slides.length);
       setAnimKey((k) => k + 1);
     }, 5500);
     return () => clearInterval(timerRef.current);
   }, [slides.length]);
+
+  if (slides.length === 0) return null;
 
   const hs = slides[idx];
 
@@ -84,15 +88,32 @@ export default function HeroSection() {
               {hs.desc}
             </p>
             <div className="flex gap-3.5 flex-wrap">
-              <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3 text-[15px] font-extrabold cursor-pointer flex items-center gap-2 shadow-lg hover:scale-105 transition-transform">
-                Apply Now <ArrowRight size={15} />
-              </button>
-              <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
-                Explore Programs
-              </button>
-              <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
-                <Play size={15} /> Watch Video
-              </button>
+              {hs.btn1Text && (
+                <a 
+                  href={hs.btn1Link || "#"} 
+                  className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3 text-[15px] font-extrabold cursor-pointer flex items-center gap-2 shadow-lg hover:scale-105 transition-transform no-underline"
+                >
+                  {hs.btn1Text} {hs.btn1Icon && <Icon name={hs.btn1Icon} size={15} />}
+                </a>
+              )}
+              {hs.btn2Text && (
+                <a 
+                  href={hs.btn2Link || "#"} 
+                  className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all no-underline"
+                >
+                  {hs.btn2Icon && <Icon name={hs.btn2Icon} size={15} />} {hs.btn2Text}
+                </a>
+              )}
+              {!hs.btn1Text && !hs.btn2Text && (
+                <>
+                  <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3 text-[15px] font-extrabold cursor-pointer flex items-center gap-2 shadow-lg hover:scale-105 transition-transform">
+                    Apply Now <Icon name="ArrowRight" size={15} />
+                  </button>
+                  <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
+                    Explore Programs
+                  </button>
+                </>
+              )}
             </div>
           </div>
           {hs.heroimg && (

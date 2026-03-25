@@ -39,7 +39,7 @@ const BLOCK_DEFINITIONS = [
 ];
 
 const getEmptyBlock = (type) => {
-  const base = { blockType: type, content: '', image: '', imageHeight: '', imageWidth: '', isReversed: false, splitConfig: '50-50', singleImage: { path: '', height: '', width: '', align: 'center' }, galleryHeading: { badge: '', title: '', highlight: '', description: '' }, accordionItems: [], profileItems: [], statsItems: [] };
+  const base = { blockType: type, content: '', image: '', imageHeight: '', imageWidth: '', isReversed: false, cssId: '', cssClass: '', splitConfig: '50-50', singleImage: { path: '', height: '', width: '', align: 'center' }, galleryHeading: { badge: '', title: '', highlight: '', description: '' }, accordionItems: [], profileItems: [], statsItems: [] };
   if (type === 'Accordion') base.accordionItems = [{ title: '', content: '' }];
   if (type === 'ProfileGrid') base.profileItems = [{ name: '', designation: '', company: '', image: '' }];
   if (type === 'StatsGrid') base.statsItems = [{ label: '', value: '', icon: '' }];
@@ -75,7 +75,10 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
     badge: initialData?.hero?.badge || '',
     hideHero: initialData?.hero?.hideHero || false
   });
+  const [pageCssId, setPageCssId] = useState(initialData?.pageCssId || '');
+  const [pageCssClass, setPageCssClass] = useState(initialData?.pageCssClass || '');
   const [blocks, setBlocks] = useState(initialData?.blocks || []);
+  const [showBlockMenu, setShowBlockMenu] = useState(false);
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -85,7 +88,7 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
     }
     setLoading(true);
     setError(null);
-    const payload = { title, slug, meta, hero, blocks };
+    const payload = { title, slug, meta, hero, blocks, pageCssId, pageCssClass };
     
     const res = mode === 'edit' 
       ? await updatePage(initialData.id, payload)
@@ -241,6 +244,28 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
           </div>
         </div>
       </div>
+      {/* ADVANCED PAGE SETTINGS */}
+      <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 rounded-none">
+        <h2 className="text-[10px] font-black text-[var(--text-primary)] uppercase tracking-widest mb-4 border-b border-[var(--border-light)] pb-2">Page Advanced Settings (Custom CSS)</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">Page CSS ID</label>
+            <input 
+              type="text" value={pageCssId} onChange={e => setPageCssId(e.target.value)} 
+              className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)] rounded-none font-mono" 
+              placeholder="e.g. main-admission-page"
+            />
+          </div>
+          <div>
+            <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-1.5">Page CSS Class</label>
+            <input 
+              type="text" value={pageCssClass} onChange={e => setPageCssClass(e.target.value)} 
+              className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)] rounded-none font-mono" 
+              placeholder="e.g. custom-theme-dark" 
+            />
+          </div>
+        </div>
+      </div>
 
       {/* HERO SECTION */}
       <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 rounded-none shadow-sm">
@@ -309,14 +334,46 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
       <div className="space-y-4">
         <div className="flex items-center justify-between border-b border-[var(--border-default)] pb-3">
           <h2 className="text-[10px] font-black text-[var(--text-primary)] uppercase tracking-widest">Content Blocks Canvas</h2>
-          <select 
-            className="bg-[var(--bg-body)] border border-[var(--border-default)] text-[var(--text-primary)] text-sm font-semibold px-3 py-2 rounded-none outline-none focus:border-[var(--color-primary)] h-[32px]"
-            onChange={(e) => { addBlock(e.target.value); e.target.value = ""; }}
-            defaultValue=""
-          >
-            <option value="" disabled>+ Append New Block</option>
-            {BLOCK_DEFINITIONS.map(bd => <option key={bd.type} value={bd.type}>{bd.label}</option>)}
-          </select>
+          
+          <div className="relative">
+            <button 
+              type="button"
+              onClick={() => setShowBlockMenu(!showBlockMenu)}
+              className="flex items-center gap-2 h-[32px] px-3 bg-[var(--bg-surface)] border border-[var(--border-default)] hover:border-[var(--color-primary)] text-[var(--text-primary)] transition-all shadow-sm rounded-none text-[11px] font-bold uppercase tracking-widest"
+            >
+              <Plus size={14} className={showBlockMenu ? 'rotate-45 transition-transform' : 'transition-transform'} />
+              <span>Append New Block</span>
+            </button>
+
+            {showBlockMenu && (
+              <>
+                <div className="fixed inset-0 z-[40]" onClick={() => setShowBlockMenu(false)}></div>
+                <div className="absolute right-0 top-full mt-1.5 z-[50] w-[240px] bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-xl p-1 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="grid grid-cols-1 gap-0.5">
+                    {BLOCK_DEFINITIONS.map(bd => {
+                      const Icon = bd.icon;
+                      return (
+                        <button
+                          key={bd.type}
+                          type="button"
+                          onClick={() => {
+                            addBlock(bd.type);
+                            setShowBlockMenu(false);
+                          }}
+                          className="flex items-center gap-3 w-full px-3 py-2.5 text-left hover:bg-[var(--bg-muted)] transition-colors group border border-transparent hover:border-[var(--border-light)]"
+                        >
+                          <div className="bg-[var(--bg-body)] p-1.5 text-[var(--text-muted)] group-hover:text-[var(--color-primary)] transition-colors">
+                            <Icon size={14} />
+                          </div>
+                          <span className="text-[11px] font-bold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] uppercase tracking-wider">{bd.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
         </div>
 
         {blocks.length === 0 && (
@@ -350,6 +407,18 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
 
               {/* Block Body Content based on type */}
               <div className="p-5">
+                
+                {/* Block-Level Advanced Settings (ID/Class) */}
+                <div className="mb-6 pb-4 border-b border-gray-100 grid grid-cols-2 gap-4">
+                   <div>
+                      <label className="block text-[9px] font-bold text-gray-400 uppercase mb-1">Block CSS ID</label>
+                      <input type="text" value={block.cssId || ''} onChange={e => updateBlock(index, 'cssId', e.target.value)} className="w-full border border-gray-200 p-1.5 text-xs outline-none focus:border-[var(--color-primary)] font-mono" placeholder="section-unique-id" />
+                   </div>
+                   <div>
+                      <label className="block text-[9px] font-bold text-gray-400 uppercase mb-1">Block CSS Class</label>
+                      <input type="text" value={block.cssClass || ''} onChange={e => updateBlock(index, 'cssClass', e.target.value)} className="w-full border border-gray-200 p-1.5 text-xs outline-none focus:border-[var(--color-primary)] font-mono" placeholder="custom-section-class" />
+                   </div>
+                </div>
                 
                 {block.blockType === 'RichTextFull' && (
                   <div>

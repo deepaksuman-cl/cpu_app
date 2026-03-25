@@ -1,7 +1,6 @@
 "use client";
 import { ArrowRight, Calendar, Star, Zap, Microscope, Plus, Minus, Facebook, Instagram, Youtube, Twitter, Linkedin, Phone, Mail, GraduationCap, Download } from "lucide-react";
 import { useState } from "react";
-import HOME_DATA from "../../data/home.json";
 
 function Lightbox({ src, title, onClose }) {
   if (!src) return null;
@@ -15,19 +14,20 @@ function Lightbox({ src, title, onClose }) {
   );
 }
 
-export function ResearchSection() {
+export function ResearchSection({ data }) {
   const [lightbox, setLightbox] = useState(null);
+  const items = data?.items || [];
   
   return (
     <>
       <section id="research" className="bg-white py-16 px-4 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="font-black text-3xl text-gray-900">Pioneering <span className="text-[#00588b]">Research</span> at CPU</h2>
+            <h2 className="font-black text-3xl text-gray-900" dangerouslySetInnerHTML={{ __html: data?.title || "Pioneering Research at CPU" }} />
             <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {HOME_DATA.researchItems.map((item, i) => (
+            {items.map((item, i) => (
               <div 
                 key={i} 
                 className="rounded-2xl overflow-hidden border border-gray-100 cursor-pointer hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300"
@@ -56,16 +56,17 @@ export function ResearchSection() {
 
 const iconMapping = { Zap, Microscope, Briefcase: Zap, Star }; // Simplified mapping placeholder for icons string to component instance.
 
-export function HappeningsSection() {
+export function HappeningsSection({ data }) {
+  const happenings = data?.items || [];
   return (
     <section className="bg-white py-16 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <h2 className="font-black text-3xl text-gray-900">Happenings <span className="text-[#00588b]">@CPU</span></h2>
+          <h2 className="font-black text-3xl text-gray-900" dangerouslySetInnerHTML={{ __html: data?.title || "Happenings @CPU" }} />
           <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-          {HOME_DATA.happenings.map((h, i) => {
+          {happenings.map((h, i) => {
             const Ic = iconMapping[h.icon] || Zap;
             return (
               <div key={i} className="rounded-2xl overflow-hidden border border-blue-100 cursor-pointer bg-white hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300">
@@ -84,25 +85,26 @@ export function HappeningsSection() {
         <div className="text-center mt-6">
           <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
             View All Events <ArrowRight size={14}/>
-          </button>
+           </button>
         </div>
       </div>
     </section>
   );
 }
 
-export function FAQSection() {
+export function FAQSection({ data }) {
   const [openFaq, setOpenFaq] = useState(null);
+  const items = data?.faqs || [];
   
   return (
     <section className="bg-blue-50 py-16 px-4 overflow-hidden">
       <div className="max-w-[860px] mx-auto">
         <div className="text-center mb-8">
-          <h2 className="font-black text-3xl text-gray-900">Frequently Asked <span className="text-[#00588b]">Questions</span></h2>
+          <h2 className="font-black text-3xl text-gray-900" dangerouslySetInnerHTML={{ __html: data?.title || "Frequently Asked Questions" }} />
           <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
         </div>
         <div className="flex flex-col gap-2.5">
-          {HOME_DATA.faqs.map((faq, i) => (
+          {items.map((faq, i) => (
             <div key={i} className="rounded-2xl border border-blue-100 overflow-hidden bg-white shadow-sm">
               <button 
                 className="w-full flex justify-between items-center px-[22px] py-[18px] bg-transparent border-none cursor-pointer text-left font-sans" 
@@ -125,20 +127,20 @@ export function FAQSection() {
     </section>
   );
 }
-
-export function SocialWallSection() {
+export function SocialWallSection({ data }) {
   const [lightbox, setLightbox] = useState(null);
+  const images = data?.images || [];
 
   return (
     <>
       <section className="bg-white py-16 px-4 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-7">
-            <h2 className="font-black text-3xl text-gray-900">CPU <span className="text-[#00588b]">Social Wall</span></h2>
+            <h2 className="font-black text-3xl text-gray-900" dangerouslySetInnerHTML={{ __html: data?.title || "CPU Social Wall" }} />
             <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
-            {HOME_DATA.socialImgs.map((src, i) => (
+            {images.map((src, i) => (
               <div 
                 key={i} 
                 className="rounded-2xl overflow-hidden aspect-square cursor-pointer hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 group relative"
@@ -170,23 +172,27 @@ export function SocialWallSection() {
   );
 }
 
-export function CTASection() {
+
+export function CTASection({ data }) {
+  if (!data) return null;
+  const { title, description, applyLabel, phone, brochureLabel } = data;
+
   return (
     <section className="bg-gradient-to-br from-[#00588b] to-[#003a5c] py-20 px-4 overflow-hidden">
       <div className="max-w-[860px] mx-auto text-center">
-        <h2 className="text-white font-black text-3xl mb-3">Begin Your Journey at Career Point University</h2>
+        <h2 className="text-white font-black text-3xl mb-3">{title}</h2>
         <p className="text-white/80 text-base max-w-xl mx-auto mb-8 leading-[1.75]">
-          Join 25,000+ students and experience world-class education, unmatched campus life, and extraordinary career opportunities in Kota.
+          {description}
         </p>
         <div className="flex justify-center gap-3.5 flex-wrap">
           <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3.5 font-extrabold text-[15px] cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
-            <GraduationCap size={16}/> Apply for Admission
+            <GraduationCap size={16}/> {applyLabel}
           </button>
-          <a href="tel:18001800345" className="bg-transparent text-white border-2 border-white/60 rounded-full px-7 py-3.5 font-bold text-[15px] flex items-center gap-2 no-underline hover:bg-white/15 hover:border-white transition-all">
-            <Phone size={15}/> 1800-1800-345
+          <a href={`tel:${phone}`} className="bg-transparent text-white border-2 border-white/60 rounded-full px-7 py-3.5 font-bold text-[15px] flex items-center gap-2 no-underline hover:bg-white/15 hover:border-white transition-all">
+            <Phone size={15}/> {phone}
           </a>
           <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-7 py-3.5 font-bold text-[15px] cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
-            <Download size={15}/> Download Brochure
+            <Download size={15}/> {brochureLabel}
           </button>
         </div>
       </div>

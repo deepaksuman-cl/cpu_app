@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache';
 export async function getAllPages() {
   try {
     const pages = await Page.findAll({
-      attributes: ['id', 'title', 'slug']
+      attributes: ['id', 'title', 'slug', 'pageCssId', 'blocks']
     });
     return { success: true, data: JSON.parse(JSON.stringify(pages)), error: null };
   } catch (error) {

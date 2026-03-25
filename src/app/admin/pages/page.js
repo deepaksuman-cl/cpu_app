@@ -39,12 +39,14 @@ export default async function PagesManager() {
           </div>
         )}
 
-        <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none shadow-sm overflow-hidden">
+        <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none shadow-sm">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-[var(--bg-muted)] border-b border-[var(--border-default)]">
                 <th className="px-4 py-3 text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-widest">Page Title</th>
+                <th className="px-4 py-3 text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-widest hidden lg:table-cell">Page ID</th>
                 <th className="px-4 py-3 text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-widest hidden sm:table-cell">URL Slug</th>
+                <th className="px-4 py-3 text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-widest text-center">Structure</th>
                 <th className="px-4 py-3 text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-widest w-28 text-right">Actions</th>
               </tr>
             </thead>
@@ -52,7 +54,41 @@ export default async function PagesManager() {
               {pages.map(page => (
                 <tr key={page.id} className="border-b border-[var(--border-light)] hover:bg-[var(--bg-muted)] transition-colors">
                   <td className="px-4 py-3 font-semibold text-[var(--text-primary)] text-sm">{page.title}</td>
+                  <td className="px-4 py-3 text-[11px] text-[var(--text-muted)] font-mono hidden lg:table-cell">{page.pageCssId || <span className="opacity-30">-</span>}</td>
                   <td className="px-4 py-3 text-xs text-[var(--text-muted)] font-mono hidden sm:table-cell">/{page.slug}</td>
+                  <td className="px-4 py-3 text-center">
+                    <div className="relative group inline-block">
+                      <span className="cursor-help bg-[var(--bg-muted)] hover:bg-[var(--bg-hover)] border border-[var(--border-default)] text-[var(--text-secondary)] text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors whitespace-nowrap">
+                        {page.blocks?.length || 0} {page.blocks?.length === 1 ? 'Block' : 'Blocks'}
+                      </span>
+                      {/* Tooltip */}
+                      {page.blocks && page.blocks.length > 0 && (
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:block z-[100] w-64 p-3 bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-xl text-left pointer-events-none">
+                          <div className="text-[10px] font-black text-[var(--text-primary)] border-b border-[var(--border-light)] pb-1.5 mb-2 uppercase tracking-widest">Page Structure</div>
+                          <div className="space-y-1.5 max-h-60 overflow-y-auto">
+                            {page.blocks.map((block, idx) => {
+                              let color = 'text-blue-500';
+                              if (block.blockType.toLowerCase().includes('hero')) color = 'text-green-500';
+                              if (block.blockType.toLowerCase().includes('grid')) color = 'text-yellow-500';
+                              if (block.blockType.toLowerCase().includes('footer') || block.blockType.toLowerCase().includes('cta')) color = 'text-purple-500';
+                              
+                              return (
+                                <div key={idx} className="flex items-start gap-2 text-[11px] leading-tight">
+                                  <span className={`${color} mt-0.5 text-[8px]`}>●</span>
+                                  <div className="flex-1">
+                                    <div className="font-bold text-[var(--text-primary)]">{block.blockType}</div>
+                                    {block.cssId && <div className="text-[10px] text-[var(--text-muted)] font-mono">#{block.cssId}</div>}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 border-8 border-transparent border-b-[var(--border-default)]"></div>
+                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 border-[7px] border-transparent border-b-[var(--bg-surface)] mb-[-1px]"></div>
+                        </div>
+                      )}
+                    </div>
+                  </td>
                   <td className="px-4 py-3 flex gap-1.5 justify-end">
                     <Link
                       href={`/admin/pages/edit/${page.id}`}
@@ -67,7 +103,7 @@ export default async function PagesManager() {
               ))}
               {pages.length === 0 && (
                 <tr>
-                  <td colSpan="3" className="px-4 py-12 text-center text-[var(--text-muted)] text-sm">
+                  <td colSpan="5" className="px-4 py-12 text-center text-[var(--text-muted)] text-sm">
                     No pages found. Click <strong>Create New Page</strong> to get started.
                   </td>
                 </tr>
