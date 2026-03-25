@@ -33,7 +33,7 @@ const ProgrammeSettingsSchema = new mongoose.Schema({
 export default mongoose.models.ProgrammeSettings || mongoose.model('ProgrammeSettings', ProgrammeSettingsSchema);
 */
 
-const ProgrammeSettings = sequelize.define('ProgrammeSettings', {
+const ProgrammeSettings = sequelize.define('programmesettings', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,

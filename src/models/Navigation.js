@@ -24,7 +24,7 @@ const Navigation = mongoose.models.Navigation || mongoose.model('Navigation', Na
 export default Navigation;
 */
 
-const Navigation = sequelize.define('Navigation', {
+const Navigation = sequelize.define('navigations', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
