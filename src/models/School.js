@@ -63,6 +63,7 @@ const School = sequelize.define('schools', {
     type: DataTypes.INTEGER,
     defaultValue: DataTypes.INTEGER,
     primaryKey: true,
+     autoIncrement: true
   },
   name: {
     type: DataTypes.STRING,

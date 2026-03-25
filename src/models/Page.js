@@ -27,8 +27,9 @@ export default Page;
 const Page = sequelize.define('pages', {
   id: {
     type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
+     autoIncrement: true
+
   },
   title: {
     type: DataTypes.STRING,
