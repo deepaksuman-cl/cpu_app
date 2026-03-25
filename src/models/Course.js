@@ -44,7 +44,7 @@ const Course = mongoose.model('Course', CourseSchema);
 export default Course;
 */
 
-const Course = sequelize.define('Course', {
+const Course = sequelize.define('courses', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,

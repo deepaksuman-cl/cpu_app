@@ -15,7 +15,7 @@ const AcademicSidebarLinkSchema = new mongoose.Schema({
 export default mongoose.models.AcademicSidebarLink || mongoose.model('AcademicSidebarLink', AcademicSidebarLinkSchema);
 */
 
-const AcademicSidebarLink = sequelize.define('AcademicSidebarLink', {
+const AcademicSidebarLink = sequelize.define('academicsidebarlinks', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,

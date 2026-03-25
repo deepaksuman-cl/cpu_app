@@ -58,7 +58,7 @@ const School = mongoose.model('School', SchoolSchema);
 export default School;
 */
 
-const School = sequelize.define('School', {
+const School = sequelize.define('schools', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,

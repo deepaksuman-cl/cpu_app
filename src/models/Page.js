@@ -24,7 +24,7 @@ const Page = mongoose.model('Page', PageSchema);
 export default Page;
 */
 
-const Page = sequelize.define('Page', {
+const Page = sequelize.define('pages', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,

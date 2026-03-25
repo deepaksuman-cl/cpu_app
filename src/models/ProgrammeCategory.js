@@ -12,7 +12,7 @@ const ProgrammeCategorySchema = new mongoose.Schema({
 export default mongoose.models.ProgrammeCategory || mongoose.model('ProgrammeCategory', ProgrammeCategorySchema);
 */
 
-const ProgrammeCategory = sequelize.define('ProgrammeCategory', {
+const ProgrammeCategory = sequelize.define('programmecategorys', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
