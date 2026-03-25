@@ -3,8 +3,8 @@ import sequelize from '../lib/db.js';
 
 const HomePage = sequelize.define('homepages', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
   },
   name: {

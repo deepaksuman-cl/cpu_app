@@ -14,8 +14,8 @@ export default mongoose.models.ProgrammeCategory || mongoose.model('ProgrammeCat
 
 const ProgrammeCategory = sequelize.define('programmecategorys', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
   },
   label: {

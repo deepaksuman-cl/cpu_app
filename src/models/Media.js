@@ -3,8 +3,8 @@ import sequelize from '../lib/db.js';
 
 const Media = sequelize.define('medias', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
   },
   displayName: {

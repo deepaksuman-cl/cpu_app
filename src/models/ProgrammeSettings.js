@@ -35,8 +35,8 @@ export default mongoose.models.ProgrammeSettings || mongoose.model('ProgrammeSet
 
 const ProgrammeSettings = sequelize.define('programmesettings', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
   },
   metaTitle: {

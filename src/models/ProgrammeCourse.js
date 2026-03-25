@@ -28,8 +28,8 @@ export default mongoose.models.ProgrammeCourse || mongoose.model('ProgrammeCours
 
 const ProgrammeCourse = sequelize.define('programmecourses', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
   },
   title: {

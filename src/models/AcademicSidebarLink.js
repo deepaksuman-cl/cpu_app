@@ -17,8 +17,8 @@ export default mongoose.models.AcademicSidebarLink || mongoose.model('AcademicSi
 
 const AcademicSidebarLink = sequelize.define('academicsidebarlinks', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
   },
   label: {
