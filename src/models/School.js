@@ -71,7 +71,7 @@ const School = sequelize.define('School', {
   slug: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    // unique: true, // Managed by named index 'idx_school_slug' below
   },
   metaTitle: {
     type: DataTypes.STRING,
@@ -120,6 +120,10 @@ const School = sequelize.define('School', {
   },
 }, {
   timestamps: true,
+  indexes: [
+    { name: 'idx_school_slug', unique: true, fields: ['slug'] },
+    { name: 'idx_school_name', fields: ['name'] }
+  ]
 });
 
 export default School;

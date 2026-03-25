@@ -11,6 +11,7 @@ const sequelize =
     logging: process.env.NODE_ENV === 'development' ? console.log : false,
     dialectOptions: {
       connectTimeout: 40000,
+      allowPublicKeyRetrieval: true,
     },
     pool: {
       max: 15,
@@ -28,23 +29,32 @@ if (process.env.NODE_ENV !== 'production') {
 let isConnected = false;
 
 export const connectToDatabase = async () => {
+  if (isConnected) return;
+
   try {
-    if (isConnected) return;
+    await sequelize.authenticate({ alter: true });
+    console.log('✅ DB authenticated successfully');
 
-    await sequelize.authenticate();
-    console.log('✅ DB connected');
-
-    await import('../models/Media.js');
-    await import('../models/HomePage.js');
+    // Import models to ensure they are registered with Sequelize
+    await import('@/models/Media.js');
+    await import('@/models/HomePage.js');
+    await import('@/models/Navigation.js');
 
     if (process.env.NODE_ENV === 'development') {
+      // Syncing with alter: true is now safer because models have named indexes
       await sequelize.sync({ alter: true });
+      console.log('✅ DB synced (alter: true)');
+    } else {
+      await sequelize.sync({ alter: false });
     }
 
     isConnected = true;
   } catch (error) {
-    console.error('❌ DB error:', error.message);
+    console.error('❌ DB connection/sync error:', error.message);
+    // Don't set isConnected to true if it failed, so it can retry
+    throw error;
   }
 };
+
 
 export default sequelize;

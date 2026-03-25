@@ -57,7 +57,7 @@ const Course = sequelize.define('Course', {
   slug: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    // unique: true, // Managed by named index 'idx_course_slug' below
   },
   schoolId: {
     type: DataTypes.UUID,
@@ -126,6 +126,10 @@ const Course = sequelize.define('Course', {
   },
 }, {
   timestamps: true,
+  indexes: [
+    { name: 'idx_course_slug', unique: true, fields: ['slug'] },
+    { name: 'idx_course_school', fields: ['schoolId'] }
+  ]
 });
 
 // Relationships

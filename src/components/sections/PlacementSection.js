@@ -1,5 +1,6 @@
 "use client";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import Swiper from "../ui/Swiper";
 import Icon from "../ui/Icon";
 
@@ -11,7 +12,7 @@ export default function PlacementSection({ data }) {
     recruiters = [], 
     tagline = "Empower Your Future through Exceptional",
     title = "Placement",
-    titleHighlight = "Opportunities at CPU"
+    highlight = "Opportunities at CPU"
   } = data;
 
   return (
@@ -31,7 +32,7 @@ export default function PlacementSection({ data }) {
             <span className="bg-white/15 backdrop-blur border border-white/20 rounded-xl px-4 py-1 font-black text-4xl text-amber-400">
               {title}
             </span>
-            <span className="font-bold text-4xl text-white">{titleHighlight}</span>
+            <span className="font-bold text-4xl text-white">{highlight}</span>
             <ArrowRight size={28} className="text-amber-400" />
           </div>
         </div>
@@ -62,10 +63,12 @@ export default function PlacementSection({ data }) {
             breakpoints={{ 0: 1, 768: 2 }}
             renderSlide={(slide) => (
               <div className="rounded-2xl overflow-hidden relative h-[360px] sm:h-[400px] shadow-2xl group">
-                <img
+                <Image
                   src={slide.img}
                   alt={slide.name}
-                  className="w-full h-full object-cover object-top block group-hover:scale-105 transition-transform duration-400"
+                  fill
+                  className="object-cover object-top block group-hover:scale-105 transition-transform duration-400"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85" />
                 <div className="absolute bottom-0 left-0 right-0 p-3.5">
@@ -90,12 +93,14 @@ export default function PlacementSection({ data }) {
             <p className="text-white/50 text-[10px] font-bold uppercase tracking-[0.3em] text-center mb-8">Trusted by Global Industry Leaders</p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
               {recruiters.map((logo, idx) => (
-                <img 
-                  key={idx} 
-                  src={logo.img} 
-                  alt="Recruiter" 
-                  className="h-7 md:h-9 w-auto object-contain brightness-0 invert" 
-                />
+                <div key={idx} className="relative h-7 md:h-9 w-24">
+                  <Image 
+                    src={logo.img} 
+                    alt="Recruiter" 
+                    fill
+                    className="object-contain brightness-0 invert" 
+                  />
+                </div>
               ))}
             </div>
           </div>

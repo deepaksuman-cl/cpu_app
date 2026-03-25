@@ -12,9 +12,8 @@ export default function ProgramsSection({ data }) {
           <p className="text-[#00588b] font-bold text-xs uppercase tracking-[.18em] mb-2">
             {data?.tagline || "ONE OF THE"}
           </p>
-          <h2 className="font-black text-3xl text-gray-900 mb-8">
-            {data?.title || "Explore Our"} <span className="text-[#00588b]">{data?.titleHighlight || "70+ Programs"}</span> — Start Your
-            Future-ready Career
+          <h2 className="font-black text-3xl md:text-5xl text-gray-900 mb-8">
+            {data?.title || "Explore Our"} <span className="text-[#00588b]">{data?.highlight || "70+ Programs"}</span>
           </h2>
           <div className="grid grid-cols-2 [@media(max-width:476px)]:grid-cols-1 md:grid-cols-4 gap-4">
             {cards.map((card) => (

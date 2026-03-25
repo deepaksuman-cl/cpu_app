@@ -1,25 +1,25 @@
 'use server';
 
-import schoolsData from '@/data/schoolsData.json';
-import programmesData from '@/data/programmes.json';
 import footerData from '@/data/footer.json';
-import navigationData from '@/data/navigation.json';
 import homeData from '@/data/home.json';
+import navigationData from '@/data/navigation.json';
+import programmesData from '@/data/programmes.json';
+import schoolsData from '@/data/schoolsData.json';
 
 import { connectToDatabase } from '@/lib/db';
 
 import Course from '@/models/Course';
 import Footer from '@/models/Footer';
+import HomePage from '@/models/HomePage';
 import Navigation from '@/models/Navigation';
 import Page from '@/models/Page';
 import School from '@/models/School';
-import HomePage from '@/models/HomePage';
 
 // 🔥 Programme models
-import ProgrammeSettings from '@/models/ProgrammeSettings';
+import AcademicSidebarLink from '@/models/AcademicSidebarLink';
 import ProgrammeCategory from '@/models/ProgrammeCategory';
 import ProgrammeCourse from '@/models/ProgrammeCourse';
-import AcademicSidebarLink from '@/models/AcademicSidebarLink';
+import ProgrammeSettings from '@/models/ProgrammeSettings';
 
 // 🔧 Helper
 const ensureStructuredTitle = (title) => {
@@ -28,19 +28,19 @@ const ensureStructuredTitle = (title) => {
   return {
     main: title.main || '',
     highlight: title.highlight || '',
-    skyHighlight: title.skyHighlight || ''
+    skyHighlight: title.skyHighlight || '',
   };
 };
 
 export async function seedDatabase() {
   try {
-    console.log("🚀 Starting Universal Database Seed...");
+    console.log('🚀 Starting Universal Database Seed...');
 
     // ✅ STEP 1: Connect + Sync
     await connectToDatabase();
 
     // ✅ STEP 2: Clear old data (Master Reset)
-    console.log("🗑️ Clearing existing data...");
+    console.log('🗑️ Clearing existing data...');
     await Course.destroy({ where: {} });
     await School.destroy({ where: {} });
     await Page.destroy({ where: {} });
@@ -57,7 +57,7 @@ export async function seedDatabase() {
     // ==========================================
     // ✅ STEP 3: Schools & Courses (Schools Hub)
     // ==========================================
-    console.log("🌱 Seeding Schools & Courses...");
+    console.log('🌱 Seeding Schools & Courses...');
 
     for (const [slug, data] of Object.entries(schoolsData)) {
       const newSchool = await School.create({
@@ -72,7 +72,7 @@ export async function seedDatabase() {
           title: ensureStructuredTitle(data.hero?.title),
           description: data.hero?.description,
           cta: data.hero?.cta,
-          quickStats: data.hero?.quickStats
+          quickStats: data.hero?.quickStats,
         },
         stats: data.stats || [],
         about: data.about || {},
@@ -84,7 +84,7 @@ export async function seedDatabase() {
         community: data.community || {},
         infrastructure: data.infrastructure || {},
         testimonials: data.testimonials || {},
-        exploreDepartment: data.exploreDepartment || {}
+        exploreDepartment: data.exploreDepartment || {},
       });
 
       if (data.courseDetails) {
@@ -106,19 +106,19 @@ export async function seedDatabase() {
     // ==========================================
     // 🔥 STEP 4: Programmes & Academic Catalog
     // ==========================================
-    console.log("🎓 Seeding Academic Programmes...");
+    console.log('🎓 Seeding Academic Programmes...');
 
     // ✅ Programme Settings
     await ProgrammeSettings.create({
-      metaTitle: "Programmes | Career Point University",
-      metaDescription: "Explore all programmes and courses offered at CPU Kota.",
+      metaTitle: 'Programmes | Career Point University',
+      metaDescription: 'Explore all programmes and courses offered at CPU Kota.',
       sidebarCta: {
-        icon: "HelpCircle",
-        title: "Need Guidance?",
-        description: "Talk to our experts for career advice.",
-        buttonText: "Request Callback",
-        buttonLink: "#"
-      }
+        icon: 'HelpCircle',
+        title: 'Need Guidance?',
+        description: 'Talk to our experts for career advice.',
+        buttonText: 'Request Callback',
+        buttonLink: '#',
+      },
     });
 
     // ✅ Categories & Courses Mapping
@@ -127,7 +127,7 @@ export async function seedDatabase() {
     for (const [index, type] of programmesData.programmeTypes.entries()) {
       const category = await ProgrammeCategory.create({
         label: type.label,
-        order: index + 1
+        order: index + 1,
       });
 
       categoryMap[type.label] = category.id;
@@ -136,16 +136,35 @@ export async function seedDatabase() {
       const courses = programmesData.courses[type.label] || [];
       for (const course of courses) {
         // Dynamic arrays to Rich Text Lists casting helper
-        let programsHtml = "";
+        let programsHtml = '';
         if (Array.isArray(course.programs)) {
-          programsHtml = `<ul class="list-disc pl-5">` + course.programs.map(p => `<li>${p}</li>`).join('') + `</ul>`;
+          programsHtml =
+            `<ul class="list-disc pl-5">` +
+            course.programs.map((p) => `<li>${p}</li>`).join('') +
+            `</ul>`;
         } else {
-          programsHtml = course.programs || "";
+          programsHtml = course.programs || '';
         }
 
         // Color fallback mappings for badge from JSON class names
-        const badgeBg = course.badge?.cls?.includes('bg-red') ? '#fee2e2' : course.badge?.cls?.includes('bg-blue') ? '#eff6ff' : course.badge?.cls?.includes('bg-teal') ? '#f0fdfa' : course.badge?.cls?.includes('bg-purple') ? '#faf5ff' : '#f8f9fa';
-        const badgeText = course.badge?.cls?.includes('text-red') ? '#dc2626' : course.badge?.cls?.includes('text-blue') ? '#2563eb' : course.badge?.cls?.includes('text-teal') ? '#0d9488' : course.badge?.cls?.includes('text-purple') ? '#9333ea' : '#212529';
+        const badgeBg = course.badge?.cls?.includes('bg-red')
+          ? '#fee2e2'
+          : course.badge?.cls?.includes('bg-blue')
+            ? '#eff6ff'
+            : course.badge?.cls?.includes('bg-teal')
+              ? '#f0fdfa'
+              : course.badge?.cls?.includes('bg-purple')
+                ? '#faf5ff'
+                : '#f8f9fa';
+        const badgeText = course.badge?.cls?.includes('text-red')
+          ? '#dc2626'
+          : course.badge?.cls?.includes('text-blue')
+            ? '#2563eb'
+            : course.badge?.cls?.includes('text-teal')
+              ? '#0d9488'
+              : course.badge?.cls?.includes('text-purple')
+                ? '#9333ea'
+                : '#212529';
 
         await ProgrammeCourse.create({
           title: course.title,
@@ -158,7 +177,9 @@ export async function seedDatabase() {
           borderHover: course.borderHover,
           programs: programsHtml,
           detailsSlug: course.id || '#',
-          badge: course.badge ? { label: course.badge.label, bgHex: badgeBg, textHex: badgeText } : null
+          badge: course.badge
+            ? { label: course.badge.label, bgHex: badgeBg, textHex: badgeText }
+            : null,
         });
       }
     }
@@ -171,19 +192,19 @@ export async function seedDatabase() {
         icon: link.icon,
         slug: link.slug,
         colorClass: link.colorClass,
-        order: linkOrder++
+        order: linkOrder++,
       });
     }
 
     // ==========================================
     // ✅ STEP 5: Footer & Navigation
     // ==========================================
-    console.log("⭐ Seeding Footer & Navigation...");
+    console.log('⭐ Seeding Footer & Navigation...');
 
     // 1. Navigation Seed
     await Navigation.create({
       documentName: 'main_header',
-      data: navigationData
+      data: navigationData,
     });
 
     // 2. Footer Seed (Mapped to Structured Columns)
@@ -193,27 +214,27 @@ export async function seedDatabase() {
         {
           title: 'Quick Links',
           columnType: 'links',
-          links: footerData.quickLinks?.map(label => ({ label, url: '#' })) || [],
-          order: 1
+          links: footerData.quickLinks?.map((label) => ({ label, url: '#' })) || [],
+          order: 1,
         },
         {
           title: 'Programs',
           columnType: 'links',
-          links: footerData.programs?.map(label => ({ label, url: '#' })) || [],
-          order: 2
+          links: footerData.programs?.map((label) => ({ label, url: '#' })) || [],
+          order: 2,
         },
         {
           title: 'Contact',
           columnType: 'contact',
           links: [],
-          order: 3
-        }
+          order: 3,
+        },
       ],
       contact: [
         { label: 'Address', text: footerData.contact?.address, icon: 'MapPin' },
         { label: 'Phone', text: footerData.contact?.phone, icon: 'Phone' },
-        { label: 'Email', text: footerData.contact?.email, icon: 'Mail' }
-      ]
+        { label: 'Email', text: footerData.contact?.email, icon: 'Mail' },
+      ],
     };
     delete mappedFooterData.quickLinks;
     delete mappedFooterData.programs;
@@ -223,8 +244,8 @@ export async function seedDatabase() {
     // ==========================================
     // 🏠 STEP 6: Home Page Content
     // ==========================================
-    console.log("🏠 Seeding Home Page Config...");
-    
+    console.log('🏠 Seeding Home Page Config...');
+
     await HomePage.create({
       sections: {
         heroConfig: homeData.heroConfig || {},
@@ -240,28 +261,29 @@ export async function seedDatabase() {
         faqConfig: homeData.faqConfig || {},
         socialWallConfig: homeData.socialWallConfig || {},
         ctaConfig: homeData.ctaConfig || {},
-        virtuallyNewsConfig: homeData.virtuallyNewsConfig || {}
+        virtuallyNewsConfig: homeData.virtuallyNewsConfig || {},
       },
       seo: {
-        title: "Career Point University, Kota | Premier Private University in Rajasthan",
-        description: "CPU Kota offers world-class education with 25+ years of academic legacy. Industry-aligned programs in Engineering, Management, Law, Pharmacy & more.",
-        keywords: "University in Kota, CPU Kota, Career Point University, Best Engineering College Rajasthan",
-        ogImage: ""
-      }
+        title: 'Career Point University, Kota | Premier Private University in Rajasthan',
+        description:
+          'CPU Kota offers world-class education with 25+ years of academic legacy. Industry-aligned programs in Engineering, Management, Law, Pharmacy & more.',
+        keywords:
+          'University in Kota, CPU Kota, Career Point University, Best Engineering College Rajasthan',
+        ogImage: '',
+      },
     });
 
-    console.log("✅ Seed Process Finished Successfully");
+    console.log('✅ Seed Process Finished Successfully');
 
     return {
       success: true,
-      message: '✅ Universal Database Seed Completed Successfully'
+      message: '✅ Universal Database Seed Completed Successfully',
     };
-
   } catch (error) {
     console.error('❌ Universal Seed Error:', error);
     return {
       success: false,
-      error: error.message
+      error: error.message,
     };
   }
 }

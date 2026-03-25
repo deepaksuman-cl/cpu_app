@@ -54,6 +54,7 @@ const Page = sequelize.define('Page', {
   timestamps: true,
   indexes: [
     {
+      name: 'idx_page_slug',
       unique: true,
       fields: ['slug'],
     },

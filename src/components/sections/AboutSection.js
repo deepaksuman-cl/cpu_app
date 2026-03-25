@@ -1,5 +1,5 @@
-"use client";
 import Icon from "../ui/Icon";
+import Image from "next/image";
 import { ArrowRight, Download } from "lucide-react";
 
 export default function AboutSection({ data }) {
@@ -36,10 +36,12 @@ export default function AboutSection({ data }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <div className="relative">
             <div className="rounded-3xl overflow-hidden h-[420px] shadow-2xl">
-              <img
+              <Image
                 src={mainImage}
                 alt="CPU Campus"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
             <div className="absolute -bottom-4 -right-4 lg:-right-5 bg-[#00588b] text-white rounded-2xl px-5 py-4 shadow-xl min-w-[140px]">

@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
 import { ArrowRight, GraduationCap } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import { getSchools } from '@/lib/actions/schoolActions';
 
@@ -47,10 +47,12 @@ export default async function AllSchoolsPage() {
                   {/* Card Image */}
                   <div className="h-48 relative overflow-hidden">
                     <div className="absolute inset-0 bg-[#001e46]/20 group-hover:bg-transparent transition-colors z-10" />
-                    <img
+                    <Image
                       src={bgImage}
                       alt={title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-sm p-2 rounded-lg">
                       <GraduationCap className="text-[#001e46] w-6 h-6" />

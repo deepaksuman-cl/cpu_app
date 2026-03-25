@@ -5,6 +5,7 @@ import School from '@/models/School';
 export async function getSchools() {
   try {
     const schools = await School.findAll({
+      attributes: ['id', 'name', 'slug', 'hero', 'metaDescription'],
       order: [['createdAt', 'DESC']]
     });
     

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import Icon from "../ui/Icon";
 
 export default function HeroSection({ data }) {
@@ -118,9 +119,12 @@ export default function HeroSection({ data }) {
           </div>
           {hs.heroimg && (
             <div className="hero_img animate-heroUp">
-              <img
+              <Image
                 src={hs.heroimg}
-                alt="img"
+                alt={hs.title || "Hero Slide"}
+                width={500} // Example width, adjust as needed
+                height={300} // Example height, adjust as needed
+                priority={idx === 0} // Apply priority if it's the first slide
                 className="ml-30 w-[80%] block m-auto rounded-2xl transition-transform duration-400"
               />
             </div>

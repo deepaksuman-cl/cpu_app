@@ -77,6 +77,10 @@ const ProgrammeCourse = sequelize.define('ProgrammeCourse', {
   },
 }, {
   timestamps: true,
+  indexes: [
+    { name: 'idx_pcourse_category', fields: ['categoryId'] },
+    { name: 'idx_pcourse_title', fields: ['title'] }
+  ]
 });
 
 // Relationships

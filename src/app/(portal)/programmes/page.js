@@ -17,17 +17,11 @@ export default async function ProgrammesPage({ searchParams }) {
   const activeType = params.type || '';
   const searchTerm = params.search || '';
 
-  const [catRes, courseRes, linkRes, setRes] = await Promise.all([
-    getCategories(),
-    getCourses(),
-    getSidebarLinks(),
-    getProgrammeSettings()
+  const [catRes] = await Promise.all([
+    getCategories()
   ]);
   
   const categories = catRes.success ? catRes.data : [];
-  const allCourses = courseRes.success ? courseRes.data : [];
-  const links = linkRes.success ? linkRes.data : [];
-  const settings = setRes.success && setRes.data ? setRes.data : {};
 
   // Sort categories
   const sortedCategories = [...categories].sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -36,32 +30,34 @@ export default async function ProgrammesPage({ searchParams }) {
   const allCategory = { id: 'all', label: 'All Categories' };
   const categoriesWithAll = [allCategory, ...sortedCategories];
 
-  // Determine active category
+  // Determine active category ID
   const currentType = activeType || (categoriesWithAll.length > 0 ? categoriesWithAll[0].label : "");
   const activeCategory = categoriesWithAll.find(c => c.label === currentType) || categoriesWithAll[0];
 
-  // Server-side filtering logic
-  let filteredCourses = activeCategory.id === 'all' 
-    ? allCourses 
-    : allCourses.filter(c => (c.categoryId?.id || c.categoryId) === activeCategory.id);
+  const [courseRes, linkRes, setRes] = await Promise.all([
+    getCourses({ 
+      categoryId: activeCategory.id, 
+      search: searchTerm 
+    }),
+    getSidebarLinks(),
+    getProgrammeSettings()
+  ]);
+  
+  const filteredCourses = courseRes.success ? courseRes.data : [];
+  const links = linkRes.success ? linkRes.data : [];
+  const settings = setRes.success && setRes.data ? setRes.data : {};
 
-  // Calculate counts for sidebar (based on full list)
+  // For category counts, we still need the full list (or a separate count query)
+  // For production, a separate count query is better, but for now we'll fetch only IDs
+  const allCourseRes = await getCourses(); // fetch all for counts
+  const allCourses = allCourseRes.success ? allCourseRes.data : [];
+
   const categoryCounts = categoriesWithAll.reduce((acc, cat) => {
     acc[cat.id] = cat.id === 'all' 
       ? allCourses.length 
       : allCourses.filter(c => (c.categoryId?.id || c.categoryId) === cat.id).length;
     return acc;
   }, {});
-
-  if (searchTerm) {
-    const term = searchTerm.toLowerCase();
-    filteredCourses = filteredCourses.filter(
-      (c) =>
-        c.title?.toLowerCase().includes(term) ||
-        c.programs?.toLowerCase().includes(term) ||
-        c.school?.toLowerCase().includes(term)
-    );
-  }
 
   const breadcrumbs = settings.breadcrumbs?.length > 0
     ? settings.breadcrumbs

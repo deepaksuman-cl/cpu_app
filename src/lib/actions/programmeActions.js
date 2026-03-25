@@ -13,6 +13,7 @@ import path from 'path';
 export async function getCategories() {
   try {
     const categories = await ProgrammeCategory.findAll({
+      attributes: ['id', 'label', 'order'],
       order: [['order', 'ASC']]
     });
     return { success: true, data: JSON.parse(JSON.stringify(categories)), error: null };
@@ -44,12 +45,31 @@ export async function deleteCategory(id) {
 /* ═══════════════════════════════════════════════════════════════
    🎓 COURSE ACTIONS
    ═══════════════════════════════════════════════════════════════ */
-export async function getCourses() {
+export async function getCourses(options = {}) {
   try {
+    const { categoryId, search } = options;
+    const where = {};
+    
+    if (categoryId && categoryId !== 'all') {
+      where.categoryId = categoryId;
+    }
+    
+    if (search) {
+      const { Op } = require('sequelize');
+      where[Op.or] = [
+        { title: { [Op.like]: `%${search}%` } },
+        { school: { [Op.like]: `%${search}%` } },
+        { programs: { [Op.like]: `%${search}%` } }
+      ];
+    }
+
     const courses = await ProgrammeCourse.findAll({
+      where,
+      attributes: ['id', 'title', 'school', 'categoryId', 'icon', 'colorHex', 'iconBg', 'textColor', 'borderHover', 'programs', 'detailsSlug', 'badge'],
       include: [{
         model: ProgrammeCategory,
-        as: 'category'
+        as: 'category',
+        attributes: ['id', 'label']
       }]
     });
     return { success: true, data: JSON.parse(JSON.stringify(courses)), error: null };

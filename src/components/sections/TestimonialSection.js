@@ -84,7 +84,9 @@ export default function TestimonialSection({ data }) {
             <span className="inline-flex items-center gap-2 border border-blue-200 bg-white text-[#00588b] text-xs font-bold px-4 py-1.5 rounded-full mb-5 shadow-sm">
               <Sparkles size={13} className="text-amber-400" /> {data?.tagline || "STUDENT STORIES"}
             </span>
-            <h2 className="font-black text-4xl md:text-5xl text-slate-900 leading-tight m-0" dangerouslySetInnerHTML={{ __html: data?.title || "Our Students Speak" }} />
+            <h2 className="font-black text-4xl md:text-5xl text-slate-900 leading-tight m-0">
+              {data?.title || "Our Students"} <span className="text-[#00588b]">{data?.highlight || "Speak"}</span>
+            </h2>
             <p className="text-slate-500 text-sm mt-3 flex items-center justify-center gap-1.5">
               <MapPin size={13} className="text-[#00588b]" />
               {data?.location || "Career Point University, Kota, Rajasthan"}
@@ -106,8 +108,9 @@ export default function TestimonialSection({ data }) {
                     alt={t.name}
                     className="w-full h-80 md:h-96 object-cover object-top"
                   />
-                  {/* <div
-                    className={`absolute top-3.5 left-3.5 ${t.tagColor} text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wide`}
+                  <div
+                    className="absolute top-3.5 left-3.5 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wide"
+                    style={{ backgroundColor: t.tagColor || '#003a5c' }}
                   >
                     {t.tag}
                   </div>
@@ -123,7 +126,7 @@ export default function TestimonialSection({ data }) {
                       {t.company}
                     </p>
                     <p className="text-white/55 text-[11px] mt-0.5">{t.batch}</p>
-                  </div> */}
+                  </div>
                 </div>
               </div>
 
@@ -163,19 +166,8 @@ export default function TestimonialSection({ data }) {
               key={`quote-${animKey}`}
               style={{ animation: "fadeSlideUp 0.5s cubic-bezier(.2,0,.2,1) both" }}
             >
-              <div className="flex justify-end gap-2 mb-6">
-                {[
-                  { Icon: ChevronLeft, fn: () => go(active - 1) },
-                  { Icon: ChevronRight, fn: () => go(active + 1) },
-                ].map(({ Icon, fn }, i) => (
-                  <button
-                    key={i}
-                    onClick={fn}
-                    className="w-9 h-9 rounded-lg border border-slate-200 bg-white flex items-center justify-center hover:bg-slate-100 transition-colors shadow-sm"
-                  >
-                    <Icon size={15} className="text-slate-500" />
-                  </button>
-                ))}
+              <div className="flex justify-end gap-2 mb-6 text-slate-400 italic text-[10px]">
+                {active + 1} / {total}
               </div>
 
               <div className="flex gap-5">
@@ -184,7 +176,7 @@ export default function TestimonialSection({ data }) {
                   <div className="flex items-center gap-3 mb-5">
                     <StarRating rating={t.rating} />
                     <span className="flex items-center gap-1 text-[#00588b] text-[11px] font-extrabold uppercase tracking-widest">
-                      <BadgeCheck size={13} /> Verified Student
+                      <BadgeCheck size={13} /> {data?.verifyLabel || "Verified Student"}
                     </span>
                   </div>
                   <blockquote className="text-slate-700 text-lg md:text-xl font-semibold italic leading-relaxed mb-8 m-0">
@@ -207,10 +199,10 @@ export default function TestimonialSection({ data }) {
                       </div>
                     </div>
                     <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-2.5 text-center min-w-[88px] shadow-sm">
-                      <p className="text-[10px] font-extrabold  text-slate-400 uppercase tracking-widest">
-                        Package
+                      <p className="text-[10px] font-extrabold  text-slate-400 uppercase tracking-widest text-center">
+                        {data?.packageLabel || "Package"}
                       </p>
-                      <p className="text-[#00588b] font-black text-base leading-tight mt-0.5">
+                      <p className="text-[#00588b] font-black text-base leading-tight mt-0.5 text-center">
                         {t.package}
                       </p>
                     </div>
