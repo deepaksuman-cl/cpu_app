@@ -47,8 +47,9 @@ export default Course;
 const Course = sequelize.define('courses', {
   id: {
     type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
+     autoIncrement: true
+
   },
   name: {
     type: DataTypes.STRING,

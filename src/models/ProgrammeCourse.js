@@ -29,8 +29,8 @@ export default mongoose.models.ProgrammeCourse || mongoose.model('ProgrammeCours
 const ProgrammeCourse = sequelize.define('programmecourses', {
   id: {
     type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
+     autoIncrement: true
   },
   title: {
     type: DataTypes.STRING,

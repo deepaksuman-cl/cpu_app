@@ -4,8 +4,9 @@ import sequelize from '../lib/db.js';
 const HomePage = sequelize.define('homepages', {
   id: {
     type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
+     autoIncrement: true
+
   },
   name: {
     type: DataTypes.STRING,

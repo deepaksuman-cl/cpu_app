@@ -36,8 +36,9 @@ export default mongoose.models.ProgrammeSettings || mongoose.model('ProgrammeSet
 const ProgrammeSettings = sequelize.define('programmesettings', {
   id: {
     type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
+   
     primaryKey: true,
+     autoIncrement: true
   },
   metaTitle: {
     type: DataTypes.STRING,
