@@ -26,8 +26,8 @@ export default Page;
 
 const Page = sequelize.define('pages', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
   },
   title: {

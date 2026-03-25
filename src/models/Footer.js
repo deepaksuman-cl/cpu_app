@@ -32,8 +32,8 @@ export default Footer;
 
 const Footer = sequelize.define('footers', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     primaryKey: true,
   },
   logo: {
