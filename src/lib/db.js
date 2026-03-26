@@ -5,13 +5,17 @@ const globalForSequelize = globalThis;
 
 const sequelize =
   globalForSequelize._sequelizeInstance ||
-  new Sequelize(process.env.DATABASE_URL, {
+  new Sequelize({
+    username: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_NAME || "cpur",
+    host: process.env.DB_HOST || "localhost",
+    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 3306,
     dialect: "mariadb",
     dialectModule: mariadb,
     logging: process.env.NODE_ENV === "development" ? console.log : false,
     dialectOptions: {
       connectTimeout: 40000,
-      allowPublicKeyRetrieval: true,
     },
     pool: {
       max: 15,

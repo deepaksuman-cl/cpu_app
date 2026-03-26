@@ -18,7 +18,7 @@
     "pg-hstore": "^2.3.4",
     "react-dom": "19.2.3",
     "react-hot-toast": "^2.6.0",
-    "react-quill-new": "^3.8.3",
+    "react-quill-new": "^3.7.0",
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
