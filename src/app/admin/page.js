@@ -1,5 +1,4 @@
 // File: src/app/admin/page.js
-import DatabaseSyncButton from '@/components/admin/DatabaseSyncButton';
 import {
   ArrowUpRight,
   BookOpen, Calendar,
@@ -188,7 +187,6 @@ export default function AdminDashboard() {
               </div>
               <ChevronRightIcon className="text-[var(--text-muted)] group-hover:text-[var(--color-primary)] transition-colors" />
             </button>
-            <DatabaseSyncButton/>
           </div>
         </div>
 

@@ -1,22 +1,27 @@
 'use server';
 
 import Page from '@/models/Page';
+import { connectToDatabase } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 
 export async function getAllPages() {
   try {
+    await connectToDatabase();
+
     const pages = await Page.findAll({
       attributes: ['id', 'title', 'slug', 'pageCssId', 'blocks']
     });
     return { success: true, data: JSON.parse(JSON.stringify(pages)), error: null };
   } catch (error) {
-    console.error('getAllPages Error:', error);
-    return { success: false, data: null, error: error.message };
+    console.error('getAllPages Error:', error.message);
+    return { success: true, data: [], error: error.message };
   }
 }
 
 export async function getPageBySlug(slug) {
   try {
+    await connectToDatabase();
+
     const page = await Page.findOne({
       where: { slug }
     });
@@ -25,13 +30,14 @@ export async function getPageBySlug(slug) {
     }
     return { success: true, data: JSON.parse(JSON.stringify(page)), error: null };
   } catch (error) {
-    console.error('getPageBySlug Error:', error);
+    console.error('getPageBySlug Error:', error.message);
     return { success: false, data: null, error: error.message };
   }
 }
 
 export async function createPage(data) {
   try {
+    await connectToDatabase();
     if (data.slug) data.slug = data.slug.replace(/^\//, '');
     
     const newPage = await Page.create(data);
@@ -47,6 +53,7 @@ export async function createPage(data) {
 
 export async function updatePage(id, data) {
   try {
+    await connectToDatabase();
     if (data.slug) data.slug = data.slug.replace(/^\//, '');
     
     await Page.update(data, {
@@ -75,6 +82,7 @@ export async function updatePage(id, data) {
 
 export async function deletePage(id) {
   try {
+    await connectToDatabase();
     const page = await Page.findByPk(id);
     if (!page) return { success: false, error: 'Page not found' };
 

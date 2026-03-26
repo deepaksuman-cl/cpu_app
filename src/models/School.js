@@ -59,12 +59,6 @@ export default School;
 */
 
 const School = sequelize.define('schools', {
-  id: {
-    type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
-    primaryKey: true,
-     autoIncrement: true
-  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,

@@ -25,12 +25,6 @@ export default Navigation;
 */
 
 const Navigation = sequelize.define('navigations', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-     autoIncrement: true
-
-  },
   documentName: {
     type: DataTypes.STRING,
     allowNull: false,

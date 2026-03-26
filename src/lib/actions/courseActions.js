@@ -2,6 +2,7 @@
 
 import Course from '@/models/Course';
 import School from '@/models/School';
+import { connectToDatabase } from '@/lib/db';
 import fs from 'fs';
 import path from 'path';
 
@@ -58,6 +59,7 @@ async function syncCourseToSeedFile(course, schoolSlug) {
 
 export async function getCourses(schoolId = null) {
   try {
+    await connectToDatabase();
     const where = schoolId ? { schoolId } : {};
     const courses = await Course.findAll({
       where,
@@ -77,6 +79,7 @@ export async function getCourses(schoolId = null) {
 
 export async function getCourseBySlug(slug) {
   try {
+    await connectToDatabase();
     const course = await Course.findOne({
       where: { slug },
       include: [{
@@ -98,6 +101,7 @@ export async function getCourseBySlug(slug) {
 
 export async function getCourseById(id) {
   try {
+    await connectToDatabase();
     const course = await Course.findByPk(id, {
       include: [{
         model: School,
@@ -118,6 +122,7 @@ export async function getCourseById(id) {
 
 export async function createCourse(data) {
   try {
+    await connectToDatabase();
     let slug = data.slug;
     if (!slug && data.name) {
       slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
@@ -147,6 +152,7 @@ export async function createCourse(data) {
 
 export async function updateCourse(id, data) {
   try {
+    await connectToDatabase();
     // Auto-generate slug if name is updated and slug is missing
     if (data.name && !data.slug) {
       data.slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
@@ -181,6 +187,7 @@ export async function updateCourse(id, data) {
 
 export async function deleteCourse(id) {
   try {
+    await connectToDatabase();
     const course = await Course.findByPk(id);
     if (!course) return { success: false, error: 'Course not found' };
     

@@ -45,12 +45,6 @@ export default Course;
 */
 
 const Course = sequelize.define('courses', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-     autoIncrement: true
-
-  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -61,12 +55,8 @@ const Course = sequelize.define('courses', {
     // unique: true, // Managed by named index 'idx_course_slug' below
   },
   schoolId: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'Schools',
-      key: 'id',
-    },
   },
   metaTitle: {
     type: DataTypes.STRING,
@@ -132,9 +122,5 @@ const Course = sequelize.define('courses', {
     { name: 'idx_course_school', fields: ['schoolId'] }
   ]
 });
-
-// Relationships
-School.hasMany(Course, { foreignKey: 'schoolId', as: 'courses' });
-Course.belongsTo(School, { foreignKey: 'schoolId', as: 'school' });
 
 export default Course;

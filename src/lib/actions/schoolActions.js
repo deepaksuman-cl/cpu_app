@@ -1,9 +1,11 @@
 'use server';
 
 import School from '@/models/School';
+import { connectToDatabase } from '@/lib/db';
 
 export async function getSchools() {
   try {
+    await connectToDatabase();
     const schools = await School.findAll({
       attributes: ['id', 'name', 'slug', 'hero', 'metaDescription'],
       order: [['createdAt', 'DESC']]
@@ -17,6 +19,7 @@ export async function getSchools() {
 
 export async function getSchoolById(id) {
   try {
+    await connectToDatabase();
     const school = await School.findByPk(id);
     
     if (!school) {
@@ -31,6 +34,7 @@ export async function getSchoolById(id) {
 
 export async function getSchoolBySlug(slug) {
   try {
+    await connectToDatabase();
     const school = await School.findOne({
       where: { slug }
     });
@@ -47,6 +51,7 @@ export async function getSchoolBySlug(slug) {
 
 export async function createSchool(data) {
   try {
+    await connectToDatabase();
     let slug = data.slug;
     if (!slug && data.name) {
       slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
@@ -62,6 +67,7 @@ export async function createSchool(data) {
 
 export async function updateSchool(id, data) {
   try {
+    await connectToDatabase();
     // Auto-generate slug if name is updated and slug is missing
     if (data.name && !data.slug) {
       data.slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
@@ -85,6 +91,7 @@ export async function updateSchool(id, data) {
 
 export async function deleteSchool(id) {
   try {
+    await connectToDatabase();
     const school = await School.findByPk(id);
     if (!school) return { success: false, error: 'School not found' };
 

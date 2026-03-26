@@ -1,10 +1,7 @@
 'use server';
 
-import footerData from '@/data/footer.json';
-import homeData from '@/data/home.json';
-import navigationData from '@/data/navigation.json';
-import programmesData from '@/data/programmes.json';
-import schoolsData from '@/data/schoolsData.json';
+import fs from 'fs/promises';
+import path from 'path';
 
 import { connectToDatabase } from '@/lib/db';
 
@@ -35,6 +32,16 @@ const ensureStructuredTitle = (title) => {
 export async function seedDatabase() {
   try {
     console.log('🚀 Starting Universal Database Seed...');
+    
+    // Use fs to load JSON files instead of static imports to avoid boot-time issues
+    const dataDir = path.join(process.cwd(), 'src', 'data');
+    const loadJson = async (file) => JSON.parse(await fs.readFile(path.join(dataDir, file), 'utf-8'));
+
+    const footerData = await loadJson('footer.json');
+    const homeData = await loadJson('home.json');
+    const navigationData = await loadJson('navigation.json');
+    const programmesData = await loadJson('programmes.json');
+    const schoolsData = await loadJson('schoolsData.json');
 
     // ✅ STEP 1: Connect + Sync
     await connectToDatabase();
@@ -60,6 +67,17 @@ export async function seedDatabase() {
     console.log('🌱 Seeding Schools & Courses...');
 
     for (const [slug, data] of Object.entries(schoolsData)) {
+      // Enrich programmes with duration from courseDetails for "Plug & Play" metadata
+      if (data.programmes?.levels) {
+        data.programmes.levels.forEach(level => {
+          level.courses?.forEach(course => {
+            if (data.courseDetails?.[course.slug]) {
+              course.duration = data.courseDetails[course.slug].duration;
+            }
+          });
+        });
+      }
+
       const newSchool = await School.create({
         name: data.hero?.title?.main || data.name || slug,
         slug: slug,
@@ -97,9 +115,59 @@ export async function seedDatabase() {
             duration: courseData.duration,
             eligibility: courseData.eligibility,
             description: courseData.description,
+            metaTitle: courseData.metaTitle || '',
+            metaDescription: courseData.metaDescription || '',
             hero: courseData.hero || {},
+            accomplishments: courseData.accomplishments || {},
+            overview: courseData.overview || {},
+            scope: courseData.scope || {},
+            curriculum: courseData.curriculum || {},
+            admissionFee: courseData.admissionFee || {},
+            scholarships: courseData.scholarships || {},
+            whyJoin: courseData.whyJoin || {},
+            uniqueFeatures: courseData.uniqueFeatures || {},
+            applySteps: courseData.applySteps || {},
+            faq: courseData.faq || {},
+            exploreDepartment: courseData.exploreDepartment || {},
+            roadmap: courseData.roadmap || {},
           });
         }
+      }
+    }
+
+    // ✅ STEP 3.5: Auto-Seed missing schools from Navigation (Stub support)
+    const schoolSlugsInNav = [];
+    const findSchoolSlugs = (obj) => {
+      if (!obj || typeof obj !== 'object') return;
+      if (obj.slug && typeof obj.slug === 'string' && obj.slug.startsWith('/schools/') && obj.slug.split('/').length === 3) {
+        // Extract label and slug (e.g., /schools/education -> education)
+        const parts = obj.slug.split('/');
+        schoolSlugsInNav.push({
+          label: obj.label,
+          slug: parts[2]
+        });
+      }
+      Object.values(obj).forEach(val => {
+        if (typeof val === 'object') findSchoolSlugs(val);
+      });
+    };
+    findSchoolSlugs(navigationData);
+
+    for (const { label, slug } of schoolSlugsInNav) {
+      const exists = await School.findOne({ where: { slug } });
+      if (!exists) {
+        console.log(`🛡️ Auto-Seeding School Stub: ${label} (${slug})`);
+        await School.create({
+          name: label,
+          slug: slug,
+          metaTitle: `${label} | Career Point University`,
+          metaDescription: `Explore our ${label} at Career Point University, Kota.`,
+          hero: {
+            title: { main: label, highlight: '', skyHighlight: '' },
+            description: `Welcome to the ${label}. We provide industry-aligned education, research opportunities, and career excellence.`,
+            badge: 'Academic Excellence'
+          }
+        });
       }
     }
 

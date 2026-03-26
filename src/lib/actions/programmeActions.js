@@ -4,6 +4,7 @@ import ProgrammeCategory from '@/models/ProgrammeCategory';
 import ProgrammeCourse from '@/models/ProgrammeCourse';
 import AcademicSidebarLink from '@/models/AcademicSidebarLink';
 import ProgrammeSettings from '@/models/ProgrammeSettings';
+import { connectToDatabase } from '@/lib/db';
 import fs from 'fs';
 import path from 'path';
 
@@ -12,6 +13,7 @@ import path from 'path';
    ═══════════════════════════════════════════════════════════════ */
 export async function getCategories() {
   try {
+    await connectToDatabase();
     const categories = await ProgrammeCategory.findAll({
       attributes: ['id', 'label', 'order'],
       order: [['order', 'ASC']]
@@ -24,6 +26,7 @@ export async function getCategories() {
 
 export async function createCategory(data) {
   try {
+    await connectToDatabase();
     const newCategory = await ProgrammeCategory.create(data);
     return { success: true, data: JSON.parse(JSON.stringify(newCategory)), error: null };
   } catch (error) {
@@ -33,6 +36,7 @@ export async function createCategory(data) {
 
 export async function deleteCategory(id) {
   try {
+    await connectToDatabase();
     await ProgrammeCategory.destroy({
       where: { id }
     });
@@ -47,6 +51,7 @@ export async function deleteCategory(id) {
    ═══════════════════════════════════════════════════════════════ */
 export async function getCourses(options = {}) {
   try {
+    await connectToDatabase();
     const { categoryId, search } = options;
     const where = {};
     
@@ -80,6 +85,7 @@ export async function getCourses(options = {}) {
 
 export async function createCourse(data) {
   try {
+    await connectToDatabase();
     const newCourse = await ProgrammeCourse.create(data);
     return { success: true, data: JSON.parse(JSON.stringify(newCourse)), error: null };
   } catch (error) {
@@ -89,6 +95,7 @@ export async function createCourse(data) {
 
 export async function updateCourse(id, data) {
   try {
+    await connectToDatabase();
     await ProgrammeCourse.update(data, {
       where: { id }
     });
@@ -101,6 +108,7 @@ export async function updateCourse(id, data) {
 
 export async function deleteCourse(id) {
   try {
+    await connectToDatabase();
     await ProgrammeCourse.destroy({
       where: { id }
     });
@@ -115,6 +123,7 @@ export async function deleteCourse(id) {
    ═══════════════════════════════════════════════════════════════ */
 export async function getSidebarLinks() {
   try {
+    await connectToDatabase();
     const links = await AcademicSidebarLink.findAll({
       order: [['order', 'ASC']]
     });
@@ -126,6 +135,7 @@ export async function getSidebarLinks() {
 
 export async function createSidebarLink(data) {
   try {
+    await connectToDatabase();
     const newLink = await AcademicSidebarLink.create(data);
     return { success: true, data: JSON.parse(JSON.stringify(newLink)), error: null };
   } catch (error) {
@@ -135,6 +145,7 @@ export async function createSidebarLink(data) {
 
 export async function updateSidebarLink(id, data) {
   try {
+    await connectToDatabase();
     await AcademicSidebarLink.update(data, {
       where: { id }
     });
@@ -147,6 +158,7 @@ export async function updateSidebarLink(id, data) {
 
 export async function deleteSidebarLink(id) {
   try {
+    await connectToDatabase();
     await AcademicSidebarLink.destroy({
       where: { id }
     });
@@ -161,6 +173,7 @@ export async function deleteSidebarLink(id) {
    ═══════════════════════════════════════════════════════════════ */
 export async function getProgrammeSettings() {
   try {
+    await connectToDatabase();
     let settings = await ProgrammeSettings.findOne();
     if (!settings) {
       settings = await ProgrammeSettings.create({});
@@ -173,6 +186,7 @@ export async function getProgrammeSettings() {
 
 export async function updateProgrammeSettings(id, data) {
   try {
+    await connectToDatabase();
     await ProgrammeSettings.update(data, {
       where: { id }
     });

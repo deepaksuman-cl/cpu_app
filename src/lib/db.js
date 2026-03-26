@@ -5,12 +5,7 @@ const globalForSequelize = globalThis;
 
 const sequelize =
   globalForSequelize._sequelizeInstance ||
-  new Sequelize({
-    username: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || "",
-    database: process.env.DB_NAME || "cpur",
-    host: process.env.DB_HOST || "localhost",
-    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 3306,
+  new Sequelize(process.env.DATABASE_URL, {
     dialect: "mariadb",
     dialectModule: mariadb,
     logging: process.env.NODE_ENV === "development" ? console.log : false,
@@ -32,33 +27,57 @@ if (process.env.NODE_ENV !== "production") {
 
 // 🔥 Important: cache connection
 let isConnected = false;
+let connectionPromise = null;
 
 export const connectToDatabase = async () => {
   if (isConnected) return;
+  if (connectionPromise) return connectionPromise;
 
-  try {
-    await sequelize.authenticate({ alter: true });
-    console.log('✅ DB authenticated successfully');
+  connectionPromise = (async () => {
+    try {
+      await sequelize.authenticate();
+      console.log('✅ DB authenticated successfully');
 
-    // Import models to ensure they are registered with Sequelize
-    await import('@/models/Media.js');
-    await import('@/models/HomePage.js');
-    await import('@/models/Navigation.js');
+      // Import centralized models and associations
+      await import('@/models/index.js');
 
-    if (process.env.NODE_ENV === 'development') {
-      // Syncing with alter: true is now safer because models have named indexes
-      await sequelize.sync({ alter: true });
-      console.log('✅ DB synced (alter: true)');
-    } else {
-      await sequelize.sync({ alter: false });
+      if (process.env.NODE_ENV === 'development') {
+        // 🚀 The Bulletproof Sync: Disable FK checks temporarily to prevent sequence errors
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
+        await sequelize.sync({ alter: true });
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+        console.log('✅ DB Auto-Synced');
+      } else {
+        await sequelize.sync();
+      }
+
+      isConnected = true; // 🔓 Set true BEFORE seeding to avoid circular deadlock
+      console.log('🚀 Database initialization complete');
+
+      if (process.env.NODE_ENV === 'development') {
+        // 🏁 Plug & Play Auto-Seed: Detect fresh DB and populate it
+        const { default: db } = await import('@/models/index.js');
+        const { Navigation } = db;
+        
+        const navCount = await Navigation.count().catch(() => 0);
+        
+        if (navCount === 0) {
+          console.log('🌱 Fresh Database Detected. Auto-feeding initial data...');
+          const { seedDatabase } = await import('@/lib/actions/seedActions.js');
+          await seedDatabase().catch(err => {
+            console.error('❌ Auto-Seed Failed:', err.message);
+          });
+        }
+      }
+    } catch (error) {
+      console.error('❌ DB connection/sync error:', error.message);
+      throw error;
+    } finally {
+      connectionPromise = null;
     }
+  })();
 
-    isConnected = true;
-  } catch (error) {
-    console.error('❌ DB connection/sync error:', error.message);
-    // Don't set isConnected to true if it failed, so it can retry
-    throw error;
-  }
+  return connectionPromise;
 };
 
 

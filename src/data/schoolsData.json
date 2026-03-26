@@ -845,177 +845,243 @@
         "duration": "3 Years",
         "eligibility": "10+2 with minimum 50% marks",
         "description": "The BCA program focuses on preparing students for roles pertaining to computer applications and IT industry.",
+        "metaTitle": "",
+        "metaDescription": "",
         "hero": {
-          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
-          "badge": "3-Year Undergraduate Programme",
-          "title": {
-            "main": "Bachelor of Computer Application",
-            "highlight": "Computer",
-            "line1": "Bachelor of",
-            "line2": "Computer",
-            "line3": "Application"
-          },
-          "description": "Comprehensive foundation in computer science with hands-on training in programming, AI, data science, cybersecurity & emerging technologies.",
           "cta": [
             {
-              "label": "Apply Now",
               "link": "#apply",
+              "label": "Apply Now",
               "primary": true
             },
             {
-              "label": "Explore Programme",
               "link": "#overview",
+              "label": "Explore Programme",
               "primary": false
             }
           ],
+          "badge": "3-Year Undergraduate Programme",
+          "title": {
+            "main": "Bachelor of Computer Application",
+            "line1": "Bachelor of",
+            "line2": "Computer",
+            "line3": "Application",
+            "highlight": "Computer",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
           "quickStats": [
             {
-              "value": "3800+",
-              "label": "Placements"
+              "label": "Highest Pkg",
+              "value": "60L+"
             },
             {
-              "value": "60L+",
-              "label": "Highest Pkg"
-            },
-            {
-              "value": "10,000+",
-              "label": "Students Trust"
+              "label": "Students Trust",
+              "value": "10,000+"
             }
-          ]
+          ],
+          "description": "Comprehensive foundation in computer science with hands-on training in programming, AI, data science, cybersecurity & emerging technologies."
         },
         "accomplishments": {
-          "heading": "University's Accomplishments & Impact",
-          "trustBadge": "✓ Trusted by 10,000+ Students",
           "stats": [
             {
               "icon": "Users",
-              "value": "3800+",
-              "label": "Placements So Far"
+              "label": "Placements So Far",
+              "value": "3800+"
             },
             {
               "icon": "BookOpen",
-              "value": "60 L",
-              "label": "Highest Package"
+              "label": "Highest Package",
+              "value": "60 L"
             },
             {
               "icon": "Award",
-              "value": "18",
-              "label": "Startups"
+              "label": "Startups",
+              "value": "18"
             },
             {
               "icon": "FileText",
-              "value": "130",
-              "label": "Papers Published"
+              "label": "Papers Published",
+              "value": "130"
             },
             {
               "icon": "Globe",
-              "value": "1250+",
-              "label": "Google Fellowships"
+              "label": "Google Fellowships",
+              "value": "1250+"
             },
             {
               "icon": "Star",
-              "value": "905",
-              "label": "Alumni Achieved"
+              "label": "Alumni Achieved",
+              "value": "905"
             }
-          ]
+          ],
+          "heading": "University's Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 10,000+ Students"
         },
         "overview": {
-          "sectionTitle": "Overview",
-          "subtitle": "What is the BCA Programme?",
-          "paragraphs": [
-            "BCA Programme is a three-year, six-semester program that offers holistic knowledge of fundamentals in computational applications technology enabling efficient solutions for industries and business problems — fostering creativity and resolution-thinking by addressing AI-enhanced tools with IoT industry for providing real-time solutions efficiently.",
-            "Overall, BCA programme enables students with a comprehensive understanding of computer science principles, practical skills in computer programming, and opportunities for career growth in the dynamic and evolving field of information technology."
-          ],
           "tags": [
             "3 Years Duration",
             "6 Semesters",
             "Industry Aligned",
             "Placement Support"
           ],
+          "subtitle": "What is the BCA Programme?",
           "gridCards": [
             {
+              "sub": "C, C++, Java, Python",
               "icon": "Code2",
-              "label": "Programming",
-              "sub": "C, C++, Java, Python"
+              "label": "Programming"
             },
             {
+              "sub": "MySQL, Oracle, NoSQL",
               "icon": "Database",
-              "label": "Database",
-              "sub": "MySQL, Oracle, NoSQL"
+              "label": "Database"
             },
             {
+              "sub": "CN, Cybersecurity",
               "icon": "Network",
-              "label": "Networking",
-              "sub": "CN, Cybersecurity"
+              "label": "Networking"
             },
             {
+              "sub": "ML, Data Analytics",
               "icon": "Brain",
-              "label": "AI & Data",
-              "sub": "ML, Data Analytics"
+              "label": "AI & Data"
             }
-          ]
+          ],
+          "paragraphs": [
+            "BCA Programme is a three-year, six-semester program that offers holistic knowledge of fundamentals in computational applications technology enabling efficient solutions for industries and business problems — fostering creativity and resolution-thinking by addressing AI-enhanced tools with IoT industry for providing real-time solutions efficiently.",
+            "Overall, BCA programme enables students with a comprehensive understanding of computer science principles, practical skills in computer programming, and opportunities for career growth in the dynamic and evolving field of information technology."
+          ],
+          "sectionTitle": {
+            "0": "O",
+            "1": "v",
+            "2": "e",
+            "3": "r",
+            "4": "v",
+            "5": "i",
+            "6": "e",
+            "7": "w",
+            "main": "Overview"
+          }
         },
         "scope": {
-          "sectionTitle": "Scope of Bachelor of Computer Application (BCA)",
-          "subtitle": "Expanding opportunities in the world of technology",
+          "body": "The BCA program is a comprehensive three-year undertaking that produces students with a solid foundation in computer science and its applications. The curriculum encompasses a wide range of subjects, spanning programming languages such as C, C++, Java, data structures, database management systems, software engineering, web development, and computer networks. Additionally, students learn to leverage data, machine learning, AI research, writing skills, and skill development. Graduates can pursue roles as software developers, database administrators, system analysts, IT consultants, and cybersecurity professionals.",
           "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
-          "body": "The BCA program is a comprehensive three-year undertaking that produces students with a solid foundation in computer science and its applications. The curriculum encompasses a wide range of subjects, spanning programming languages such as C, C++, Java, data structures, database management systems, software engineering, web development, and computer networks. Additionally, students learn to leverage data, machine learning, AI research, writing skills, and skill development. Graduates can pursue roles as software developers, database administrators, system analysts, IT consultants, and cybersecurity professionals."
+          "subtitle": "Expanding opportunities in the world of technology",
+          "sectionTitle": {
+            "0": "S",
+            "1": "c",
+            "2": "o",
+            "3": "p",
+            "4": "e",
+            "5": " ",
+            "6": "o",
+            "7": "f",
+            "8": " ",
+            "9": "B",
+            "10": "a",
+            "11": "c",
+            "12": "h",
+            "13": "e",
+            "14": "l",
+            "15": "o",
+            "16": "r",
+            "17": " ",
+            "18": "o",
+            "19": "f",
+            "20": " ",
+            "21": "C",
+            "22": "o",
+            "23": "m",
+            "24": "p",
+            "25": "u",
+            "26": "t",
+            "27": "e",
+            "28": "r",
+            "29": " ",
+            "30": "A",
+            "31": "p",
+            "32": "p",
+            "33": "l",
+            "34": "i",
+            "35": "c",
+            "36": "a",
+            "37": "t",
+            "38": "i",
+            "39": "o",
+            "40": "n",
+            "41": " ",
+            "42": "(",
+            "43": "B",
+            "44": "C",
+            "45": "A",
+            "46": ")",
+            "main": "Scope"
+          }
         },
         "curriculum": {
-          "sectionTitle": "Course Structure BCA",
           "subtitle": "A well-structured curriculum designed for excellence",
           "introNote": "The BCA programme is a comprehensive curriculum providing students with a solid foundation in computer science, spanning programming languages (C, C++, Java), data structures, database management, software engineering, web development, and computer networks.",
           "outroNote": "Graduates of BCA are well prepared for diverse career specialization in the IT industry, including roles such as software developers, system analysts, IT consultants, database administrators, and cybersecurity professionals.",
+          "sectionTitle": {
+            "0": "C",
+            "1": "o",
+            "2": "u",
+            "3": "r",
+            "4": "s",
+            "5": "e",
+            "6": " ",
+            "7": "S",
+            "8": "t",
+            "9": "r",
+            "10": "u",
+            "11": "c",
+            "12": "t",
+            "13": "u",
+            "14": "r",
+            "15": "e",
+            "16": " ",
+            "17": "B",
+            "18": "C",
+            "19": "A",
+            "main": "Structure"
+          },
           "courseStructure": [
             {
+              "credits": 62,
               "category": "Departmental Core",
               "shortName": "DC",
-              "description": "Discipline Specific Core Courses (DSC)",
-              "credits": 62
+              "description": "Discipline Specific Core Courses (DSC)"
             },
             {
+              "credits": 6,
               "category": "Departmental Core",
               "shortName": "DC",
-              "description": "Project / Dissertation / Field Study / Survey",
-              "credits": 6
+              "description": "Project / Dissertation / Field Study / Survey"
             },
             {
+              "credits": 2,
               "category": "Departmental Core",
               "shortName": "DC",
-              "description": "Seminar",
-              "credits": 2
+              "description": "Seminar"
             },
             {
+              "credits": 4,
               "category": "Departmental Core",
               "shortName": "DC",
-              "description": "Internship / on Job Experience",
-              "credits": 4
+              "description": "Internship / on Job Experience"
             },
             {
+              "credits": 0,
               "category": "Departmental Core",
               "shortName": "DC",
-              "description": "Research Credit Course",
-              "credits": 0
+              "description": "Research Credit Course"
             },
             {
+              "credits": 32,
               "category": "Departmental Elective",
               "shortName": "DE",
-              "description": "Discipline Specific Elective Courses (DSE)",
-              "credits": 32
-            }
-          ],
-          "valueAddedCourses": [
-            {
-              "name": "Additional Languages",
-              "credits": 2
-            },
-            {
-              "name": "Professional and Business Ethics",
-              "credits": 2
-            },
-            {
-              "name": "National and Professional Issues (NPI)",
-              "credits": 2
+              "description": "Discipline Specific Elective Courses (DSE)"
             }
           ],
           "accordionSections": [
@@ -1065,67 +1131,25 @@
               "title": "Departmental Elective",
               "content": "Departmental Elective options include: Advanced Database Systems, Internet of Things (IoT), Blockchain Technology, AR/VR Development, Big Data Analytics, and Natural Language Processing."
             }
-          ]
-        },
-        "deptSlides": [
-          {
-            "title": "Department at a Glance",
-            "icon": "Building2",
-            "items": [
-              "3 Guest Experts/year",
-              "IEEE Collaboration",
-              "Modern Lab Facilities",
-              "Specializations & Electives",
-              "Industry Collaborations",
-              "Student Programs",
-              "Placement Assistance",
-              "Exclusive Lab Activities"
-            ],
-            "cta": "VIEW MORE"
-          },
-          {
-            "title": "Exclusive Labs",
-            "icon": "FlaskConical",
-            "items": [
-              "Microsoft Innovation Centre",
-              "Microsoft MTAC",
-              "Oracle Innovation Lab",
-              "Oracle Industry Lab",
-              "Artificial Intelligence Lab"
-            ],
-            "cta": "VIEW MORE"
-          },
-          {
-            "title": "Your Department in a Nutshell",
-            "icon": "Star",
-            "items": [
-              "Achievements",
-              "Pharmacy",
-              "Research",
-              "Latest Updates",
-              "Activities",
-              "Links"
-            ],
-            "cta": "START NOW"
-          }
-        ],
-        "admissionFee": {
-          "sectionTitle": "Admission & Fee Details",
-          "subtitle": "Simple admission process and transparent fee structure",
-          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
-          "youtubeVideoId": "dQw4w9WgXcQ",
-          "admissionCriteria": [
+          ],
+          "valueAddedCourses": [
             {
-              "color": "#00588b",
-              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
-              "link": "Click here"
+              "name": "Additional Languages",
+              "credits": 2
             },
             {
-              "color": "#ffb900",
-              "text": "Admission procedure: For follow-up admissions process. To apply, ",
-              "link": "Click Here"
+              "name": "Professional and Business Ethics",
+              "credits": 2
+            },
+            {
+              "name": "National and Professional Issues (NPI)",
+              "credits": 2
             }
-          ],
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Simple admission process and transparent fee structure",
           "feeDetails": [
             {
               "label": "Admission Fee (one-time)",
@@ -1147,18 +1171,48 @@
               "label": "Caution Money (one-time)",
               "amount": "3,000/- (Refundable)"
             }
+          ],
+          "sectionTitle": {
+            "0": "A",
+            "1": "d",
+            "2": "m",
+            "3": "i",
+            "4": "s",
+            "5": "s",
+            "6": "i",
+            "7": "o",
+            "8": "n",
+            "9": " ",
+            "10": "&",
+            "11": " ",
+            "12": "F",
+            "13": "e",
+            "14": "e",
+            "15": " ",
+            "16": "D",
+            "17": "e",
+            "18": "t",
+            "19": "a",
+            "20": "i",
+            "21": "l",
+            "22": "s",
+            "main": "Admission"
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
           ]
         },
         "scholarships": {
-          "sectionTitle": "Scholarship Criteria",
-          "subtitle": "Scholarship for Session 2026-27",
-          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
-          "dateHeaders": [
-            "Till 31st June",
-            "Till 13th July",
-            "Till 31st July",
-            "After 31st July"
-          ],
           "rows": [
             {
               "range": "Above 90%",
@@ -1188,6 +1242,15 @@
               ]
             }
           ],
+          "notes": [
+            "Merit scholarship is offered to students based on previous class.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated (A+ or equivalent year).",
+            "A 50% scholarship is given to students in the merit scholarship.",
+            "If a valid scholarship / subject scholarship fees are 50% off and student fails to continue, they may be eligible for cancellation scholarship.",
+            "To avail merit scholarship, student has to submit supporting documents in original along with 1 set of photocopies."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
           "earlyBird": {
             "label": "Early Admission Benefit (One-Time) INR",
             "values": [
@@ -1197,283 +1260,342 @@
               "No Use"
             ]
           },
-          "notes": [
-            "Merit scholarship is offered to students based on previous class.",
-            "Tuition and fees may be net once your scholarship criteria is evaluated (A+ or equivalent year).",
-            "A 50% scholarship is given to students in the merit scholarship.",
-            "If a valid scholarship / subject scholarship fees are 50% off and student fails to continue, they may be eligible for cancellation scholarship.",
-            "To avail merit scholarship, student has to submit supporting documents in original along with 1 set of photocopies."
-          ]
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "0": "S",
+            "1": "c",
+            "2": "h",
+            "3": "o",
+            "4": "l",
+            "5": "a",
+            "6": "r",
+            "7": "s",
+            "8": "h",
+            "9": "i",
+            "10": "p",
+            "11": " ",
+            "12": "C",
+            "13": "r",
+            "14": "i",
+            "15": "t",
+            "16": "e",
+            "17": "r",
+            "18": "i",
+            "19": "a",
+            "main": "Scholarships"
+          }
         },
         "whyJoin": {
-          "sectionTitle": "Why Join Bachelor of Computer Application (BCA)?",
-          "subtitle": "Unlock your potential with a BCA degree",
           "reasons": [
             {
+              "desc": "BCA serves as a gateway to the vast IT industry. The program equips students with foundational knowledge and practical skills in software development, web design, database administration, networking, and other IT areas.",
               "icon": "TrendingUp",
-              "title": "Gateway to the IT Industry",
-              "desc": "BCA serves as a gateway to the vast IT industry. The program equips students with foundational knowledge and practical skills in software development, web design, database administration, networking, and other IT areas."
+              "title": "Gateway to the IT Industry"
             },
             {
+              "desc": "BCA graduates have opportunities across IT companies, software firms, government agencies, finance, healthcare, and educational institutions. The versatile degree allows exploring diverse career paths.",
               "icon": "Briefcase",
-              "title": "Diverse Career Opportunities",
-              "desc": "BCA graduates have opportunities across IT companies, software firms, government agencies, finance, healthcare, and educational institutions. The versatile degree allows exploring diverse career paths."
+              "title": "Diverse Career Opportunities"
             },
             {
+              "desc": "The curriculum covers programming languages, database management, software engineering, and computer applications — highly demanded across multiple industries.",
               "icon": "BookOpen",
-              "title": "In-demand Skills",
-              "desc": "The curriculum covers programming languages, database management, software engineering, and computer applications — highly demanded across multiple industries."
+              "title": "In-demand Skills"
             },
             {
+              "desc": "BCA programs emphasize practical training through projects, internships, and industry collaborations. Students apply theoretical knowledge to real-world problems.",
               "icon": "Target",
-              "title": "Practical Training & Hands-On Exp.",
-              "desc": "BCA programs emphasize practical training through projects, internships, and industry collaborations. Students apply theoretical knowledge to real-world problems."
+              "title": "Practical Training & Hands-On Exp."
             },
             {
+              "desc": "Many BCA programs offer specialization in data science, machine learning, cybersecurity, AI, and mobile application development.",
               "icon": "Brain",
-              "title": "Opportunities for Specialization",
-              "desc": "Many BCA programs offer specialization in data science, machine learning, cybersecurity, AI, and mobile application development."
+              "title": "Opportunities for Specialization"
             }
-          ]
+          ],
+          "subtitle": "Unlock your potential with a BCA degree",
+          "sectionTitle": {
+            "0": "W",
+            "1": "h",
+            "2": "y",
+            "3": " ",
+            "4": "J",
+            "5": "o",
+            "6": "i",
+            "7": "n",
+            "8": " ",
+            "9": "B",
+            "10": "a",
+            "11": "c",
+            "12": "h",
+            "13": "e",
+            "14": "l",
+            "15": "o",
+            "16": "r",
+            "17": " ",
+            "18": "o",
+            "19": "f",
+            "20": " ",
+            "21": "C",
+            "22": "o",
+            "23": "m",
+            "24": "p",
+            "25": "u",
+            "26": "t",
+            "27": "e",
+            "28": "r",
+            "29": " ",
+            "30": "A",
+            "31": "p",
+            "32": "p",
+            "33": "l",
+            "34": "i",
+            "35": "c",
+            "36": "a",
+            "37": "t",
+            "38": "i",
+            "39": "o",
+            "40": "n",
+            "41": " ",
+            "42": "(",
+            "43": "B",
+            "44": "C",
+            "45": "A",
+            "46": ")",
+            "47": "?",
+            "main": "Why Join"
+          }
         },
         "uniqueFeatures": {
-          "sectionTitle": "What makes Department of BCA unique?",
-          "subtitle": "Setting us apart from the rest",
           "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
           "features": [
             {
               "num": "06",
+              "desc": "BCA departments provide entrepreneurship and career support services, merit reviews, internship opportunities, and mentoring for student entrepreneurs.",
               "icon": "Users",
-              "title": "Support Services",
-              "desc": "BCA departments provide entrepreneurship and career support services, merit reviews, internship opportunities, and mentoring for student entrepreneurs."
+              "title": "Support Services"
             },
             {
               "num": "07",
+              "desc": "BCA departments collaborate with academic and industry partners to promote interdisciplinary research, joint projects, and knowledge exchange.",
               "icon": "Globe",
-              "title": "Interdisciplinary Approach",
-              "desc": "BCA departments collaborate with academic and industry partners to promote interdisciplinary research, joint projects, and knowledge exchange."
+              "title": "Interdisciplinary Approach"
             },
             {
               "num": "08",
+              "desc": "The department focuses on holistic development offering professional skills, skill training, career readiness programs, and competitive preparation.",
               "icon": "Brain",
-              "title": "Research & Development",
-              "desc": "The department focuses on holistic development offering professional skills, skill training, career readiness programs, and competitive preparation."
+              "title": "Research & Development"
             },
             {
               "num": "09",
+              "desc": "BCA departments engage with the local community, industry stakeholders through community programs and promote social responsibility among students.",
               "icon": "Building2",
-              "title": "Community Engagement",
-              "desc": "BCA departments engage with the local community, industry stakeholders through community programs and promote social responsibility among students."
+              "title": "Community Engagement"
             }
-          ]
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "0": "W",
+            "1": "h",
+            "2": "a",
+            "3": "t",
+            "4": " ",
+            "5": "m",
+            "6": "a",
+            "7": "k",
+            "8": "e",
+            "9": "s",
+            "10": " ",
+            "11": "D",
+            "12": "e",
+            "13": "p",
+            "14": "a",
+            "15": "r",
+            "16": "t",
+            "17": "m",
+            "18": "e",
+            "19": "n",
+            "20": "t",
+            "21": " ",
+            "22": "o",
+            "23": "f",
+            "24": " ",
+            "25": "B",
+            "26": "C",
+            "27": "A",
+            "28": " ",
+            "29": "u",
+            "30": "n",
+            "31": "i",
+            "32": "q",
+            "33": "u",
+            "34": "e",
+            "35": "?",
+            "main": "Features"
+          }
         },
         "applySteps": {
-          "sectionTitle": "How to Apply",
-          "subtitle": "Simple 5-step process to join the BCA programme",
-          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
-          "guideLabel": "Guide to Register Online",
-          "ctaLabel": "Start Your Application",
-          "ctaLink": "#",
           "steps": [
             {
+              "desc": "Create your account on the portal with your basic personal details and email address.",
               "icon": "UserCheck",
               "step": "01",
-              "label": "Register Yourself",
-              "desc": "Create your account on the portal with your basic personal details and email address."
+              "label": "Register Yourself"
             },
             {
+              "desc": "Confirm your identity, educational background, and upload the necessary documents.",
               "icon": "FileText",
               "step": "02",
-              "label": "Verify Details",
-              "desc": "Confirm your identity, educational background, and upload the necessary documents."
+              "label": "Verify Details"
             },
             {
+              "desc": "Complete the online application form with all required academic and personal information.",
               "icon": "ClipboardList",
               "step": "03",
-              "label": "Fill Application Online",
-              "desc": "Complete the online application form with all required academic and personal information."
+              "label": "Fill Application Online"
             },
             {
+              "desc": "Securely pay the application processing fee online via net banking, UPI, or card.",
               "icon": "IndianRupee",
               "step": "04",
-              "label": "Pay Application Fee",
-              "desc": "Securely pay the application processing fee online via net banking, UPI, or card."
+              "label": "Pay Application Fee"
             },
             {
+              "desc": "Review your complete application and submit it for processing and review.",
               "icon": "BadgeCheck",
               "step": "05",
-              "label": "Submit Application",
-              "desc": "Review your complete application and submit it for processing and review."
+              "label": "Submit Application"
             }
-          ]
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the BCA programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "0": "H",
+            "1": "o",
+            "2": "w",
+            "3": " ",
+            "4": "t",
+            "5": "o",
+            "6": " ",
+            "7": "A",
+            "8": "p",
+            "9": "p",
+            "10": "l",
+            "11": "y",
+            "main": "Apply"
+          }
         },
         "faq": {
-          "sectionTitle": "Frequently Asked Questions",
-          "subtitle": "Everything you need to know about the BCA programme",
           "items": [
             {
-              "q": "What is the eligibility criteria for BCA admission?",
-              "a": "Candidates must have passed 10+2 (or equivalent) from a recognized board with a minimum of 50% marks in aggregate. Science/Commerce/Arts stream students are all eligible."
+              "a": "Candidates must have passed 10+2 (or equivalent) from a recognized board with a minimum of 50% marks in aggregate. Science/Commerce/Arts stream students are all eligible.",
+              "q": "What is the eligibility criteria for BCA admission?"
             },
             {
-              "q": "What is the duration and fee structure of the BCA programme?",
-              "a": "BCA is a 3-year (6 semester) programme. The tuition fee is ₹21,000 per semester. Additional charges include examination fee (₹2,500), development fee (₹2,500), and a one-time admission fee of ₹8,900."
+              "a": "BCA is a 3-year (6 semester) programme. The tuition fee is ₹21,000 per semester. Additional charges include examination fee (₹2,500), development fee (₹2,500), and a one-time admission fee of ₹8,900.",
+              "q": "What is the duration and fee structure of the BCA programme?"
             },
             {
-              "q": "What specializations are available in BCA at Career Point University?",
-              "a": "Students can choose electives in Data Science, Artificial Intelligence & Machine Learning, Cloud Computing, Cybersecurity, Mobile App Development, and IoT. These are offered as Discipline Specific Electives (DSE)."
+              "a": "Students can choose electives in Data Science, Artificial Intelligence & Machine Learning, Cloud Computing, Cybersecurity, Mobile App Development, and IoT. These are offered as Discipline Specific Electives (DSE).",
+              "q": "What specializations are available in BCA at Career Point University?"
             },
             {
-              "q": "What kind of placements can I expect after completing BCA?",
-              "a": "Career Point University has a strong placement record. BCA graduates have been placed at companies like TCS, Infosys, Tech Mahindra, Wipro, and Zalando with packages ranging from 6 LPA up to 75 LPA (highest)."
+              "a": "Career Point University has a strong placement record. BCA graduates have been placed at companies like TCS, Infosys, Tech Mahindra, Wipro, and Zalando with packages ranging from 6 LPA up to 75 LPA (highest).",
+              "q": "What kind of placements can I expect after completing BCA?"
             },
             {
-              "q": "Is there any scholarship available for BCA students?",
-              "a": "Yes. Merit-based scholarships of up to 100% on tuition fees are available for students scoring above 90% in their qualifying examination. Early admission also offers an additional one-time benefit of up to ₹3,000."
+              "a": "Yes. Merit-based scholarships of up to 100% on tuition fees are available for students scoring above 90% in their qualifying examination. Early admission also offers an additional one-time benefit of up to ₹3,000.",
+              "q": "Is there any scholarship available for BCA students?"
             },
             {
-              "q": "What is the admission process for BCA?",
-              "a": "Admissions are done through the DPM-SAT (Merit & Scholarship Test). After registration, candidates appear for the test, submit documents, pay the application fee, and receive their admission offer letter."
+              "a": "Admissions are done through the DPM-SAT (Merit & Scholarship Test). After registration, candidates appear for the test, submit documents, pay the application fee, and receive their admission offer letter.",
+              "q": "What is the admission process for BCA?"
             },
             {
-              "q": "What labs and infrastructure are available for BCA students?",
-              "a": "BCA students have access to the Microsoft Innovation Centre, Microsoft MTAC, Oracle Innovation Lab, Oracle Industry Lab, and an Artificial Intelligence Lab. Modern computer labs with the latest hardware and software are also available."
+              "a": "BCA students have access to the Microsoft Innovation Centre, Microsoft MTAC, Oracle Innovation Lab, Oracle Industry Lab, and an Artificial Intelligence Lab. Modern computer labs with the latest hardware and software are also available.",
+              "q": "What labs and infrastructure are available for BCA students?"
             },
             {
-              "q": "Can I pursue higher studies after completing BCA?",
-              "a": "Yes. BCA graduates can pursue MCA (Master of Computer Applications), MBA in IT, M.Sc. in Computer Science, or directly enter the industry. Career Point University also offers an MCA programme with Data Science specialization."
+              "a": "Yes. BCA graduates can pursue MCA (Master of Computer Applications), MBA in IT, M.Sc. in Computer Science, or directly enter the industry. Career Point University also offers an MCA programme with Data Science specialization.",
+              "q": "Can I pursue higher studies after completing BCA?"
             }
-          ]
+          ],
+          "subtitle": "Everything you need to know about the BCA programme",
+          "sectionTitle": {
+            "0": "F",
+            "1": "r",
+            "2": "e",
+            "3": "q",
+            "4": "u",
+            "5": "e",
+            "6": "n",
+            "7": "t",
+            "8": "l",
+            "9": "y",
+            "10": " ",
+            "11": "A",
+            "12": "s",
+            "13": "k",
+            "14": "e",
+            "15": "d",
+            "16": " ",
+            "17": "Q",
+            "18": "u",
+            "19": "e",
+            "20": "s",
+            "21": "t",
+            "22": "i",
+            "23": "o",
+            "24": "n",
+            "25": "s",
+            "main": "FAQ"
+          }
         },
-        "placements": {
-          "title": {
-            "main": "Students Placed in Top Companies",
-            "highlight": "Top Companies"
+        "deptSlides": [
+          {
+            "cta": "VIEW MORE",
+            "icon": "Building2",
+            "items": [
+              ""
+            ],
+            "title": ""
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "3Year Learning Roadmap",
+            "highlight": "Roadmap"
           },
-          "label": "BCA Placement Records",
-          "subtitle": "Highest & best placement record in the region",
-          "list": [
+          "subtitle": "Your journey from foundation to industry expert.",
+          "years": [
             {
-              "name": "Siraj Ali",
-              "company": "Course5 Intelligence",
-              "pkg": "8 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
-            },
-            {
-              "name": "Tarun Jain",
-              "company": "Appcino",
-              "pkg": "10 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
-            },
-            {
-              "name": "Prateek Dhaman",
-              "company": "TCS",
-              "pkg": "9 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png"
-            },
-            {
-              "name": "Archana Kumari",
-              "company": "Tech Mahindra",
-              "pkg": "12 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
-            },
-            {
-              "name": "Kiran Daklani",
-              "company": "Zalando",
-              "pkg": "75 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg"
-            },
-            {
-              "name": "Ravindra Singh",
-              "company": "ATC",
-              "pkg": "8 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
-            },
-            {
-              "name": "Priya Sharma",
-              "company": "Infosys",
-              "pkg": "7 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
-            },
-            {
-              "name": "Rahul Verma",
-              "company": "Wipro",
-              "pkg": "9 LPA",
-              "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
-            }
-          ]
-        },
-        "industry": {
-          "title": {
-            "main": "Industry Tie Up's",
-            "highlight": "Tie Up's"
-          },
-          "label": "BCA Collaborations",
-          "partners": [
-            {
-              "name": "Tech Mahindra",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/tech-mahindra-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "TCS",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "Infosys",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "Wipro",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "Vodafone",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/vodafone-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "Google",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "J-Spiders",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/j-spiders-logo-as-Smart-Object-1.jpg"
-            },
-            {
-              "name": "JustDial",
-              "url": "https://cpur.in/wp-content/uploads/2023/08/justdial-logo-as-Smart-Object-1.jpg"
-            }
-          ]
-        },
-        "testimonials": {
-          "title": {
-            "main": "BCA Students Speak",
-            "highlight": "Students"
-          },
-          "label": "BCA Testimonials",
-          "list": [
-            {
-              "name": "Archana Kumari",
-              "batch": "BCA 2019",
-              "company": "Tech Mahindra",
-              "rating": 5,
-              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari-Tech-Mahindra.png",
-              "text": "Career Point University transformed my career. The faculty's dedication and industry-focused curriculum gave me the confidence to crack top MNC interviews."
-            },
-            {
-              "name": "Rahul Verma",
-              "batch": "BCA 2021",
-              "company": "Infosys",
-              "rating": 5,
-              "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
-              "text": "The research opportunities and cutting-edge labs at CPU are unmatched. I published 2 research papers during my BCA, which opened doors I never imagined."
-            },
-            {
-              "name": "Priya Sharma",
-              "batch": "BCA 2020",
-              "company": "Accenture",
-              "rating": 5,
-              "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
-              "text": "From day one, the university prepared us for real-world challenges. The industry tie-ups and live projects gave hands-on experience. I landed my dream job."
+              "id": 1774493156934,
+              "badge": "YEAR-1",
+              "skills": [],
+              "aiTools": [
+                {
+                  "desc": "",
+                  "icon": "Bot",
+                  "name": "",
+                  "color": "#000"
+                }
+              ],
+              "concepts": [],
+              "projects": [],
+              "subjects": [],
+              "tabLabel": "YEAR 1",
+              "tabTitle": "New Year",
+              "contentDesc": "Year Description",
+              "contentTitle": "Year Heading"
             }
           ]
         }
