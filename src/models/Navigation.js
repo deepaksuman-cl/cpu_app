@@ -25,16 +25,10 @@ export default Navigation;
 */
 
 const Navigation = sequelize.define('navigations', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-     autoIncrement: true
-
-  },
   documentName: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    // unique: true, // Managed by named index 'idx_nav_docname' below
     defaultValue: 'main_header',
   },
   data: {
@@ -43,6 +37,9 @@ const Navigation = sequelize.define('navigations', {
   },
 }, {
   timestamps: true,
+  indexes: [
+    { name: 'idx_nav_docname', unique: true, fields: ['documentName'] }
+  ]
 });
 
 export default Navigation;

@@ -81,6 +81,13 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
                           {course.name}
                         </span>
                       </Link>
+
+                      {course.duration && (
+                        <div className="mt-1 flex items-center gap-1.5 px-1.5 py-0.5 bg-slate-100 rounded text-[10px] font-bold text-slate-500 w-fit">
+                          <LucideIcons.Clock className="w-3 h-3" />
+                          {course.duration}
+                        </div>
+                      )}
                       
                       {course.specializations?.length > 0 && (
                         <div className="mt-3 flex flex-wrap items-center gap-x-0.5 gap-y-1">

@@ -7,6 +7,7 @@ import {
   GraduationCap, Trophy, BookOpen, Dumbbell,
   BadgeCheck, MapPin, ExternalLink,
 } from "lucide-react";
+import Image from "next/image";
 
 // ╔══════════════════════════════════════════════════════════╗
 // ║               SLIDER CONSTANTS                           ║
@@ -208,10 +209,12 @@ export default function NewsVideoSection({ data }) {
 
                       {/* Thumbnail */}
                       <div className="relative h-full w-24 min-w-[96px] overflow-hidden flex-shrink-0">
-                        <img
+                        <Image
                           src={item.image}
                           alt={item.title}
-                          className="nvs-card-img h-full w-full object-cover"
+                          fill
+                          className="nvs-card-img object-cover"
+                          sizes="96px"
                         />
                         {/* subtle overlay */}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />

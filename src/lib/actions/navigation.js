@@ -1,6 +1,7 @@
 'use server';
 
 import Navigation from '@/models/Navigation';
+import { connectToDatabase } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import fs from 'fs';
 import path from 'path';
@@ -10,27 +11,22 @@ import path from 'path';
  * Auto-seeds from navigation.json if database is empty.
  */
 export async function getNavigationData() {
+  const defaultNav = { topMenu: [], siteConfig: {}, topBarInfo: {} };
   try {
+    await connectToDatabase();
+
     let navDoc = await Navigation.findOne({
       where: { documentName: 'main_header' }
     });
 
     if (!navDoc) {
-      console.log("Database is empty. Seeding from navigation.json...");
-      const filePath = path.join(process.cwd(), 'src', 'data', 'navigation.json');
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      const defaultData = JSON.parse(fileContents);
-
-      navDoc = await Navigation.create({
-        documentName: 'main_header',
-        data: defaultData
-      });
+      return defaultNav; // Return default if not seeded yet, db.js will handle seeding
     }
 
     return JSON.parse(JSON.stringify(navDoc.data));
   } catch (error) {
-    console.error("Error fetching navigation data:", error);
-    return { topMenu: [], siteConfig: {}, topBarInfo: {} }; 
+    console.error("Error fetching navigation data:", error.message);
+    return defaultNav; 
   }
 }
 
@@ -39,6 +35,7 @@ export async function getNavigationData() {
  */
 export async function updateNavigationData(nodePath, payload) {
   try {
+    await connectToDatabase();
     const navDoc = await Navigation.findOne({
       where: { documentName: 'main_header' }
     });
@@ -76,6 +73,7 @@ export async function updateNavigationData(nodePath, payload) {
  */
 export async function saveFullNavigationData(fullData) {
   try {
+    await connectToDatabase();
     const cleanData = JSON.parse(JSON.stringify(fullData));
     
     await Navigation.update(

@@ -18,11 +18,6 @@ export default mongoose.models.AcademicSidebarLink || mongoose.model('AcademicSi
 const AcademicSidebarLink = sequelize.define(
   "academicsidebarlinks",
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     label: {
       type: DataTypes.STRING,
       allowNull: false,

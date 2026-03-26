@@ -13,16 +13,10 @@ export default mongoose.models.ProgrammeCategory || mongoose.model('ProgrammeCat
 */
 
 const ProgrammeCategory = sequelize.define('programmecategorys', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-     autoIncrement: true
-
-  },
   label: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    // unique: true, // Managed by named index 'idx_pcat_label' below
   },
   order: {
     type: DataTypes.INTEGER,
@@ -30,6 +24,10 @@ const ProgrammeCategory = sequelize.define('programmecategorys', {
   },
 }, {
   timestamps: true,
+  indexes: [
+    { name: 'idx_pcat_label', unique: true, fields: ['label'] },
+    { name: 'idx_pcat_order', fields: ['order'] }
+  ]
 });
 
 export default ProgrammeCategory;

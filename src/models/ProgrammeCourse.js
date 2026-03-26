@@ -27,11 +27,6 @@ export default mongoose.models.ProgrammeCourse || mongoose.model('ProgrammeCours
 */
 
 const ProgrammeCourse = sequelize.define('programmecourses', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-     autoIncrement: true
-  },
   title: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -41,12 +36,8 @@ const ProgrammeCourse = sequelize.define('programmecourses', {
     allowNull: false,
   },
   categoryId: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'ProgrammeCategories',
-      key: 'id',
-    },
   },
   icon: {
     type: DataTypes.STRING,
@@ -77,10 +68,10 @@ const ProgrammeCourse = sequelize.define('programmecourses', {
   },
 }, {
   timestamps: true,
+  indexes: [
+    { name: 'idx_pcourse_category', fields: ['categoryId'] },
+    { name: 'idx_pcourse_title', fields: ['title'] }
+  ]
 });
-
-// Relationships
-ProgrammeCategory.hasMany(ProgrammeCourse, { foreignKey: 'categoryId', as: 'courses' });
-ProgrammeCourse.belongsTo(ProgrammeCategory, { foreignKey: 'categoryId', as: 'category' });
 
 export default ProgrammeCourse;

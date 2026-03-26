@@ -13,20 +13,22 @@ function Lightbox({ src, title, onClose }) {
     </div>
   );
 }
-
 export function ResearchSection({ data }) {
   const [lightbox, setLightbox] = useState(null);
   const items = data?.items || [];
+  const { title, highlight } = data || {};
   
   return (
     <>
       <section id="research" className="bg-white py-16 px-4 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="font-black text-3xl text-gray-900" dangerouslySetInnerHTML={{ __html: data?.title || "Pioneering Research at CPU" }} />
-            <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3" />
+          <div className="text-center mb-12">
+            <h2 className="font-black text-3xl md:text-5xl text-gray-900">
+              {title || "Pioneering"} <span className="text-[#00588b]">{highlight || "Research at CPU"}</span>
+            </h2>
+            <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-4" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {items.map((item, i) => (
               <div 
                 key={i} 
@@ -54,18 +56,22 @@ export function ResearchSection({ data }) {
   );
 }
 
-const iconMapping = { Zap, Microscope, Briefcase: Zap, Star }; // Simplified mapping placeholder for icons string to component instance.
+const iconMapping = { Zap, Microscope, Briefcase: Zap, Star }; 
 
 export function HappeningsSection({ data }) {
   const happenings = data?.items || [];
+  const { title, highlight } = data || {};
+
   return (
     <section className="bg-white py-16 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="font-black text-3xl text-gray-900" dangerouslySetInnerHTML={{ __html: data?.title || "Happenings @CPU" }} />
-          <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
+        <div className="text-center mb-12">
+          <h2 className="font-black text-3xl md:text-5xl text-gray-900">
+            {title || "Happenings"} <span className="text-[#00588b]">{highlight || "@CPU"}</span>
+          </h2>
+          <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-4"/>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {happenings.map((h, i) => {
             const Ic = iconMapping[h.icon] || Zap;
             return (
@@ -82,7 +88,7 @@ export function HappeningsSection({ data }) {
             );
           })}
         </div>
-        <div className="text-center mt-6">
+        <div className="text-center mt-8">
           <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
             View All Events <ArrowRight size={14}/>
            </button>
@@ -95,13 +101,16 @@ export function HappeningsSection({ data }) {
 export function FAQSection({ data }) {
   const [openFaq, setOpenFaq] = useState(null);
   const items = data?.faqs || [];
+  const { title, highlight } = data || {};
   
   return (
     <section className="bg-blue-50 py-16 px-4 overflow-hidden">
       <div className="max-w-[860px] mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="font-black text-3xl text-gray-900" dangerouslySetInnerHTML={{ __html: data?.title || "Frequently Asked Questions" }} />
-          <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
+        <div className="text-center mb-12">
+          <h2 className="font-black text-3xl md:text-5xl text-gray-900">
+            {title || "Frequently Asked"} <span className="text-[#00588b]">{highlight || "Questions"}</span>
+          </h2>
+          <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-4"/>
         </div>
         <div className="flex flex-col gap-2.5">
           {items.map((faq, i) => (
@@ -127,19 +136,23 @@ export function FAQSection({ data }) {
     </section>
   );
 }
+
 export function SocialWallSection({ data }) {
   const [lightbox, setLightbox] = useState(null);
   const images = data?.images || [];
+  const { title, highlight } = data || {};
 
   return (
     <>
       <section className="bg-white py-16 px-4 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-7">
-            <h2 className="font-black text-3xl text-gray-900" dangerouslySetInnerHTML={{ __html: data?.title || "CPU Social Wall" }} />
-            <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-3"/>
+          <div className="text-center mb-10">
+            <h2 className="font-black text-3xl md:text-5xl text-gray-900">
+              {title || "CPU"} <span className="text-[#00588b]">{highlight || "Social Wall"}</span>
+            </h2>
+            <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-4"/>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {images.map((src, i) => (
               <div 
                 key={i} 
@@ -153,6 +166,7 @@ export function SocialWallSection({ data }) {
               </div>
             ))}
           </div>
+
           <div className="flex justify-center gap-5 mt-5 flex-wrap">
             {[
               { Ic: Facebook, label: "Facebook", c: "text-[#1877F2]" },

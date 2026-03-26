@@ -74,8 +74,8 @@ export default async function CourseSlugPage({ params }) {
   }
   
   // Breadcrumb logic
-  const schoolName = course.schoolId?.name || "School";
-  const schoolSlug = course.schoolId?.slug || slug;
+  const schoolName = course.school?.name || "School";
+  const schoolSlug = course.school?.slug || slug;
 
   const breadcrumbPaths = [
     { label: "Home", link: "/" },
@@ -89,7 +89,7 @@ export default async function CourseSlugPage({ params }) {
       <Breadcrumb paths={breadcrumbPaths} />
       
       {course.hero && (
-        <SchoolHero data={course.hero}>
+        <SchoolHero data={{...course.hero, duration: course.duration, eligibility: course.eligibility}}>
           {course.accomplishments && <AccomplishmentsCard data={course.accomplishments} />}
         </SchoolHero>
       )}

@@ -3,7 +3,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 
 export default function CampusLifeSection({ data }) {
   if (!data) return null;
-  const { tagline, title, stats = [], cols: columns = [] } = data;
+  const { tagline, title, highlight, stats = [], cols: columns = [] } = data;
 
   return (
     <section id="campus" className="bg-blue-50 py-16 overflow-hidden">
@@ -13,7 +13,9 @@ export default function CampusLifeSection({ data }) {
             {tagline}
           </p>
         </div>
-        <h2 className="text-center font-black text-3xl text-gray-900 mt-1.5" dangerouslySetInnerHTML={{ __html: title }} />
+        <h2 className="text-center font-black text-3xl md:text-5xl text-gray-900 mt-1.5">
+          {title} <span className="text-[#00588b]">{highlight}</span>
+        </h2>
         <div className="flex justify-center gap-12 flex-wrap mt-7">
           {stats.map(({ v, l }, i) => (
             <div key={i} className="text-center">
@@ -45,13 +47,13 @@ export default function CampusLifeSection({ data }) {
                 </p>
               </div>
               <div className="flex flex-col gap-0.5 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                {col.links.map((link, li) => (
+                {(col.links || []).map((link, li) => (
                   <a
                     key={li}
-                    href="#campus"
+                    href={link.slug || "#"}
                     className="flex items-center gap-1.5 text-white/88 text-[12.5px] no-underline py-0.5 hover:text-amber-400 transition-colors"
                   >
-                    <ChevronRight size={10} className="flex-shrink-0" /> {link}
+                    <ChevronRight size={10} className="flex-shrink-0" /> {link.label}
                   </a>
                 ))}
               </div>

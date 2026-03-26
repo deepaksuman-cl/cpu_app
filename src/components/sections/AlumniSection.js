@@ -1,5 +1,6 @@
 "use client";
 import Swiper from "../ui/Swiper";
+import Image from "next/image";
 
 export default function AlumniSection({ data }) {
   const alumni = data?.alumni || [];
@@ -30,10 +31,12 @@ export default function AlumniSection({ data }) {
                 className="absolute bottom-14 left-1/2 -translate-x-1/2 w-52 h-52 rounded-full opacity-90"
                 style={{ backgroundColor: alum.circleBg || '#fbbf24' }}
               />
-              <img
+              <Image
                 src={alum.img}
                 alt={alum.name}
-                className="absolute inset-0 w-full h-full object-cover object-top z-10"
+                fill
+                className="object-cover object-top z-10"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
               <div
                 className="absolute top-0 right-0 bottom-0 w-11 flex items-center justify-center z-20"

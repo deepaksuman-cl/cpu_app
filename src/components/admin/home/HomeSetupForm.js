@@ -8,7 +8,11 @@ import {
 } from 'lucide-react';
 import Modal from '@/components/admin/ui/Modal';
 import MediaUploader from '@/components/admin/MediaUploader';
-import RichTextEditor from '@/components/admin/RichTextEditor';
+import dynamic from 'next/dynamic';
+const RichTextEditor = dynamic(() => import('@/components/admin/RichTextEditor'), { 
+  ssr: false,
+  loading: () => <div className="h-[500px] bg-gray-50 border border-gray-200 animate-pulse flex items-center justify-center text-sm text-gray-400">Loading Editor...</div>
+});
 import IconPicker from '@/components/admin/ui/IconPicker';
 import ColorPicker from '@/components/admin/ui/ColorPicker';
 import { updateHomePageData } from "@/lib/actions/homeActions";
@@ -397,28 +401,25 @@ export default function HomeSetupForm({ initialData }) {
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Tagline</label>
-                   <input type="text" value={sections.aboutConfig.tagline} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
-                </div>
-                <div>
-                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Title Main</label>
-                   <input type="text" value={sections.aboutConfig.title} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
-                </div>
-                <div>
-                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Title Highlight</label>
-                   <input type="text" value={sections.aboutConfig.highlight} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, highlight: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                   <div>
-                     <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">NAAC Badge</label>
-                     <input type="text" value={sections.aboutConfig.naacBadge} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, naacBadge: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                   </div>
-                   <div>
-                     <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">NAAC Sub</label>
-                     <input type="text" value={sections.aboutConfig.naacSub} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, naacSub: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                   </div>
-                </div>
+              <TitleEditor 
+                label="Section Heading" 
+                value={{ main: sections.aboutConfig.title, highlight: sections.aboutConfig.highlight }} 
+                onChange={val => updateSection('aboutConfig', {...sections.aboutConfig, title: val.main, highlight: val.highlight})} 
+              />
+              <div className="bg-[var(--bg-muted)] p-3">
+                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Tagline</label>
+                 <input type="text" value={sections.aboutConfig.tagline} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
+              </div>
+              <div className="grid grid-cols-2 gap-3 bg-[var(--bg-muted)] p-3">
+                 <div>
+                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">NAAC Badge</label>
+                   <input type="text" value={sections.aboutConfig.naacBadge} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, naacBadge: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
+                 </div>
+                 <div>
+                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">NAAC Sub</label>
+                   <input type="text" value={sections.aboutConfig.naacSub} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, naacSub: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
+                 </div>
+              </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-[var(--bg-muted)] p-3">
@@ -477,19 +478,14 @@ export default function HomeSetupForm({ initialData }) {
 
           {activeSection === 'programsConfig' && (
             <div className="space-y-6">
-              <div className="bg-[var(--bg-muted)] p-4 border-l-2 border-[var(--color-primary)] grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div className="md:col-span-3">
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Tagline</label>
-                  <input type="text" value={sections.programsConfig.tagline} onChange={e => updateSection('programsConfig', {...sections.programsConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Title Main</label>
-                  <input type="text" value={sections.programsConfig.title} onChange={e => updateSection('programsConfig', {...sections.programsConfig, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                </div>
-                <div>
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Title Highlight</label>
-                  <input type="text" value={sections.programsConfig.titleHighlight} onChange={e => updateSection('programsConfig', {...sections.programsConfig, titleHighlight: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                </div>
+              <TitleEditor 
+                label="Section Heading" 
+                value={{ main: sections.programsConfig.title, highlight: sections.programsConfig.highlight }} 
+                onChange={val => updateSection('programsConfig', {...sections.programsConfig, title: val.main, highlight: val.highlight})} 
+              />
+              <div className="bg-[var(--bg-muted)] p-3">
+                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Tagline</label>
+                 <input type="text" value={sections.programsConfig.tagline} onChange={e => updateSection('programsConfig', {...sections.programsConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
               </div>
               <NestedListEditor 
                 label="Category Cards"
@@ -508,19 +504,14 @@ export default function HomeSetupForm({ initialData }) {
 
           {activeSection === 'placementConfig' && (
             <div className="space-y-8">
-              <div className="bg-[var(--bg-muted)] p-4 border-l-2 border-[var(--color-primary)] grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div className="md:col-span-3">
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Tagline</label>
-                  <input type="text" value={sections.placementConfig.tagline} onChange={e => updateSection('placementConfig', {...sections.placementConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Title Main</label>
-                  <input type="text" value={sections.placementConfig.title} onChange={e => updateSection('placementConfig', {...sections.placementConfig, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                </div>
-                <div>
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Title Highlight</label>
-                  <input type="text" value={sections.placementConfig.titleHighlight} onChange={e => updateSection('placementConfig', {...sections.placementConfig, titleHighlight: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                </div>
+              <TitleEditor 
+                label="Section Heading" 
+                value={{ main: sections.placementConfig.title, highlight: sections.placementConfig.highlight }} 
+                onChange={val => updateSection('placementConfig', {...sections.placementConfig, title: val.main, highlight: val.highlight})} 
+              />
+              <div className="bg-[var(--bg-muted)] p-3">
+                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Tagline</label>
+                 <input type="text" value={sections.placementConfig.tagline} onChange={e => updateSection('placementConfig', {...sections.placementConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
               </div>
               <NestedListEditor 
                 label="Placement Statistics"
@@ -557,19 +548,14 @@ export default function HomeSetupForm({ initialData }) {
 
           {activeSection === 'alumniConfig' && (
             <div className="space-y-6">
-              <div className="bg-[var(--bg-muted)] p-4 border-l-2 border-[var(--color-primary)] grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div className="md:col-span-3">
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Tagline</label>
-                  <input type="text" value={sections.alumniConfig.tagline} onChange={e => updateSection('alumniConfig', {...sections.alumniConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Title Main</label>
-                  <input type="text" value={sections.alumniConfig.title} onChange={e => updateSection('alumniConfig', {...sections.alumniConfig, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                </div>
-                <div>
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Title Highlight</label>
-                  <input type="text" value={sections.alumniConfig.titleHighlight} onChange={e => updateSection('alumniConfig', {...sections.alumniConfig, titleHighlight: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                </div>
+              <TitleEditor 
+                label="Section Heading" 
+                value={{ main: sections.alumniConfig.title, highlight: sections.alumniConfig.highlight }} 
+                onChange={val => updateSection('alumniConfig', {...sections.alumniConfig, title: val.main, highlight: val.highlight})} 
+              />
+              <div className="bg-[var(--bg-muted)] p-3">
+                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Tagline</label>
+                 <input type="text" value={sections.alumniConfig.tagline} onChange={e => updateSection('alumniConfig', {...sections.alumniConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
               </div>
               <NestedListEditor 
                 label="Alumni Highlights"
@@ -590,30 +576,64 @@ export default function HomeSetupForm({ initialData }) {
 
           {activeSection === 'campusConfig' && (
             <div className="space-y-6">
-              <NestedListEditor 
-                label="Campus Columns"
-                items={sections.campusConfig.cols}
-                newItemTemplate={{ title: '', bold: '', img: '', links: [] }}
-                fields={[
-                  {key: 'title', label: 'Title prefix'},
-                  {key: 'bold', label: 'Bold emphasis'},
-                  {key: 'img', label: 'Cover Image', type: 'image', fullWidth: true},
-                  {key: 'links', label: 'Link labels (JSON array recommended)', fullWidth: true}
-                ]}
-                onUpdate={items => updateSection('campusConfig', {...sections.campusConfig, cols: items})}
+              <TitleEditor 
+                label="Campus Heading" 
+                value={{ main: sections.campusConfig.title, highlight: sections.campusConfig.highlight }} 
+                onChange={val => updateSection('campusConfig', {...sections.campusConfig, title: val.main, highlight: val.highlight})} 
               />
-              <p className="text-[9px] text-[var(--text-muted)] italic px-2">
-                Note: For links, currently supports direct manual entry. Link paths are derived from labels.
-              </p>
+              <div className="bg-[var(--bg-muted)] p-3 mb-4">
+                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Section Tagline</label>
+                 <input type="text" value={sections.campusConfig.tagline} onChange={e => updateSection('campusConfig', {...sections.campusConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+              </div>
+              <NestedListEditor 
+                label="Campus Stats Bar"
+                items={sections.campusConfig.stats}
+                newItemTemplate={{ v: '', l: '' }}
+                fields={[{key: 'v', label: 'Value'}, {key: 'l', label: 'Label'}]}
+                onUpdate={items => updateSection('campusConfig', {...sections.campusConfig, stats: items})}
+              />
+              <div className="pt-6 border-t border-[var(--border-light)]">
+                <NestedListEditor 
+                  label="Campus Gallery Columns"
+                  items={sections.campusConfig.cols}
+                  newItemTemplate={{ title: '', bold: '', img: '', links: [{label: '', slug: '#'}] }}
+                  fields={[
+                    {key: 'title', label: 'Title prefix'},
+                    {key: 'bold', label: 'Bold emphasis'},
+                    {key: 'img', label: 'Cover Image', type: 'image', fullWidth: true}
+                  ]}
+                  onUpdate={items => updateSection('campusConfig', {...sections.campusConfig, cols: items})}
+                />
+                <p className="text-[10px] font-bold text-[var(--text-primary)] uppercase mt-6 mb-2">Column Links Manager</p>
+                <div className="space-y-4">
+                  {sections.campusConfig.cols.map((col, cIdx) => (
+                    <div key={cIdx} className="p-3 bg-gray-50 border border-gray-200">
+                      <p className="text-[9px] font-black text-[#00588b] uppercase mb-2">Links for: {col.bold || `Column ${cIdx+1}`}</p>
+                      <NestedListEditor 
+                        label=""
+                        items={col.links || []}
+                        newItemTemplate={{ label: '', slug: '#' }}
+                        fields={[{key: 'label', label: 'Link Label'}, {key: 'slug', label: 'Slug/Link'}]}
+                        onUpdate={newLinks => {
+                          const newCols = [...sections.campusConfig.cols];
+                          newCols[cIdx].links = newLinks;
+                          updateSection('campusConfig', {...sections.campusConfig, cols: newCols});
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
 
           {activeSection === 'researchConfig' && (
             <div className="space-y-6">
-              <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4">
-                 <label className="block text-[10px] font-black text-[var(--text-primary)] uppercase mb-3 tracking-widest">Section Title (HTML supported)</label>
-                 <input type="text" value={sections.researchConfig.title} onChange={e => updateSection('researchConfig', {...sections.researchConfig, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
-              </div>
+              <TitleEditor 
+                label="Research Heading" 
+                value={{ main: sections.researchConfig.title, highlight: sections.researchConfig.highlight }} 
+                onChange={val => updateSection('researchConfig', {...sections.researchConfig, title: val.main, highlight: val.highlight})} 
+              />
               <NestedListEditor 
                 label="Research Items"
                 items={sections.researchConfig.items}
@@ -631,10 +651,11 @@ export default function HomeSetupForm({ initialData }) {
 
           {activeSection === 'happeningsConfig' && (
             <div className="space-y-6">
-              <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4">
-                 <label className="block text-[10px] font-black text-[var(--text-primary)] uppercase mb-3 tracking-widest">Section Title (HTML supported)</label>
-                 <input type="text" value={sections.happeningsConfig.title} onChange={e => updateSection('happeningsConfig', {...sections.happeningsConfig, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
-              </div>
+              <TitleEditor 
+                label="Happenings Heading" 
+                value={{ main: sections.happeningsConfig.title, highlight: sections.happeningsConfig.highlight }} 
+                onChange={val => updateSection('happeningsConfig', {...sections.happeningsConfig, title: val.main, highlight: val.highlight})} 
+              />
               <NestedListEditor 
                 label="Event Cards"
                 items={sections.happeningsConfig.items}
@@ -644,7 +665,7 @@ export default function HomeSetupForm({ initialData }) {
                   {key: 'date', label: 'Date string'},
                   {key: 'tag', label: 'Category Tag'},
                   {key: 'icon', label: 'Icon', type: 'icon'},
-                  {key: 'colorClass', label: 'Gradient Classes', fullWidth: true}
+                  {key: 'colorClass', label: 'Tailwind Gradient Classes', fullWidth: true}
                 ]}
                 onUpdate={items => updateSection('happeningsConfig', {...sections.happeningsConfig, items: items})}
               />
@@ -653,21 +674,44 @@ export default function HomeSetupForm({ initialData }) {
 
           {activeSection === 'testimonialConfig' && (
             <div className="space-y-6">
+              <TitleEditor 
+                label="Testimonials Heading" 
+                value={{ main: sections.testimonialConfig.title, highlight: sections.testimonialConfig.highlight }} 
+                onChange={val => updateSection('testimonialConfig', {...sections.testimonialConfig, title: val.main, highlight: val.highlight})} 
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[var(--bg-muted)] p-3">
+                 <div>
+                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Section Tagline</label>
+                   <input type="text" value={sections.testimonialConfig.tagline} onChange={e => updateSection('testimonialConfig', {...sections.testimonialConfig, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
+                 </div>
+                 <div>
+                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Map/Location Label</label>
+                   <input type="text" value={sections.testimonialConfig.location} onChange={e => updateSection('testimonialConfig', {...sections.testimonialConfig, location: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
+                 </div>
+                 <div>
+                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Package Label</label>
+                   <input type="text" value={sections.testimonialConfig.packageLabel} onChange={e => updateSection('testimonialConfig', {...sections.testimonialConfig, packageLabel: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
+                 </div>
+                 <div>
+                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Verify Label</label>
+                   <input type="text" value={sections.testimonialConfig.verifyLabel} onChange={e => updateSection('testimonialConfig', {...sections.testimonialConfig, verifyLabel: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
+                 </div>
+              </div>
               <NestedListEditor 
-                label="Student Testimonials"
+                label="Student Feed"
                 items={sections.testimonialConfig.testimonials}
-                newItemTemplate={{ name: '', course: '', company: '', package: '', rating: 5, batch: '', quote: '', img: '', tag: '', tagColor: 'bg-[#003a5c]' }}
+                newItemTemplate={{ name: '', course: '', company: '', package: '', rating: 5, batch: '', quote: '', img: '', tag: '', tagColor: '#003a5c' }}
                 fields={[
                   {key: 'name', label: 'Name'},
                   {key: 'course', label: 'Course/Degree'},
                   {key: 'company', label: 'Placed Company'},
-                  {key: 'package', label: 'Package'},
+                  {key: 'package', label: 'Salary/Offer'},
                   {key: 'batch', label: 'Batch'},
                   {key: 'rating', label: 'Rating (1-5)', type: 'number'},
-                  {key: 'img', label: 'Photo', type: 'image', fullWidth: true},
-                  {key: 'quote', label: 'Testimonial Quote', type: 'textarea', fullWidth: true},
-                  {key: 'tag', label: 'Tag Label'},
-                  {key: 'tagColor', label: 'Tag Color (Tailwind class)'}
+                  {key: 'tag', label: 'Slide Tag Label'},
+                  {key: 'tagColor', label: 'Tag Color', type: 'color'},
+                  {key: 'img', label: 'Student Photo', type: 'image', fullWidth: true},
+                  {key: 'quote', label: 'Testimonial Quote', type: 'textarea', fullWidth: true}
                 ]}
                 onUpdate={items => updateSection('testimonialConfig', {...sections.testimonialConfig, testimonials: items})}
               />
@@ -676,10 +720,11 @@ export default function HomeSetupForm({ initialData }) {
 
           {activeSection === 'faqConfig' && (
             <div className="space-y-6">
-              <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4">
-                 <label className="block text-[10px] font-black text-[var(--text-primary)] uppercase mb-3 tracking-widest">Section Title (HTML supported)</label>
-                 <input type="text" value={sections.faqConfig.title} onChange={e => updateSection('faqConfig', {...sections.faqConfig, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
-              </div>
+              <TitleEditor 
+                label="FAQ Heading" 
+                value={{ main: sections.faqConfig.title, highlight: sections.faqConfig.highlight }} 
+                onChange={val => updateSection('faqConfig', {...sections.faqConfig, title: val.main, highlight: val.highlight})} 
+              />
               <NestedListEditor 
                 label="FAQs"
                 items={sections.faqConfig.faqs}
@@ -695,10 +740,11 @@ export default function HomeSetupForm({ initialData }) {
 
           {activeSection === 'socialWallConfig' && (
             <div className="space-y-6">
-              <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4">
-                 <label className="block text-[10px] font-black text-[var(--text-primary)] uppercase mb-3 tracking-widest">Section Title (HTML supported)</label>
-                 <input type="text" value={sections.socialWallConfig.title} onChange={e => updateSection('socialWallConfig', {...sections.socialWallConfig, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
-              </div>
+              <TitleEditor 
+                label="Social Wall Heading" 
+                value={{ main: sections.socialWallConfig.title, highlight: sections.socialWallConfig.highlight }} 
+                onChange={val => updateSection('socialWallConfig', {...sections.socialWallConfig, title: val.main, highlight: val.highlight})} 
+              />
               <NestedListEditor 
                 label="Social Wall Images"
                 items={sections.socialWallConfig.images.map(img => ({ url: img }))}

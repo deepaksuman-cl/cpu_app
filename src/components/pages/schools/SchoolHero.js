@@ -57,9 +57,27 @@ export default function SchoolHero({ data, children }) {
               </p>
             )}
 
-            <p className="text-blue-100/90 text-lg leading-relaxed mb-10 max-w-xl">
+            <p className="text-blue-100/90 text-lg leading-relaxed mb-6 max-w-xl">
               {data.description}
             </p>
+
+            {/* Course Information Chip (Duration/Eligibility) */}
+            {(data.duration || data.eligibility) && (
+              <div className="flex flex-wrap gap-4 mb-10">
+                {data.duration && (
+                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 border border-white/20 rounded-xl">
+                    <LucideIcons.Clock className="w-4 h-4 text-[#ffb900]" />
+                    <span className="text-white text-sm font-bold uppercase tracking-wider">{data.duration}</span>
+                  </div>
+                )}
+                {data.eligibility && (
+                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 border border-white/20 rounded-xl">
+                    <LucideIcons.GraduationCap className="w-4 h-4 text-[#ffb900]" />
+                    <span className="text-white text-sm font-bold uppercase tracking-wider">Eligibility: {data.eligibility}</span>
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="flex flex-wrap gap-4">
               {data.cta?.map((btn, i) => (

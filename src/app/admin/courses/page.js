@@ -85,8 +85,8 @@ export default async function CoursesPage() {
                         {/* Parent School */}
                         <td className="block md:table-cell py-1 md:py-2 px-0 md:px-4 border-none md:border-r border-[var(--border-light)] mb-2 md:mb-0">
                           <span className="md:hidden text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest block mb-0.5">Parent School</span>
-                          {course.schoolId?.name ? (
-                            <span className="text-[var(--text-secondary)] font-medium text-[13px] md:text-[12px]">{course.schoolId.name}</span>
+                          {course.school?.name ? (
+                            <span className="text-[var(--text-secondary)] font-medium text-[13px] md:text-[12px]">{course.school.name}</span>
                           ) : (
                             <span className="text-[var(--text-muted)] italic text-[10px] bg-[var(--bg-body)] border border-[var(--border-default)] px-1.5 py-0.5">No School</span>
                           )}

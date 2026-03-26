@@ -1,6 +1,7 @@
 'use server';
 
 import HomePage from '@/models/HomePage';
+import { connectToDatabase } from '@/lib/db';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -10,25 +11,12 @@ import path from 'path';
  */
 export async function getHomePageData() {
   try {
+    await connectToDatabase();
+
     let homePage = await HomePage.findOne({ where: { name: 'Home' } });
     
     if (!homePage) {
-      // Auto-Seed from JSON file
-      console.log('🏘️ Auto-seeding Home Page data from home.json...');
-      const filePath = path.join(process.cwd(), 'src/data/home.json');
-      const jsonData = await fs.readFile(filePath, 'utf-8');
-      const sections = JSON.parse(jsonData);
-      
-      homePage = await HomePage.create({
-        name: 'Home',
-        sections: sections,
-        seo: {
-          title: 'Career Point University Kota | Top Private University in Rajasthan',
-          description: 'Experience world-class education at Career Point University Kota. 100+ programs, 42 LPA highest package, and a vibrant campus life.',
-          keywords: 'CPU Kota, Career Point University, Best University in Rajasthan, Private University Kota',
-          ogImage: 'https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg'
-        }
-      });
+      return { success: true, data: { sections: {}, seo: {} }, error: 'Seeding in progress' };
     }
     
     return { 
@@ -38,7 +26,7 @@ export async function getHomePageData() {
     };
   } catch (error) {
     console.error('❌ Error in getHomePageData:', error.message);
-    return { success: false, data: null, error: error.message };
+    return { success: false, data: { sections: {}, seo: {} }, error: error.message };
   }
 }
 
@@ -47,6 +35,7 @@ export async function getHomePageData() {
  */
 export async function updateHomePageData(sections, seo) {
   try {
+    await connectToDatabase();
     const homePage = await HomePage.findOne({ where: { name: 'Home' } });
     if (homePage) {
       const updateData = {};

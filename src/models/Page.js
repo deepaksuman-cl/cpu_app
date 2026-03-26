@@ -25,12 +25,6 @@ export default Page;
 */
 
 const Page = sequelize.define('pages', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-     autoIncrement: true
-
-  },
   title: {
     type: DataTypes.STRING,
   },
@@ -55,6 +49,7 @@ const Page = sequelize.define('pages', {
   timestamps: true,
   indexes: [
     {
+      name: 'idx_page_slug',
       unique: true,
       fields: ['slug'],
     },
