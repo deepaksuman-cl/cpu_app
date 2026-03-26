@@ -52,14 +52,10 @@ export default function SchoolHero({ data, children }) {
             </h1>
 
             {data.subtitle && (
-              <p className="text-[#ffb900] text-xl font-black uppercase tracking-widest mb-6 opacity-90 drop-shadow-md">
-                {data.subtitle}
-              </p>
+              <p className="text-[#ffb900] text-xl font-black uppercase tracking-widest mb-6 opacity-90 drop-shadow-md" dangerouslySetInnerHTML={{ __html: data.subtitle }} />
             )}
 
-            <p className="text-blue-100/90 text-lg leading-relaxed mb-6 max-w-xl">
-              {data.description}
-            </p>
+            <p className="text-blue-100/90 text-lg leading-relaxed mb-6 max-w-xl" dangerouslySetInnerHTML={{ __html: data.description }} />
 
             {/* Course Information Chip (Duration/Eligibility) */}
             {(data.duration || data.eligibility) && (

@@ -25,14 +25,10 @@ export default function PlacementSection({ data }) {
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="mb-12">
-          <h2 className="font-bold text-3xl text-white/85 m-0 mb-1 leading-snug">
-            {tagline}
-          </h2>
+          <h2 className="font-bold text-3xl text-white/85 m-0 mb-1 leading-snug" dangerouslySetInnerHTML={{ __html: tagline }} />
           <div className="flex items-center gap-3.5 flex-wrap">
-            <span className="bg-white/15 backdrop-blur border border-white/20 rounded-xl px-4 py-1 font-black text-4xl text-amber-400">
-              {title}
-            </span>
-            <span className="font-bold text-4xl text-white">{highlight}</span>
+            <span className="bg-white/15 backdrop-blur border border-white/20 rounded-xl px-4 py-1 font-black text-4xl text-amber-400" dangerouslySetInnerHTML={{ __html: title }} />
+            <span className="font-bold text-4xl text-white" dangerouslySetInnerHTML={{ __html: highlight }} />
             <ArrowRight size={28} className="text-amber-400" />
           </div>
         </div>

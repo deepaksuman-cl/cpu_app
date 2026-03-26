@@ -29,7 +29,7 @@ export default function AboutSection({ data }) {
             {tagline}
           </p>
           <h2 className="font-black text-4xl text-gray-900 m-0">
-            {title} <span className="text-[#00588b]">{highlight}</span>
+            <span dangerouslySetInnerHTML={{ __html: title }} /> <span className="text-[#00588b]" dangerouslySetInnerHTML={{ __html: highlight }} />
           </h2>
           <div className="w-16 h-1 bg-amber-400 rounded mx-auto mt-4" />
         </div>
@@ -54,9 +54,7 @@ export default function AboutSection({ data }) {
             </div>
           </div>
           <div>
-            <p className="text-gray-800 leading-[1.9] mb-8 text-[15.5px]">
-              {description}
-            </p>
+            <p className="text-gray-800 leading-[1.9] mb-8 text-[15.5px]" dangerouslySetInnerHTML={{ __html: description }} />
             <div className="grid grid-cols-2 gap-3.5 mb-8">
               {features?.map((f, i) => {
                 return (

@@ -82,10 +82,10 @@ export default function TestimonialSection({ data }) {
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-14">
             <span className="inline-flex items-center gap-2 border border-blue-200 bg-white text-[#00588b] text-xs font-bold px-4 py-1.5 rounded-full mb-5 shadow-sm">
-              <Sparkles size={13} className="text-amber-400" /> {data?.tagline || "STUDENT STORIES"}
+              <Sparkles size={13} className="text-amber-400" /> <span dangerouslySetInnerHTML={{ __html: data?.tagline || "STUDENT STORIES" }} />
             </span>
             <h2 className="font-black text-4xl md:text-5xl text-slate-900 leading-tight m-0">
-              {data?.title || "Our Students"} <span className="text-[#00588b]">{data?.highlight || "Speak"}</span>
+              <span dangerouslySetInnerHTML={{ __html: data?.title || "Our Students" }} /> <span className="text-[#00588b]" dangerouslySetInnerHTML={{ __html: data?.highlight || "Speak" }} />
             </h2>
             <p className="text-slate-500 text-sm mt-3 flex items-center justify-center gap-1.5">
               <MapPin size={13} className="text-[#00588b]" />
@@ -118,9 +118,7 @@ export default function TestimonialSection({ data }) {
                     <StarRating rating={t.rating} />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-4 pb-4 pt-10">
-                    <p className="text-white font-extrabold text-lg leading-tight">
-                      {t.name}
-                    </p>
+                    <p className="text-white font-extrabold text-lg leading-tight" dangerouslySetInnerHTML={{ __html: t.name }} />
                     <p className="text-amber-400 text-xs font-bold mt-0.5 flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" />
                       {t.company}
@@ -179,16 +177,12 @@ export default function TestimonialSection({ data }) {
                       <BadgeCheck size={13} /> {data?.verifyLabel || "Verified Student"}
                     </span>
                   </div>
-                  <blockquote className="text-slate-700 text-lg md:text-xl font-semibold italic leading-relaxed mb-8 m-0">
-                    "{t.quote}"
-                  </blockquote>
+                  <blockquote className="text-slate-700 text-lg md:text-xl font-semibold italic leading-relaxed mb-8 m-0" dangerouslySetInnerHTML={{ __html: `"${t.quote}"` }} />
                   <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-3">
                    
                       <div>
-                        <p className="font-extrabold text-slate-900 text-md leading-tight">
-                          {t.name}
-                        </p>
+                        <p className="font-extrabold text-slate-900 text-md leading-tight" dangerouslySetInnerHTML={{ __html: t.name }} />
                         <p className="text-slate-400 text-xs mt-1.5 mb-1.5">
                           {t.course}&nbsp;&nbsp;
                           <span className="text-[#000] font-bold">{t.company}</span>

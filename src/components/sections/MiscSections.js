@@ -24,7 +24,7 @@ export function ResearchSection({ data }) {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-black text-3xl md:text-5xl text-gray-900">
-              {title || "Pioneering"} <span className="text-[#00588b]">{highlight || "Research at CPU"}</span>
+              <span dangerouslySetInnerHTML={{ __html: title || "Pioneering" }} /> <span className="text-[#00588b]" dangerouslySetInnerHTML={{ __html: highlight || "Research at CPU" }} />
             </h2>
             <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-4" />
           </div>
@@ -67,7 +67,7 @@ export function HappeningsSection({ data }) {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="font-black text-3xl md:text-5xl text-gray-900">
-            {title || "Happenings"} <span className="text-[#00588b]">{highlight || "@CPU"}</span>
+            <span dangerouslySetInnerHTML={{ __html: title || "Happenings" }} /> <span className="text-[#00588b]" dangerouslySetInnerHTML={{ __html: highlight || "@CPU" }} />
           </h2>
           <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-4"/>
         </div>
@@ -81,7 +81,7 @@ export function HappeningsSection({ data }) {
                   <div className="absolute top-2.5 right-2.5 bg-amber-400 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full">{h.tag}</div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold text-gray-900 text-sm mb-2">{h.title}</h3>
+                  <h3 className="font-bold text-gray-900 text-sm mb-2" dangerouslySetInnerHTML={{ __html: h.title }} />
                   <div className="flex items-center gap-1.5 text-gray-400 text-xs"><Calendar size={12}/> {h.date}</div>
                 </div>
               </div>
@@ -108,7 +108,7 @@ export function FAQSection({ data }) {
       <div className="max-w-[860px] mx-auto">
         <div className="text-center mb-12">
           <h2 className="font-black text-3xl md:text-5xl text-gray-900">
-            {title || "Frequently Asked"} <span className="text-[#00588b]">{highlight || "Questions"}</span>
+            <span dangerouslySetInnerHTML={{ __html: title || "Frequently Asked" }} /> <span className="text-[#00588b]" dangerouslySetInnerHTML={{ __html: highlight || "Questions" }} />
           </h2>
           <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-4"/>
         </div>
@@ -148,7 +148,7 @@ export function SocialWallSection({ data }) {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="font-black text-3xl md:text-5xl text-gray-900">
-              {title || "CPU"} <span className="text-[#00588b]">{highlight || "Social Wall"}</span>
+              <span dangerouslySetInnerHTML={{ __html: title || "CPU" }} /> <span className="text-[#00588b]" dangerouslySetInnerHTML={{ __html: highlight || "Social Wall" }} />
             </h2>
             <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-4"/>
           </div>
@@ -194,10 +194,8 @@ export function CTASection({ data }) {
   return (
     <section className="bg-gradient-to-br from-[#00588b] to-[#003a5c] py-20 px-4 overflow-hidden">
       <div className="max-w-[860px] mx-auto text-center">
-        <h2 className="text-white font-black text-3xl mb-3">{title}</h2>
-        <p className="text-white/80 text-base max-w-xl mx-auto mb-8 leading-[1.75]">
-          {description}
-        </p>
+        <h2 className="text-white font-black text-3xl mb-3" dangerouslySetInnerHTML={{ __html: title }} />
+        <p className="text-white/80 text-base max-w-xl mx-auto mb-8 leading-[1.75]" dangerouslySetInnerHTML={{ __html: description }} />
         <div className="flex justify-center gap-3.5 flex-wrap">
           <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3.5 font-extrabold text-[15px] cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
             <GraduationCap size={16}/> {applyLabel}
