@@ -54,7 +54,7 @@ export default function AboutSection({ data }) {
             </div>
           </div>
           <div>
-            <div className="rdx_text_ss text-gray-800 leading-[1.9] mb-8 text-[15.5px]" dangerouslySetInnerHTML={{ __html: description }} />
+            <div className="rdx_text text-gray-800 leading-[1.9] mb-8 text-[15.5px]" dangerouslySetInnerHTML={{ __html: description }} />
             <div className="grid grid-cols-2 gap-3.5 mb-8">
               {features?.map((f, i) => {
                 return (
