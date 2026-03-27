@@ -79,9 +79,9 @@ export default function AboutSection({ data }) {
               >
                 {btnText} {btnIcon && <Icon name={btnIcon} size={14} />}
               </a>
-              <button className="bg-transparent border-2 border-[#00588b] text-[#00588b] rounded-full px-6 py-[11px] font-bold text-sm cursor-pointer flex items-center gap-1.5 hover:bg-[#00588b] hover:text-white transition-all">
+              {/* <button className="bg-transparent border-2 border-[#00588b] text-[#00588b] rounded-full px-6 py-[11px] font-bold text-sm cursor-pointer flex items-center gap-1.5 hover:bg-[#00588b] hover:text-white transition-all">
                 {brochureLabel} <Download size={14} />
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
