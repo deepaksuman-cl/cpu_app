@@ -7,7 +7,7 @@ const sequelize =
   globalForSequelize._sequelizeInstance ||
   new Sequelize({
     username: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || "",
+    password: process.env.DB_PASSWORD || "Shashi@123",
     database: process.env.DB_NAME || "cpur",
     host: process.env.DB_HOST || "localhost",
     port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 3306,
@@ -46,9 +46,9 @@ export const connectToDatabase = async () => {
       await import('@/models/index.js');
 
       if (process.env.NODE_ENV === 'development') {
-        // 🚀 The Bulletproof Sync: Disable FK checks temporarily to prevent sequence errors
+    // 🚀 The Bulletproof Sync (Works in DEV & PROD)
         await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-        await sequelize.sync({ alter: true });
+        await sequelize.sync({ alter: process.env.NODE_ENV === 'development'});
         await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
         console.log('✅ DB Auto-Synced');
       } else {

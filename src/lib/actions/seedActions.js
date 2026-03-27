@@ -3,7 +3,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-import { connectToDatabase } from '@/lib/db';
+import sequelize, { connectToDatabase } from '@/lib/db';
 
 import Course from '@/models/Course';
 import Footer from '@/models/Footer';
@@ -48,6 +48,7 @@ export async function seedDatabase() {
 
     // ✅ STEP 2: Clear old data (Master Reset)
     console.log('🗑️ Clearing existing data...');
+    await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
     await Course.destroy({ where: {} });
     await School.destroy({ where: {} });
     await Page.destroy({ where: {} });
@@ -60,6 +61,7 @@ export async function seedDatabase() {
     await ProgrammeCategory.destroy({ where: {} });
     await ProgrammeSettings.destroy({ where: {} });
     await AcademicSidebarLink.destroy({ where: {} });
+    await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
 
     // ==========================================
     // ✅ STEP 3: Schools & Courses (Schools Hub)

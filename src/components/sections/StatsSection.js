@@ -35,7 +35,7 @@ function StatCard({ value, suffix, label, icon: IconName, inView }) {
         {Icon && <Icon size={40} className="text-[#00588b]" />}
       </div>
       <div className="font-black text-3xl text-[#00588b] leading-none">{d}</div>
-      <div className="text-xs text-gray-500 mt-1.5">{label}</div>
+      <div className="text-xs text-gray-500 mt-1.5" dangerouslySetInnerHTML={{ __html: label }} />
     </div>
   );
 }

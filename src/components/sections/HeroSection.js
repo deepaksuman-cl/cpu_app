@@ -73,21 +73,11 @@ export default function HeroSection({ data }) {
           style={{ zIndex: 2 }}
         >
           <div key={animKey} className="max-w-[660px] animate-heroUp">
-            <span className="inline-flex items-center gap-1.5 bg-amber-400 text-black text-xs font-extrabold px-4 py-1.5 rounded-full mb-5">
-              {hs.badge}
-            </span>
-            <p className="text-amber-400 font-bold text-xs uppercase tracking-[0.2em] mb-2.5">
-              {hs.tagline}
-            </p>
-            <h1 className="text-white font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] m-0">
-              {hs.title}
-            </h1>
-            <h1 className="text-amber-400 font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] mt-0 mb-6">
-              {hs.subtitle}
-            </h1>
-            <p className="text-white/80 text-base leading-[1.75] max-w-[520px] mb-8">
-              {hs.desc}
-            </p>
+            <span className="inline-flex items-center gap-1.5 bg-amber-400 text-black text-xs font-extrabold px-4 py-1.5 rounded-full mb-5" dangerouslySetInnerHTML={{ __html: hs.badge }} />
+            <p className="text-amber-400 font-bold text-xs uppercase tracking-[0.2em] mb-2.5" dangerouslySetInnerHTML={{ __html: hs.tagline }} />
+            <h1 className="text-white font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] m-0" dangerouslySetInnerHTML={{ __html: hs.title }} />
+            <h1 className="text-amber-400 font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] mt-0 mb-6" dangerouslySetInnerHTML={{ __html: hs.subtitle }} />
+            <p className="text-white/80 text-base leading-[1.75] max-w-[520px] mb-8" dangerouslySetInnerHTML={{ __html: hs.desc }} />
             <div className="flex gap-3.5 flex-wrap">
               {hs.btn1Text && (
                 <a 
