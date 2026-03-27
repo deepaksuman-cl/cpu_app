@@ -46,23 +46,23 @@ export default async function SchoolPage({ params }) {
         { label: school.name || school.hero?.title?.main, link: `/schools/${currentSlug}` }
       ]} />
       
-      {school.hero && <SchoolHero data={school.hero} />}
-      {school.stats && <SchoolStats data={school.stats} />}
-      {school.about && <SchoolAbout data={school.about} />}
+      {school.hero && !school.hero.hide && <SchoolHero data={school.hero} />}
+      {school.stats && !school.stats[0]?.hide && <SchoolStats data={school.stats} />}
+      {school.about && !school.about.hide && <SchoolAbout data={school.about} />}
       
       {/* Programmes section links to courses, uses school.programmes header data */}
-      {school.programmes && (
+      {school.programmes && !school.programmes.hide && (
         <SchoolProgrammes data={school.programmes} schoolSlug={currentSlug} />
       )}
 
-      {school.placements && <SchoolPlacements data={school.placements} />}
-      {school.alumni && <SchoolAlumni data={school.alumni} />}
-      {school.industry && <SchoolPartners data={school.industry} />}
-      {school.research && <SchoolResearch data={school.research} />}
-      {school.community && <SchoolCommunity data={school.community} />}
-      {school.infrastructure && <SchoolInfrastructure data={school.infrastructure} />}
-      {school.testimonials && <SchoolTestimonials data={school.testimonials} />}
-      {school.exploreDepartment && <SchoolExploreDepartment data={school.exploreDepartment} />}
+      {school.placements && !school.placements.hide && <SchoolPlacements data={school.placements} />}
+      {school.alumni && !school.alumni.hide && <SchoolAlumni data={school.alumni} />}
+      {school.industry && !school.industry.hide && <SchoolPartners data={school.industry} />}
+      {school.research && !school.research.hide && <SchoolResearch data={school.research} />}
+      {school.community && !school.community.hide && <SchoolCommunity data={school.community} />}
+      {school.infrastructure && !school.infrastructure.hide && <SchoolInfrastructure data={school.infrastructure} />}
+      {school.testimonials && !school.testimonials.hide && <SchoolTestimonials data={school.testimonials} />}
+      {school.exploreDepartment && !school.exploreDepartment.hide && <SchoolExploreDepartment data={school.exploreDepartment} />}
     </main>
   );
 }

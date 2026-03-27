@@ -1,6 +1,6 @@
 "use client";
-import { useState, useRef, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight, MapPin, Sparkles, Star, BadgeCheck } from "lucide-react";
+import { BadgeCheck, ChevronLeft, ChevronRight, MapPin, Sparkles, Star } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 function StarRating({ rating, max = 5 }) {
   return (
@@ -122,23 +122,6 @@ export default function TestimonialSection({ data }) {
                     alt={t.name}
                     className="w-full h-80 md:h-96 object-cover object-top"
                   />
-                  <div
-                    className="absolute top-3.5 left-3.5 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wide"
-                    style={{ backgroundColor: t.tagColor || '#003a5c' }}
-                  >
-                    {t.tag}
-                  </div>
-                  <div className="absolute top-3.5 right-3.5 bg-white/90 backdrop-blur rounded-xl px-2.5 py-1.5 shadow flex items-center gap-1">
-                    <StarRating rating={t.rating} />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-4 pb-4 pt-10">
-                    <p className="text-white font-extrabold text-lg leading-tight" dangerouslySetInnerHTML={{ __html: t.name }} />
-                    <p className="text-amber-400 text-xs font-bold mt-0.5 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" />
-                      {t.company}
-                    </p>
-                    <p className="text-white/55 text-[11px] mt-0.5">{t.batch}</p>
-                  </div>
                 </div>
               </div>
 

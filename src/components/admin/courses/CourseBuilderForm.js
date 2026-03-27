@@ -186,7 +186,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       merged.testimonialsJSON = initialData.testimonialsRel.map(t => ({
         name: t.studentName, text: t.reviewText, company: t.company, batch: t.batch, 
         photo: t.image, rating: t.rating, course: t.course, package: t.package, 
-        tag: t.tag, tagColor: t.tagColor, slug: t.slug || ''
+        slug: t.slug || ''
       }));
       // Note: Course JSON structure might be different, but we'll adapt as needed
     }
@@ -225,23 +225,37 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
     }
   };
 
-  const SectionCard = ({ id, title, description, isComplete }) => (
-    <div className="border border-[var(--border-default)] bg-[var(--bg-surface)] p-3 flex flex-col sm:flex-row justify-between sm:items-center gap-3 hover:border-[var(--color-primary)] transition-all rounded-none group shadow-[var(--shadow-sm)]">
+  const SectionCard = ({ id, title, description, isComplete, isHidden, onToggleHide }) => (
+    <div className={`border border-[var(--border-default)] p-3 flex flex-col sm:flex-row justify-between sm:items-center gap-3 hover:border-[var(--color-primary)] transition-all rounded-none group shadow-[var(--shadow-sm)] ${isHidden ? 'opacity-60 bg-gray-50' : 'bg-[var(--bg-surface)]'}`}>
       <div className="flex items-center gap-3">
         <div className={`w-8 h-8 flex items-center justify-center rounded-none shrink-0 ${isComplete ? 'bg-[var(--color-success-light)] text-[var(--color-success-dark)]' : 'bg-[var(--bg-muted)] text-[var(--text-muted)]'}`}>
           {isComplete ? <CheckCircle2 size={16} strokeWidth={2.5} /> : <AlertCircle size={16} strokeWidth={2} />}
         </div>
         <div>
-          <h3 className="font-bold text-[var(--text-primary)] text-[12px] uppercase tracking-wide leading-tight">{title}</h3>
+          <div className="flex items-center gap-2">
+            <h3 className="font-bold text-[var(--text-primary)] text-[12px] uppercase tracking-wide leading-tight">{title}</h3>
+            {isHidden && <span className="text-[8px] bg-red-100 text-red-600 px-1.5 py-0.5 font-black uppercase tracking-tighter">Hidden</span>}
+          </div>
           <p className="text-[10px] text-[var(--text-secondary)] mt-0.5">{description}</p>
         </div>
       </div>
-      <button 
-        onClick={() => { setActiveSection(id); setIsModalOpen(true); }}
-        className="w-full sm:w-auto px-3 py-1.5 border border-[var(--border-dark)] text-[var(--text-secondary)] font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--text-primary)] hover:border-[var(--text-primary)] hover:text-[var(--bg-surface)] transition-all rounded-none flex items-center justify-center gap-1.5"
-      >
-        <Pencil size={12} strokeWidth={2} /> EDIT
-      </button>
+      <div className="flex items-center gap-3">
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input 
+            type="checkbox" 
+            checked={!!isHidden} 
+            onChange={(e) => onToggleHide(e.target.checked)}
+            className="w-3.5 h-3.5 accent-[var(--color-primary)]"
+          />
+          <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Hide</span>
+        </label>
+        <button 
+          onClick={() => { setActiveSection(id); setIsModalOpen(true); }}
+          className="px-3 py-1.5 border border-[var(--border-dark)] text-[var(--text-secondary)] font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--text-primary)] hover:border-[var(--text-primary)] hover:text-[var(--bg-surface)] transition-all rounded-none flex items-center justify-center gap-1.5"
+        >
+          <Pencil size={12} strokeWidth={2} /> EDIT
+        </button>
+      </div>
     </div>
   );
 
@@ -299,22 +313,22 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       <div className="space-y-4">
         <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide border-b border-[var(--border-light)] pb-2">Page Layout Sections</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          <SectionCard id="hero" title="Hero Header" description="Top banner & title." isComplete={!!formData.hero?.title?.main} />
-          <SectionCard id="accomplishments" title="Impact Stats" description="Badges & numbers." isComplete={!!formData.accomplishments?.heading} />
-          <SectionCard id="overview" title="Overview" description="Summary & grid cards." isComplete={!!formData.overview?.sectionTitle?.main} />
-          <SectionCard id="scope" title="Career Scope" description="Future opportunities." isComplete={!!formData.scope?.body} />
-          <SectionCard id="curriculum" title="Curriculum" description="Semester breakdowns." isComplete={formData.curriculum?.accordionSections?.length > 0} />
-          <SectionCard id="admissionFee" title="Admission" description="Criteria & fee tables." isComplete={formData.admissionFee?.feeDetails?.length > 0} />
-          <SectionCard id="scholarships" title="Scholarships" description="Merit & early bird slabs." isComplete={formData.scholarships?.rows?.length > 0} />
-          <SectionCard id="whyJoin" title="Why Join" description="Key benefits & reasons." isComplete={formData.whyJoin?.reasons?.length > 0} />
-          <SectionCard id="uniqueFeatures" title="Features" description="Unique course points." isComplete={formData.uniqueFeatures?.features?.length > 0} />
-          <SectionCard id="applySteps" title="How to Apply" description="Step-by-step guide." isComplete={formData.applySteps?.steps?.length > 0} />
-          <SectionCard id="faq" title="FAQs" description="Common questions." isComplete={formData.faq?.items?.length > 0} />
-          <SectionCard id="exploreDepartment" title="Department" description="Related facilities." isComplete={formData.exploreDepartment?.slides?.length > 0} />
-          <SectionCard id="roadmap" title="Roadmap" description="Yearly learning flow." isComplete={formData.roadmap?.years?.length > 0} />
-          <SectionCard id="placements" title="Placements" description="Stats & highlights." isComplete={formData.placements?.list?.length > 0} />
-          <SectionCard id="industry" title="Partners" description="Placement partners." isComplete={formData.industry?.partners?.length > 0} />
-          <SectionCard id="testimonials" title="Testimonials" description="Student reviews." isComplete={formData.testimonials?.list?.length > 0} />
+          <SectionCard id="hero" title="Hero Header" description="Top banner & title." isComplete={!!formData.hero?.title?.main} isHidden={formData.hero?.hide} onToggleHide={(val) => updateSection('hero', {...formData.hero, hide: val})} />
+          <SectionCard id="accomplishments" title="Impact Stats" description="Badges & numbers." isComplete={!!formData.accomplishments?.heading} isHidden={formData.accomplishments?.hide} onToggleHide={(val) => updateSection('accomplishments', {...formData.accomplishments, hide: val})} />
+          <SectionCard id="overview" title="Overview" description="Summary & grid cards." isComplete={!!formData.overview?.sectionTitle?.main} isHidden={formData.overview?.hide} onToggleHide={(val) => updateSection('overview', {...formData.overview, hide: val})} />
+          <SectionCard id="scope" title="Career Scope" description="Future opportunities." isComplete={!!formData.scope?.body} isHidden={formData.scope?.hide} onToggleHide={(val) => updateSection('scope', {...formData.scope, hide: val})} />
+          <SectionCard id="curriculum" title="Curriculum" description="Semester breakdowns." isComplete={formData.curriculum?.accordionSections?.length > 0} isHidden={formData.curriculum?.hide} onToggleHide={(val) => updateSection('curriculum', {...formData.curriculum, hide: val})} />
+          <SectionCard id="admissionFee" title="Admission" description="Criteria & fee tables." isComplete={formData.admissionFee?.feeDetails?.length > 0} isHidden={formData.admissionFee?.hide} onToggleHide={(val) => updateSection('admissionFee', {...formData.admissionFee, hide: val})} />
+          <SectionCard id="scholarships" title="Scholarships" description="Merit & early bird slabs." isComplete={formData.scholarships?.rows?.length > 0} isHidden={formData.scholarships?.hide} onToggleHide={(val) => updateSection('scholarships', {...formData.scholarships, hide: val})} />
+          <SectionCard id="whyJoin" title="Why Join" description="Key benefits & reasons." isComplete={formData.whyJoin?.reasons?.length > 0} isHidden={formData.whyJoin?.hide} onToggleHide={(val) => updateSection('whyJoin', {...formData.whyJoin, hide: val})} />
+          <SectionCard id="uniqueFeatures" title="Features" description="Unique course points." isComplete={formData.uniqueFeatures?.features?.length > 0} isHidden={formData.uniqueFeatures?.hide} onToggleHide={(val) => updateSection('uniqueFeatures', {...formData.uniqueFeatures, hide: val})} />
+          <SectionCard id="applySteps" title="How to Apply" description="Step-by-step guide." isComplete={formData.applySteps?.steps?.length > 0} isHidden={formData.applySteps?.hide} onToggleHide={(val) => updateSection('applySteps', {...formData.applySteps, hide: val})} />
+          <SectionCard id="faq" title="FAQs" description="Common questions." isComplete={formData.faq?.items?.length > 0} isHidden={formData.faq?.hide} onToggleHide={(val) => updateSection('faq', {...formData.faq, hide: val})} />
+          <SectionCard id="exploreDepartment" title="Department" description="Related facilities." isComplete={formData.exploreDepartment?.slides?.length > 0} isHidden={formData.exploreDepartment?.hide} onToggleHide={(val) => updateSection('exploreDepartment', {...formData.exploreDepartment, hide: val})} />
+          <SectionCard id="roadmap" title="Roadmap" description="Yearly learning flow." isComplete={formData.roadmap?.years?.length > 0} isHidden={formData.roadmap?.hide} onToggleHide={(val) => updateSection('roadmap', {...formData.roadmap, hide: val})} />
+          <SectionCard id="placements" title="Placements" description="Stats & highlights." isComplete={formData.placements?.list?.length > 0} isHidden={formData.placements?.hide} onToggleHide={(val) => updateSection('placements', {...formData.placements, hide: val})} />
+          <SectionCard id="industry" title="Partners" description="Placement partners." isComplete={formData.industry?.partners?.length > 0} isHidden={formData.industry?.hide} onToggleHide={(val) => updateSection('industry', {...formData.industry, hide: val})} />
+          <SectionCard id="testimonials" title="Testimonials" description="Student feedback." isComplete={formData.testimonials?.list?.length > 0} isHidden={formData.testimonials?.hide} onToggleHide={(val) => updateSection('testimonials', {...formData.testimonials, hide: val})} />
         </div>
       </div>
 

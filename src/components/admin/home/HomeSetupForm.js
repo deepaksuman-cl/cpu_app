@@ -700,7 +700,7 @@ export default function HomeSetupForm({ initialData }) {
               <NestedListEditor 
                 label="Student Feed"
                 items={sections.testimonialConfig.testimonials}
-                newItemTemplate={{ name: '', course: '', company: '', package: '', rating: 5, batch: '', quote: '', img: '', tag: '', tagColor: '#003a5c' }}
+                newItemTemplate={{ name: '', course: '', company: '', package: '', rating: 5, batch: '', quote: '', img: '' }}
                 fields={[
                   {key: 'name', label: 'Name'},
                   {key: 'course', label: 'Course/Degree'},
@@ -708,8 +708,6 @@ export default function HomeSetupForm({ initialData }) {
                   {key: 'package', label: 'Salary/Offer'},
                   {key: 'batch', label: 'Batch'},
                   {key: 'rating', label: 'Rating (1-5)', type: 'number'},
-                  {key: 'tag', label: 'Slide Tag Label'},
-                  {key: 'tagColor', label: 'Tag Color', type: 'color'},
                   {key: 'img', label: 'Student Photo', type: 'image', fullWidth: true},
                   {key: 'quote', label: 'Testimonial Quote', type: 'textarea', fullWidth: true}
                 ]}

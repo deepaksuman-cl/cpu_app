@@ -90,29 +90,29 @@ export default async function CourseSlugPage({ params }) {
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden">
       <Breadcrumb paths={breadcrumbPaths} />
       
-      {course.hero && (
+      {course.hero && !course.hero.hide && (
         <SchoolHero data={{...course.hero, duration: course.duration, eligibility: course.eligibility}}>
-          {course.accomplishments && <AccomplishmentsCard data={course.accomplishments} />}
+          {course.accomplishments && !course.accomplishments.hide && <AccomplishmentsCard data={course.accomplishments} />}
         </SchoolHero>
       )}
 
-      {course.overview && <CourseOverview data={course.overview} />}
-      {course.scope && <CourseScope data={course.scope} />}
-      {course.curriculum && <CourseCurriculum data={course.curriculum} />}
-      <CourseRoadmap data={course.roadmap} />
-      {course.exploreDepartment && <CourseDeptSlider data={course.exploreDepartment} />}
-      {course.admissionFee && <CourseAdmissionFee data={course.admissionFee} />}
-      {course.scholarships && <CourseScholarships data={course.scholarships} />}
-      {course.whyJoin && <CourseWhyJoin data={course.whyJoin} />}
-      {course.uniqueFeatures && <CourseUniqueFeatures data={course.uniqueFeatures} />}
-      {course.applySteps && <CourseApplySteps data={course.applySteps} />}
-      {course.faq && <CourseFAQ data={course.faq} />}
+      {course.overview && !course.overview.hide && <CourseOverview data={course.overview} />}
+      {course.scope && !course.scope.hide && <CourseScope data={course.scope} />}
+      {course.curriculum && !course.curriculum.hide && <CourseCurriculum data={course.curriculum} />}
+      {course.roadmap && !course.roadmap.hide && <CourseRoadmap data={course.roadmap} />}
+      {course.exploreDepartment && !course.exploreDepartment.hide && <CourseDeptSlider data={course.exploreDepartment} />}
+      {course.admissionFee && !course.admissionFee.hide && <CourseAdmissionFee data={course.admissionFee} />}
+      {course.scholarships && !course.scholarships.hide && <CourseScholarships data={course.scholarships} />}
+      {course.whyJoin && !course.whyJoin.hide && <CourseWhyJoin data={course.whyJoin} />}
+      {course.uniqueFeatures && !course.uniqueFeatures.hide && <CourseUniqueFeatures data={course.uniqueFeatures} />}
+      {course.applySteps && !course.applySteps.hide && <CourseApplySteps data={course.applySteps} />}
+      {course.faq && !course.faq.hide && <CourseFAQ data={course.faq} />}
     
 
       {/* Course specific versions of common sections if available */}
-      {course.placements && <SchoolPlacements data={course.placements} />}
-      {course.industry && <SchoolPartners data={course.industry} />}
-      {course.testimonials && <SchoolTestimonials data={course.testimonials} />}
+      {course.placements && !course.placements.hide && <SchoolPlacements data={course.placements} />}
+      {course.industry && !course.industry.hide && <SchoolPartners data={course.industry} />}
+      {course.testimonials && !course.testimonials.hide && <SchoolTestimonials data={course.testimonials} />}
     </div>
   );
 }

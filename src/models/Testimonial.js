@@ -34,14 +34,6 @@ const Testimonial = sequelize.define('testimonials', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  tag: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  tagColor: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
   schoolId: {
     type: DataTypes.INTEGER,
     allowNull: true,
