@@ -50,7 +50,7 @@ export async function uploadImageFromUrl(url, category = 'general') {
     revalidatePath('/', 'layout');
 
     // 8. Public URL generate karna
-    const fileUrl = `/uploads/${year}/${month}/${category}/${filename}`;
+    const fileUrl = `/api/media/${year}/${month}/${category}/${filename}`;
 
     return { 
       success: true, 
@@ -96,7 +96,7 @@ export async function uploadImage(formData) {
     // Global Revalidation
     revalidatePath('/', 'layout');
 
-    const fileUrl = `/uploads/${year}/${month}/${category}/${filename}`;
+    const fileUrl = `/api/media/${year}/${month}/${category}/${filename}`;
 
     return { 
       success: true, 

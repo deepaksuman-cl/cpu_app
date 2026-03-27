@@ -46,7 +46,7 @@ export async function uploadLocalMedia(formData) {
     const media = await Media.create({
       displayName: originalName,
       originalName: originalName,
-      url: `/uploads/media/${fileName}`,
+      url: `/api/media/media/${fileName}`,
       isExternal: false,
       mimeType: file.type,
       size: file.size,
