@@ -1,4 +1,6 @@
 import { notFound } from 'next/navigation';
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import SchoolHero from "@/components/pages/schools/SchoolHero";
 import SchoolStats from "@/components/pages/schools/SchoolStats";

@@ -7,8 +7,7 @@ import { notFound } from 'next/navigation';
 
 export default async function EditCoursePage({ params }) {
   const resolvedParams = await params;
-  const id = resolvedParams.id;
-  
+  const id = parseInt(resolvedParams.id, 10);
   const [courseResult, schoolsResult] = await Promise.all([
     getCourseById(id),
     getSchools()
@@ -38,7 +37,7 @@ export default async function EditCoursePage({ params }) {
         {/* Title & Course Name */}
         <div className="flex items-center h-full px-4 gap-3">
           <h1 className="text-[15px] sm:text-[16px] font-black text-[var(--text-primary)] uppercase tracking-wide">
-            Edit Course
+            Edit Course (ID: {id})
           </h1>
           
           <div className="hidden md:block w-[1px] h-4 bg-[var(--border-default)]"></div>

@@ -84,7 +84,7 @@ if (process.env.NODE_ENV !== "production") {
   globalForSequelize._sequelizeInstance = sequelize;
 }
 
-// Cache the in-flight connection work so concurrent requests share it.
+// 🔥 Important: Cache the connection to prevent multiple instances
 let isConnected = false;
 let connectionPromise = null;
 
@@ -97,34 +97,33 @@ export const connectToDatabase = async () => {
       await sequelize.authenticate();
       console.log("DB authenticated successfully");
 
-      await import("@/models/index.js");
+      // 1. Import centralized models and associations
+      await import('@/models/index.js');
 
-      if (process.env.NODE_ENV === "development") {
-        await sequelize.query("SET FOREIGN_KEY_CHECKS = 0");
-        await sequelize.sync({ alter: true });
-        await sequelize.query("SET FOREIGN_KEY_CHECKS = 1");
-        console.log("DB auto-synced");
-      } else {
-        await sequelize.sync();
-      }
+      // 🚀 2. The Bulletproof Sync (Universal for DEV & PROD)
+      await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
+      await sequelize.sync({ alter: false });
+      await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+      console.log('✅ DB Auto-Synced (Tables verified/created)');
 
       isConnected = true;
       console.log("Database initialization complete");
 
-      if (process.env.NODE_ENV === "development") {
-        const { default: db } = await import("@/models/index.js");
-        const { Navigation } = db;
-
-        const navCount = await Navigation.count().catch(() => 0);
-
-        if (navCount === 0) {
-          console.log("Fresh database detected. Auto-seeding initial data...");
-          const { seedDatabase } = await import("@/lib/actions/seedActions.js");
-          await seedDatabase().catch((error) => {
-            console.error("Auto-seed failed:", error.message);
-          });
-        }
-      }
+      // 🏁 3. Plug & Play Auto-Seed (Universal for DEV & PROD)
+      const db = await import('@/models/index.js');
+      const { Navigation } = db;
+      
+      // Check if the core table is empty. If it fails (e.g., table not fully ready), default to 0.
+      // const navCount = await Navigation.count().catch(() => 0);
+      
+      // if (navCount === 0) {
+      //   console.log('🌱 Fresh Database Detected. Auto-feeding initial data...');
+      //   const { seedDatabase } = await import('@/lib/actions/seedActions.js');
+      //   await seedDatabase().catch(err => {
+      //     console.error('❌ Auto-Seed Failed:', err.message);
+      //   });
+      // }
+      
     } catch (error) {
       console.error("DB connection/sync error:", formatDbError(error));
       throw error;

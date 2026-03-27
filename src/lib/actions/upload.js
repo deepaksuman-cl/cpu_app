@@ -2,6 +2,7 @@
 'use server';
 
 import { writeFile, mkdir } from 'fs/promises';
+import { revalidatePath } from 'next/cache';
 import path from 'path';
 
 // 🟢 NAYA aur Bulletproof function (Axios hata diya)
@@ -45,7 +46,10 @@ export async function uploadImageFromUrl(url, category = 'general') {
     // 6. Image save karna
     await writeFile(filePath, buffer);
 
-    // 7. Public URL generate karna
+    // 7. Global Revalidation
+    revalidatePath('/', 'layout');
+
+    // 8. Public URL generate karna
     const fileUrl = `/uploads/${year}/${month}/${category}/${filename}`;
 
     return { 
@@ -88,6 +92,9 @@ export async function uploadImage(formData) {
     
     const filePath = path.join(uploadDir, filename);
     await writeFile(filePath, buffer);
+
+    // Global Revalidation
+    revalidatePath('/', 'layout');
 
     const fileUrl = `/uploads/${year}/${month}/${category}/${filename}`;
 

@@ -1,4 +1,6 @@
 import HeroSection from "../../components/sections/HeroSection";
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 import StatsSection from "../../components/sections/StatsSection";
 import AboutSection from "../../components/sections/AboutSection";
 import ProgramsSection from "../../components/sections/ProgramsSection";

@@ -8,22 +8,7 @@ import RichTextEditor from '@/components/admin/RichTextEditor';
 import { updateFooter } from '@/lib/actions/footerActions';
 import { seedDatabase } from '@/lib/actions/seedActions';
 
-// --- Toast Notification ---
-function Toast({ msg, type, onClose }) {
-  return (
-    <div className={`fixed bottom-6 right-6 z-[200] flex items-center gap-3 px-5 py-3.5 shadow-xl text-[13px] font-semibold bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none ${
-      type === 'success'
-        ? 'text-[var(--color-success-dark)] border-l-[3px] border-l-[var(--color-success)]'
-        : 'text-[var(--color-danger)] border-l-[3px] border-l-[var(--color-danger)]'
-    }`}>
-      {type === 'success'
-        ? <CheckCircle2 size={16} className="text-[var(--color-success)] flex-shrink-0" />
-        : <AlertCircle size={16} className="text-[var(--color-danger)] flex-shrink-0" />}
-      {msg}
-      <button onClick={onClose} className="ml-2 text-[var(--text-muted)] hover:text-[var(--text-secondary)]"><X size={14} /></button>
-    </div>
-  );
-}
+import toast, { Toaster } from 'react-hot-toast';
 
 // --- Internal Helper Components ---
 
@@ -86,24 +71,19 @@ export default function FooterManagerForm({ initialData }) {
   });
   const [isSaving, setIsSaving] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
-  const [toast, setToast] = useState(null);
 
-  const showToast = (msg, type = 'success') => {
-    setToast({ msg, type });
-    setTimeout(() => setToast(null), 3500);
-  };
 
   const handleSave = async () => {
     setIsSaving(true);
     try {
       const result = await updateFooter(formData);
       if (result.success) {
-        showToast('Footer configuration saved successfully!');
+        toast.success(result.message || 'Footer configuration saved successfully!');
       } else {
-        showToast('Error: ' + result.error, 'error');
+        toast.error(result.message || 'Error updating footer');
       }
     } catch (err) {
-      showToast('Failed to save: ' + err.message, 'error');
+      toast.error('Failed to save: ' + err.message);
     } finally {
       setIsSaving(false);
     }
@@ -115,13 +95,13 @@ export default function FooterManagerForm({ initialData }) {
     try {
       const result = await seedDatabase();
       if (result.success) {
-        showToast('Synced from JSON successfully! Reloading...');
+        toast.success(result.message || 'Synced from JSON successfully! Reloading...');
         setTimeout(() => window.location.reload(), 1500);
       } else {
-        showToast('Error: ' + result.error, 'error');
+        toast.error(result.message || 'Error syncing data');
       }
     } catch (err) {
-      showToast('Failed to sync: ' + err.message, 'error');
+      toast.error('Failed to sync: ' + err.message);
     } finally {
       setIsSyncing(false);
     }
@@ -443,7 +423,7 @@ export default function FooterManagerForm({ initialData }) {
       </Card>
 
       </div>
-      {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
+      <Toaster position="bottom-right" />
     </div>
   );
 }

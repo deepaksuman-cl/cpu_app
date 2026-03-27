@@ -953,15 +953,9 @@
             "Overall, BCA programme enables students with a comprehensive understanding of computer science principles, practical skills in computer programming, and opportunities for career growth in the dynamic and evolving field of information technology."
           ],
           "sectionTitle": {
-            "0": "O",
-            "1": "v",
-            "2": "e",
-            "3": "r",
-            "4": "v",
-            "5": "i",
-            "6": "e",
-            "7": "w",
-            "main": "Overview"
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
           }
         },
         "scope": {
@@ -969,54 +963,9 @@
           "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
           "subtitle": "Expanding opportunities in the world of technology",
           "sectionTitle": {
-            "0": "S",
-            "1": "c",
-            "2": "o",
-            "3": "p",
-            "4": "e",
-            "5": " ",
-            "6": "o",
-            "7": "f",
-            "8": " ",
-            "9": "B",
-            "10": "a",
-            "11": "c",
-            "12": "h",
-            "13": "e",
-            "14": "l",
-            "15": "o",
-            "16": "r",
-            "17": " ",
-            "18": "o",
-            "19": "f",
-            "20": " ",
-            "21": "C",
-            "22": "o",
-            "23": "m",
-            "24": "p",
-            "25": "u",
-            "26": "t",
-            "27": "e",
-            "28": "r",
-            "29": " ",
-            "30": "A",
-            "31": "p",
-            "32": "p",
-            "33": "l",
-            "34": "i",
-            "35": "c",
-            "36": "a",
-            "37": "t",
-            "38": "i",
-            "39": "o",
-            "40": "n",
-            "41": " ",
-            "42": "(",
-            "43": "B",
-            "44": "C",
-            "45": "A",
-            "46": ")",
-            "main": "Scope"
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
           }
         },
         "curriculum": {
@@ -1024,27 +973,9 @@
           "introNote": "The BCA programme is a comprehensive curriculum providing students with a solid foundation in computer science, spanning programming languages (C, C++, Java), data structures, database management, software engineering, web development, and computer networks.",
           "outroNote": "Graduates of BCA are well prepared for diverse career specialization in the IT industry, including roles such as software developers, system analysts, IT consultants, database administrators, and cybersecurity professionals.",
           "sectionTitle": {
-            "0": "C",
-            "1": "o",
-            "2": "u",
-            "3": "r",
-            "4": "s",
-            "5": "e",
-            "6": " ",
-            "7": "S",
-            "8": "t",
-            "9": "r",
-            "10": "u",
-            "11": "c",
-            "12": "t",
-            "13": "u",
-            "14": "r",
-            "15": "e",
-            "16": " ",
-            "17": "B",
-            "18": "C",
-            "19": "A",
-            "main": "Structure"
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
           },
           "courseStructure": [
             {
@@ -1173,30 +1104,9 @@
             }
           ],
           "sectionTitle": {
-            "0": "A",
-            "1": "d",
-            "2": "m",
-            "3": "i",
-            "4": "s",
-            "5": "s",
-            "6": "i",
-            "7": "o",
-            "8": "n",
-            "9": " ",
-            "10": "&",
-            "11": " ",
-            "12": "F",
-            "13": "e",
-            "14": "e",
-            "15": " ",
-            "16": "D",
-            "17": "e",
-            "18": "t",
-            "19": "a",
-            "20": "i",
-            "21": "l",
-            "22": "s",
-            "main": "Admission"
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
           },
           "youtubeVideoId": "dQw4w9WgXcQ",
           "admissionCriteria": [
@@ -1267,27 +1177,9 @@
             "After 31st July"
           ],
           "sectionTitle": {
-            "0": "S",
-            "1": "c",
-            "2": "h",
-            "3": "o",
-            "4": "l",
-            "5": "a",
-            "6": "r",
-            "7": "s",
-            "8": "h",
-            "9": "i",
-            "10": "p",
-            "11": " ",
-            "12": "C",
-            "13": "r",
-            "14": "i",
-            "15": "t",
-            "16": "e",
-            "17": "r",
-            "18": "i",
-            "19": "a",
-            "main": "Scholarships"
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
           }
         },
         "whyJoin": {
@@ -1320,55 +1212,9 @@
           ],
           "subtitle": "Unlock your potential with a BCA degree",
           "sectionTitle": {
-            "0": "W",
-            "1": "h",
-            "2": "y",
-            "3": " ",
-            "4": "J",
-            "5": "o",
-            "6": "i",
-            "7": "n",
-            "8": " ",
-            "9": "B",
-            "10": "a",
-            "11": "c",
-            "12": "h",
-            "13": "e",
-            "14": "l",
-            "15": "o",
-            "16": "r",
-            "17": " ",
-            "18": "o",
-            "19": "f",
-            "20": " ",
-            "21": "C",
-            "22": "o",
-            "23": "m",
-            "24": "p",
-            "25": "u",
-            "26": "t",
-            "27": "e",
-            "28": "r",
-            "29": " ",
-            "30": "A",
-            "31": "p",
-            "32": "p",
-            "33": "l",
-            "34": "i",
-            "35": "c",
-            "36": "a",
-            "37": "t",
-            "38": "i",
-            "39": "o",
-            "40": "n",
-            "41": " ",
-            "42": "(",
-            "43": "B",
-            "44": "C",
-            "45": "A",
-            "46": ")",
-            "47": "?",
-            "main": "Why Join"
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
           }
         },
         "uniqueFeatures": {
@@ -1401,43 +1247,9 @@
           ],
           "subtitle": "Setting us apart from the rest",
           "sectionTitle": {
-            "0": "W",
-            "1": "h",
-            "2": "a",
-            "3": "t",
-            "4": " ",
-            "5": "m",
-            "6": "a",
-            "7": "k",
-            "8": "e",
-            "9": "s",
-            "10": " ",
-            "11": "D",
-            "12": "e",
-            "13": "p",
-            "14": "a",
-            "15": "r",
-            "16": "t",
-            "17": "m",
-            "18": "e",
-            "19": "n",
-            "20": "t",
-            "21": " ",
-            "22": "o",
-            "23": "f",
-            "24": " ",
-            "25": "B",
-            "26": "C",
-            "27": "A",
-            "28": " ",
-            "29": "u",
-            "30": "n",
-            "31": "i",
-            "32": "q",
-            "33": "u",
-            "34": "e",
-            "35": "?",
-            "main": "Features"
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
           }
         },
         "applySteps": {
@@ -1479,19 +1291,9 @@
           "subtitle": "Simple 5-step process to join the BCA programme",
           "guideLabel": "Guide to Register Online",
           "sectionTitle": {
-            "0": "H",
-            "1": "o",
-            "2": "w",
-            "3": " ",
-            "4": "t",
-            "5": "o",
-            "6": " ",
-            "7": "A",
-            "8": "p",
-            "9": "p",
-            "10": "l",
-            "11": "y",
-            "main": "Apply"
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
           }
         },
         "faq": {
@@ -1531,49 +1333,58 @@
           ],
           "subtitle": "Everything you need to know about the BCA programme",
           "sectionTitle": {
-            "0": "F",
-            "1": "r",
-            "2": "e",
-            "3": "q",
-            "4": "u",
-            "5": "e",
-            "6": "n",
-            "7": "t",
-            "8": "l",
-            "9": "y",
-            "10": " ",
-            "11": "A",
-            "12": "s",
-            "13": "k",
-            "14": "e",
-            "15": "d",
-            "16": " ",
-            "17": "Q",
-            "18": "u",
-            "19": "e",
-            "20": "s",
-            "21": "t",
-            "22": "i",
-            "23": "o",
-            "24": "n",
-            "25": "s",
-            "main": "FAQ"
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
           }
         },
         "deptSlides": [
           {
-            "cta": "VIEW MORE",
+            "title": "Department at a Glance",
             "icon": "Building2",
             "items": [
-              ""
+              "3 Guest Experts/year",
+              "IEEE Collaboration",
+              "Modern Lab Facilities",
+              "Specializations & Electives",
+              "Industry Collaborations",
+              "Student Programs",
+              "Placement Assistance",
+              "Exclusive Lab Activities"
             ],
-            "title": ""
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Labs",
+            "icon": "FlaskConical",
+            "items": [
+              "Microsoft Innovation Centre",
+              "Microsoft MTAC",
+              "Oracle Innovation Lab",
+              "Oracle Industry Lab",
+              "Artificial Intelligence Lab"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Achievements",
+              "Pharmacy",
+              "Research",
+              "Latest Updates",
+              "Activities",
+              "Links"
+            ],
+            "cta": "START NOW"
           }
         ],
         "roadmap": {
           "sectionTitle": {
             "main": "3Year Learning Roadmap",
-            "highlight": "Roadmap"
+            "highlight": "Roadmap",
+            "skyHighlight": ""
           },
           "subtitle": "Your journey from foundation to industry expert.",
           "years": [
@@ -3133,6 +2944,55 @@
           "rating": 5,
           "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
           "text": "From day one, the university prepared us for real-world challenges. The industry tie-ups and live projects gave hands-on experience. I landed my dream job."
+        }
+      ]
+    },
+    "exploreDepartment": {
+      "sectionTitle": {
+        "main": "Explore School of Computer Applications",
+        "highlight": "School"
+      },
+      "subtitle": "Discover our specialized wings and innovation labs",
+      "items": [
+        {
+          "title": "Department at a Glance",
+          "icon": "Building2",
+          "items": [
+            "3 Guest Experts/year",
+            "IEEE Collaboration",
+            "Modern Lab Facilities",
+            "Specializations & Electives",
+            "Industry Collaborations",
+            "Student Programs",
+            "Placement Assistance",
+            "Exclusive Lab Activities"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Exclusive Labs",
+          "icon": "FlaskConical",
+          "items": [
+            "Microsoft Innovation Centre",
+            "Microsoft MTAC",
+            "Oracle Innovation Lab",
+            "Oracle Industry Lab",
+            "Artificial Intelligence Lab"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Your Department in a Nutshell",
+          "icon": "Star",
+          "items": [
+            "Achievements",
+            "Pharmacy",
+            "Research",
+            "Latest Updates",
+            "Activities",
+            "Links"
+          ],
+          "cta": "START NOW"
         }
       ]
     }

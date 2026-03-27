@@ -3,6 +3,7 @@
 import Footer from '@/models/Footer';
 import { connectToDatabase } from '@/lib/db';
 import defaultFooterData from '@/data/footer.json';
+import { revalidatePath } from 'next/cache';
 
 /**
  * Fetches the global footer configuration.
@@ -81,10 +82,11 @@ export async function updateFooter(data) {
       updatedFooter = await Footer.create(data);
     }
     
-    return { success: true, data: JSON.parse(JSON.stringify(updatedFooter)), error: null };
+    revalidatePath('/', 'layout');
+    return { success: true, message: 'Footer updated successfully', data: JSON.parse(JSON.stringify(updatedFooter)) };
   } catch (error) {
     console.error('updateFooter Error:', error);
-    return { success: false, data: null, error: error.message };
+    return { success: false, message: error.message || 'Failed to update footer.' };
   }
 }
 

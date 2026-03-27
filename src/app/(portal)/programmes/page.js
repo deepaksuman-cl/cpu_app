@@ -1,4 +1,6 @@
 import Breadcrumb from '@/components/ui/Breadcrumb';
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 import ProgrammesClient from '@/components/pages/programmes/ProgrammesClient';
 import { getProgrammeSettings, getCategories, getCourses, getSidebarLinks } from '@/lib/actions/programmeActions';
 import { Suspense } from 'react';

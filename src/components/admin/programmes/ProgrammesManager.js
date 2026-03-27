@@ -9,26 +9,12 @@ import { AlertCircle, AlertTriangle, BookMarked, CheckCircle2, ChevronRight, Dat
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-// Custom Toast Component matching UI standards
-function Toast({ msg, type, onClose }) {
-  return (
-    <div className={`fixed bottom-6 right-6 z-[200] flex items-center gap-3 px-5 py-3.5 shadow-xl text-[13px] font-semibold bg-[var(--bg-surface)] rounded-none ${type === 'success' ? 'text-[var(--color-success-dark)] border-l-[3px] border-[var(--color-success)]' : 'text-[var(--color-danger-dark)] border-l-[3px] border-[var(--color-danger)]'}`}>
-      {type === 'success' ? <CheckCircle2 size={16} className="text-[var(--color-success)] flex-shrink-0" /> : <AlertCircle size={16} className="text-[var(--color-danger)] flex-shrink-0" />}
-      {msg}
-      <button onClick={onClose} className="ml-2 text-[var(--text-muted)] hover:text-[var(--text-secondary)]"><X size={14} /></button>
-    </div>
-  );
-}
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function ProgrammesManager({ initialCategories, initialCourses, initialLinks, initialSettings }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState(null);
-  
-  const showToast = (msg, type = 'success') => {
-    setToast({ msg, type });
-    setTimeout(() => setToast(null), 3500);
-  };
+
 
   // Modal States
   const [isCatModalOpen, setCatModalOpen] = useState(false);
@@ -65,10 +51,10 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     if (res.success) {
       setCatLabel('');
       setCatModalOpen(false);
-      showToast('Category created successfully!');
+      toast.success('Category created successfully!');
       router.refresh();
     } else {
-      showToast('Error creating category: ' + res.error, 'error');
+      toast.error(res.message || 'Error creating category');
     }
   };
 
@@ -78,10 +64,10 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     const res = await deleteCategory(id);
     setLoading(false);
     if (res.success) {
-      showToast('Category deleted successfully!');
+      toast.success('Category deleted successfully!');
       router.refresh();
     } else {
-      showToast('Error deleting category: ' + res.error, 'error');
+      toast.error(res.message || 'Error deleting category');
     }
   };
 
@@ -116,13 +102,13 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     
     setLoading(false);
     if (res.success) {
-      showToast(editingCourseId ? 'Course updated successfully!' : 'Course created successfully!');
+      toast.success(editingCourseId ? 'Course updated successfully!' : 'Course created successfully!');
       setCourseModalOpen(false);
       setEditingCourseId(null);
       setCourseForm({ title: '', school: '', categoryId: '', icon: 'Monitor', colorHex: '#1c54a3', iconBg: 'bg-blue-50', textColor: 'text-[#1c54a3]', borderHover: 'hover:border-[#1c54a3]', programs: '', badgeLabel: '', badgeBgHex: '#fee2e2', badgeTextHex: '#dc2626', detailsSlug: '#' });
       router.refresh();
     } else {
-      showToast('Error saving course: ' + res.error, 'error');
+      toast.error(res.message || 'Error saving course');
     }
   };
 
@@ -152,10 +138,10 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     const res = await deleteCourse(id);
     setLoading(false);
     if (res.success) {
-      showToast('Course deleted successfully!');
+      toast.success('Course deleted successfully!');
       router.refresh();
     } else {
-      showToast('Error deleting course: ' + res.error, 'error');
+      toast.error(res.message || 'Error deleting course');
     }
   };
 
@@ -171,22 +157,22 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     if (editingLinkId) {
       res = await updateSidebarLink(editingLinkId, linkForm);
       if (res.success) {
-        showToast('Link updated successfully!');
+        toast.success('Link updated successfully!');
         setLinkModalOpen(false);
         setEditingLinkId(null);
         setLinkForm({ label: '', icon: '', slug: '', colorClass: '' });
       } else {
-        showToast('Error updating link: ' + res.error, 'error');
+        toast.error(res.message || 'Error updating link');
       }
     } else {
       res = await createSidebarLink({ ...linkForm, order: initialLinks.length + 1 });
       if (res.success) {
-        showToast('Link created successfully!');
+        toast.success('Link created successfully!');
         setLinkModalOpen(false);
         setEditingLinkId(null);
         setLinkForm({ label: '', icon: '', slug: '', colorClass: '' });
       } else {
-        showToast('Error creating link: ' + res.error, 'error');
+        toast.error(res.message || 'Error creating link');
       }
     }
     setLoading(false);
@@ -210,10 +196,10 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     const res = await deleteSidebarLink(id);
     setLoading(false);
     if (res.success) {
-      showToast('Link deleted successfully!');
+      toast.success('Link deleted successfully!');
       router.refresh();
     } else {
-      showToast('Error deleting link: ' + res.error, 'error');
+      toast.error(res.message || 'Error deleting link');
     }
   };
 
@@ -223,10 +209,10 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     const res = await seedDatabase();
     setLoading(false);
     if(res.success) {
-      showToast(res.message || 'Database seeded successfully!', 'success');
+      toast.success(res.message || 'Database seeded successfully!');
       router.refresh();
     } else {
-      showToast("Error seeding data: " + res.error, 'error');
+      toast.error(res.message || 'Error seeding data');
     }
   };
 
@@ -236,7 +222,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     setLoading(true);
     await updateProgrammeSettings(settingsForm.id, settingsForm);
     setLoading(false);
-    showToast('Global Page Settings successfully updated!');
+    toast.success('Global Page Settings successfully updated!');
     router.refresh();
   };
 
@@ -250,7 +236,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
 
   return (
     <>
-      {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
+      <Toaster position="bottom-right" />
       
       {/* ── Fixed/Sticky Header (Exactly 44px Height) ── */}
       <div className="sticky top-0 z-30 flex items-center justify-between h-[44px] w-full bg-[var(--bg-surface)] border-b border-[var(--border-default)] shadow-sm">

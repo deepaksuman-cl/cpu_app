@@ -100,7 +100,14 @@ export function HappeningsSection({ data }) {
 
 export function FAQSection({ data }) {
   const [openFaq, setOpenFaq] = useState(null);
-  const items = data?.faqs || [];
+  
+  // Prefer relational data over legacy JSON items
+  const relationalFaqs = data?.faqsRel?.map(f => ({
+    q: f.question,
+    a: f.answer
+  })) || [];
+
+  const items = relationalFaqs.length > 0 ? relationalFaqs : (data?.faqs || []);
   const { title, highlight } = data || {};
   
   return (
@@ -195,7 +202,7 @@ export function CTASection({ data }) {
     <section className="bg-gradient-to-br from-[#00588b] to-[#003a5c] py-20 px-4 overflow-hidden">
       <div className="max-w-[860px] mx-auto text-center">
         <h2 className="text-white font-black text-3xl mb-3" dangerouslySetInnerHTML={{ __html: title }} />
-        <p className="text-white/80 text-base max-w-xl mx-auto mb-8 leading-[1.75]" dangerouslySetInnerHTML={{ __html: description }} />
+        <div className="text-white/80 text-base max-w-xl mx-auto mb-8 leading-[1.75]" dangerouslySetInnerHTML={{ __html: description }} />
         <div className="flex justify-center gap-3.5 flex-wrap">
           <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3.5 font-extrabold text-[15px] cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
             <GraduationCap size={16}/> {applyLabel}

@@ -11,7 +11,17 @@ import path from 'path';
  * Auto-seeds from navigation.json if database is empty.
  */
 export async function getNavigationData() {
-  const defaultNav = { topMenu: [], siteConfig: {}, topBarInfo: {} };
+  const defaultNav = { 
+    topMenu: [], 
+    siteConfig: { 
+      topBar: { latestNewsLabel: 'News', helpdeskLabel: 'HelpDesk' },
+      searchPlaceholder: 'Search...',
+      sidebar: { closeLabel: 'Close' }
+    }, 
+    topBarInfo: { newsTicker: [], topStripLinks: [] }, 
+    mobileConfig: { bottomTabs: [] },
+    sideMenu: { exploreMore: [], directLinks: [] }
+  };
   try {
     await connectToDatabase();
 
@@ -58,8 +68,7 @@ export async function updateNavigationData(nodePath, payload) {
       { where: { documentName: 'main_header' } }
     );
 
-    revalidatePath('/admin/header');
-    revalidatePath('/');
+    revalidatePath('/', 'layout');
     
     return { success: true, message: 'Settings updated successfully' };
   } catch (error) {
@@ -81,8 +90,7 @@ export async function saveFullNavigationData(fullData) {
       { where: { documentName: 'main_header' } }
     );
 
-    revalidatePath('/admin/header');
-    revalidatePath('/');
+    revalidatePath('/', 'layout');
     
     return { success: true, message: 'Changes saved successfully' };
   } catch (error) {

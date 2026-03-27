@@ -1,6 +1,9 @@
 // File: src/app/admin/layout.js
 'use client';
 
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminTopbar from '@/components/admin/AdminTopbar';
 import ScrollToTop from '@/components/admin/ui/ScrollToTop';

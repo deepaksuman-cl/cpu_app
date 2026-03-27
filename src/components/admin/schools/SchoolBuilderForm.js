@@ -124,23 +124,56 @@ export default function SchoolBuilderForm({ initialData = null }) {
   const [activeSection, setActiveSection] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [formData, setFormData] = useState(initialData || {
-    name: '', slug: '', metaTitle: '', metaDescription: '', breadcrumb: [],
-    hero: { bgImage: '', badge: '', title: { main: '', highlight: '', skyHighlight: '' }, subtitle: '', description: '', cta: [], quickStats: [] },
-    stats: [],
-    exploreDepartment: { sectionTitle: { main: 'Explore Our Department', highlight: 'Department' }, subtitle: 'Discover our specialized wings', items: [] },
-    about: { 
-      vision: { title: { main: 'Vision' }, label: 'Our Purpose', icon: 'Target', text: '', highlights: [] }, 
-      mission: { title: { main: 'Mission' }, label: 'Our Goal', icon: 'Lightbulb', points: [] } 
-    },
-    programmes: { title: { main: 'Our Programme', highlight: 'Programme' }, subtitle: 'Academic Programmes', description: '', levels: [] },
-    placements: { title: { main: 'Placement Highlights', highlight: 'Highlights' }, label: 'Placements', subtitle: '', list: [] },
-    alumni: { title: { main: 'Life at CPU', highlight: 'CPU' }, label: 'Our Alumni', list: [] },
-    industry: { title: { main: 'Industry Tie Ups', highlight: 'Tie Ups' }, label: 'Partners', partners: [] },
-    research: { title: { main: 'Research', highlight: 'Research' }, label: 'R&D', gallery: [], stats: [] },
-    community: { title: { main: 'Community', highlight: 'Community' }, label: 'Campus Life', description: [], gallery: [] },
-    infrastructure: { title: { main: 'Infrastructure', highlight: 'Infrastructure' }, label: 'Facilities', list: [] },
-    testimonials: { title: { main: 'Testimonials', highlight: 'Testimonials' }, label: 'Reviews', list: [] }
+  const [formData, setFormData] = useState(() => {
+    const base = initialData || {
+      name: '', slug: '', metaTitle: '', metaDescription: '', breadcrumb: [],
+      hero: { bgImage: '', badge: '', title: { main: '', highlight: '', skyHighlight: '' }, subtitle: '', description: '', cta: [], quickStats: [] },
+      stats: [],
+      exploreDepartment: { sectionTitle: { main: 'Explore Our Department', highlight: 'Department' }, subtitle: 'Discover our specialized wings', items: [] },
+      about: { 
+        vision: { title: { main: 'Vision' }, label: 'Our Purpose', icon: 'Target', text: '', highlights: [] }, 
+        mission: { title: { main: 'Mission' }, label: 'Our Goal', icon: 'Lightbulb', points: [] } 
+      },
+      programmes: { title: { main: 'Our Programme', highlight: 'Programme' }, subtitle: 'Academic Programmes', description: '', levels: [] },
+      placements: { title: { main: 'Placement Highlights', highlight: 'Highlights' }, label: 'Placements', subtitle: '', list: [] },
+      alumni: { title: { main: 'Life at CPU', highlight: 'CPU' }, label: 'Our Alumni', list: [] },
+      industry: { title: { main: 'Industry Tie Ups', highlight: 'Tie Ups' }, label: 'Partners', partners: [] },
+      research: { title: { main: 'Research', highlight: 'Research' }, label: 'R&D', gallery: [], stats: [] },
+      community: { title: { main: 'Community', highlight: 'Community' }, label: 'Campus Life', description: [], gallery: [] },
+      infrastructure: { title: { main: 'Infrastructure', highlight: 'Infrastructure' }, label: 'Facilities', list: [] },
+      testimonials: { title: { main: 'Testimonials', highlight: 'Testimonials' }, label: 'Reviews', list: [] }
+    };
+
+    // Merge relational data if available
+    if (initialData?.testimonialsRel?.length > 0) {
+      base.testimonials = { 
+        ...base.testimonials, 
+        list: initialData.testimonialsRel.map(t => ({
+          name: t.studentName, text: t.reviewText, company: t.company, batch: t.batch, 
+          photo: t.image, rating: t.rating, course: t.course, package: t.package, 
+          tag: t.tag, tagColor: t.tagColor, slug: t.slug || ''
+        }))
+      };
+    }
+    if (initialData?.placementPartnersRel?.length > 0) {
+      base.placements = {
+        ...base.placements,
+        list: initialData.placementPartnersRel.map(p => ({
+          name: p.studentName, company: p.companyName, pkg: p.packageOffered, 
+          city: p.city, img: p.logoUrl, slug: p.slug || ''
+        }))
+      };
+    }
+    if (initialData?.facilitiesRel?.length > 0) {
+      base.infrastructure = {
+        ...base.infrastructure,
+        list: initialData.facilitiesRel.map(f => ({
+          title: f.name, image: f.image, desc: f.description, slug: f.slug || ''
+        }))
+      };
+    }
+
+    return base;
   });
 
   const updateSection = useCallback((section, data) => {
@@ -197,17 +230,17 @@ export default function SchoolBuilderForm({ initialData = null }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">School Name *</label>
-            <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" placeholder="e.g. School of Engineering" />
+            <input type="text" value={formData.name || ''} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" placeholder="e.g. School of Engineering" />
           </div>
           <div>
             <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Slug</label>
-            <input type="text" value={formData.slug} onChange={(e) => setFormData({...formData, slug: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-muted)] font-mono" placeholder="engineering" />
+            <input type="text" value={formData.slug || ''} onChange={(e) => setFormData({...formData, slug: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-muted)] font-mono" placeholder="engineering" />
           </div>
           <div className="md:col-span-2 pt-3 border-t border-[var(--border-light)]">
             <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Meta Title</label>
-            <input type="text" value={formData.metaTitle} onChange={(e) => setFormData({...formData, metaTitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)] mb-3" placeholder="SEO Title..." />
+            <input type="text" value={formData.metaTitle || ''} onChange={(e) => setFormData({...formData, metaTitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)] mb-3" placeholder="SEO Title..." />
             <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Meta Description</label>
-            <textarea value={formData.metaDescription} onChange={(e) => setFormData({...formData, metaDescription: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs h-20 focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)] resize-none" placeholder="SEO Description..." />
+            <textarea value={formData.metaDescription || ''} onChange={(e) => setFormData({...formData, metaDescription: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs h-20 focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)] resize-none" placeholder="SEO Description..." />
           </div>
           <div className="md:col-span-2 pt-3 border-t border-[var(--border-light)]">
             <NestedListEditor 
@@ -279,24 +312,24 @@ export default function SchoolBuilderForm({ initialData = null }) {
               <TitleEditor label="Hero Title" value={formData.hero.title} onChange={val => updateSection('hero', {...formData.hero, title: val})} />
               <div>
                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Hero Subtitle</label>
-                <input type="text" value={formData.hero.subtitle} onChange={e => updateSection('hero', {...formData.hero, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="e.g. Shaping the Future of Tech" />
+                <input type="text" value={formData.hero.subtitle || ''} onChange={e => updateSection('hero', {...formData.hero, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="e.g. Shaping the Future of Tech" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Badge Text</label>
-                  <input type="text" value={formData.hero.badge} onChange={e => updateSection('hero', {...formData.hero, badge: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                  <input type="text" value={formData.hero.badge || ''} onChange={e => updateSection('hero', {...formData.hero, badge: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
                 </div>
                 <div>
                    <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Background Image URL</label>
                    <div className="flex flex-col sm:flex-row gap-2">
-                     <input type="text" value={formData.hero.bgImage} onChange={e => updateSection('hero', {...formData.hero, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                     <input type="text" value={formData.hero.bgImage || ''} onChange={e => updateSection('hero', {...formData.hero, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
                      <div className="w-full sm:w-auto shrink-0"><MediaUploader category="schools" onUploadSuccess={url => updateSection('hero', {...formData.hero, bgImage: url})} /></div>
                    </div>
                 </div>
               </div>
               <div>
                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Description</label>
-                <textarea value={formData.hero.description} onChange={e => updateSection('hero', {...formData.hero, description: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs h-20 outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none resize-none" />
+                <textarea value={formData.hero.description || ''} onChange={e => updateSection('hero', {...formData.hero, description: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs h-20 outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none resize-none" />
               </div>
               <div className="pt-5 border-t border-[var(--border-light)]">
                 <NestedListEditor 
@@ -314,11 +347,11 @@ export default function SchoolBuilderForm({ initialData = null }) {
                     <div key={idx} className="flex flex-col sm:flex-row gap-3 items-end bg-[var(--bg-surface)] p-3 border border-[var(--border-default)] rounded-none group hover:border-[var(--border-dark)] transition-colors relative">
                       <div className="flex-1 w-full">
                         <label className="text-[9px] text-[var(--text-muted)] font-bold uppercase block mb-1">Value</label>
-                        <input type="text" value={s.value} onChange={e => { const n = [...formData.hero.quickStats]; n[idx].value = e.target.value; updateSection('hero', {...formData.hero, quickStats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                        <input type="text" value={s.value || ''} onChange={e => { const n = [...formData.hero.quickStats]; n[idx].value = e.target.value; updateSection('hero', {...formData.hero, quickStats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
                       <div className="flex-1 w-full">
                         <label className="text-[9px] text-[var(--text-muted)] font-bold uppercase block mb-1">Label</label>
-                        <input type="text" value={s.label} onChange={e => { const n = [...formData.hero.quickStats]; n[idx].label = e.target.value; updateSection('hero', {...formData.hero, quickStats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                        <input type="text" value={s.label || ''} onChange={e => { const n = [...formData.hero.quickStats]; n[idx].label = e.target.value; updateSection('hero', {...formData.hero, quickStats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
                       <div className="w-full sm:w-40">
                         <label className="text-[9px] text-[var(--text-muted)] font-bold uppercase block mb-1">Icon</label>
@@ -342,11 +375,11 @@ export default function SchoolBuilderForm({ initialData = null }) {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
                       <div>
                         <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Value (e.g. 50+)</label>
-                        <input type="text" value={s.value} onChange={e => { const ns = [...formData.stats]; ns[idx].value = e.target.value; updateSection('stats', ns); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                        <input type="text" value={s.value || ''} onChange={e => { const ns = [...formData.stats]; ns[idx].value = e.target.value; updateSection('stats', ns); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
                       <div>
                         <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Label (e.g. Labs)</label>
-                        <input type="text" value={s.label} onChange={e => { const ns = [...formData.stats]; ns[idx].label = e.target.value; updateSection('stats', ns); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                        <input type="text" value={s.label || ''} onChange={e => { const ns = [...formData.stats]; ns[idx].label = e.target.value; updateSection('stats', ns); }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
                       <div className="z-[60]">
                         <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Icon</label>
@@ -370,7 +403,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div className="flex-1">
                     <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Label</label>
-                    <input type="text" placeholder="Label" value={formData.about.vision.label} onChange={e => updateSection('about', {...formData.about, vision: {...formData.about.vision, label: e.target.value}})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                    <input type="text" placeholder="Label" value={formData.about.vision.label || ''} onChange={e => updateSection('about', {...formData.about, vision: {...formData.about.vision, label: e.target.value}})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                   </div>
                   <div className="flex-1">
                     <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Icon</label>
@@ -380,7 +413,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 rounded-none mb-4">
                   <label className="block text-[10px] font-black text-[var(--text-primary)] uppercase mb-3 tracking-widest">Vision Statement (Rich Text)</label>
                   <RichTextEditor 
-                    value={formData.about.vision.text} 
+                    value={formData.about.vision.text || ''} 
                     onChange={content => updateSection('about', {...formData.about, vision: {...formData.about.vision, text: content}})} 
                   />
                 </div>
@@ -398,7 +431,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div className="flex-1">
                     <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Label</label>
-                    <input type="text" placeholder="Label" value={formData.about.mission.label} onChange={e => updateSection('about', {...formData.about, mission: {...formData.about.mission, label: e.target.value}})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                    <input type="text" placeholder="Label" value={formData.about.mission.label || ''} onChange={e => updateSection('about', {...formData.about, mission: {...formData.about.mission, label: e.target.value}})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                   </div>
                   <div className="flex-1">
                     <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Icon</label>
@@ -430,12 +463,12 @@ export default function SchoolBuilderForm({ initialData = null }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Section Subtitle</label>
-                  <input type="text" placeholder="Subtitle" value={formData.programmes.subtitle} onChange={e => updateSection('programmes', {...formData.programmes, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                  <input type="text" placeholder="Subtitle" value={formData.programmes.subtitle || ''} onChange={e => updateSection('programmes', {...formData.programmes, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
                 </div>
                 <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Background Image</label>
                   <div className="flex flex-col sm:flex-row gap-2">
-                    <input type="text" placeholder="BG Image URL" value={formData.programmes.bgImage} onChange={e => updateSection('programmes', {...formData.programmes, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                    <input type="text" placeholder="BG Image URL" value={formData.programmes.bgImage || ''} onChange={e => updateSection('programmes', {...formData.programmes, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
                     <div className="w-full sm:w-auto shrink-0"><MediaUploader category="schools" onUploadSuccess={url => updateSection('programmes', {...formData.programmes, bgImage: url})} /></div>
                   </div>
                 </div>
@@ -443,7 +476,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
               <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
                 <label className="block text-[11px] font-black text-[var(--text-secondary)] uppercase mb-3 tracking-widest">Programme Overview (Rich Text)</label>
                 <RichTextEditor 
-                  value={formData.programmes.description} 
+                  value={formData.programmes.description || ''} 
                   onChange={content => updateSection('programmes', {...formData.programmes, description: content})} 
                 />
               </div>
@@ -458,7 +491,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                     <div key={lIdx} className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 rounded-none group relative">
                       <button onClick={() => updateSection('programmes', {...formData.programmes, levels: formData.programmes.levels.filter((_, i) => i !== lIdx)})} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] transition-colors p-1"><Trash2 size={18}/></button>
                       <div className="flex flex-col sm:flex-row gap-3 mb-5 mt-4 sm:mt-0">
-                        <input type="text" placeholder="Level Label (e.g. Undergrad)" value={level.label} onChange={e => {
+                        <input type="text" placeholder="Level Label (e.g. Undergrad)" value={level.label || ''} onChange={e => {
                           const nl = [...formData.programmes.levels]; nl[lIdx].label = e.target.value; updateSection('programmes', {...formData.programmes, levels: nl});
                         }} className="border border-[var(--border-default)] p-2.5 text-sm flex-1 font-bold outline-none focus:border-[var(--color-primary)] rounded-none" />
                         <div className="w-full sm:w-48">
@@ -516,22 +549,22 @@ export default function SchoolBuilderForm({ initialData = null }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
-                  <input type="text" placeholder="e.g. Placements" value={formData.placements.label} onChange={e => updateSection('placements', {...formData.placements, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                  <input type="text" placeholder="e.g. Placements" value={formData.placements.label || ''} onChange={e => updateSection('placements', {...formData.placements, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                 </div>
                 <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Section Subtitle</label>
-                  <input type="text" placeholder="e.g. CPU Placement Records" value={formData.placements.subtitle} onChange={e => updateSection('placements', {...formData.placements, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                  <input type="text" placeholder="e.g. CPU Placement Records" value={formData.placements.subtitle || ''} onChange={e => updateSection('placements', {...formData.placements, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                 </div>
               </div>
               <NestedListEditor 
                 label="Student Placements"
                 items={formData.placements.list}
-                newItemTemplate={{ name: '', company: '', package: '', city: '', image: '', slug: '' }}
+                newItemTemplate={{ name: '', company: '', pkg: '', city: '', img: '', slug: '' }}
                 fields={[
                   {key: 'name', label: 'Student Name'},
                   {key: 'company', label: 'Company'},
-                  {key: 'package', label: 'Package'},
-                  {key: 'image', label: 'Photo URL', type: 'image'},
+                  {key: 'pkg', label: 'Package'},
+                  {key: 'img', label: 'Photo URL', type: 'image'},
                   {key: 'slug', label: 'Slug'}
                 ]}
                 onUpdate={items => updateSection('placements', {...formData.placements, list: items})}
@@ -544,7 +577,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                <TitleEditor label="Alumni Section Title" value={formData.alumni.title} onChange={val => updateSection('alumni', {...formData.alumni, title: val})} />
                <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
-                  <input type="text" placeholder="e.g. Our Alumni" value={formData.alumni.label} onChange={e => updateSection('alumni', {...formData.alumni, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
+                  <input type="text" placeholder="e.g. Our Alumni" value={formData.alumni.label || ''} onChange={e => updateSection('alumni', {...formData.alumni, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                </div>
                <NestedListEditor 
                 label="Alumni Success"
@@ -566,7 +599,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                <TitleEditor label="Industry Section Title" value={formData.industry.title} onChange={val => updateSection('industry', {...formData.industry, title: val})} />
                <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
-                  <input type="text" placeholder="e.g. Collaborations" value={formData.industry.label} onChange={e => updateSection('industry', {...formData.industry, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
+                  <input type="text" placeholder="e.g. Collaborations" value={formData.industry.label || ''} onChange={e => updateSection('industry', {...formData.industry, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                </div>
                <NestedListEditor 
                 label="Industry Partners (Logos)"
@@ -583,7 +616,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 <TitleEditor label="Research Section Title" value={formData.research.title} onChange={val => updateSection('research', {...formData.research, title: val})} />
                 <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
-                  <input type="text" placeholder="e.g. Eminence Research" value={formData.research.label} onChange={e => updateSection('research', {...formData.research, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
+                   <input type="text" placeholder="e.g. Eminence Research" value={formData.research.label || ''} onChange={e => updateSection('research', {...formData.research, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                 </div>
                 
                 <div className="space-y-4 pt-4 border-t border-[var(--border-light)]">
@@ -593,11 +626,11 @@ export default function SchoolBuilderForm({ initialData = null }) {
                       <button onClick={() => updateSection('research', {...formData.research, stats: formData.research.stats.filter((_, i) => i !== idx)})} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 sm:static"><Trash2 size={16} /></button>
                       <div className="w-full sm:flex-1">
                         <label className="text-[9px] block mb-1 uppercase font-bold text-[var(--text-muted)]">Value</label>
-                        <input type="text" value={s.value} onChange={e => { const n = [...formData.research.stats]; n[idx].value = e.target.value; updateSection('research', {...formData.research, stats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                        <input type="text" value={s.value || ''} onChange={e => { const n = [...formData.research.stats]; n[idx].value = e.target.value; updateSection('research', {...formData.research, stats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
                       <div className="w-full sm:flex-1">
                         <label className="text-[9px] block mb-1 uppercase font-bold text-[var(--text-muted)]">Label</label>
-                        <input type="text" value={s.label} onChange={e => { const n = [...formData.research.stats]; n[idx].label = e.target.value; updateSection('research', {...formData.research, stats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
+                        <input type="text" value={s.label || ''} onChange={e => { const n = [...formData.research.stats]; n[idx].label = e.target.value; updateSection('research', {...formData.research, stats: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none" />
                       </div>
                       <div className="w-full sm:w-40">
                         <label className="text-[9px] block mb-1 uppercase font-bold text-[var(--text-muted)]">Icon</label>
@@ -630,12 +663,12 @@ export default function SchoolBuilderForm({ initialData = null }) {
               <TitleEditor label="Community Section Title" value={formData.community.title} onChange={val => updateSection('community', {...formData.community, title: val})} />
                <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
-                  <input type="text" placeholder="e.g. Community" value={formData.community.label} onChange={e => updateSection('community', {...formData.community, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
+                   <input type="text" placeholder="e.g. Community" value={formData.community.label || ''} onChange={e => updateSection('community', {...formData.community, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                </div>
                 <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 shadow-sm mb-6 rounded-none">
                   <label className="block text-[11px] font-black text-[var(--text-secondary)] uppercase mb-3 tracking-widest">Community Description (Rich Text)</label>
                   <RichTextEditor 
-                    value={formData.community.description?.join('\n')} 
+                    value={formData.community.description?.join('\n') || ''} 
                     onChange={content => updateSection('community', {...formData.community, description: [content]})} 
                   />
                 </div>
@@ -654,7 +687,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 <TitleEditor label="Infrastructure Section Title" value={formData.infrastructure.title} onChange={val => updateSection('infrastructure', {...formData.infrastructure, title: val})} />
                 <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
-                  <input type="text" placeholder="e.g. Campus" value={formData.infrastructure.label} onChange={e => updateSection('infrastructure', {...formData.infrastructure, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
+                   <input type="text" placeholder="e.g. Campus" value={formData.infrastructure.label || ''} onChange={e => updateSection('infrastructure', {...formData.infrastructure, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                 </div>
                 <NestedListEditor 
                 label="Infrastructure Items"
@@ -676,7 +709,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 <TitleEditor label="Testimonials Section Title" value={formData.testimonials.title} onChange={val => updateSection('testimonials', {...formData.testimonials, title: val})} />
                 <div>
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Badge Label</label>
-                  <input type="text" placeholder="e.g. Testimonials" value={formData.testimonials.label} onChange={e => updateSection('testimonials', {...formData.testimonials, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
+                   <input type="text" placeholder="e.g. Testimonials" value={formData.testimonials.label || ''} onChange={e => updateSection('testimonials', {...formData.testimonials, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] mb-4 rounded-none" />
                 </div>
                 <NestedListEditor 
                   label="Testimonials"
@@ -701,7 +734,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
               <TitleEditor label="Explore Department Title" value={formData.exploreDepartment.sectionTitle} onChange={val => updateSection('exploreDepartment', {...formData.exploreDepartment, sectionTitle: val})} />
               <div>
                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Subtitle</label>
-                <input type="text" value={formData.exploreDepartment.subtitle} onChange={e => updateSection('exploreDepartment', {...formData.exploreDepartment, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none" placeholder="e.g. Discover our specialized wings" />
+                <input type="text" value={formData.exploreDepartment.subtitle || ''} onChange={e => updateSection('exploreDepartment', {...formData.exploreDepartment, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none" placeholder="e.g. Discover our specialized wings" />
               </div>
               <NestedListEditor 
                 label="Department Items"
