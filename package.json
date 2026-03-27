@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "sequelize-cli": "^6.6.5",
     "tailwindcss": "^4"
   }
 }
