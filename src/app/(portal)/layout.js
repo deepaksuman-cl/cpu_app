@@ -47,7 +47,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  await connectToDatabase();
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
