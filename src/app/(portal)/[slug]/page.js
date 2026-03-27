@@ -1,4 +1,6 @@
 import { getPageBySlug } from '@/lib/actions/pageActions';
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 import { notFound } from 'next/navigation';
 import BlockRenderer from '@/components/portal/pages/BlockRenderer';
 import '@/app/university-prose.css'; // Load global university CMS prose styles

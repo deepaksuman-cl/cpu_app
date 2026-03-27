@@ -2,6 +2,7 @@
 
 import HomePage from '@/models/HomePage';
 import { connectToDatabase } from '@/lib/db';
+import { revalidatePath } from 'next/cache';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -43,6 +44,7 @@ export async function updateHomePageData(sections, seo) {
       if (seo) updateData.seo = seo;
       
       await homePage.update(updateData);
+      revalidatePath('/', 'layout');
       return { success: true, error: null };
     }
     return { success: false, error: 'Home Page record not found' };

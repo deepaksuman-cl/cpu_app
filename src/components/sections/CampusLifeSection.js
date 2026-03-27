@@ -3,7 +3,17 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 
 export default function CampusLifeSection({ data }) {
   if (!data) return null;
-  const { tagline, title, highlight, stats = [], cols: columns = [] } = data;
+  const { tagline, title, highlight, stats = [] } = data;
+
+  // Prefer relational data over legacy JSON cols
+  const relationalCols = data?.facilitiesRel?.map(f => ({
+    img: f.image,
+    bold: f.name,
+    title: f.description,
+    links: [] // Links are not currently in the relational basic facility model
+  })) || [];
+
+  const columns = relationalCols.length > 0 ? relationalCols : (data.cols || []);
 
   return (
     <section id="campus" className="bg-blue-50 py-16 overflow-hidden">

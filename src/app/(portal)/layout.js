@@ -1,4 +1,6 @@
 import { connectToDatabase } from '@/lib/db';
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "../../components/layout/Footer";
 import HeaderServer from '../../components/layout/HeaderServer';

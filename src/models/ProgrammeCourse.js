@@ -31,13 +31,22 @@ const ProgrammeCourse = sequelize.define('programmecourses', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  school: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   categoryId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+  },
+  schoolId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'schools',
+      key: 'id'
+    },
+    onDelete: 'SET NULL',
+  },
+  school: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
   icon: {
     type: DataTypes.STRING,

@@ -1,46 +1,67 @@
 {
   "logo": "https://cpur.in/wp-content/uploads/2024/09/Career-point-logo-white-02.png",
   "aboutText": "Empowering minds and shaping futures through excellence in education, innovation, and global exposure.",
-  "socialLinks": [
-    { "icon": "Facebook", "url": "#" },
-    { "icon": "Instagram", "url": "#" },
-    { "icon": "Youtube", "url": "#" },
-    { "icon": "Twitter", "url": "#" },
-    { "icon": "Linkedin", "url": "#" }
-  ],
-  "quickLinks": [
-    "About University",
-    "Academic Programs",
-    "Admissions 2024",
-    "Placements",
-    "Campus Life",
-    "Contact Us"
-  ],
-  "programs": [
-    "Engineering & Technology",
-    "Computer Applications",
-    "Management & Commerce",
-    "Health & Allied Sciences",
-    "Agriculture Science",
-    "Legal Studies"
-  ],
-  "contact": {
-    "address": "National Highway 12, Alaniya, Kota (Rajasthan) 325003",
-    "phone": "1800-1800-345",
-    "email": "info@cpuniverse.in"
+  "colors": {
+    "primary": "#ffb900",
+    "background": "#001428"
   },
+  "socialLinks": [
+    { "icon": "Facebook", "url": "https://facebook.com" },
+    { "icon": "Instagram", "url": "https://instagram.com" },
+    { "icon": "Youtube", "url": "https://youtube.com" },
+    { "icon": "Twitter", "url": "https://twitter.com" },
+    { "icon": "Linkedin", "url": "https://linkedin.com" }
+  ],
+  "columns": [
+    {
+      "title": "Quick Links",
+      "columnType": "links",
+      "order": 1,
+      "links": [
+        { "label": "About University", "url": "/about" },
+        { "label": "Academic Programs", "url": "/programmes" },
+        { "label": "Admissions 2024", "url": "/admission" },
+        { "label": "Placements", "url": "/placements" },
+        { "label": "Campus Life", "url": "/campus" },
+        { "label": "Contact Us", "url": "/contact" }
+      ]
+    },
+    {
+      "title": "Our Programs",
+      "columnType": "links",
+      "order": 2,
+      "links": [
+        { "label": "Engineering & Technology", "url": "/schools/engineering-technology" },
+        { "label": "Computer Applications", "url": "/schools/computer-applications-technology" },
+        { "label": "Management & Commerce", "url": "/schools/management-commerce" },
+        { "label": "Health & Allied Sciences", "url": "/schools/health-allied-sciences" },
+        { "label": "Agriculture Science", "url": "/schools/agriculture-science" },
+        { "label": "Legal Studies", "url": "/schools/legal-studies" }
+      ]
+    },
+    {
+      "title": "Reach Us",
+      "columnType": "contact",
+      "order": 3
+    }
+  ],
+  "contact": [
+    { "icon": "MapPin", "label": "Address", "text": "National Highway 12, Alaniya, Kota (Rajasthan) 325003" },
+    { "icon": "Phone", "label": "Phone", "text": "1800-1800-345" },
+    { "icon": "Mail", "label": "Email", "text": "info@cpuniverse.in" }
+  ],
   "copyright": {
     "text": "© 2026 Career Point University, Kota. All Rights Reserved.",
     "links": [
-      { "label": "Privacy Policy", "url": "#" },
-      { "label": "Terms of Service", "url": "#" }
+      { "label": "Privacy Policy", "url": "/privacy" },
+      { "label": "Terms of Service", "url": "/terms" }
     ]
   },
   "floatingButtons": [
     {
       "type": "whatsapp",
       "icon": "Phone",
-      "url": "https://wa.me/yournumber",
+      "url": "https://wa.me/917446630500",
       "color": "#25D366"
     }
   ]

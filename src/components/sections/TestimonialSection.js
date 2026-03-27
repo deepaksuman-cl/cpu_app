@@ -19,7 +19,21 @@ function StarRating({ rating, max = 5 }) {
 }
 
 export default function TestimonialSection({ data }) {
-  const testimonials = data?.testimonials || [];
+  // Prefer relational data over legacy JSON list
+  const relationalTestimonials = data?.testimonialsRel?.map(t => ({
+    name: t.studentName,
+    quote: t.reviewText,
+    img: t.image,
+    rating: t.rating,
+    company: t.company,
+    batch: t.batch,
+    course: t.course,
+    package: t.package,
+    tag: t.tag,
+    tagColor: t.tagColor
+  })) || [];
+  
+  const testimonials = relationalTestimonials.length > 0 ? relationalTestimonials : (data?.testimonials || []);
   const [active, setActive] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const timerRef = useRef(null);

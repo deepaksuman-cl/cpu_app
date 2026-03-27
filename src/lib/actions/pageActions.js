@@ -9,7 +9,7 @@ export async function getAllPages() {
     await connectToDatabase();
 
     const pages = await Page.findAll({
-      attributes: ['id', 'title', 'slug', 'pageCssId', 'blocks']
+      attributes: ['id', 'title', 'slug', 'pageCssId', 'blocks', 'createdAt', 'updatedAt']
     });
     return { success: true, data: JSON.parse(JSON.stringify(pages)), error: null };
   } catch (error) {
@@ -42,8 +42,7 @@ export async function createPage(data) {
     
     const newPage = await Page.create(data);
     
-    revalidatePath('/admin/pages');
-    revalidatePath(`/${data.slug}`);
+    revalidatePath('/', 'layout');
     return { success: true, data: JSON.parse(JSON.stringify(newPage)), error: null };
   } catch (error) {
     console.error('createPage Error:', error);
@@ -63,15 +62,7 @@ export async function updatePage(id, data) {
     const updatedPage = await Page.findByPk(id);
     
     // Multi-path revalidation to ensure all related pages are fresh.
-    try {
-      revalidatePath('/admin/pages');
-      revalidatePath(`/admin/pages/edit/${id}`);
-      if (data.slug) {
-        revalidatePath(`/${data.slug}`);
-      }
-    } catch (revalidateError) {
-      console.error('Revalidation error (non-fatal):', revalidateError);
-    }
+    revalidatePath('/', 'layout');
     
     return { success: true, data: JSON.parse(JSON.stringify(updatedPage)), error: null };
   } catch (error) {
@@ -84,15 +75,16 @@ export async function deletePage(id) {
   try {
     await connectToDatabase();
     const page = await Page.findByPk(id);
-    if (!page) return { success: false, error: 'Page not found' };
+    if (!page) return { success: false, message: 'Page not found' };
 
     await Page.destroy({
       where: { id }
     });
     
-    return { success: true, data: JSON.parse(JSON.stringify(page)), error: null };
+    revalidatePath('/', 'layout');
+    return { success: true, message: 'Page deleted successfully', data: JSON.parse(JSON.stringify(page)) };
   } catch (error) {
-    console.error('deletePage Error:', error);
-    return { success: false, data: null, error: error.message };
+    console.error(`[deletePage] Error:`, error);
+    return { success: false, message: error.message || 'Deletion failed due to database constraint.' };
   }
 }

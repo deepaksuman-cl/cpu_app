@@ -1,8 +1,8 @@
-// File: src/components/admin/RichTextEditor.js
+// File: src/components/admin/ui/RichTextEditor.js
 'use client';
 
 import { Editor } from '@tinymce/tinymce-react';
-import { useRef, useState, useEffect, memo } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 function RichTextEditor({ value, onChange, placeholder = 'Write your content here...' }) {
   const [mounted, setMounted] = useState(false);
@@ -45,28 +45,30 @@ function RichTextEditor({ value, onChange, placeholder = 'Write your content her
       `}</style>
 
       <Editor
-        apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY || 'no-api-key'} 
+        tinymceScriptSrc="/tinymce/tinymce.min.js" 
         onInit={(evt, editor) => editorRef.current = editor}
         value={value || ''}
         onEditorChange={(content) => onChange(content)}
         init={{
+          // 🔥 ERROR 1 FIX: Free license accept karne ka code
+          license_key: 'gpl', 
+          
           height: 500,
           width: '100%',
           menubar: 'file edit view insert format tools table',
           placeholder: placeholder,
           
-          // 🔴 NAYE PLUGINS: pagebreak, codesample, font, hr aur tableofcontents add kiye hain
+          // 🔥 ERROR 2 FIX: 'tableofcontents' premium tha, isliye hata diya
           plugins: [
             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
             'insertdatetime', 'media', 'table', 'help', 'wordcount', 
-            'emoticons', 'directionality', 'pagebreak', 'codesample', 'tableofcontents'
+            'emoticons', 'directionality', 'pagebreak', 'codesample'
           ],
           
-          // 🔴 SARA KUCH TOOLBAR ME: Fonts, Sizes, HR (line), Fullscreen sab add kar diya
           toolbar: [
             'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify',
-            'numlist bullist outdent indent | link image media table tableofcontents codesample hr | emoticons charmap pagebreak anchor | removeformat | ltr rtl fullscreen preview code'
+            'numlist bullist outdent indent | link image media table codesample hr | emoticons charmap pagebreak anchor | removeformat | ltr rtl fullscreen preview code'
           ],
           
           toolbar_mode: 'wrap',

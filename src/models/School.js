@@ -113,6 +113,15 @@ const School = sequelize.define('schools', {
   exploreDepartment: {
     type: DataTypes.JSON,
   },
+  status: {
+    type: DataTypes.ENUM('draft', 'published'),
+    defaultValue: 'draft',
+    allowNull: false,
+  },
+  version: {
+    type: DataTypes.INTEGER,
+    defaultValue: 1,
+  },
 }, {
   timestamps: true,
   indexes: [

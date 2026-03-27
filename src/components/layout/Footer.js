@@ -31,12 +31,12 @@ export default async function Footer() {
             
             {/* Branding Column */}
             <div className="space-y-6 lg:col-span-1">
-              <img src={FOOTER_DATA.logo} alt="CPU Logo" className="w-[80%]" />
+              <img src={FOOTER_DATA?.logo} alt="CPU Logo" className="w-[80%]" />
               <p className="text-sm leading-relaxed" style={{ color: "#94a3b8" }}>
-                {FOOTER_DATA.aboutText}
+                {FOOTER_DATA?.aboutText}
               </p>
               <div className="flex gap-4">
-                {FOOTER_DATA.socialLinks?.map((link, i) => {
+                {FOOTER_DATA?.socialLinks?.map((link, i) => {
                   const Icon = IconMap[link.icon];
                   return (
                     <a key={i} href={link.url} className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:-translate-y-1"
@@ -49,7 +49,7 @@ export default async function Footer() {
             </div>
 
             {/* Dynamic Columns */}
-            {FOOTER_DATA.columns?.sort((a,b)=> a.order - b.order).map((col, i) => (
+            {FOOTER_DATA?.columns?.sort((a,b)=> a.order - b.order).map((col, i) => (
               <div key={i}>
                 <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-3">
                   <span className="w-4 h-1 rounded flex-shrink-0" style={{ background: G }}></span> {col.title}
@@ -98,9 +98,9 @@ export default async function Footer() {
           {/* Bottom Bar */}
           <div className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-xs"
             style={{ borderColor: "rgba(255,255,255,0.05)", color: "#64748b" }}>
-            <p>{FOOTER_DATA.copyright?.text}</p>
+            <p>{FOOTER_DATA?.copyright?.text}</p>
             <div className="flex gap-6">
-              {FOOTER_DATA.copyright?.links?.map((link, i) => (
+              {FOOTER_DATA?.copyright?.links?.map((link, i) => (
                 <Link key={i} href={link.url} className="hover:text-white transition-colors">{link.label}</Link>
               ))}
             </div>

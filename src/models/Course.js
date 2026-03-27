@@ -115,6 +115,24 @@ const Course = sequelize.define('courses', {
   exploreDepartment: {
     type: DataTypes.JSON,
   },
+  placements: {
+    type: DataTypes.JSON,
+  },
+  industry: {
+    type: DataTypes.JSON,
+  },
+  testimonials: {
+    type: DataTypes.JSON,
+  },
+  status: {
+    type: DataTypes.ENUM('draft', 'published'),
+    defaultValue: 'draft',
+    allowNull: false,
+  },
+  version: {
+    type: DataTypes.INTEGER,
+    defaultValue: 1,
+  },
 }, {
   timestamps: true,
   indexes: [

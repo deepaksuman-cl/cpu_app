@@ -3,59 +3,12 @@
 import Course from '@/models/Course';
 import School from '@/models/School';
 import { connectToDatabase } from '@/lib/db';
+import { Testimonial, FAQ } from '@/models/index';
+import { revalidatePath } from 'next/cache';
 import fs from 'fs';
 import path from 'path';
 
-/**
- * Syncs a course document from the database back to src/data/schoolsData.json
- */
-async function syncCourseToSeedFile(course, schoolSlug) {
-  try {
-    const filePath = path.join(process.cwd(), 'src/data/schoolsData.json');
-    if (!fs.existsSync(filePath)) return { success: false, error: 'File not found' };
-    
-    const fileData = fs.readFileSync(filePath, 'utf8');
-    const schoolsData = JSON.parse(fileData);
 
-    if (!schoolsData[schoolSlug]) return { success: false, error: 'School not found' };
-
-    // Map DB fields back to JSON structure
-    const jsonCourse = {
-      title: course.name,
-      duration: course.duration,
-      eligibility: course.eligibility,
-      description: course.description,
-      metaTitle: course.metaTitle,
-      metaDescription: course.metaDescription,
-      hero: course.hero,
-      accomplishments: course.accomplishments,
-      overview: course.overview,
-      scope: course.scope,
-      curriculum: course.curriculum,
-      admissionFee: course.admissionFee,
-      scholarships: course.scholarships,
-      whyJoin: course.whyJoin,
-      uniqueFeatures: course.uniqueFeatures,
-      applySteps: course.applySteps,
-      faq: course.faq,
-      deptSlides: course.exploreDepartment?.slides || [],
-      roadmap: {
-        sectionTitle: course.roadmap?.sectionTitle,
-        subtitle: course.roadmap?.subtitle,
-        years: course.roadmap?.years || []
-      }
-    };
-
-    if (!schoolsData[schoolSlug].courseDetails) schoolsData[schoolSlug].courseDetails = {};
-    schoolsData[schoolSlug].courseDetails[course.slug] = jsonCourse;
-
-    fs.writeFileSync(filePath, JSON.stringify(schoolsData, null, 2), 'utf8');
-    return { success: true };
-  } catch (error) {
-    console.error('Sync Error:', error);
-    return { success: false, error: error.message };
-  }
-}
 
 export async function getCourses(schoolId = null) {
   try {
@@ -82,11 +35,15 @@ export async function getCourseBySlug(slug) {
     await connectToDatabase();
     const course = await Course.findOne({
       where: { slug },
-      include: [{
-        model: School,
-        as: 'school',
-        attributes: ['name', 'slug']
-      }]
+      include: [
+        {
+          model: School,
+          as: 'school',
+          attributes: ['name', 'slug']
+        },
+        { model: Testimonial, as: 'testimonialsRel' },
+        { model: FAQ, as: 'faqsRel' }
+      ]
     });
     
     if (!course) {
@@ -103,19 +60,25 @@ export async function getCourseById(id) {
   try {
     await connectToDatabase();
     const course = await Course.findByPk(id, {
-      include: [{
-        model: School,
-        as: 'school',
-        attributes: ['name', 'slug']
-      }]
+      include: [
+        {
+          model: School,
+          as: 'school',
+          attributes: ['name', 'slug']
+        },
+        { model: Testimonial, as: 'testimonialsRel' },
+        { model: FAQ, as: 'faqsRel' }
+      ]
     });
     
     if (!course) {
+      console.warn(`[getCourseById] Course with ID ${id} not found.`);
       return { success: false, data: null, error: 'Course not found' };
     }
     
     return { success: true, data: JSON.parse(JSON.stringify(course)), error: null };
   } catch (error) {
+    console.error(`[getCourseById] Error fetching course ${id}:`, error);
     return { success: false, data: null, error: error.message };
   }
 }
@@ -130,21 +93,30 @@ export async function createCourse(data) {
     
     const newCourse = await Course.create({ ...data, slug });
     
-    // Fetch with school to sync
-    const courseWithSchool = await Course.findByPk(newCourse.id, {
-      include: [{
-        model: School,
-        as: 'school',
-        attributes: ['name', 'slug']
-      }]
-    });
-    
-    // Sync to JSON
-    if (courseWithSchool?.school?.slug) {
-      await syncCourseToSeedFile(courseWithSchool, courseWithSchool.school.slug);
+    // Sync Relational Tables
+    if (data.faq?.items) {
+      for (const item of data.faq.items) {
+        await FAQ.create({
+          question: item.q, answer: item.a || '', courseId: newCourse.id
+        });
+      }
     }
+    // Course testimonials if any in JSON
+    if (data.testimonials?.list) {
+       for (const item of data.testimonials.list) {
+        await Testimonial.create({
+          studentName: item.name, reviewText: item.text || '', rating: item.rating || 5,
+          image: item.photo || item.img || null, company: item.company || null,
+          batch: item.batch || null, course: item.course || null, package: item.package || null,
+          tag: item.tag || null, tagColor: item.tagColor || null, courseId: newCourse.id
+        });
+      }
+    }
+
+    // Global Revalidation
+    revalidatePath('/', 'layout');
     
-    return { success: true, data: JSON.parse(JSON.stringify(courseWithSchool)), error: null };
+    return { success: true, data: JSON.parse(JSON.stringify(newCourse)), error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
   }
@@ -161,23 +133,46 @@ export async function updateCourse(id, data) {
     await Course.update(data, {
       where: { id }
     });
+
+    // Sync Relational Tables: Clear and Re-insert
+    if (data.faq?.items) {
+      await FAQ.destroy({ where: { courseId: id } });
+      for (const item of data.faq.items) {
+        await FAQ.create({
+          question: item.q, answer: item.a || '', courseId: id
+        });
+      }
+    }
+    if (data.testimonials?.list) {
+      await Testimonial.destroy({ where: { courseId: id } });
+       for (const item of data.testimonials.list) {
+        await Testimonial.create({
+          studentName: item.name, reviewText: item.text || '', rating: item.rating || 5,
+          image: item.photo || item.img || null, company: item.company || null,
+          batch: item.batch || null, course: item.course || null, package: item.package || null,
+          tag: item.tag || null, tagColor: item.tagColor || null, courseId: id
+        });
+      }
+    }
     
     const updatedCourse = await Course.findByPk(id, {
-      include: [{
-        model: School,
-        as: 'school',
-        attributes: ['name', 'slug']
-      }]
+      include: [
+        {
+          model: School,
+          as: 'school',
+          attributes: ['name', 'slug']
+        },
+        { model: Testimonial, as: 'testimonialsRel' },
+        { model: FAQ, as: 'faqsRel' }
+      ]
     });
     
     if (!updatedCourse) {
       return { success: false, data: null, error: 'Course not found' };
     }
 
-    // Sync to JSON
-    if (updatedCourse.school?.slug) {
-      await syncCourseToSeedFile(updatedCourse, updatedCourse.school.slug);
-    }
+    // Global Revalidation
+    revalidatePath('/', 'layout');
     
     return { success: true, data: JSON.parse(JSON.stringify(updatedCourse)), error: null };
   } catch (error) {
@@ -189,14 +184,16 @@ export async function deleteCourse(id) {
   try {
     await connectToDatabase();
     const course = await Course.findByPk(id);
-    if (!course) return { success: false, error: 'Course not found' };
+    if (!course) return { success: false, message: 'Course not found' };
     
     await Course.destroy({
       where: { id }
     });
     
-    return { success: true, data: JSON.parse(JSON.stringify(course)), error: null };
+    revalidatePath('/', 'layout');
+    return { success: true, message: 'Course deleted successfully', data: JSON.parse(JSON.stringify(course)) };
   } catch (error) {
-    return { success: false, data: null, error: error.message };
+    console.error(`[deleteCourse] Error:`, error);
+    return { success: false, message: error.message || 'Deletion failed due to database constraint.' };
   }
 }

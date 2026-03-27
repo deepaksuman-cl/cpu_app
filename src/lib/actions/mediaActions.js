@@ -6,15 +6,8 @@ import { revalidatePath } from 'next/cache';
 import fs from 'fs/promises';
 import path from 'path';
 
-const UPLOAD_DIR = path.join(process.cwd(), 'public', 'uploads', 'media');
-
-async function ensureUploadDir() {
-  try {
-    await fs.access(UPLOAD_DIR);
-  } catch {
-    await fs.mkdir(UPLOAD_DIR, { recursive: true });
-  }
-}
+// Safe resolution of upload directory in cPanel
+const getUploadDir = () => path.join(process.cwd(), 'public', 'uploads', 'media');
 
 export async function getAllMedia() {
   try {
@@ -35,14 +28,19 @@ export async function uploadLocalMedia(formData) {
     const file = formData.get('file');
     if (!file) throw new Error('No file uploaded');
 
-    await ensureUploadDir();
+    const uploadDir = getUploadDir();
+    // 🛡️ Bulletproof: Ensure directory exists without crashing
+    await fs.mkdir(uploadDir, { recursive: true });
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const originalName = file.name;
-    const extension = path.extname(originalName);
-    const fileName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${extension}`;
-    const filePath = path.join(UPLOAD_DIR, fileName);
+    
+    // 🛡️ Bulletproof: Sanitize filename (spaces to hyphens, remove special chars)
+    const sanitizedName = originalName.replace(/[^a-zA-Z0-9.-]/g, '-').replace(/-+/g, '-');
+    const fileName = `${Date.now()}-${sanitizedName}`;
+    const filePath = path.join(uploadDir, fileName);
 
+    // Write to persistent disk
     await fs.writeFile(filePath, buffer);
 
     const media = await Media.create({
@@ -53,6 +51,9 @@ export async function uploadLocalMedia(formData) {
       mimeType: file.type,
       size: file.size,
     });
+
+    // Global revalidation to refresh Media Library instantly
+    revalidatePath('/', 'layout');
 
     return { success: true, data: JSON.parse(JSON.stringify(media)), error: null };
   } catch (error) {
@@ -73,6 +74,7 @@ export async function saveExternalMedia(url) {
       altText: '',
     });
 
+    revalidatePath('/', 'layout');
     return { success: true, data: JSON.parse(JSON.stringify(media)), error: null };
   } catch (error) {
     console.error('saveExternalMedia Error:', error);
@@ -87,6 +89,7 @@ export async function updateMedia(id, data) {
       where: { id }
     });
     const updatedMedia = await Media.findByPk(id);
+    revalidatePath('/', 'layout');
     return { success: true, data: JSON.parse(JSON.stringify(updatedMedia)), error: null };
   } catch (error) {
     console.error('updateMedia Error:', error);
@@ -102,7 +105,7 @@ export async function deleteMedia(id) {
 
     if (!media.isExternal) {
       const fileName = media.url.split('/').pop();
-      const filePath = path.join(UPLOAD_DIR, fileName);
+      const filePath = path.join(getUploadDir(), fileName);
       try {
         await fs.unlink(filePath);
       } catch (unlinkError) {
@@ -111,6 +114,7 @@ export async function deleteMedia(id) {
     }
 
     await Media.destroy({ where: { id } });
+    revalidatePath('/', 'layout');
     return { success: true, error: null };
   } catch (error) {
     console.error('deleteMedia Error:', error);

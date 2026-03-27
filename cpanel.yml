@@ -1,0 +1,5 @@
+deployment:
+  tasks:
+    - export DEPLOY_PATH=/home/careerpointac/cpur_next
+    - cd $DEPLOY_PATH
+    - npm run build

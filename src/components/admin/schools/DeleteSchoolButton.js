@@ -3,6 +3,7 @@
 import { Trash2 } from 'lucide-react';
 import { deleteSchool } from '@/lib/actions/schoolActions';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default function DeleteSchoolButton({ id }) {
   const router = useRouter();
@@ -11,9 +12,10 @@ export default function DeleteSchoolButton({ id }) {
     if (confirm('Are you sure you want to delete this school?')) {
       const result = await deleteSchool(id);
       if (result.success) {
+        toast.success(result.message || 'Deleted successfully!');
         router.refresh();
       } else {
-        alert('Failed to delete: ' + result.error);
+        toast.error(result.message || 'Failed to delete');
       }
     }
   };

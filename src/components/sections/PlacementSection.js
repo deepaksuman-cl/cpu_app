@@ -8,12 +8,25 @@ export default function PlacementSection({ data }) {
   if (!data) return null;
   const { 
     stats = [], 
-    slides = [], 
-    recruiters = [], 
     tagline = "Empower Your Future through Exceptional",
     title = "Placement",
     highlight = "Opportunities at CPU"
   } = data;
+
+  // Prefer relational data over legacy JSON
+  const relationalSides = data?.placementPartnersRel?.filter(p => p.studentName).map(p => ({
+    name: p.studentName,
+    course: p.courseName,
+    company: p.companyName,
+    img: p.logoUrl // Assuming logoUrl was used for student photo in migration if no other img
+  })) || [];
+
+  const relationalRecruiters = data?.placementPartnersRel?.map(p => ({
+    img: p.logoUrl
+  })) || [];
+
+  const slides = relationalSides.length > 0 ? relationalSides : (data?.slides || []);
+  const recruiters = relationalRecruiters.length > 0 ? relationalRecruiters : (data?.recruiters || []);
 
   return (
     <section

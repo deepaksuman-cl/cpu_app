@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 
 export default async function EditSchoolPage({ params }) {
   const resolvedParams = await params;
-  const id = resolvedParams.id;
+  const id = parseInt(resolvedParams.id, 10);
   const { data: school, success } = await getSchoolById(id);
   
   if (!success || !school) {
@@ -41,7 +41,7 @@ export default async function EditSchoolPage({ params }) {
 
           {/* Contextual ID Badge */}
           <span className="hidden sm:inline-block bg-[var(--bg-muted)] text-[var(--text-muted)] font-mono text-[10px] px-2 py-0.5 border border-[var(--border-light)] rounded-none uppercase tracking-widest">
-            ID: {id.slice(-6)}
+            ID: {id}
           </span>
           
           {/* Vertical Divider */}

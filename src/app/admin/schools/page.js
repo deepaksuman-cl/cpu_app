@@ -94,7 +94,9 @@ export default async function SchoolsPage() {
                         <td className="block md:table-cell py-1 md:py-2 px-0 md:px-4 border-none md:border-r border-[var(--border-light)] mb-4 md:mb-0">
                           <span className="md:hidden text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest block mb-0.5">Created Date</span>
                           <span className="text-[var(--text-secondary)] font-medium text-[13px] md:text-[12px]">
-                            {new Date(school.createdAt).toLocaleDateString()}
+                            {school.createdAt 
+                              ? new Date(school.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })
+                              : 'N/A'}
                           </span>
                         </td>
                         

@@ -29,7 +29,7 @@ if (process.env.NODE_ENV !== "production") {
   globalForSequelize._sequelizeInstance = sequelize;
 }
 
-// 🔥 Important: cache connection
+// 🔥 Important: Cache the connection to prevent multiple instances
 let isConnected = false;
 let connectionPromise = null;
 
@@ -42,37 +42,33 @@ export const connectToDatabase = async () => {
       await sequelize.authenticate();
       console.log('✅ DB authenticated successfully');
 
-      // Import centralized models and associations
+      // 1. Import centralized models and associations
       await import('@/models/index.js');
 
-      if (process.env.NODE_ENV === 'development') {
-    // 🚀 The Bulletproof Sync (Works in DEV & PROD)
-        await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-        await sequelize.sync({ alter: process.env.NODE_ENV === 'development'});
-        await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
-        console.log('✅ DB Auto-Synced');
-      } else {
-        await sequelize.sync();
-      }
+      // 🚀 2. The Bulletproof Sync (Universal for DEV & PROD)
+      await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
+      await sequelize.sync({ alter: false });
+      await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+      console.log('✅ DB Auto-Synced (Tables verified/created)');
 
       isConnected = true; // 🔓 Set true BEFORE seeding to avoid circular deadlock
       console.log('🚀 Database initialization complete');
 
-      if (process.env.NODE_ENV === 'development') {
-        // 🏁 Plug & Play Auto-Seed: Detect fresh DB and populate it
-        const { default: db } = await import('@/models/index.js');
-        const { Navigation } = db;
-        
-        const navCount = await Navigation.count().catch(() => 0);
-        
-        if (navCount === 0) {
-          console.log('🌱 Fresh Database Detected. Auto-feeding initial data...');
-          const { seedDatabase } = await import('@/lib/actions/seedActions.js');
-          await seedDatabase().catch(err => {
-            console.error('❌ Auto-Seed Failed:', err.message);
-          });
-        }
-      }
+      // 🏁 3. Plug & Play Auto-Seed (Universal for DEV & PROD)
+      const db = await import('@/models/index.js');
+      const { Navigation } = db;
+      
+      // Check if the core table is empty. If it fails (e.g., table not fully ready), default to 0.
+      // const navCount = await Navigation.count().catch(() => 0);
+      
+      // if (navCount === 0) {
+      //   console.log('🌱 Fresh Database Detected. Auto-feeding initial data...');
+      //   const { seedDatabase } = await import('@/lib/actions/seedActions.js');
+      //   await seedDatabase().catch(err => {
+      //     console.error('❌ Auto-Seed Failed:', err.message);
+      //   });
+      // }
+      
     } catch (error) {
       console.error('❌ DB connection/sync error:', error.message);
       throw error;
@@ -84,6 +80,4 @@ export const connectToDatabase = async () => {
   return connectionPromise;
 };
 
-
 export default sequelize;
-

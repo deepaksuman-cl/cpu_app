@@ -1,4 +1,6 @@
 // Course detail page - DB-first with static JSON fallback
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { notFound } from "next/navigation";
 

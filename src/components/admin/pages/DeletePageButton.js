@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Trash2, Loader2 } from 'lucide-react';
 import { deletePage } from '@/lib/actions/pageActions';
+import toast from 'react-hot-toast';
 
 export default function DeletePageButton({ id, title }) {
   const [loading, setLoading] = useState(false);
@@ -14,9 +15,10 @@ export default function DeletePageButton({ id, title }) {
     setLoading(true);
     const res = await deletePage(id);
     if (res.success) {
+      toast.success(res.message || 'Deleted successfully!');
       router.refresh();
     } else {
-      alert(res.error || 'Failed to delete page');
+      toast.error(res.message || 'Failed to delete');
       setLoading(false);
     }
   };

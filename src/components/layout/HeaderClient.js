@@ -676,7 +676,7 @@ export default function HeaderClient({ navData }) {
 
   const { siteConfig, topBarInfo, topMenu, mobileConfig } = navData;
   const phone = topBarInfo.phone;
-  const activeTab = mobileConfig.bottomTabs.find(t => t.key === state.openTabKey);
+  const activeTab = mobileConfig?.bottomTabs?.find(t => t.key === state.openTabKey);
 
   const getHref = tab => {
     if (tab.type === 'link') return tab.path || '#';
@@ -690,14 +690,14 @@ export default function HeaderClient({ navData }) {
         break;
       case 'open-menu':
         // Find the tab that is the full menu to set it active
-        const menuTab = mobileConfig.bottomTabs.find(t => t.panel?.type === 'full-menu');
+        const menuTab = mobileConfig?.bottomTabs?.find(t => t.panel?.type === 'full-menu');
         if (menuTab) dispatch({ type: 'SET_TAB', key: menuTab.key });
         break;
       case 'call-admission':
         window.location.href = `tel:${phone}`;
         break;
       case 'open-enquiry':
-        const enquiryTab = mobileConfig.bottomTabs.find(t => t.panel?.type === 'enquiry');
+        const enquiryTab = mobileConfig?.bottomTabs?.find(t => t.panel?.type === 'enquiry');
         if (enquiryTab) dispatch({ type: 'SET_TAB', key: enquiryTab.key });
         break;
       default:
@@ -733,7 +733,7 @@ export default function HeaderClient({ navData }) {
             <LucideIcons.X size={40} strokeWidth={1.5} />
           </button>
           <div className="w-full max-w-4xl relative border-b border-gray-600 pb-2">
-            <input type="text" placeholder={siteConfig.searchPlaceholder}
+            <input type="text" placeholder={siteConfig?.searchPlaceholder || 'Search...'}
               className="w-full bg-transparent text-white text-3xl md:text-5xl outline-none placeholder-gray-600 pr-12" autoFocus />
             <LucideIcons.Search className="absolute right-2 top-1/2 -translate-y-1/2 text-[#fec53a]" size={36} />
           </div>
@@ -752,7 +752,7 @@ export default function HeaderClient({ navData }) {
           <div className="mx-auto w-[98vw] h-full flex justify-between items-center">
             <div className="flex items-center h-full">
               <div className="bg-[#fec53a] text-[#00588b] font-bold px-4 h-full flex items-center shadow-sm z-10 uppercase tracking-wide">
-                {siteConfig.topBar.latestNewsLabel}
+                {siteConfig?.topBar?.latestNewsLabel || 'News'}
               </div>
               <div className="news-ticker-container pl-4 h-full">
                 <div className="news-ticker-content text-[#fec53a] font-medium tracking-wide gap-8 flex items-center h-full">
@@ -794,7 +794,7 @@ export default function HeaderClient({ navData }) {
                     <a href={`tel:${topBarInfo.tollFree}`} className="text-[#fec53a] font-bold mr-6 hover:text-white transition-colors">{topBarInfo.tollFree}</a>
                   </>
                 )}
-                {siteConfig.topBar.helpdeskLabel}
+                {siteConfig?.topBar?.helpdeskLabel || 'Admission HelpDesk'}
                 <a href={`tel:${phone}`} className="ml-3 bg-[#fec53a] text-[#00588b] px-4 h-full flex items-center font-bold text-[13px] hover:bg-white transition-colors tracking-wide">{phone}</a>
               </span>
             </div>
@@ -862,11 +862,11 @@ export default function HeaderClient({ navData }) {
          To add/remove/reorder tabs → edit navigation.json only.
          ───────────────────────────────────────────────── */}
       <div className="fixed bottom-0 left-0 w-full bg-[#00588b] text-white z-[1000] lg:hidden flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.4)] pb-safe">
-        {mobileConfig.bottomTabs.map(tab => {
+        {mobileConfig?.bottomTabs?.map(tab => {
           const isActive   = state.openTabKey === tab.key;
           const isMenuTab  = tab.panel?.type === 'full-menu' || tab.path === 'full-menu';
           const baseClass  = `flex flex-col items-center justify-center py-2.5 transition-all ${isActive ? 'text-[#fec53a]' : 'text-gray-300'}`;
-          const tabWidth   = `${100 / mobileConfig.bottomTabs.length}%`;
+          const tabWidth   = `${100 / (mobileConfig?.bottomTabs?.length || 1)}%`;
 
           // If it's a direct link (functional for SEO/Browser behavior)
           if (tab.type === 'link') {

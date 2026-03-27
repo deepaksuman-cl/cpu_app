@@ -143,6 +143,9 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       faq: { sectionTitle: { main: 'FAQ' }, subtitle: '', items: [] },
       exploreDepartment: { sectionTitle: { main: 'Explore Our Department', highlight: 'Department' }, subtitle: 'Discover our specialized wings', slides: [] },
       roadmap: { sectionTitle: { main: '4 Year Learning Roadmap', highlight: 'Roadmap' }, subtitle: 'Your journey from foundation to industry expert.', years: [] },
+      placements: { sectionTitle: { main: 'Placements' }, subtitle: '', stats: [], list: [] },
+      industry: { sectionTitle: { main: 'Industry Partners' }, subtitle: '', partners: [] },
+      testimonials: { label: 'Testimonials', title: { main: 'Student Stories' }, list: [] },
       breadcrumb: []
     };
 
@@ -155,7 +158,8 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
     const sections = [
       'hero', 'accomplishments', 'overview', 'scope', 'curriculum', 
       'admissionFee', 'scholarships', 'whyJoin', 'uniqueFeatures', 
-      'applySteps', 'faq', 'exploreDepartment', 'roadmap'
+      'applySteps', 'faq', 'exploreDepartment', 'roadmap',
+      'placements', 'industry', 'testimonials'
     ];
 
     sections.forEach(sec => {
@@ -176,6 +180,24 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
         merged[sec] = defaults[sec];
       }
     });
+
+    // Merge relational data if available
+    if (initialData?.testimonialsRel?.length > 0) {
+      merged.testimonialsJSON = initialData.testimonialsRel.map(t => ({
+        name: t.studentName, text: t.reviewText, company: t.company, batch: t.batch, 
+        photo: t.image, rating: t.rating, course: t.course, package: t.package, 
+        tag: t.tag, tagColor: t.tagColor, slug: t.slug || ''
+      }));
+      // Note: Course JSON structure might be different, but we'll adapt as needed
+    }
+    if (initialData?.faqsRel?.length > 0) {
+      merged.faq = {
+        ...merged.faq,
+        items: initialData.faqsRel.map(f => ({
+          q: f.question, a: f.answer
+        }))
+      };
+    }
 
     return merged;
   });
@@ -290,6 +312,9 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
           <SectionCard id="faq" title="FAQs" description="Common questions." isComplete={formData.faq?.items?.length > 0} />
           <SectionCard id="exploreDepartment" title="Department" description="Related facilities." isComplete={formData.exploreDepartment?.slides?.length > 0} />
           <SectionCard id="roadmap" title="Roadmap" description="Yearly learning flow." isComplete={formData.roadmap?.years?.length > 0} />
+          <SectionCard id="placements" title="Placements" description="Stats & highlights." isComplete={formData.placements?.list?.length > 0} />
+          <SectionCard id="industry" title="Partners" description="Placement partners." isComplete={formData.industry?.partners?.length > 0} />
+          <SectionCard id="testimonials" title="Testimonials" description="Student reviews." isComplete={formData.testimonials?.list?.length > 0} />
         </div>
       </div>
 
@@ -429,7 +454,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
               <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
                 <label className="block text-[11px] font-bold text-[var(--text-secondary)] uppercase mb-3 tracking-widest">Introduction (Rich Text)</label>
                 <RichTextEditor 
-                  value={formData.overview.paragraphs?.join('')}
+                  value={formData.overview.paragraphs?.join('') || ''}
                   onChange={content => updateSection('overview', {...formData.overview, paragraphs: [content]})}
                 />
               </div>
@@ -476,7 +501,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
               </div>
               <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
                 <label className="block text-[11px] font-bold text-[var(--text-secondary)] uppercase mb-3 tracking-widest">Scope Body (Rich Text)</label>
-                <RichTextEditor value={formData.scope.body} onChange={val => updateSection('scope', {...formData.scope, body: val})} />
+                <RichTextEditor value={formData.scope.body || ''} onChange={val => updateSection('scope', {...formData.scope, body: val})} />
               </div>
             </div>
           )}
@@ -491,11 +516,11 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                </div>
                <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-2">Intro Note</label>
-                <RichTextEditor value={formData.curriculum.introNote} onChange={val => updateSection('curriculum', {...formData.curriculum, introNote: val})} />
+                <RichTextEditor value={formData.curriculum.introNote || ''} onChange={val => updateSection('curriculum', {...formData.curriculum, introNote: val})} />
               </div>
               <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-2">Outro Note</label>
-                <RichTextEditor value={formData.curriculum.outroNote} onChange={val => updateSection('curriculum', {...formData.curriculum, outroNote: val})} />
+                <RichTextEditor value={formData.curriculum.outroNote || ''} onChange={val => updateSection('curriculum', {...formData.curriculum, outroNote: val})} />
               </div>
               <div className="pt-2">
                 <NestedListEditor 
@@ -972,6 +997,88 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* PLACEMENTS */}
+          {activeSection === 'placements' && (
+            <div className="space-y-6">
+              <TitleEditor label="Placements Title" value={formData.placements.title} onChange={val => updateSection('placements', {...formData.placements, title: val})} />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Badge/Label</label>
+                  <input type="text" value={formData.placements.label || ''} onChange={e => updateSection('placements', {...formData.placements, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="e.g. Placement Records" />
+                </div>
+                <div>
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Subtitle</label>
+                  <input type="text" value={formData.placements.subtitle || ''} onChange={e => updateSection('placements', {...formData.placements, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                </div>
+              </div>
+              <NestedListEditor 
+                label="Placement Stats"
+                items={formData.placements.stats || []}
+                newItemTemplate={{ value: '', label: '', icon: 'TrendingUp' }}
+                fields={[{key: 'icon', label: 'Icon', type: 'icon'}, {key: 'value', label: 'Value'}, {key: 'label', label: 'Label'}]}
+                onUpdate={items => updateSection('placements', {...formData.placements, stats: items})}
+              />
+              <NestedListEditor 
+                label="Highlighted Students"
+                items={formData.placements.list || []}
+                newItemTemplate={{ name: '', company: '', img: '', pkg: '', role: '' }}
+                fields={[
+                  {key: 'name', label: 'Student Name'}, 
+                  {key: 'company', label: 'Company'}, 
+                  {key: 'img', label: 'Photo URL', type: 'image'}, 
+                  {key: 'pkg', label: 'Package'}, 
+                  {key: 'role', label: 'Role'}
+                ]}
+                onUpdate={items => updateSection('placements', {...formData.placements, list: items})}
+              />
+            </div>
+          )}
+
+          {/* INDUSTRY PARTNERS */}
+          {activeSection === 'industry' && (
+            <div className="space-y-6">
+              <TitleEditor label="Industry Partners Title" value={formData.industry.title} onChange={val => updateSection('industry', {...formData.industry, title: val})} />
+              <div>
+                <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Section Label (Badge)</label>
+                <input type="text" value={formData.industry.label || ''} onChange={e => updateSection('industry', {...formData.industry, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="e.g. Industry Tie-ups" />
+              </div>
+              <NestedListEditor 
+                label="Partner Logos"
+                items={formData.industry.partners || []}
+                newItemTemplate={{ name: '', url: '' }}
+                fields={[{key: 'name', label: 'Partner Name'}, {key: 'url', label: 'Logo URL', type: 'image'}]}
+                onUpdate={items => updateSection('industry', {...formData.industry, partners: items})}
+              />
+            </div>
+          )}
+
+          {/* TESTIMONIALS */}
+          {activeSection === 'testimonials' && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Section Label</label>
+                  <input type="text" value={formData.testimonials.label || ''} onChange={e => updateSection('testimonials', {...formData.testimonials, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                </div>
+                <TitleEditor label="Testimonials Title" value={formData.testimonials.title} onChange={val => updateSection('testimonials', {...formData.testimonials, title: val})} />
+              </div>
+              <NestedListEditor 
+                label="Student Testimonials"
+                items={formData.testimonials.list || []}
+                newItemTemplate={{ name: '', text: '', photo: '', batch: '', company: '', rating: 5 }}
+                fields={[
+                  {key: 'name', label: 'Student Name'}, 
+                  {key: 'text', label: 'Review Text', type: 'richText'}, 
+                  {key: 'photo', label: 'Photo URL', type: 'image'}, 
+                  {key: 'batch', label: 'Batch'}, 
+                  {key: 'company', label: 'Company'}, 
+                  {key: 'rating', label: 'Rating (1-5)', type: 'number'}
+                ]}
+                onUpdate={items => updateSection('testimonials', {...formData.testimonials, list: items})}
+              />
             </div>
           )}
 
