@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "id": 1,
+    "displayName": "Gemini_Generated_Image_cnrlwlcnrlwlcnrl.png",
+    "originalName": "Gemini_Generated_Image_cnrlwlcnrlwlcnrl.png",
+    "url": "/uploads/media/1774508213825-598493725.png",
+    "isExternal": false,
+    "mimeType": "image/png",
+    "size": 4726848,
+    "altText": null,
+    "createdAt": "2026-03-26T06:56:53.000Z",
+    "updatedAt": "2026-03-27T06:43:01.000Z"
+  },
+  {
+    "id": 2,
+    "displayName": "CPU_White_Logo.png",
+    "originalName": "CPU_White_Logo.png",
+    "url": "/uploads/media/1774518848495-603842375.png",
+    "isExternal": false,
+    "mimeType": "image/png",
+    "size": 33903,
+    "altText": null,
+    "createdAt": "2026-03-26T09:54:08.000Z",
+    "updatedAt": "2026-03-27T06:43:01.000Z"
+  },
+  {
+    "id": 3,
+    "displayName": "CPU White Logo.png",
+    "originalName": "CPU White Logo.png",
+    "url": "/uploads/media/1774518876787-935239289.png",
+    "isExternal": false,
+    "mimeType": "image/png",
+    "size": 33903,
+    "altText": null,
+    "createdAt": "2026-03-26T09:54:36.000Z",
+    "updatedAt": "2026-03-27T06:43:01.000Z"
+  },
+  {
+    "id": 4,
+    "displayName": "131620.jpg",
+    "originalName": "131620.jpg",
+    "url": "/uploads/media/1774519259514-72954226.jpg",
+    "isExternal": false,
+    "mimeType": "image/jpeg",
+    "size": 807981,
+    "altText": null,
+    "createdAt": "2026-03-26T10:00:59.000Z",
+    "updatedAt": "2026-03-27T06:43:01.000Z"
+  },
+  {
+    "id": 5,
+    "displayName": "afaf35f8-5209-4cc8-92cc-db546d4476b0.jpg",
+    "originalName": "afaf35f8-5209-4cc8-92cc-db546d4476b0.jpg",
+    "url": "/uploads/media/1774519274858-745895655.jpg",
+    "isExternal": false,
+    "mimeType": "image/jpeg",
+    "size": 39424,
+    "altText": null,
+    "createdAt": "2026-03-26T10:01:14.000Z",
+    "updatedAt": "2026-03-27T06:43:01.000Z"
+  },
+  {
+    "id": 6,
+    "displayName": "1774519259514-72954226.jpg",
+    "originalName": "1774519259514-72954226.jpg",
+    "url": "/uploads/media/1774592913463-1774519259514-72954226.jpg",
+    "isExternal": false,
+    "mimeType": "image/jpeg",
+    "size": 807981,
+    "altText": null,
+    "createdAt": "2026-03-27T06:28:33.000Z",
+    "updatedAt": "2026-03-27T06:43:01.000Z"
+  },
+  {
+    "id": 7,
+    "displayName": "Deepak Kankaria.jpeg",
+    "originalName": "Deepak Kankaria.jpeg",
+    "url": "/uploads/media/1774593240459-Deepak-Kankaria.jpeg",
+    "isExternal": false,
+    "mimeType": "image/jpeg",
+    "size": 633103,
+    "altText": null,
+    "createdAt": "2026-03-27T06:34:00.000Z",
+    "updatedAt": "2026-03-27T06:43:01.000Z"
+  },
+  {
+    "id": 8,
+    "displayName": "CPU-Kota-1536x800.png",
+    "originalName": null,
+    "url": "https://cpur.in/wp-content/uploads/2022/04/CPU-Kota-1536x800.png",
+    "isExternal": true,
+    "mimeType": null,
+    "size": null,
+    "altText": "",
+    "createdAt": "2026-03-27T06:40:03.000Z",
+    "updatedAt": "2026-03-27T06:43:01.000Z"
+  },
+  {
+    "id": 9,
+    "displayName": "Gemini_Generated_Image_2hlp5t2hlp5t2hlp.png",
+    "originalName": "Gemini_Generated_Image_2hlp5t2hlp5t2hlp.png",
+    "url": "/uploads/media/1774593665185-Gemini-Generated-Image-2hlp5t2hlp5t2hlp.png",
+    "isExternal": false,
+    "mimeType": "image/png",
+    "size": 382816,
+    "altText": null,
+    "createdAt": "2026-03-27T06:41:05.000Z",
+    "updatedAt": "2026-03-27T06:43:01.000Z"
+  }
+]
