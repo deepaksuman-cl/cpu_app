@@ -52,7 +52,7 @@ export default async function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <HeaderServer /> 
         
-        <main className="pt-[110px] lg:pt-[112px]">
+        <main className="pt-[64px] lg:pt-[112px]">
           {children}
         </main>
 

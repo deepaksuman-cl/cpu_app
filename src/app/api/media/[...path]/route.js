@@ -16,10 +16,10 @@ export async function GET(request, { params }) {
     // Join the path segments
     const relativePath = filePathArray.join('/');
     // Map to public/uploads directory
-    const fullPath = path.join(process.cwd(), 'public', 'uploads', relativePath);
+    const fullPath = path.join(process.cwd(), 'uploads', relativePath);
 
     // Security Check: Prevent directory traversal
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+    const uploadsDir = path.join(process.cwd(), 'uploads');
     if (!fullPath.startsWith(uploadsDir)) {
       return new NextResponse('Forbidden', { status: 403 });
     }
