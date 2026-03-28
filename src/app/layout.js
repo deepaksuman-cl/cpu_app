@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       {/* <body> tag hona zaroori hai error hatane ke liye */}
-      <body className="min-h-screen bg-gray-100 antialiased">
+      <body className="min-h-screen bg-gray-100 antialiased" suppressHydrationWarning>
         <NextAuthProvider>
           {children}
         </NextAuthProvider>

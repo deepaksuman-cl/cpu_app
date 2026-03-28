@@ -2,7 +2,9 @@
   body * {
     font-weight: 500;
   }
-
+[id^="content-year-"] {
+  scroll-margin-top: 140px;
+}
   .gg-detail {
     position: relative!important;
     z-index: 9999!important;

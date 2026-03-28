@@ -199,10 +199,11 @@ export default function CourseRoadmap({ data }) {
     setActiveYear(id);
     const target = document.getElementById(`content-year-${id}`);
     if (target) {
-      window.scrollTo({
+         window.scrollTo({
         top: target.offsetTop - 140, // Match your original offset
         behavior: 'smooth'
       });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 

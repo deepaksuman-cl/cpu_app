@@ -21,12 +21,12 @@ export default function NotFound() {
         <div className="p-6 sm:p-8 md:p-12 lg:p-16 flex-1 flex flex-col justify-center order-last md:order-first z-10 bg-white">
           
           {/* CPU Official Logo */}
-          <img 
+          {/* <img 
             src="https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png" 
             alt="Career Point University" 
             className="h-14 sm:h-16 md:h-20 w-auto object-contain mb-8 md:mb-10 self-start"
           />
-          
+           */}
           <div className="flex items-center gap-2 mb-3 text-[#00588b] font-bold tracking-widest uppercase text-xs">
             <span className="w-8 h-px bg-[#00588b]/40"></span>
             Error 404
