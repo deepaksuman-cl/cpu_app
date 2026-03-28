@@ -1,29 +1,43 @@
 'use client';
 
 import { Bell, ChevronDown, LogOut, Menu, Settings, User } from 'lucide-react';
+import { signOut, useSession } from 'next-auth/react'; // 🔥 NextAuth imported
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function TopHeader({ setMobileMenuOpen }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [hasNotification, setHasNotification] = useState(true); // Isko API ya state se manage kar sakte hain
+  const [hasNotification, setHasNotification] = useState(true);
+  
+  // 🔥 Get current user session
+  const { data: session } = useSession();
+
+  // Safely extract user details
+  const userName = session?.user?.name || "Admin User";
+  const userEmail = session?.user?.email || "admin@cpu.com";
+  const userRole = session?.user?.role === 'super_admin' ? 'Super Admin' : 'Admin';
+  const profilePic = session?.user?.profilePic;
+  const userInitial = userName.charAt(0).toUpperCase();
+
+  // Handle Logout securely
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/login' });
+  };
 
   return (
     <header className="h-[72px] bg-[var(--bg-surface)] border-b border-[var(--border-light)] flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-40 transition-all duration-300">
       
-      {/* ── Left Section: Mobile Toggle & Page Title ── */}
+      {/* ── Left Section ── */}
       <div className="flex items-center gap-4">
-        {/* Mobile Hamburger Menu (Shows only on small screens) */}
         <button
           onClick={() => setMobileMenuOpen(true)}
           className="lg:hidden p-2 text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] hover:text-[var(--color-primary)] transition-colors rounded-none border border-transparent hover:border-[var(--border-default)]"
         >
           <Menu size={24} />
         </button>
-
-       
       </div>
 
-      {/* ── Right Section: Notifications & Profile ── */}
+      {/* ── Right Section ── */}
       <div className="flex items-center gap-2 sm:gap-4">
         
         {/* Notification Bell */}
@@ -32,8 +46,6 @@ export default function TopHeader({ setMobileMenuOpen }) {
           title="Notifications"
         >
           <Bell size={20} className="transition-transform group-hover:rotate-12" />
-          
-          {/* Unread Pinging Badge */}
           {hasNotification && (
             <span className="absolute top-2 right-2 flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-none bg-[var(--color-danger)] opacity-75"></span>
@@ -42,7 +54,6 @@ export default function TopHeader({ setMobileMenuOpen }) {
           )}
         </button>
 
-        {/* Vertical Divider */}
         <div className="h-8 w-[2px] bg-[var(--border-light)] hidden sm:block mx-1"></div>
 
         {/* User Profile Dropdown */}
@@ -51,18 +62,21 @@ export default function TopHeader({ setMobileMenuOpen }) {
             onClick={() => setIsProfileOpen(!isProfileOpen)}
             className={`flex items-center gap-3 p-1.5 transition-colors duration-200 rounded-none border ${isProfileOpen ? 'bg-[var(--bg-muted)] border-[var(--border-default)]' : 'border-transparent hover:bg-[var(--bg-muted)] hover:border-[var(--border-light)]'}`}
           >
-            {/* Avatar Box (Zero Radius) */}
-            <div className="w-9 h-9 bg-[var(--color-primary)] flex items-center justify-center shrink-0 rounded-none border border-[var(--color-primary-dark)] shadow-sm">
-              <span className="text-[var(--color-white)] font-bold text-[14px]">A</span>
+            {/* 🔥 Dynamic Avatar Box */}
+            <div className="w-9 h-9 bg-[var(--color-primary)] flex items-center justify-center shrink-0 rounded-none border border-[var(--color-primary-dark)] shadow-sm overflow-hidden relative">
+              {profilePic && profilePic !== '/default-avatar.png' ? (
+                <Image src={profilePic} alt={userName} fill className="object-cover" />
+              ) : (
+                <span className="text-[var(--color-white)] font-bold text-[14px]">{userInitial}</span>
+              )}
             </div>
             
-            {/* Name & Role (Hidden on Mobile) */}
+            {/* 🔥 Dynamic Name & Role */}
             <div className="hidden md:flex flex-col text-left pr-1">
-              <span className="text-[13px] font-bold text-[var(--text-primary)] leading-none tracking-wide">Admin User</span>
-              <span className="text-[11px] text-[var(--text-muted)] mt-1 font-medium">Super Admin</span>
+              <span className="text-[13px] font-bold text-[var(--text-primary)] leading-none tracking-wide">{userName}</span>
+              <span className="text-[11px] text-[var(--text-muted)] mt-1 font-medium">{userRole}</span>
             </div>
 
-            {/* Dropdown Arrow */}
             <ChevronDown 
               size={16} 
               strokeWidth={2.5}
@@ -70,17 +84,16 @@ export default function TopHeader({ setMobileMenuOpen }) {
             />
           </button>
 
-          {/* Dropdown Menu Popup */}
           {isProfileOpen && (
             <>
-              {/* Invisible Overlay to close dropdown when clicked outside */}
               <div className="fixed inset-0 z-40" onClick={() => setIsProfileOpen(false)}></div>
               
               <div className="absolute right-0 mt-3 w-56 bg-[var(--bg-surface)] border border-[var(--border-light)] shadow-[var(--shadow-lg)] z-50 rounded-none py-1 origin-top-right transition-all animate-in fade-in slide-in-from-top-2 duration-200">
                 
                 <div className="px-4 py-3 border-b border-[var(--border-light)] bg-[var(--bg-body)]">
                   <p className="text-[11px] uppercase tracking-widest text-[var(--text-muted)] font-bold mb-1">Signed in as</p>
-                  <p className="text-[13px] text-[var(--text-primary)] font-bold truncate">admin@cpur.in</p>
+                  {/* 🔥 Dynamic Email */}
+                  <p className="text-[13px] text-[var(--text-primary)] font-bold truncate">{userEmail}</p>
                 </div>
                 
                 <div className="py-2 flex flex-col">
@@ -95,7 +108,11 @@ export default function TopHeader({ setMobileMenuOpen }) {
                 </div>
                 
                 <div className="border-t border-[var(--border-light)] py-2">
-                  <button className="w-full flex items-center gap-3 px-4 py-2 text-[13px] font-bold text-[var(--color-danger)] hover:bg-[var(--color-danger-light)] hover:border-l-[3px] border-transparent hover:border-[var(--color-danger)] transition-all">
+                  {/* 🔥 Working Logout Button */}
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-3 px-4 py-2 text-[13px] font-bold text-[var(--color-danger)] hover:bg-[var(--color-danger-light)] hover:border-l-[3px] border-transparent hover:border-[var(--color-danger)] transition-all"
+                  >
                     <LogOut size={16} />
                     Sign Out
                   </button>

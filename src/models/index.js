@@ -14,6 +14,7 @@ import Testimonial from './Testimonial.js';
 import FAQ from './FAQ.js';
 import PlacementPartner from './PlacementPartner.js';
 import Facility from './Facility.js';
+import User from './User.js';
 
 // Define Associations here to ensure correct initialization order
 // School & Course
@@ -65,7 +66,8 @@ const db = {
   Testimonial,
   FAQ,
   PlacementPartner,
-  Facility
+  Facility,
+  User
 };
 
 export {
@@ -83,7 +85,8 @@ export {
   Testimonial,
   FAQ,
   PlacementPartner,
-  Facility
+  Facility,
+  User
 };
 
 export default db;
