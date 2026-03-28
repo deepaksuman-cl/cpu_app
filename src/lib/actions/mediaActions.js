@@ -7,7 +7,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 // Safe resolution of upload directory in cPanel
-const getUploadDir = () => path.join(process.cwd(), 'public', 'uploads', 'media');
+const getUploadDir = () => path.join(process.cwd(), 'uploads', 'media');
 
 export async function getAllMedia() {
   try {
@@ -34,7 +34,7 @@ export async function uploadLocalMedia(formData) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const originalName = file.name;
-    
+
     // 🛡️ Bulletproof: Sanitize filename (spaces to hyphens, remove special chars)
     const sanitizedName = originalName.replace(/[^a-zA-Z0-9.-]/g, '-').replace(/-+/g, '-');
     const fileName = `${Date.now()}-${sanitizedName}`;

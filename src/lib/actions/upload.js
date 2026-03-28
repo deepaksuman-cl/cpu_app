@@ -33,14 +33,14 @@ export async function uploadImageFromUrl(url, category = 'general') {
     const date = new Date();
     const year = date.getFullYear().toString();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', year, month, category);
+    const uploadDir = path.join(process.cwd(), 'uploads', year, month, category);
 
     // 4. Folder banana
     await mkdir(uploadDir, { recursive: true });
 
     // 5. Ekdam Clean aur Safe File Name banana (Bina kisi special characters ke)
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const filename = `url-img-${uniqueSuffix}${ext}`; 
+    const filename = `url-img-${uniqueSuffix}${ext}`;
     const filePath = path.join(uploadDir, filename);
 
     // 6. Image save karna
@@ -52,16 +52,16 @@ export async function uploadImageFromUrl(url, category = 'general') {
     // 8. Public URL generate karna
     const fileUrl = `/api/media/${year}/${month}/${category}/${filename}`;
 
-    return { 
-      success: true, 
-      url: fileUrl, 
-      message: 'Image uploaded from URL successfully!' 
+    return {
+      success: true,
+      url: fileUrl,
+      message: 'Image uploaded from URL successfully!'
     };
 
   } catch (error) {
     console.error("URL Upload Error:", error);
     // Frontend ko actual error bhejna taaki pata chale kya issue hai
-    return { success: false, error: error.message || 'Failed to upload image from URL.' }; 
+    return { success: false, error: error.message || 'Failed to upload image from URL.' };
   }
 }
 
@@ -69,7 +69,7 @@ export async function uploadImageFromUrl(url, category = 'general') {
 export async function uploadImage(formData) {
   try {
     const file = formData.get('file');
-    const category = formData.get('category') || 'general'; 
+    const category = formData.get('category') || 'general';
 
     if (!file) {
       return { success: false, error: 'No file uploaded.' };
@@ -80,16 +80,17 @@ export async function uploadImage(formData) {
 
     const date = new Date();
     const year = date.getFullYear().toString();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
-    
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', year, month, category);
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+
+    const uploadDir = path.join(process.cwd(), 'uploads', year, month, category);
+    console.log('Upload directory:', uploadDir);
     await mkdir(uploadDir, { recursive: true });
 
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
     // Clean filename for local uploads too
-    const cleanFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, '-'); 
-    const filename = `${uniqueSuffix}-${cleanFileName}`; 
-    
+    const cleanFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, '-');
+    const filename = `${uniqueSuffix}-${cleanFileName}`;
+
     const filePath = path.join(uploadDir, filename);
     await writeFile(filePath, buffer);
 
@@ -98,10 +99,10 @@ export async function uploadImage(formData) {
 
     const fileUrl = `/api/media/${year}/${month}/${category}/${filename}`;
 
-    return { 
-      success: true, 
-      url: fileUrl, 
-      message: 'Image uploaded successfully!' 
+    return {
+      success: true,
+      url: fileUrl,
+      message: 'Image uploaded successfully!'
     };
 
   } catch (error) {
