@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { DataTypes } from 'sequelize';
 import sequelize from '../lib/db.js';
 
-const User = sequelize.define('User', {
+const User = sequelize.define('users', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
