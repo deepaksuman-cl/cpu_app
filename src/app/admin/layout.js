@@ -40,8 +40,8 @@ export default function AdminLayout({ children }) {
   const contentMargin = isMobile ? '0px' : (isPinned ? '294px' : '76px');
 
   return (
-    <html lang="en">
-      <body className="bg-[#f4f4f5] antialiased text-gray-900 overflow-x-hidden">
+ 
+      <div className="bg-[#f4f4f5] antialiased text-gray-900 overflow-x-hidden">
         <div className="flex min-h-screen">
           
           <AdminSidebar 
@@ -78,7 +78,7 @@ export default function AdminLayout({ children }) {
           <ScrollToTop />
           <Toaster position="bottom-right" />
         </div>
-      </body>
-    </html>
+      </div>
+
   );
 }

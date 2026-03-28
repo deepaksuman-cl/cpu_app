@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // ==========================================
 // 1. ALL DATA EXTRACTED TO JSON

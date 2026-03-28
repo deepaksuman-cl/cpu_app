@@ -58,11 +58,14 @@ export default function SchoolPlacements({ data }) {
                   <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#f8fbff] to-[#dbeafe] border border-[#dde8f5] shadow-[0_4px_16px_rgba(0,88,139,0.08)] transition-all hover:-translate-y-2 hover:shadow-xl">
                     <div className="relative aspect-[3/4]">
                       <img src={p.img} alt={p.name} className="w-full h-full object-cover object-top" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 flex flex-col justify-end">
-                        <p className="text-white font-black text-sm">{p.name}</p>
-                        <p className="text-[#ffb900] text-xs font-bold leading-tight">{p.company}</p>
-                        {p.pkg && <p className="text-sky-300 text-[10px] font-black uppercase mt-1 tracking-widest">{p.pkg} LPA</p>}
-                      </div>
+                      {/* Only show overlay and text if at least one field exists */}
+                      {(p.name || p.company || p.pkg) && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 flex flex-col justify-end">
+                          {p.name && <p className="text-white font-black text-sm">{p.name}</p>}
+                          {p.company && <p className="text-[#ffb900] text-xs font-bold leading-tight">{p.company}</p>}
+                          {p.pkg && <p className="text-sky-300 text-[10px] font-black uppercase mt-1 tracking-widest">{p.pkg} LPA</p>}
+                        </div>
+                      )}
                       <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#ffb900] rounded-tl" />
                       <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#00588b] rounded-br" />
                     </div>

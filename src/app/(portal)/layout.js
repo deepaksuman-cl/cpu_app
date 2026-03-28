@@ -48,8 +48,8 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+  
+      <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <HeaderServer /> 
         
         <main className="pt-[110px] lg:pt-[112px]">
@@ -57,7 +57,7 @@ export default async function RootLayout({ children }) {
         </main>
 
         <Footer />
-      </body>
-    </html>
+      </div>
+
   );
 }
