@@ -1,19 +1,18 @@
 "use client";
 
 import {
-  BookOpen,
-  GraduationCap,
-  Building2,
-  Home,
-  MapPin,
-  Calendar,
-  Users,
   Award,
-  ExternalLink,
+  BookOpen,
+  Building2,
+  Calendar,
   ChevronRight,
-  Star,
-  Globe,
+  ExternalLink,
+  GraduationCap,
+  Home,
   House,
+  MapPin,
+  Star,
+  Users
 } from "lucide-react";
 
 // ── Breadcrumb Data ──────────────────────────────────────────────────────────
