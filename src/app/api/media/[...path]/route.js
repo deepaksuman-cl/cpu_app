@@ -8,7 +8,9 @@ const stat = promisify(fs.stat);
 
 export async function GET(request, { params }) {
   try {
-    const filePathArray = params.path;
+    const param = await params;
+    const filePathArray = param.path;
+    console.log('Requested file path array:', param);
     if (!filePathArray || filePathArray.length === 0) {
       return new NextResponse('Not Found', { status: 404 });
     }
@@ -20,6 +22,7 @@ export async function GET(request, { params }) {
 
     // Security Check: Prevent directory traversal
     const uploadsDir = path.join(process.cwd(), 'uploads');
+    console.log('Requested file path:', uploadsDir, fullPath);
     if (!fullPath.startsWith(uploadsDir)) {
       return new NextResponse('Forbidden', { status: 403 });
     }
