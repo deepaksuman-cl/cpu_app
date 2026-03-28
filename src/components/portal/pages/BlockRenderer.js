@@ -9,7 +9,7 @@ export default function BlockRenderer({ block }) {
   if (blockType === 'RichTextFull') {
     return (
       <div id={block.cssId || undefined} className={`w-full py-12 px-6 ${block.cssClass || ''}`}>
-        <div className="max-w-[100%] mx-auto">
+        <div className="max-w-[80%] mx-auto">
           <div 
             className="university-prose prose-max-w-none"
             dangerouslySetInnerHTML={{ __html: block.content }}

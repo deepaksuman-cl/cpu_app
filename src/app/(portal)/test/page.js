@@ -1,363 +1,390 @@
-"use client"
-import { useEffect, useState } from 'react';
+"use client";
 
-// ==========================================
-// 1. ALL DATA EXTRACTED TO JSON
-// ==========================================
-const roadmapData = {
-  config: {
-    sectionTitle: "Career Point University 4 Year Learning Roadmap",
-    labels: {
-      whatYouWillLearn: "What you'll learn",
-      aiTools: "AI Tools & Technologies",
-      inClassroom: "In Classroom Concepts",
-      projects: "Projects You'll Work On",
-      viewAllSubjects: "View All Subjects"
-    }
-  },
-  years: [
-    {
-      id: 1,
-      tabLabel: "YEAR 1",
-      tabTitle: "Foundation",
-      contentTitle: "Build",
-      contentDesc: "Learn by building from day 1, strengthening your foundations in core CS concepts and AI thinking.",
-      badge: "YEAR-1",
-      skills: ["C++", "HTML", "CSS", "JavaScript", "Git & GitHub", "VS Code", "Figma Basics", "Command Line", "Linux Basics"],
-      aiTools: [
-        { name: "ChatGPT", desc: "Prompt engineering & AI-assisted learning", icon: "fa-robot", color: "#10a37f", size: "26px" },
-        { name: "Notion AI", desc: "Smart documentation & notes", icon: "fa-file-lines", color: "#000", size: "26px" }
-      ],
-      concepts: [
-        { title: "Data Structures & Algorithms", desc: "Unlock the building blocks of any form of programming", icon: "🖥️" },
-        { title: "Web Development", desc: "Learn to build modern, fully functional websites from scratch", icon: "🌐" },
-        { title: "Core Maths", desc: "Explore the math behind computers and how 1s and 0s come to life", icon: "📐" }
-      ],
-      projects: [
-        { name: "Personal Portfolio Website", desc: "Design and build your developer portfolio from scratch", companies: "Google · Airbnb · Stripe", color: "rgb(60, 204, 139)" },
-        { name: "E-Commerce Product Page", desc: "Build a fully responsive product showcase with cart functionality", companies: "Amazon · Flipkart · Shopify", color: "rgb(59, 195, 226)" },
-        { name: "AI-Powered Quiz App", desc: "Create an interactive quiz app using ChatGPT API", companies: "Duolingo · Quizlet · Khan Academy", color: "rgb(252, 192, 50)" },
-        { name: "Task Management Dashboard", desc: "Full-stack CRUD app with React and local storage", companies: "Notion · Asana · Trello", color: "rgb(34, 172, 209)" }
-      ],
-      subjects: [
-        "Programming Fundamentals (C++)", "Web Essentials (HTML, CSS, JS)", "Discrete Mathematics", 
-        "Computer Organization", "Data Structures & Algorithms I", "Frontend Development (React.js)", 
-        "Probability & Statistics", "Communication Skills"
-      ]
-    },
-    {
-      id: 2,
-      tabLabel: "YEAR 2",
-      tabTitle: "Development",
-      contentTitle: "Develop",
-      contentDesc: "Go deeper into backend systems, databases, and start your AI engineering journey with hands-on LLM projects.",
-      badge: "YEAR-2",
-      skills: ["Node.js", "MongoDB", "SQL", "Java", "REST APIs", "Express.js", "LLM APIs", "Postman", "Docker Basics", "Agile"],
-      aiTools: [
-        { name: "Google Gemini API", desc: "Build applications powered by Gemini", icon: "fa-brain", color: "#4285f4", size: "26px" },
-        { name: "OpenAI API", desc: "Integrate GPT models into your apps", icon: "fa-bolt", color: "#000", size: "26px" },
-        { name: "Hugging Face", desc: "Access pre-trained AI models", icon: "fa-face-smile", color: "#ffd21e", size: "26px" }
-      ],
-      concepts: [
-        { title: "Backend Engineering", desc: "Build scalable server-side applications and REST APIs", icon: "⚙️" },
-        { title: "AI Engineering with LLMs", desc: "Learn to build AI-powered products using large language models", icon: "🤖" },
-        { title: "Database Systems", desc: "Master SQL, NoSQL, and data modeling for real applications", icon: "🗄️" }
-      ],
-      projects: [
-        { name: "Social Media Platform", desc: "Full-stack social app with feeds, auth, and real-time features", companies: "Meta · Twitter · LinkedIn", color: "rgb(59, 195, 226)" },
-        { name: "AI Chatbot Assistant", desc: "Build a conversational AI bot using OpenAI API & LangChain", companies: "OpenAI · Intercom · Drift", color: "rgb(252, 192, 50)" },
-        { name: "Food Ordering System", desc: "End-to-end food delivery app with payment integration", companies: "Zomato · Swiggy · DoorDash", color: "rgb(60, 204, 139)" },
-        { name: "GenAI-Powered CRM", desc: "Build an AI CRM that auto-generates customer insights", companies: "Salesforce · HubSpot · Zoho", color: "rgb(34, 172, 209)" }
-      ],
-      subjects: [
-        "Object Oriented Programming (Java)", "Data Structures & Algorithms II", "Backend Development (Node.js)",
-        "Database Management Systems", "Operating Systems", "AI Engineering with LLMs", 
-        "Computer Networks", "API Design & Microservices"
-      ]
-    },
-    {
-      id: 3,
-      tabLabel: "YEAR 3",
-      tabTitle: "AI Immersed Learning",
-      contentTitle: "Specialize",
-      contentDesc: "Dive deep into AI/ML, system design, and cloud — while gaining real industry exposure through internships.",
-      badge: "YEAR-3",
-      skills: ["TensorFlow", "PyTorch", "AWS", "Docker", "Kubernetes", "System Design", "NLP", "Computer Vision", "MLOps", "CI/CD", "Redis", "GraphQL"],
-      aiTools: [
-        { name: "TensorFlow", desc: "Build & train production ML models", icon: "fa-network-wired", color: "#ff6f00", size: "26px" },
-        { name: "Stable Diffusion", desc: "Generate images with AI diffusion models", icon: "fa-image", color: "#8b5cf6", size: "26px" },
-        { name: "AutoML", desc: "Automated machine learning pipelines", icon: "fa-gears", color: "#0ea5e9", size: "26px" }
-      ],
-      concepts: [
-        { title: "Machine Learning & Deep Learning", desc: "Build intelligent systems that learn from data", icon: "🧠" },
-        { title: "System Design", desc: "Architect scalable, distributed systems like the pros", icon: "🏗️" },
-        { title: "DevOps & Cloud", desc: "Deploy, monitor, and scale applications on AWS", icon: "☁️" }
-      ],
-      projects: [
-        { name: "AI Image Generator", desc: "Build a Stable Diffusion-powered image generation tool", companies: "Midjourney · Adobe · Canva", color: "rgb(252, 192, 50)" },
-        { name: "Video Streaming Platform", desc: "Netflix-like app with adaptive streaming and recommendations", companies: "Netflix · YouTube · Hotstar", color: "rgb(59, 195, 226)" },
-        { name: "Real-time Chat Application", desc: "WebSocket-based chat with AI-powered smart replies", companies: "Slack · Discord · WhatsApp", color: "rgb(60, 204, 139)" },
-        { name: "ML Model Deployment Pipeline", desc: "End-to-end MLOps pipeline on AWS with CI/CD", companies: "Google · Amazon · Microsoft", color: "rgb(34, 172, 209)" }
-      ],
-      subjects: [
-        "System Design & Architecture", "DevOps & Cloud Computing (AWS)", "Machine Learning Fundamentals",
-        "Natural Language Processing", "Entrepreneurship & Product Thinking", "Software Engineering & Testing",
-        "Computer Vision"
-      ]
-    },
-    {
-      id: 4,
-      tabLabel: "YEAR 4",
-      tabTitle: "Career Ready",
-      contentTitle: "Launch",
-      contentDesc: "Get placement-ready with intensive bootcamps, capstone projects, and real-world industry immersion.",
-      badge: "YEAR-4",
-      skills: ["System Design", "Selenium", "CI/CD", "Git", "Interview Prep", "Portfolio Dev", "Leadership", "AI Product Mgmt", "QA Testing", "Agile/Scrum"],
-      aiTools: [
-        { name: "Claude AI", desc: "Advanced AI reasoning & code generation", icon: "fa-message", color: "#d97757", size: "26px" },
-        { name: "Cursor", desc: "AI-first code editor for 10x productivity", icon: "fa-terminal", color: "#000", size: "26px" },
-        { name: "Vercel AI SDK", desc: "Build & deploy AI-powered web apps", icon: "fa-triangle-exclamation", color: "#000", size: "26px" }
-      ],
-      concepts: [
-        { title: "Placement Bootcamps", desc: "Intensive interview prep with mock drives and DSA drills", icon: "🎯" },
-        { title: "AI Product Development", desc: "Build and ship a complete AI product from idea to launch", icon: "🚀" },
-        { title: "Industry Capstone", desc: "Work on a real company problem as your final project", icon: "💼" }
-      ],
-      projects: [
-        { name: "AI Code Assistant", desc: "Build an intelligent coding assistant like GitHub Copilot", companies: "GitHub · Cursor · Replit", color: "rgb(252, 192, 50)" },
-        { name: "Job Portal Platform", desc: "Full-stack job board with AI-powered resume matching", companies: "LinkedIn · Naukri · Indeed", color: "rgb(59, 195, 226)" },
-        { name: "Final Capstone Project", desc: "Industry-grade project solving a real business problem", companies: "Google · Razorpay · Zerodha", color: "rgb(60, 204, 139)" }
-      ],
-      subjects: [
-        "Software Quality Assurance", "AI Product Development", "Placement Bootcamp II", 
-        "Interview Preparation", "Portfolio Development", "Capstone Project"
-      ]
-    }
-  ]
+import {
+  Award,
+  BookOpen,
+  Building2,
+  Calendar,
+  ChevronRight,
+  ExternalLink,
+  GraduationCap,
+  Home,
+  House,
+  MapPin,
+  Star,
+  Users
+} from "lucide-react";
+
+// ── Breadcrumb Data ──────────────────────────────────────────────────────────
+
+const breadcrumbs = [
+  { label: "Home", href: "/", icon: House },
+  { label: "About Us", href: "/about" },
+  { label: "Our Roots", href: null },
+];
+
+// ── Data ────────────────────────────────────────────────────────────────────
+
+const heroData = {
+  badge: "Providing Quality Education Since 1993",
+  title: "Our Roots",
+  subtitle: "Career Point Ltd",
+  description:
+    "Founded in May 1993 by Mr. Pramod Maheshwari, an IIT-Delhi alumnus, Career Point embarked on its mission in Kota to provide quality education to students preparing for competitive examinations. Starting with just 50 students focused on IIT-JEE preparation, Career Point has grown into a leading educational organization in India.",
+  description2:
+    "Today, Career Point offers a comprehensive educational experience, helping thousands of students from various backgrounds achieve their academic goals. Our programs cater to students pursuing formal education as well as those preparing for various entrance exams, ensuring a holistic approach to learning. With over 30 years of dedication, our management and faculty have continuously addressed the evolving challenges in education.",
+  description3:
+    "Career Point takes pride in the trust and respect earned from countless students since its inception. As a publicly listed company on the NSE and BSE in India, Career Point Limited remains committed to transparency, excellence, and educational innovation.",
 };
 
-// ==========================================
-// 2. REACT COMPONENT
-// ==========================================
-export default function App() {
-  const [activeYear, setActiveYear] = useState(roadmapData.years[0].id);
-  const [expandedSubjects, setExpandedSubjects] = useState({});
+const bannerText =
+  `The University is sponsored by the Gopi Bai Foundation and supported by Career Point Ltd, an educational group known for its strong commitment to providing quality education. Career Point has a legacy of over 30 years. Its journey began in May 1993 in Kota with a mission to provide "Excellent Education and Training to Students from KG to PhD." The group supports two universities, five schools (KG to 12th), three residential school campuses, and numerous skill development and coaching institutions across India.`;
 
-  // Equivalent to jQuery ScrollSpy
-  useEffect(() => {
-    // Inject FontAwesome for standard icons used in JSON
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-    document.head.appendChild(link);
+const stats = [
+  { icon: Calendar, value: "30+", label: "Years of Excellence", desc: "Since 1993", gradient: "from-[#ffb900]/30 to-[#ff8c00]/10" },
+  { icon: Users, value: "50K+", label: "Students Enrolled", desc: "Across India", gradient: "from-cyan-400/30 to-sky-400/10" },
+  { icon: Building2, value: "2", label: "Universities", desc: "Kota & Hamirpur", gradient: "from-emerald-400/30 to-teal-400/10" },
+  { icon: Star, value: "5", label: "Schools KG-12th", desc: "Pan India", gradient: "from-purple-400/30 to-pink-400/10" },
+];
 
-    const handleScroll = () => {
-      let scrollPos = window.scrollY + 160;
-      roadmapData.years.forEach((year) => {
-        const el = document.getElementById(`content-year-${year.id}`);
-        if (el) {
-          const top = el.offsetTop;
-          const bottom = top + el.offsetHeight;
-          if (scrollPos >= top && scrollPos < bottom) {
-            setActiveYear(year.id);
-          }
-        }
-      });
-    };
+const tableHeaders = [
+  { key: "school", label: "School Education", icon: BookOpen },
+  { key: "higher", label: "Higher Education", icon: GraduationCap },
+  { key: "coaching", label: "Coaching Institute", icon: Award },
+  { key: "hostel", label: "CP Hostels", icon: Home },
+];
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+const badgeRow = {
+  school: "KG To K12",
+  higher: "Diploma To Ph.D",
+  coaching: "IIT, AIEEE, AIPMT",
+  hostel: "Within/Outside Campus",
+};
 
-  const handleTabClick = (e, id) => {
-    e.preventDefault();
-    setActiveYear(id);
-    const target = document.getElementById(`content-year-${id}`);
-    if (target) {
-      window.scrollTo({
-        top: target.offsetTop - 140, // offset for sticky navbar/tabs
-        behavior: 'smooth'
-      });
-    }
-  };
+const institutions = [
+  {
+    school: { label: "Global Public School, Kota", href: "http://www.globalpublicschool.com/" },
+    higher: { label: "CP University, Kota (Rajasthan)", href: "http://cpur.in/" },
+    coaching: { label: "CAREER POINT Coaching, Kota", href: "http://www.careerpoint.ac.in/" },
+    hostel: { label: "Ashirwad Hostel within Campus, Kota", href: null },
+  },
+  {
+    school: { label: "Career Point Gurukul School, Kota", href: "http://www.jbsschool.in/" },
+    higher: { label: "CP University, Hamirpur (H.P.)", href: "http://cpuh.in/" },
+    coaching: {
+      label: "CP Gurukul, Kota (Rajasthan)",
+      sub: "Residential School with Integrated Coaching",
+      href: "http://www.cpgurukul.com/",
+    },
+    hostel: { label: "Matruchhaya Hostel, Kota", href: null },
+  },
+  {
+    school: { label: "Global Kids School, Kota", href: "http://cpwsjodhpur.com/" },
+    higher: null,
+    coaching: {
+      label: "CP Gurukul, Mohali (Punjab)",
+      sub: "Residential School with Integrated Coaching",
+      href: "http://cpmohali.in/",
+    },
+    hostel: { label: "Gurukul, Kota Hostel within Campus", href: "http://www.cpgurukul.com/" },
+  },
+  {
+    school: { label: "Career Point World School, Jodhpur", href: "http://www.cpwsjodhpur.com/" },
+    higher: null,
+    coaching: {
+      label: "CP Gurukul, Rajsamand (Rajasthan)",
+      sub: "Residential School with Integrated Coaching",
+      href: "http://cprajsamand.in/",
+    },
+    hostel: {
+      label: "Associated Hostels List",
+      href: "http://careerpoint.ac.in/academicinfo/associatedhostel.asp",
+    },
+  },
+  {
+    school: { label: "Career Point World School, Bilaspur", href: "http://www.cpwsbilaspur.com/" },
+    higher: null,
+    coaching: null,
+    hostel: null,
+  },
+];
 
-  const toggleSubjects = (id) => {
-    setExpandedSubjects(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
+// ── Sub-components ───────────────────────────────────────────────────────────
 
+function Breadcrumb() {
   return (
-    <section id="curriculum" className="py-16 md:py-20 px-4 md:px-8 bg-white font-sans text-[#0c4088]">
-      <div className="text-center mb-10">
-        <h2 className="text-2xl md:text-[2.5rem] font-extrabold text-[#0c4088] mb-4 leading-tight">
-          {roadmapData.config.sectionTitle}
-        </h2>
-      </div>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 lg:gap-10 max-w-[1200px] mx-auto items-start">
-        {/* TABS SIDEBAR */}
-        <div className="flex flex-row lg:flex-col gap-2 lg:gap-4 sticky top-[63px] lg:top-[120px] z-[99] bg-[#f8fbff] lg:bg-transparent p-2 lg:p-0 rounded-lg lg:rounded-none overflow-x-auto lg:overflow-visible">
-          {roadmapData.years.map((year) => {
-            const isActive = activeYear === year.id;
-            return (
-              <a
-                key={`tab-${year.id}`}
-                href={`#content-year-${year.id}`}
-                onClick={(e) => handleTabClick(e, year.id)}
-                className={`flex-none lg:flex-auto px-3 py-2 lg:px-6 lg:py-[18px] rounded-xl border cursor-pointer flex flex-col lg:flex-row items-start lg:items-center gap-1 lg:gap-3 font-bold transition-all duration-300 text-[13px] lg:text-base no-underline 
-                ${isActive 
-                  ? 'bg-white border-[#f1bd0e] shadow-[0_5px_20px_rgba(34,172,209,0.15)] lg:translate-x-2.5 text-[#0c4088]' 
-                  : 'bg-gray-50 border-gray-200 text-inherit hover:bg-white hover:border-[#f1bd0e]'}`}
-              >
-                <span className={`text-[12px] lg:text-[0.8rem] font-extrabold uppercase tracking-widest ${isActive ? 'text-[#f1bd0e]' : 'text-gray-500'}`}>
-                  {year.tabLabel}
-                </span> 
-                {year.tabTitle}
-              </a>
-            );
-          })}
+    <nav
+      aria-label="Breadcrumb"
+      className="bg-white border-b border-gray-100 px-4 md:px-8 py-3"
+    >
+      <ol className="flex items-center flex-wrap gap-1 text-sm">
+        {breadcrumbs.map((crumb, i) => {
+          const isLast = i === breadcrumbs.length - 1;
+          const Icon = crumb.icon;
+          return (
+            <li key={i} className="flex items-center gap-1">
+              {/* Separator */}
+              {i > 0 && (
+                <ChevronRight className="w-3.5 h-3.5 text-gray-300 shrink-0" />
+              )}
+
+              {isLast ? (
+                /* Active / current page */
+                <span className="flex items-center gap-1.5 font-semibold text-[#00588b] bg-[#00588b]/8 px-2.5 py-1 rounded-md">
+                  {Icon && <Icon className="w-3.5 h-3.5" />}
+                  {crumb.label}
+                </span>
+              ) : (
+                /* Clickable link */
+                <a
+                  href={crumb.href}
+                  className="flex items-center gap-1.5 text-gray-500 hover:text-[#00588b] transition-colors duration-150 px-1.5 py-1 rounded-md hover:bg-[#00588b]/5"
+                >
+                  {Icon && <Icon className="w-3.5 h-3.5" />}
+                  {crumb.label}
+                </a>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  );
+}
+
+function InstitutionLink({ data }) {
+  if (!data) return <span className="text-gray-300 text-sm">—</span>;
+  const inner = (
+    <>
+      <span className="font-medium text-sm leading-snug">{data.label}</span>
+      {data.sub && (
+        <span className="block text-xs text-gray-500 mt-0.5 italic">{data.sub}</span>
+      )}
+    </>
+  );
+  if (data.href) {
+    return (
+      <a
+        href={data.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex items-start gap-1.5 text-[#00588b] hover:text-[#ffb900] transition-colors duration-200"
+      >
+        <ExternalLink className="w-3.5 h-3.5 mt-0.5 shrink-0 opacity-60 group-hover:opacity-100" />
+        <span>{inner}</span>
+      </a>
+    );
+  }
+  return <span className="text-gray-700 text-sm">{inner}</span>;
+}
+
+function StatCard({ icon: Icon, value, label, desc, gradient }) {
+  return (
+    <div className="relative overflow-hidden rounded-2xl group cursor-default">
+      {/* Gradient glow bg */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
+
+      {/* Glass card body */}
+      <div className="relative z-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 flex flex-col gap-2 transition-all duration-300 group-hover:border-white/40 group-hover:-translate-y-1.5 group-hover:shadow-2xl">
+
+        {/* Icon row */}
+        <div className="flex items-start justify-between mb-1">
+          <div className="w-12 h-12 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center group-hover:bg-[#ffb900]/25 group-hover:border-[#ffb900]/40 transition-all duration-300 shadow-inner">
+            <Icon className="w-5 h-5 text-white/80 group-hover:text-[#ffb900] transition-colors duration-300" />
+          </div>
+          {/* Animated pulse dot */}
+          <span className="relative flex h-2.5 w-2.5 mt-1">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ffb900] opacity-50" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#ffb900]" />
+          </span>
         </div>
 
-        {/* CONTENT STACK */}
-        <div className="relative flex flex-col gap-10">
-          {roadmapData.years.map((year) => {
-            const isActive = activeYear === year.id;
-            return (
-              <div 
-                key={`content-${year.id}`} 
-                id={`content-year-${year.id}`}
-                className={`block bg-white rounded-2xl p-4 md:p-10 shadow-[0_5px_30px_rgba(0,0,0,0.03)] border border-gray-100 ${isActive ? 'opacity-100' : 'opacity-100'}`} 
-              >
-                
-                {/* Header */}
-                <div className="block md:flex justify-between items-start mb-8">
-                  <div>
-                    <h3 className="text-[1.6rem] md:text-[2.2rem] font-extrabold text-[#0c4088] mb-2 leading-tight mt-0">
-                      {year.contentTitle}
-                    </h3>
-                    <p className="text-base text-black max-w-[500px] leading-relaxed m-0">
-                      {year.contentDesc}
-                    </p>
-                  </div>
-                  <span className="bg-[#f1bd0e]/15 text-[#f1bd0e] px-4 py-1.5 rounded-md text-[0.85rem] font-extrabold uppercase tracking-widest inline-block mt-2 md:mt-0 w-fit">
-                    {year.badge}
-                  </span>
-                </div>
-                
-                {/* Skills Section */}
-                {year.skills && year.skills.length > 0 && (
-                  <div className="mb-8">
-                    <h4 className="text-[0.95rem] font-extrabold text-[#0c4088] mb-4 uppercase tracking-[0.5px]">
-                      {roadmapData.config.labels.whatYouWillLearn}
-                    </h4>
-                    <div className="flex flex-wrap gap-2.5 mb-8">
-                      {year.skills.map((skill, idx) => (
-                        <span key={idx} className="bg-gray-50 px-4 py-2 rounded-lg text-[0.85rem] font-bold text-[#0c4088] border border-gray-200 transition-all duration-300 hover:bg-[#22acd1]/10 hover:border-[#f1bd0e] hover:text-[#f1bd0e]">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {/* AI Tools Section */}
-                {year.aiTools && year.aiTools.length > 0 && (
-                  <div className="bg-[#f8fbff] border border-[#e0f0ff] rounded-xl p-4 mb-8">
-                    <div className="flex items-center gap-2.5 mb-5">
-                      <span className="text-[#fcc032] text-[1.2rem]">
-                        <i className="fa-solid fa-sparkles"></i>
-                      </span>
-                      <h4 className="text-[1.1rem] font-extrabold text-[#0c4088] m-0">
-                        {roadmapData.config.labels.aiTools}
-                      </h4>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {year.aiTools.map((tool, idx) => (
-                        <div key={idx} className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:border-[#f1bd0e]">
-                          <i className={`fa-solid ${tool.icon} mb-2.5 block`} style={{ color: tool.color, fontSize: tool.size }}></i>
-                          <span className="font-extrabold text-[#0c4088] text-[0.95rem] mb-1.5">{tool.name}</span>
-                          <span className="text-base text-black leading-relaxed m-0">{tool.desc}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Concepts Section */}
-                {year.concepts && year.concepts.length > 0 && (
-                  <div className="mb-8">
-                    <h4 className="text-[0.95rem] font-extrabold text-[#0c4088] mb-4 uppercase tracking-[0.5px]">
-                      {roadmapData.config.labels.inClassroom}
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
-                      {year.concepts.map((concept, idx) => (
-                        <div key={idx} className="border border-gray-200 p-5 rounded-xl bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#f1bd0e]">
-                          <span className="text-[2rem] mb-4 block">{concept.icon}</span>
-                          <h5 className="font-extrabold text-[1.05rem] text-[#0c4088] mb-2.5 leading-tight">{concept.title}</h5>
-                          <p className="text-base text-black m-0 leading-relaxed">{concept.desc}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Projects Section */}
-                {year.projects && year.projects.length > 0 && (
-                  <div className="mb-8">
-                    <h4 className="text-[0.95rem] font-extrabold text-[#0c4088] mb-4 uppercase tracking-[0.5px]">
-                      {roadmapData.config.labels.projects}
-                    </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-                      {year.projects.map((project, idx) => (
-                        <div key={idx} className="border border-gray-200 p-6 rounded-xl bg-white transition-all duration-300 relative overflow-hidden hover:-translate-y-1 hover:shadow-lg">
-                          <div className="absolute top-0 left-0 w-full h-1" style={{ background: project.color }}></div>
-                          <h5 className="font-extrabold text-[1.15rem] text-[#0c4088] mb-2 mt-1.5">{project.name}</h5>
-                          <p className="text-[0.9rem] text-black mb-4 leading-relaxed">{project.desc}</p>
-                          <span className="block text-[0.75rem] font-extrabold text-black uppercase tracking-[0.5px]">{project.companies}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Subjects Toggle Section */}
-                {year.subjects && year.subjects.length > 0 && (
-                  <div className="border border-gray-200 rounded-xl bg-white">
-                    <div 
-                      className="flex justify-between items-center p-4 lg:p-[18px_25px] cursor-pointer font-extrabold text-[#0c4088] transition-all duration-300 hover:bg-gray-50 hover:rounded-xl" 
-                      onClick={() => toggleSubjects(year.id)}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <span className="text-[#f1bd0e] text-[1.2rem]">☰</span>
-                        <span>{roadmapData.config.labels.viewAllSubjects}</span>
-                      </div>
-                      <span className={`transition-transform duration-300 text-[0.8rem] text-gray-500 ${expandedSubjects[year.id] ? 'rotate-180' : ''}`}>
-                        <i className="fa-solid fa-chevron-down"></i>
-                      </span>
-                    </div>
-                    
-                    {/* Animated Dropdown Body */}
-                    {expandedSubjects[year.id] && (
-                      <div className="px-6 pb-6 border-t border-gray-200">
-                        <ul className="list-none m-0 pt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {year.subjects.map((subject, idx) => (
-                            <li key={idx} className="text-[0.95rem] text-gray-600 flex items-center gap-2.5 font-medium">
-                              <span className="text-[#f1bd0e] font-extrabold text-[1.2rem]">›</span>{subject}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                )}
+        {/* Big number */}
+        <p className="text-5xl font-black text-white leading-none tracking-tighter drop-shadow">
+          {value}
+        </p>
 
+        {/* Yellow underline bar */}
+        <div className="flex items-center gap-2">
+          <div className="h-0.5 w-10 rounded-full bg-[#ffb900]" />
+          <div className="h-0.5 w-4 rounded-full bg-[#ffb900]/30" />
+        </div>
+
+        {/* Label */}
+        <p className="text-xs font-bold text-white uppercase tracking-widest leading-snug">
+          {label}
+        </p>
+
+        {/* Sub desc badge */}
+        <span className="self-start mt-1 text-[10px] font-semibold text-[#ffb900]/80 bg-[#ffb900]/10 border border-[#ffb900]/20 px-2 py-0.5 rounded-full uppercase tracking-wide">
+          {desc}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ── Main Component ───────────────────────────────────────────────────────────
+
+export default function OurRoots() {
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
+
+      {/* ── Breadcrumb (full width) ── */}
+      <Breadcrumb />
+
+      {/* ── Page Container ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        {/* ── Announcement Banner ── */}
+        <div className="bg-white border-2 border-dashed border-[#00588b] rounded-xl p-5">
+          <p className="text-sm text-gray-700 leading-relaxed">
+            <span className="font-bold text-[#00588b]">
+              The University is sponsored by the Gopi Bai Foundation
+            </span>{" "}
+            and supported by Career Point Ltd, an educational group known for its strong commitment to
+            providing quality education. Career Point has a legacy of over 30 years. Its journey began
+            in May 1993 in Kota with a mission to provide{" "}
+            <span className="font-semibold text-[#00588b]">
+              &ldquo;Excellent Education and Training to Students from KG to PhD.&rdquo;
+            </span>{" "}
+            The group supports two universities, five schools (KG to 12th), three residential school
+            campuses, and numerous skill development and coaching institutions across India.
+          </p>
+        </div>
+
+        {/* ── Hero Section ── */}
+        <section className="relative bg-gradient-to-br from-[#00588b] via-[#006fa8] to-[#004d7a] overflow-hidden rounded-3xl">
+          {/* Decorative circles */}
+          <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/5" />
+          <div className="absolute -bottom-20 -left-10 w-80 h-80 rounded-full bg-[#ffb900]/10" />
+          <div className="absolute top-1/2 right-1/4 w-32 h-32 rounded-full bg-white/5" />
+
+          <div className="relative px-6 py-12 md:px-12 md:py-16 lg:flex lg:items-center lg:gap-12">
+            {/* Text */}
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 bg-[#ffb900]/20 border border-[#ffb900]/40 rounded-full px-4 py-1.5 mb-5">
+                <Star className="w-3.5 h-3.5 text-[#ffb900]" />
+                <span className="text-[#ffb900] text-xs font-semibold uppercase tracking-widest">
+                  {heroData.badge}
+                </span>
               </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+
+              <h1 className="text-4xl md:text-5xl font-black text-white leading-tight">
+                {heroData.title}
+                <span className="block text-[#ffb900]">{heroData.subtitle}</span>
+              </h1>
+
+              <div className="mt-6 space-y-3 text-white/80 text-sm leading-relaxed max-w-xl">
+                <p>{heroData.description}</p>
+                <p>{heroData.description2}</p>
+                <p>{heroData.description3}</p>
+              </div>
+
+              <div className="mt-6 flex items-center gap-2 text-[#ffb900] text-sm font-semibold">
+                <MapPin className="w-4 h-4" />
+                <span>Kota, Rajasthan — Established 1993</span>
+              </div>
+            </div>
+
+            {/* Stats grid */}
+            <div className="mt-10 lg:mt-0 lg:w-96 grid grid-cols-2 gap-4 shrink-0">
+              {stats.map((s) => (
+                <StatCard key={s.label} {...s} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Institutions Table Section ── */}
+        <section className="pb-6">
+          {/* Section heading */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-1.5 h-8 rounded-full bg-[#ffb900]" />
+            <h2 className="text-2xl font-black text-[#00588b]">
+              Career Point Education Institutions
+            </h2>
+            <ChevronRight className="w-5 h-5 text-[#00588b]/40" />
+          </div>
+
+          {/* Cards grid (mobile) */}
+          <div className="grid grid-cols-1 gap-4 md:hidden">
+            {institutions.map((row, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
+              >
+                {tableHeaders.map(({ key, label, icon: Icon }) =>
+                  row[key] ? (
+                    <div key={key} className="flex gap-3 px-4 py-3 border-b border-gray-50 last:border-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#00588b]/10 flex items-center justify-center shrink-0">
+                        <Icon className="w-4 h-4 text-[#00588b]" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-0.5 font-semibold">
+                          {label}
+                        </p>
+                        <InstitutionLink data={row[key]} />
+                      </div>
+                    </div>
+                  ) : null
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Table (desktop) */}
+          <div className="hidden md:block bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-[#00588b]">
+                  {tableHeaders.map(({ key, label, icon: Icon }) => (
+                    <th
+                      key={key}
+                      className="w-1/4 px-5 py-4 text-left text-white text-sm font-bold tracking-wide"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Icon className="w-4 h-4 text-[#ffb900]" />
+                        {label}
+                      </div>
+                    </th>
+                  ))}
+                </tr>
+
+                {/* Badge row */}
+                <tr className="border-b-2 border-[#ffb900] bg-[#00588b]/5">
+                  {tableHeaders.map(({ key }) => (
+                    <td key={key} className="px-5 py-3">
+                      <span className="inline-block bg-[#ffb900] text-[#00588b] text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
+                        {badgeRow[key]}
+                      </span>
+                    </td>
+                  ))}
+                </tr>
+              </thead>
+
+              <tbody>
+                {institutions.map((row, i) => (
+                  <tr
+                    key={i}
+                    className="border-b border-gray-100 hover:bg-[#00588b]/4 transition-colors duration-150"
+                  >
+                    {tableHeaders.map(({ key }) => (
+                      <td key={key} className="px-5 py-4 align-top">
+                        <InstitutionLink data={row[key]} />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Footer note */}
+    
+        </section>
+
+      </div>{/* end container */}
+    </div>
   );
 }
