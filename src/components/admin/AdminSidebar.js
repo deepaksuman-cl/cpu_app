@@ -3,15 +3,12 @@
 import {
   Building,
   ChevronDown,
-  Database, FileText, Home, ImageIcon,
-  Key,
+  FileText, Home, ImageIcon,
   LayoutDashboard,
   PanelBottom,
   PanelLeftClose,
   PanelLeftOpen,
   PanelTop,
-  Settings,
-  ShieldCheck, Users,
   X
 } from 'lucide-react';
 import Link from 'next/link';
@@ -23,7 +20,7 @@ const SIDEBAR_MENUS = [
     category: 'OVERVIEW',
     items: [
       { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-      { name: 'Database Explorer', href: '/admin/database', icon: Database },
+      // { name: 'Database Explorer', href: '/admin/database', icon: Database },
     ]
   },
   {
@@ -62,29 +59,29 @@ const SIDEBAR_MENUS = [
       }
     ]
   },
-  {
-    category: 'SECURITY & ACCESS',
-    items: [
-      { 
-        name: 'Project Identity & Access',
-        icon: Users,
-        isCollapsible: true,
-        subItems: [
-          { name: 'Users', href: '/admin/users' },
-          { name: 'Applications', href: '/admin/applications' },
-          { name: 'Teams', href: '/admin/teams' },
-        ]
-      },
-      { name: 'Audit Logs', href: '/admin/audit-logs', icon: ShieldCheck },
-      { name: 'API Keys', href: '/admin/api-keys', icon: Key },
-    ]
-  },
-  {
-    category: 'SYSTEM',
-    items: [
-      { name: 'Global Settings', href: '/admin/settings', icon: Settings },
-    ]
-  }
+  // {
+  //   category: 'SECURITY & ACCESS',
+  //   items: [
+  //     { 
+  //       name: 'Project Identity & Access',
+  //       icon: Users,
+  //       isCollapsible: true,
+  //       subItems: [
+  //         { name: 'Users', href: '/admin/users' },
+  //         { name: 'Applications', href: '/admin/applications' },
+  //         { name: 'Teams', href: '/admin/teams' },
+  //       ]
+  //     },
+  //     { name: 'Audit Logs', href: '/admin/audit-logs', icon: ShieldCheck },
+  //     { name: 'API Keys', href: '/admin/api-keys', icon: Key },
+  //   ]
+  // },
+  // {
+  //   category: 'SYSTEM',
+  //   items: [
+  //     { name: 'Global Settings', href: '/admin/settings', icon: Settings },
+  //   ]
+  // }
 ];
 
 // ─── Sub Item Tree Row ────────────────────────────────────────────────────────
