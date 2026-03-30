@@ -83,22 +83,22 @@ export default function PlacementSection({ data }) {
                 {(slide.name || slide.course || slide.company) && (
                   <>
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3.5">
+                    <div className="placement_bg_blur absolute bottom-0 left-0 right-0 p-3.5">
                       {slide.name && (
-                        <div className="font-extrabold text-[13px] text-white">
+                        <h6 className="font-extrabold text-[13px] text-white">
                           {slide.name}
-                        </div>
+                        </h6>
                       )}
                       {slide.course && (
-                        <div className="text-[11px] text-white/70 mt-0.5 mb-2">
+                        <small className="text-[11px] text-white/70 mt-0.5 mb-2">
                           {slide.course}
-                        </div>
+                        </small>
                       )}
-                      {slide.company && (
+                      {/* {slide.company && (
                         <span className="bg-amber-400 text-black text-[10px] font-extrabold px-2.5 py-0.5 rounded">
                           {slide.company}
                         </span>
-                      )}
+                      )} */}
                     </div>
                   </>
                 )}
