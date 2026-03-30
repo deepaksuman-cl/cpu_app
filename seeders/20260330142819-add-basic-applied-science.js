@@ -3,31 +3,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // Tumhare Sequelize model columns ke hisaab se exact mapping
     await queryInterface.bulkInsert('schools', [
       {
-        name: "School of Arts & Humanities",
-        slug: "arts-and-humanities",
+        name: "School of Basic & Applied Sciences",
+        slug: "basic-applied-science",
         status: "published",
         version: 1,
-        metaTitle: "School of Arts & Humanities | Career Point University",
-        metaDescription: "Fostering creativity, critical thinking, and a deeper understanding of human culture, history, and society. Join our premier institute.",
+        metaTitle: "School of Basic & Applied Sciences | Career Point University",
+        metaDescription: "Pioneering research and innovation in Physics, Chemistry, Mathematics, and Biosciences. Discover our premier science programs.",
         
         breadcrumb: JSON.stringify([
           { "label": "Home", "link": "/" },
           { "label": "Schools & Departments", "link": "/schools" },
-          { "label": "School of Arts & Humanities", "link": "/schools/arts-and-humanities" }
+          { "label": "Basic & Applied Sciences", "link": "/schools/basic-applied-science" }
         ]),
         
         hero: JSON.stringify({
           "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
-          "badge": "Premier Institute for Humanities & Social Sciences",
-          "title": {
-            "main": "School of Arts & Humanities",
-            "highlight": "Arts",
-            "skyHighlight": "& Humanities"
+          "badge": "Center of Scientific Excellence & Innovation",
+          "title": { 
+            "main": "School of Basic & Applied Sciences", 
+            "highlight": "Basic", 
+            "skyHighlight": "& Applied Sciences" 
           },
-          "description": "Career Point University offers cutting-edge programs in humanities, shaping future leaders, researchers, writers, and civil servants in Kota.",
+          "description": "Empowering the next generation of scientists, researchers, and innovators through world-class laboratories and research-driven academics.",
           "cta": [
             { "label": "Apply Now", "link": "#", "primary": true },
             { "label": "Explore Programs", "link": "#programs", "primary": false }
@@ -35,56 +34,56 @@ module.exports = {
         }),
 
         stats: JSON.stringify([
-          { "value": "15L", "label": "Highest Package", "icon": "TrendingUp" },
-          { "value": "4.5L", "label": "Avg Salary Package", "icon": "BarChart3" },
-          { "value": "20+", "label": "Global NGO Partners", "icon": "Briefcase" },
-          { "value": "500+", "label": "Students Enrolled", "icon": "Users" }
+          { "value": "18L", "label": "Highest Package", "icon": "TrendingUp" },
+          { "value": "300+", "label": "Research Papers", "icon": "BookOpen" },
+          { "value": "25+", "label": "Patents Filed", "icon": "FlaskConical" },
+          { "value": "40+", "label": "Industry Partners", "icon": "Briefcase" }
         ]),
 
         about: JSON.stringify({
           "vision": {
-            "title": "Vision",
-            "label": "Our Purpose",
+            "title": "Vision", 
+            "label": "Our Purpose", 
             "icon": "Target",
-            "text": "To develop and deliver industry-relevant education, nurturing students to be socially responsible, research-driven innovators who can effectively meet the challenges of the modern world at both national and global levels.",
+            "text": "To emerge as a premier center of scientific learning and research, fostering a culture of innovation that addresses global challenges through fundamental and applied sciences.",
             "highlights": [
-              { "value": "800+", "label": "Students" },
-              { "value": "95%", "label": "Placement/Higher Ed" },
-              { "value": "15+", "label": "Global Partners" }
+              { "value": "1200+", "label": "Science Scholars" },
+              { "value": "92%", "label": "Placement/Research" },
+              { "value": "10+", "label": "Advanced Labs" }
             ]
           },
           "mission": {
-            "title": "Mission",
-            "label": "Our Goal",
+            "title": "Mission", 
+            "label": "Our Goal", 
             "icon": "Lightbulb",
             "points": [
-              "Improve academic practices that bridge theory, literature, and research.",
-              "Create a research-led teaching environment combining classroom learning with field studies.",
-              "Impart collaborative resources to build a diverse intellectual space.",
-              "Nurture researchers and critical thinkers through contemporary socio-political studies.",
-              "Seek student solutions and critical thinking in a powerful, inclusive environment."
+              "Deliver rigorous, concept-driven academic programs in core scientific disciplines.",
+              "Promote interdisciplinary research that connects basic sciences with real-world applications.",
+              "Equip students with cutting-edge analytical and laboratory skills.",
+              "Collaborate with leading scientific organizations and biotech industries."
             ]
           }
         }),
 
         programmes: JSON.stringify({
           "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
-          "title": { "main": "Our Programme", "highlight": "Programme" },
-          "subtitle": "Academic Programmes",
-          "description": "Over the years, the School of Arts & Humanities has earned several accolades for playing a dynamic role in elevating research and the learning process of the institution.",
+          "title": { "main": "Our Programmes", "highlight": "Programmes" },
+          "subtitle": "Academic Offerings",
+          "description": "Explore our specialized undergraduate, postgraduate, and doctoral programs in Mathematics, Physics, Chemistry, and Life Sciences.",
           "levels": [
             {
-              "label": "After 12th Pass / Equivalent",
+              "label": "After 12th Pass (Science)",
               "icon": "GraduationCap",
               "courses": [
                 {
-                  "name": "Bachelor of Arts (BA)",
-                  "slug": "ba", // 🔥 DUMMY SLUG FOR COURSE DETAILS
+                  "name": "Bachelor of Science (B.Sc.)",
+                  "slug": "bsc", // 🔥 Bas ye dummy slug yahan rahega, jaise tumne kaha tha.
                   "specializations": [
-                    { "name": "English", "slug": "english" },
-                    { "name": "History", "slug": "history" },
-                    { "name": "Political Science", "slug": "political-science" },
-                    { "name": "Sociology", "slug": "sociology" }
+                    { "name": "Physics", "slug": "physics" },
+                    { "name": "Chemistry", "slug": "chemistry" },
+                    { "name": "Mathematics", "slug": "mathematics" },
+                    { "name": "Botany", "slug": "botany" },
+                    { "name": "Zoology", "slug": "zoology" }
                   ]
                 }
               ]
@@ -94,12 +93,12 @@ module.exports = {
               "icon": "BookOpen",
               "courses": [
                 {
-                  "name": "Master of Arts (MA)",
-                  "slug": "ma", // 🔥 DUMMY SLUG FOR COURSE DETAILS
+                  "name": "Master of Science (M.Sc.)",
+                  "slug": "msc", // 🔥 Dummy slug
                   "specializations": [
-                    { "name": "English Literature", "slug": "english-lit" },
-                    { "name": "History", "slug": "history-pg" },
-                    { "name": "Political Science", "slug": "political-science-pg" }
+                    { "name": "Organic Chemistry", "slug": "organic-chemistry" },
+                    { "name": "Applied Physics", "slug": "applied-physics" },
+                    { "name": "Biotechnology", "slug": "biotech" }
                   ]
                 }
               ]
@@ -109,9 +108,9 @@ module.exports = {
               "icon": "Microscope",
               "courses": [
                 {
-                  "name": "Ph.D. (Arts & Humanities)",
-                  "slug": "phd-arts", // 🔥 DUMMY SLUG FOR COURSE DETAILS
-                  "description": "Research-focused doctoral programme in various humanities disciplines."
+                  "name": "Ph.D. in Science",
+                  "slug": "phd-science", // 🔥 Dummy slug
+                  "description": "Advanced doctoral research in fundamental and applied sciences."
                 }
               ]
             }
@@ -119,102 +118,92 @@ module.exports = {
         }),
 
         placements: JSON.stringify({
-          "title": { "main": "Students Placed in Top Organizations", "highlight": "Top Organizations" },
+          "title": { "main": "Science Graduates in Top Organizations", "highlight": "Top Organizations" },
           "label": "Placement Records",
-          "subtitle": "Highest & best placement record in media, education, and social sectors",
+          "subtitle": "Outstanding placements in Pharma, R&D, and Tech sectors",
           "list": [
-            { "name": "Priya Singh", "company": "Times of India", "pkg": "8 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png" },
-            { "name": "Rahul Verma", "company": "Teach For India", "pkg": "6 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png" },
-            { "name": "Anjali Sharma", "company": "Penguin Random House", "pkg": "9 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari-Tech-Mahindra.png" },
-            { "name": "Vikram Rathore", "company": "NDTV", "pkg": "7.5 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png" },
-            { "name": "Sneha Kapoor", "company": "UNESCO (Intern)", "pkg": "Stipend", "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg" },
-            { "name": "Aman Desai", "company": "Oxfam India", "pkg": "6.5 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png" }
+            { "name": "Aditi Sharma", "company": "Biocon", "pkg": "12 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png" },
+            { "name": "Rohan Das", "company": "Cipla Pharmaceuticals", "pkg": "9 LPA", "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png" },
+            { "name": "Vikram Singh", "company": "DRDO (Research Intern)", "pkg": "Stipend", "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png" },
+            { "name": "Megha Nair", "company": "Sun Pharma", "pkg": "10.5 LPA", "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg" }
           ]
         }),
 
         alumni: JSON.stringify({
-          "title": { "main": "Making an Impact Globally", "highlight": "Impact" },
+          "title": { "main": "Scientists Making a Global Impact", "highlight": "Impact" },
           "label": "Our Alumni",
           "list": [
-            { "name": "Neha Gupta", "role": "Senior Editor", "company": "HarperCollins India", "img": "https://cpur.in/wp-content/uploads/2023/08/Saloni.jpg" },
-            { "name": "Aditya Rao", "role": "Policy Analyst", "company": "NITI Aayog", "img": "https://cpur.in/wp-content/uploads/2023/08/aryan.jpg" },
-            { "name": "Meera Menon", "role": "Assistant Professor", "company": "Delhi University", "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png" },
-            { "name": "Kunal Tiwari", "role": "Journalist", "company": "The Hindu", "img": "https://cpur.in/wp-content/uploads/2023/08/harsh.jpg" }
+            { "name": "Dr. Sameer Khan", "role": "Lead Researcher", "company": "National Chemical Lab", "img": "https://cpur.in/wp-content/uploads/2023/08/aryan.jpg" },
+            { "name": "Ananya Patil", "role": "Quality Control Head", "company": "Pfizer", "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png" },
+            { "name": "Rahul Verma", "role": "Data Analyst", "company": "Accenture", "img": "https://cpur.in/wp-content/uploads/2023/08/harsh.jpg" }
           ]
         }),
 
         industry: JSON.stringify({
-          "title": { "main": "Industry & NGO Tie Up's", "highlight": "Tie Up's" },
+          "title": { "main": "Scientific & Industry Tie Up's", "highlight": "Tie Up's" },
           "label": "Collaborations",
           "partners": [
-            { "name": "Sahitya Akademi", "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg" },
-            { "name": "Pratham Education Foundation", "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg" },
-            { "name": "National Archives of India", "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg" },
-            { "name": "Amnesty International", "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg" },
-            { "name": "Oxford University Press", "url": "https://cpur.in/wp-content/uploads/2023/08/tech-mahindra-as-Smart-Object-1.jpg" }
+            { "name": "Biocon", "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg" },
+            { "name": "CSIR Labs", "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg" },
+            { "name": "Serum Institute", "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg" },
+            { "name": "Dr. Reddy's", "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg" }
           ]
         }),
 
         research: JSON.stringify({
-          "title": { "main": "Research Excellence", "highlight": "Excellence" },
+          "title": { "main": "Scientific Research Excellence", "highlight": "Excellence" },
           "label": "Eminence Research",
           "gallery": [
             "https://cpur.in/wp-content/uploads/2023/07/gallery-7.jpg",
             "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
-            "https://cpur.in/wp-content/uploads/2023/07/gallery-12.jpg",
-            "https://cpur.in/wp-content/uploads/2023/07/gallery-4.jpg"
+            "https://cpur.in/wp-content/uploads/2023/07/gallery-12.jpg"
           ],
           "stats": [
-            { "value": "150+", "label": "Research Papers Published", "icon": "BookOpen" },
-            { "value": "40+", "label": "Conference Presentations", "icon": "Presentation" },
-            { "value": "15+", "label": "Books Authored", "icon": "GraduationCap" },
-            { "value": "5+", "label": "Funded Projects", "icon": "FlaskConical" }
+            { "value": "300+", "label": "SCI/SCOPUS Publications", "icon": "BookOpen" },
+            { "value": "25+", "label": "Patents Filed", "icon": "FlaskConical" },
+            { "value": "12+", "label": "Govt. Funded Projects", "icon": "Briefcase" },
+            { "value": "50+", "label": "International Conferences", "icon": "Presentation" }
           ]
         }),
 
         community: JSON.stringify({
-          "title": { "main": "Our Diverse Community", "highlight": "Diverse" },
+          "title": { "main": "A Community of Innovators", "highlight": "Innovators" },
           "label": "Community",
           "description": [
-            "The Arts & Humanities community thrives on diversity, encompassing a dynamic range of thinkers, writers, historians, and social scientists.",
-            "We focus on producing individuals with strong social ethics, a deep understanding of human culture, and the critical thinking skills required to address complex global challenges. Our community regularly engages in literary fests, mock parliaments, and socio-cultural outreach programs."
+            "The School of Basic & Applied Sciences is a thriving ecosystem of curiosity. Our community consists of brilliant minds dedicated to unraveling the mysteries of the universe.",
+            "From national-level science exhibitions and hackathons to coding clubs and environmental drives, our students are constantly engaged in activities that broaden their scientific horizons and societal impact."
           ],
           "gallery": [
-            { "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-7-1.jpg", "caption": "Literature & Poetry Seminar" },
-            { "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-12-1.jpg", "caption": "Historical Heritage Walk" },
-            { "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-4.jpg", "caption": "Mock United Nations Session" }
+            { "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-7-1.jpg", "caption": "Advanced Chemistry Lab Session" },
+            { "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-12-1.jpg", "caption": "Annual Science Exhibition" }
           ]
         }),
 
         infrastructure: JSON.stringify({
-          "title": { "main": "World-Class Infrastructure", "highlight": "Infrastructure" },
+          "title": { "main": "World-Class Science Infrastructure", "highlight": "Infrastructure" },
           "label": "Campus",
           "list": [
-            { "title": "Modern Central Library", "desc": "Extensive collection of books, journals, manuscripts, and digital archives spanning centuries.", "img": "https://img.freepik.com/free-photo/library-dummy.jpg" },
-            { "title": "Advanced Language Labs", "desc": "Equipped with linguistic software and interactive tools for mastering foreign and regional languages.", "img": "https://img.freepik.com/free-photo/lab-dummy.jpg" },
-            { "title": "Seminar Halls", "desc": "State-of-the-art audio-visual setups designed for debates, symposiums, and guest lectures.", "img": "https://img.freepik.com/free-photo/modern-classroom-projector_1048-12346.jpg" },
-            { "title": "Creative Writing & Media Studio", "desc": "Dedicated space for journalism students and aspiring authors to hone their craft.", "img": "https://img.freepik.com/free-photo/scientists-working-laboratory_23-2149041483.jpg" }
+            { "title": "Advanced Central Instrumentation Lab", "desc": "Equipped with HPLC, FTIR, UV-Vis Spectrophotometers, and more.", "img": "https://img.freepik.com/free-photo/scientists-working-laboratory_23-2149041483.jpg" },
+            { "title": "High-Performance Computing Lab", "desc": "For complex mathematical modeling and computational physics.", "img": "https://img.freepik.com/free-photo/network-server-room_1048-2200.jpg" },
+            { "title": "Modern Bioscience Labs", "desc": "Bio-safety cabinets, incubators, and genetic testing equipment.", "img": "https://img.freepik.com/free-photo/lab-dummy.jpg" }
           ]
         }),
 
         testimonials: JSON.stringify({
-          "title": { "main": "Our Students Speak", "highlight": "Speak" },
+          "title": { "main": "Our Science Scholars Speak", "highlight": "Speak" },
           "label": "Testimonials",
           "list": [
-            { "name": "Simran Kaur", "batch": "BA 2021", "company": "Media Professional", "emoji": "✍️", "rating": 5, "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png", "text": "The faculty's dedication to literature and social sciences profoundly shaped my worldview. The creative freedom here allowed me to find my true voice as a writer." },
-            { "name": "Aman Raj", "batch": "MA 2022", "company": "Civil Services Aspirant", "emoji": "🏛️", "rating": 5, "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png", "text": "The depth of the curriculum, especially in History and Political Science, gave me a massive advantage in my UPSC preparations. The library resources are phenomenal." },
-            { "name": "Kavya Sharma", "batch": "BA 2020", "company": "Social Worker (NGO)", "emoji": "🌍", "rating": 5, "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari-Tech-Mahindra.png", "text": "CPU taught me that humanities isn't just about reading; it's about applying knowledge to solve real human problems. The fieldwork experiences were eye-opening." },
-            { "name": "Rohan Gupta", "batch": "Ph.D. Scholar", "company": "Research Fellow", "emoji": "🎓", "rating": 5, "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png", "text": "The research environment here is incredibly supportive. My mentors encouraged interdisciplinary study, which added immense value to my doctoral thesis." }
+            { "name": "Aditi Sharma", "batch": "M.Sc. 2022", "company": "Biocon", "emoji": "🧬", "rating": 5, "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png", "text": "The lab facilities here are at par with industry standards. The practical exposure I got directly helped me secure my placement in R&D." },
+            { "name": "Vikram Singh", "batch": "B.Sc. 2021", "company": "Research Intern", "emoji": "🔭", "rating": 5, "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png", "text": "CPU's faculty didn't just teach us from books; they involved us in their live research projects. It completely changed my perspective on Physics." }
           ]
         }),
 
         exploreDepartment: JSON.stringify({
-          "sectionTitle": { "main": "Explore School of Arts & Humanities", "highlight": "School" },
-          "subtitle": "Discover our specialized wings, societies, and libraries",
+          "sectionTitle": { "main": "Explore School of Basic & Applied Sciences", "highlight": "School" },
+          "subtitle": "Discover our specialized labs, research cells, and scientific societies",
           "items": [
-            { "title": "Department at a Glance", "icon": "Building2", "items": ["3+ Guest Experts/year", "Literary & Debate Clubs", "Seminars & Symposiums", "Civil Service Mentoring", "NGO Collaborations", "Cultural Fests", "Placement Assistance", "Field Trips"], "cta": "VIEW MORE" },
-            { "title": "Exclusive Facilities", "icon": "FlaskConical", "items": ["Central Digital Library", "Advanced Language Lab", "Media & Journalism Studio", "Historical Archives Access", "Research Cell"], "cta": "VIEW MORE" },
-            { "title": "Your Department in a Nutshell", "icon": "Star", "items": ["Student Achievements", "Faculty Publications", "Research Papers", "Latest Department Updates", "Upcoming Activities", "Important Links"], "cta": "START NOW" }
+            { "title": "Department at a Glance", "icon": "Building2", "items": ["National Science Fests", "Guest Lectures by ISRO/CSIR Scientists", "Science Club Activities", "Placement Drives", "Industrial Lab Visits"], "cta": "VIEW MORE" },
+            { "title": "Exclusive Facilities", "icon": "FlaskConical", "items": ["Central Instrumentation Facility", "Biosafety Level 2 Lab", "Computational Mathematics Lab", "Botanical Garden"], "cta": "VIEW MORE" }
           ]
         }),
 
@@ -225,6 +214,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('schools', { slug: 'arts-and-humanities' }, {});
+    await queryInterface.bulkDelete('schools', { slug: 'basic-applied-science' }, {});
   }
 };
