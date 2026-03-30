@@ -111,14 +111,14 @@ export default function PlacementSection({ data }) {
         {recruiters.length > 0 && (
           <div className="mt-20 pt-10 border-t border-white/10">
             <p className="text-white/50 text-[10px] font-bold uppercase tracking-[0.3em] text-center mb-8">Trusted by Global Industry Leaders</p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14 transition-all duration-700">
               {recruiters.map((logo, idx) => (
                 <div key={idx} className="relative h-7 md:h-9 w-24">
                   <Image 
                     src={logo.img} 
                     alt="Recruiter" 
                     fill
-                    className="object-contain brightness-0 invert" 
+                    className="object -0 invert" 
                   />
                 </div>
               ))}
