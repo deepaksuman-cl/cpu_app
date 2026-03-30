@@ -798,7 +798,7 @@ export default function HeaderClient({ navData }) {
               {/* Mega panels */}
               {topMenu.map(menu => (
                 <div key={menu.title}
-                  className={`absolute top-[55px] right-0 w-[72vw] xl:w-[70vw] bg-[#004a75] shadow-[0_20px_40px_rgba(0,0,0,0.6)] border-t-[4px] border-[#fec53a] transition-all duration-300 ease-in-out origin-top z-40 rounded-b-lg overflow-hidden ${state.activeMegaMenu === menu.title.toLowerCase() ? 'opacity-100 visible translate-y-0 pointer-events-auto' : 'opacity-0 invisible translate-y-2 pointer-events-none'}`}>
+                  className={`absolute top-[46px] right-0 w-[72vw] xl:w-[70vw] bg-[#004a75] shadow-[0_20px_40px_rgba(0,0,0,0.6)] border-t-[4px] border-[#fec53a] transition-all duration-300 ease-in-out origin-top z-40 rounded-b-lg overflow-hidden ${state.activeMegaMenu === menu.title.toLowerCase() ? 'opacity-100 visible translate-y-0 pointer-events-auto' : 'opacity-0 invisible translate-y-2 pointer-events-none'}`}>
                   <DesktopMegaPanel menu={menu} phone={phone} tollFree={topBarInfo.tollFree} />
                 </div>
               ))}
