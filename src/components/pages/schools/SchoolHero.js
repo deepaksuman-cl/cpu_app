@@ -13,7 +13,7 @@ export default function SchoolHero({ data, children }) {
       {/* Background & Overlays */}
       <div className="absolute inset-0">
         <img
-          src={data.bgImage || "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg"}
+          src={data.bgImage || data.image || data.img || "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg"}
           alt="Campus"
           className="w-full h-full object-cover"
         />

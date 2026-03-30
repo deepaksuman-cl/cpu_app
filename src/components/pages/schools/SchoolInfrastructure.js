@@ -22,7 +22,7 @@ export default function SchoolInfrastructure({ data }) {
           {list.map((item, i) => (
             <div key={i} className="group rounded-2xl overflow-hidden bg-white transition-transform hover:-translate-y-1.5 border border-slate-200 shadow-[0_4px_16px_rgba(0,88,139,0.07)]">
               <div className="overflow-hidden aspect-[16/9]">
-                <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <img src={item.image || item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
               </div>
               <div className="p-5">
                 <h4 className="font-bold text-sm mb-1.5 text-[#0a1628]">{item.title}</h4>
