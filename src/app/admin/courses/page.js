@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getCourses } from '@/lib/actions/courseActions';
-import { Plus, Edit, FolderOpen, AlertCircle } from 'lucide-react';
+import { Plus, Edit, Eye, FolderOpen, AlertCircle } from 'lucide-react';
 import DeleteCourseButton from '@/components/admin/courses/DeleteCourseButton';
 
 export default async function CoursesPage() {
@@ -103,6 +103,15 @@ export default async function CoursesPage() {
                         {/* Actions */}
                         <td className="block md:table-cell py-2 md:py-2 px-0 md:px-4 border-t border-[var(--border-light)] pt-3 md:border-none md:pt-0">
                           <div className="flex justify-start md:justify-center items-center gap-3 md:gap-2">
+                            <Link 
+                              href={`/schools/${course.school?.slug || 'unknown'}/${course.slug}`}
+                              target="_blank"
+                              className="p-2 md:p-1 bg-[var(--bg-body)] text-[var(--text-secondary)] hover:bg-[var(--color-primary)] hover:text-[var(--text-inverse)] border border-[var(--border-default)] transition-colors rounded-none flex items-center justify-center"
+                              title="Preview"
+                            >
+                              <Eye className="w-4 h-4 md:w-3.5 md:h-3.5" />
+                              <span className="md:hidden text-[10px] font-bold uppercase ml-2 tracking-widest">Preview</span>
+                            </Link>
                             <Link 
                               href={`/admin/courses/edit/${course.id}`}
                               className="p-2 md:p-1 bg-[var(--bg-body)] text-[var(--text-secondary)] hover:bg-[var(--color-primary)] hover:text-[var(--text-inverse)] border border-[var(--border-default)] transition-colors rounded-none flex items-center justify-center"

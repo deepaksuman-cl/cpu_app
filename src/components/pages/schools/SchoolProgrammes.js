@@ -5,6 +5,7 @@ import * as LucideIcons from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import StructuredTitle from "@/components/common/StructuredTitle";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 export default function SchoolProgrammes({ data, schoolSlug }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -28,9 +29,10 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
           <h2 className="font-black text-white" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>
             <StructuredTitle title={data.title} highlightClass="text-[#ffb900]" />
           </h2>
-          <div 
-            className="mt-3 max-w-2xl mx-auto text-sm lg:text-base leading-relaxed text-white/65 prose prose-invert prose-sm" 
-            dangerouslySetInnerHTML={{ __html: data.description }}
+          <RichTextRenderer 
+            content={data.description} 
+            useProse={data.useProse !== false}
+            className="mt-3 max-w-2xl mx-auto text-sm lg:text-base leading-relaxed text-white/65" 
           />
         </div>
 

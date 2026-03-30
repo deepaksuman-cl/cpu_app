@@ -96,6 +96,10 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                     onChange={val => {
                       const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
                     }} 
+                    useProse={item.useProse !== false}
+                    onProseChange={val => {
+                      const newItems = [...items]; newItems[idx].useProse = val; onUpdate(newItems);
+                    }}
                   />
                 ) : field.type === 'stringList' ? (
                   <StringListEditor 
@@ -140,7 +144,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       whyJoin: { sectionTitle: { main: 'Why Join' }, subtitle: '', reasons: [] },
       uniqueFeatures: { sectionTitle: { main: 'Features' }, subtitle: '', bgImage: '', features: [] },
       applySteps: { sectionTitle: { main: 'Apply' }, subtitle: '', bgImage: '', guideLabel: '', ctaLabel: '', ctaLink: '', steps: [] },
-      faq: { sectionTitle: { main: 'FAQ' }, subtitle: '', items: [] },
+      faq: { sectionTitle: { main: 'FAQ' }, subtitle: '', items: [], useProse: true },
       exploreDepartment: { sectionTitle: { main: 'Explore Our Department', highlight: 'Department' }, subtitle: 'Discover our specialized wings', slides: [] },
       roadmap: { sectionTitle: { main: '4 Year Learning Roadmap', highlight: 'Roadmap' }, subtitle: 'Your journey from foundation to industry expert.', years: [] },
       placements: { sectionTitle: { main: 'Placements' }, subtitle: '', stats: [], list: [] },
@@ -470,6 +474,8 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                 <RichTextEditor 
                   value={formData.overview.paragraphs?.join('') || ''}
                   onChange={content => updateSection('overview', {...formData.overview, paragraphs: [content]})}
+                  useProse={formData.overview.useProse !== false}
+                  onProseChange={val => updateSection('overview', {...formData.overview, useProse: val})}
                 />
               </div>
               <div className="space-y-4 pt-4 border-t border-[var(--border-light)]">
@@ -515,7 +521,12 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
               </div>
               <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
                 <label className="block text-[11px] font-bold text-[var(--text-secondary)] uppercase mb-3 tracking-widest">Scope Body (Rich Text)</label>
-                <RichTextEditor value={formData.scope.body || ''} onChange={val => updateSection('scope', {...formData.scope, body: val})} />
+                <RichTextEditor 
+                  value={formData.scope.body || ''} 
+                  onChange={val => updateSection('scope', {...formData.scope, body: val})} 
+                  useProse={formData.scope.useProse !== false}
+                  onProseChange={val => updateSection('scope', {...formData.scope, useProse: val})}
+                />
               </div>
             </div>
           )}
@@ -530,11 +541,21 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                </div>
                <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-2">Intro Note</label>
-                <RichTextEditor value={formData.curriculum.introNote || ''} onChange={val => updateSection('curriculum', {...formData.curriculum, introNote: val})} />
+                <RichTextEditor 
+                  value={formData.curriculum.introNote || ''} 
+                  onChange={val => updateSection('curriculum', {...formData.curriculum, introNote: val})} 
+                  useProse={formData.curriculum.useProse !== false}
+                  onProseChange={val => updateSection('curriculum', {...formData.curriculum, useProse: val})}
+                />
               </div>
               <div className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none">
                 <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-2">Outro Note</label>
-                <RichTextEditor value={formData.curriculum.outroNote || ''} onChange={val => updateSection('curriculum', {...formData.curriculum, outroNote: val})} />
+                <RichTextEditor 
+                  value={formData.curriculum.outroNote || ''} 
+                  onChange={val => updateSection('curriculum', {...formData.curriculum, outroNote: val})} 
+                  useProse={formData.curriculum.useProse !== false}
+                  onProseChange={val => updateSection('curriculum', {...formData.curriculum, useProse: val})}
+                />
               </div>
               <div className="pt-2">
                 <NestedListEditor 
@@ -764,13 +785,15 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
 
           {/* FAQ */}
           {activeSection === 'faq' && (
-            <NestedListEditor 
-              label="Course Questions"
-              items={formData.faq.items}
-              newItemTemplate={{ q: '', a: '' }}
-              fields={[{key: 'q', label: 'Question'}, {key: 'a', label: 'Answer', type: 'richText'}]}
-              onUpdate={items => updateSection('faq', {...formData.faq, items: items})}
-            />
+            <div className="space-y-6">
+              <NestedListEditor 
+                label="Course Questions"
+                items={formData.faq.items}
+                newItemTemplate={{ q: '', a: '', useProse: true }}
+                fields={[{key: 'q', label: 'Question'}, {key: 'a', label: 'Answer', type: 'richText'}]}
+                onUpdate={items => updateSection('faq', {...formData.faq, items: items})}
+              />
+            </div>
           )}
 
           {/* WHY JOIN */}

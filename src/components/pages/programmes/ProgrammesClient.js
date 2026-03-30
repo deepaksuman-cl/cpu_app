@@ -5,6 +5,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import * as LucideIcons from "lucide-react";
 import { BookMarked, Layers, Search, CheckCircle2, ChevronRight, Microscope, HelpCircle } from "lucide-react";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 const getDynamicIcon = (lucideName, size, className, style) => {
   const IconCmp = LucideIcons[lucideName] || HelpCircle;
@@ -147,9 +148,6 @@ export default function ProgrammesClient({ categories = [], courses = [], links 
             {courses.map((course) => {
               const isHov = hoveredCard === course.id;
               
-              // Helper to inject our checkmarks securely into raw HTML
-              const finalHtml = (course.programs || '').replace(/<li>/g, '<li class="flex items-start gap-2 mb-2 text-sm text-slate-600 font-medium"><svg class="w-4 h-4 mt-0.5 shrink-0 text-[#00588b]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg><span class="leading-snug">');
-              
               return (
                 <div key={course.id} onMouseEnter={() => setHoveredCard(course.id)} onMouseLeave={() => setHoveredCard(null)} className={`group bg-white rounded-2xl border-[1.5px] cursor-pointer flex flex-col overflow-hidden transition-all duration-300 transform relative shadow-sm hover:shadow-xl hover:shadow-[#00588b]/5 hover:border-slate-300 hover:-translate-y-1`}>
                   
@@ -171,10 +169,11 @@ export default function ProgrammesClient({ categories = [], courses = [], links 
                     
                     <h4 className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-3">Specialisations</h4>
                     
-                    {/* Rich text injection */}
-                    <div 
-                      className="prose prose-sm text-slate-600 prose-ul:pl-0 prose-ul:list-none max-h-[160px] overflow-y-auto custom-scroll pr-2 pb-2 flex-grow" 
-                      dangerouslySetInnerHTML={{ __html: finalHtml }} 
+                    <RichTextRenderer 
+                      content={course.programs} 
+                      useProse={course.useProse !== false}
+                      variant="checkmarks"
+                      className="max-h-[160px] overflow-y-auto custom-scroll pr-2 pb-2 flex-grow text-slate-600" 
                     />
                   </div>
                   

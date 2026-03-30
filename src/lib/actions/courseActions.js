@@ -5,6 +5,7 @@ import School from '@/models/School';
 import { connectToDatabase } from '@/lib/db';
 import { Testimonial, FAQ } from '@/models/index';
 import { revalidatePath } from 'next/cache';
+import { cache } from 'react';
 import fs from 'fs';
 import path from 'path';
 
@@ -24,13 +25,14 @@ export async function getCourses(schoolId = null) {
       order: [['createdAt', 'DESC']]
     });
     
-    return { success: true, data: JSON.parse(JSON.stringify(courses)), error: null };
+    const plainCourses = courses.map(c => c.get({ plain: true }));
+    return { success: true, data: plainCourses, error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
   }
 }
 
-export async function getCourseBySlug(slug) {
+export const getCourseBySlug = cache(async (slug) => {
   try {
     await connectToDatabase();
     const course = await Course.findOne({
@@ -50,13 +52,13 @@ export async function getCourseBySlug(slug) {
       return { success: false, data: null, error: 'Course not found' };
     }
     
-    return { success: true, data: JSON.parse(JSON.stringify(course)), error: null };
+    return { success: true, data: course.get({ plain: true }), error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
   }
-}
+});
 
-export async function getCourseById(id) {
+export const getCourseById = cache(async (id) => {
   try {
     await connectToDatabase();
     const course = await Course.findByPk(id, {
@@ -76,12 +78,12 @@ export async function getCourseById(id) {
       return { success: false, data: null, error: 'Course not found' };
     }
     
-    return { success: true, data: JSON.parse(JSON.stringify(course)), error: null };
+    return { success: true, data: course.get({ plain: true }), error: null };
   } catch (error) {
     console.error(`[getCourseById] Error fetching course ${id}:`, error);
     return { success: false, data: null, error: error.message };
   }
-}
+});
 
 export async function createCourse(data) {
   try {
@@ -116,7 +118,7 @@ export async function createCourse(data) {
     // Global Revalidation
     revalidatePath('/', 'layout');
     
-    return { success: true, data: JSON.parse(JSON.stringify(newCourse)), error: null };
+    return { success: true, data: newCourse.get({ plain: true }), error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
   }
@@ -174,7 +176,7 @@ export async function updateCourse(id, data) {
     // Global Revalidation
     revalidatePath('/', 'layout');
     
-    return { success: true, data: JSON.parse(JSON.stringify(updatedCourse)), error: null };
+    return { success: true, data: updatedCourse.get({ plain: true }), error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
   }
@@ -191,7 +193,7 @@ export async function deleteCourse(id) {
     });
     
     revalidatePath('/', 'layout');
-    return { success: true, message: 'Course deleted successfully', data: JSON.parse(JSON.stringify(course)) };
+    return { success: true, message: 'Course deleted successfully', data: course.get({ plain: true }) };
   } catch (error) {
     console.error(`[deleteCourse] Error:`, error);
     return { success: false, message: error.message || 'Deletion failed due to database constraint.' };

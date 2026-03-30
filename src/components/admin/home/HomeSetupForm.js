@@ -89,9 +89,16 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                     </div>
                   </div>
                 ) : field.type === 'richText' ? (
-                  <RichTextEditor value={item[field.key] || ''} onChange={val => {
-                    const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
-                  }} />
+                  <RichTextEditor 
+                    value={item[field.key] || ''} 
+                    onChange={val => {
+                      const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
+                    }} 
+                    useProse={item.useProse !== false}
+                    onProseChange={val => {
+                      const newItems = [...items]; newItems[idx].useProse = val; onUpdate(newItems);
+                    }}
+                  />
                 ) : field.type === 'textarea' ? (
                   <textarea value={item[field.key] || ''} onChange={e => {
                     const newItems = [...items]; newItems[idx][field.key] = e.target.value; onUpdate(newItems);
@@ -442,6 +449,8 @@ export default function HomeSetupForm({ initialData }) {
                  <RichTextEditor 
                   value={sections.aboutConfig.description} 
                   onChange={val => updateSection('aboutConfig', {...sections.aboutConfig, description: val})} 
+                  useProse={sections.aboutConfig.useProse !== false}
+                  onProseChange={val => updateSection('aboutConfig', {...sections.aboutConfig, useProse: val})}
                  />
               </div>
 

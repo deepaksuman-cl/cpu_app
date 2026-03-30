@@ -341,7 +341,12 @@ export default function FooterManagerForm({ initialData }) {
           {col.columnType === 'text' && (
             <div>
               <label className="block text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-2">Content (Rich Text)</label>
-              <RichTextEditor value={col.content || ''} onChange={(content) => updateColumn(colIdx, { content })} />
+              <RichTextEditor 
+                value={col.content || ''} 
+                onChange={(content) => updateColumn(colIdx, { content })} 
+                useProse={col.useProse !== false}
+                onProseChange={(val) => updateColumn(colIdx, { useProse: val })}
+              />
             </div>
           )}
         </Card>

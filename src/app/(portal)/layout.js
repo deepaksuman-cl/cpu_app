@@ -1,10 +1,9 @@
-import { connectToDatabase } from '@/lib/db';
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "../../components/layout/Footer";
 import HeaderServer from '../../components/layout/HeaderServer';
-import "../globals.css";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,10 +30,6 @@ export const metadata = {
   ],
   authors: [{ name: "Career Point University" }],
   creator: "Career Point University",
-  icons: {
-    icon: [{ url: '/icon.png', type: 'image/png' }],
-    apple: [{ url: '/icon.png' }],
-  },
   openGraph: {
     title: "Career Point University, Kota",
     description:
@@ -53,6 +48,7 @@ export default async function RootLayout({ children }) {
         <HeaderServer /> 
         
         <main className="pt-[64px] lg:pt-[112px]">
+          <Breadcrumb />
           {children}
         </main>
 

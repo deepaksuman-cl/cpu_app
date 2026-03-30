@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import * as LucideIcons from "lucide-react";
 import { Star, CheckCircle, Plus, Minus, ChevronDown, ChevronLeft, ChevronRight, Building2, FlaskConical } from "lucide-react";
 import StructuredTitle from "@/components/common/StructuredTitle";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 /* ── Shared Section Title ── */
 function SectionTitle({ children, subtitle, center = true }) {
@@ -64,13 +65,11 @@ function CourseAccordion({ sections, courseStructure }) {
             {/* Body */}
             {isOpen && (
               <div className="bg-white border-t border-gray-100 px-6 py-6">
-                {typeof section.content === 'string' && section.content.includes('<') ? (
-                  <div className="text-gray-700 text-sm leading-relaxed prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: section.content }} />
-                ) : (
-                  section.content?.toString().split("\n\n").map((para, i) => (
-                    <p key={i} className="text-gray-700 text-sm leading-relaxed mb-4">{para}</p>
-                  ))
-                )}
+                <RichTextRenderer 
+                  content={section.content} 
+                  useProse={section.useProse !== false}
+                  className="text-gray-700 text-sm leading-relaxed" 
+                />
 
                 {/* Embedded table for Course Structure row */}
                 {section.hasTable && courseStructure && (
@@ -235,9 +234,10 @@ export function CourseCurriculum({ data }) {
       <div className="max-w-7xl mx-auto px-4 mb-10">
         <SectionTitle subtitle={data.subtitle}>{data.sectionTitle}</SectionTitle>
         {data.introNote && (
-          <div 
-            className="mt-6 text-gray-600 leading-relaxed text-sm prose prose-sm max-w-none"
-            dangerouslySetInnerHTML={{ __html: data.introNote }}
+          <RichTextRenderer 
+            content={data.introNote} 
+            useProse={data.useProse !== false}
+            className="mt-6 text-gray-600 leading-relaxed text-sm" 
           />
         )}
       </div>
@@ -253,9 +253,10 @@ export function CourseCurriculum({ data }) {
       {/* Value Added Courses and Outro Note */}
       <div className="max-w-7xl mx-auto px-4 mt-12 space-y-10">
         {data.outroNote && (
-          <div 
-            className="text-gray-600 leading-relaxed text-sm prose prose-sm max-w-none border-t border-gray-100 pt-8"
-            dangerouslySetInnerHTML={{ __html: data.outroNote }}
+          <RichTextRenderer 
+            content={data.outroNote} 
+            useProse={data.useProse !== false}
+            className="text-gray-600 leading-relaxed text-sm border-t border-gray-100 pt-8" 
           />
         )}
         {data.valueAddedCourses && data.valueAddedCourses.length > 0 && (

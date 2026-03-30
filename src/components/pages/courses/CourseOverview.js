@@ -4,6 +4,7 @@ import * as LucideIcons from "lucide-react";
 import { Code2, Database, Network, Brain } from "lucide-react";
 
 import StructuredTitle from "@/components/common/StructuredTitle";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 function SectionTitle({ children, subtitle, center = true }) {
   return (
@@ -34,9 +35,9 @@ export default function CourseOverview({ data }) {
           <SectionTitle center={false} subtitle={data.subtitle}>
             {data.sectionTitle}
           </SectionTitle>
-          <div 
-            className="text-gray-600 leading-relaxed mb-6 text-sm prose prose-sm max-w-none"
-            dangerouslySetInnerHTML={{ __html: data.paragraphs?.join('') }}
+          <RichTextRenderer 
+            content={data.paragraphs?.join('')} 
+            className="text-gray-600 leading-relaxed text-sm" 
           />
           <div className="flex flex-wrap gap-3 mt-2">
             {data.tags?.map((tag, i) => (

@@ -32,7 +32,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const [courseForm, setCourseForm] = useState({
     title: '', school: '', categoryId: '', icon: 'Monitor', colorHex: '#1c54a3', 
     iconBg: 'bg-blue-50', textColor: 'text-[#1c54a3]', borderHover: 'hover:border-[#1c54a3]', 
-    programs: '', badgeLabel: '', badgeBgHex: '#fee2e2', badgeTextHex: '#dc2626', detailsSlug: '#'
+    programs: '', useProse: true, badgeLabel: '', badgeBgHex: '#fee2e2', badgeTextHex: '#dc2626', detailsSlug: '#'
   });
 
   // Settings Form State
@@ -89,6 +89,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
       textColor: courseForm.textColor,
       borderHover: courseForm.borderHover,
       programs: courseForm.programs,
+      useProse: courseForm.useProse,
       detailsSlug: courseForm.detailsSlug,
       badge: courseForm.badgeLabel ? { label: courseForm.badgeLabel, bgHex: courseForm.badgeBgHex, textHex: courseForm.badgeTextHex } : null
     };
@@ -123,6 +124,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
       textColor: course.textColor,
       borderHover: course.borderHover,
       programs: course.programs || '',
+      useProse: course.useProse !== false,
       detailsSlug: course.detailsSlug || '#',
       badgeLabel: course.badge?.label || '',
       badgeBgHex: course.badge?.bgHex || '#fee2e2',
@@ -619,7 +621,12 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
 
           <div className="bg-[var(--bg-body)] border border-[var(--border-default)] p-4 rounded-none">
             <label className="block text-[10px] font-bold text-[var(--color-primary)] uppercase mb-2.5 tracking-widest">Specialisations (Rich Text)</label>
-            <RichTextEditor value={courseForm.programs} onChange={(val) => setCourseForm({...courseForm, programs: val})} />
+            <RichTextEditor 
+              value={courseForm.programs} 
+              onChange={(val) => setCourseForm({...courseForm, programs: val})} 
+              useProse={courseForm.useProse !== false}
+              onProseChange={(val) => setCourseForm({...courseForm, useProse: val})}
+            />
           </div>
 
           {/* Theme & Badge Settings */}

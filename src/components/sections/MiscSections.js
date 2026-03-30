@@ -1,6 +1,7 @@
 "use client";
 import { ArrowRight, Calendar, Star, Zap, Microscope, Plus, Minus, Facebook, Instagram, Youtube, Twitter, Linkedin, Phone, Mail, GraduationCap, Download } from "lucide-react";
 import { useState } from "react";
+import RichTextRenderer from "../common/RichTextRenderer";
 
 function Lightbox({ src, title, onClose }) {
   if (!src) return null;
@@ -81,7 +82,10 @@ export function HappeningsSection({ data }) {
                   <div className="absolute top-2.5 right-2.5 bg-amber-400 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full">{h.tag}</div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold text-gray-900 text-sm mb-2" dangerouslySetInnerHTML={{ __html: h.title }} />
+                  <RichTextRenderer 
+                    content={h.title} 
+                    className="font-bold text-gray-900 text-sm mb-2" 
+                  />
                   <div className="flex items-center gap-1.5 text-gray-400 text-xs"><Calendar size={12}/> {h.date}</div>
                 </div>
               </div>
@@ -133,7 +137,10 @@ export function FAQSection({ data }) {
               </button>
               {openFaq === i && (
                 <div className="px-[22px] pb-[18px]">
-                  <p className="text-gray-500 text-sm leading-[1.75] m-0">{faq.a}</p>
+                  <RichTextRenderer 
+                    content={faq.a} 
+                    className="text-gray-500 text-sm leading-[1.75] m-0" 
+                  />
                 </div>
               )}
             </div>
@@ -201,8 +208,14 @@ export function CTASection({ data }) {
   return (
     <section className="bg-gradient-to-br from-[#00588b] to-[#003a5c] py-20 px-4 overflow-hidden">
       <div className="max-w-[860px] mx-auto text-center">
-        <h2 className="text-white font-black text-3xl mb-3" dangerouslySetInnerHTML={{ __html: title }} />
-        <div className="text-white/80 text-base max-w-xl mx-auto mb-8 leading-[1.75]" dangerouslySetInnerHTML={{ __html: description }} />
+        <RichTextRenderer 
+          content={title} 
+          className="text-white font-black text-3xl mb-3" 
+        />
+        <RichTextRenderer 
+          content={description} 
+          className="text-white/80 text-base max-w-xl mx-auto mb-8 leading-[1.75]" 
+        />
         <div className="flex justify-center gap-3.5 flex-wrap">
           <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3.5 font-extrabold text-[15px] cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
             <GraduationCap size={16}/> {applyLabel}

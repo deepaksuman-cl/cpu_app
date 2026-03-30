@@ -3,6 +3,7 @@
 import Page from '@/models/Page';
 import { connectToDatabase } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
+import { cache } from 'react';
 
 export async function getAllPages() {
   try {
@@ -11,14 +12,15 @@ export async function getAllPages() {
     const pages = await Page.findAll({
       attributes: ['id', 'title', 'slug', 'pageCssId', 'blocks', 'createdAt', 'updatedAt']
     });
-    return { success: true, data: JSON.parse(JSON.stringify(pages)), error: null };
+    const plainPages = pages.map(p => p.get({ plain: true }));
+    return { success: true, data: plainPages, error: null };
   } catch (error) {
     console.error('getAllPages Error:', error.message);
     return { success: true, data: [], error: error.message };
   }
 }
 
-export async function getPageBySlug(slug) {
+export const getPageBySlug = cache(async (slug) => {
   try {
     await connectToDatabase();
 
@@ -28,12 +30,12 @@ export async function getPageBySlug(slug) {
     if (!page) {
       return { success: false, data: null, error: 'Page not found' };
     }
-    return { success: true, data: JSON.parse(JSON.stringify(page)), error: null };
+    return { success: true, data: page.get({ plain: true }), error: null };
   } catch (error) {
     console.error('getPageBySlug Error:', error.message);
     return { success: false, data: null, error: error.message };
   }
-}
+});
 
 export async function createPage(data) {
   try {
@@ -43,7 +45,7 @@ export async function createPage(data) {
     const newPage = await Page.create(data);
     
     revalidatePath('/', 'layout');
-    return { success: true, data: JSON.parse(JSON.stringify(newPage)), error: null };
+    return { success: true, data: newPage.get({ plain: true }), error: null };
   } catch (error) {
     console.error('createPage Error:', error);
     return { success: false, data: null, error: error.message };
@@ -64,7 +66,7 @@ export async function updatePage(id, data) {
     // Multi-path revalidation to ensure all related pages are fresh.
     revalidatePath('/', 'layout');
     
-    return { success: true, data: JSON.parse(JSON.stringify(updatedPage)), error: null };
+    return { success: true, data: updatedPage.get({ plain: true }), error: null };
   } catch (error) {
     console.error('updatePage Error:', error);
     return { success: false, data: null, error: error.message };

@@ -53,7 +53,7 @@ const INIT = {
   isScrolled: false, showTopBar: true, lastScrollY: 0,
   activeMegaMenu: null,
   openTabKey: null,
-  searchOpen: false, desktopSidebarOpen: false,
+  desktopSidebarOpen: false,
   mobileAccordion: null, mobileSubAccordion: null,
   sidebarDropdown: null, sidebarNestedDropdown: null,
 };
@@ -88,7 +88,6 @@ function reducer(s, a) {
     case 'SET_MEGA': return { ...s, activeMegaMenu: a.key };
     case 'SET_TAB':  return { ...s, openTabKey: s.openTabKey === a.key ? null : a.key, mobileAccordion: null, mobileSubAccordion: null };
     case 'CLOSE_TAB': return { ...s, openTabKey: null };
-    case 'TOGGLE_SEARCH':  return { ...s, searchOpen: !s.searchOpen };
     case 'TOGGLE_SIDEBAR': return { ...s, desktopSidebarOpen: !s.desktopSidebarOpen };
     case 'CLOSE_SIDEBAR':  return { ...s, desktopSidebarOpen: false };
     case 'TOGGLE_MOB_ACC': return { ...s, mobileAccordion: s.mobileAccordion === a.key ? null : a.key, mobileSubAccordion: null };
@@ -283,11 +282,15 @@ function DesktopMegaPanel({ menu, phone, tollFree }) {
 
 /** panel.type = "programmes" */
 function MobPanelProgrammes({ config, navData }) {
-  const src   = navData.topMenu.find(m => m.title === config.sourceMenu);
+  // Resilient matching for source menu
+  const src = navData.topMenu.find(m => 
+    m.title === config.sourceMenu || 
+    m.title.toLowerCase().replace(/s$/, '') === (config.sourceMenu || '').toLowerCase().replace(/s$/, '')
+  );
   if (!src) return null;
-  const progCol   = src.columns.find(c => c.heading === config.programmesColumn);
-  const schoolCol = src.columns.find(c => c.heading === config.schoolsColumn);
-  const others    = src.columns.filter(c => c.heading !== config.programmesColumn && c.heading !== config.schoolsColumn);
+  const progCol   = src.columns?.find(c => c.heading === config.programmesColumn);
+  const schoolCol = src.columns?.find(c => c.heading === config.schoolsColumn);
+  const others    = (src.columns || []).filter(c => c.heading !== config.programmesColumn && c.heading !== config.schoolsColumn);
 
   return (
     <div className="animate-in fade-in duration-300">
@@ -328,7 +331,11 @@ function MobPanelProgrammes({ config, navData }) {
 
 /** panel.type = "admissions" */
 function MobPanelAdmissions({ config, navData }) {
-  const menu  = navData.topMenu.find(m => m.title === config.sourceMenu);
+  // Resilient matching for source menu (handles Admissions vs Admission)
+  const menu = navData.topMenu.find(m => 
+    m.title === config.sourceMenu || 
+    m.title.toLowerCase().replace(/s$/, '') === (config.sourceMenu || '').toLowerCase().replace(/s$/, '')
+  );
   const phone = navData.topBarInfo.phone;
   const email = navData.topBarInfo.email;
   if (!menu) return null;
@@ -466,56 +473,6 @@ function MobPanelFullMenu({ config, navData, state, dispatch }) {
           />
         ))}
       </div>
-
-      <div className="mt-6 pt-4 border-t border-white/20">
-        <h4 className="text-[16px] font-bold mb-4 text-[#fec53a]">{mc.exploreMoreHeading}</h4>
-        <div className="space-y-4">
-          {navData.sideMenu.exploreMore.map(cat => {
-            const subKey = `explore__${cat.title}`;
-            const isOpen = state.mobileSubAccordion === subKey;
-            return (
-              <div key={cat.title} className="border-b border-white/5 pb-3">
-                <button className="w-full flex justify-between items-center text-[14px] text-white font-bold mb-2"
-                  onClick={() => dispatch({ type: 'TOGGLE_MOB_SUB', key: subKey })}>
-                  {cat.title}
-                  <LucideIcons.ChevronDown size={14} className={`transform transition-transform ${isOpen ? 'rotate-180 text-[#fec53a]' : 'text-gray-400'}`} />
-                </button>
-                <div className={`transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <ul className="pl-4 border-l border-white/20 space-y-2">
-                    {cat.links.map(link => (
-                      <li key={link.slug || link.label}>
-                        <Link href={link.slug} className="text-[13px] text-gray-400 hover:text-[#fec53a] block py-1 transition-colors">{link.label}</Link>
-                        {link.subLinks && (
-                          <ul className="pl-4 mt-1 space-y-1">
-                            {link.subLinks.map(sub => (
-                              <li key={sub.slug}>
-                                <Link href={sub.slug} className="text-[12px] text-gray-500 hover:text-white flex items-center gap-1 py-0.5 transition-colors">
-                                  <span className="text-gray-600">—</span> {sub.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            );
-          })}
-          <div className="pt-2">
-            <ul className="space-y-3">
-              {navData.sideMenu.directLinks.map(link => (
-                <li key={link.slug}>
-                  <Link href={link.slug} className="text-[14px] text-white font-bold hover:text-[#fec53a] flex items-center gap-2 transition-colors">
-                    <LucideIcons.ChevronRight size={14} className="text-[#fec53a]" /> {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
@@ -553,15 +510,15 @@ function DesktopSidebar({ navData, state, dispatch }) {
   return (
     <div className={`fixed inset-y-0 right-0 w-full max-w-[800px] bg-white shadow-2xl z-[9999] transform transition-transform duration-500 ease-in-out ${state.desktopSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
       <div className="p-8 h-full flex flex-col overflow-y-auto desktop-mega-scroll">
-        <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
-          <img src={navData.logoUrl} alt="Logo" className="h-10 object-contain d_logo" />
-          <button onClick={() => dispatch({ type: 'CLOSE_SIDEBAR' })} className="flex items-center gap-2 group text-gray-500 hover:text-[#00588b] transition-colors">
+        <div className="flex items-center justify-start lg:justify-between mb-6 pb-4 border-b border-gray-100">
+          <img src={navData.logoUrl} alt="Logo" className="h-10 object-contain d_logo hidden lg:block" />
+          <button onClick={() => dispatch({ type: 'CLOSE_SIDEBAR' })} className="flex flex-row-reverse lg:flex-row items-center gap-2 group text-gray-500 hover:text-[#00588b] transition-colors">
             <span className="font-bold text-[13px] tracking-wider uppercase">{siteConfig.sidebar.closeLabel}</span>
             <div className="p-1.5 bg-gray-100 rounded-full group-hover:bg-[#00588b] group-hover:text-white transition-colors"><LucideIcons.X size={18} /></div>
           </button>
         </div>
-        <div className="flex-1 flex gap-8">
-          <div className="w-2/3">
+        <div className="flex-1 flex flex-col lg:flex-row gap-8">
+          <div className="w-full lg:w-2/3">
             {sideMenu.exploreMore.map(cat => (
               <div key={cat.title} className="mb-6">
                 <h2 className="text-[18px] font-bold text-[#00588b] mb-3 border-b pb-2 cursor-pointer flex justify-between items-center group"
@@ -604,7 +561,7 @@ function DesktopSidebar({ navData, state, dispatch }) {
               </div>
             ))}
           </div>
-          <div className="w-1/3 border-l border-gray-200 pl-6">
+          <div className="w-full lg:w-1/3 border-t lg:border-t-0 lg:border-l border-gray-200 pt-6 lg:pt-0 lg:pl-6 pb-20 lg:pb-0">
             <ul className="space-y-3 text-[14px] font-bold text-[#00588b] mb-6">
               {sideMenu.directLinks.map(link => (
                 <li key={link.slug} className="hover:text-[#1c54a3] cursor-pointer transition-colors">
@@ -670,11 +627,21 @@ export default function HeaderClient({ navData }) {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = (state.openTabKey || state.searchOpen || state.desktopSidebarOpen) ? 'hidden' : 'auto';
+    document.body.style.overflow = (state.openTabKey || state.desktopSidebarOpen) ? 'hidden' : 'auto';
     return () => { document.body.style.overflow = 'auto'; };
-  }, [state.openTabKey, state.searchOpen, state.desktopSidebarOpen]);
+  }, [state.openTabKey, state.desktopSidebarOpen]);
 
-  const { siteConfig, topBarInfo, topMenu, mobileConfig } = navData;
+  const { siteConfig, topBarInfo, topMenu: rawTopMenu, mobileConfig } = navData;
+  
+  // Deduplicate topMenu (if both "Admission" and "Admissions" exist, keep only one)
+  const seenTitles = new Set();
+  const topMenu = (rawTopMenu || []).filter(item => {
+    const normalized = item.title.toLowerCase().replace(/s$/, '');
+    if (seenTitles.has(normalized)) return false;
+    seenTitles.add(normalized);
+    return true;
+  });
+
   const phone = topBarInfo.phone;
   const activeTab = mobileConfig?.bottomTabs?.find(t => t.key === state.openTabKey);
 
@@ -685,9 +652,6 @@ export default function HeaderClient({ navData }) {
 
   const runDynamicAction = (actionKey) => {
     switch (actionKey) {
-      case 'open-search':
-        dispatch({ type: 'TOGGLE_SEARCH' });
-        break;
       case 'open-menu':
         // Find the tab that is the full menu to set it active
         const menuTab = mobileConfig?.bottomTabs?.find(t => t.panel?.type === 'full-menu');
@@ -726,22 +690,17 @@ export default function HeaderClient({ navData }) {
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
-      {/* SEARCH OVERLAY */}
-      {state.searchOpen && (
-        <div className="fixed inset-0 bg-black/95 z-[9999] flex flex-col justify-center items-center px-4 backdrop-blur-sm">
-          <button onClick={() => dispatch({ type: 'TOGGLE_SEARCH' })} className="absolute top-10 right-10 text-white hover:text-[#fec53a] transition-colors">
-            <LucideIcons.X size={40} strokeWidth={1.5} />
-          </button>
-          <div className="w-full max-w-4xl relative border-b border-gray-600 pb-2">
-            <input type="text" placeholder={siteConfig?.searchPlaceholder || 'Search...'}
-              className="w-full bg-transparent text-white text-3xl md:text-5xl outline-none placeholder-gray-600 pr-12" autoFocus />
-            <LucideIcons.Search className="absolute right-2 top-1/2 -translate-y-1/2 text-[#fec53a]" size={36} />
-          </div>
-        </div>
-      )}
 
       {/* DESKTOP SIDEBAR */}
       <DesktopSidebar navData={navData} state={state} dispatch={dispatch} />
+
+      {/* SIDEBAR BACKDROP */}
+      {state.desktopSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9998] lg:hidden"
+          onClick={() => dispatch({ type: 'CLOSE_SIDEBAR' })}
+        />
+      )}
 
       {/* DESKTOP HEADER - TRANSFORM SLIDE UP INSTEAD OF HEIGHT ANIMATION */}
       <header className={`hidden lg:block w-[100vw] z-[1000] fixed top-0 transition-transform duration-300 ease-out shadow-md bg-white ${state.showTopBar ? 'translate-y-0' : '-translate-y-[38px]'}`}
@@ -829,7 +788,6 @@ export default function HeaderClient({ navData }) {
                     </Link>
                   )}
 
-                  <button onClick={() => dispatch({ type: 'TOGGLE_SEARCH' })} className="px-2 h-full hover:text-[#fec53a] transition-colors flex items-center"><LucideIcons.Search size={22} strokeWidth={2.5} /></button>
                   <button onClick={() => dispatch({ type: 'TOGGLE_SIDEBAR' })} className="px-3 h-full hover:text-[#fec53a] flex flex-col gap-[5px] items-end justify-center transition-colors group">
                     <span className="w-6 h-[2.5px] bg-current block rounded-full" />
                     <span className="w-6 h-[2.5px] bg-current block rounded-full" />
@@ -853,7 +811,12 @@ export default function HeaderClient({ navData }) {
       {/* MOBILE TOP HEADER */}
       <header className={`lg:hidden fixed top-0 w-full z-[1000] p-3 flex justify-between items-center shadow-md bg-white transition-transform duration-300 ease-out ${!state.showTopBar ? '-translate-y-full' : 'translate-y-0'}`}>
         <Link href="/"><img src={navData.logoUrl} alt="Logo" className="h-10 object-contain" /></Link>
-        <button onClick={() => dispatch({ type: 'TOGGLE_SEARCH' })} className="text-[#00588b] p-2 hover:bg-gray-100 rounded-full transition-colors"><LucideIcons.Search size={24} strokeWidth={2.5} /></button>
+        <button 
+          onClick={() => dispatch({ type: 'TOGGLE_SIDEBAR' })} 
+          className="text-[#00588b] p-2 hover:bg-gray-100 rounded-full transition-colors"
+        >
+          <LucideIcons.Menu size={28} strokeWidth={2.5} />
+        </button>
       </header>
 
       {/* ─────────────────────────────────────────────────
@@ -899,7 +862,13 @@ export default function HeaderClient({ navData }) {
 
       {/* MOBILE POPUP PANEL */}
       <div className={`fixed bottom-[65px] pb-safe w-full bg-[#004a75] text-white z-[995] lg:hidden transform transition-transform duration-300 ease-in-out origin-bottom flex flex-col max-h-[85vh] shadow-2xl border-t-[4px] border-[#fec53a] ${state.openTabKey ? 'translate-y-0' : 'translate-y-full'}`}>
-        <div className="flex-1 overflow-y-auto hide-scrollbar p-6">
+        <div className="h-full overflow-y-auto px-4 py-8 pb-32 invisible-scrollbar"
+          onClick={(e) => {
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+              dispatch({ type: 'CLOSE_TAB' });
+            }
+          }}
+        >
           <MobPanelRouter tab={activeTab} navData={navData} state={state} dispatch={dispatch} />
         </div>
       </div>

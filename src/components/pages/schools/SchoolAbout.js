@@ -3,6 +3,7 @@ import React from "react";
 import * as LucideIcons from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import StructuredTitle from "@/components/common/StructuredTitle";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 export default function SchoolAbout({ data }) {
   if (!data) return null;
@@ -31,9 +32,10 @@ export default function SchoolAbout({ data }) {
               </div>
             </div>
             <div className="w-12 h-1 rounded-full mb-6 bg-gradient-to-r from-[#ffb900] to-orange-500" />
-            <div 
-              className="text-base leading-relaxed text-white/75 prose prose-invert prose-sm max-w-none"
-              dangerouslySetInnerHTML={{ __html: vision.text }}
+            <RichTextRenderer 
+              content={vision.text} 
+              useProse={vision.useProse !== false}
+              className="text-base leading-relaxed text-white/75" 
             />
             <div className="flex flex-wrap gap-3 mt-8">
               {vision.highlights?.map((h, i) => (
@@ -62,9 +64,10 @@ export default function SchoolAbout({ data }) {
               </div>
             </div>
             <div className="w-12 h-1 rounded-full mb-6 bg-gradient-to-r from-[#00588b] to-[#007abf]" />
-            <div 
-              className="text-sm leading-relaxed text-slate-600 prose prose-sm max-w-none"
-              dangerouslySetInnerHTML={{ __html: mission.points?.join('') }}
+            <RichTextRenderer 
+              content={mission.points?.join('')} 
+              useProse={mission.useProse !== false}
+              className="text-sm leading-relaxed text-slate-600" 
             />
           </div>
         </div>

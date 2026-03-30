@@ -84,55 +84,46 @@ if (process.env.NODE_ENV !== "production") {
   globalForSequelize._sequelizeInstance = sequelize;
 }
 
-// 🔥 Important: Cache the connection to prevent multiple instances
-let isConnected = false;
-let connectionPromise = null;
+// 🔥 GLOBAL INITIALIZATION (PERSISTS ACROSS RELOADS)
+const globalState = globalThis;
 
 export const connectToDatabase = async () => {
-  if (isConnected) return;
-  if (connectionPromise) return connectionPromise;
+  // 1. Authenticate quickly every time (Fast)
+  try {
+    await sequelize.authenticate();
+  } catch (error) {
+    console.error("DB authentication error:", formatDbError(error));
+    throw error;
+  }
 
-  connectionPromise = (async () => {
+  // 2. Heavy Setup (Run only ONCE per server session)
+  if (globalState._dbInitialized) return;
+  if (globalState._dbInitPromise) return globalState._dbInitPromise;
+
+  globalState._dbInitPromise = (async () => {
     try {
-      await sequelize.authenticate();
-      console.log("DB authenticated successfully");
+      console.log("🚀 Initializing Database One-Time Setup...");
 
-      // 1. Import centralized models and associations
+      // Import centralized models and associations
       await import('@/models/index.js');
 
-      // 🚀 2. The Bulletproof Sync (Universal for DEV & PROD)
+      // The Bulletproof Sync (Universal for DEV & PROD)
       await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
       await sequelize.sync({ alter: false });
       await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
-      console.log('✅ DB Auto-Synced (Tables verified/created)');
+      console.log('✅ DB Schema Verified & Synced');
 
-      isConnected = true;
-      console.log("Database initialization complete");
-
-      // 🏁 3. Plug & Play Auto-Seed (Universal for DEV & PROD)
-      const db = await import('@/models/index.js');
-      const { Navigation } = db;
-      
-      // Check if the core table is empty. If it fails (e.g., table not fully ready), default to 0.
-      // const navCount = await Navigation.count().catch(() => 0);
-      
-      // if (navCount === 0) {
-      //   console.log('🌱 Fresh Database Detected. Auto-feeding initial data...');
-      //   const { seedDatabase } = await import('@/lib/actions/seedActions.js');
-      //   await seedDatabase().catch(err => {
-      //     console.error('❌ Auto-Seed Failed:', err.message);
-      //   });
-      // }
-      
+      globalState._dbInitialized = true;
+      console.log("🏁 Database configuration complete");
     } catch (error) {
-      console.error("DB connection/sync error:", formatDbError(error));
+      console.error("DB initialization error:", formatDbError(error));
       throw error;
     } finally {
-      connectionPromise = null;
+      globalState._dbInitPromise = null;
     }
   })();
 
-  return connectionPromise;
+  return globalState._dbInitPromise;
 };
 
 export default sequelize;

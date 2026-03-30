@@ -1,18 +1,20 @@
 import AccordionClient from './AccordionClient';
 import * as LucideIcons from 'lucide-react';
 import GalleryClient from './GalleryClient';
+import RichTextRenderer from '@/components/common/RichTextRenderer';
 
 export default function BlockRenderer({ block }) {
   const { blockType } = block;
 
   // 1. Full Width Rich Text Container
   if (blockType === 'RichTextFull') {
+    const useProse = block.useProse !== false;
     return (
       <div id={block.cssId || undefined} className={`w-full py-12 px-6 ${block.cssClass || ''}`}>
         <div className="max-w-[80%] mx-auto">
-          <div 
-            className="university-prose prose-max-w-none"
-            dangerouslySetInnerHTML={{ __html: block.content }}
+          <RichTextRenderer 
+            content={block.content} 
+            useProse={useProse}
           />
         </div>
       </div>
@@ -33,13 +35,15 @@ export default function BlockRenderer({ block }) {
       textCol = 'lg:w-[65%]'; imgCol = 'lg:w-[35%]';
     }
 
+    const useProse = block.useProse !== false;
+
     return (
       <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-white ${block.cssClass || ''}`}>
         <div className={`max-w-7xl mx-auto flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-16 items-center`}>
           <div className={`w-full ${textCol}`}>
-             <div 
-                className="university-prose max-w-none"
-                dangerouslySetInnerHTML={{ __html: block.content }}
+             <RichTextRenderer 
+                content={block.content} 
+                useProse={useProse}
               />
           </div>
           <div className={`w-full ${imgCol}`}>
@@ -65,7 +69,7 @@ export default function BlockRenderer({ block }) {
     return (
       <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-gray-50 border-y border-gray-200 ${block.cssClass || ''}`}>
         <div className="max-w-[56rem] mx-auto">
-          <AccordionClient items={block.accordionItems} />
+          <AccordionClient items={block.accordionItems} useProse={block.useProse !== false} />
         </div>
       </div>
     );
@@ -254,7 +258,11 @@ export default function BlockRenderer({ block }) {
               <p className="text-[#00588b] text-lg font-semibold mb-1 italic">{greeting}</p>
               <h3 className="text-2xl lg:text-3xl font-black text-gray-900 mb-5 leading-tight">{welcomeHeadline}</h3>
               <div className="w-14 h-1 rounded-full bg-[#ffb900] mb-6" />
-              <div className="university-prose max-w-none text-gray-600 text-base lg:text-lg leading-relaxed mb-8" dangerouslySetInnerHTML={{ __html: messageHTML }} />
+              <RichTextRenderer 
+                content={messageHTML} 
+                useProse={block.useProse !== false}
+                className="text-gray-600 text-base lg:text-lg leading-relaxed mb-8" 
+              />
               {visionQuote && (
                 <div className="relative bg-gradient-to-br from-[#00588b]/5 to-[#ffb900]/5 border-l-4 border-[#ffb900] rounded-r-2xl px-6 py-5 mb-8">
                   <p className="text-[#00588b] font-semibold text-sm lg:text-base leading-relaxed italic">&ldquo;{visionQuote}&rdquo;</p>
