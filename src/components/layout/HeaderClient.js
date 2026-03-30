@@ -1,4 +1,4 @@
-'use client'; 
+'use client';
 
 /**
  * ╔══════════════════════════════════════════════════════════════════╗
@@ -63,14 +63,14 @@ function reducer(s, a) {
     case 'SCROLL': {
       const currentY = a.y;
       const isScrolled = currentY > 50;
-      
+
       // Top 50px par hamesha dikhega
       if (currentY <= 50) {
         return { ...s, isScrolled, showTopBar: true, lastScrollY: currentY };
       }
 
       let newShowTopBar = s.showTopBar;
-      
+
       // Fast scroll detection (5px threshold)
       if (currentY - s.lastScrollY > 5) {
         newShowTopBar = false; // Scroll Down -> Hide
@@ -86,10 +86,10 @@ function reducer(s, a) {
       };
     }
     case 'SET_MEGA': return { ...s, activeMegaMenu: a.key };
-    case 'SET_TAB':  return { ...s, openTabKey: s.openTabKey === a.key ? null : a.key, mobileAccordion: null, mobileSubAccordion: null };
+    case 'SET_TAB': return { ...s, openTabKey: s.openTabKey === a.key ? null : a.key, mobileAccordion: null, mobileSubAccordion: null };
     case 'CLOSE_TAB': return { ...s, openTabKey: null };
     case 'TOGGLE_SIDEBAR': return { ...s, desktopSidebarOpen: !s.desktopSidebarOpen };
-    case 'CLOSE_SIDEBAR':  return { ...s, desktopSidebarOpen: false };
+    case 'CLOSE_SIDEBAR': return { ...s, desktopSidebarOpen: false };
     case 'TOGGLE_MOB_ACC': return { ...s, mobileAccordion: s.mobileAccordion === a.key ? null : a.key, mobileSubAccordion: null };
     case 'TOGGLE_MOB_SUB': return { ...s, mobileSubAccordion: s.mobileSubAccordion === a.key ? null : a.key };
     case 'TOGGLE_SB_DROP': return { ...s, sidebarDropdown: s.sidebarDropdown === a.key ? null : a.key };
@@ -102,9 +102,9 @@ function reducer(s, a) {
 // STYLE TOKENS
 // ─────────────────────────────────────────────────────────────
 const T = {
-  megaLink:   'group flex items-center justify-between py-1.5 border-b border-white/5 hover:text-[#fec53a] transition-colors text-[12.5px] xl:text-[13.5px] font-medium',
-  chevron:    'opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 text-[#fec53a]',
-  sectionH:   'text-[17px] xl:text-[18px] font-bold mb-4 tracking-wide text-[#fec53a] border-b border-white/10 pb-2',
+  megaLink: 'group flex items-center justify-between py-1.5 border-b border-white/5 hover:text-[#fec53a] transition-colors text-[12.5px] xl:text-[13.5px] font-medium',
+  chevron: 'opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 text-[#fec53a]',
+  sectionH: 'text-[17px] xl:text-[18px] font-bold mb-4 tracking-wide text-[#fec53a] border-b border-white/10 pb-2',
   mobileItem: 'text-[13px] text-gray-200 hover:text-white flex items-center justify-between bg-white/5 p-2.5 rounded border border-transparent hover:border-[#fec53a]/50 transition-all',
 };
 
@@ -268,10 +268,10 @@ function PanelImgTopCols({ menu }) {
 /** Routes menu.type → correct desktop panel component */
 function DesktopMegaPanel({ menu, phone, tollFree }) {
   switch (menu.type) {
-    case 'mega-columns-with-image':   return <PanelImageCols menu={menu} />;
-    case 'split-action-menu':         return <PanelSplitAction menu={menu} phone={phone} tollFree={tollFree} />;
-    case 'mega-columns':              return <PanelCols menu={menu} />;
-    case 'mega-columns-with-images':  return <PanelImgTopCols menu={menu} />;
+    case 'mega-columns-with-image': return <PanelImageCols menu={menu} />;
+    case 'split-action-menu': return <PanelSplitAction menu={menu} phone={phone} tollFree={tollFree} />;
+    case 'mega-columns': return <PanelCols menu={menu} />;
+    case 'mega-columns-with-images': return <PanelImgTopCols menu={menu} />;
     default: return null;
   }
 }
@@ -418,7 +418,7 @@ function AccordionItem({ menuItem, isOpen, onToggle, activeSubKey, onSubToggle }
             </div>
           )}
           {menuItem.columns && menuItem.columns.map(col => {
-            const subKey  = `${menuItem.title}__${col.heading}`;
+            const subKey = `${menuItem.title}__${col.heading}`;
             const subOpen = activeSubKey === subKey;
             return (
               <div key={col.heading} className="mb-3">
@@ -456,8 +456,8 @@ function AccordionItem({ menuItem, isOpen, onToggle, activeSubKey, onSubToggle }
 /** panel.type = "full-menu" */
 function MobPanelFullMenu({ config, navData, state, dispatch }) {
   const excluded = config.excludeMenuTitles || [];
-  const items    = navData.topMenu.filter(m => !excluded.includes(m.title));
-  const mc       = navData.mobileConfig;
+  const items = navData.topMenu.filter(m => !excluded.includes(m.title));
+  const mc = navData.mobileConfig;
 
   return (
     <div className="animate-in fade-in duration-300">
@@ -486,17 +486,17 @@ function MobPanelRouter({ tab, navData, state, dispatch }) {
   if (!pType) return null;
 
   switch (pType) {
-    case 'programmes': 
+    case 'programmes':
       return <MobPanelProgrammes config={tab.panel || { type: 'programmes', sourceMenu: 'Academic' }} navData={navData} />;
-    case 'admissions': 
+    case 'admissions':
       return <MobPanelAdmissions config={tab.panel || { type: 'admissions', sourceMenu: 'Admissions' }} navData={navData} />;
-    case 'enquiry':    
+    case 'enquiry':
       return <MobPanelEnquiry formConfig={navData.mobileConfig.enquiryForm} />;
     case 'open-enquiry': // Handle as drawer if configured as such
       return <MobPanelEnquiry formConfig={navData.mobileConfig.enquiryForm} />;
-    case 'full-menu':  
+    case 'full-menu':
       return <MobPanelFullMenu config={tab.panel || { type: 'full-menu' }} navData={navData} state={state} dispatch={dispatch} />;
-    case 'links':      
+    case 'links':
       return <MobPanelLinks config={tab.panel || { type: 'links' }} />;
     default: return null;
   }
@@ -530,11 +530,10 @@ function DesktopSidebar({ navData, state, dispatch }) {
                   {cat.hasDropdown && <LucideIcons.ChevronDown size={18} className={`transform transition-transform ${state.sidebarDropdown === cat.title ? 'rotate-180' : ''}`} />}
                 </h2>
                 <div className={`transition-all duration-300 overflow-hidden ${state.sidebarDropdown === cat.title ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <ul className={`grid gap-x-6 gap-y-2 text-[14px] text-gray-700 font-medium pl-2 ${
-                    cat.columns === 2 ? 'grid-cols-2' : 
-                    cat.columns === 3 ? 'grid-cols-3' : 
-                    'grid-cols-1'
-                  }`}>
+                  <ul className={`grid gap-x-6 gap-y-2 text-[14px] text-gray-700 font-medium pl-2 ${cat.columns === 2 ? 'grid-cols-2' :
+                    cat.columns === 3 ? 'grid-cols-3' :
+                      'grid-cols-1'
+                    }`}>
                     {cat.links.map(link => (
                       <li key={link.slug || link.label} className={cat.columns > 1 ? 'border-b border-gray-50 pb-1' : ''}>
                         {cat.type === 'nested-dropdown' && link.subLinks ? (
@@ -705,7 +704,7 @@ export default function HeaderClient({ navData }) {
       {/* DESKTOP HEADER - TRANSFORM SLIDE UP INSTEAD OF HEIGHT ANIMATION */}
       <header className={`hidden lg:block w-[100vw] z-[1000] fixed top-0 transition-transform duration-300 ease-out shadow-md bg-white ${state.showTopBar ? 'translate-y-0' : '-translate-y-[38px]'}`}
         onMouseLeave={() => dispatch({ type: 'SET_MEGA', key: null })}>
-        
+
         {/* Top bar - OPACITY FADE OUT, FIXED HEIGHT */}
         <div className={`bg-[#00588b] w-full flex items-center h-[38px] text-white text-[12px] font-light transition-opacity duration-300 ease-out border-b border-[#1c54a3] ${state.showTopBar ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           <div className="mx-auto w-[98vw] h-full flex justify-between items-center">
@@ -719,7 +718,7 @@ export default function HeaderClient({ navData }) {
                     const isObj = typeof item === 'object' && item !== null;
                     const text = isObj ? item.text : item;
                     const link = isObj ? item.link : '';
-                    
+
                     const content = (
                       <span className={`whitespace-nowrap transition-all ${link ? 'hover:underline underline-offset-4 cursor-pointer' : ''}`}>
                         {text}
@@ -762,13 +761,13 @@ export default function HeaderClient({ navData }) {
 
         {/* Main nav */}
         <div className={`mx-auto w-[98vw] relative flex justify-between items-center transition-all duration-300 ease-out ${state.isScrolled ? 'py-1.5' : 'py-3'}`}>
-         <Link href="/" className="flex items-center h-[50px]">
-  <img 
-    src={navData.logoUrl} 
-    alt="Logo" 
-    className={`h-full w-auto object-contain transition-transform duration-300 ease-in-out origin-left ${state.isScrolled ? 'scale-[0.8]' : 'scale-100'}`} 
-  />
-</Link>
+          <Link href="/" className="flex items-center h-[50px]">
+            <img
+              src={navData.logoUrl}
+              alt="Logo"
+              className={`h-full w-auto object-contain transition-transform duration-300 ease-in-out origin-left ${state.isScrolled ? 'scale-[0.8]' : 'scale-100'}`}
+            />
+          </Link>
           <div className="flex flex-col items-end relative w-full" onMouseLeave={() => dispatch({ type: 'SET_MEGA', key: null })}>
             <div className="relative flex items-center justify-end w-full">
               <nav className="flex items-center h-[50px] z-50">
@@ -781,7 +780,7 @@ export default function HeaderClient({ navData }) {
                 ))}
                 <div className="flex items-center h-full border-l border-gray-300 ml-4 pl-4 text-[#00588b]"
                   onMouseEnter={() => dispatch({ type: 'SET_MEGA', key: null })}>
-                  
+
                   {siteConfig.headerActionButton?.text && (
                     <Link href={siteConfig.headerActionButton.link || '/admission'} className="hidden xl:flex items-center gap-2 bg-[#fec53a] text-gray-900 px-6 py-2.5 rounded-full font-bold text-[12px] hover:bg-[#00588b] hover:text-white transition-all transform hover:scale-[1.05] shadow-lg shadow-yellow-500/10 mr-4">
                       {siteConfig.headerActionButton.text}
@@ -826,10 +825,10 @@ export default function HeaderClient({ navData }) {
          ───────────────────────────────────────────────── */}
       <div className="fixed bottom-0 left-0 w-full bg-[#00588b] text-white z-[1000] lg:hidden flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.4)] pb-safe">
         {mobileConfig?.bottomTabs?.map(tab => {
-          const isActive   = state.openTabKey === tab.key;
-          const isMenuTab  = tab.panel?.type === 'full-menu' || tab.path === 'full-menu';
-          const baseClass  = `flex flex-col items-center justify-center py-2.5 transition-all ${isActive ? 'text-[#fec53a]' : 'text-gray-300'}`;
-          const tabWidth   = `${100 / (mobileConfig?.bottomTabs?.length || 1)}%`;
+          const isActive = state.openTabKey === tab.key;
+          const isMenuTab = tab.panel?.type === 'full-menu' || tab.path === 'full-menu';
+          const baseClass = `flex flex-col items-center justify-center py-2.5 transition-all ${isActive ? 'text-[#fec53a]' : 'text-gray-300'}`;
+          const tabWidth = `${100 / (mobileConfig?.bottomTabs?.length || 1)}%`;
 
           // If it's a direct link (functional for SEO/Browser behavior)
           if (tab.type === 'link') {

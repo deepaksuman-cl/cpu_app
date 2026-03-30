@@ -39,13 +39,13 @@ export default function SchoolHero({ data, children }) {
             <h1 className="font-black text-white leading-tight mb-4" style={{ fontSize: "clamp(2.4rem,4.5vw,3.8rem)" }}>
               {data.title?.line1 ? (
                 <>
-                  {data.title.line1}<br />
-                  <span className="text-[#ffb900]">{data.title.line2}</span><br />
+                  {data.title.line1}
+                  <span className="text-[#ffb900]"> {data.title.line2} </span>
                   {data.title.line3}
                 </>
               ) : (
-                <StructuredTitle 
-                  title={data.title} 
+                <StructuredTitle
+                  title={data.title}
                   highlightClass="text-[#ffb900]"
                   skyHighlightClass="text-sky-300"
                 />
@@ -93,11 +93,10 @@ export default function SchoolHero({ data, children }) {
                       window.location.href = btn.link;
                     }
                   }}
-                  className={`flex items-center gap-2 font-bold px-8 py-4 rounded-xl text-lg transition-transform hover:scale-105 border-none cursor-pointer ${
-                    btn.primary
+                  className={`flex items-center gap-2 font-bold px-8 py-4 rounded-xl text-lg transition-transform hover:scale-105 border-none cursor-pointer ${btn.primary
                     ? "bg-[#ffb900] text-[#0a1628] shadow-[0_8px_32px_rgba(255,185,0,0.4)]"
                     : "text-white bg-white/10 hover:bg-white/20 border-2 border-white/30"
-                  }`}
+                    }`}
                 >
                   {btn.label} {btn.primary && <ArrowRight className="w-5 h-5" />}
                 </button>
@@ -105,7 +104,7 @@ export default function SchoolHero({ data, children }) {
             </div>
 
             {/* Optional quick stats row (course pages) */}
-            {data.quickStats && (
+            {/* {data.quickStats && (
               <div className="flex flex-wrap gap-8 mt-12 pt-6 border-t border-white/20">
                 {data.quickStats.map((s, i) => {
                   const Icon = LucideIcons[s.icon] || Star;
@@ -122,23 +121,23 @@ export default function SchoolHero({ data, children }) {
                   );
                 })}
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Right — injected from course page (Accomplishments card, etc.) */}
           {children && (
-            <div className="flex-1 max-w-sm w-full">
+            <div className="flex-1 max-w-md w-full">
               {children}
             </div>
           )}
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0">
+      {/* <div className="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 55" fill="white" xmlns="http://www.w3.org/2000/svg">
           <path d="M0,35 C360,70 1080,0 1440,35 L1440,55 L0,55 Z" />
         </svg>
-      </div>
+      </div> */}
     </section>
   );
 }

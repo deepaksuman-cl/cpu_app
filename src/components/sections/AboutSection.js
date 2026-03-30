@@ -77,7 +77,7 @@ export default function AboutSection({ data }) {
                 );
               })}
             </div>
-            {/* <div className="flex gap-3 flex-wrap">
+            <div className="flex gap-3 flex-wrap">
               <a 
                 href={btnLink || "#"}
                 className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform no-underline"
@@ -87,7 +87,7 @@ export default function AboutSection({ data }) {
               <button className="bg-transparent border-2 border-[#00588b] text-[#00588b] rounded-full px-6 py-[11px] font-bold text-sm cursor-pointer flex items-center gap-1.5 hover:bg-[#00588b] hover:text-white transition-all">
                 {brochureLabel} <Download size={14} />
               </button>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

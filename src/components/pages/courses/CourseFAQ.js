@@ -38,23 +38,20 @@ export default function CourseFAQ({ data }) {
             return (
               <div
                 key={idx}
-                className={`rounded-2xl overflow-hidden border transition-all duration-300 ${
-                  isOpen
-                    ? "border-[#00588b]/30 shadow-lg shadow-[#00588b]/8"
-                    : "border-gray-200 shadow-sm"
-                }`}
+                className={`rounded-2xl overflow-hidden border transition-all duration-300 ${isOpen
+                  ? "border-[#00588b]/30 shadow-lg shadow-[#00588b]/8"
+                  : "border-gray-200 shadow-sm"
+                  }`}
               >
                 {/* Question */}
                 <button
                   onClick={() => toggle(idx)}
-                  className={`w-full flex items-center justify-between px-6 py-4 text-left transition-all duration-200 ${
-                    isOpen ? "bg-[#00588b] text-white" : "bg-white hover:bg-blue-50 text-gray-800"
-                  }`}
+                  className={`w-full flex items-center justify-between px-6 py-4 text-left transition-all duration-200 ${isOpen ? "bg-[#00588b] text-white" : "bg-white hover:bg-blue-50 text-gray-800"
+                    }`}
                 >
                   <span className="flex items-center gap-3 font-semibold text-sm md:text-base pr-4">
-                    <span className={`w-7 h-7 rounded flex items-center justify-center flex-shrink-0 transition-colors ${
-                      isOpen ? "bg-white/20" : "bg-[#00588b]/10"
-                    }`}>
+                    <span className={`w-7 h-7 rounded flex items-center justify-center flex-shrink-0 transition-colors ${isOpen ? "bg-white/20" : "bg-[#00588b]/10"
+                      }`}>
                       {isOpen
                         ? <Minus size={15} className="text-white" />
                         : <Plus size={15} className="text-[#00588b]" />
@@ -64,9 +61,8 @@ export default function CourseFAQ({ data }) {
                   </span>
                   <ChevronDown
                     size={18}
-                    className={`flex-shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-white" : "text-gray-400"
-                    }`}
+                    className={`flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-white" : "text-gray-400"
+                      }`}
                   />
                 </button>
 
@@ -88,26 +84,6 @@ export default function CourseFAQ({ data }) {
           })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-12 text-center bg-gradient-to-r from-[#00588b]/8 to-blue-50 rounded-2xl p-8 border border-[#00588b]/15">
-          <HelpCircle size={32} className="text-[#ffb900] mx-auto mb-3" />
-          <h3 className="text-[#00588b] font-extrabold text-lg mb-2">Still have questions?</h3>
-          <p className="text-gray-500 text-sm mb-5">Our admissions team is happy to help you with any queries.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="tel:+911234567890"
-              className="inline-flex items-center gap-2 bg-[#00588b] text-white font-bold px-6 py-3 rounded-full hover:bg-[#004570] transition text-sm"
-            >
-              📞 Call Us
-            </a>
-            <a
-              href="mailto:admissions@cpur.in"
-              className="inline-flex items-center gap-2 bg-[#ffb900] text-[#00588b] font-bold px-6 py-3 rounded-full hover:bg-yellow-300 transition text-sm"
-            >
-              ✉️ Email Us
-            </a>
-          </div>
-        </div>
       </div>
     </section>
   );

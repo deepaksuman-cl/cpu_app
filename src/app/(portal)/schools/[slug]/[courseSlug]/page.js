@@ -33,24 +33,24 @@ export async function generateMetadata({ params }) {
 }
 
 import * as LucideIcons from "lucide-react";
-import { Award, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 /* ── "University's Accomplishments & Impact" right-side card ── */
 function AccomplishmentsCard({ data }) {
   if (!data) return null;
   return (
     <div className="bg-white/10 backdrop-blur-md rounded-3xl p-7 border border-white/20 shadow-2xl">
-      <h3 className="text-[#ffb900] font-extrabold text-sm mb-5 text-center flex items-center justify-center gap-2">
-        <Award size={16} /> {data.heading}
+      <h3 className="text-[#ffb900] font-extrabold text-md mb-5 text-center flex items-center justify-center gap-2">
+        {data.heading}
       </h3>
       <div className="grid grid-cols-3 gap-3">
         {data.stats?.map((s, i) => {
           const Icon = LucideIcons[s.icon] || Star;
           return (
             <div key={i} className="bg-white/10 rounded-2xl p-3 text-center hover:bg-white/20 transition cursor-default">
-              <Icon size={18} className="mx-auto mb-1.5 text-[#ffb900]" />
-              <div className="text-white font-black text-sm leading-tight">{s.value}</div>
-              <div className="text-blue-200 text-[10px] mt-0.5 leading-tight">{s.label}</div>
+              <Icon size={26} className="mx-auto mb-1.5 text-[#ffb900]" />
+              <div className="text-white font-black text-md leading-tight">{s.value}</div>
+              <div className="text-blue-200 text-[14px] mt-0.5 leading-tight">{s.label}</div>
             </div>
           );
         })}
@@ -79,7 +79,7 @@ export default async function CourseSlugPage({ params }) {
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden">
       
       {course.hero && !course.hero.hide && (
-        <SchoolHero data={{...course.hero, duration: course.duration, eligibility: course.eligibility}}>
+        <SchoolHero data={{ ...course.hero, duration: course.duration, eligibility: course.eligibility }}>
           {course.accomplishments && !course.accomplishments.hide && <AccomplishmentsCard data={course.accomplishments} />}
         </SchoolHero>
       )}
@@ -95,7 +95,7 @@ export default async function CourseSlugPage({ params }) {
       {course.uniqueFeatures && !course.uniqueFeatures.hide && <CourseUniqueFeatures data={course.uniqueFeatures} />}
       {course.applySteps && !course.applySteps.hide && <CourseApplySteps data={course.applySteps} />}
       {course.faq && !course.faq.hide && <CourseFAQ data={course.faq} />}
-    
+
 
       {/* Course specific versions of common sections if available */}
       {course.placements && !course.placements.hide && <SchoolPlacements data={course.placements} />}
