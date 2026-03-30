@@ -1,6 +1,7 @@
 import Icon from "../ui/Icon";
 import Image from "next/image";
 import { ArrowRight, Download } from "lucide-react";
+import RichTextRenderer from "../common/RichTextRenderer";
 
 export default function AboutSection({ data }) {
   if (!data) return null;
@@ -54,7 +55,11 @@ export default function AboutSection({ data }) {
             </div>
           </div>
           <div>
-            <div className="rdx_text text-gray-800 leading-[1.9] mb-8 text-[15.5px]" dangerouslySetInnerHTML={{ __html: description }} />
+            <RichTextRenderer 
+              content={description} 
+              useProse={data.useProse !== false}
+              className="rdx_text text-gray-800 leading-[1.9] mb-8 text-[15.5px]" 
+            />
             <div className="grid grid-cols-2 gap-3.5 mb-8">
               {features?.map((f, i) => {
                 return (

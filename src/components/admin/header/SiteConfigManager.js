@@ -116,16 +116,6 @@ export default function SiteConfigManager({ initialData }) {
               <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest flex items-center gap-1">
-                    <Search size={12} className="text-[var(--text-muted)]" /> Search Placeholder
-                  </label>
-                  <input 
-                    value={config.searchPlaceholder}
-                    onChange={(e) => updateNested('searchPlaceholder', e.target.value)}
-                    className="w-full bg-[var(--bg-body)] border border-[var(--border-default)] rounded-none px-4 py-3 text-sm focus:border-[var(--color-primary)] outline-none"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest flex items-center gap-1">
                     <Megaphone size={12} className="text-[var(--text-muted)]" /> News Badge Label
                   </label>
                   <input 

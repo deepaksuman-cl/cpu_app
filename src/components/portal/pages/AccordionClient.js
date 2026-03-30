@@ -1,8 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import RichTextRenderer from '@/components/common/RichTextRenderer';
 
-export default function AccordionClient({ items }) {
+export default function AccordionClient({ items, useProse = true }) {
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
@@ -31,9 +32,10 @@ export default function AccordionClient({ items }) {
               className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}
             >
               <div className="px-6 py-5 border-t border-gray-200 bg-white">
-                <div 
-                  className="university-prose max-w-none text-base"
-                  dangerouslySetInnerHTML={{ __html: item.content }}
+                <RichTextRenderer 
+                  content={item.content} 
+                  useProse={useProse}
+                  className="max-w-none text-base" 
                 />
               </div>
             </div>

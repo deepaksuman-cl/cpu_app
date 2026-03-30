@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ZoomIn, X, ChevronLeft, ChevronRight } from "lucide-react";
 import StructuredTitle from "@/components/common/StructuredTitle";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 export default function SchoolCommunity({ data }) {
   const [lightboxIdx, setLightboxIdx] = useState(null);
@@ -23,10 +24,11 @@ export default function SchoolCommunity({ data }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="space-y-4">
             {description?.map((p, i) => (
-              <div 
+              <RichTextRenderer 
                 key={i} 
-                className="text-base leading-relaxed text-slate-500 prose prose-slate prose-sm max-w-none"
-                dangerouslySetInnerHTML={{ __html: p }}
+                content={p} 
+                useProse={data.useProse !== false}
+                className="text-base leading-relaxed text-slate-500" 
               />
             ))}
           </div>

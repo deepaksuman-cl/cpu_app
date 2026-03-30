@@ -1,4 +1,3 @@
-import Breadcrumb from '@/components/ui/Breadcrumb';
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 import ProgrammesClient from '@/components/pages/programmes/ProgrammesClient';
@@ -61,16 +60,9 @@ export default async function ProgrammesPage({ searchParams }) {
     return acc;
   }, {});
 
-  const breadcrumbs = settings.breadcrumbs?.length > 0
-    ? settings.breadcrumbs
-    : [ { label: 'Home', link: '/' }, { label: 'Programmes', link: '/programmes' } ];
 
   return (
     <div>
-      {/* ── Global Breadcrumb ── */}
-      <div className="bg-gray-100 border-b border-gray-200">
-        <Breadcrumb paths={breadcrumbs} />
-      </div>
 
       {/* ── Hero Banner ── */}
       <div className="bg-gradient-to-br from-[#00588b] to-[#003d63] text-white px-4 sm:px-12 pt-10 pb-12 relative overflow-hidden">

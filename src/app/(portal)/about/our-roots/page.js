@@ -16,13 +16,6 @@ import {
   House,
 } from "lucide-react";
 
-// ── Breadcrumb Data ──────────────────────────────────────────────────────────
-
-const breadcrumbs = [
-  { label: "Home", href: "/", icon: House },
-  { label: "About Us", href: "/about" },
-  { label: "Our Roots", href: null },
-];
 
 // ── Data ────────────────────────────────────────────────────────────────────
 
@@ -112,46 +105,6 @@ const institutions = [
 
 // ── Sub-components ───────────────────────────────────────────────────────────
 
-function Breadcrumb() {
-  return (
-    <nav
-      aria-label="Breadcrumb"
-      className="bg-white border-b border-gray-100 px-4 md:px-8 py-3"
-    >
-      <ol className="flex items-center flex-wrap gap-1 text-sm">
-        {breadcrumbs.map((crumb, i) => {
-          const isLast = i === breadcrumbs.length - 1;
-          const Icon = crumb.icon;
-          return (
-            <li key={i} className="flex items-center gap-1">
-              {/* Separator */}
-              {i > 0 && (
-                <ChevronRight className="w-3.5 h-3.5 text-gray-300 shrink-0" />
-              )}
-
-              {isLast ? (
-                /* Active / current page */
-                <span className="flex items-center gap-1.5 font-semibold text-[#00588b] bg-[#00588b]/8 px-2.5 py-1 rounded-md">
-                  {Icon && <Icon className="w-3.5 h-3.5" />}
-                  {crumb.label}
-                </span>
-              ) : (
-                /* Clickable link */
-                <a
-                  href={crumb.href}
-                  className="flex items-center gap-1.5 text-gray-500 hover:text-[#00588b] transition-colors duration-150 px-1.5 py-1 rounded-md hover:bg-[#00588b]/5"
-                >
-                  {Icon && <Icon className="w-3.5 h-3.5" />}
-                  {crumb.label}
-                </a>
-              )}
-            </li>
-          );
-        })}
-      </ol>
-    </nav>
-  );
-}
 
 function InstitutionLink({ data }) {
   if (!data) return <span className="text-gray-300 text-sm">—</span>;
@@ -231,8 +184,6 @@ export default function OurRoots() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
 
-      {/* ── Breadcrumb (full width) ── */}
-      <Breadcrumb />
 
       {/* ── Page Container ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">

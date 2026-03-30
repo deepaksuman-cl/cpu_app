@@ -1,17 +1,18 @@
 "use client";
 import { ArrowLeft, BookOpen, GraduationCap, Home, MapPin, Phone } from 'lucide-react';
+import Link from 'next/link';
 
-export default function NotFound() {
-  // University navigation ke liye quick links (English mein)
+export default function PortalNotFound() {
+  // University navigation quick links for the portal
   const quickLinks = [
-    { name: 'Admissions & Apply', icon: <GraduationCap size={20} className="text-[#00588b]" />, desc: 'Start your journey', href: '#' },
-    { name: 'Academic Programs', icon: <BookOpen size={20} className="text-[#00588b]" />, desc: 'Explore our courses', href: '#' },
-    { name: 'Campus Facilities', icon: <MapPin size={20} className="text-[#00588b]" />, desc: 'Discover campus life', href: '#' },
-    { name: 'Contact Helpdesk', icon: <Phone size={20} className="text-[#00588b]" />, desc: 'Get in touch with us', href: '#' },
+    { name: 'Admissions & Apply', icon: <GraduationCap size={20} className="text-[#00588b]" />, desc: 'Start your journey', href: '/admission' },
+    { name: 'Academic Programs', icon: <BookOpen size={20} className="text-[#00588b]" />, desc: 'Explore our courses', href: '/programmes' },
+    { name: 'Campus Facilities', icon: <MapPin size={20} className="text-[#00588b]" />, desc: 'Discover campus life', href: '/about' },
+    { name: 'Contact Helpdesk', icon: <Phone size={20} className="text-[#00588b]" />, desc: 'Get in touch with us', href: '/contact-us' },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans selection:bg-[#00588b] selection:text-white">
+    <div className="bg-slate-50 min-h-[calc(100vh-200px)] flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans selection:bg-[#00588b] selection:text-white">
       
       {/* Main Professional Card Layout - Mobile Responsive */}
       <div className="max-w-6xl w-full bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden flex flex-col md:flex-row border border-slate-100">
@@ -19,13 +20,6 @@ export default function NotFound() {
         {/* Left Content Area (Details aur buttons) - Mobile pe niche, Desktop pe left */}
         <div className="p-6 sm:p-8 md:p-12 lg:p-16 flex-1 flex flex-col justify-center order-last md:order-first z-10 bg-white">
           
-          {/* CPU Official Logo */}
-          {/* <img 
-            src="https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png" 
-            alt="Career Point University" 
-            className="h-14 sm:h-16 md:h-20 w-auto object-contain mb-8 md:mb-10 self-start"
-          />
-           */}
           <div className="flex items-center gap-2 mb-3 text-[#00588b] font-bold tracking-widest uppercase text-xs">
             <span className="w-8 h-px bg-[#00588b]/40"></span>
             Error 404
@@ -41,12 +35,12 @@ export default function NotFound() {
 
           {/* Primary Call to Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10 md:mb-12">
-            <button 
-              onClick={() => window.location.href = '/'} 
+            <Link 
+              href="/" 
               className="w-full sm:w-auto bg-[#00588b] text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-[#1c54a3] transition-colors flex items-center justify-center gap-2 shadow-sm"
             >
               <Home size={18} /> Go to Homepage
-            </button>
+            </Link>
             
             <button 
               onClick={() => window.history.back()} 
@@ -59,7 +53,7 @@ export default function NotFound() {
           {/* Clean Quick Links Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {quickLinks.map((link, index) => (
-              <a 
+              <Link 
                 key={index} 
                 href={link.href} 
                 className="group flex items-center gap-4 p-4 rounded-xl border border-slate-100 hover:border-[#00588b]/20 hover:bg-slate-50 transition-all shadow-sm shadow-slate-100/50 hover:shadow-md"
@@ -75,7 +69,7 @@ export default function NotFound() {
                     {link.desc}
                   </p>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
           

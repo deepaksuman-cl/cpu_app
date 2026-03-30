@@ -3,6 +3,7 @@
 import Navigation from '@/models/Navigation';
 import { connectToDatabase } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
+import { cache } from 'react';
 import fs from 'fs';
 import path from 'path';
 
@@ -10,7 +11,7 @@ import path from 'path';
  * Fetches navigation data from MariaDB via Sequelize.
  * Auto-seeds from navigation.json if database is empty.
  */
-export async function getNavigationData() {
+export const getNavigationData = cache(async () => {
   const defaultNav = { 
     topMenu: [], 
     siteConfig: { 
@@ -33,12 +34,13 @@ export async function getNavigationData() {
       return defaultNav; // Return default if not seeded yet, db.js will handle seeding
     }
 
-    return JSON.parse(JSON.stringify(navDoc.data));
+    // Direct access after getting plain object for maximum speed.
+    return navDoc.get({ plain: true }).data || defaultNav;
   } catch (error) {
     console.error("Error fetching navigation data:", error.message);
     return defaultNav; 
   }
-}
+});
 
 /**
  * Updates navigation data handles in JS since Sequelize doesn't support dot notation update for JSON directly.

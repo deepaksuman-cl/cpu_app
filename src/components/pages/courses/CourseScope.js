@@ -2,6 +2,7 @@
 import React from "react";
 
 import StructuredTitle from "@/components/common/StructuredTitle";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 function SectionTitle({ children, subtitle, light = false }) {
   return (
@@ -39,9 +40,10 @@ export default function CourseScope({ data }) {
           {data.sectionTitle}
         </SectionTitle>
         <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
-          <div 
-            className="text-blue-100 text-sm leading-relaxed prose prose-invert prose-sm max-w-none" 
-            dangerouslySetInnerHTML={{ __html: data.body }} 
+          <RichTextRenderer 
+            content={data.body} 
+            useProse={data.useProse !== false}
+            className="text-blue-100 text-sm leading-relaxed" 
           />
         </div>
       </div>

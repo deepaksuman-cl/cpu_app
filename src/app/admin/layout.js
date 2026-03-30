@@ -10,8 +10,6 @@ import ScrollToTop from '@/components/admin/ui/ScrollToTop';
 import { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 
-import '@/app/globals.css';
-
 export default function AdminLayout({ children }) {
   // Atlas States
   const [isPinned, setIsPinned] = useState(true); // Sidebar locked/expanded hai ya nahi
@@ -56,7 +54,7 @@ export default function AdminLayout({ children }) {
 
           {/* MAIN CONTENT AREA - Smooth transform */}
           <div 
-            className="flex-1 flex flex-col transition-all duration-300 ease-in-out min-h-screen relative"
+            className="flex-1 flex flex-col transition-all duration-300 ease-in-out h-screen max-h-screen relative overflow-hidden"
             style={{ marginLeft: contentMargin }}
           >
             <AdminTopbar setMobileMenuOpen={setMobileMenuOpen} />

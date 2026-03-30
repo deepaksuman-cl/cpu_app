@@ -1,6 +1,6 @@
 import Link from 'next/link'; 
 import { getAllPages } from '@/lib/actions/pageActions';
-import { Edit, FileText, Plus } from 'lucide-react';
+import { Edit, Eye, FileText, Plus } from 'lucide-react';
 import DeletePageButton from '@/components/admin/pages/DeletePageButton';
 
 export const metadata = { title: 'Page Manager | Admin' };
@@ -90,6 +90,14 @@ export default async function PagesManager() {
                     </div>
                   </td>
                   <td className="px-4 py-3 flex gap-1.5 justify-end">
+                    <Link
+                      href={`/${page.slug}`}
+                      target="_blank"
+                      title="Preview Page"
+                      className="p-2 text-[var(--text-secondary)] hover:bg-[var(--bg-body)] border border-transparent hover:border-[var(--border-default)] rounded-none transition-colors"
+                    >
+                      <Eye size={15} />
+                    </Link>
                     <Link
                       href={`/admin/pages/edit/${page.id}`}
                       title="Edit Page"

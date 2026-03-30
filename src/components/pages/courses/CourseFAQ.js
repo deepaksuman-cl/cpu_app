@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Plus, Minus, ChevronDown, HelpCircle } from "lucide-react";
 import StructuredTitle from "@/components/common/StructuredTitle";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 function SectionTitle({ children, subtitle }) {
   return (
@@ -22,7 +23,7 @@ function SectionTitle({ children, subtitle }) {
 export default function CourseFAQ({ data }) {
   const [openId, setOpenId] = useState(null);
   if (!data) return null;
-  const { sectionTitle, subtitle, items } = data;
+  const { sectionTitle, subtitle, items, useProse = true } = data;
 
   const toggle = (idx) => setOpenId(prev => prev === idx ? null : idx);
 
@@ -70,7 +71,11 @@ export default function CourseFAQ({ data }) {
                   <div className="bg-white border-t border-gray-100 px-6 py-5">
                     <div className="flex items-start gap-3">
                       <HelpCircle size={18} className="text-[#ffb900] flex-shrink-0 mt-0.5" />
-                      <p className="text-gray-700 text-sm leading-relaxed">{item.a}</p>
+                      <RichTextRenderer 
+                        content={item.a} 
+                        useProse={item.useProse !== undefined ? item.useProse : useProse}
+                        className="text-gray-700 text-sm leading-relaxed" 
+                      />
                     </div>
                   </div>
                 )}

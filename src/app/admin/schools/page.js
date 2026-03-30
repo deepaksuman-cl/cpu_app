@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getSchools } from '@/lib/actions/schoolActions';
-import { Plus, Edit, AlertCircle } from 'lucide-react';
+import { Plus, Edit, Eye, AlertCircle } from 'lucide-react';
 import DeleteSchoolButton from '@/components/admin/schools/DeleteSchoolButton';
 import SeedDatabaseButton from '@/components/admin/schools/SeedDatabaseButton';
 
@@ -103,6 +103,15 @@ export default async function SchoolsPage() {
                         {/* Actions */}
                         <td className="block md:table-cell py-2 md:py-2 px-0 md:px-4 border-t border-[var(--border-light)] pt-3 md:border-none md:pt-0">
                           <div className="flex justify-start md:justify-center items-center gap-3 md:gap-2">
+                            <Link 
+                              href={`/schools/${school.slug}`}
+                              target="_blank"
+                              className="p-2 md:p-1 bg-[var(--bg-body)] text-[var(--text-secondary)] hover:bg-[var(--color-primary)] hover:text-[var(--text-inverse)] border border-[var(--border-default)] transition-colors rounded-none flex items-center justify-center"
+                              title="Preview"
+                            >
+                              <Eye className="w-4 h-4 md:w-3.5 md:h-3.5" />
+                              <span className="md:hidden text-[10px] font-bold uppercase ml-2 tracking-widest">Preview</span>
+                            </Link>
                             <Link 
                               href={`/admin/schools/edit/${school.id}`}
                               className="p-2 md:p-1 bg-[var(--bg-body)] text-[var(--text-secondary)] hover:bg-[var(--color-primary)] hover:text-[var(--text-inverse)] border border-[var(--border-default)] transition-colors rounded-none flex items-center justify-center"

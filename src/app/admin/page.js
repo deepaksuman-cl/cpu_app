@@ -10,7 +10,6 @@ import {
   Users
 } from 'lucide-react';
 import Link from 'next/link';
-import SyncDatabaseButton from '@/components/admin/SyncDatabaseButton';
 
 export const metadata = {
   title: 'Dashboard | University Admin',
@@ -146,7 +145,6 @@ export default function AdminDashboard() {
 
         {/* Right Side: Quick Actions Panel */}
         <div className="space-y-6">
-          <SyncDatabaseButton />
           
           <div className="bg-[var(--bg-surface)] border border-[var(--border-light)] rounded-xl shadow-[var(--shadow-sm)] p-5">
             <h2 className="text-lg font-bold text-[var(--text-primary)] mb-5">Quick Actions</h2>

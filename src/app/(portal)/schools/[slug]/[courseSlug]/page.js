@@ -1,7 +1,6 @@
 // Course detail page - DB-first with static JSON fallback
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
-import Breadcrumb from "@/components/ui/Breadcrumb";
 import { notFound } from "next/navigation";
 
 // Shared School components
@@ -34,7 +33,7 @@ export async function generateMetadata({ params }) {
 }
 
 import * as LucideIcons from "lucide-react";
-import { Award, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 /* ── "University's Accomplishments & Impact" right-side card ── */
 function AccomplishmentsCard({ data }) {
@@ -74,22 +73,11 @@ export default async function CourseSlugPage({ params }) {
   if (!course) {
     notFound();
   }
-
-  // Breadcrumb logic
-  const schoolName = course.school?.name || "School";
-  const schoolSlug = course.school?.slug || slug;
-
-  const breadcrumbPaths = [
-    { label: "Home", link: "/" },
-    { label: "Schools & Departments", link: "/schools" },
-    { label: schoolName, link: `/schools/${schoolSlug}` },
-    { label: course.name || course.hero?.title?.main, link: `/schools/${schoolSlug}/${courseSlug}` },
-  ];
+  
 
   return (
-    <div className="font-sans text-gray-800 bg-white">
-      <Breadcrumb paths={breadcrumbPaths} />
-
+    <div className="font-sans text-gray-800 bg-white overflow-x-hidden">
+      
       {course.hero && !course.hero.hide && (
         <SchoolHero data={{ ...course.hero, duration: course.duration, eligibility: course.eligibility }}>
           {course.accomplishments && !course.accomplishments.hide && <AccomplishmentsCard data={course.accomplishments} />}

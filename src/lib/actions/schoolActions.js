@@ -3,6 +3,7 @@
 import School from '@/models/School';
 import { connectToDatabase } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
+import { cache } from 'react';
 import { Testimonial, FAQ, PlacementPartner, Facility } from '@/models/index';
 
 export async function getSchools() {
@@ -13,13 +14,14 @@ export async function getSchools() {
       order: [['createdAt', 'DESC']]
     });
     
-    return { success: true, data: JSON.parse(JSON.stringify(schools)), error: null };
+    const plainSchools = schools.map(s => s.get({ plain: true }));
+    return { success: true, data: plainSchools, error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
   }
 }
 
-export async function getSchoolById(id) {
+export const getSchoolById = cache(async (id) => {
   try {
     await connectToDatabase();
     const school = await School.findByPk(id, {
@@ -36,14 +38,14 @@ export async function getSchoolById(id) {
       return { success: false, data: null, error: 'School not found' };
     }
     
-    return { success: true, data: JSON.parse(JSON.stringify(school)), error: null };
+    return { success: true, data: school.get({ plain: true }), error: null };
   } catch (error) {
     console.error(`[getSchoolById] Error fetching school ${id}:`, error);
     return { success: false, data: null, error: error.message };
   }
-}
+});
 
-export async function getSchoolBySlug(slug) {
+export const getSchoolBySlug = cache(async (slug) => {
   try {
     await connectToDatabase();
     const school = await School.findOne({
@@ -60,11 +62,11 @@ export async function getSchoolBySlug(slug) {
       return { success: false, data: null, error: 'School not found' };
     }
     
-    return { success: true, data: JSON.parse(JSON.stringify(school)), error: null };
+    return { success: true, data: school.get({ plain: true }), error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
   }
-}
+});
 
 export async function createSchool(data) {
   try {
@@ -105,7 +107,7 @@ export async function createSchool(data) {
     }
 
     revalidatePath('/', 'layout');
-    return { success: true, data: JSON.parse(JSON.stringify(newSchool)), error: null };
+    return { success: true, data: newSchool.get({ plain: true }), error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
   }
@@ -168,7 +170,7 @@ export async function updateSchool(id, data) {
     }
     
     revalidatePath('/', 'layout');
-    return { success: true, data: JSON.parse(JSON.stringify(updatedSchool)), error: null };
+    return { success: true, data: updatedSchool.get({ plain: true }), error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
   }
@@ -185,7 +187,7 @@ export async function deleteSchool(id) {
     });
     
     revalidatePath('/', 'layout');
-    return { success: true, message: 'School deleted successfully', data: JSON.parse(JSON.stringify(school)) };
+    return { success: true, message: 'School deleted successfully', data: school.get({ plain: true }) };
   } catch (error) {
     console.error(`[deleteSchool] Error:`, error);
     return { success: false, message: error.message || 'Deletion failed due to database constraint.' };

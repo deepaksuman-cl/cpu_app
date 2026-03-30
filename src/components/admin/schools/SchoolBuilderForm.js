@@ -93,6 +93,10 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                     onChange={val => {
                       const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
                     }} 
+                    useProse={item.useProse !== false}
+                    onProseChange={val => {
+                      const newItems = [...items]; newItems[idx].useProse = val; onUpdate(newItems);
+                    }}
                   />
                 ) : field.type === 'stringList' ? (
                   <StringListEditor 
@@ -429,6 +433,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
                   <RichTextEditor 
                     value={formData.about.vision.text || ''} 
                     onChange={content => updateSection('about', {...formData.about, vision: {...formData.about.vision, text: content}})} 
+                    useProse={formData.about.vision.useProse !== false}
+                    onProseChange={val => updateSection('about', {...formData.about, vision: {...formData.about.vision, useProse: val}})}
                   />
                 </div>
                 <NestedListEditor 
@@ -463,6 +469,11 @@ export default function SchoolBuilderForm({ initialData = null }) {
                         ...formData.about, 
                         mission: { ...formData.about.mission, points: [content] }
                       })}
+                      useProse={formData.about.mission.useProse !== false}
+                      onProseChange={val => updateSection('about', {
+                        ...formData.about, 
+                        mission: { ...formData.about.mission, useProse: val }
+                      })}
                     />
                   </div>
                   <p className="mt-2 text-[9px] text-[var(--text-muted)] italic">Note: Use the editor to add bullet points, bold text, etc.</p>
@@ -492,6 +503,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 <RichTextEditor 
                   value={formData.programmes.description || ''} 
                   onChange={content => updateSection('programmes', {...formData.programmes, description: content})} 
+                  useProse={formData.programmes.useProse !== false}
+                  onProseChange={val => updateSection('programmes', {...formData.programmes, useProse: val})}
                 />
               </div>
               
@@ -684,6 +697,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
                   <RichTextEditor 
                     value={formData.community.description?.join('\n') || ''} 
                     onChange={content => updateSection('community', {...formData.community, description: [content]})} 
+                    useProse={formData.community.useProse !== false}
+                    onProseChange={val => updateSection('community', {...formData.community, useProse: val})}
                   />
                 </div>
                 <NestedListEditor 

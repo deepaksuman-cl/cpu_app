@@ -1,21 +1,15 @@
 import { ArrowRight, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Breadcrumb from '@/components/ui/Breadcrumb';
 import { getSchools } from '@/lib/actions/schoolActions';
 
 export default async function AllSchoolsPage() {
-  const breadcrumbPaths = [
-    { label: "Home", link: "/" },
-    { label: "Schools & Departments", link: "#" }
-  ];
 
   // Fetch from DB
   const { data: schools } = await getSchools();
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <Breadcrumb paths={breadcrumbPaths} />
 
       {/* Hero Section for All Schools */}
       <div className="bg-[#001e46] py-16 px-4 text-center">

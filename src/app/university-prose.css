@@ -1,164 +1,263 @@
-/* Advanced University Branding Prose - RTE Optimized */
+/* 
+   =============================================
+   UNIVERSITY PROSE STYLING - PREMIUM EDITION
+   Optimized for Editor.js Content & CPanel SSR
+   ============================================= 
+*/
 
 :root {
-  --u-primary: #00588b;
+  --u-primary: #00588b;       /* Signature Blue */
   --u-primary-dark: #004570;
-  --u-accent: #ffb900;
-  --u-text-main: #374151;
-  --u-text-dark: #111827;
-  --u-bg-light: #f9fafb;
-  --u-border: #e5e7eb;
-  --u-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --u-accent: #ffb900;        /* Signature Gold/Yellow */
+  --u-accent-soft: rgba(255, 185, 0, 0.1);
+  --u-text-main: #334155;     /* Slate 700 */
+  --u-text-dark: #0f172a;     /* Slate 900 */
+  --u-bg-light: #f8fafc;      /* Slate 50 */
+  --u-border: #e2e8f0;        /* Slate 200 */
+  --u-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --u-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* 
+   🔥 REVERTED TO TAG-BASED PREMIUM STYLING 
+   We use :where() so these rules have ZERO weight. 
+   - They follow the parent's color (text-blue-100) by default.
+   - They provide the premium university look only when enabled.
+*/
+:where(.university-prose) h1,
+:where(.university-prose) h2,
+:where(.university-prose) h3,
+:where(.university-prose) h4,
+:where(.university-prose) p,
+:where(.university-prose) span,
+:where(.university-prose) li,
+:where(.university-prose) strong,
+:where(.university-prose) em {
+  color: currentColor; /* Follow parent color by default */
 }
 
 .university-prose {
-  color: var(--u-text-main);
-  line-height: 1.7;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 1rem;
-  max-width: 100%; /* Ensures it doesn't overflow parent */
+  line-height: 1.8;
+  font-family: var(--u-font-sans);
+  font-size: 1.05rem;
+  max-width: 100%;
   overflow-wrap: break-word;
 }
 
-/* Headings */
-.university-prose h1,
-.university-prose h2,
-.university-prose h3,
-.university-prose h4 {
-  color: var(--u-primary);
-  font-weight: 800;
-  line-height: 1.3;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+/* ── Headings ── */
+.university-prose h1 { 
+  font-size: 2.5rem !important; 
+  border-left: 6px solid var(--u-accent) !important;
+  padding-left: 1.25rem !important;
+  font-weight: 700 !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 1.25rem !important;
 }
 
-.university-prose h1 { font-size: 2rem; }
 .university-prose h2 { 
-  font-size: 1.5rem; 
-  border-bottom: 2px solid var(--u-border); 
-  padding-bottom: 0.5rem; 
+  font-size: 1.875rem !important; 
+  padding-bottom: 0.75rem !important;
+  border-bottom: 2px solid var(--u-border) !important;
+  position: relative !important;
+  font-weight: 600 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
 }
-.university-prose h3 { font-size: 1.25rem; }
-.university-prose h4 { font-size: 1.15rem; }
 
-.university-prose p { margin-bottom: 1.25rem; }
-.university-prose strong { color: var(--u-text-dark); font-weight: 700; }
+.university-prose h2::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 0 !important;
+  width: 80px !important;
+  height: 2px !important;
+  background-color: var(--u-accent) !important;
+}
 
-/* Lists */
+.university-prose h3 { font-size: 1.5rem !important; font-weight: 600 !important; }
+.university-prose h4 { font-size: 1.25rem !important; font-weight: 600 !important; }
+.university-prose h5 { font-size: 1.125rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; }
+
+/* ── Core Text ── */
+.university-prose p { margin-bottom: 1rem; }
+.university-prose strong { font-weight: 700; }
+.university-prose em { font-style: italic; }
+
+/* ── Professional Links ── */
+.university-prose a {
+  color: var(--u-primary);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.university-prose a:hover {
+  color: var(--u-primary-dark);
+  border-bottom-color: var(--u-accent);
+  background-color: var(--u-accent-soft);
+}
+
+/* ── Lists ── */
 .university-prose ul {
-  list-style: none;
-  padding-left: 0.5rem;
-  margin-bottom: 1.5rem;
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+  color: inherit;
 }
 
 .university-prose ul li {
   position: relative;
-  padding-left: 1.5rem;
-  margin-bottom: 0.5rem;
+  padding-left: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: inherit;
 }
 
 .university-prose ul li::before {
-  content: "■";
+  content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  color: var(--u-accent);
-  font-size: 0.8em;
+  left: -1.25rem;
+  top: 0.65rem;
+  width: 10px;
+  height: 2px;
+  background-color: var(--u-accent);
+  border-radius: 2px;
 }
 
 .university-prose ol {
-  padding-left: 1.5rem;
-  margin-bottom: 1.5rem;
+  list-style-type: decimal !important;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+  color: inherit;
+}
+
+.university-prose ol li {
+  padding-left: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: inherit;
 }
 
 .university-prose ol li::marker {
-  color: var(--u-primary);
+  color: inherit; /* Marker also inherits color */
+  font-weight: 800;
+  font-family: inherit;
+}
+
+/* ── Table UI (Matched to Reference Image) ── */
+.university-prose div.table-wrapper {
+  margin: 2.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--u-shadow);
+  border: 1px solid var(--u-border);
+}
+.university-prose table,
+.university-prose .tc-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  text-align: left;
+  border: 1px solid var(--u-border) !important;
+}
+
+/* Editor table rows */
+.university-prose .tc-row {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid var(--u-border);
+}
+
+.university-prose .tc-cell {
+  flex: 1;
+  padding: 1.15rem 1.5rem !important;
+  border-left: 1px solid var(--u-border) !important;
+  vertical-align: middle;
+}
+
+.university-prose .tc-cell:first-child {
+  border-left: none !important;
+}
+
+/* Editor Table Header Row (First Row) */
+.university-prose .tc-row:first-child {
+  background-color: var(--u-primary) !important;
+  color: #ffffff !important;
   font-weight: 700;
 }
 
-/* =========================================
-   TABLE STYLING (Fixed for RTE & Overflow)
-   ========================================= */
-.university-prose table {
-  width: 100%;
-  border-collapse: collapse; /* Better for standard RTEs than 'separate' */
-  margin: 2rem 0;
-  border: 1px solid var(--u-border);
-  background-color: #ffffff;
-  font-size: 0.9rem; /* Smaller, professional font size for tables */
-  table-layout: auto; /* Allows columns to adjust based on content */
+.university-prose .tc-row:first-child .tc-cell {
+  color: #ffffff !important;
 }
 
-/* Wrapper-like behavior on the table itself for mobile */
-.university-prose table {
-  display: block;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+/* Editor Striped Rows (Even rows) */
+.university-prose .tc-row:nth-child(even):not(:first-child) {
+  background-color: var(--u-bg-light) !important;
 }
 
-.university-prose thead {
-  display: table-header-group;
-}
-
-.university-prose tbody {
-  display: table-row-group;
-}
-
-.university-prose tr {
-  display: table-row;
+/* Scroll support for mobile */
+@media (max-width: 768px) {
+  .university-prose table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
 
 .university-prose thead th {
   background-color: var(--u-primary);
   color: #ffffff;
-  font-weight: 600;
-  text-align: left;
-  padding: 0.85rem 1rem; /* Adjusted padding */
-  border: 1px solid var(--u-primary-dark);
-  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 1.25rem 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  white-space: normal; /* Ensures headers can wrap if needed */
-  line-height: 1.3;
+  font-size: 0.85rem;
+  border-bottom: 2px solid var(--u-primary-dark);
 }
 
 .university-prose tbody td {
-  padding: 0.85rem 1rem; /* Adjusted padding so text doesn't look cramped */
-  border: 1px solid var(--u-border);
-  vertical-align: top;
-  line-height: 1.5;
-  color: var(--u-text-main);
-  word-break: break-word; /* CRITICAL: Prevents long strings from breaking layout */
-  min-width: 120px; /* Ensures columns don't get impossibly thin */
+  padding: 1.15rem 1.5rem;
+  border-bottom: 1px solid var(--u-border);
+  vertical-align: middle;
+  transition: background-color 0.15s ease;
+}
+
+.university-prose tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .university-prose tbody tr:nth-child(even) {
   background-color: var(--u-bg-light);
 }
 
-.university-prose tbody tr:hover td {
-  background-color: #f0f6fb;
+.university-prose tbody tr:hover {
+  background-color: #f1f5f9;
 }
 
-/* Links */
-.university-prose a {
-  color: var(--u-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-weight: 600;
-  transition: var(--u-transition);
-}
-
-.university-prose a:hover {
-  color: var(--u-accent);
-}
-
-/* Blockquotes */
+/* ── Blockquotes ── */
 .university-prose blockquote {
-  border-left: 4px solid var(--u-accent);
+  border-left: 5px solid var(--u-primary);
   background-color: var(--u-bg-light);
-  padding: 1rem 1.5rem;
-  margin: 1.5rem 0;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  font-size: 1.2rem;
   font-style: italic;
-  color: #4b5563;
+  color: #334155;
+  border-radius: 0 8px 8px 0;
+  position: relative;
 }
+
+.university-prose blockquote::before {
+  content: "“";
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 4rem;
+  color: var(--u-primary);
+  opacity: 0.1;
+  font-family: serif;
+}
+
+/* ── Custom Utilities for Editor.js ── */
+.university-prose figure { margin: 2rem 0; text-align: center; }
+.university-prose figcaption { font-size: 0.875rem; color: #64748b; margin-top: 0.75rem; font-style: italic; }

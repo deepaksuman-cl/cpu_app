@@ -1,6 +1,7 @@
 import { ChevronRight, Facebook, GraduationCap, Instagram, Linkedin, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react";
 import { getFooter } from "@/lib/actions/footerActions";
 import Link from 'next/link';
+import RichTextRenderer from "../common/RichTextRenderer";
 
 const IconMap = {
   Facebook,
@@ -88,7 +89,12 @@ export default async function Footer() {
                 )}
 
                 {col.columnType === 'text' && (
-                  <div className="text-sm prose prose-invert max-w-none" style={{ color: "#94a3b8" }} dangerouslySetInnerHTML={{ __html: col.content }} />
+                  <RichTextRenderer 
+                    content={col.content} 
+                    useProse={col.useProse !== false}
+                    className="text-sm prose-invert max-w-none" 
+                    style={{ color: "#94a3b8" }} 
+                  />
                 )}
               </div>
             ))}

@@ -3,6 +3,7 @@ import React from "react";
 import * as LucideIcons from "lucide-react";
 import { Star, ArrowRight } from "lucide-react";
 import StructuredTitle from "@/components/common/StructuredTitle";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 export default function SchoolHero({ data, children }) {
   if (!data) return null;
@@ -52,10 +53,16 @@ export default function SchoolHero({ data, children }) {
             </h1>
 
             {data.subtitle && (
-              <p className="text-[#ffb900] text-xl font-black uppercase tracking-widest mb-6 opacity-90 drop-shadow-md" dangerouslySetInnerHTML={{ __html: data.subtitle }} />
+              <RichTextRenderer 
+                content={data.subtitle} 
+                className="text-[#ffb900] text-xl font-black uppercase tracking-widest opacity-90 drop-shadow-md" 
+              />
             )}
 
-            <p className="text-blue-100/90 text-lg leading-relaxed mb-6 max-w-xl" dangerouslySetInnerHTML={{ __html: data.description }} />
+            <RichTextRenderer 
+              content={data.description} 
+              className="text-blue-100/90 text-lg leading-relaxed mb-6 max-w-xl" 
+            />
 
             {/* Course Information Chip (Duration/Eligibility) */}
             {(data.duration || data.eligibility) && (

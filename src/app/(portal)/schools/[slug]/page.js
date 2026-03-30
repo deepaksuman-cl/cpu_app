@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
-import Breadcrumb from "@/components/ui/Breadcrumb";
 import SchoolHero from "@/components/pages/schools/SchoolHero";
 import SchoolStats from "@/components/pages/schools/SchoolStats";
 import SchoolAbout from "@/components/pages/schools/SchoolAbout";
@@ -40,12 +39,6 @@ export default async function SchoolPage({ params }) {
   // Render components using structured fields
   return (
     <main className="min-h-screen bg-white">
-      <Breadcrumb paths={school.breadcrumb || [
-        { label: "Home", link: "/" },
-        { label: "Schools & Departments", link: "/schools" },
-        { label: school.name || school.hero?.title?.main, link: `/schools/${currentSlug}` }
-      ]} />
-      
       {school.hero && !school.hero.hide && <SchoolHero data={school.hero} />}
       {school.stats && !school.stats[0]?.hide && <SchoolStats data={school.stats} />}
       {school.about && !school.about.hide && <SchoolAbout data={school.about} />}

@@ -39,7 +39,7 @@ const BLOCK_DEFINITIONS = [
 ];
 
 const getEmptyBlock = (type) => {
-  const base = { blockType: type, content: '', image: '', imageHeight: '', imageWidth: '', isReversed: false, cssId: '', cssClass: '', splitConfig: '50-50', singleImage: { path: '', height: '', width: '', align: 'center' }, galleryHeading: { badge: '', title: '', highlight: '', description: '' }, accordionItems: [], profileItems: [], statsItems: [] };
+  const base = { blockType: type, content: '', useProse: true, image: '', imageHeight: '', imageWidth: '', isReversed: false, cssId: '', cssClass: '', splitConfig: '50-50', singleImage: { path: '', height: '', width: '', align: 'center' }, galleryHeading: { badge: '', title: '', highlight: '', description: '' }, accordionItems: [], profileItems: [], statsItems: [] };
   if (type === 'Accordion') base.accordionItems = [{ title: '', content: '' }];
   if (type === 'ProfileGrid') base.profileItems = [{ name: '', designation: '', company: '', image: '' }];
   if (type === 'StatsGrid') base.statsItems = [{ label: '', value: '', icon: '' }];
@@ -408,13 +408,13 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
               {/* Block Body Content based on type */}
               <div className="p-5">
                 
-                {/* Block-Level Advanced Settings (ID/Class) */}
-                <div className="mb-6 pb-4 border-b border-gray-100 grid grid-cols-2 gap-4">
-                   <div>
+                {/* Block-Level Advanced Settings (ID/Class/Style) */}
+                <div className="mb-6 pb-4 border-b border-gray-100 flex flex-wrap gap-4 items-end">
+                   <div className="flex-1 min-w-[150px]">
                       <label className="block text-[9px] font-bold text-gray-400 uppercase mb-1">Block CSS ID</label>
                       <input type="text" value={block.cssId || ''} onChange={e => updateBlock(index, 'cssId', e.target.value)} className="w-full border border-gray-200 p-1.5 text-xs outline-none focus:border-[var(--color-primary)] font-mono" placeholder="section-unique-id" />
                    </div>
-                   <div>
+                   <div className="flex-1 min-w-[150px]">
                       <label className="block text-[9px] font-bold text-gray-400 uppercase mb-1">Block CSS Class</label>
                       <input type="text" value={block.cssClass || ''} onChange={e => updateBlock(index, 'cssClass', e.target.value)} className="w-full border border-gray-200 p-1.5 text-xs outline-none focus:border-[var(--color-primary)] font-mono" placeholder="custom-section-class" />
                    </div>
@@ -423,7 +423,12 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                 {block.blockType === 'RichTextFull' && (
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase mb-2">Rich Text Paragraph Content</label>
-                    <RichTextEditor value={block.content} onChange={(val) => updateBlock(index, 'content', val)} />
+                    <RichTextEditor 
+                      value={block.content} 
+                      onChange={(val) => updateBlock(index, 'content', val)} 
+                      useProse={block.useProse !== false}
+                      onProseChange={(val) => updateBlock(index, 'useProse', val)}
+                    />
                   </div>
                 )}
 
@@ -446,7 +451,12 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-xs font-bold text-gray-700 uppercase mb-2">Text Side Content</label>
-                        <RichTextEditor value={block.content} onChange={(val) => updateBlock(index, 'content', val)} />
+                        <RichTextEditor 
+                          value={block.content} 
+                          onChange={(val) => updateBlock(index, 'content', val)} 
+                          useProse={block.useProse !== false}
+                          onProseChange={(val) => updateBlock(index, 'useProse', val)}
+                        />
                       </div>
                       <div className="border border-gray-200 p-4">
                         <label className="block text-xs font-bold text-gray-700 uppercase mb-2">Visual Side Media</label>
@@ -495,7 +505,12 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                           </div>
                           <div>
                             <label className="block text-xs font-bold text-gray-600 mb-1">Expanded Content (HTML)</label>
-                            <RichTextEditor value={item.content} onChange={val => updateArrayItem(index, 'accordionItems', aIdx, 'content', val)} />
+                            <RichTextEditor 
+                              value={item.content} 
+                              onChange={val => updateArrayItem(index, 'accordionItems', aIdx, 'content', val)} 
+                              useProse={item.useProse !== false}
+                              onProseChange={val => updateArrayItem(index, 'accordionItems', aIdx, 'useProse', val)}
+                            />
                           </div>
                         </div>
                       ))}
@@ -854,7 +869,12 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                         </div>
                         <div>
                           <label className="block text-[10px] font-bold text-gray-400 uppercase mb-2">Rich Text Message HTML</label>
-                          <RichTextEditor value={block.leaderProfile?.messageHTML || ''} onChange={val => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, messageHTML: val })} />
+                          <RichTextEditor 
+                            value={block.leaderProfile?.messageHTML || ''} 
+                            onChange={val => updateBlock(index, 'leaderProfile', { ...block.leaderProfile, messageHTML: val })} 
+                            useProse={block.useProse !== false}
+                            onProseChange={val => updateBlock(index, 'useProse', val)}
+                          />
                         </div>
                         <div>
                           <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1">Vision Quote / Bottom Line</label>
