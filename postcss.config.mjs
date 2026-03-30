@@ -1,7 +1,7 @@
 /** @type {import('postcss-load-config').Config} */
 const config = {
   plugins: {
-    tailwindcss: {},
+    '@tailwindcss/postcss': {},
     autoprefixer: {
       flexbox: 'no-2009', // Purane browsers ke liye flexbox fix
     },
