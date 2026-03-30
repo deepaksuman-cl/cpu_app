@@ -12,13 +12,15 @@ module.exports = {
         metaTitle: "School of Basic & Applied Sciences | Career Point University",
         metaDescription: "Pioneering research and innovation in Physics, Chemistry, Mathematics, and Biosciences. Discover our premier science programs.",
         
-        breadcrumb: JSON.stringify([
+        // ❌ NO JSON.stringify - ✅ RAW ARRAY
+        breadcrumb: [
           { "label": "Home", "link": "/" },
           { "label": "Schools & Departments", "link": "/schools" },
           { "label": "Basic & Applied Sciences", "link": "/schools/basic-applied-science" }
-        ]),
+        ],
         
-        hero: JSON.stringify({
+        // ❌ NO JSON.stringify - ✅ RAW OBJECT
+        hero: {
           "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
           "badge": "Center of Scientific Excellence & Innovation",
           "title": { 
@@ -31,16 +33,16 @@ module.exports = {
             { "label": "Apply Now", "link": "#", "primary": true },
             { "label": "Explore Programs", "link": "#programs", "primary": false }
           ]
-        }),
+        },
 
-        stats: JSON.stringify([
+        stats: [
           { "value": "18L", "label": "Highest Package", "icon": "TrendingUp" },
           { "value": "300+", "label": "Research Papers", "icon": "BookOpen" },
           { "value": "25+", "label": "Patents Filed", "icon": "FlaskConical" },
           { "value": "40+", "label": "Industry Partners", "icon": "Briefcase" }
-        ]),
+        ],
 
-        about: JSON.stringify({
+        about: {
           "vision": {
             "title": "Vision", 
             "label": "Our Purpose", 
@@ -63,9 +65,9 @@ module.exports = {
               "Collaborate with leading scientific organizations and biotech industries."
             ]
           }
-        }),
+        },
 
-        programmes: JSON.stringify({
+        programmes: {
           "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
           "title": { "main": "Our Programmes", "highlight": "Programmes" },
           "subtitle": "Academic Offerings",
@@ -77,7 +79,7 @@ module.exports = {
               "courses": [
                 {
                   "name": "Bachelor of Science (B.Sc.)",
-                  "slug": "bsc", // 🔥 Bas ye dummy slug yahan rahega, jaise tumne kaha tha.
+                  "slug": "bsc", 
                   "specializations": [
                     { "name": "Physics", "slug": "physics" },
                     { "name": "Chemistry", "slug": "chemistry" },
@@ -94,7 +96,7 @@ module.exports = {
               "courses": [
                 {
                   "name": "Master of Science (M.Sc.)",
-                  "slug": "msc", // 🔥 Dummy slug
+                  "slug": "msc",
                   "specializations": [
                     { "name": "Organic Chemistry", "slug": "organic-chemistry" },
                     { "name": "Applied Physics", "slug": "applied-physics" },
@@ -109,15 +111,15 @@ module.exports = {
               "courses": [
                 {
                   "name": "Ph.D. in Science",
-                  "slug": "phd-science", // 🔥 Dummy slug
+                  "slug": "phd-science",
                   "description": "Advanced doctoral research in fundamental and applied sciences."
                 }
               ]
             }
           ]
-        }),
+        },
 
-        placements: JSON.stringify({
+        placements: {
           "title": { "main": "Science Graduates in Top Organizations", "highlight": "Top Organizations" },
           "label": "Placement Records",
           "subtitle": "Outstanding placements in Pharma, R&D, and Tech sectors",
@@ -127,9 +129,9 @@ module.exports = {
             { "name": "Vikram Singh", "company": "DRDO (Research Intern)", "pkg": "Stipend", "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png" },
             { "name": "Megha Nair", "company": "Sun Pharma", "pkg": "10.5 LPA", "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg" }
           ]
-        }),
+        },
 
-        alumni: JSON.stringify({
+        alumni: {
           "title": { "main": "Scientists Making a Global Impact", "highlight": "Impact" },
           "label": "Our Alumni",
           "list": [
@@ -137,9 +139,9 @@ module.exports = {
             { "name": "Ananya Patil", "role": "Quality Control Head", "company": "Pfizer", "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png" },
             { "name": "Rahul Verma", "role": "Data Analyst", "company": "Accenture", "img": "https://cpur.in/wp-content/uploads/2023/08/harsh.jpg" }
           ]
-        }),
+        },
 
-        industry: JSON.stringify({
+        industry: {
           "title": { "main": "Scientific & Industry Tie Up's", "highlight": "Tie Up's" },
           "label": "Collaborations",
           "partners": [
@@ -148,9 +150,9 @@ module.exports = {
             { "name": "Serum Institute", "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg" },
             { "name": "Dr. Reddy's", "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg" }
           ]
-        }),
+        },
 
-        research: JSON.stringify({
+        research: {
           "title": { "main": "Scientific Research Excellence", "highlight": "Excellence" },
           "label": "Eminence Research",
           "gallery": [
@@ -164,9 +166,9 @@ module.exports = {
             { "value": "12+", "label": "Govt. Funded Projects", "icon": "Briefcase" },
             { "value": "50+", "label": "International Conferences", "icon": "Presentation" }
           ]
-        }),
+        },
 
-        community: JSON.stringify({
+        community: {
           "title": { "main": "A Community of Innovators", "highlight": "Innovators" },
           "label": "Community",
           "description": [
@@ -177,9 +179,9 @@ module.exports = {
             { "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-7-1.jpg", "caption": "Advanced Chemistry Lab Session" },
             { "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-12-1.jpg", "caption": "Annual Science Exhibition" }
           ]
-        }),
+        },
 
-        infrastructure: JSON.stringify({
+        infrastructure: {
           "title": { "main": "World-Class Science Infrastructure", "highlight": "Infrastructure" },
           "label": "Campus",
           "list": [
@@ -187,30 +189,30 @@ module.exports = {
             { "title": "High-Performance Computing Lab", "desc": "For complex mathematical modeling and computational physics.", "img": "https://img.freepik.com/free-photo/network-server-room_1048-2200.jpg" },
             { "title": "Modern Bioscience Labs", "desc": "Bio-safety cabinets, incubators, and genetic testing equipment.", "img": "https://img.freepik.com/free-photo/lab-dummy.jpg" }
           ]
-        }),
+        },
 
-        testimonials: JSON.stringify({
+        testimonials: {
           "title": { "main": "Our Science Scholars Speak", "highlight": "Speak" },
           "label": "Testimonials",
           "list": [
             { "name": "Aditi Sharma", "batch": "M.Sc. 2022", "company": "Biocon", "emoji": "🧬", "rating": 5, "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png", "text": "The lab facilities here are at par with industry standards. The practical exposure I got directly helped me secure my placement in R&D." },
             { "name": "Vikram Singh", "batch": "B.Sc. 2021", "company": "Research Intern", "emoji": "🔭", "rating": 5, "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png", "text": "CPU's faculty didn't just teach us from books; they involved us in their live research projects. It completely changed my perspective on Physics." }
           ]
-        }),
+        },
 
-        exploreDepartment: JSON.stringify({
+        exploreDepartment: {
           "sectionTitle": { "main": "Explore School of Basic & Applied Sciences", "highlight": "School" },
           "subtitle": "Discover our specialized labs, research cells, and scientific societies",
           "items": [
             { "title": "Department at a Glance", "icon": "Building2", "items": ["National Science Fests", "Guest Lectures by ISRO/CSIR Scientists", "Science Club Activities", "Placement Drives", "Industrial Lab Visits"], "cta": "VIEW MORE" },
             { "title": "Exclusive Facilities", "icon": "FlaskConical", "items": ["Central Instrumentation Facility", "Biosafety Level 2 Lab", "Computational Mathematics Lab", "Botanical Garden"], "cta": "VIEW MORE" }
           ]
-        }),
+        },
 
         createdAt: new Date(),
         updatedAt: new Date()
       }
-    ], {});
+    ], {}); // Yahan ek empty object pass hota hai Sequelize options ke liye (bulkInsert syntax)
   },
 
   async down(queryInterface, Sequelize) {
