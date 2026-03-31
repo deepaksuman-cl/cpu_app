@@ -1,0 +1,3400 @@
+{
+  "legal-studies": {
+    "slug": "legal-studies",
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "link": "/"
+      },
+      {
+        "label": "Schools & Departments",
+        "link": "/schools"
+      },
+      {
+        "label": "School of Legal Studies",
+        "link": "/schools/legal-studies"
+      }
+    ],
+    "hero": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "badge": "Premier Law School Approved by BCI",
+      "title": {
+        "main": "School of Legal Studies",
+        "highlight": "Legal",
+        "skyHighlight": "Studies"
+      },
+      "description": "Forge a career in justice, corporate law, and public policy. Experience rigorous legal training through live Moot Courts, legal aid clinics, and expert mentorship by practicing advocates.",
+      "cta": [
+        {
+          "label": "Apply Now",
+          "link": "#",
+          "primary": true
+        },
+        {
+          "label": "Explore Programs",
+          "link": "#programs",
+          "primary": false
+        }
+      ]
+    },
+    "stats": [
+      {
+        "value": "12L",
+        "label": "Highest Package",
+        "icon": "TrendingUp"
+      },
+      {
+        "value": "500+",
+        "label": "Moot Court Hours",
+        "icon": "Scale"
+      },
+      {
+        "value": "100%",
+        "label": "Court Internships",
+        "icon": "Briefcase"
+      }
+    ],
+    "about": {
+      "vision": {
+        "title": "Vision",
+        "label": "Our Purpose",
+        "icon": "Target",
+        "text": "To establish a center of excellence in legal education that nurtures ethical, socially responsible, and globally competent legal professionals dedicated to upholding justice and the rule of law.",
+        "highlights": [
+          {
+            "value": "1000+",
+            "label": "Law Graduates"
+          },
+          {
+            "value": "40+",
+            "label": "Corporate Law Firms"
+          },
+          {
+            "value": "Top 10",
+            "label": "Law School in State"
+          }
+        ]
+      },
+      "mission": {
+        "title": "Mission",
+        "label": "Our Goal",
+        "icon": "Lightbulb",
+        "points": [
+          "Deliver Bar Council of India (BCI) approved curriculum through dynamic and experiential teaching methods.",
+          "Foster practical advocacy skills through rigorous Moot Court competitions and Legal Aid Clinics.",
+          "Instill strong moral ethics and professional integrity required for the modern legal landscape.",
+          "Facilitate high-quality internships with reputed law firms, NGOs, and senior advocates."
+        ]
+      }
+    },
+    "programmes": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "title": {
+        "main": "Our Programmes",
+        "highlight": "Programmes"
+      },
+      "subtitle": "Academic Offerings",
+      "description": "Explore our comprehensive range of Integrated Law Degrees, Postgraduate studies, and Doctoral research programs.",
+      "levels": [
+        {
+          "label": "After 12th Pass/ \"A\" Level",
+          "icon": "GraduationCap",
+          "courses": [
+            {
+              "name": "BBA + LLB (Integrated)",
+              "slug": "bba-llb",
+              "specializations": []
+            },
+            {
+              "name": "BA + LLB (Integrated)",
+              "slug": "ba-llb",
+              "specializations": []
+            }
+          ]
+        },
+        {
+          "label": "After Graduation / Equivalent",
+          "icon": "BookOpen",
+          "courses": [
+            {
+              "name": "LLB (Bachelor of Laws)",
+              "slug": "llb",
+              "specializations": []
+            },
+            {
+              "name": "LLM (Master of Laws)",
+              "slug": "llm",
+              "specializations": []
+            }
+          ]
+        },
+        {
+          "label": "After Post Graduation / Equivalent",
+          "icon": "Microscope",
+          "courses": [
+            {
+              "name": "Ph.D. (Law)",
+              "slug": "research-phd",
+              "description": "Research-focused doctoral programme in Legal Studies",
+              "redirectUrl": "/research-phd"
+            }
+          ]
+        }
+      ]
+    },
+    "courseDetails": {
+     "bba-llb": {
+        "title": "BBA + LLB (Integrated)",
+        "duration": "5 Years",
+        "eligibility": "10+2 in any stream with minimum 50% marks from a recognized board (CLAT/LSAT scores preferred)",
+        "description": "A 5-year integrated professional law degree approved by the BCI, bridging the gap between business management and legal intricacies for future corporate lawyers.",
+        "metaTitle": "BBA + LLB (Integrated) Course | Legal Studies | CPU",
+        "metaDescription": "Pursue a 5-year BBA LLB at Career Point University. BCI approved curriculum, mandatory Moot Courts, and top placements in corporate law firms.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "5-Year BCI Approved Integrated Law Degree",
+          "title": {
+            "main": "BBA + LLB (Integrated)",
+            "line1": "BBA + LLB",
+            "line2": "Integrated",
+            "line3": "Degree",
+            "highlight": "BBA",
+            "skyHighlight": "+ LLB"
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "10L+"
+            },
+            {
+              "label": "Court Internships",
+              "value": "20 Weeks"
+            }
+          ],
+          "description": "Master the boardroom and the courtroom. Combine business acumen with rigorous legal training to become a highly sought-after corporate legal expert."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Corporate Lawyers Placed",
+              "value": "800+"
+            },
+            {
+              "icon": "Briefcase",
+              "label": "Highest Package",
+              "value": "10.5 L"
+            },
+            {
+              "icon": "Scale",
+              "label": "Moot Court Awards",
+              "value": "45+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Live Legal Drafts",
+              "value": "500+"
+            },
+            {
+              "icon": "Globe",
+              "label": "Law Firm Tie-ups",
+              "value": "25+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni in Judiciary",
+              "value": "50+"
+            }
+          ],
+          "heading": "Department's Legal Accomplishments & Impact",
+          "trustBadge": "✓ Approved by the Bar Council of India (BCI)"
+        },
+        "overview": {
+          "tags": [
+            "5 Years Duration",
+            "10 Semesters",
+            "Moot Court Focused",
+            "BCI Approved"
+          ],
+          "subtitle": "What is the BBA+LLB Programme?",
+          "gridCards": [
+            {
+              "sub": "Corporate & Tax",
+              "icon": "Briefcase",
+              "label": "Business Law"
+            },
+            {
+              "sub": "Crime & Penal Code",
+              "icon": "Scale",
+              "label": "Criminal Law"
+            },
+            {
+              "sub": "Rights & Duties",
+              "icon": "Users",
+              "label": "Constitutional Law"
+            },
+            {
+              "sub": "Agreements & Drafts",
+              "icon": "FileText",
+              "label": "Contracts Law"
+            }
+          ],
+          "paragraphs": [
+            "The BBA+LLB is a dual-degree integrated program that saves students one academic year. It is explicitly designed for students who want to dominate the corporate legal sector. The program merges the core principles of Business Administration (HR, Finance, Marketing) with the strict, analytical frameworks of Indian and International Law.",
+            "Approved by the Bar Council of India (BCI), the pedagogy shifts away from pure textbook learning. Students are trained through highly competitive Moot Courts (simulated trials), client counseling sessions, and mandatory 20-week internships spanning trial courts, appellate courts, and corporate law firms."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "A BBA+LLB graduate is uniquely positioned to understand both the business objectives of a company and the legal boundaries it must operate within. They are aggressively recruited by Top Tier Law Firms (Khaitan & Co, Amarchand Mangaldas), Corporate Legal Departments (as In-House Counsel), Legal Process Outsourcing (LPO) companies, and Investment Banks. Alternatively, graduates can directly enroll with the Bar Council and practice as independent litigation advocates in High Courts and the Supreme Court.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in corporate law and litigation",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A BCI-mandated curriculum blending business with justice",
+          "introNote": "The first two years heavily integrate business management subjects with foundational law, transitioning into pure, advanced legal frameworks in the final three years.",
+          "outroNote": "Students must complete 20 weeks of mandatory internships across NGOs, Trial Courts, High Courts, and Law Firms.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 60,
+              "category": "Management Core",
+              "shortName": "MC",
+              "description": "Economics, HR & Corporate Finance"
+            },
+            {
+              "credits": 100,
+              "category": "Legal Core",
+              "shortName": "LC",
+              "description": "Constitutional, Criminal & Corporate Law"
+            },
+            {
+              "credits": 24,
+              "category": "Clinical Papers",
+              "shortName": "CP",
+              "description": "Drafting, Pleading & Moot Court Prep"
+            },
+            {
+              "credits": 16,
+              "category": "Internships",
+              "shortName": "IN",
+              "description": "20 Weeks Mandatory Legal Internship"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The 5-year BBA+LLB program spans 10 semesters. Years 1 and 2 introduce business concepts (Accounting, Marketing) alongside basic law (Torts, Contracts). Years 3, 4, and 5 dive deeply into substantive and procedural laws (IPC, CrPC, Evidence Act), culminating in intensive Clinical Legal Education (Drafting, Moot Courts) and final internships.",
+              "hasTable": true
+            },
+            {
+              "id": "y1",
+              "title": "Year-1: Foundation of Business & Law",
+              "content": "Principles of Management, Managerial Economics, Legal Methods, Law of Torts, Law of Contracts I, English & Legal Language, Financial Accounting."
+            },
+            {
+              "id": "y2",
+              "title": "Year-2: Connecting Management to Justice",
+              "content": "Human Resource Management, Law of Contracts II, Constitutional Law I & II, Family Law I (Hindu Law), Family Law II (Muslim Law), Jurisprudence."
+            },
+            {
+              "id": "y3",
+              "title": "Year-3: Substantive Legal Frameworks",
+              "content": "Law of Crimes I (IPC), Corporate Law / Company Law, Property Law, Administrative Law, Labour & Industrial Law I, Public International Law."
+            },
+            {
+              "id": "y4",
+              "title": "Year-4: Procedural Laws & Evidence",
+              "content": "Law of Crimes II (CrPC), Civil Procedure Code (CPC) & Limitation Act, Law of Evidence, Taxation Law, Environmental Law, Labour Law II."
+            },
+            {
+              "id": "y5",
+              "title": "Year-5: Clinical Papers & Specialization",
+              "content": "Drafting, Pleading and Conveyancing (Clinical), Moot Court Exercise and Internship (Clinical), Professional Ethics (Clinical), Alternative Dispute Resolution (Clinical), Intellectual Property Rights (IPR), Cyber Law."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Advanced Legal Drafting Workshop",
+              "credits": 2
+            },
+            {
+              "name": "Alternative Dispute Resolution (Arbitration)",
+              "credits": 2
+            },
+            {
+              "name": "Corporate Mergers & Acquisitions (M&A)",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for BBA-LLB",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "45,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Moot Court & Clinical Fee",
+              "amount": "4,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "5,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through CLAT/LSAT scores or CPU Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "CLAT Rank < 5000",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "12th Board > 85%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "12th Board 75% – 84%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Heavy scholarships are awarded to students with high CLAT or LSAT scores.",
+            "Merit scholarship is also offered based on 12th Board marks (Any stream).",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "If a student fails to maintain the required academic standards, they may lose scholarship eligibility."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "5000",
+              "3000",
+              "2000",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "Save an entire academic year by pursuing this 5-year integrated dual degree instead of doing a traditional 3-year graduation followed by a 3-year LLB.",
+              "icon": "TrendingUp",
+              "title": "Save One Academic Year"
+            },
+            {
+              "desc": "The combination of Business Administration and Law makes you the perfect candidate for high-paying roles as a Corporate Legal Advisor or In-House Counsel.",
+              "icon": "Briefcase",
+              "title": "Corporate Law Advantage"
+            },
+            {
+              "desc": "Our advanced Moot Court halls allow you to practice arguments, cross-examinations, and legal research exactly like a real High Court environment.",
+              "icon": "Scale",
+              "title": "Intensive Moot Court Training"
+            },
+            {
+              "desc": "The university's placement cell guarantees placement assistance in top law firms, legal consultancies, and LPO sectors.",
+              "icon": "Target",
+              "title": "Law Firm Placements"
+            },
+            {
+              "desc": "The curriculum provides a strong foundation for clearing the prestigious Judicial Services Examinations (Civil Judge) and UPSC.",
+              "icon": "Award",
+              "title": "Judiciary Exam Prep"
+            }
+          ],
+          "subtitle": "Unlock your potential with an Integrated Law Degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "A fully functional Legal Aid Clinic where students provide free legal advice to the public under the guidance of senior advocates.",
+              "icon": "Users",
+              "title": "Live Legal Aid Clinic"
+            },
+            {
+              "num": "07",
+              "desc": "Access to premium digital law libraries including SCC Online, Manupatra, and LexisNexis for comprehensive case research.",
+              "icon": "BookOpen",
+              "title": "Digital Law Library"
+            },
+            {
+              "num": "08",
+              "desc": "Learn the art of drafting legal documents—from business contracts to bail applications—in dedicated clinical labs.",
+              "icon": "FileText",
+              "title": "Legal Drafting Labs"
+            },
+            {
+              "num": "09",
+              "desc": "A mandatory 20-week internship program ensuring students rotate through NGOs, Trial Courts, and Corporate Firms.",
+              "icon": "Activity",
+              "title": "20-Week Legal Internship"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload 12th standard marksheets, CLAT scorecard (if applicable), and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select BBA+LLB (Integrated).",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for the legal screening process.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the BBA-LLB programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have passed 10+2 from a recognized board with a minimum of 50% marks. Students from ANY stream (Arts, Commerce, or Science) are eligible to apply for this course.",
+              "q": "What is the eligibility criteria? Can Arts/Science students apply?"
+            },
+            {
+              "a": "It is a 5-year (10 semester) integrated degree program. The tuition fee is ₹45,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "A traditional LLB is a 3-year course done after graduation (total 6 years). BBA+LLB is a 5-year integrated course done directly after 12th, saving you one full academic year.",
+              "q": "Why should I choose 5-Year Integrated LLB over a 3-Year LLB?"
+            },
+            {
+              "a": "BA+LLB integrates Arts subjects (History, Political Science) with law, making it great for UPSC/Litigation. BBA+LLB integrates Business subjects (Management, Accounts) making it the absolute best choice for Corporate Law.",
+              "q": "What is the difference between BBA-LLB and BA-LLB?"
+            },
+            {
+              "a": "Yes! The program is fully approved by the Bar Council of India (BCI). Upon graduation, you are eligible to enroll with your State Bar Council and practice in any court in India.",
+              "q": "Is this degree approved by the Bar Council of India (BCI)?"
+            },
+            {
+              "a": "Graduates are hired by top Law Firms, Corporate Legal Departments, Banks, and LPO companies. You can also practice independently or attempt the Judicial Services Examination to become a judge.",
+              "q": "What kind of jobs will I get after BBA-LLB?"
+            },
+            {
+              "a": "Yes, we strongly encourage applicants with CLAT or LSAT scores, and they are eligible for heavy scholarships. However, non-CLAT students can also apply via the CPU entrance test.",
+              "q": "Do I need a CLAT score to get admission?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the BBA-LLB programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "BCI Approved Curriculum",
+              "National Moot Court Events",
+              "Mandatory 20-Week Internships",
+              "Corporate Law Firm Placements",
+              "Judiciary Exam Coaching",
+              "Legal Aid Clinics"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Advanced Moot Court Room",
+              "Legal Aid Counseling Center",
+              "Digital Law Library (Manupatra)",
+              "Alternative Dispute Resolution (ADR) Cell"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Law Firm Placements",
+              "Judiciary Exam Selections",
+              "Alumni Network (Advocates)",
+              "Latest Supreme Court Judgments",
+              "Upcoming Legal Conclaves",
+              "Important Resources"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "5 Year Legal Leadership Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from high school to a corporate legal expert.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Business & Legal Basics",
+              "contentTitle": "Mastering the Foundations",
+              "contentDesc": "The first year introduces you to the corporate world through management principles, alongside the foundational pillars of law like Contracts and Torts.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Basic Legal Research",
+                "Understanding Contracts",
+                "Corporate Management"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Contracts",
+                  "desc": "How agreements work",
+                  "icon": "🤝"
+                },
+                {
+                  "title": "Management",
+                  "desc": "Business fundamentals",
+                  "icon": "⚙️"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Contract Drafting",
+                  "desc": "Writing basic agreements",
+                  "companies": "Legal Clinic",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Principles of Management",
+                "Legal Methods",
+                "Law of Torts",
+                "Law of Contracts I"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Constitutional Law",
+              "contentTitle": "Rights, Duties & Family Law",
+              "contentDesc": "The second year delves deeply into the Constitution of India, understanding human rights, and the intricacies of Hindu and Muslim Family Law.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Constitutional Interpretation",
+                "HR Management",
+                "Family Dispute Analysis"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Constitution",
+                  "desc": "The supreme law of India",
+                  "icon": "📜"
+                },
+                {
+                  "title": "Family Law",
+                  "desc": "Marriage & succession laws",
+                  "icon": "👨‍👩‍👧"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Writ Petition Draft",
+                  "desc": "Drafting constitutional appeals",
+                  "companies": "Moot Court",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Human Resource Management",
+                "Constitutional Law I & II",
+                "Family Law (Hindu/Muslim)",
+                "Jurisprudence"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "YEAR 3",
+              "tabTitle": "Criminal & Corp Law",
+              "contentTitle": "Crimes, Companies & Properties",
+              "contentDesc": "The third year focuses heavily on Substantive Laws—learning the Indian Penal Code (IPC), Corporate/Company Law, and Property transfer laws.",
+              "badge": "YEAR-3",
+              "skills": [
+                "Criminal Case Analysis",
+                "Corporate Compliance",
+                "Property Title Checking"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "IPC",
+                  "desc": "Indian Penal Code (Crimes)",
+                  "icon": "⚖️"
+                },
+                {
+                  "title": "Corporate Law",
+                  "desc": "Rules for running companies",
+                  "icon": "🏢"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Company Incorporation",
+                  "desc": "Filing mock RoC documents",
+                  "companies": "Corporate Lab",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Law of Crimes I (IPC)",
+                "Corporate / Company Law",
+                "Property Law",
+                "Administrative Law"
+              ]
+            },
+            {
+              "id": 4,
+              "tabLabel": "YEAR 4",
+              "tabTitle": "Procedural Laws",
+              "contentTitle": "How the Courts Function",
+              "contentDesc": "Year four moves from 'what is the law' to 'how to apply it in court'. Master the Criminal Procedure Code (CrPC), Civil Procedure (CPC), and Evidence Act.",
+              "badge": "YEAR-4",
+              "skills": [
+                "Filing FIRs & Bail",
+                "Cross-Examination Strategy",
+                "Tax Computation"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "CrPC & CPC",
+                  "desc": "Court procedures",
+                  "icon": "🏛️"
+                },
+                {
+                  "title": "Evidence",
+                  "desc": "Proving facts in court",
+                  "icon": "🔍"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Mock Trial",
+                  "desc": "Conducting a full trial",
+                  "companies": "Moot Court Hall",
+                  "color": "#9b0000"
+                }
+              ],
+              "subjects": [
+                "Law of Crimes II (CrPC)",
+                "Civil Procedure Code (CPC)",
+                "Law of Evidence",
+                "Taxation Law"
+              ]
+            },
+            {
+              "id": 5,
+              "tabLabel": "YEAR 5",
+              "tabTitle": "Clinical & Internship",
+              "contentTitle": "Ready for the Bar",
+              "contentDesc": "The final year is entirely clinical. You will draft real legal documents, participate in national Moot Courts, and complete extensive mandatory internships.",
+              "badge": "YEAR-5",
+              "skills": [
+                "Advanced Legal Drafting",
+                "Courtroom Advocacy",
+                "Arbitration & Mediation"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Drafting",
+                  "desc": "Writing flawless legal pleas",
+                  "icon": "📝"
+                },
+                {
+                  "title": "Internship",
+                  "desc": "20 Weeks field experience",
+                  "icon": "💼"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "20-Week Internship",
+                  "desc": "Working in Courts/Law Firms",
+                  "companies": "Corporate / Courts",
+                  "color": "#107c41"
+                }
+              ],
+              "subjects": [
+                "Drafting, Pleading & Conveyancing",
+                "Moot Court Exercise",
+                "Alternative Dispute Resolution",
+                "Cyber Law & IPR"
+              ]
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Our Future Advocates Speak",
+            "highlight": "Speak"
+          },
+          "label": "Testimonials",
+          "list": [
+            {
+              "name": "Neha Agarwal",
+              "batch": "BBA LLB 2022",
+              "company": "Corporate Lawyer, AZB",
+              "emoji": "💼",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+              "text": "Combining Business Administration with Law was the best decision. I now handle corporate compliance and mergers for a top firm. CPU's corporate law faculty is excellent."
+            },
+            {
+              "name": "Aman Gupta",
+              "batch": "BBA LLB 2021",
+              "company": "High Court Advocate",
+              "emoji": "🏛️",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+              "text": "The mandatory court internships and rigorous clinical drafting classes gave me the exact practical exposure I needed to start my independent practice confidently."
+            },
+            {
+              "name": "Priya Sharma",
+              "batch": "BBA LLB 2020",
+              "company": "Legal Process Outsourcing",
+              "emoji": "⚖️",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg",
+              "text": "The Moot Court competitions completely eradicated my stage fear. Learning to research case laws using SCC Online prepared me for the high-pressure LPO sector."
+            }
+          ]
+        },
+        "exploreDepartment": {
+          "sectionTitle": {
+            "main": "Explore School of Legal Studies",
+            "highlight": "School"
+          },
+          "subtitle": "Discover our specialized law clinics, moot courts, and corporate training modules",
+          "items": [
+            {
+              "title": "Department at a Glance",
+              "icon": "Building2",
+              "items": [
+                "National Moot Court Competitions",
+                "Guest Lectures by High Court Judges",
+                "Legal Aid Camps",
+                "Corporate Law Firm Placements",
+                "Mock Parliaments",
+                "Debate Society"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Exclusive Facilities",
+              "icon": "FlaskConical",
+              "items": [
+                "Advanced Moot Court Room",
+                "Legal Aid Counseling Center",
+                "Digital Law Library (Manupatra)",
+                "Alternative Dispute Resolution (ADR) Cell"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Your Department in a Nutshell",
+              "icon": "Star",
+              "items": [
+                "Law Firm Placements",
+                "Judiciary Exam Selections",
+                "Alumni Network (Advocates)",
+                "Latest Supreme Court Judgments",
+                "Upcoming Legal Conclaves",
+                "Important Resources"
+              ],
+              "cta": "START NOW"
+            }
+          ]
+        }
+      },
+     "ba-llb": {
+        "title": "BA + LLB (Integrated)",
+        "duration": "5 Years",
+        "eligibility": "10+2 in any stream (Arts preferred) with minimum 50% marks from a recognized board (CLAT/LSAT scores preferred)",
+        "description": "A 5-year integrated BCI-approved law degree that combines Humanities with Law, designed perfectly for students aiming for the Judiciary, Civil Services, and core litigation.",
+        "metaTitle": "BA + LLB (Integrated) Course | Legal Studies | CPU",
+        "metaDescription": "Pursue a 5-year BA LLB at Career Point University. BCI approved curriculum tailored for Judiciary and UPSC aspirants. Top placements in litigation and law firms.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "5-Year BCI Approved Integrated Law Degree",
+          "title": {
+            "main": "BA + LLB (Integrated)",
+            "line1": "BA + LLB",
+            "line2": "Integrated",
+            "line3": "Degree",
+            "highlight": "BA",
+            "skyHighlight": "+ LLB"
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Judiciary Success",
+              "value": "High Selection Rate"
+            },
+            {
+              "label": "Court Internships",
+              "value": "20 Weeks"
+            }
+          ],
+          "description": "Become a champion of justice. Build a strong foundation in political science, history, and sociology, integrated seamlessly with intensive legal and constitutional studies."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Litigation Advocates",
+              "value": "1000+"
+            },
+            {
+              "icon": "Briefcase",
+              "label": "Highest Package",
+              "value": "9.5 L"
+            },
+            {
+              "icon": "Scale",
+              "label": "Judges & Magistrates",
+              "value": "60+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Policy Drafts Submitted",
+              "value": "150+"
+            },
+            {
+              "icon": "Globe",
+              "label": "NGO Tie-ups",
+              "value": "40+"
+            },
+            {
+              "icon": "Star",
+              "label": "UPSC Selections",
+              "value": "35+"
+            }
+          ],
+          "heading": "Department's Legal Accomplishments & Impact",
+          "trustBadge": "✓ Approved by the Bar Council of India (BCI)"
+        },
+        "overview": {
+          "tags": [
+            "5 Years Duration",
+            "10 Semesters",
+            "Judiciary Focused",
+            "BCI Approved"
+          ],
+          "subtitle": "What is the BA+LLB Programme?",
+          "gridCards": [
+            {
+              "sub": "State & Rights",
+              "icon": "Users",
+              "label": "Constitutional Law"
+            },
+            {
+              "sub": "Crime & Punishment",
+              "icon": "Scale",
+              "label": "Criminal Law"
+            },
+            {
+              "sub": "Society & Governance",
+              "icon": "Activity",
+              "label": "Political Science"
+            },
+            {
+              "sub": "Legal Origins",
+              "icon": "BookOpen",
+              "label": "Legal History"
+            }
+          ],
+          "paragraphs": [
+            "The BA+LLB is an integrated dual-degree program that combines a Bachelor of Arts (BA) with a Bachelor of Laws (LLB). This course is specifically tailored for students who have a deep interest in social sciences and public administration, making it the absolute best choice for those preparing for the UPSC (Civil Services) or State Judiciary Examinations.",
+            "By studying subjects like Sociology, Political Science, and History alongside Constitutional Law, IPC, and CrPC, students develop a holistic understanding of how laws are formed and how they impact society. The program is heavily focused on public speaking, debate, policy-making, and courtroom advocacy."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "A BA+LLB degree offers unparalleled opportunities in public service and litigation. Graduates are thoroughly prepared to crack the Judicial Services Exam to become Civil Judges or Magistrates. The strong humanities base makes it an ideal pre-requisite for cracking the UPSC exams (IAS/IPS). Furthermore, graduates establish successful independent practices in High Courts and the Supreme Court as Criminal or Civil Litigation Lawyers, or join top NGOs and Think Tanks as Public Policy Advisors.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in judiciary, civil services, and litigation",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A BCI-mandated curriculum blending humanities with justice",
+          "introNote": "The first two years heavily integrate Arts subjects (History, Pol Science) with foundational law, transitioning into pure procedural laws in the final three years.",
+          "outroNote": "Students must complete 20 weeks of mandatory internships across NGOs, Trial Courts, Appellate Courts, and Law Firms.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 60,
+              "category": "Humanities Core",
+              "shortName": "HC",
+              "description": "Political Science, History & Sociology"
+            },
+            {
+              "credits": 100,
+              "category": "Legal Core",
+              "shortName": "LC",
+              "description": "Constitutional, Criminal & Civil Law"
+            },
+            {
+              "credits": 24,
+              "category": "Clinical Papers",
+              "shortName": "CP",
+              "description": "Drafting, Pleading & Moot Court Prep"
+            },
+            {
+              "credits": 16,
+              "category": "Internships",
+              "shortName": "IN",
+              "description": "20 Weeks Mandatory Legal Internship"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The 5-year BA+LLB program spans 10 semesters. Years 1 and 2 introduce Arts concepts (Sociology, Political Science) alongside basic law (Torts, Contracts). Years 3, 4, and 5 dive deeply into substantive and procedural laws (IPC, CrPC, Evidence Act), culminating in intensive Clinical Legal Education (Drafting, Moot Courts) and final internships.",
+              "hasTable": true
+            },
+            {
+              "id": "y1",
+              "title": "Year-1: Foundation of Humanities & Law",
+              "content": "Political Science I, Sociology I, Legal Methods, Law of Torts, Law of Contracts I, English & Legal Language, Legal History."
+            },
+            {
+              "id": "y2",
+              "title": "Year-2: Connecting Society to Justice",
+              "content": "Political Science II, Sociology II, Law of Contracts II, Constitutional Law I & II, Family Law I (Hindu Law), Family Law II (Muslim Law), Jurisprudence."
+            },
+            {
+              "id": "y3",
+              "title": "Year-3: Substantive Legal Frameworks",
+              "content": "Law of Crimes I (IPC), Corporate Law / Company Law, Property Law, Administrative Law, Labour & Industrial Law I, Public International Law."
+            },
+            {
+              "id": "y4",
+              "title": "Year-4: Procedural Laws & Evidence",
+              "content": "Law of Crimes II (CrPC), Civil Procedure Code (CPC) & Limitation Act, Law of Evidence, Taxation Law, Environmental Law, Human Rights Law."
+            },
+            {
+              "id": "y5",
+              "title": "Year-5: Clinical Papers & Court Practice",
+              "content": "Drafting, Pleading and Conveyancing (Clinical), Moot Court Exercise and Internship (Clinical), Professional Ethics (Clinical), Alternative Dispute Resolution (Clinical), Intellectual Property Rights (IPR), Criminology & Penology."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "UPSC / Judiciary Exam Mentoring",
+              "credits": 0
+            },
+            {
+              "name": "Advanced Criminal Drafting Workshop",
+              "credits": 2
+            },
+            {
+              "name": "Public Policy & NGO Management",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for BA-LLB",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "40,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Moot Court & Clinical Fee",
+              "amount": "4,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "5,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through CLAT/LSAT scores or CPU Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "CLAT Rank < 5000",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "12th Board > 85%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "12th Board 75% – 84%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Heavy scholarships are awarded to students with high CLAT or LSAT scores.",
+            "Merit scholarship is also offered based on 12th Board marks (Any stream, Arts preferred).",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "If a student fails to maintain the required academic standards, they may lose scholarship eligibility."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "5000",
+              "3000",
+              "2000",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "Save an entire academic year by pursuing this 5-year integrated dual degree instead of doing a traditional 3-year BA followed by a 3-year LLB.",
+              "icon": "TrendingUp",
+              "title": "Save One Academic Year"
+            },
+            {
+              "desc": "The combination of Political Science, History, and Law makes this the absolute best degree for students aiming to crack the UPSC (IAS/IPS) exams.",
+              "icon": "Award",
+              "title": "Perfect for UPSC Aspirants"
+            },
+            {
+              "desc": "Our advanced Moot Court halls allow you to practice arguments, cross-examinations, and legal research exactly like a real High Court environment.",
+              "icon": "Scale",
+              "title": "Intensive Moot Court Training"
+            },
+            {
+              "desc": "The curriculum provides a strong, focused foundation for clearing the prestigious Judicial Services Examinations to become a Civil Judge.",
+              "icon": "Target",
+              "title": "Judiciary Exam Prep"
+            },
+            {
+              "desc": "Gain hands-on experience in fighting for public rights through our on-campus Legal Aid Clinic and NGO internships.",
+              "icon": "Users",
+              "title": "Focus on Public Litigation"
+            }
+          ],
+          "subtitle": "Unlock your potential with an Integrated Law Degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "A fully functional Legal Aid Clinic where students provide free legal advice to the public under the guidance of senior advocates.",
+              "icon": "Users",
+              "title": "Live Legal Aid Clinic"
+            },
+            {
+              "num": "07",
+              "desc": "Access to premium digital law libraries including SCC Online, Manupatra, and LexisNexis for comprehensive case research.",
+              "icon": "BookOpen",
+              "title": "Digital Law Library"
+            },
+            {
+              "num": "08",
+              "desc": "Learn the art of drafting legal documents—from PILs to bail applications—in dedicated clinical labs.",
+              "icon": "FileText",
+              "title": "Legal Drafting Labs"
+            },
+            {
+              "num": "09",
+              "desc": "A mandatory 20-week internship program ensuring students rotate through NGOs, Trial Courts, and Appellate Courts.",
+              "icon": "Activity",
+              "title": "20-Week Legal Internship"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload 12th standard marksheets, CLAT scorecard (if applicable), and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select BA+LLB (Integrated).",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for the legal screening process.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the BA-LLB programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have passed 10+2 from a recognized board with a minimum of 50% marks. Students from ANY stream are eligible, but Arts/Humanities students often find the BA subjects more familiar.",
+              "q": "What is the eligibility criteria? Can Science/Commerce students apply?"
+            },
+            {
+              "a": "It is a 5-year (10 semester) integrated degree program. The tuition fee is ₹40,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "A traditional LLB is a 3-year course done after graduation (total 6 years). BA+LLB is a 5-year integrated course done directly after 12th, saving you one full academic year.",
+              "q": "Why should I choose 5-Year Integrated LLB over a 3-Year LLB?"
+            },
+            {
+              "a": "BA+LLB integrates Arts subjects (History, Political Science) with law, making it great for UPSC, Judiciary, and Criminal Litigation. BBA+LLB integrates Business subjects (Management, Accounts), making it best for Corporate Law.",
+              "q": "What is the difference between BA-LLB and BBA-LLB?"
+            },
+            {
+              "a": "Yes! The program is fully approved by the Bar Council of India (BCI). Upon graduation, you are eligible to enroll with your State Bar Council and practice in any court in India.",
+              "q": "Is this degree approved by the Bar Council of India (BCI)?"
+            },
+            {
+              "a": "Graduates primarily practice as independent advocates in Trial and High Courts, join top NGOs, or clear exams to become Civil Judges. Many also successfully clear the UPSC exams.",
+              "q": "What kind of jobs will I get after BA-LLB?"
+            },
+            {
+              "a": "Yes, we strongly encourage applicants with CLAT or LSAT scores, and they are eligible for heavy scholarships. However, non-CLAT students can also apply via the CPU entrance test.",
+              "q": "Do I need a CLAT score to get admission?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the BA-LLB programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "BCI Approved Curriculum",
+              "National Moot Court Events",
+              "Mandatory 20-Week Internships",
+              "UPSC / Judiciary Exam Mentoring",
+              "Mock Parliaments",
+              "Debate Society"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Advanced Moot Court Room",
+              "Legal Aid Counseling Center",
+              "Digital Law Library (Manupatra)",
+              "Alternative Dispute Resolution (ADR) Cell"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Litigation Success Stories",
+              "Judiciary Exam Selections",
+              "Alumni Network (Advocates)",
+              "Latest Supreme Court Judgments",
+              "Upcoming Legal Conclaves",
+              "Important Resources"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "5 Year Legal Leadership Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from high school to a litigation expert and policy maker.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Humanities & Legal Basics",
+              "contentTitle": "Mastering the Foundations",
+              "contentDesc": "The first year introduces you to society and politics through Arts subjects, alongside the foundational pillars of law like Contracts and Torts.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Basic Legal Research",
+                "Understanding Contracts",
+                "Political Analysis"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Contracts",
+                  "desc": "How agreements work",
+                  "icon": "🤝"
+                },
+                {
+                  "title": "Pol Science",
+                  "desc": "State and governance",
+                  "icon": "🏛️"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Contract Drafting",
+                  "desc": "Writing basic agreements",
+                  "companies": "Legal Clinic",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Political Science I",
+                "Sociology I",
+                "Law of Torts",
+                "Law of Contracts I"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Constitutional Law",
+              "contentTitle": "Rights, Duties & Family Law",
+              "contentDesc": "The second year delves deeply into the Constitution of India, understanding human rights, and the intricacies of Hindu and Muslim Family Law.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Constitutional Interpretation",
+                "Social Policy Analysis",
+                "Family Dispute Analysis"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Constitution",
+                  "desc": "The supreme law of India",
+                  "icon": "📜"
+                },
+                {
+                  "title": "Family Law",
+                  "desc": "Marriage & succession laws",
+                  "icon": "👨‍👩‍👧"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Writ Petition Draft",
+                  "desc": "Drafting constitutional appeals",
+                  "companies": "Moot Court",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Political Science II",
+                "Constitutional Law I & II",
+                "Family Law (Hindu/Muslim)",
+                "Jurisprudence"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "YEAR 3",
+              "tabTitle": "Criminal & Admin Law",
+              "contentTitle": "Crimes, State & Properties",
+              "contentDesc": "The third year focuses heavily on Substantive Laws—learning the Indian Penal Code (IPC), Property transfer laws, and Administrative Law.",
+              "badge": "YEAR-3",
+              "skills": [
+                "Criminal Case Analysis",
+                "Public Law Scrutiny",
+                "Property Title Checking"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "IPC",
+                  "desc": "Indian Penal Code (Crimes)",
+                  "icon": "⚖️"
+                },
+                {
+                  "title": "Admin Law",
+                  "desc": "Rules for govt bodies",
+                  "icon": "🏢"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "FIR & Bail Drafts",
+                  "desc": "Drafting criminal pleas",
+                  "companies": "Criminal Lab",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Law of Crimes I (IPC)",
+                "Administrative Law",
+                "Property Law",
+                "Public International Law"
+              ]
+            },
+            {
+              "id": 4,
+              "tabLabel": "YEAR 4",
+              "tabTitle": "Procedural Laws",
+              "contentTitle": "How the Courts Function",
+              "contentDesc": "Year four moves from 'what is the law' to 'how to apply it in court'. Master the Criminal Procedure Code (CrPC), Civil Procedure (CPC), and Evidence Act.",
+              "badge": "YEAR-4",
+              "skills": [
+                "Trial Court Procedures",
+                "Cross-Examination Strategy",
+                "Human Rights Advocacy"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "CrPC & CPC",
+                  "desc": "Court procedures",
+                  "icon": "🏛️"
+                },
+                {
+                  "title": "Evidence",
+                  "desc": "Proving facts in court",
+                  "icon": "🔍"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Mock Trial",
+                  "desc": "Conducting a full trial",
+                  "companies": "Moot Court Hall",
+                  "color": "#9b0000"
+                }
+              ],
+              "subjects": [
+                "Law of Crimes II (CrPC)",
+                "Civil Procedure Code (CPC)",
+                "Law of Evidence",
+                "Human Rights Law"
+              ]
+            },
+            {
+              "id": 5,
+              "tabLabel": "YEAR 5",
+              "tabTitle": "Clinical & Internship",
+              "contentTitle": "Ready for the Bar",
+              "contentDesc": "The final year is entirely clinical. You will draft real legal documents, participate in national Moot Courts, and complete extensive mandatory internships.",
+              "badge": "YEAR-5",
+              "skills": [
+                "Advanced Legal Drafting",
+                "Courtroom Advocacy",
+                "Arbitration & Mediation"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Drafting",
+                  "desc": "Writing flawless legal pleas",
+                  "icon": "📝"
+                },
+                {
+                  "title": "Internship",
+                  "desc": "20 Weeks field experience",
+                  "icon": "💼"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "20-Week Internship",
+                  "desc": "Working in Courts/NGOs",
+                  "companies": "Courts / Law Firms",
+                  "color": "#107c41"
+                }
+              ],
+              "subjects": [
+                "Drafting, Pleading & Conveyancing",
+                "Moot Court Exercise",
+                "Alternative Dispute Resolution",
+                "Criminology & Penology"
+              ]
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Our Future Advocates Speak",
+            "highlight": "Speak"
+          },
+          "label": "Testimonials",
+          "list": [
+            {
+              "name": "Priya Sharma",
+              "batch": "BA LLB 2022",
+              "company": "Civil Judge Candidate",
+              "emoji": "⚖️",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+              "text": "The combination of Political Science and Law built the perfect foundation for my Judiciary preparations. The faculty's support was incredible."
+            },
+            {
+              "name": "Aman Gupta",
+              "batch": "BA LLB 2021",
+              "company": "High Court Advocate",
+              "emoji": "🏛️",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+              "text": "The mandatory court internships and rigorous clinical drafting classes gave me the exact practical exposure I needed to start my independent practice confidently."
+            },
+            {
+              "name": "Neha Agarwal",
+              "batch": "BA LLB 2020",
+              "company": "Public Policy Advisor, NGO",
+              "emoji": "🌍",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+              "text": "Working in the campus Legal Aid Clinic opened my eyes to grassroots issues. It inspired me to pursue human rights litigation."
+            }
+          ]
+        },
+        "exploreDepartment": {
+          "sectionTitle": {
+            "main": "Explore School of Legal Studies",
+            "highlight": "School"
+          },
+          "subtitle": "Discover our specialized law clinics, moot courts, and policy-making modules",
+          "items": [
+            {
+              "title": "Department at a Glance",
+              "icon": "Building2",
+              "items": [
+                "National Moot Court Competitions",
+                "Guest Lectures by High Court Judges",
+                "Legal Aid Camps",
+                "Corporate Law Firm Placements",
+                "Mock Parliaments",
+                "Debate Society"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Exclusive Facilities",
+              "icon": "FlaskConical",
+              "items": [
+                "Advanced Moot Court Room",
+                "Legal Aid Counseling Center",
+                "Digital Law Library (Manupatra)",
+                "Alternative Dispute Resolution (ADR) Cell"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Your Department in a Nutshell",
+              "icon": "Star",
+              "items": [
+                "Litigation Success Stories",
+                "Judiciary Exam Selections",
+                "Alumni Network (Advocates)",
+                "Latest Supreme Court Judgments",
+                "Upcoming Legal Conclaves",
+                "Important Resources"
+              ],
+              "cta": "START NOW"
+            }
+          ]
+        }
+      },
+      "llb": {
+        "title": "LLB (Bachelor of Laws)",
+        "duration": "3 Years",
+        "eligibility": "Graduation in any discipline (B.A./B.Sc./B.Com/B.Tech etc.) with minimum 50% marks from a recognized university",
+        "description": "An intensive, 3-year BCI-approved professional law degree designed for graduates aiming to become elite litigators, corporate advocates, or judicial officers.",
+        "metaTitle": "LLB (Bachelor of Laws) Course | Legal Studies | CPU",
+        "metaDescription": "Pursue a 3-year LLB degree at Career Point University. BCI approved core legal curriculum tailored for graduates. Focus on litigation, drafting, and Judiciary exams.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "3-Year BCI Approved Professional Law Degree",
+          "title": {
+            "main": "LLB (Bachelor of Laws)",
+            "line1": "Bachelor of",
+            "line2": "Laws",
+            "line3": "(LLB)",
+            "highlight": "Laws",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Court Practice",
+              "value": "Mandatory"
+            },
+            {
+              "label": "Judiciary Focus",
+              "value": "High Selection"
+            }
+          ],
+          "description": "Transform your graduation into a powerful legal career. Master the Indian Penal Code, civil procedures, and constitutional law through pure, unadulterated legal training."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Registered Advocates",
+              "value": "1500+"
+            },
+            {
+              "icon": "Briefcase",
+              "label": "Highest Package",
+              "value": "8 L"
+            },
+            {
+              "icon": "Scale",
+              "label": "Judges & Magistrates",
+              "value": "100+"
+            },
+            {
+              "icon": "FileText",
+              "label": "High Court Internships",
+              "value": "100%"
+            },
+            {
+              "icon": "Globe",
+              "label": "Legal Aid Beneficiaries",
+              "value": "5000+"
+            },
+            {
+              "icon": "Star",
+              "label": "Supreme Court Lawyers",
+              "value": "30+"
+            }
+          ],
+          "heading": "Department's Legal Accomplishments & Impact",
+          "trustBadge": "✓ Approved by the Bar Council of India (BCI)"
+        },
+        "overview": {
+          "tags": [
+            "3 Years Duration",
+            "6 Semesters",
+            "Hardcore Law",
+            "BCI Approved"
+          ],
+          "subtitle": "What is the 3-Year LLB Programme?",
+          "gridCards": [
+            {
+              "sub": "Crimes & Punishment",
+              "icon": "Scale",
+              "label": "Criminal Law"
+            },
+            {
+              "sub": "Disputes & Property",
+              "icon": "Activity",
+              "label": "Civil Law"
+            },
+            {
+              "sub": "State & Citizens",
+              "icon": "Users",
+              "label": "Constitutional Law"
+            },
+            {
+              "sub": "Drafting & Pleading",
+              "icon": "FileText",
+              "label": "Clinical Practice"
+            }
+          ],
+          "paragraphs": [
+            "The 3-Year LLB is a pure, unadulterated law program meant for students who have already completed their graduation in another discipline. Unlike the 5-year integrated programs, this course strips away foundational arts or business subjects and plunges students directly into intense legal study from day one.",
+            "The curriculum is extremely rigorous, focusing on the deep mechanics of Indian and International law. Students spend their time mastering the Indian Penal Code (IPC), Civil Procedure Code (CPC), and Evidence Act. The program mandates heavy clinical training, meaning students will draft live court petitions, conduct mock cross-examinations in Moot Courts, and intern under senior practicing advocates."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "An LLB degree holds immense power and respect. Upon graduation, students are eligible to enroll with the State Bar Council and immediately begin independent practice as Litigating Advocates in District Courts, High Courts, and the Supreme Court. It is the primary qualification required to appear for the Judicial Services Examination (to become a Civil Judge) and the Judge Advocate General (JAG) branch in the Indian Army. Graduates are also hired as Legal Advisors in banks, real estate firms, and media houses.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in litigation, judiciary, and corporate advisory",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A hardcore legal curriculum designed for courtroom dominance",
+          "introNote": "The 3-year LLB focuses entirely on substantive and procedural laws, with no basic graduation subjects mixed in.",
+          "outroNote": "A mandatory 12-week intensive internship in trial courts, appellate courts, or with senior advocates is required to graduate.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 50,
+              "category": "Substantive Law",
+              "shortName": "SL",
+              "description": "Constitution, Contracts, IPC & Property"
+            },
+            {
+              "credits": 50,
+              "category": "Procedural Law",
+              "shortName": "PL",
+              "description": "CrPC, CPC, Evidence & Drafting"
+            },
+            {
+              "credits": 20,
+              "category": "Specialized Law",
+              "shortName": "SP",
+              "description": "Cyber, IPR, Taxation & Labour Law"
+            },
+            {
+              "credits": 20,
+              "category": "Clinical",
+              "shortName": "CL",
+              "description": "Moot Courts, Legal Aid & Internships"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The 3-year LLB spans 6 semesters. Year 1 sets the heavy foundation of Constitutional Law, Contracts, and Crimes. Year 2 shifts focus to how courts operate with procedural laws like CrPC and Evidence. Year 3 is highly clinical, focusing on drafting actual court documents, professional ethics, and mandatory court internships.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Constitutional Law I, Law of Contracts I, Law of Torts & Consumer Protection, Family Law I (Hindu Law), Law of Crimes I (Indian Penal Code). Total Credits: 24"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Constitutional Law II, Law of Contracts II (Special Contracts), Family Law II (Muslim Law), Property Law & Transfer of Property Act, Public International Law. Total Credits: 24"
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Jurisprudence, Administrative Law, Labour & Industrial Law I, Company Law, Law of Crimes II (Criminal Procedure Code - CrPC). Total Credits: 24"
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Law of Evidence, Civil Procedure Code (CPC) & Limitation Act, Labour & Industrial Law II, Taxation Law, Environmental Law. Total Credits: 24"
+            },
+            {
+              "id": "s5",
+              "title": "Semester-5",
+              "content": "Drafting, Pleading and Conveyancing (Clinical), Professional Ethics & Bar Bench Relations (Clinical), Alternative Dispute Resolution (ADR), Intellectual Property Rights (IPR). Total Credits: 24"
+            },
+            {
+              "id": "s6",
+              "title": "Semester-6",
+              "content": "Moot Court Exercise and Internship (Clinical), Cyber Law, Interpretation of Statutes, Human Rights Law & Practice, Penology & Victimology. Total Credits: 24"
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Judiciary Exam Preparation Module",
+              "credits": 0
+            },
+            {
+              "name": "Advanced Cross-Examination Techniques",
+              "credits": 2
+            },
+            {
+              "name": "Cyber Crime Investigation Basics",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for 3-Year LLB",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "35,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Moot Court & Clinical Fee",
+              "amount": "4,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "5,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Admission based on Graduation marks, followed by Personal Interview / CPU Entrance Test. ",
+              "color": "#00588b"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "Graduation > 85%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "Graduation 75% – 84%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "Graduation 60% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered based on aggregate marks obtained in the qualifying Graduation degree.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "Special scholarships exist for defense personnel and wards of martyrs.",
+            "If a student fails to maintain the required academic standards, they may lose scholarship eligibility."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "5000",
+              "3000",
+              "2000",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "Unlike integrated courses, the 3-year LLB skips basic graduation subjects and dives instantly into hardcore Indian Penal Code, Civil Procedures, and Corporate Laws.",
+              "icon": "BookOpen",
+              "title": "Pure Legal Focus"
+            },
+            {
+              "desc": "This degree is fully recognized by the Bar Council of India, allowing you to wear the black coat and practice in any court in the country.",
+              "icon": "Scale",
+              "title": "Become a Registered Advocate"
+            },
+            {
+              "desc": "The curriculum is perfectly aligned with State Judicial Services syllabi, making it the ideal preparation ground for aspiring Civil Judges.",
+              "icon": "Award",
+              "title": "Gateway to the Judiciary"
+            },
+            {
+              "desc": "Our advanced Moot Court halls allow you to practice arguments, cross-examinations, and legal research exactly like a real High Court environment.",
+              "icon": "Users",
+              "title": "Intensive Moot Court Training"
+            },
+            {
+              "desc": "Gain hands-on experience in fighting for public rights through our on-campus Legal Aid Clinic and mandatory court internships.",
+              "icon": "Briefcase",
+              "title": "Real Courtroom Exposure"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Professional Law Degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "A fully functional Legal Aid Clinic where students provide free legal advice to the public under the guidance of senior advocates.",
+              "icon": "Users",
+              "title": "Live Legal Aid Clinic"
+            },
+            {
+              "num": "07",
+              "desc": "Access to premium digital law libraries including SCC Online, Manupatra, and LexisNexis for comprehensive case research.",
+              "icon": "BookOpen",
+              "title": "Digital Law Library"
+            },
+            {
+              "num": "08",
+              "desc": "Learn the art of drafting legal documents—from PILs to bail applications—in dedicated clinical labs.",
+              "icon": "FileText",
+              "title": "Legal Drafting Labs"
+            },
+            {
+              "num": "09",
+              "desc": "A mandatory 12-week internship program ensuring students rotate through NGOs, Trial Courts, and Appellate Courts.",
+              "icon": "Activity",
+              "title": "Mandatory Court Internships"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload Graduation marksheets (B.A./B.Sc./B.Com/B.Tech) and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select LLB (Bachelor of Laws).",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for the legal screening process.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the LLB programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates MUST have completed a 3-year or 4-year graduation degree (B.A., B.Sc., B.Com, B.Tech, BBA, etc.) from a recognized university with a minimum of 50% marks. 12th pass students are NOT eligible for this 3-year course.",
+              "q": "What is the eligibility criteria? Can I apply right after 12th?"
+            },
+            {
+              "a": "It is a 3-year (6 semester) pure law degree program. The tuition fee is ₹35,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "BA-LLB/BBA-LLB are 5-year courses for students directly out of 12th grade, mixing basic graduation subjects with law. The 3-year LLB is exclusively for students who have ALREADY graduated. It contains no basic subjects, only intensive law.",
+              "q": "What is the difference between a 3-Year LLB and a 5-Year Integrated LLB?"
+            },
+            {
+              "a": "Yes! The program is fully approved by the Bar Council of India (BCI). Upon graduation, you are eligible to enroll with your State Bar Council and practice in any court in India.",
+              "q": "Is this degree approved by the Bar Council of India (BCI)?"
+            },
+            {
+              "a": "Graduates primarily practice as independent advocates in Trial and High Courts. Many clear the Judicial Services Examination to become Civil Judges. They are also hired as Legal Advisors in corporate firms and banks.",
+              "q": "What kind of jobs will I get after LLB?"
+            },
+            {
+              "a": "Yes, we mandate a 12-week internship spanning across NGOs, Trial Courts, and Senior Advocates to ensure you have practical courtroom experience before graduating.",
+              "q": "Is an internship or court visit compulsory?"
+            },
+            {
+              "a": "Yes! Many Engineers (B.Tech) pursue LLB to become highly paid Patent Lawyers or Cyber Law experts, and Science (B.Sc.) graduates pursue it for Medical/Forensic Law.",
+              "q": "I have a B.Tech / B.Sc. degree. Can I do an LLB?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the 3-Year LLB programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "BCI Approved Curriculum",
+              "National Moot Court Events",
+              "Mandatory Court Internships",
+              "Judiciary Exam Coaching",
+              "Legal Aid Clinics",
+              "Guest Lectures by Advocates"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Advanced Moot Court Room",
+              "Legal Aid Counseling Center",
+              "Digital Law Library (SCC Online)",
+              "Alternative Dispute Resolution (ADR) Cell"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Litigation Success Stories",
+              "Judiciary Exam Selections",
+              "Alumni Network (Advocates)",
+              "Latest Supreme Court Judgments",
+              "Upcoming Legal Conclaves",
+              "Important Resources"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "3 Year Professional Law Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from graduate to litigating advocate.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Substantive Law & Rights",
+              "contentTitle": "Mastering the Foundations of Law",
+              "contentDesc": "The first year drops you immediately into the core pillars of the Indian Legal System: The Constitution, the Indian Penal Code, and the Law of Contracts.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Constitutional Interpretation",
+                "Understanding Contracts",
+                "Criminal Case Analysis"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Constitution",
+                  "desc": "The supreme law of India",
+                  "icon": "📜"
+                },
+                {
+                  "title": "IPC",
+                  "desc": "Indian Penal Code (Crimes)",
+                  "icon": "⚖️"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Writ Petition Draft",
+                  "desc": "Drafting constitutional appeals",
+                  "companies": "Moot Court",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Constitutional Law I & II",
+                "Law of Contracts I & II",
+                "Law of Torts",
+                "Law of Crimes I (IPC)"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Procedural Law & Evidence",
+              "contentTitle": "How the Courts Function",
+              "contentDesc": "Year two moves from 'what is the law' to 'how to apply it in court'. Master the Criminal Procedure Code (CrPC), Civil Procedure (CPC), and Evidence Act.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Filing FIRs & Bail",
+                "Cross-Examination Strategy",
+                "Corporate Compliance"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "CrPC & CPC",
+                  "desc": "Court procedures",
+                  "icon": "🏛️"
+                },
+                {
+                  "title": "Evidence",
+                  "desc": "Proving facts in court",
+                  "icon": "🔍"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Mock Trial",
+                  "desc": "Conducting a full trial",
+                  "companies": "Moot Court Hall",
+                  "color": "#9b0000"
+                }
+              ],
+              "subjects": [
+                "Law of Crimes II (CrPC)",
+                "Civil Procedure Code (CPC)",
+                "Law of Evidence",
+                "Company Law"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "YEAR 3",
+              "tabTitle": "Clinical & Internship",
+              "contentTitle": "Ready for the Bar",
+              "contentDesc": "The final year is entirely clinical. You will draft real legal documents, participate in national Moot Courts, and complete extensive mandatory court internships.",
+              "badge": "YEAR-3",
+              "skills": [
+                "Advanced Legal Drafting",
+                "Courtroom Advocacy",
+                "Arbitration & Mediation"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Drafting",
+                  "desc": "Writing flawless legal pleas",
+                  "icon": "📝"
+                },
+                {
+                  "title": "Internship",
+                  "desc": "12 Weeks field experience",
+                  "icon": "💼"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Court Internship",
+                  "desc": "Working with Senior Advocates",
+                  "companies": "High Court / Trial",
+                  "color": "#107c41"
+                }
+              ],
+              "subjects": [
+                "Drafting, Pleading & Conveyancing",
+                "Moot Court Exercise",
+                "Alternative Dispute Resolution",
+                "Professional Ethics"
+              ]
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Our Future Advocates Speak",
+            "highlight": "Speak"
+          },
+          "label": "Testimonials",
+          "list": [
+            {
+              "name": "Aman Gupta",
+              "batch": "LLB 2022",
+              "company": "High Court Advocate",
+              "emoji": "🏛️",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+              "text": "Coming from a B.Tech background, I thought Law would be tough. But the pure, intense focus on CrPC and Evidence Act here made me a confident tech-lawyer today."
+            },
+            {
+              "name": "Priya Sharma",
+              "batch": "LLB 2021",
+              "company": "Civil Judge Candidate",
+              "emoji": "⚖️",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+              "text": "The curriculum is perfectly aligned with the Judicial Services exams. The rigorous clinical drafting classes gave me the exact practical exposure I needed."
+            },
+            {
+              "name": "Neha Agarwal",
+              "batch": "LLB 2020",
+              "company": "Corporate Legal Advisor",
+              "emoji": "💼",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+              "text": "Working in the campus Legal Aid Clinic and participating in National Moot Courts completely eradicated my stage fear. Highly recommended."
+            }
+          ]
+        },
+        "exploreDepartment": {
+          "sectionTitle": {
+            "main": "Explore School of Legal Studies",
+            "highlight": "School"
+          },
+          "subtitle": "Discover our specialized law clinics, moot courts, and litigation modules",
+          "items": [
+            {
+              "title": "Department at a Glance",
+              "icon": "Building2",
+              "items": [
+                "National Moot Court Competitions",
+                "Guest Lectures by High Court Judges",
+                "Legal Aid Camps",
+                "Corporate Law Firm Placements",
+                "Mock Parliaments",
+                "Debate Society"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Exclusive Facilities",
+              "icon": "FlaskConical",
+              "items": [
+                "Advanced Moot Court Room",
+                "Legal Aid Counseling Center",
+                "Digital Law Library (Manupatra)",
+                "Alternative Dispute Resolution (ADR) Cell"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Your Department in a Nutshell",
+              "icon": "Star",
+              "items": [
+                "Litigation Success Stories",
+                "Judiciary Exam Selections",
+                "Alumni Network (Advocates)",
+                "Latest Supreme Court Judgments",
+                "Upcoming Legal Conclaves",
+                "Important Resources"
+              ],
+              "cta": "START NOW"
+            }
+          ]
+        }
+      },
+    "llb": {
+        "title": "LLM (Master of Laws)",
+        "duration": "1 Year / 2 Years (As per BCI guidelines)",
+        "eligibility": "LLB (3-Year or 5-Year Integrated) with minimum 50% marks from a BCI recognized university (CLAT PG scores preferred)",
+        "description": "An advanced postgraduate legal specialization designed to forge elite legal scholars, future judges, and specialized corporate counsels.",
+        "metaTitle": "LLM (Master of Laws) Course | Legal Studies | CPU",
+        "metaDescription": "Pursue an LLM degree at Career Point University. Specialize in Corporate Law, Criminal Law, or Constitutional Law. Ideal for Judiciary and Academic careers.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "Postgraduate Legal Specialization Degree",
+          "title": {
+            "main": "Master of Laws",
+            "line1": "Master of",
+            "line2": "Laws",
+            "line3": "(LLM)",
+            "highlight": "Laws",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "15L+"
+            },
+            {
+              "label": "NET/JRF",
+              "value": "Oriented"
+            }
+          ],
+          "description": "Elevate your legal authority. Master complex jurisprudential concepts, specialize in niche legal domains, and prepare for the highest echelons of the judiciary and academia."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Specialized Counsels",
+              "value": "500+"
+            },
+            {
+              "icon": "Briefcase",
+              "label": "Highest Package",
+              "value": "15 L"
+            },
+            {
+              "icon": "Scale",
+              "label": "Judicial Officers",
+              "value": "80+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Research Papers Published",
+              "value": "200+"
+            },
+            {
+              "icon": "Globe",
+              "label": "UGC-NET Law Cleared",
+              "value": "150+"
+            },
+            {
+              "icon": "Star",
+              "label": "Supreme Court Clerks",
+              "value": "25+"
+            }
+          ],
+          "heading": "Department's Legal Accomplishments & Impact",
+          "trustBadge": "✓ Approved by the Bar Council of India (BCI)"
+        },
+        "overview": {
+          "tags": [
+            "Postgraduate Degree",
+            "Research Intensive",
+            "Judiciary Focused",
+            "BCI Approved"
+          ],
+          "subtitle": "What is the LLM Programme?",
+          "gridCards": [
+            {
+              "sub": "M&A and Finance",
+              "icon": "Briefcase",
+              "label": "Corporate Law"
+            },
+            {
+              "sub": "Rights & Governance",
+              "icon": "Users",
+              "label": "Constitutional Law"
+            },
+            {
+              "sub": "Criminology & Forensics",
+              "icon": "Scale",
+              "label": "Criminal Law"
+            },
+            {
+              "sub": "Patents & Trademarks",
+              "icon": "Activity",
+              "label": "Intellectual Property"
+            }
+          ],
+          "paragraphs": [
+            "The Master of Laws (LLM) is an advanced postgraduate degree designed for law graduates who wish to achieve subject-matter mastery in a specific area of law. While an LLB teaches you what the law is and how to apply it, an LLM teaches you the profound philosophy, history, and the future trajectory of the law.",
+            "This program shifts away from basic trial advocacy and moves heavily into appellate-level arguments, policy drafting, and intensive legal research. It is the gold standard for advocates who want to join elite corporate law firms as specialized counsels, clear the UGC-NET for a career in academics, or write the higher judicial services exams."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "An LLM transforms a general lawyer into a specialized legal expert. Graduates are highly sought after by top-tier law firms for niche roles like IPR Consultants, M&A Strategists, and Cyber Law Advisors. Furthermore, an LLM is the mandatory prerequisite for appearing in the UGC-NET to become an Assistant Professor of Law. It also provides a massive analytical advantage for those appearing for the Civil Judge and Higher Judicial Services (HJS) examinations, or those seeking clerkships at the Supreme Court of India.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in judiciary, academics, and specialized corporate advisory",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "An advanced BCI-mandated curriculum for legal mastery",
+          "introNote": "The LLM curriculum is divided into foundational papers on advanced jurisprudence, followed by deep dives into your chosen legal specialization.",
+          "outroNote": "A mandatory legal research dissertation (thesis) must be submitted and defended to complete the degree.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 30,
+              "category": "Foundational Core",
+              "shortName": "FC",
+              "description": "Jurisprudence & Research Methodology"
+            },
+            {
+              "credits": 40,
+              "category": "Specialization",
+              "shortName": "SP",
+              "description": "Major Domain Papers (Criminal/Corp/Const.)"
+            },
+            {
+              "credits": 15,
+              "category": "Skill Enhancement",
+              "shortName": "SE",
+              "description": "Law Teaching & Pedagogy"
+            },
+            {
+              "credits": 35,
+              "category": "Research",
+              "shortName": "RS",
+              "description": "Master's Dissertation (Thesis)"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The LLM program focuses heavily on seminar-style learning and independent research. The initial phase covers mandatory papers for all students regarding advanced legal theories and how to conduct valid legal research. The latter half is entirely dedicated to the student's chosen specialization and the drafting of a comprehensive legal thesis.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1: Core Legal Foundations",
+              "content": "Law and Social Transformation in India, Indian Constitutional Law: The New Challenges, Judicial Process, Legal Education and Research Methodology."
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2: Specialization Dive",
+              "content": "Specialization Paper I, Specialization Paper II, Specialization Paper III, Practical (Law Teaching & Clinical Work)."
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3: Advanced Specialization",
+              "content": "Specialization Paper IV, Specialization Paper V, Specialization Paper VI, Doctrinal Research (Synopsis Submission)."
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4: Research & Culmination",
+              "content": "Master's Dissertation (Research, Writing, and Final Defense), Viva-Voce."
+            },
+            {
+              "id": "specs",
+              "title": "Available Specializations",
+              "content": "1. Corporate and Commercial Law, 2. Criminal Law and Criminal Justice Administration, 3. Constitutional and Administrative Law, 4. Intellectual Property Rights (IPR)."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "UGC-NET Law Preparation Module",
+              "credits": 0
+            },
+            {
+              "name": "Advanced Judgment Writing Workshop",
+              "credits": 2
+            },
+            {
+              "name": "Patent & Trademark Filing Procedures",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for LLM",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "10,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "40,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Library & Research Fee",
+              "amount": "5,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "5,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Admission through CLAT PG scores, LLB Graduation marks, followed by Personal Interview / CPU Entrance Test. ",
+              "color": "#00588b"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "CLAT PG Rank < 3000",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "LLB > 80%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "LLB 70% – 79%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Heavy scholarships are awarded to students with high CLAT PG scores.",
+            "Merit scholarship is also offered based on aggregate marks obtained in the qualifying LLB degree.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "If a student fails to maintain the required academic/research standards, they may lose scholarship eligibility."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "5000",
+              "3000",
+              "2000",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "An LLM transforms you from a general litigator to a specialized subject matter expert (e.g., a Corporate Lawyer or a Criminal Defense specialist).",
+              "icon": "Target",
+              "title": "Master a Niche Domain"
+            },
+            {
+              "desc": "It is the strict, mandatory qualification mandated by the UGC if you wish to become an Assistant Professor in any Law College in India.",
+              "icon": "BookOpen",
+              "title": "Academic & Teaching Career"
+            },
+            {
+              "desc": "Top-tier corporate law firms heavily prefer hiring LLM graduates for highly technical roles like Mergers & Acquisitions and Patent drafting.",
+              "icon": "Briefcase",
+              "title": "Elite Law Firm Placements"
+            },
+            {
+              "desc": "The rigorous focus on constitutional law and judgment writing provides a massive analytical advantage for cracking State Judicial Services.",
+              "icon": "Scale",
+              "title": "Judiciary Exam Advantage"
+            },
+            {
+              "desc": "The mandatory thesis forces you to research deeply, allowing you to publish papers in prestigious national and international law journals.",
+              "icon": "FileText",
+              "title": "Publish Legal Research"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Master's Degree in Law",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Access to premium digital law libraries including SCC Online, Manupatra, and Westlaw for comprehensive appellate-level case research.",
+              "icon": "BookOpen",
+              "title": "Digital Legal Databases"
+            },
+            {
+              "num": "07",
+              "desc": "Learn directly from retired High Court judges, senior Supreme Court advocates, and prominent legal scholars.",
+              "icon": "Users",
+              "title": "Expert Mentorship"
+            },
+            {
+              "num": "08",
+              "desc": "Specialized workshops focused on teaching pedagogy, preparing students to confidently deliver lectures as future law professors.",
+              "icon": "Activity",
+              "title": "Law Teaching Practice"
+            },
+            {
+              "num": "09",
+              "desc": "Dedicated guidance and support for obtaining prestigious judicial clerkships under Supreme Court and High Court judges.",
+              "icon": "Target",
+              "title": "Judicial Clerkship Support"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload LLB marksheets, CLAT PG scorecard (if applicable), and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select your preferred LLM Specialization.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for the PG legal screening process.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the LLM programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates MUST hold an LLB degree (either the 3-year or the 5-year integrated program) with a minimum of 50% marks from a university recognized by the Bar Council of India. Graduates of other disciplines cannot apply.",
+              "q": "What is the eligibility criteria? Can a non-law graduate apply?"
+            },
+            {
+              "a": "Depending on the specific UGC and BCI guidelines adopted, the LLM is typically offered as a 1-Year or 2-Year program. The tuition fee is ₹40,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "An LLB teaches you the basics of all laws and qualifies you to practice in court. An LLM is an advanced master's degree that makes you a specialist in one specific area (like Corporate Law) and qualifies you for academic teaching.",
+              "q": "What is the difference between LLB and LLM?"
+            },
+            {
+              "a": "We offer highly sought-after specializations including Corporate and Commercial Law, Criminal Law, Constitutional Law, and Intellectual Property Rights (IPR).",
+              "q": "What specializations are available in this LLM?"
+            },
+            {
+              "a": "Yes, submitting a deeply researched Master's Dissertation (Thesis) is a mandatory academic requirement. You must defend your thesis before a panel to obtain your degree.",
+              "q": "Is a research thesis mandatory?"
+            },
+            {
+              "a": "LLM graduates are hired as Assistant Professors in law universities, specialized Legal Counsels in top corporate firms (like Amarchand Mangaldas), and policy advisors. Many also use the degree's rigorous training to successfully crack the Judicial Services exams.",
+              "q": "What kind of jobs will I get after LLM?"
+            },
+            {
+              "a": "Yes, completing an LLM with at least 55% marks makes you fully eligible to appear for the UGC-NET exam, which is required to become an Assistant Professor.",
+              "q": "Can I appear for UGC-NET Law after this?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the LLM programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "Advanced Legal Specializations",
+              "Guest Lectures by Supreme Court Judges",
+              "Mandatory Legal Dissertation",
+              "Corporate Law Firm Placements",
+              "Judiciary & UGC-NET Coaching",
+              "Law Teaching Practicums"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Advanced Moot Court Room",
+              "Legal Aid & Policy Drafting Center",
+              "Digital Law Library (SCC Online, LexisNexis)",
+              "Alternative Dispute Resolution (ADR) Cell"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "UGC-NET Cleared Alumni",
+              "Judiciary Exam Selections",
+              "Student Research Publications",
+              "Latest Supreme Court Judgments",
+              "Upcoming Legal Conclaves",
+              "Important Resources"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "Advanced Legal Specialization Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from a general advocate to a specialized legal expert.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "PHASE 1",
+              "tabTitle": "Foundations of Research",
+              "contentTitle": "Mastering Jurisprudence & Methodology",
+              "contentDesc": "The first phase elevates your analytical thinking, focusing on advanced constitutional law, the philosophy of law (jurisprudence), and how to conduct appellate-level research.",
+              "badge": "PHASE-1",
+              "skills": [
+                "Advanced Legal Research",
+                "Constitutional Interpretation",
+                "Policy Analysis"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Jurisprudence",
+                  "desc": "The philosophy of law",
+                  "icon": "🧠"
+                },
+                {
+                  "title": "Research",
+                  "desc": "Legal methodology",
+                  "icon": "🔍"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Thesis Synopsis",
+                  "desc": "Drafting research proposals",
+                  "companies": "Research Cell",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Law and Social Transformation",
+                "Indian Constitutional Law (New Challenges)",
+                "Judicial Process",
+                "Legal Education & Research Methodology"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "PHASE 2",
+              "tabTitle": "Specialization & Thesis",
+              "contentTitle": "Niche Expertise & Defense",
+              "contentDesc": "The final phase is intensely focused on your chosen specialty (Corporate, Criminal, Const.), preparing for UGC-NET, and defending your Master's thesis.",
+              "badge": "PHASE-2",
+              "skills": [
+                "Specialized Legal Drafting",
+                "Appellate Court Arguments",
+                "Scientific Paper Writing"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Specialization",
+                  "desc": "Deep domain expertise",
+                  "icon": "⚖️"
+                },
+                {
+                  "title": "Thesis",
+                  "desc": "Original legal contribution",
+                  "icon": "🎓"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Legal Dissertation",
+                  "desc": "Independent legal research thesis",
+                  "companies": "Final Defense",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Specialization Papers I to VI",
+                "Law Teaching Practicals",
+                "Master's Dissertation (Thesis)",
+                "Seminar & Final Viva-Voce"
+              ]
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Our Specialized Counsels Speak",
+            "highlight": "Speak"
+          },
+          "label": "Testimonials",
+          "list": [
+            {
+              "name": "Adv. Neha Agarwal",
+              "batch": "LLM Corporate Law 2022",
+              "company": "Senior Associate, Khaitan & Co",
+              "emoji": "💼",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+              "text": "The deep dive into Corporate Mergers and IPR during my LLM gave me the exact technical expertise required to secure a senior position at a Top Tier firm."
+            },
+            {
+              "name": "Priya Sharma",
+              "batch": "LLM Constitutional Law 2021",
+              "company": "Civil Judge Candidate",
+              "emoji": "🏛️",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+              "text": "The rigorous focus on Constitutional Law and judgment writing during my LLM provided a massive analytical advantage for cracking the State Judicial Services."
+            },
+            {
+              "name": "Prof. Aman Gupta",
+              "batch": "LLM Criminal Law 2020",
+              "company": "Assistant Professor of Law",
+              "emoji": "👨‍🏫",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+              "text": "The pedagogy training and the guidance for UGC-NET preparation were exceptional. It helped me publish in reputed journals and secure my academic career."
+            }
+          ]
+        },
+        "exploreDepartment": {
+          "sectionTitle": {
+            "main": "Explore School of Legal Studies",
+            "highlight": "School"
+          },
+          "subtitle": "Discover our specialized law clinics, moot courts, and policy-making modules",
+          "items": [
+            {
+              "title": "Department at a Glance",
+              "icon": "Building2",
+              "items": [
+                "Advanced Legal Specializations",
+                "Guest Lectures by Supreme Court Judges",
+                "Mandatory Legal Dissertation",
+                "Corporate Law Firm Placements",
+                "Judiciary & UGC-NET Coaching",
+                "Law Teaching Practicums"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Exclusive Facilities",
+              "icon": "FlaskConical",
+              "items": [
+                "Advanced Moot Court Room",
+                "Legal Aid Counseling Center",
+                "Digital Law Library (SCC Online)",
+                "Alternative Dispute Resolution (ADR) Cell"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Your Department in a Nutshell",
+              "icon": "Star",
+              "items": [
+                "UGC-NET Cleared Alumni",
+                "Judiciary Exam Selections",
+                "Student Research Publications",
+                "Latest Supreme Court Judgments",
+                "Upcoming Legal Conclaves",
+                "Important Resources"
+              ],
+              "cta": "START NOW"
+            }
+          ]
+        }
+      }
+    },
+    "placements": {
+      "title": {
+        "main": "Law Graduates in Top Firms & Courts",
+        "highlight": "Top Firms"
+      },
+      "label": "Placement Records",
+      "subtitle": "Outstanding placements across Corporate Law Firms, LPOs, and Independent Practices",
+      "list": [
+        {
+          "name": "Priya Sharma",
+          "company": "Amarchand Mangaldas",
+          "pkg": "12 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        },
+        {
+          "name": "Rahul Verma",
+          "company": "Corporate Counsel, HDFC Bank",
+          "pkg": "10 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
+        },
+        {
+          "name": "Aman Gupta",
+          "company": "Luthra & Luthra Law Offices",
+          "pkg": "11.5 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
+        },
+        {
+          "name": "Sneha Reddy",
+          "company": "Legal Consultant, EY",
+          "pkg": "9.5 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg"
+        },
+        {
+          "name": "Karan Singh",
+          "company": "High Court Advocate",
+          "pkg": "Independent",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png"
+        },
+        {
+          "name": "Neha Agarwal",
+          "company": "Legal Process Outsourcing (LPO)",
+          "pkg": "8 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Saloni.jpg"
+        }
+      ]
+    },
+    "alumni": {
+      "title": {
+        "main": "Legal Luminaries Making an Impact",
+        "highlight": "Impact"
+      },
+      "label": "Our Alumni",
+      "list": [
+        {
+          "name": "Adv. Rohan Mehra",
+          "role": "Senior Partner",
+          "company": "Mehra & Associates",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/aryan.jpg"
+        },
+        {
+          "name": "Ananya Desai",
+          "role": "Civil Judge / Magistrate",
+          "company": "State Judiciary",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        },
+        {
+          "name": "Vikram Rathore",
+          "role": "Legal Head",
+          "company": "Reliance Industries",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/harsh.jpg"
+        }
+      ]
+    },
+    "industry": {
+      "title": {
+        "main": "Law Firms & Corporate Tie Up's",
+        "highlight": "Tie Up's"
+      },
+      "label": "Collaborations",
+      "partners": [
+        {
+          "name": "Khaitan & Co",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "AZB & Partners",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "HDFC Legal",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "LexisNexis",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg"
+        }
+      ]
+    },
+    "research": {
+      "title": {
+        "main": "Legal Research & Policy Drafting",
+        "highlight": "Research"
+      },
+      "label": "Legal Eminence",
+      "gallery": [
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-7.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-12.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-4.jpg"
+      ],
+      "stats": [
+        {
+          "value": "150+",
+          "label": "Research Papers Published",
+          "icon": "BookOpen"
+        },
+        {
+          "value": "30+",
+          "label": "Moot Court Victories",
+          "icon": "Scale"
+        },
+        {
+          "value": "20+",
+          "label": "Policy Drafts Submitted",
+          "icon": "FileText"
+        },
+        {
+          "value": "50+",
+          "label": "Legal Aid Camps",
+          "icon": "Users"
+        }
+      ]
+    },
+    "community": {
+      "title": {
+        "main": "A Community for Justice",
+        "highlight": "Justice"
+      },
+      "label": "Community Action",
+      "description": [
+        "The School of Legal Studies is deeply committed to societal welfare. Our Legal Aid Clinic provides free legal counseling to underprivileged sections of society, giving students real-world exposure to civil and criminal grievances.",
+        "Through Mock Parliaments, Debate Societies, and Legal Literacy Camps in rural areas, our students learn that law is not just a profession, but a tool for social engineering and justice."
+      ],
+      "gallery": [
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-7-1.jpg",
+          "caption": "Students at a Rural Legal Aid Camp"
+        },
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-12-1.jpg",
+          "caption": "National Level Moot Court Competition"
+        }
+      ]
+    },
+    "infrastructure": {
+      "title": {
+        "main": "State-of-the-Art Legal Infrastructure",
+        "highlight": "Infrastructure"
+      },
+      "label": "Campus",
+      "list": [
+        {
+          "title": "Advanced Moot Court Hall",
+          "desc": "An exact replica of a High Court room designed for simulating trials, cross-examinations, and legal arguments.",
+          "img": "https://img.freepik.com/free-photo/business-people-meeting_1048-1234.jpg"
+        },
+        {
+          "title": "Digital Law Library",
+          "desc": "Access to premium legal databases like SCC Online, Manupatra, and LexisNexis for comprehensive legal research.",
+          "img": "https://img.freepik.com/free-photo/modern-office-space_1170-2.jpg"
+        },
+        {
+          "title": "Legal Aid Clinic",
+          "desc": "A dedicated campus facility where students provide free legal advice to the local community under expert supervision.",
+          "img": "https://img.freepik.com/free-photo/stock-market-display_1048-3333.jpg"
+        },
+        {
+          "title": "Seminar & Debate Halls",
+          "desc": "Equipped with advanced AV systems to host Mock Parliaments, client counseling sessions, and guest lectures by judges.",
+          "img": "https://img.freepik.com/free-photo/modern-classroom-projector_1048-12346.jpg"
+        }
+      ]
+    },
+    "testimonials": {
+      "title": {
+        "main": "Our Law Scholars Speak",
+        "highlight": "Speak"
+      },
+      "label": "Testimonials",
+      "list": [
+        {
+          "name": "Priya Sharma",
+          "batch": "BA LLB 2022",
+          "company": "Corporate Lawyer",
+          "emoji": "⚖️",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+          "text": "The Moot Court competitions completely eradicated my stage fear. It taught me how to research case laws and argue effectively in front of real judges."
+        },
+        {
+          "name": "Aman Gupta",
+          "batch": "LLB 2021",
+          "company": "High Court Advocate",
+          "emoji": "🏛️",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+          "text": "The mandatory court internships arranged by the university gave me the exact practical exposure I needed to start my independent practice."
+        },
+        {
+          "name": "Neha Agarwal",
+          "batch": "BBA LLB 2020",
+          "company": "Legal Head, StartUp",
+          "emoji": "💼",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+          "text": "Combining Business Administration with Law was the best decision. I now handle corporate compliance, mergers, and legal drafting for a top tech firm."
+        }
+      ]
+    },
+    "exploreDepartment": {
+      "sectionTitle": {
+        "main": "Explore School of Legal Studies",
+        "highlight": "School"
+      },
+      "subtitle": "Discover our specialized law clinics, moot courts, and corporate training modules",
+      "items": [
+        {
+          "title": "Department at a Glance",
+          "icon": "Building2",
+          "items": [
+            "National Moot Court Competitions",
+            "Guest Lectures by High Court Judges",
+            "Legal Aid Camps",
+            "Corporate Law Firm Placements",
+            "Mock Parliaments",
+            "Debate Society"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Exclusive Facilities",
+          "icon": "FlaskConical",
+          "items": [
+            "Advanced Moot Court Room",
+            "Legal Aid Counseling Center",
+            "Digital Law Library (Manupatra)",
+            "Alternative Dispute Resolution (ADR) Cell"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Your Department in a Nutshell",
+          "icon": "Star",
+          "items": [
+            "Law Firm Placements",
+            "Judiciary Exam Selections",
+            "Alumni Network (Advocates)",
+            "Latest Supreme Court Judgments",
+            "Upcoming Legal Conclaves",
+            "Important Resources"
+          ],
+          "cta": "START NOW"
+        }
+      ]
+    }
+  }
+}

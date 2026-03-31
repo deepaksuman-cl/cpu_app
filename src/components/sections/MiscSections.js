@@ -151,7 +151,7 @@ export function FAQSection({ data }) {
                 className="w-full flex justify-between items-center px-[22px] py-[18px] bg-transparent border-none cursor-pointer text-left font-sans" 
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
               >
-                <span className="font-bold text-gray-900 text-sm pr-3.5 leading-relaxed">{faq.q}</span>
+                <span className="font-bold text-gray-900 text-lg pr-3.5 leading-relaxed">{faq.q}</span>
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${openFaq === i ? "bg-[#00588b]" : "bg-gray-100"}`}>
                   {openFaq === i ? <Minus size={13} className="text-white"/> : <Plus size={13} className="text-gray-600"/>}
                 </div>

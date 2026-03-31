@@ -8,7 +8,8 @@ const SyncSchoolData = () => {
     { label: "Basic & Applied Science", value: "basic-applied-science" },
     { label: "Computer Applications", value: "computer-applications-technology" },
     { label: 'Commerce & Management (commerce-and-management.json)', value: 'commerce-and-management' },
-    { label: 'Health Sciences (health-sciences.json)', value: 'health-sciences' }
+    { label: 'Health Sciences (health-sciences.json)', value: 'health-sciences' },
+    { label: 'Legal Studies (legal-studies.json)', value: 'legal-studies' }
     
     // Naya school add karna ho toh bas yahan add kar dena!
   ];
