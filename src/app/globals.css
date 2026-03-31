@@ -9,10 +9,24 @@
     position: relative!important;
     z-index: 9999!important;
 }
-
+.placement_bg_blur{
+   background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      background-color: #00000030 !important;
+    backdrop-filter: blur(5px);
+    text-align: center;
+}
+.placement_bg_blur h6 {
+   font-size: 22px;
+}
+.placement_bg_blur small {
+   font-size: 16px;
+}
 .gg-detail.animate-gg-fadein {
     Z-INDEX: 9999;
     POSITION: RELATIVE;
+}
+.placement_bg_blur {
+
 }
 /* virtulallynews css */
 .nvs-clamp-title, .nvs-clamp-dec{
