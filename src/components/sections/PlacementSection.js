@@ -113,7 +113,7 @@ export default function PlacementSection({ data }) {
         {/* --- Recruiter Logos --- */}
         {recruiters.length > 0 && (
           <div className="mt-20 pt-10 border-t border-white/10">
-            <p className="text-white/50 text-[10px] font-bold uppercase tracking-[0.3em] text-center mb-8">Trusted by Global Industry Leaders</p>
+            <p className="text-white/50 text-[20px] font-bold uppercase tracking-[0.3em] text-center mb-8">Trusted by Global Industry Leaders</p>
             <div className="w-full relative swraper overflow-hidden pointer-events-none">
               <style dangerouslySetInnerHTML={{__html: `
                 .swraper .swiper-wrapper {
@@ -141,7 +141,7 @@ export default function PlacementSection({ data }) {
                       <img 
                         src={logo.img} 
                         alt={`Recruiter ${idx + 1}`} 
-                        className="max-h-12 max-w-[120px] object-contain filter invert opacity-60 transition-all duration-300" 
+                        className="h-18 w-full home_logo_slider object-contain transition-all duration-300" 
                       />
                     </div>
                   </SwiperSlide>

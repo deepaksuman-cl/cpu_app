@@ -18,6 +18,12 @@
     margin-bottom: 10px !important;
   
 }
+.home_logo_slider {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 6px!important;
+}
+
 .university-prose ul li:before {
  display: none;
 }
