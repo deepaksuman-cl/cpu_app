@@ -1,16 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
+import StructuredTitle from "@/components/common/StructuredTitle";
 import * as Icons from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import React, { useState } from "react";
 
 // Safer icon component for dynamic names
 const DynamicIcon = ({ name, className, fallback = Icons.GraduationCap }) => {
   const IconComponent = Icons[name] || fallback;
   return <IconComponent className={className} />;
 };
-import StructuredTitle from "@/components/common/StructuredTitle";
-import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 export default function SchoolProgrammes({ data, schoolSlug }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -105,18 +105,21 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
                         </div>
                       )}
                       
-                      {course.specializations?.length > 0 && (
+                      {course.specializations?.length > 0 && Array.isArray(course.specializations) && (
                         <div className="mt-3 flex flex-wrap items-center gap-x-0.5 gap-y-1">
-                          <span className="text-xs font-bold text-slate-700 mr-1">Specialization:</span>
-                          {course.specializations.map((sp, si) => (
-                            <React.Fragment key={si}>
-                              {/* Isko abhi ke liye `#` rakhte hain jab tak specializations ke alag page na banayein */}
-                              <Link href="#" className="text-xs font-semibold text-[#00588b] hover:underline no-underline">
-                                {sp.name}
-                              </Link>
-                              {si < course.specializations.length - 1 && <span className="text-slate-400 text-xs mx-0.5">,</span>}
-                            </React.Fragment>
-                          ))}
+                          <span className="text-xs font-bold text-slate-700 mr-1 uppercase tracking-widest text-[10px]">Specializations:</span>
+                          {course.specializations.map((sp, si) => {
+                            if (!sp || typeof sp !== 'object') return null;
+                            const specUrl = sp.slug ? `/schools/${schoolSlug}/${sp.slug}` : "#";
+                            return (
+                              <React.Fragment key={si}>
+                                <Link href={specUrl} className="text-xs font-semibold text-[#00588b] hover:text-[#ffb900] transition-colors no-underline">
+                                  {sp.name}
+                                </Link>
+                                {si < course.specializations.length - 1 && <span className="text-slate-400 text-xs mx-0.5">,</span>}
+                              </React.Fragment>
+                            );
+                          })}
                         </div>
                       )}
                       
