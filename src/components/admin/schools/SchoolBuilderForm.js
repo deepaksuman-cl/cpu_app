@@ -53,6 +53,15 @@ const StringListEditor = ({ value = [], onChange, label }) => (
 
 const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate }) => {
   const imageField = fields.find(f => f.type === 'image');
+  
+  // Normalize items to objects if they are strings (legacy support)
+  const normalizedItems = (items || []).map(item => {
+    if (typeof item === 'string') {
+      return { ...newItemTemplate, [imageField?.key || 'url']: item };
+    }
+    return item || newItemTemplate;
+  });
+
   return (
   <div className="space-y-4">
     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 border-b border-[var(--border-light)] pb-2">
@@ -66,20 +75,20 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
              onUploadSuccess={urls => {
                 if(Array.isArray(urls)) {
                    const newItems = urls.map(url => ({ ...newItemTemplate, [imageField.key]: url }));
-                   onUpdate([...items, ...newItems]);
+                   onUpdate([...normalizedItems, ...newItems]);
                 }
              }}
            />
         )}
-        <button onClick={() => onUpdate([...items, newItemTemplate])} className="flex items-center justify-center gap-1 text-[10px] h-[34px] font-bold text-[var(--text-inverse)] bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] transition-colors px-3 uppercase tracking-wide rounded-none">
+        <button onClick={() => onUpdate([...normalizedItems, newItemTemplate])} className="flex items-center justify-center gap-1 text-[10px] h-[34px] font-bold text-[var(--text-inverse)] bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] transition-colors px-3 uppercase tracking-wide rounded-none">
           <Plus size={14} /> Row
         </button>
       </div>
     </div>
     <div className="space-y-3">
-      {items.map((item, idx) => (
+      {normalizedItems.map((item, idx) => (
         <div key={idx} className="border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 relative group hover:border-[var(--border-dark)] transition-colors rounded-none">
-          <button onClick={() => onUpdate(items.filter((_, i) => i !== idx))} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 transition-colors bg-[var(--bg-surface)] border border-transparent hover:border-[var(--color-danger-light)] rounded-none">
+          <button onClick={() => onUpdate(normalizedItems.filter((_, i) => i !== idx))} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 transition-colors bg-[var(--bg-surface)] border border-transparent hover:border-[var(--color-danger-light)] rounded-none">
             <Trash2 size={16} />
           </button>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
@@ -90,25 +99,31 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                   <IconPicker 
                     value={item[field.key]} 
                     onChange={val => {
-                      const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
+                      const newItems = [...normalizedItems]; 
+                      newItems[idx] = { ...newItems[idx], [field.key]: val }; 
+                      onUpdate(newItems);
                     }} 
                   />
                 ) : field.type === 'image' ? (
                   <div className="space-y-2">
                     <div className="border border-[var(--border-default)] bg-[var(--bg-muted)] overflow-hidden h-24 flex items-center justify-center">
-                      {item[field.key] ? (
+                      {typeof item[field.key] === 'string' && item[field.key] ? (
                         <img src={item[field.key]} className="w-full h-full object-cover" alt="Preview" />
                       ) : (
                         <ImageIcon size={24} className="text-[var(--text-muted)]" />
                       )}
                     </div>
                     <div className="flex flex-col sm:flex-row gap-2">
-                      <input type="text" value={item[field.key] || ''} onChange={e => {
-                        const newItems = [...items]; newItems[idx][field.key] = e.target.value; onUpdate(newItems);
+                      <input type="text" value={typeof item[field.key] === 'string' ? item[field.key] : ''} onChange={e => {
+                        const newItems = [...normalizedItems]; 
+                        newItems[idx] = { ...newItems[idx], [field.key]: e.target.value }; 
+                        onUpdate(newItems);
                       }} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="Image URL..." />
                       <div className="w-full sm:w-auto shrink-0">
                         <MediaUploader category="schools" onUploadSuccess={url => {
-                          const newItems = [...items]; newItems[idx][field.key] = url; onUpdate(newItems);
+                          const newItems = [...normalizedItems]; 
+                          newItems[idx] = { ...newItems[idx], [field.key]: url }; 
+                          onUpdate(newItems);
                         }} />
                       </div>
                     </div>
@@ -117,11 +132,15 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                   <RichTextEditor 
                     value={item[field.key] || ''} 
                     onChange={val => {
-                      const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
+                      const newItems = [...normalizedItems]; 
+                      newItems[idx] = { ...newItems[idx], [field.key]: val }; 
+                      onUpdate(newItems);
                     }} 
                     useProse={item.useProse !== false}
                     onProseChange={val => {
-                      const newItems = [...items]; newItems[idx].useProse = val; onUpdate(newItems);
+                      const newItems = [...normalizedItems]; 
+                      newItems[idx] = { ...newItems[idx], useProse: val }; 
+                      onUpdate(newItems);
                     }}
                   />
                 ) : field.type === 'stringList' ? (
@@ -129,12 +148,16 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                     label={field.label} 
                     value={item[field.key] || []} 
                     onChange={val => {
-                      const newItems = [...items]; newItems[idx][field.key] = val; onUpdate(newItems);
+                      const newItems = [...normalizedItems]; 
+                      newItems[idx] = { ...newItems[idx], [field.key]: val }; 
+                      onUpdate(newItems);
                     }} 
                   />
                 ) : (
                   <input type={field.type || 'text'} value={item[field.key] || ''} onChange={e => {
-                    const newItems = [...items]; newItems[idx][field.key] = e.target.value; onUpdate(newItems);
+                    const newItems = [...normalizedItems]; 
+                    newItems[idx] = { ...newItems[idx], [field.key]: e.target.value }; 
+                    onUpdate(newItems);
                   }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" />
                 )}
               </div>
@@ -266,7 +289,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
   return (
     <div className="w-[98%] lg:w-[95%] xl:w-[92%] mx-auto pb-28 space-y-6 px-4 mt-6">
       
-      {/* ── Basic Configuration ── */}
+      {/* --- Basic Configuration --- */}
       <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 shadow-[var(--shadow-sm)] space-y-5 rounded-none">
         <div className="flex items-center gap-2 border-b border-[var(--border-light)] pb-3">
           <Settings size={18} className="text-[var(--color-primary)]" />
@@ -299,7 +322,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
         </div>
       </div>
 
-      {/* ── Structured Sections List ── */}
+      {/* --- Structured Sections List --- */}
       <div className="space-y-4">
         <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide border-b border-[var(--border-light)] pb-2">Page Layout Sections</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -318,7 +341,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
         </div>
       </div>
 
-      {/* ── Minimal Floating Save Bar ── */}
+      {/* --- Minimal Floating Save Bar --- */}
       <div className="fixed bottom-6 right-6 z-50 flex items-center justify-end">
         <div className="bg-[var(--bg-surface)] border border-[var(--border-dark)] p-2 shadow-2xl flex items-center gap-3 rounded-none">
           <div className="hidden sm:flex flex-col text-right px-3 border-r border-[var(--border-light)]">
@@ -336,7 +359,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
         </div>
       </div>
 
-      {/* ── Edit Modal ── */}
+      {/* --- Edit Modal --- */}
       <Modal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
