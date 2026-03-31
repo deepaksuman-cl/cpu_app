@@ -54,16 +54,16 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
   const handleLocalUpload = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const file = e.target.files[0];
-    if (!file) return;
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
 
     setUploadLoading(true);
     const formData = new FormData();
-    formData.append('file', file);
+    files.forEach(file => formData.append('file', file));
     
     const res = await uploadLocalMedia(formData);
     if (res.success) {
-      toast.success('Uploaded to library!');
+      toast.success(`Successfully uploaded ${res.count || files.length} files to library!`);
       setActiveTab('library');
       fetchLibrary();
     } else {
@@ -215,6 +215,7 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
                         <input 
                           type="file" 
                           onChange={handleLocalUpload}
+                          multiple
                           className="absolute inset-0 opacity-0 cursor-pointer z-10" 
                         />
                         {uploadLoading ? (
@@ -227,6 +228,7 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
                           </>
                         )}
                       </div>
+
                    </div>
 
                    {/* External Link */}

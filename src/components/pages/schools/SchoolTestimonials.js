@@ -6,7 +6,10 @@ import StructuredTitle from "@/components/common/StructuredTitle";
 export default function SchoolTestimonials({ data }) {
   const [active, setActive] = useState(0);
   if (!data) return null;
-  const { list, title, label } = data;
+  const list = Array.isArray(data) ? data : (data.list || []);
+  if (!list || list.length === 0) return null;
+  const title = data.title || "Student Testimonials";
+  const label = data.label || "What They Say";
 
   const next = () => setActive(p => (p + 1) % list.length);
   const prev = () => setActive(p => (p - 1 + list.length) % list.length);
@@ -39,11 +42,11 @@ export default function SchoolTestimonials({ data }) {
                     <div className="h-1 bg-gradient-to-r from-[#ffb900] to-orange-500" />
                     <div className="p-8">
                       <Quote className="w-9 h-9 mb-5 text-[#ffb900] opacity-40" />
-                      <p className="text-base lg:text-lg leading-relaxed mb-8 text-white/85">"{t.text}"</p>
+                      <p className="text-base lg:text-lg leading-relaxed mb-8 text-white/85">"{t.text || t.content}"</p>
                       <div className="flex items-center justify-between flex-wrap gap-4">
                         <div className="flex items-center gap-4">
                           <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-[#ffb900]/35 flex-shrink-0">
-                            <img src={t.photo} alt={t.name} className="w-full h-full object-cover object-top" />
+                            <img src={t.photo || t.avatar || "https://cpur.in/wp-content/uploads/2023/07/student.png"} alt={t.name} className="w-full h-full object-cover object-top" />
                           </div>
                           <div>
                             <div className="font-bold text-white text-base">{t.name}</div>

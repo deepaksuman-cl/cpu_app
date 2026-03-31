@@ -8,7 +8,7 @@ export default function SchoolPlacements({ data }) {
   const [perPage, setPerPage] = useState(4);
   const timer = useRef(null);
 
-  if (!data) return null;
+  if (!data || !data.list || !Array.isArray(data.list) || data.list.length === 0) return null;
   const { list, title, label, subtitle } = data;
   const pages = Math.ceil(list.length / perPage);
 

@@ -153,16 +153,17 @@ export default function MediaLibrary() {
                   <div className="border-2 border-dashed border-[var(--border-default)] p-8 text-center bg-[var(--bg-muted)] hover:border-[var(--color-primary)] transition-colors cursor-pointer group relative">
                     <input 
                       type="file" 
+                      multiple
                       className="absolute inset-0 opacity-0 cursor-pointer" 
                       onChange={async (e) => {
-                        const file = e.target.files[0];
-                        if (file) {
+                        const files = Array.from(e.target.files);
+                        if (files.length > 0) {
                           setUploadLoading(true);
                           const formData = new FormData();
-                          formData.append('file', file);
+                          files.forEach(file => formData.append('file', file));
                           const res = await uploadLocalMedia(formData);
                           if (res.success) {
-                            toast.success('File uploaded successfully!');
+                            toast.success(`Successfully uploaded ${res.count || files.length} files!`);
                             fetchMedia();
                           } else toast.error('Upload failed: ' + res.error);
                           setUploadLoading(false);
