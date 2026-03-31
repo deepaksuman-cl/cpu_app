@@ -47,7 +47,7 @@ export default function AlumniSection({ data }) {
                 </span>
               </div>
               <div
-                className="absolute top-3 left-12 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full z-30"
+                className="absolute top-3 left-5 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full z-30"
                 style={{ backgroundColor: alum.companyBg || '#00588b' }}
               >
                 {alum.company}

@@ -17,6 +17,7 @@ import {
   ExternalLink 
 } from 'lucide-react';
 import { createPortal } from 'react-dom';
+import toast from 'react-hot-toast';
 
 export default function MediaUploader({ onUploadSuccess, category = 'general', multiple = false, buttonText = "Select / Upload Media" }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +33,7 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
   
   // Upload State
   const [uploadLoading, setUploadLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [externalUrl, setExternalUrl] = useState('');
 
   const fetchLibrary = async () => {
@@ -69,18 +71,43 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
     if (files.length === 0) return;
 
     setUploadLoading(true);
-    const formData = new FormData();
-    files.forEach(file => formData.append('file', file));
-    
-    const res = await uploadLocalMedia(formData);
-    if (res.success) {
-      toast.success(`Successfully uploaded ${res.count || files.length} files to library!`);
-      setActiveTab('library');
-      fetchLibrary();
-    } else {
-      toast.error('Upload failed: ' + res.error);
+    setUploadProgress(0);
+
+    const progressInterval = setInterval(() => {
+      setUploadProgress(prev => {
+        if (prev >= 90) return prev;
+        return prev + Math.floor(Math.random() * 10) + 5;
+      });
+    }, 300);
+
+    try {
+      const formData = new FormData();
+      files.forEach(file => formData.append('file', file));
+      
+      const res = await uploadLocalMedia(formData);
+      
+      clearInterval(progressInterval);
+      setUploadProgress(100);
+
+      if (res.success) {
+        setTimeout(() => {
+          toast.success(`Successfully uploaded ${res.count || files.length} files to library!`);
+          setActiveTab('library');
+          setUploadProgress(0);
+          setUploadLoading(false);
+          fetchLibrary();
+        }, 500);
+      } else {
+        toast.error('Upload failed: ' + res.error);
+        setUploadLoading(false);
+        setUploadProgress(0);
+      }
+    } catch (err) {
+      clearInterval(progressInterval);
+      toast.error('Upload failed: ' + err.message);
+      setUploadLoading(false);
+      setUploadProgress(0);
     }
-    setUploadLoading(false);
   };
 
   const handleExternalSave = async () => {
@@ -253,12 +280,23 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
                           className="absolute inset-0 opacity-0 cursor-pointer z-10" 
                         />
                         {uploadLoading ? (
-                          <Loader2 className="animate-spin text-[var(--color-primary)] mx-auto" size={32} />
+                          <div className="w-full max-w-xs mx-auto py-2 z-20 relative">
+                            <div className="mb-3 text-xs font-bold text-[var(--color-primary)] uppercase tracking-widest flex justify-between items-center">
+                              <span className="flex items-center gap-2"><Loader2 className="animate-spin" size={14} /> Uploading...</span>
+                              <span>{uploadProgress}%</span>
+                            </div>
+                            <div className="w-full bg-[var(--border-default)] h-2.5 rounded-full overflow-hidden">
+                              <div 
+                                className="bg-[var(--color-primary)] h-full transition-all duration-300 ease-out" 
+                                style={{ width: `${uploadProgress}%` }}
+                              />
+                            </div>
+                          </div>
                         ) : (
                           <>
                             <UploadCloud className="mx-auto mb-4 text-[var(--text-muted)] group-hover:text-[var(--color-primary)] group-hover:scale-110 transition-all" size={40} />
                             <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Drag & drop or browse files</p>
-                            <p className="text-[10px] text-[var(--text-muted)] mt-2">Maximum file size: 10MB. Formats: PNG, JPG, WEBP, SVG.</p>
+                            <p className="text-[10px] text-[var(--text-muted)] mt-2">Maximum file size: 10MB. Formats: PNG, JPG, WEBP, SVG, PDF.</p>
                           </>
                         )}
                       </div>

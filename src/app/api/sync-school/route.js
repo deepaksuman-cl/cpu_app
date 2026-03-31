@@ -43,7 +43,7 @@ export async function POST(req) {
     try {
       // 5. School Data Prepare karo (Exclude courseDetails)
       const schoolPayload = {
-        name: schoolData.name || schoolData.title?.main, // Fallback if name is missing
+        name: schoolData.name || schoolData.hero?.title?.main || schoolData.slug, // Fallback if name is missing
         slug: schoolData.slug,
         metaTitle: schoolData.metaTitle,
         metaDescription: schoolData.metaDescription,

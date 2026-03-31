@@ -809,7 +809,7 @@ export default function HeaderClient({ navData }) {
 
       {/* MOBILE TOP HEADER */}
       <header className={`lg:hidden fixed top-0 w-full z-[1000] p-3 flex justify-between items-center shadow-md bg-white transition-transform duration-300 ease-out ${!state.showTopBar ? '-translate-y-full' : 'translate-y-0'}`}>
-        <Link href="/"><img src={navData.logoUrl} alt="Logo" className="h-10 object-contain" /></Link>
+        <Link href="/"><img src={navData.logoUrl} alt="Logo" className="h-6  md:h-10 object-contain" /></Link>
         <button 
           onClick={() => dispatch({ type: 'TOGGLE_SIDEBAR' })} 
           className="text-[#00588b] p-2 hover:bg-gray-100 rounded-full transition-colors"
