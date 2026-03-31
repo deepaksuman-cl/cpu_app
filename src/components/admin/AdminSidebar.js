@@ -41,6 +41,7 @@ const SIDEBAR_MENUS = [
       { name: 'Footer Settings', href: '/admin/footer-manager', icon: PanelBottom },
       { name: 'Home Page Setup', href: '/admin/home-setup', icon: Home },
       { name: 'Page Builder', href: '/admin/pages', icon: FileText },
+      { name: 'Flipbook Manager', href: '/admin/flipbooks', icon: FileText },
       { name: 'Media Library', href: '/admin/media', icon: ImageIcon },
     ]
   },

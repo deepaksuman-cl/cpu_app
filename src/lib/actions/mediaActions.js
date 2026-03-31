@@ -25,42 +25,58 @@ export async function getAllMedia() {
 export async function uploadLocalMedia(formData) {
   try {
     await connectToDatabase();
-    const file = formData.get('file');
-    if (!file) throw new Error('No file uploaded');
+    
+    // Attempt to get multiple files with key 'file' or 'files'
+    const files = formData.getAll('file').concat(formData.getAll('files'));
+    
+    if (files.length === 0) throw new Error('No files uploaded');
 
     const uploadDir = getUploadDir();
     // 🛡️ Bulletproof: Ensure directory exists without crashing
     await fs.mkdir(uploadDir, { recursive: true });
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const originalName = file.name;
+    const processedMedia = [];
 
-    // 🛡️ Bulletproof: Sanitize filename (spaces to hyphens, remove special chars)
-    const sanitizedName = originalName.replace(/[^a-zA-Z0-9.-]/g, '-').replace(/-+/g, '-');
-    const fileName = `${Date.now()}-${sanitizedName}`;
-    const filePath = path.join(uploadDir, fileName);
+    for (const file of files) {
+      if (!(file instanceof Blob)) continue;
 
-    // Write to persistent disk
-    await fs.writeFile(filePath, buffer);
+      const buffer = Buffer.from(await file.arrayBuffer());
+      const originalName = file.name || 'unnamed-file';
 
-    const media = await Media.create({
-      displayName: originalName,
-      originalName: originalName,
-      url: `/api/media/media/${fileName}`,
-      isExternal: false,
-      mimeType: file.type,
-      size: file.size,
-    });
+      // 🛡️ Bulletproof: Sanitize filename (spaces to hyphens, remove special chars) & ensure uniqueness
+      const sanitizedName = originalName.replace(/[^a-zA-Z0-9.-]/g, '-').replace(/-+/g, '-');
+      const uniqueSuffix = Math.random().toString(36).substring(2, 7);
+      const fileName = `${Date.now()}-${uniqueSuffix}-${sanitizedName}`;
+      const filePath = path.join(uploadDir, fileName);
 
-    // Global revalidation to refresh Media Library instantly
+      // Write to persistent disk
+      await fs.writeFile(filePath, buffer);
+
+      const media = await Media.create({
+        displayName: originalName,
+        originalName: originalName,
+        url: `/api/media/media/${fileName}`,
+        isExternal: false,
+        mimeType: file.type || 'application/octet-stream',
+        size: file.size || 0,
+      });
+      processedMedia.push(media);
+    }
+
     revalidatePath('/', 'layout');
 
-    return { success: true, data: JSON.parse(JSON.stringify(media)), error: null };
+    return { 
+      success: true, 
+      data: JSON.parse(JSON.stringify(processedMedia)), 
+      count: processedMedia.length,
+      error: null 
+    };
   } catch (error) {
     console.error('uploadLocalMedia Error:', error);
     return { success: false, data: null, error: error.message };
   }
 }
+
 
 export async function saveExternalMedia(url) {
   try {

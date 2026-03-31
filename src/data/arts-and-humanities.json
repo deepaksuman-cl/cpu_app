@@ -1,0 +1,3976 @@
+{
+  "arts-and-humanities": {
+    "slug": "arts-and-humanities",
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "link": "/"
+      },
+      {
+        "label": "Schools & Departments",
+        "link": "/schools"
+      },
+      {
+        "label": "School of Arts & Humanities",
+        "link": "/schools/arts-and-humanities"
+      }
+    ],
+    "hero": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "badge": "Premier Institute for Humanities & Social Sciences",
+      "title": {
+        "main": "School of Arts & Humanities",
+        "highlight": "Arts",
+        "skyHighlight": "& Humanities"
+      },
+      "description": "Career Point University offers cutting-edge programs shaping future civil servants, researchers, writers, and social leaders.",
+      "cta": [
+        {
+          "label": "Apply Now",
+          "link": "#",
+          "primary": true
+        },
+        {
+          "label": "Explore Programs",
+          "link": "#programs",
+          "primary": false
+        }
+      ]
+    },
+    "stats": [
+      {
+        "value": "12L",
+        "label": "Highest Package",
+        "icon": "TrendingUp"
+      },
+      {
+        "value": "4.5L",
+        "label": "Avg Salary Package",
+        "icon": "BarChart3"
+      },
+      {
+        "value": "50+",
+        "label": "Global NGO Partners",
+        "icon": "Briefcase"
+      }
+    ],
+    "about": {
+      "vision": {
+        "title": "Vision",
+        "label": "Our Purpose",
+        "icon": "Target",
+        "text": "To be a center of excellence in humanities education, nurturing creative minds that contribute meaningfully to society and culture at national and global levels.",
+        "highlights": [
+          {
+            "value": "800+",
+            "label": "Students"
+          },
+          {
+            "value": "90%",
+            "label": "Placement"
+          },
+          {
+            "value": "15+",
+            "label": "Partners"
+          }
+        ]
+      },
+      "mission": {
+        "title": "Mission",
+        "label": "Our Goal",
+        "icon": "Lightbulb",
+        "points": [
+          "Promote interdisciplinary research in arts, literature, and social sciences.",
+          "Encourage creative expression, critical analysis, and open debates.",
+          "Preserve and promote cultural heritage through academic practices.",
+          "Nurture scholars and critical thinkers through modern research methodologies.",
+          "Prepare students for diverse careers in media, education, and public service."
+        ]
+      }
+    },
+    "programmes": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "title": {
+        "main": "Our Programme",
+        "highlight": "Programme"
+      },
+      "subtitle": "Academic Programmes",
+      "description": "Explore our diverse range of undergraduate, postgraduate, and doctoral programs designed to foster deep analytical and social skills.",
+      "levels": [
+        {
+          "label": "After 12th Pass/ \"A\" Level",
+          "icon": "GraduationCap",
+          "courses": [
+            {
+              "name": "Bachelor of Arts (B.A.)",
+              "slug": "ba",
+              "specializations": [
+                { "name": "English", "slug": "english" },
+                { "name": "History", "slug": "history" },
+                { "name": "Political Science", "slug": "political-science" }
+              ]
+            },
+            {
+              "name": "Bachelor of Library Science (B.Lib.)",
+              "slug": "b-lib",
+              "specializations": []
+            }
+          ]
+        },
+        {
+          "label": "After Graduation / Equivalent",
+          "icon": "BookOpen",
+          "courses": [
+            {
+              "name": "Master of Arts (M.A.)",
+              "slug": "ma",
+              "specializations": [
+                { "name": "English Literature", "slug": "english-lit" },
+                { "name": "Sociology", "slug": "sociology" }
+              ]
+            },
+            {
+              "name": "Master of Social Work (MSW)",
+              "slug": "msw",
+              "specializations": []
+            },
+            {
+              "name": "Master of Library Science (M.Lib.)",
+              "slug": "m-lib",
+              "specializations": []
+            }
+          ]
+        },
+        {
+          "label": "After Post Graduation / Equivalent",
+          "icon": "Microscope",
+          "courses": [
+            {
+              "name": "Ph.D. (All Subjects)",
+              "slug": "research-phd",
+              "description": "Research-focused doctoral programme"
+            }
+          ]
+        }
+      ]
+    },
+    "courseDetails": {
+     "ba": {
+        "title": "Bachelor of Arts (B.A.)",
+        "duration": "3 Years",
+        "eligibility": "10+2 with minimum 50% marks from a recognized board",
+        "description": "The B.A. program focuses on preparing students for roles pertaining to civil services, journalism, social work, and the broader humanities sector.",
+        "metaTitle": "Bachelor of Arts (B.A.) | School of Arts & Humanities",
+        "metaDescription": "Pursue a 3-year Bachelor of Arts (B.A.) degree at Career Point University. Comprehensive foundation in English, History, Political Science, and Sociology.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "3-Year Undergraduate Programme",
+          "title": {
+            "main": "Bachelor of Arts",
+            "line1": "Bachelor of",
+            "line2": "Arts",
+            "line3": "(B.A.)",
+            "highlight": "Arts",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "8L+"
+            },
+            {
+              "label": "Students Trust",
+              "value": "5,000+"
+            }
+          ],
+          "description": "Comprehensive foundation in humanities with extensive focus on critical thinking, literature, historical analysis, governance, and social behavior."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Placements So Far",
+              "value": "1500+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Highest Package",
+              "value": "8 L"
+            },
+            {
+              "icon": "Award",
+              "label": "Civil Service Selections",
+              "value": "120+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Student Publications",
+              "value": "85"
+            },
+            {
+              "icon": "Globe",
+              "label": "Global Fellowships",
+              "value": "50+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni Achieved",
+              "value": "95%"
+            }
+          ],
+          "heading": "Department's Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 5,000+ Students"
+        },
+        "overview": {
+          "tags": [
+            "3 Years Duration",
+            "6 Semesters",
+            "Interdisciplinary",
+            "Civil Services Aligned"
+          ],
+          "subtitle": "What is the B.A. Programme?",
+          "gridCards": [
+            {
+              "sub": "Literature & Grammar",
+              "icon": "BookOpen",
+              "label": "English"
+            },
+            {
+              "sub": "Ancient & Modern",
+              "icon": "Database",
+              "label": "History"
+            },
+            {
+              "sub": "Governance & Policies",
+              "icon": "Network",
+              "label": "Political Science"
+            },
+            {
+              "sub": "Human Behavior",
+              "icon": "Brain",
+              "label": "Sociology"
+            }
+          ],
+          "paragraphs": [
+            "The B.A. Programme is a three-year, six-semester journey that offers holistic knowledge of human culture, society, and governance. It fosters creativity, analytical thinking, and effective communication, addressing complex societal challenges and providing real-world perspectives.",
+            "Overall, the B.A. programme enables students with a comprehensive understanding of liberal arts principles, practical skills in writing and research, and opportunities for career growth in the dynamic and evolving fields of media, public administration, and education."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "The B.A. program is a comprehensive three-year undertaking that produces students with a solid foundation in humanities. The curriculum encompasses a wide range of subjects, spanning English Literature, Ancient and Modern History, Political Science, and Sociology. Additionally, students learn to leverage critical thinking, writing skills, and socio-economic analysis. Graduates can pursue roles as journalists, content strategists, civil servants, policy analysts, educators, and public relations officers.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in the world of humanities",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A well-structured curriculum designed for excellence",
+          "introNote": "The B.A. programme is a comprehensive curriculum providing students with a solid foundation in arts, spanning subjects like English, History, Political Science, and Sociology, along with skill enhancement modules.",
+          "outroNote": "Graduates of B.A. are well prepared for diverse career specializations in media, public administration, NGOs, and the education sector.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 62,
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Discipline Specific Core Courses (DSC)"
+            },
+            {
+              "credits": 6,
+              "category": "Skill Enhancement",
+              "shortName": "SE",
+              "description": "Project / Field Study / Survey"
+            },
+            {
+              "credits": 2,
+              "category": "Ability Enhancement",
+              "shortName": "AE",
+              "description": "Seminar & Communication"
+            },
+            {
+              "credits": 4,
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Internship / NGO Experience"
+            },
+            {
+              "credits": 32,
+              "category": "Departmental Elective",
+              "shortName": "DE",
+              "description": "Discipline Specific Elective Courses (DSE)"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure",
+              "content": "The Bachelor of Arts (B.A.) program at Career Point University is a comprehensive three-year undergraduate course designed to provide students with a solid foundation in humanities. The curriculum encompasses a wide range of subjects, including History, Political Science, Sociology, and English. In addition to these core topics, the program offers specialized modules in emerging fields like public policy, digital media, and social psychology, ensuring that students are well-versed in current societal trends.\n\nThe following table outlines the comprehensive course structure of the B.A. program. It is organized into core, elective, interdisciplinary, and skill enhancement components. Each category specifies the type of courses, their descriptions, and the corresponding credits, ensuring a well-rounded academic experience:",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Subjects covered in Semester 1 include: Introduction to English Literature, History of Ancient India, Understanding Political Theory, Environmental Studies, and Communication Skills. Total Credits: 22"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Subjects covered in Semester 2 include: British Poetry & Drama, History of Medieval India, Political Process in India, Creative Writing, and Sociology Basics. Total Credits: 22"
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Subjects covered in Semester 3 include: American Literature, History of Modern India, Comparative Government and Politics, Skill Enhancement Course I. Total Credits: 22"
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Subjects covered in Semester 4 include: Women's Writing, History of Europe, Global Politics, Research Methodology, and Skill Enhancement Course II. Total Credits: 22"
+            },
+            {
+              "id": "s5",
+              "title": "Semester-5",
+              "content": "Subjects covered in Semester 5 include: Postcolonial Literatures, History of Modern World, Public Administration, Discipline Specific Elective I, and Internship. Total Credits: 22"
+            },
+            {
+              "id": "s6",
+              "title": "Semester-6",
+              "content": "Subjects covered in Semester 6 include: Modern European Drama, Issues in 20th Century World History, Indian Political Thought, Major Project, and Discipline Specific Elective II. Total Credits: 22"
+            },
+            {
+              "id": "uc",
+              "title": "University Core",
+              "content": "University Core courses include: Environmental Science, Human Values & Professional Ethics, Indian Constitution & Traditional Knowledge, and Sports/NSS/NCC activities."
+            },
+            {
+              "id": "de",
+              "title": "Departmental Elective",
+              "content": "Departmental Elective options include: International Relations, Public Policy Analysis, Digital Humanities, Advanced Sociology, and Creative Non-Fiction."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Additional Foreign Languages (French/German)",
+              "credits": 2
+            },
+            {
+              "name": "Public Speaking & Personality Development",
+              "credits": 2
+            },
+            {
+              "name": "National and Professional Issues (NPI)",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Simple admission process and transparent fee structure",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "5,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "15,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,000/- per Semester"
+            },
+            {
+              "label": "Development Fee",
+              "amount": "2,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered to students based on previous class (12th Board).",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "If a student fails to maintain academic standards, the scholarship may be cancelled.",
+            "To avail merit scholarship, student has to submit supporting documents in original along with 1 set of photocopies."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "B.A. serves as a gateway to civil services and administration. The program equips students with foundational knowledge in history, polity, and social sciences required for UPSC and state exams.",
+              "icon": "TrendingUp",
+              "title": "Gateway to Civil Services"
+            },
+            {
+              "desc": "B.A. graduates have opportunities across media houses, publishing firms, government agencies, NGOs, and educational institutions. The versatile degree allows exploring diverse career paths.",
+              "icon": "Briefcase",
+              "title": "Diverse Career Opportunities"
+            },
+            {
+              "desc": "The curriculum covers writing, critical analysis, public speaking, and behavioral studies — highly demanded soft skills across multiple modern industries.",
+              "icon": "BookOpen",
+              "title": "In-demand Soft Skills"
+            },
+            {
+              "desc": "B.A. programs emphasize practical training through field trips, social surveys, and NGO collaborations. Students apply theoretical knowledge to real-world societal problems.",
+              "icon": "Target",
+              "title": "Field Training & Hands-On Exp."
+            },
+            {
+              "desc": "Many B.A. programs offer specialization in English literature, modern history, public policy, and sociology.",
+              "icon": "Brain",
+              "title": "Opportunities for Specialization"
+            }
+          ],
+          "subtitle": "Unlock your potential with a B.A. degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "The department provides career support services, civil service coaching tie-ups, and mentoring for future administrators.",
+              "icon": "Users",
+              "title": "Civil Service Support"
+            },
+            {
+              "num": "07",
+              "desc": "We collaborate with historical societies and media houses to promote interdisciplinary research and knowledge exchange.",
+              "icon": "Globe",
+              "title": "Interdisciplinary Approach"
+            },
+            {
+              "num": "08",
+              "desc": "The department focuses on holistic development offering communication skills, debate training, and competitive exam preparation.",
+              "icon": "Brain",
+              "title": "Skill Development"
+            },
+            {
+              "num": "09",
+              "desc": "Students engage with the local community through NGO partnerships and social awareness campaigns.",
+              "icon": "Building2",
+              "title": "Community Engagement"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details and email address.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Confirm your identity, educational background (12th marksheets), and upload the necessary documents.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form with all required academic and personal information.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online via net banking, UPI, or card.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for processing and review.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the B.A. programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have passed 10+2 (or equivalent) from a recognized board with a minimum of 50% marks in aggregate. Science/Commerce/Arts stream students are all eligible.",
+              "q": "What is the eligibility criteria for B.A. admission?"
+            },
+            {
+              "a": "B.A. is a 3-year (6 semester) programme. The tuition fee is ₹15,000 per semester. Additional charges include examination fee (₹2,000), development fee (₹2,000), and a one-time admission fee of ₹5,000.",
+              "q": "What is the duration and fee structure of the B.A. programme?"
+            },
+            {
+              "a": "Students can choose major subjects in English Literature, History, Political Science, and Sociology. These are offered as Discipline Specific Core and Electives.",
+              "q": "What specializations are available in B.A. at Career Point University?"
+            },
+            {
+              "a": "B.A. graduates frequently enter civil services, journalism, teaching, public relations, and NGO management. We also provide placement assistance with top media houses and NGOs.",
+              "q": "What kind of career options can I expect after completing B.A.?"
+            },
+            {
+              "a": "Yes. Merit-based scholarships of up to 100% on tuition fees are available for students scoring above 90% in their 12th board exams.",
+              "q": "Is there any scholarship available for B.A. students?"
+            },
+            {
+              "a": "Yes, our curriculum for History and Political Science is specifically designed to align with the syllabi of UPSC and other state-level civil service examinations.",
+              "q": "Does the course help in UPSC/Civil Services preparation?"
+            },
+            {
+              "a": "B.A. students have access to the Central Digital Library, Language and Communication Labs, and historical archives. Seminar halls for debates and mock parliaments are also available.",
+              "q": "What facilities are available for B.A. students?"
+            },
+            {
+              "a": "Yes. B.A. graduates can pursue M.A. in their respective subjects, B.Ed. for teaching, MBA, MSW, or degree in Law (L.L.B).",
+              "q": "Can I pursue higher studies after completing B.A.?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the B.A. programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "Guest Lectures by IAS Officers",
+              "Debate & Literary Clubs",
+              "Modern Language Labs",
+              "Specializations in Core Arts",
+              "NGO Collaborations",
+              "Civil Service Mentoring",
+              "Placement Assistance",
+              "Field Trips & Heritage Walks"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Central Digital Library",
+              "Advanced Language Lab",
+              "Media & Journalism Studio",
+              "Historical Archives Access",
+              "Research & Policy Cell"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Student Achievements",
+              "Civil Service Selections",
+              "Research & Publications",
+              "Latest Literary Updates",
+              "Upcoming Cultural Fests",
+              "Important Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "3 Year Learning Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your intensive journey to mastering the humanities.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Core Foundations",
+              "contentTitle": "Building the Basics",
+              "contentDesc": "Master the fundamentals of history, political theory, and effective communication.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Critical Reading",
+                "Historical Analysis",
+                "Public Speaking",
+                "Grammar & Syntax"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Political Theory",
+                  "desc": "Understanding governance systems",
+                  "icon": "🏛️"
+                },
+                {
+                  "title": "Ancient History",
+                  "desc": "The roots of human civilization",
+                  "icon": "📜"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Heritage Study",
+                  "desc": "Local historical site documentation",
+                  "companies": "Field Work",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "English Literature",
+                "Ancient Indian History",
+                "Political Theory",
+                "Communication Skills"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Specialization",
+              "contentTitle": "Deepening Knowledge & Electives",
+              "contentDesc": "Specialize in your chosen majors and begin understanding global contexts.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Research Methodology",
+                "Policy Analysis",
+                "Creative Writing",
+                "Sociological Observation"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Global Politics",
+                  "desc": "International relations and treaties",
+                  "icon": "🌍"
+                },
+                {
+                  "title": "Literary Eras",
+                  "desc": "Victorian and Romantic literature",
+                  "icon": "📖"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Social Survey",
+                  "desc": "Demographic analysis project",
+                  "companies": "NGO Partner",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Medieval & Modern History",
+                "Global Politics",
+                "Sociology Basics",
+                "Research Methodology"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "YEAR 3",
+              "tabTitle": "Career & Capstone",
+              "contentTitle": "Professional Readiness",
+              "contentDesc": "Final projects, internships, and focused preparation for competitive exams.",
+              "badge": "YEAR-3",
+              "skills": [
+                "Advanced Thesis Writing",
+                "Public Administration",
+                "Interview Preparation"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Public Admin",
+                  "desc": "Bureaucracy and civil service",
+                  "icon": "✒️"
+                },
+                {
+                  "title": "Post-Colonial Studies",
+                  "desc": "Modern global impacts",
+                  "icon": "🔍"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Final Dissertation",
+                  "desc": "Independent research thesis",
+                  "companies": "University",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Public Administration",
+                "Postcolonial Literature",
+                "Contemporary World History",
+                "Major Project"
+              ]
+            }
+          ]
+        }
+      },
+      "b-lib": {
+        "title": "Bachelor of Library Science (B.Lib.)",
+        "duration": "1 Year",
+        "eligibility": "Graduation in any discipline with minimum 50% marks",
+        "description": "A professional one-year program designed to train students in modern library management, digital informatics, and cataloging.",
+        "metaTitle": "Bachelor of Library Science (B.Lib.) | Career Point University",
+        "metaDescription": "Pursue a 1-Year B.Lib. degree at Career Point University. Master digital archiving, library software, and information retrieval.",
+        "hero": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "badge": "1-Year Professional Programme",
+          "title": {
+            "main": "Bachelor of Library Science",
+            "highlight": "Library",
+            "skyHighlight": "Science"
+          },
+          "description": "Bridge traditional library science with modern digital informatics. Master knowledge management, digital archiving, and modern cataloging systems.",
+          "cta": [
+            {
+              "label": "Apply Now",
+              "link": "#apply",
+              "primary": true
+            },
+            {
+              "label": "Explore Programme",
+              "link": "#overview",
+              "primary": false
+            }
+          ],
+          "quickStats": [
+            {
+              "value": "100%",
+              "label": "Placement Assistance"
+            },
+            {
+              "value": "Top Govt &",
+              "label": "Private Jobs"
+            }
+          ]
+        },
+        "accomplishments": {
+          "heading": "Department's Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 1,000+ Information Professionals",
+          "stats": [
+            {
+              "icon": "Users",
+              "value": "800+",
+              "label": "Placements So Far"
+            },
+            {
+              "icon": "BookOpen",
+              "value": "100%",
+              "label": "Digital Training"
+            },
+            {
+              "icon": "Award",
+              "label": "Govt. Selections",
+              "value": "150+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Archives Managed",
+              "value": "50+"
+            },
+            {
+              "icon": "Globe",
+              "label": "University Tie-ups",
+              "value": "20+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni Achieved",
+              "value": "95%"
+            }
+          ]
+        },
+        "overview": {
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "subtitle": "What is the B.Lib. Programme?",
+          "paragraphs": [
+            "The B.Lib. Programme is a highly specialized one-year, two-semester course that prepares students for professional roles in library and information centers. In the modern era of big data, librarians act as the crucial link between vast information resources and the users.",
+            "The curriculum is a perfect blend of traditional cataloging practices and modern IT applications like digital libraries, institutional repositories, and automated circulation systems."
+          ],
+          "tags": [
+            "1 Year Duration",
+            "2 Semesters",
+            "IT Integrated",
+            "Professional Degree"
+          ],
+          "gridCards": [
+            {
+              "icon": "BookOpen",
+              "label": "Cataloging",
+              "sub": "DDC, UDC & Metadata"
+            },
+            {
+              "icon": "Database",
+              "label": "Digital Libraries",
+              "sub": "DSpace & Greenstone"
+            },
+            {
+              "icon": "Network",
+              "label": "Library Software",
+              "sub": "KOHA & SOUL Training"
+            },
+            {
+              "icon": "Brain",
+              "label": "Info Retrieval",
+              "sub": "Search & Database Admin"
+            }
+          ]
+        },
+        "scope": {
+          "sectionTitle": {
+            "main": "Scope of Bachelor of Library Science",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "subtitle": "Expanding opportunities in Knowledge Management",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "body": "The scope of B.Lib. goes far beyond traditional bookshelves. Graduates are in high demand across universities, schools (KVS, NVS), government archives, corporate law firms, and media houses. Roles include Assistant Librarian, Information Architect, Digital Archivist, Metadata Analyst, and Documentation Officer. With the digital boom, the need to organize and retrieve electronic information has made this profession highly lucrative."
+        },
+        "curriculum": {
+          "sectionTitle": {
+            "main": "Course Structure B.Lib.",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "subtitle": "A well-structured curriculum designed for excellence",
+          "introNote": "The B.Lib. programme provides intensive theoretical and practical training in Library and Information Science (LIS), integrating modern ICT tools.",
+          "outroNote": "Graduates are fully prepared to take up professional roles or advance to the Master of Library Science (M.Lib.) programme.",
+          "courseStructure": [
+            {
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Library Science Theory",
+              "credits": 20
+            },
+            {
+              "category": "Practical Training",
+              "shortName": "PT",
+              "description": "Classification & Cataloging Practice",
+              "credits": 12
+            },
+            {
+              "category": "IT Application",
+              "shortName": "IT",
+              "description": "Library Automation Labs",
+              "credits": 8
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Advanced Search Techniques",
+              "credits": 2
+            },
+            {
+              "name": "KOHA Library Software Administration",
+              "credits": 2
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The Bachelor of Library Science (B.Lib.) program at Career Point University is an intensive one-year course. It bridges traditional library science with modern informatics. The course is divided equally into theoretical frameworks and hands-on laboratory practice with library automation software.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Subjects covered in Semester 1 include: Foundations of Library and Information Science, Library Classification (Theory), Library Cataloging (Theory), and Basics of Information Technology. Total Credits: 20"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Subjects covered in Semester 2 include: Library Management, Information Sources & Services, Library Classification (Practice), Library Cataloging (Practice), and Library Automation (IT Practical). Total Credits: 20"
+            }
+          ]
+        },
+        "admissionFee": {
+          "sectionTitle": {
+            "main": "Admission & Fee Details",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "subtitle": "Simple admission process and transparent fee structure",
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "color": "#00588b",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "link": "Click here"
+            },
+            {
+              "color": "#ffb900",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "link": "Click Here"
+            }
+          ],
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,900/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "15,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,000/- per Semester"
+            },
+            {
+              "label": "IT Lab Fee",
+              "amount": "2,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ]
+        },
+        "scholarships": {
+          "sectionTitle": {
+            "main": "Scholarship Criteria",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "subtitle": "Scholarship for Session 2026-27",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "notes": [
+            {
+              "icon": "Info",
+              "text": "Merit scholarship is offered to students based on Graduation percentage."
+            },
+            {
+              "icon": "Info",
+              "text": "Tuition and fees may be net once your scholarship criteria is evaluated."
+            },
+            {
+              "icon": "Info",
+              "text": "To avail merit scholarship, student has to submit supporting documents in original."
+            }
+          ]
+        },
+        "whyJoin": {
+          "sectionTitle": {
+            "main": "Why Join Bachelor of Library Science (B.Lib.)?",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "subtitle": "Unlock your potential with an Information Science degree",
+          "reasons": [
+            {
+              "icon": "TrendingUp",
+              "title": "High Employability",
+              "desc": "Every educational institution, research facility, and large corporation requires certified librarians and documentation officers."
+            },
+            {
+              "icon": "Briefcase",
+              "title": "Govt. Job Opportunities",
+              "desc": "Direct eligibility for librarian vacancies in KVS, NVS, state libraries, and national archives."
+            },
+            {
+              "icon": "BookOpen",
+              "title": "Tech-Driven Curriculum",
+              "desc": "Learn beyond books. Master digital cataloging, e-resource management, and database search strategies."
+            },
+            {
+              "icon": "Target",
+              "title": "Practical Training",
+              "desc": "Extensive hands-on practice in the University's Central Library using real-world automation software."
+            }
+          ]
+        },
+        "uniqueFeatures": {
+          "sectionTitle": {
+            "main": "What makes our B.Lib. unique?",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "subtitle": "Setting us apart from the rest",
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "01",
+              "icon": "Users",
+              "title": "Live Lab Setup",
+              "desc": "Students manage live sections of the CPU Central Library as part of their coursework."
+            },
+            {
+              "num": "02",
+              "icon": "Globe",
+              "title": "Software Training",
+              "desc": "Dedicated training on open-source integrated library systems (ILS) like KOHA."
+            },
+            {
+              "num": "03",
+              "icon": "Brain",
+              "title": "Digital Archiving",
+              "desc": "Special modules on creating and managing institutional digital repositories."
+            }
+          ]
+        },
+        "applySteps": {
+          "sectionTitle": {
+            "main": "How to Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "subtitle": "Simple 5-step process to join the B.Lib. programme",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "guideLabel": "Guide to Register Online",
+          "ctaLabel": "Start Your Application",
+          "ctaLink": "#",
+          "steps": [
+            {
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself",
+              "desc": "Create your account on the portal with your basic personal details."
+            },
+            {
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details",
+              "desc": "Upload graduation marksheets and verify identity."
+            },
+            {
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online",
+              "desc": "Complete the academic form online."
+            },
+            {
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee",
+              "desc": "Securely pay the processing fee online."
+            },
+            {
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application",
+              "desc": "Review and submit your application."
+            }
+          ]
+        },
+        "faq": {
+          "sectionTitle": {
+            "main": "Frequently Asked Questions",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "subtitle": "Everything you need to know about the B.Lib. programme",
+          "items": [
+            {
+              "q": "What is the eligibility criteria for B.Lib. admission?",
+              "a": "Candidates must have completed their Graduation in any stream (B.A, B.Sc, B.Com, etc.) from a recognized university with a minimum of 50% marks."
+            },
+            {
+              "q": "What is the duration of the course?",
+              "a": "B.Lib. is a 1-year professional course divided into 2 semesters."
+            },
+            {
+              "q": "Are there government jobs after B.Lib.?",
+              "a": "Yes, completing B.Lib. makes you eligible for Librarian and Assistant Librarian posts in government schools (KVS, NVS), colleges, public libraries, and research institutes like DRDO."
+            },
+            {
+              "q": "Does the course teach software or is it just theory?",
+              "a": "It is highly tech-driven. You will have dedicated IT practicals where you will learn to use Library Automation Software (like KOHA, SOUL) and digital repository tools."
+            },
+            {
+              "q": "Can I pursue a Master's degree after this?",
+              "a": "Yes, completing B.Lib. is the prerequisite to enroll in the Master of Library and Information Science (M.Lib.) programme."
+            }
+          ]
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "Vast Central Library",
+              "Digital Informatics Training",
+              "Live Cataloging Projects",
+              "Archival Science Excursions",
+              "Placement Assistance"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Labs",
+            "icon": "FlaskConical",
+            "items": [
+              "Digital Archiving Hub",
+              "Library Automation IT Lab",
+              "E-Resource Management Center"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Student Placements",
+              "Digital Collections",
+              "Workshops",
+              "Latest Updates",
+              "Important Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "1-Year Professional Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your intensive journey to becoming an Information Architect.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "SEMESTER 1",
+              "tabTitle": "Core Foundations",
+              "contentTitle": "Library Science Theory & Basics",
+              "contentDesc": "Master the theoretical foundations of classification, cataloging, and the societal role of libraries.",
+              "badge": "SEM-1",
+              "skills": [
+                "DDC Classification",
+                "Metadata Creation",
+                "Reference Handling"
+              ],
+              "aiTools": [
+                {
+                  "name": "ChatGPT",
+                  "desc": "Metadata generation assist",
+                  "icon": "Bot",
+                  "color": "#0b1bf4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Cataloging",
+                  "desc": "Structuring information",
+                  "icon": "📚"
+                },
+                {
+                  "title": "Classification",
+                  "desc": "Dewey Decimal System",
+                  "icon": "🗄️"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Manual Cataloging",
+                  "desc": "Creating index cards for 100 books",
+                  "companies": "Library Lab",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Foundations of LIS",
+                "Library Classification Theory",
+                "Library Cataloging Theory"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "SEMESTER 2",
+              "tabTitle": "IT & Practice",
+              "contentTitle": "Digital Libraries & Automation",
+              "contentDesc": "Apply theory to software. Learn how to manage a modern digital library infrastructure.",
+              "badge": "SEM-2",
+              "skills": [
+                "KOHA Administration",
+                "Digital Archiving",
+                "Library Management"
+              ],
+              "aiTools": [
+                {
+                  "name": "DSpace",
+                  "desc": "Digital Repository Tech",
+                  "icon": "Database",
+                  "color": "#000",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Library Automation",
+                  "desc": "Using integrated systems",
+                  "icon": "💻"
+                },
+                {
+                  "title": "Info Retrieval",
+                  "desc": "Database search strategies",
+                  "icon": "🔍"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Digital Archive Setup",
+                  "desc": "Creating an e-repository",
+                  "companies": "IT Lab",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Library Management",
+                "IT Applications in LIS",
+                "Cataloging & Classification Practice"
+              ]
+            }
+          ]
+        }
+      },
+     "ma": {
+        "title": "Master of Arts (M.A.)",
+        "duration": "2 Years",
+        "eligibility": "Graduation in relevant field with minimum 50% marks",
+        "description": "An advanced postgraduate program designed to develop subject matter expertise, critical research skills, and profound academic inquiry.",
+        "metaTitle": "Master of Arts (M.A.) | School of Arts & Humanities",
+        "metaDescription": "Pursue a 2-year Master of Arts (M.A.) degree at Career Point University. Specialize in English, History, or Political Science with a focus on advanced research.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "2-Year Postgraduate Programme",
+          "title": {
+            "main": "Master of Arts",
+            "line1": "Master of",
+            "line2": "Arts",
+            "line3": "(M.A.)",
+            "highlight": "Arts",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "12L+"
+            },
+            {
+              "label": "NET/JRF",
+              "value": "Selections"
+            }
+          ],
+          "description": "Deepen your expertise, engage in critical research, and prepare for prestigious roles in academia, civil services, and global policy leadership."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Placements So Far",
+              "value": "800+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Highest Package",
+              "value": "12 L"
+            },
+            {
+              "icon": "Award",
+              "label": "NET/JRF Cleared",
+              "value": "200+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Research Papers",
+              "value": "150+"
+            },
+            {
+              "icon": "Globe",
+              "label": "Global Seminars",
+              "value": "40+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni in Academia",
+              "value": "300+"
+            }
+          ],
+          "heading": "Postgraduate Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 2,000+ Scholars"
+        },
+        "overview": {
+          "tags": [
+            "2 Years Duration",
+            "4 Semesters",
+            "Research Intensive",
+            "UGC-NET Aligned"
+          ],
+          "subtitle": "What is the M.A. Programme?",
+          "gridCards": [
+            {
+              "sub": "Advanced Criticism & Theory",
+              "icon": "BookOpen",
+              "label": "English Lit."
+            },
+            {
+              "sub": "Archival & Historiography",
+              "icon": "Database",
+              "label": "History"
+            },
+            {
+              "sub": "Global Policy & IR",
+              "icon": "Network",
+              "label": "Political Sci."
+            },
+            {
+              "sub": "Advanced Methodology",
+              "icon": "Brain",
+              "label": "Research"
+            }
+          ],
+          "paragraphs": [
+            "The Master of Arts (M.A.) is a rigorous two-year, four-semester programme that transforms students into subject matter experts. It moves beyond textbook learning to focus on critical theory, independent research, and advanced analytical thinking.",
+            "Whether you are aiming to crack the UGC-NET/JRF for an academic career, preparing for higher civil services, or looking to enter the world of publishing and policy-making, the M.A. programme provides the intellectual depth required to succeed."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "An M.A. degree signifies a high level of academic rigor and intellectual maturity. Graduates are highly sought after as Assistant Professors, Senior Content Strategists, Policy Analysts, Museum Curators, and Political Consultants. Furthermore, the specialized knowledge gained during this programme acts as a massive catalyst for students appearing in the UPSC Civil Services Main Examination (Optional Subjects).",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Elevating your academic and professional stature",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A master-level curriculum focusing on research and theory",
+          "introNote": "The M.A. programme is characterized by advanced seminars, intensive reading lists, and a mandatory research dissertation.",
+          "outroNote": "Graduates leave not just with a degree, but with published research and specialized expertise in their chosen domain.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 40,
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Advanced Core Courses"
+            },
+            {
+              "credits": 20,
+              "category": "Departmental Elective",
+              "shortName": "DE",
+              "description": "Specialization Electives"
+            },
+            {
+              "credits": 12,
+              "category": "Research",
+              "shortName": "RP",
+              "description": "Master's Thesis / Dissertation"
+            },
+            {
+              "credits": 4,
+              "category": "Seminar",
+              "shortName": "SM",
+              "description": "Academic Presentations"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The Master of Arts (M.A.) program offers specializations in subjects like English, History, and Political Science. The first year focuses on establishing strong theoretical frameworks and research methodologies. The second year allows students to dive deep into specialized electives and culminates in an independent research dissertation.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Core Subjects: Advanced Theoretical Frameworks, History of Ideas, Research Methodology in Humanities, Academic Writing & Ethics. Total Credits: 20"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Core Subjects: Contemporary Literary/Historical Trends, Core Specialization Subject I, Core Specialization Subject II, Seminar Presentation. Total Credits: 20"
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Advanced Studies: Elective Specialization I, Elective Specialization II, Interdisciplinary Studies, Synopsis Submission for Dissertation. Total Credits: 20"
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Research & Culmination: Master's Dissertation (Research, Writing, and Defense), Viva-Voce, Elective Specialization III. Total Credits: 20"
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "UGC-NET Preparation Module",
+              "credits": 0
+            },
+            {
+              "name": "Data Analysis for Social Sciences (SPSS)",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Simple admission process and transparent fee structure",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "18,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Library/Development Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered to students based on Graduation marks.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "A 50% scholarship is given to students who clear the CPU Entrance Exam with top ranks.",
+            "To avail merit scholarship, student has to submit supporting documents in original."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "M.A. serves as a gateway to academia. The program equips students with the advanced theoretical knowledge required to clear UGC-NET/JRF and pursue a Ph.D.",
+              "icon": "TrendingUp",
+              "title": "Academic Excellence"
+            },
+            {
+              "desc": "The deep analytical skills gained in an M.A. are highly valuable for senior roles in journalism, content strategy, publishing, and political consulting.",
+              "icon": "Briefcase",
+              "title": "Elite Career Opportunities"
+            },
+            {
+              "desc": "M.A. programs emphasize independent research. Students are guided to write and publish research papers in peer-reviewed national and international journals.",
+              "icon": "Target",
+              "title": "Research & Publication"
+            },
+            {
+              "desc": "Dive deep into specific niches like Post-Colonial Literature, International Relations, or Historiography, setting you apart as a subject matter expert.",
+              "icon": "Brain",
+              "title": "Expert Specialization"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Master's degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Dedicated mentoring sessions for UGC-NET/JRF and state-level eligibility tests are integrated into the curriculum.",
+              "icon": "BookOpen",
+              "title": "NET/JRF Mentoring"
+            },
+            {
+              "num": "07",
+              "desc": "Students are required to conduct independent research, write a master's thesis, and defend it before a panel of experts.",
+              "icon": "FileText",
+              "title": "Thesis Defense"
+            },
+            {
+              "num": "08",
+              "desc": "Regular guest lectures and seminars by eminent authors, historians, and policy-makers from across the globe.",
+              "icon": "Users",
+              "title": "Eminent Guest Faculty"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload graduation marksheets and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the academic form online with specialization preferences.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review and submit your application.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the M.A. programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have completed their Graduation (preferably B.A.) from a recognized university with a minimum of 50% marks.",
+              "q": "What is the eligibility criteria for M.A. admission?"
+            },
+            {
+              "a": "M.A. is a 2-year (4 semester) postgraduate programme.",
+              "q": "What is the duration of the M.A. programme?"
+            },
+            {
+              "a": "We currently offer specializations in English Literature, History, and Political Science.",
+              "q": "What subjects can I specialize in?"
+            },
+            {
+              "a": "Yes, a final semester research dissertation is a mandatory requirement to complete the M.A. degree.",
+              "q": "Is a dissertation or thesis compulsory?"
+            },
+            {
+              "a": "Our curriculum is heavily aligned with the UGC-NET syllabus, and we provide special guidance sessions to help students clear the exam for academic careers.",
+              "q": "Does this course help in preparing for UGC-NET?"
+            },
+            {
+              "a": "Yes, completing an M.A. with good grades and clearing NET/JRF makes you eligible to apply for our Ph.D. programs.",
+              "q": "Can I pursue a Ph.D. immediately after completing this M.A.?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the M.A. programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "UGC-NET Preparation",
+              "Advanced Research Seminars",
+              "Guest Lectures by Authors",
+              "Thesis & Dissertation Focus",
+              "Placement in Academia"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Advanced Research Cell",
+              "Digital Archives Access",
+              "Seminar Halls for Defense"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Faculty Publications",
+              "Student Dissertations",
+              "Academic Conferences",
+              "Important Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "2-Year Academic Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from graduate to subject matter expert.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Advanced Theory",
+              "contentTitle": "Mastering the Frameworks",
+              "contentDesc": "The first year is dedicated to understanding high-level critical theories, historiography, and advanced methodologies.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Critical Theory Analysis",
+                "Advanced Academic Writing",
+                "Research Methodology"
+              ],
+              "aiTools": [
+                {
+                  "name": "Google Scholar",
+                  "desc": "Research Aggregation",
+                  "icon": "BookOpen",
+                  "color": "#4285F4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Critical Theory",
+                  "desc": "Deconstructing texts & societies",
+                  "icon": "🧠"
+                },
+                {
+                  "title": "Methodology",
+                  "desc": "How to conduct valid research",
+                  "icon": "🔍"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Term Paper",
+                  "desc": "A 5,000-word academic paper",
+                  "companies": "Internal Eval",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Advanced Literary/Historical Theory",
+                "Research Methodology",
+                "Core Subject Papers"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Specialization & Thesis",
+              "contentTitle": "Independent Research",
+              "contentDesc": "The second year focuses on your chosen electives and culminates in the writing and defense of your Master's Thesis.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Independent Research",
+                "Thesis Defense",
+                "Public Speaking"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Specialization",
+                  "desc": "Deep dive into niche topics",
+                  "icon": "🎯"
+                },
+                {
+                  "title": "Dissertation",
+                  "desc": "Original academic contribution",
+                  "icon": "🎓"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Master's Thesis",
+                  "desc": "A 15,000+ word original research document",
+                  "companies": "Final Defense",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Specialization Electives",
+                "Master's Dissertation",
+                "Seminar & Viva-Voce"
+              ]
+            }
+          ]
+        }
+      },
+     "msw": {
+        "title": "Master of Social Work (MSW)",
+        "duration": "2 Years",
+        "eligibility": "Graduation in any discipline with minimum 50% marks",
+        "description": "A professional postgraduate degree focused on community development, human rights, corporate social responsibility (CSR), and social justice.",
+        "metaTitle": "Master of Social Work (MSW) | Career Point University",
+        "metaDescription": "Pursue a 2-year Master of Social Work (MSW) at CPU. Gain hands-on field experience, NGO management skills, and prepare for a career in social advocacy and CSR.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "2-Year Professional Programme",
+          "title": {
+            "main": "Master of Social Work",
+            "line1": "Master of",
+            "line2": "Social",
+            "line3": "Work (MSW)",
+            "highlight": "Social",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "10L+"
+            },
+            {
+              "label": "Field Work",
+              "value": "100%"
+            }
+          ],
+          "description": "Empower yourself to empower others. A highly practical programme integrating classroom theory with extensive on-ground fieldwork and NGO internships."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Placements So Far",
+              "value": "1200+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Highest Package",
+              "value": "10 L"
+            },
+            {
+              "icon": "Award",
+              "label": "NGO Tie-ups",
+              "value": "50+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Field Hours/Student",
+              "value": "500+"
+            },
+            {
+              "icon": "Globe",
+              "label": "UN/UNICEF Interns",
+              "value": "30+"
+            },
+            {
+              "icon": "Star",
+              "label": "Corporate CSR Roles",
+              "value": "400+"
+            }
+          ],
+          "heading": "Department's Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 1,500+ Social Leaders"
+        },
+        "overview": {
+          "tags": [
+            "2 Years Duration",
+            "4 Semesters",
+            "Field Work Intensive",
+            "CSR & NGO Aligned"
+          ],
+          "subtitle": "What is the MSW Programme?",
+          "gridCards": [
+            {
+              "sub": "Individual Therapy & Aid",
+              "icon": "BookOpen",
+              "label": "Social Case Work"
+            },
+            {
+              "sub": "NGOs & Mobilization",
+              "icon": "Database",
+              "label": "Community Org."
+            },
+            {
+              "sub": "Corporate Social Responsibility",
+              "icon": "Network",
+              "label": "CSR Management"
+            },
+            {
+              "sub": "Psychiatric Social Work",
+              "icon": "Brain",
+              "label": "Medical Social Work"
+            }
+          ],
+          "paragraphs": [
+            "The Master of Social Work (MSW) is a professional degree that prepares individuals to work with vulnerable populations, communities, and corporate bodies. The course bridges the gap between sociological theory and grassroots reality through rigorous concurrent fieldwork.",
+            "Whether you want to drive policy changes, manage large-scale NGOs, work in hospital settings as a medical social worker, or lead CSR initiatives for multinational corporations, the MSW programme provides the exact skill set required."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "The scope of MSW is expanding rapidly with the mandate of CSR (Corporate Social Responsibility) in India. Graduates are actively recruited by top MNCs for their CSR wings, international organizations like WHO, UNICEF, and UNDP, as well as top national NGOs. Career roles include CSR Manager, Project Coordinator, Psychiatric Social Worker, Human Resource Officer, and Child Welfare Protection Officer. The degree also offers immense scope for independent social entrepreneurship.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in the social sector",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A well-structured curriculum designed for social excellence",
+          "introNote": "The MSW programme is uniquely designed with a 50-50 weightage on academic theory and concurrent fieldwork.",
+          "outroNote": "Graduates leave with a massive portfolio of fieldwork reports, rural camp experience, and a month-long block placement.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 40,
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Core Social Work Theory"
+            },
+            {
+              "credits": 24,
+              "category": "Field Work",
+              "shortName": "FW",
+              "description": "Concurrent Field Work & Rural Camp"
+            },
+            {
+              "credits": 16,
+              "category": "Departmental Elective",
+              "shortName": "DE",
+              "description": "Specialization Electives (HR/Medical/Community)"
+            },
+            {
+              "credits": 10,
+              "category": "Research",
+              "shortName": "RP",
+              "description": "Research Project & Block Placement"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The Master of Social Work (MSW) program combines classroom teaching with rigorous fieldwork. Students spend 2 days a week in the field working with NGOs or communities. The final semester includes a month-long 'Block Placement' where students work full-time in an organization of their choice.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "History and Philosophy of Social Work, Sociology for Social Workers, Human Growth and Development, Social Case Work, Concurrent Field Work I. Total Credits: 22"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Social Group Work, Community Organization and Social Action, Social Work Research and Statistics, Social Welfare Administration, Concurrent Field Work II. Total Credits: 22"
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Social Policy and Planning, Corporate Social Responsibility (CSR), Specialization Paper I (e.g., Medical & Psychiatric Social Work / HR Management), Concurrent Field Work III, Rural Camp. Total Credits: 22"
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Specialization Paper II, NGO Management and Project Formulation, Research Dissertation, Block Placement (1 Month full-time internship). Total Credits: 22"
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Disaster Management & First Aid",
+              "credits": 2
+            },
+            {
+              "name": "Counseling and Therapy Skills",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Simple admission process and transparent fee structure",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "20,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Field Work & Camp Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through Merit & Personal Interview. For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered to students based on Graduation marks.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "Special scholarships are available for students with prior recognized NGO volunteering experience.",
+            "To avail merit scholarship, student has to submit supporting documents in original."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "The MSW program is incredibly hands-on. You aren't just reading books; you are out in the field, analyzing communities, and directly helping vulnerable groups.",
+              "icon": "TrendingUp",
+              "title": "Real-World Impact"
+            },
+            {
+              "desc": "With CSR becoming mandatory for corporations, there is a massive demand for MSW professionals to lead social projects for top multinational companies.",
+              "icon": "Briefcase",
+              "title": "High Demand in CSR"
+            },
+            {
+              "desc": "The curriculum provides diverse choices. You can specialize in Human Resource Management (HR), Medical & Psychiatric Social Work, or Community Development.",
+              "icon": "BookOpen",
+              "title": "Versatile Specializations"
+            },
+            {
+              "desc": "A month-long Block Placement at the end of the course often converts directly into a pre-placement offer (PPO) in leading NGOs and corporates.",
+              "icon": "Target",
+              "title": "Guaranteed Block Placement"
+            },
+            {
+              "desc": "Learn essential counseling techniques, group dynamics, and case work methodologies that make you a certified professional social worker.",
+              "icon": "Brain",
+              "title": "Professional Certification"
+            }
+          ],
+          "subtitle": "Unlock your potential with an MSW degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "We have formal MOUs with over 50 NGOs, hospitals, and rural development agencies where our students undergo their concurrent fieldwork.",
+              "icon": "Users",
+              "title": "Vast NGO Network"
+            },
+            {
+              "num": "07",
+              "desc": "An integral part of the MSW program is the 7-10 day Rural Camp, where students live in a remote village to study rural sociology and execute social actions.",
+              "icon": "Globe",
+              "title": "Mandatory Rural Camp"
+            },
+            {
+              "num": "08",
+              "desc": "Our MSW syllabus includes a dedicated module on drafting CSR proposals and NGO project management, a highly sought-after skill in the corporate sector.",
+              "icon": "Brain",
+              "title": "CSR & Project Training"
+            },
+            {
+              "num": "09",
+              "desc": "Specialized training for mental health interventions and hospital administration for students opting for Medical & Psychiatric Social Work.",
+              "icon": "Building2",
+              "title": "Medical Social Work Labs"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload graduation marksheets and verify your identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the academic form and submit a short Statement of Purpose (Why you want to do Social Work).",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online via net banking, UPI, or card.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Appear for the personal interview round and submit your final application.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the MSW programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have a Bachelor's degree (B.A., B.Sc., B.Com, BBA, B.Tech, etc.) from a recognized university with a minimum of 50% marks. Students from any stream can apply.",
+              "q": "What is the eligibility criteria for MSW admission?"
+            },
+            {
+              "a": "Yes! Fieldwork is the backbone of the MSW degree. Students must complete 2 days of 'Concurrent Field Work' every week in an assigned NGO or community setting, along with a continuous 'Block Placement' at the end of the course.",
+              "q": "Is fieldwork compulsory in MSW?"
+            },
+            {
+              "a": "We offer three major specializations in the 2nd year: 1. Human Resource Management (HRM) & Industrial Relations. 2. Medical and Psychiatric Social Work. 3. Urban & Rural Community Development.",
+              "q": "What specializations are available in MSW at CPU?"
+            },
+            {
+              "a": "MSW graduates have excellent placements. They are hired as CSR Executives in MNCs, HR Managers, Medical Social Workers in corporate hospitals, Project Coordinators in international organizations like UNICEF, and Child Development Officers.",
+              "q": "What kind of career options and placements can I expect?"
+            },
+            {
+              "a": "Yes, MSW graduates who choose the HR specialization are fully eligible and highly preferred for HR roles in the corporate sector, as they possess strong interpersonal and employee welfare skills.",
+              "q": "Can I work in Human Resources (HR) after completing MSW?"
+            },
+            {
+              "a": "It is a mandatory 7 to 10-day immersive field trip where students stay in a rural setting. They conduct surveys, study rural dynamics, run awareness campaigns, and learn community mobilization techniques hands-on.",
+              "q": "What is the 'Rural Camp' mentioned in the curriculum?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the MSW programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "50+ Active NGO Tie-ups",
+              "Mandatory Rural Camps",
+              "CSR & HR Training",
+              "Block Placements",
+              "Field Work Seminars",
+              "Guest Lectures by Social Leaders",
+              "Placement Assistance"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Community Intervention Lab",
+              "Counseling Simulation Room",
+              "CSR Project Cell"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Field Work Journals",
+              "Rural Camp Reports",
+              "Research Dissertations",
+              "Alumni Success Stories",
+              "Important Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "2-Year Professional Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your intensive journey to becoming a professional Social Worker.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Foundations & Field",
+              "contentTitle": "Understanding Society & Case Work",
+              "contentDesc": "The first year focuses on building theoretical knowledge of sociology and psychology, combined with immediate exposure to concurrent fieldwork in local NGOs.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Social Case Work",
+                "Community Mobilization",
+                "Field Reporting",
+                "Empathy & Active Listening"
+              ],
+              "aiTools": [
+                {
+                  "name": "SPSS Basics",
+                  "desc": "Statistical Analysis for Surveys",
+                  "icon": "BarChart",
+                  "color": "#0b1bf4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Case Work",
+                  "desc": "Individual level intervention",
+                  "icon": "🤝"
+                },
+                {
+                  "title": "Group Work",
+                  "desc": "Dynamics of social groups",
+                  "icon": "👥"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Concurrent Field Work",
+                  "desc": "2 Days/Week in assigned NGO",
+                  "companies": "Local NGOs",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "History & Philosophy of Social Work",
+                "Human Growth and Development",
+                "Social Case & Group Work",
+                "Concurrent Field Work"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Specialization & Camp",
+              "contentTitle": "Advanced Practice & Block Placement",
+              "contentDesc": "Year two involves choosing a specialization (HR/Medical/Community), attending the rural camp, completing a research dissertation, and undergoing a month-long block placement.",
+              "badge": "YEAR-2",
+              "skills": [
+                "CSR Project Formulation",
+                "NGO Management",
+                "Counseling",
+                "Social Research"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "CSR & Policies",
+                  "desc": "Corporate social strategies",
+                  "icon": "🏢"
+                },
+                {
+                  "title": "Medical SW",
+                  "desc": "Hospital & psychiatric settings",
+                  "icon": "🏥"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Block Placement",
+                  "desc": "1-Month full-time internship",
+                  "companies": "UNICEF / Top CSR",
+                  "color": "#e87211"
+                },
+                {
+                  "name": "Rural Camp",
+                  "desc": "10-day village immersion",
+                  "companies": "Field Study",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Corporate Social Responsibility",
+                "NGO Management",
+                "Specialization Electives",
+                "Research Dissertation"
+              ]
+            }
+          ]
+        }
+      },
+     "m-lib": {
+        "title": "Master of Library Science (M.Lib.)",
+        "duration": "1 Year",
+        "eligibility": "B.Lib. degree from a recognized university with minimum 50% marks",
+        "description": "An advanced postgraduate programme designed to transform library professionals into information architects and digital collection managers.",
+        "metaTitle": "Master of Library Science (M.Lib.) | Career Point University",
+        "metaDescription": "Pursue a 1-year Master of Library Science (M.Lib.) degree at CPU. Specialize in advanced informatics, digital library systems, and archival research.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "1-Year Postgraduate Programme",
+          "title": {
+            "main": "Master of Library Science",
+            "line1": "Master of",
+            "line2": "Library",
+            "line3": "Science (M.Lib.)",
+            "highlight": "Library",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "9L+"
+            },
+            {
+              "label": "Research",
+              "value": "Oriented"
+            }
+          ],
+          "description": "Master the complexities of knowledge infrastructure. Focus on digital library architecture, advanced information retrieval, and scientometrics."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Senior Placements",
+              "value": "500+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Digital Repositories Built",
+              "value": "120+"
+            },
+            {
+              "icon": "Award",
+              "label": "Govt/University Roles",
+              "value": "200+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Research Papers",
+              "value": "80+"
+            },
+            {
+              "icon": "Globe",
+              "label": "Archive Projects",
+              "value": "40+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni Achieved",
+              "value": "95%"
+            }
+          ],
+          "heading": "Department's Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 1,000+ Information Architects"
+        },
+        "overview": {
+          "tags": [
+            "1 Year Duration",
+            "2 Semesters",
+            "Informatics Focused",
+            "Research Aligned"
+          ],
+          "subtitle": "What is the M.Lib. Programme?",
+          "gridCards": [
+            {
+              "sub": "Architecture & DSpace",
+              "icon": "Database",
+              "label": "Digital Libraries"
+            },
+            {
+              "sub": "Scientometrics",
+              "icon": "BarChart",
+              "label": "Informetrics"
+            },
+            {
+              "sub": "Advanced Systems",
+              "icon": "Network",
+              "label": "Info Retrieval"
+            },
+            {
+              "sub": "Independent Study",
+              "icon": "Brain",
+              "label": "LIS Research"
+            }
+          ],
+          "paragraphs": [
+            "The Master of Library Science (M.Lib.) is a highly specialized postgraduate course that goes beyond basic cataloging. It dives into the sophisticated realm of Information Architecture, focusing on how large datasets and academic archives are structured, preserved, and retrieved in the digital age.",
+            "This programme is tailored for professionals aiming for leadership roles such as Chief Librarian, Documentation Officer, or Information Scientist in universities, national archives, and corporate intelligence sectors."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "As the volume of global data explodes, the role of a traditional librarian has evolved into an 'Information Scientist'. M.Lib. graduates are urgently required to manage massive institutional repositories, design information systems, and analyze publication metrics (Scientometrics). Career opportunities span across premier universities, R&D organizations (like ISRO, DRDO), media houses, national museums, and top-tier IT companies requiring knowledge management.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in Information Architecture",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A curriculum designed for digital knowledge leadership",
+          "introNote": "The M.Lib. syllabus is heavily tilted towards Information Technology, Systems Architecture, and Research Methodologies in Library Science.",
+          "outroNote": "The programme culminates in an independent research dissertation, making students eligible for Ph.D. admissions.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 20,
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Advanced Informatics Theory"
+            },
+            {
+              "credits": 12,
+              "category": "IT Application",
+              "shortName": "IT",
+              "description": "Digital Library Systems (Practical)"
+            },
+            {
+              "credits": 8,
+              "category": "Research",
+              "shortName": "RP",
+              "description": "Dissertation & Scientometrics"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The M.Lib. program at Career Point University is an intensive two-semester journey. Semester 1 focuses on building advanced information retrieval systems and understanding the economics of information. Semester 2 is highly research and tech-oriented, focusing on digital library creation and a mandatory master's dissertation.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Subjects covered: Information Systems and Programmes, Information Retrieval Systems, Information Economics, Information Technology Application (Practice). Total Credits: 20"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Subjects covered: Information Technology (Theory & Advanced Systems), Research Methodology in LIS, Informetrics and Scientometrics, LIS Dissertation. Total Credits: 20"
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Database Management Systems for Libraries",
+              "credits": 2
+            },
+            {
+              "name": "Academic Plagiarism & Ethics",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Simple admission process and transparent fee structure",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "18,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Advanced IT Lab Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered based on B.Lib. marks.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "To avail merit scholarship, student has to submit supporting documents in original."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "M.Lib. is the highest professional degree required to become a Chief Librarian or Director of Library Services in universities and large-scale institutions.",
+              "icon": "TrendingUp",
+              "title": "Leadership in Academia"
+            },
+            {
+              "desc": "The curriculum focuses heavily on building digital libraries (using DSpace/EPrints), preparing you for the tech-driven future of archiving.",
+              "icon": "Database",
+              "title": "Master Digital Archiving"
+            },
+            {
+              "desc": "Learn Informetrics and Scientometrics—the science of analyzing research data and publication impact, a highly paid niche in the R&D sector.",
+              "icon": "BarChart",
+              "title": "Scientometrics Expertise"
+            },
+            {
+              "desc": "The mandatory research dissertation provides a direct pathway for students looking to pursue a Ph.D. in Library and Information Science.",
+              "icon": "Target",
+              "title": "Pathway to Ph.D."
+            }
+          ],
+          "subtitle": "Unlock your potential with an Advanced Information Science degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Students get hands-on experience in server administration, database creation, and hosting digital repositories.",
+              "icon": "Database",
+              "title": "Advanced IT Lab Training"
+            },
+            {
+              "num": "07",
+              "desc": "M.Lib. students are mentored directly by senior university librarians and information scientists.",
+              "icon": "Users",
+              "title": "Expert Mentorship"
+            },
+            {
+              "num": "08",
+              "desc": "The programme emphasizes independent research, with a requirement to write a high-level academic dissertation.",
+              "icon": "Brain",
+              "title": "Research & Publication"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload B.Lib. marksheets and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the academic application form online.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review and submit your final application.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the M.Lib. programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must possess a Bachelor of Library Science (B.Lib. / B.L.I.Sc.) degree from a recognized university with a minimum of 50% marks.",
+              "q": "What is the eligibility criteria for M.Lib. admission?"
+            },
+            {
+              "a": "M.Lib. is an advanced 1-year postgraduate programme divided into 2 semesters.",
+              "q": "What is the duration of the M.Lib. programme?"
+            },
+            {
+              "a": "Yes! The second semester includes a mandatory research dissertation, which is essential for developing high-level analytical skills in information science.",
+              "q": "Is a research dissertation mandatory?"
+            },
+            {
+              "a": "M.Lib. is heavily focused on IT. You will learn to use advanced digital library software (DSpace, Greenstone), database management, and information retrieval systems.",
+              "q": "How much IT / Computer work is involved in this course?"
+            },
+            {
+              "a": "M.Lib. opens doors to senior roles like Chief Librarian, Information Scientist, Digital Archivist, and roles in corporate R&D sectors. It is also the required qualification for appearing in UGC-NET (Library Science) to become an Assistant Professor.",
+              "q": "What are the career benefits of M.Lib. over B.Lib.?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the M.Lib. programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "Advanced IT Labs",
+              "Digital Informatics Focus",
+              "Research Dissertations",
+              "Scientometrics Training",
+              "Placement in Universities"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Labs",
+            "icon": "FlaskConical",
+            "items": [
+              "Institutional Repository Lab",
+              "Advanced IT Application Center",
+              "Digital Archives Vault"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Alumni Placements",
+              "Student Research Papers",
+              "Archive Projects",
+              "Important Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "1-Year Advanced Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your intensive journey to becoming an Information Scientist.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "SEMESTER 1",
+              "tabTitle": "Advanced Systems",
+              "contentTitle": "Information Retrieval & Architecture",
+              "contentDesc": "The first semester focuses on advanced information retrieval systems, digital databases, and the economics of information management.",
+              "badge": "SEM-1",
+              "skills": [
+                "Information Retrieval",
+                "Systems Analysis",
+                "Advanced IT Applications"
+              ],
+              "aiTools": [
+                {
+                  "name": "Database Querying",
+                  "desc": "Advanced Boolean Logic",
+                  "icon": "Database",
+                  "color": "#0b1bf4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Info Retrieval",
+                  "desc": "Complex search architecture",
+                  "icon": "🔍"
+                },
+                {
+                  "title": "Economics",
+                  "desc": "Information as a resource",
+                  "icon": "📊"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "System Evaluation",
+                  "desc": "Analysis of existing digital libraries",
+                  "companies": "IT Lab",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Information Systems & Programmes",
+                "Information Retrieval Systems",
+                "Information Technology Practice"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "SEMESTER 2",
+              "tabTitle": "Research & Metrics",
+              "contentTitle": "Scientometrics & Dissertation",
+              "contentDesc": "Semester two is purely research-driven, focusing on analyzing publication data, digital archiving technologies, and submitting a master's thesis.",
+              "badge": "SEM-2",
+              "skills": [
+                "Scientometrics",
+                "Digital Archiving (DSpace)",
+                "Research Writing"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Scientometrics",
+                  "desc": "Measuring research impact",
+                  "icon": "📈"
+                },
+                {
+                  "title": "Dissertation",
+                  "desc": "Original LIS research",
+                  "icon": "🎓"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Master's Dissertation",
+                  "desc": "Final research defense",
+                  "companies": "University",
+                  "color": "#e87211"
+                },
+                {
+                  "name": "Digital Repo Creation",
+                  "desc": "Building a working repository",
+                  "companies": "IT Lab",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Informetrics and Scientometrics",
+                "Advanced IT Theory",
+                "Research Methodology",
+                "LIS Dissertation"
+              ]
+            }
+          ]
+        }
+      },
+     "research-phd": {
+        "title": "Ph.D. in Arts & Humanities",
+        "duration": "Min 3 Years",
+        "eligibility": "Master's degree in relevant field with minimum 55% marks & Entrance/NET/JRF",
+        "description": "A rigorous, highest-level academic degree focused on independent, original research in fields like Literature, History, Political Science, and Sociology.",
+        "metaTitle": "Ph.D. in Arts & Humanities | Doctoral Research | CPU",
+        "metaDescription": "Pursue your Ph.D. in Arts & Humanities at Career Point University. World-class mentorship, extensive digital archives, and a vibrant research community.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "Doctoral Research Programme",
+          "title": {
+            "main": "Doctor of Philosophy",
+            "line1": "Doctor of",
+            "line2": "Philosophy",
+            "line3": "(Ph.D.)",
+            "highlight": "Philosophy",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Research Output",
+              "value": "150+ Papers"
+            },
+            {
+              "label": "Expert Guides",
+              "value": "20+"
+            }
+          ],
+          "description": "Contribute original knowledge to the world. A mentor-driven research programme for the most ambitious scholars aiming to shape global discourse."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "FileText",
+              "label": "SCOPUS Publications",
+              "value": "150+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Books Authored",
+              "value": "45+"
+            },
+            {
+              "icon": "Award",
+              "label": "Funded Projects",
+              "value": "12+"
+            },
+            {
+              "icon": "Users",
+              "label": "Scholars Awarded",
+              "value": "80+"
+            },
+            {
+              "icon": "Globe",
+              "label": "International Seminars",
+              "value": "50+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni in Academia",
+              "value": "100%"
+            }
+          ],
+          "heading": "Doctoral Accomplishments & Impact",
+          "trustBadge": "✓ Leading the Research Frontier"
+        },
+        "overview": {
+          "tags": [
+            "Min 3 Years",
+            "Coursework + Thesis",
+            "Mentor Guided",
+            "Original Research"
+          ],
+          "subtitle": "What is the Ph.D. Programme?",
+          "gridCards": [
+            {
+              "sub": "Methodology & Review",
+              "icon": "BookOpen",
+              "label": "Coursework"
+            },
+            {
+              "sub": "Hypothesis Formulation",
+              "icon": "Brain",
+              "label": "Synopsis"
+            },
+            {
+              "sub": "Primary & Archival",
+              "icon": "Database",
+              "label": "Data Collection"
+            },
+            {
+              "sub": "Writing & Viva-Voce",
+              "icon": "Award",
+              "label": "Thesis Defense"
+            }
+          ],
+          "paragraphs": [
+            "The Doctor of Philosophy (Ph.D.) is the pinnacle of academic achievement in the Arts and Humanities. It is not just about studying existing knowledge, but about creating new, original contributions that advance human understanding.",
+            "Scholars work closely with expert faculty to investigate complex socio-cultural, historical, and literary phenomena, culminating in a substantial dissertation that must stand up to rigorous peer review."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "A Ph.D. is the ultimate qualification for a career in academia and high-level research. Graduates transition into roles such as University Professors, Post-Doctoral Fellows, Senior Policy Analysts for think tanks, and Directors of Research Institutes. Beyond academia, Ph.D. holders are highly valued in top-tier journalism, international NGOs (like UN, Amnesty), and governmental advisory boards for their unparalleled analytical and research capabilities.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities at the highest academic level",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A structured timeline for doctoral completion",
+          "introNote": "The Ph.D. journey begins with rigorous coursework to establish methodology, followed by years of dedicated, independent research.",
+          "outroNote": "The award of the degree requires successful publication in reputed journals and a final public defense of the thesis.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 16,
+              "category": "Pre-Ph.D.",
+              "shortName": "CW",
+              "description": "Mandatory Course Work (Semester 1)"
+            },
+            {
+              "credits": 0,
+              "category": "Research",
+              "shortName": "RP",
+              "description": "Synopsis & Literature Review"
+            },
+            {
+              "credits": 0,
+              "category": "Research",
+              "shortName": "RP",
+              "description": "Data Collection & Analysis"
+            },
+            {
+              "credits": 0,
+              "category": "Thesis",
+              "shortName": "TH",
+              "description": "Drafting, Publication & Final Defense"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Ph.D. Milestones Overview",
+              "content": "Unlike undergraduate or master's programs, a Ph.D. is not entirely credit-based across years. It is milestone-driven. The only structured classes occur in the initial 6-month Coursework phase. After passing the coursework, scholars move into the independent research phases guided by their supervisor.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Phase 1: Coursework (First 6 Months)",
+              "content": "Subjects covered: Advanced Research Methodology, Computer Applications in Research, Review of Published Research, Research Ethics & Publication Guidelines."
+            },
+            {
+              "id": "s2",
+              "title": "Phase 2: Synopsis & Registration",
+              "content": "Scholars must conduct an extensive literature review, formulate a research gap, and present a Research Proposal (Synopsis) before the Research Degree Committee (RDC) for formal registration."
+            },
+            {
+              "id": "s3",
+              "title": "Phase 3: Core Research & Publications",
+              "content": "The longest phase involving primary data collection, fieldwork, archival visits, and data analysis. Scholars must publish at least two research papers in UGC-CARE/SCOPUS indexed journals."
+            },
+            {
+              "id": "s4",
+              "title": "Phase 4: Pre-Submission & Defense",
+              "content": "Drafting the final thesis. Presenting a pre-submission seminar to the department. Finally, submitting the thesis and defending it in a public Viva-Voce examination against external examiners."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Advanced Statistical Tools (SPSS/R)",
+              "credits": 2
+            },
+            {
+              "name": "Grant & Proposal Writing Workshop",
+              "credits": 0
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for Doctoral Scholars",
+          "feeDetails": [
+            {
+              "label": "Admission/Registration Fee",
+              "amount": "10,000/- (one-time)"
+            },
+            {
+              "label": "Coursework Fee",
+              "amount": "25,000/- (First Semester Only)"
+            },
+            {
+              "label": "Research Fee",
+              "amount": "35,000/- per Year"
+            },
+            {
+              "label": "Thesis Submission Fee",
+              "amount": "15,000/- (At the end of tenure)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission & Fees",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Admission through University Entrance Test & Interview (NET/JRF exempted from test). ",
+              "color": "#00588b"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "JRF Qualified",
+              "values": [
+                "Govt. Fellowship + Contingency Grant",
+                "-",
+                "-",
+                "-"
+              ]
+            },
+            {
+              "range": "NET Qualified",
+              "values": [
+                "University Research Fellowship (As per norms)",
+                "-",
+                "-",
+                "-"
+              ]
+            }
+          ],
+          "notes": [
+            "Scholars who have cleared UGC-JRF will receive their monthly fellowship directly from the UGC.",
+            "The University provides assistance in applying for various state and central government research grants.",
+            "Outstanding full-time scholars without NET/JRF may be considered for University Teaching Assistantships (stipend based)."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Grants & Fellowships for Scholars",
+          "earlyBird": {
+            "label": "Early Registration Benefit",
+            "values": [
+              "N/A",
+              "N/A",
+              "N/A",
+              "N/A"
+            ]
+          },
+          "dateHeaders": [
+            "Category 1",
+            "Category 2",
+            "Category 3",
+            "Remarks"
+          ],
+          "sectionTitle": {
+            "main": "Fellowships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "Our faculty comprises renowned authors, historians, and social scientists who provide highly personalized, 1-on-1 mentorship throughout your doctoral journey.",
+              "icon": "Users",
+              "title": "Eminent Mentorship"
+            },
+            {
+              "desc": "Scholars get access to vast digital libraries, international journals, and rare historical archives required for high-quality humanities research.",
+              "icon": "Database",
+              "title": "Extensive Archival Access"
+            },
+            {
+              "desc": "The university actively encourages and financially assists scholars to present their research papers at prestigious national and international conferences.",
+              "icon": "Globe",
+              "title": "Global Conference Support"
+            },
+            {
+              "desc": "With our strict adherence to UGC norms regarding coursework, anti-plagiarism, and external evaluation, a Ph.D. from CPU holds immense credibility globally.",
+              "icon": "Award",
+              "title": "Unquestionable Credibility"
+            }
+          ],
+          "subtitle": "Why pursue your doctoral research with us?",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "01",
+              "desc": "A dedicated Research and Development (R&D) Cell that conducts regular workshops on SPSS, Research Methodology, and Thesis formatting.",
+              "icon": "Brain",
+              "title": "Active R&D Cell"
+            },
+            {
+              "num": "02",
+              "desc": "We promote interdisciplinary topics, allowing scholars to combine literature with sociology, or history with political science.",
+              "icon": "Network",
+              "title": "Interdisciplinary Focus"
+            },
+            {
+              "num": "03",
+              "desc": "Strict adherence to anti-plagiarism norms using software like Turnitin, ensuring your research is completely original and respected.",
+              "icon": "FileText",
+              "title": "Ethics & Plagiarism Control"
+            }
+          ],
+          "subtitle": "Setting our research environment apart",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Check if you meet the minimum 55% criteria in your Master's degree.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Check Eligibility"
+            },
+            {
+              "desc": "Fill out the online application for the Ph.D. Entrance Test (exempt for NET/JRF holders).",
+              "icon": "ClipboardList",
+              "step": "02",
+              "label": "Apply for Entrance"
+            },
+            {
+              "desc": "Appear for the written entrance exam covering research methodology and subject knowledge.",
+              "icon": "FileText",
+              "step": "03",
+              "label": "Clear Entrance Test"
+            },
+            {
+              "desc": "Shortlisted candidates will face an interview panel to discuss their broad area of research interest.",
+              "icon": "Users",
+              "step": "04",
+              "label": "Personal Interview"
+            },
+            {
+              "desc": "Upon selection, pay the registration fee and enroll for the mandatory Coursework semester.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Register & Begin"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Apply for Ph.D.",
+          "subtitle": "Process to enroll in the Doctoral Programme",
+          "guideLabel": "Ph.D. Admission Guide",
+          "sectionTitle": {
+            "main": "Admission Process",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have a Master's degree in a relevant subject with a minimum of 55% marks (50% for SC/ST/OBC categories) from a recognized university.",
+              "q": "What is the basic eligibility for Ph.D.?"
+            },
+            {
+              "a": "Candidates who have cleared UGC-NET or JRF are generally exempted from the University's written entrance test, but they must still appear for the personal interview round.",
+              "q": "I have cleared UGC-NET. Do I need to give the entrance exam?"
+            },
+            {
+              "a": "The minimum duration to submit the thesis is 3 years (including the 6-month coursework). The maximum duration is typically 6 years, as per UGC guidelines.",
+              "q": "What is the minimum and maximum duration of the Ph.D.?"
+            },
+            {
+              "a": "Yes, you can pursue a part-time Ph.D. while working, provided you submit a 'No Objection Certificate' (NOC) from your current employer and fulfill the mandatory offline coursework requirements.",
+              "q": "Can I do a Ph.D. while doing a full-time job?"
+            },
+            {
+              "a": "Yes, completing the 6-month Pre-Ph.D. Coursework and passing the subsequent examination is strictly mandatory for all scholars, regardless of their prior qualifications (including NET/M.Phil).",
+              "q": "Is the Ph.D. Coursework mandatory?"
+            },
+            {
+              "a": "Guides are allocated after the successful completion of the coursework. Allocation is based on the scholar's research interest matching with the specialization and available vacancy of the faculty members.",
+              "q": "How is a Research Guide / Supervisor allotted?"
+            }
+          ],
+          "subtitle": "Everything you need to know about Doctoral Research",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Research Ecosystem",
+            "icon": "Building2",
+            "items": [
+              "Dedicated R&D Cell",
+              "Access to Scopus/Web of Science",
+              "International Conferences",
+              "Plagiarism Check Tools",
+              "Grant Writing Support"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Eminent Faculty",
+            "icon": "Users",
+            "items": [
+              "Published Authors",
+              "Former Civil Servants",
+              "Policy Advisors",
+              "International Fellows"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Scholars Hub",
+            "icon": "Star",
+            "items": [
+              "Recently Awarded Theses",
+              "Scholar Publications",
+              "Upcoming Seminars",
+              "UGC Guidelines"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "Doctoral Research Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "The milestone-driven journey to becoming a Doctor of Philosophy.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "PHASE 1",
+              "tabTitle": "Coursework & Synopsis",
+              "contentTitle": "Methodology & Registration",
+              "contentDesc": "The first phase requires passing the 6-month mandatory coursework and successfully defending your research synopsis to officially register your topic.",
+              "badge": "0-1 Year",
+              "skills": [
+                "Research Methodology",
+                "Literature Review",
+                "Synopsis Drafting"
+              ],
+              "aiTools": [
+                {
+                  "name": "Mendeley / Zotero",
+                  "desc": "Reference Management",
+                  "icon": "BookOpen",
+                  "color": "#9b0000",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Methodology",
+                  "desc": "Qualitative & Quantitative",
+                  "icon": "📊"
+                },
+                {
+                  "title": "Ethics",
+                  "desc": "Anti-plagiarism norms",
+                  "icon": "⚖️"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "RDC Presentation",
+                  "desc": "Defending the research proposal",
+                  "companies": "Committee",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Research Methodology",
+                "Computer Applications",
+                "Literature Review"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "PHASE 2",
+              "tabTitle": "Core Research",
+              "contentTitle": "Data Collection & Publication",
+              "contentDesc": "The longest phase dedicated to primary research, archival visits, fieldwork, and publishing papers in peer-reviewed journals.",
+              "badge": "1-3 Years",
+              "skills": [
+                "Data Collection",
+                "Academic Writing",
+                "Critical Analysis"
+              ],
+              "aiTools": [
+                {
+                  "name": "SPSS",
+                  "desc": "Data Analysis",
+                  "icon": "BarChart",
+                  "color": "#0b1bf4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Field Work",
+                  "desc": "Gathering primary data",
+                  "icon": "🌍"
+                },
+                {
+                  "title": "Publication",
+                  "desc": "Peer-reviewed journals",
+                  "icon": "📰"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Research Papers",
+                  "desc": "Publishing 2 mandatory papers",
+                  "companies": "Journals",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Independent Study",
+                "Data Analysis",
+                "Drafting Chapters"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "PHASE 3",
+              "tabTitle": "Thesis Defense",
+              "contentTitle": "Submission & Viva-Voce",
+              "contentDesc": "The final phase where the completed thesis is submitted, evaluated by external examiners, and defended in a public Viva-Voce.",
+              "badge": "Final",
+              "skills": [
+                "Thesis Formatting",
+                "Public Speaking",
+                "Defending Arguments"
+              ],
+              "aiTools": [
+                {
+                  "name": "Turnitin",
+                  "desc": "Plagiarism Checking",
+                  "icon": "FileText",
+                  "color": "#000",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Pre-Submission",
+                  "desc": "Departmental seminar",
+                  "icon": "🗣️"
+                },
+                {
+                  "title": "Viva-Voce",
+                  "desc": "Final public defense",
+                  "icon": "🎓"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Final Thesis",
+                  "desc": "Submission of the bound document",
+                  "companies": "University",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Pre-Submission Seminar",
+                "Final Formatting",
+                "Viva-Voce Examination"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "placements": {
+      "title": {
+        "main": "Students Placed in Top Organizations",
+        "highlight": "Top Organizations"
+      },
+      "label": "Placement Records",
+      "subtitle": "Highest & best placement record in media, education, and NGOs",
+      "list": [
+        {
+          "name": "Priya Singh",
+          "company": "Times of India",
+          "pkg": "8 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        },
+        {
+          "name": "Rahul Verma",
+          "company": "Teach For India",
+          "pkg": "6 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
+        },
+        {
+          "name": "Anjali Sharma",
+          "company": "Penguin Random House",
+          "pkg": "9 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari-Tech-Mahindra.png"
+        },
+        {
+          "name": "Vikram Rathore",
+          "company": "NDTV",
+          "pkg": "7.5 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
+        }
+      ]
+    },
+    "alumni": {
+      "title": {
+        "main": "Making an Impact Globally",
+        "highlight": "Impact"
+      },
+      "label": "Our Alumni",
+      "list": [
+        {
+          "name": "Neha Gupta",
+          "role": "Senior Editor",
+          "company": "HarperCollins India",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Saloni.jpg"
+        },
+        {
+          "name": "Aditya Rao",
+          "role": "Policy Analyst",
+          "company": "NITI Aayog",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/aryan.jpg"
+        },
+        {
+          "name": "Meera Menon",
+          "role": "Assistant Professor",
+          "company": "Delhi University",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        }
+      ]
+    },
+    "industry": {
+      "title": {
+        "main": "Industry & NGO Tie Up's",
+        "highlight": "Tie Up's"
+      },
+      "label": "Collaborations",
+      "partners": [
+        {
+          "name": "Sahitya Akademi",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "Pratham Education",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "National Archives",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "Amnesty International",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg"
+        }
+      ]
+    },
+    "research": {
+      "title": {
+        "main": "Research Excellence",
+        "highlight": "Excellence"
+      },
+      "label": "Eminence Research",
+      "gallery": [
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-7.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-12.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-4.jpg"
+      ],
+      "stats": [
+        {
+          "value": "150+",
+          "label": "Research Papers Published",
+          "icon": "BookOpen"
+        },
+        {
+          "value": "40+",
+          "label": "Conference Presentations",
+          "icon": "Presentation"
+        },
+        {
+          "value": "15+",
+          "label": "Books Authored",
+          "icon": "GraduationCap"
+        },
+        {
+          "value": "5+",
+          "label": "Funded Projects",
+          "icon": "FlaskConical"
+        }
+      ]
+    },
+    "community": {
+      "title": {
+        "main": "Our Diverse Community",
+        "highlight": "Diverse"
+      },
+      "label": "Community",
+      "description": [
+        "The Arts & Humanities community thrives on diversity, encompassing a dynamic range of thinkers, writers, historians, and social scientists.",
+        "We focus on producing individuals with strong social ethics, a deep understanding of human culture, and the critical thinking skills required to address complex global challenges. Our community regularly engages in literary fests, mock parliaments, and socio-cultural outreach programs."
+      ],
+      "gallery": [
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-7-1.jpg",
+          "caption": "Literature & Poetry Seminar"
+        },
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-12-1.jpg",
+          "caption": "Historical Heritage Walk"
+        }
+      ]
+    },
+    "infrastructure": {
+      "title": {
+        "main": "World-Class Infrastructure",
+        "highlight": "Infrastructure"
+      },
+      "label": "Campus",
+      "list": [
+        {
+          "title": "Modern Central Library",
+          "desc": "Extensive collection of books, journals, manuscripts, and digital archives spanning centuries.",
+          "img": "https://img.freepik.com/free-photo/library-dummy.jpg"
+        },
+        {
+          "title": "Advanced Language Labs",
+          "desc": "Equipped with linguistic software and interactive tools for mastering foreign and regional languages.",
+          "img": "https://cpur.in/wp-content/uploads/2023/07/gallery-7.jpg"
+        },
+        {
+          "title": "Creative Media Studio",
+          "desc": "Dedicated space for journalism students and aspiring authors to hone their craft.",
+          "img": "https://img.freepik.com/free-photo/modern-classroom-projector_1048-12346.jpg"
+        }
+      ]
+    },
+    "testimonials": {
+      "title": {
+        "main": "Our Students Speak",
+        "highlight": "Speak"
+      },
+      "label": "Testimonials",
+      "list": [
+        {
+          "name": "Simran Kaur",
+          "batch": "BA 2021",
+          "company": "Media Professional",
+          "emoji": "✍️",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+          "text": "The faculty's dedication to literature and social sciences profoundly shaped my worldview. The creative freedom here allowed me to find my true voice as a writer."
+        },
+        {
+          "name": "Aman Raj",
+          "batch": "MA 2022",
+          "company": "Civil Services Aspirant",
+          "emoji": "🏛️",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/student.png",
+          "text": "The depth of the curriculum, especially in History and Political Science, gave me a massive advantage in my UPSC preparations. The library resources are phenomenal."
+        }
+      ]
+    },
+    "exploreDepartment": {
+      "sectionTitle": {
+        "main": "Explore School of Arts & Humanities",
+        "highlight": "School"
+      },
+      "subtitle": "Discover our specialized wings and innovation labs",
+      "items": [
+        {
+          "title": "Department at a Glance",
+          "icon": "Building2",
+          "items": [
+            "Guest Experts & Authors",
+            "Literary & Debate Clubs",
+            "Seminars & Symposiums",
+            "Civil Service Mentoring",
+            "NGO Collaborations",
+            "Cultural Fests"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Exclusive Facilities",
+          "icon": "FlaskConical",
+          "items": [
+            "Central Digital Library",
+            "Advanced Language Lab",
+            "Media & Journalism Studio",
+            "Historical Archives Access",
+            "Research Cell"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Your Department in a Nutshell",
+          "icon": "Star",
+          "items": [
+            "Student Achievements",
+            "Faculty Publications",
+            "Research Papers",
+            "Latest Updates",
+            "Upcoming Activities"
+          ],
+          "cta": "START NOW"
+        }
+      ]
+    }
+  }
+}

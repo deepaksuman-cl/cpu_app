@@ -55,6 +55,11 @@ export default function AlumniSection({ data }) {
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-8 pb-4 px-3.5 z-40">
                 <div className="text-white font-extrabold text-base">{alum.name}</div>
                 <div className="text-white/70 text-xs mt-0.5">{alum.role}</div>
+                {alum.package && (
+                  <div className="text-amber-400 font-black text-xs mt-1.5 bg-black/40 inline-flex px-2 py-0.5 rounded shadow-sm border border-white/10">
+                    {alum.package}
+                  </div>
+                )}
               </div>
             </div>
           )}

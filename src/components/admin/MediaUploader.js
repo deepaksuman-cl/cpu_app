@@ -16,12 +16,13 @@ import {
   Check, 
   ExternalLink 
 } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { createPortal } from 'react-dom';
 
-export default function MediaUploader({ onUploadSuccess, category = 'general' }) {
+export default function MediaUploader({ onUploadSuccess, category = 'general', multiple = false, buttonText = "Select / Upload Media" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('library'); // 'library' or 'upload'
   const [uploadType, setUploadType] = useState('local'); // 'local' or 'external'
+  const [selectedItems, setSelectedItems] = useState([]);
   const modalRef = useRef(null);
   
   // Library State
@@ -46,24 +47,34 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
     }
   }, [isOpen, activeTab]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedItems([]);
+    }
+  }, [isOpen]);
+
   const handleSelect = (url) => {
-    if (onUploadSuccess) onUploadSuccess(url);
-    setIsOpen(false);
+    if (multiple) {
+      setSelectedItems(prev => prev.includes(url) ? prev.filter(u => u !== url) : [...prev, url]);
+    } else {
+      if (onUploadSuccess) onUploadSuccess(url);
+      setIsOpen(false);
+    }
   };
 
   const handleLocalUpload = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const file = e.target.files[0];
-    if (!file) return;
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
 
     setUploadLoading(true);
     const formData = new FormData();
-    formData.append('file', file);
+    files.forEach(file => formData.append('file', file));
     
     const res = await uploadLocalMedia(formData);
     if (res.success) {
-      toast.success('Uploaded to library!');
+      toast.success(`Successfully uploaded ${res.count || files.length} files to library!`);
       setActiveTab('library');
       fetchLibrary();
     } else {
@@ -101,11 +112,11 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
         className="flex items-center gap-2 bg-[var(--bg-surface)] border border-[var(--border-default)] hover:border-[var(--color-primary)] text-[var(--text-primary)] px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all shadow-sm group"
       >
         <Library size={16} className="text-[var(--text-muted)] group-hover:text-[var(--color-primary)]" />
-        <span>Select / Upload Media</span>
+        <span>{buttonText}</span>
       </button>
 
-      {/* Modal */}
-      {isOpen && (
+      {/* Modal rendered into body via Portal */}
+      {isOpen && typeof document !== 'undefined' && createPortal(
         <div 
           className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={(e) => {
@@ -180,16 +191,25 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
                           <div 
                             key={item.id} 
                             onClick={() => handleSelect(item.url)}
-                            className="group relative aspect-square bg-[var(--bg-muted)] border border-[var(--border-default)] hover:border-[var(--color-primary)] transition-all cursor-pointer overflow-hidden shadow-sm"
+                            className={`group relative aspect-square bg-[var(--bg-muted)] border transition-all cursor-pointer overflow-hidden shadow-sm ${multiple && selectedItems.includes(item.url) ? 'border-[var(--color-primary)] ring-2 ring-[var(--color-primary)] ring-offset-2' : 'border-[var(--border-default)] hover:border-[var(--color-primary)]'}`}
                           >
-                            <img src={item.url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={item.displayName} />
-                            {item.isExternal && (
-                                <div className="absolute top-1 right-1 bg-white p-0.5 border border-[var(--border-default)]"><ExternalLink size={8} className="text-[var(--color-primary)]" /></div>
+                            <img src={item.url} className={`w-full h-full object-cover transition-transform duration-500 ${!selectedItems.includes(item.url) ? 'group-hover:scale-110' : ''}`} alt={item.displayName} />
+                            
+                            {multiple && selectedItems.includes(item.url) && (
+                                <div className="absolute top-2 right-2 bg-[var(--color-primary)] text-white p-1 rounded-full z-10 shadow-md">
+                                   <Check size={14} strokeWidth={3} />
+                                </div>
                             )}
-                            <div className="absolute inset-0 bg-[var(--color-primary)]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                               <div className="bg-white p-2 rounded-none shadow-lg text-[var(--color-primary)] scale-50 group-hover:scale-100 transition-transform font-bold text-[9px] uppercase tracking-widest">Select</div>
+
+                            {item.isExternal && (
+                                <div className="absolute top-1 left-1 bg-white p-0.5 border border-[var(--border-default)]"><ExternalLink size={8} className="text-[var(--color-primary)]" /></div>
+                            )}
+                            <div className={`absolute inset-0 bg-[var(--color-primary)]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center ${multiple && selectedItems.includes(item.url) ? 'opacity-10' : ''}`}>
+                               {(!multiple || !selectedItems.includes(item.url)) && (
+                                  <div className="bg-white p-2 rounded-none shadow-lg text-[var(--color-primary)] scale-50 group-hover:scale-100 transition-transform font-bold text-[9px] uppercase tracking-widest">Select</div>
+                               )}
                             </div>
-                            <div className="absolute bottom-0 left-0 right-0 p-1.5 bg-black/60 text-white text-[9px] font-bold uppercase tracking-tight truncate opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div className={`absolute bottom-0 left-0 right-0 p-1.5 bg-black/60 text-white text-[9px] font-bold uppercase tracking-tight truncate transition-opacity ${multiple && selectedItems.includes(item.url) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                               {item.displayName}
                             </div>
                           </div>
@@ -203,6 +223,20 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
                       </div>
                     )}
                   </div>
+                  
+                  {/* Modal Footer (Multiple Select Mode) */}
+                  {multiple && selectedItems.length > 0 && (
+                    <div className="bg-[var(--bg-surface)] border-t border-[var(--border-default)] py-3 px-4 flex justify-between items-center shadow-lg -mx-6 -mb-6 mt-2">
+                       <div className="text-xs font-bold text-[var(--color-primary)]">{selectedItems.length} Asset(s) Selected</div>
+                       <div className="flex gap-2">
+                          <button onClick={() => setSelectedItems([])} className="px-4 py-2 border border-[var(--border-default)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--bg-muted)] transition-colors">Clear</button>
+                          <button onClick={() => {
+                              if(onUploadSuccess) onUploadSuccess(selectedItems);
+                              setIsOpen(false);
+                          }} className="px-5 py-2 bg-[var(--color-primary)] text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--color-primary-dark)] transition-colors shadow-sm">Confirm Selection</button>
+                       </div>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -215,6 +249,7 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
                         <input 
                           type="file" 
                           onChange={handleLocalUpload}
+                          multiple
                           className="absolute inset-0 opacity-0 cursor-pointer z-10" 
                         />
                         {uploadLoading ? (
@@ -227,6 +262,7 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
                           </>
                         )}
                       </div>
+
                    </div>
 
                    {/* External Link */}
@@ -261,7 +297,8 @@ export default function MediaUploader({ onUploadSuccess, category = 'general' })
 
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

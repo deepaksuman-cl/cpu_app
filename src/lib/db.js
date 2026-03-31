@@ -71,6 +71,7 @@ const sequelize =
     logging: process.env.NODE_ENV === "development" ? console.log : false,
     dialectOptions: {
       connectTimeout: 40000,
+      allowPublicKeyRetrieval: true,
     },
     pool: {
       max: 15,

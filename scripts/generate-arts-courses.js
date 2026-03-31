@@ -1,0 +1,313 @@
+const fs = require('fs');
+const path = require('path');
+
+// Helper to make deep rich structures quickly
+const makeCommonStats = () => [
+  { value: "4.5L", label: "Average Salary Package", icon: "TrendingUp" },
+  { value: "500+", label: "Placements", icon: "Users" },
+  { value: "Top 10", label: "State Ranking", icon: "Award" }
+];
+
+const makeCommonGridCards = () => [
+  { icon: "Research", label: "Research Excellence", sub: "Collaborative research opportunities from year 1." },
+  { icon: "Global", label: "Global Perspective", sub: "International field experiences and guest lecturers." },
+  { icon: "Industry", label: "Industry Relevant", sub: "Curriculum designed with inputs from leading NGOs and Agencies." },
+  { icon: "Leadership", label: "Leadership Programs", sub: "Specialized workshops for soft skills and career growth." }
+];
+
+const makeFaq = (courseName) => ({
+  sectionTitle: { main: "Frequently Asked Questions", highlight: "", skyHighlight: "" },
+  subtitle: `Everything you need to know about the ${courseName} programme`,
+  items: [
+    { q: `What is the eligibility for the ${courseName} programme?`, a: "Minimum 50% aggregate marks in the requested qualifying examination." },
+    { q: "Do you offer placement assistance?", a: "Yes, our dedicated placement cell provides 100% placement assistance, internship guidance, and employability workshops." },
+    { q: "Is the curriculum updated?", a: "Absolutely. Our academic council reviews the curriculum annually to align with global standards and industry expectations." },
+    { q: "Are there scholarships available?", a: "Yes, up to 100% merit-based scholarships are available for deserving students based on their prior academic performance." }
+  ]
+});
+
+const makeAdmissionFee = () => ({
+  sectionTitle: "Admission & Fee Details",
+  subtitle: "Simple admission process and transparent fee structure",
+  bgImage: "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+  youtubeVideoId: "dQw4w9WgXcQ",
+  admissionCriteria: [
+    { color: "#00588b", text: "Through Merit & Entrance Examination. For details, ", link: "/apply" }
+  ],
+  feeDetails: [
+    { label: "Admission Fee (one-time)", amount: "8,900/-" },
+    { label: "Tuition Fee", amount: "25,000/- per Semester" },
+    { label: "Examination Fee", amount: "2,500/- per Semester" }
+  ]
+});
+
+const makeScholarships = () => ({
+  sectionTitle: "Scholarship Criteria",
+  subtitle: "Scholarship for Session 2026-27",
+  bgImage: "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+  dateHeaders: ["Till 31st June", "Till 13th July"],
+  rows: [
+    { range: "Above 90%", values: ["100% Waiver", "50% Waiver"] },
+    { range: "75% – 89%", values: ["50% Waiver", "25% Waiver"] }
+  ],
+  earlyBird: { label: "Early Admission Benefit", values: ["3000", "1500"] },
+  notes: [
+    { icon: "Info", text: "Merit scholarship is offered to students based on previous class marks." },
+    { icon: "Info", text: "A 50% scholarship is given to students in special categories." }
+  ]
+});
+
+const makeWhyJoin = (title) => ({
+  sectionTitle: `Why Join ${title}?`,
+  subtitle: "Unlock your potential with Career Point University",
+  reasons: [
+    { icon: "TrendingUp", title: "Gateway to the Industry", desc: "Equips students with foundational knowledge and practical skills highly demanded." },
+    { icon: "Briefcase", title: "Diverse Career Opportunities", desc: "Opportunities across government agencies, finance, healthcare, and educational institutions." },
+    { icon: "Target", title: "Practical Training", desc: "Emphasize practical training through projects, internships, and industry collaborations." }
+  ]
+});
+
+const makeUniqueFeatures = () => ({
+  sectionTitle: "What makes this Department unique?",
+  subtitle: "Setting us apart from the rest",
+  bgImage: "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+  features: [
+    { num: "01", icon: "Users", title: "Support Services", desc: "Entrepreneurship and career support services." },
+    { num: "02", icon: "Globe", title: "Interdisciplinary Approach", desc: "Collaborate with academic partners for joint projects." },
+    { num: "03", icon: "Brain", title: "Research & Development", desc: "Holistic development offering professional skills training." }
+  ]
+});
+
+const makeApplySteps = () => ({
+  sectionTitle: "How to Apply",
+  subtitle: "Simple step-by-step process",
+  bgImage: "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+  guideLabel: "Guide to Register Online",
+  ctaLabel: "Start Your Application",
+  ctaLink: "/apply",
+  steps: [
+    { icon: "UserCheck", step: "01", label: "Register Yourself", desc: "Create your account on the portal." },
+    { icon: "FileText", step: "02", label: "Verify Details", desc: "Confirm your identity and educational background." },
+    { icon: "IndianRupee", step: "03", label: "Pay Application Fee", desc: "Securely pay the processing fee online." },
+    { icon: "BadgeCheck", step: "04", label: "Submit Application", desc: "Review and submit your application." }
+  ]
+});
+
+const makeTestimonials = () => ([
+  { name: "Rahul Sharma", batch: "2023", company: "Times of India", rating: 5, photo: "https://cpur.in/wp-content/uploads/2023/07/student.png", text: "The curriculum here bridged the gap between academic theory and practical application perfectly." },
+  { name: "Priya Singh", batch: "2022", company: "UNICEF NGO Partner", rating: 5, photo: "https://cpur.in/wp-content/uploads/2023/07/student.png", text: "Exceptional faculty and extensive field work exposure helped me secure my dream job immediately after graduating." }
+]);
+
+const makeIndustry = () => ({
+  title: "Industry Connect",
+  description: "Our academic partners and placement recruiters include top-tier national and international organizations.",
+  partners: [
+    { name: "Penguin Random House", logo: "https://cpur.in/wp-content/uploads/2023/07/partner1.png" },
+    { name: "Oxfam", logo: "https://cpur.in/wp-content/uploads/2023/07/partner2.png" }
+  ]
+});
+
+const makeExploreDept = () => ({
+  title: "Explore Department",
+  links: [
+    { label: "Research Publications", link: "#" },
+    { label: "Faculty Profiles", link: "#" },
+    { label: "Alumni Network", link: "#" }
+  ]
+});
+
+const coursesData = [
+  {
+    name: 'Bachelor of Arts (B.A.)',
+    slug: 'ba',
+    duration: '3 Years',
+    eligibility: '10+2 with minimum 50% aggregate from a recognized board.',
+    description: 'The B.A. programme provides a robust foundation in humanities and social sciences. We emphasize the development of analytical rigor, creative expression, and a deep understanding of human culture.',
+    hero: {
+      bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg',
+      badge: 'Foundation of Liberal Thought',
+      title: { main: 'Bachelor of', highlight: 'Arts', skyHighlight: '(B.A.)' },
+      description: 'A versatile 3-year degree for future thinkers, writers, and leaders in a complex global society.',
+      cta: [{ label: 'Apply Now', link: '/apply', primary: true }],
+      quickStats: [{ value: '3 Yrs', label: 'Duration' }, { value: '6 Sem', label: 'Semesters' }]
+    },
+    accomplishments: { heading: 'Excellence in Humanities', trustBadge: 'UGC Recognized & NAAC Accredited', stats: makeCommonStats() },
+    overview: {
+      sectionTitle: { main: 'Programme', highlight: 'Overview', skyHighlight: 'B.A.' },
+      subtitle: 'A journey through the human experience.',
+      paragraphs: ['Our B.A. programme is meticulously designed to offer students a broad perspective...', 'With specializations in English, Political Science, and History, we prepare students.'],
+      tags: ['Literature', 'History', 'Pol. Science'],
+      gridCards: makeCommonGridCards()
+    },
+    scope: {
+      sectionTitle: { main: 'Future', highlight: 'Scope', skyHighlight: '& Careers' }, subtitle: 'Endless possibilities in the social sector.', bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', body: 'Graduates find success in diverse fields such as Civil Services, Journalism, Content Strategy, Education, and International NGOs.'
+    },
+    curriculum: {
+      sectionTitle: { main: 'Academic', highlight: 'Curriculum', skyHighlight: '& Subjects' }, subtitle: 'A carefully curated map of learning.', introNote: 'Core subjects are balanced with diverse electives.', outroNote: 'Final year focuses on research synthesis.',
+      courseStructure: [{ category: 'Core Subjects', shortName: 'CORE', description: 'Mandatory humanities foundation.', credits: 72 }, { category: 'Electives', shortName: 'ELC', description: 'Specialized subjects.', credits: 24 }],
+      valueAddedCourses: [{ name: 'Creative Writing Workshop', credits: 4 }],
+      accordionSections: [
+        { id: 'sem1', title: 'Semester 1', content: 'Intro to Literature, World History, Basics of Political Theory, Communication Labs.', hasTable: true },
+        { id: 'sem2', title: 'Semester 2', content: 'Modern Indian History, Western Political Philosophy, English Poetry.', hasTable: true },
+        { id: 'sem3', title: 'Semester 3', content: 'Public Administration, Advanced Literature, Research Methods.', hasTable: true },
+        { id: 'sem4', title: 'Semester 4', content: 'Sociology Concepts, Macroeconomics, Human Rights.', hasTable: true },
+        { id: 'sem5', title: 'Semester 5', content: 'Constitution Law, International Relations, Creative Writing.', hasTable: true },
+        { id: 'sem6', title: 'Semester 6', content: 'Final Research Paper, Internships, Major Project.', hasTable: true }
+      ]
+    },
+    roadmap: {
+      sectionTitle: { main: 'Student', highlight: 'Success', skyHighlight: 'Roadmap' }, subtitle: 'Your path from student to social leader.',
+      years: [
+        { id: 1, badge: 'Year 1', tabLabel: 'Foundational', tabTitle: 'Discovery', contentTitle: 'Building the Base', contentDesc: 'Year one focusing on core thinking skills.', skills: ['Critical Thinking'], subjects: ['History'], aiTools: [{ name: 'Grammarly', desc: 'Assisted Writing', icon: 'Bot', size: '20px' }], concepts: [{ title: 'Democracy', desc: 'Core concept', icon: '🏛️' }], projects: [{ name: 'Community Mapping', desc: 'Local project', color: '#ffb900' }] },
+        { id: 2, badge: 'Year 2', tabLabel: 'Specialization', tabTitle: 'Inquiry', contentTitle: 'Deep Diving', contentDesc: 'Advanced exploration.', skills: ['Data Analysis'], subjects: ['Modern History'], aiTools: [{ name: 'Nvivo', desc: 'Qualitative Data', icon: 'Code', size: '20px' }], concepts: [{ title: 'Post-modernism', desc: 'Advanced', icon: '📚' }], projects: [{ name: 'Historical Archive', desc: 'Digital recording', color: '#00588b' }] },
+        { id: 3, badge: 'Year 3', tabLabel: 'Professional', tabTitle: 'Synthesis', contentTitle: 'Career Ready', contentDesc: 'Final year projects and civil service prep.', skills: ['Policy Review'], subjects: ['International Relations'], aiTools: [{ name: 'Tableau', desc: 'Data Viz', icon: 'Chart', size: '20px' }], concepts: [{ title: 'Globalism', desc: 'Geopolitics', icon: '🌍' }], projects: [{ name: 'Thesis', desc: 'Final paper', color: '#3ccc8b' }] }
+      ]
+    },
+    admissionFee: makeAdmissionFee(), scholarships: makeScholarships(), whyJoin: makeWhyJoin('B.A.'), uniqueFeatures: makeUniqueFeatures(), applySteps: makeApplySteps(), faq: makeFaq('B.A.'),
+    placements: { title: "Placements", label: "Career Success", list: [{ name: "Ananya", company: "Times Group", pkg: "6.5", img: "https://cpur.in/wp-content/uploads/2023/07/student.png" }] }, industry: makeIndustry(), testimonials: makeTestimonials(), exploreDepartment: makeExploreDept()
+  },
+  {
+    name: 'Bachelor of Library Science (B.Lib.)',
+    slug: 'b-lib',
+    duration: '1 Year',
+    eligibility: 'Bachelor degree in any stream with minimum 50% aggregate.',
+    description: 'The Bachelor of Library Science (B.Lib.) is a professional 1-year degree designed to produce information experts. In the digital age, this course bridges traditional library management with modern informatics.',
+    hero: {
+      bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', badge: 'Information Science', title: { main: 'Bachelor of', highlight: 'Library', skyHighlight: 'Science' }, description: 'A focused, career-oriented programme for the modern informatics age.', cta: [{ label: 'Apply', link: '/apply', primary: true }], quickStats: [{ value: '1 Yr', label: 'Duration' }, { value: '2 Sem', label: 'Semesters' }]
+    },
+    accomplishments: { heading: 'Information Science Leadership', trustBadge: 'UGC Recognized', stats: makeCommonStats() },
+    overview: { sectionTitle: { main: 'Programme', highlight: 'Overview', skyHighlight: 'B.Lib.' }, subtitle: 'Guarding the modern archives.', paragraphs: ['Mastering the organization of information.', 'Focusing on digital retrieval systems.'], tags: ['Informatics', 'Cataloging'], gridCards: makeCommonGridCards() },
+    scope: { sectionTitle: { main: 'Future', highlight: 'Scope', skyHighlight: 'B.Lib.' }, subtitle: 'Librarians and Info Officers.', bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', body: 'Graduates serve as librarians, catalogers, and digital archive managers in universities and corporations.' },
+    curriculum: {
+      sectionTitle: { main: 'Academic', highlight: 'Curriculum', skyHighlight: '& Subjects' }, subtitle: 'Technical LIS training.', introNote: 'Theory and practice of classification.', outroNote: 'Internships in university libraries.',
+      courseStructure: [{ category: 'Core', shortName: 'CORE', description: 'LIS Foundations', credits: 40 }], valueAddedCourses: [],
+      accordionSections: [
+        { id: 'sem1', title: 'Semester 1', content: 'Foundations of LIS, Classification, Reference Services.', hasTable: true },
+        { id: 'sem2', title: 'Semester 2', content: 'Cataloging, Library Automation, Digital Informatics.', hasTable: true }
+      ]
+    },
+    roadmap: {
+      sectionTitle: { main: 'Student', highlight: 'Roadmap', skyHighlight: 'B.Lib.' }, subtitle: '1 year to expertise.',
+      years: [{ id: 1, badge: 'Phase 1', tabLabel: 'Management', tabTitle: 'Knowledge Org', contentTitle: 'Library Arch', contentDesc: 'Learning retrieval.', skills: ['Cataloging'], subjects: ['Classification'], aiTools: [{ name: 'Koha', desc: 'ILMS', icon: 'Book', size: '20px' }], concepts: [{ title: 'DDC', desc: 'Dewey Decimal', icon: '🔢' }], projects: [{ name: 'Digital Audit', desc: 'Lib audit', color: '#ffb900' }] }]
+    },
+    admissionFee: makeAdmissionFee(), scholarships: makeScholarships(), whyJoin: makeWhyJoin('B.Lib.'), uniqueFeatures: makeUniqueFeatures(), applySteps: makeApplySteps(), faq: makeFaq('B.Lib.'),
+    placements: { title: "Placements", label: "Career Success", list: [{ name: "Suresh", company: "Central Library", pkg: "4.5", img: "https://cpur.in/wp-content/uploads/2023/07/student.png" }] }, industry: makeIndustry(), testimonials: makeTestimonials(), exploreDepartment: makeExploreDept()
+  },
+  {
+    name: 'Master of Arts (M.A.)',
+    slug: 'ma',
+    duration: '2 Years',
+    eligibility: 'B.A. or relevant degree with minimum 50% aggregate.',
+    description: 'The M.A. is a research-intensive graduate degree. It enables students to specialize in their field of interest, covering advanced theoretical frameworks.',
+    hero: { bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', badge: 'Advanced Humanities', title: { main: 'Master of', highlight: 'Arts', skyHighlight: '(M.A.)' }, description: 'Theoretical deep dives for future scholars.', cta: [{ label: 'Apply', link: '/apply', primary: true }], quickStats: [{ value: '2 Yrs', label: 'Duration' }] },
+    accomplishments: { heading: 'Research Excellence', trustBadge: 'UGC Recognized', stats: makeCommonStats() },
+    overview: { sectionTitle: { main: 'Programme', highlight: 'Overview', skyHighlight: 'M.A.' }, subtitle: 'Advanced critical thinking.', paragraphs: ['Specializations in Literature, Policy, History.'], tags: ['Research', 'Theory'], gridCards: makeCommonGridCards() },
+    scope: { sectionTitle: { main: 'Future', highlight: 'Scope', skyHighlight: 'M.A.' }, subtitle: 'Academia and Policy.', bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', body: 'Professors, Think Tanks, Policy Analysts.' },
+    curriculum: {
+      sectionTitle: { main: 'Academic', highlight: 'Curriculum', skyHighlight: '& Subjects' }, subtitle: '4 Semesters of Theory.', introNote: 'Core subjects are balanced with diverse electives.', outroNote: 'Master Thesis in Sem 4.',
+      courseStructure: [{ category: 'Core', shortName: 'CORE', description: 'Advanced Theory', credits: 60 }], valueAddedCourses: [],
+      accordionSections: [
+        { id: 'sem1', title: 'Semester 1', content: 'Literary Criticism, Advanced World History, Research Ethics.', hasTable: true },
+        { id: 'sem2', title: 'Semester 2', content: 'Cultural Studies, Linguistics.', hasTable: true },
+        { id: 'sem3', title: 'Semester 3', content: 'Post-Modernism, Policy Analysis.', hasTable: true },
+        { id: 'sem4', title: 'Semester 4', content: 'Master Thesis Defense.', hasTable: true }
+      ]
+    },
+    roadmap: {
+      sectionTitle: { main: 'Student', highlight: 'Roadmap', skyHighlight: 'M.A.' }, subtitle: 'Your path to scholarship.',
+      years: [
+        { id: 1, badge: 'Year 1', tabLabel: 'Theory', tabTitle: 'Conceptual Mastery', contentTitle: 'Building Theory', contentDesc: 'Learning advanced frameworks.', skills: ['Synthesis'], subjects: ['Post-Colonialism'], aiTools: [{ name: 'Scopus', desc: 'Research DB', icon: 'Book', size: '20px' }], concepts: [{ title: 'Semiotics', desc: 'Signs', icon: '📝' }], projects: [{ name: 'Proposal', desc: 'Research', color: '#ffb900' }] },
+        { id: 2, badge: 'Year 2', tabLabel: 'Research', tabTitle: 'Dissertation', contentTitle: 'Thesis Writing', contentDesc: 'Independent research execution.', skills: ['Academic Writing'], subjects: ['Thesis'], aiTools: [{ name: 'LaTeX', desc: 'Formatting', icon: 'Code', size: '20px' }], concepts: [{ title: 'Originality', desc: 'Contribution', icon: '💡' }], projects: [{ name: 'Masters Thesis', desc: 'Final Paper', color: '#00588b' }] }
+      ]
+    },
+    admissionFee: makeAdmissionFee(), scholarships: makeScholarships(), whyJoin: makeWhyJoin('M.A.'), uniqueFeatures: makeUniqueFeatures(), applySteps: makeApplySteps(), faq: makeFaq('M.A.'),
+    placements: { title: "Placements", label: "Career Success", list: [{ name: "Vikram", company: "Oxford Univ Press", pkg: "8.5", img: "https://cpur.in/wp-content/uploads/2023/07/student.png" }] }, industry: makeIndustry(), testimonials: makeTestimonials(), exploreDepartment: makeExploreDept()
+  },
+  {
+    name: 'Master of Social Work (MSW)',
+    slug: 'msw',
+    duration: '2 Years',
+    eligibility: 'Graduate in any stream with minimum 50% aggregate.',
+    description: 'The Master of Social Work (MSW) is a professional degree that prepares you for work in the development sector. From NGO management to CSR roles.',
+    hero: { bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', badge: 'Social Impact', title: { main: 'Master of', highlight: 'Social', skyHighlight: 'Work' }, description: 'Ethical and professional social service.', cta: [{ label: 'Apply', link: '/apply', primary: true }], quickStats: [{ value: '2 Yrs', label: 'Duration' }] },
+    accomplishments: { heading: 'Impact Records', trustBadge: 'UGC Recognized', stats: makeCommonStats() },
+    overview: { sectionTitle: { main: 'Programme', highlight: 'Overview', skyHighlight: 'MSW' }, subtitle: 'Field-intensive learning.', paragraphs: ['Focusing on community development and CSR.'], tags: ['NGO', 'CSR', 'Policy'], gridCards: makeCommonGridCards() },
+    scope: { sectionTitle: { main: 'Future', highlight: 'Scope', skyHighlight: 'MSW' }, subtitle: 'CSR & NGO Leadership.', bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', body: 'Work as CSR Managers, Social Project heads, and UN agency consultants.' },
+    curriculum: {
+      sectionTitle: { main: 'Academic', highlight: 'Curriculum', skyHighlight: '& Subjects' }, subtitle: '4 Semesters of Fieldwork.', introNote: 'Core subjects and daily field visits.', outroNote: 'Block placements in Sem 4.',
+      courseStructure: [{ category: 'Core', shortName: 'CORE', description: 'Social Work Theory', credits: 60 }], valueAddedCourses: [],
+      accordionSections: [
+        { id: 'sem1', title: 'Semester 1', content: 'Social Case Work, Human Behavior.', hasTable: true },
+        { id: 'sem2', title: 'Semester 2', content: 'Social Group Work, Community Organization.', hasTable: true },
+        { id: 'sem3', title: 'Semester 3', content: 'NGO Management, Social Policy.', hasTable: true },
+        { id: 'sem4', title: 'Semester 4', content: 'Corporate Social Responsibility, Block Placement.', hasTable: true }
+      ]
+    },
+    roadmap: {
+      sectionTitle: { main: 'Student', highlight: 'Roadmap', skyHighlight: 'MSW' }, subtitle: 'Path to social leadership.',
+      years: [
+        { id: 1, badge: 'Year 1', tabLabel: 'Community', tabTitle: 'Grassroots', contentTitle: 'Field Immersion', contentDesc: 'Learning in rural sectors.', skills: ['Advocacy'], subjects: ['Sociology'], aiTools: [{ name: 'Tableau', desc: 'Data Viz', icon: 'Chart', size: '20px' }], concepts: [{ title: 'Social Justice', desc: 'Equity', icon: '⚖️' }], projects: [{ name: 'Project Sharda', desc: 'Rural education', color: '#ffb900' }] },
+        { id: 2, badge: 'Year 2', tabLabel: 'Leadership', tabTitle: 'NGO Management', contentTitle: 'Driving Change', contentDesc: 'Managing CSR funds and leading teams.', skills: ['Project Management'], subjects: ['CSR Laws'], aiTools: [{ name: 'Salesforce', desc: 'NPSP', icon: 'Cloud', size: '20px' }], concepts: [{ title: 'Sustainability', desc: 'ESG Goals', icon: '🌱' }], projects: [{ name: 'Block Placement', desc: '6 months internship', color: '#00588b' }] }
+      ]
+    },
+    admissionFee: makeAdmissionFee(), scholarships: makeScholarships(), whyJoin: makeWhyJoin('MSW'), uniqueFeatures: makeUniqueFeatures(), applySteps: makeApplySteps(), faq: makeFaq('MSW'),
+    placements: { title: "Placements", label: "Career Success", list: [{ name: "Anita", company: "Save the Children", pkg: "7.0", img: "https://cpur.in/wp-content/uploads/2023/07/student.png" }] }, industry: makeIndustry(), testimonials: makeTestimonials(), exploreDepartment: makeExploreDept()
+  },
+  {
+    name: 'Master of Library Science (M.Lib.)',
+    slug: 'm-lib',
+    duration: '1 Year',
+    eligibility: 'B.Lib. degree from a recognized university with minimum 50% aggregate.',
+    description: 'The M.Lib. is an advanced 1-year programme focused on the high-level management of information ecosystems. We focus on digital library infrastructures and data informatics.',
+    hero: { bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', badge: 'Advanced Informatics', title: { main: 'Master of', highlight: 'Library', skyHighlight: 'Science' }, description: 'Digital ecosystems and information curation.', cta: [{ label: 'Apply', link: '/apply', primary: true }], quickStats: [{ value: '1 Yr', label: 'Duration' }] },
+    accomplishments: { heading: 'Digital Archives', trustBadge: 'UGC Recognized', stats: makeCommonStats() },
+    overview: { sectionTitle: { main: 'Programme', highlight: 'Overview', skyHighlight: 'M.Lib.' }, subtitle: 'Digital architecture.', paragraphs: ['Mastering big data libraries.'], tags: ['Informatics', 'Big Data'], gridCards: makeCommonGridCards() },
+    scope: { sectionTitle: { main: 'Future', highlight: 'Scope', skyHighlight: 'M.Lib.' }, subtitle: 'Chief Librarians.', bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', body: 'Digital curators, Chief Information Officers, Data Archivists.' },
+    curriculum: {
+      sectionTitle: { main: 'Academic', highlight: 'Curriculum', skyHighlight: '& Subjects' }, subtitle: '2 Semesters of Data.', introNote: 'Focus on digital tools.', outroNote: 'Research project in Sem 2.',
+      courseStructure: [{ category: 'Core', shortName: 'CORE', description: 'Advanced LIS', credits: 40 }], valueAddedCourses: [],
+      accordionSections: [
+        { id: 'sem1', title: 'Semester 1', content: 'Information Systems, Digital Retrieval.', hasTable: true },
+        { id: 'sem2', title: 'Semester 2', content: 'Bibliometrics, Informetrics, Project.', hasTable: true }
+      ]
+    },
+    roadmap: {
+      sectionTitle: { main: 'Student', highlight: 'Roadmap', skyHighlight: 'M.Lib.' }, subtitle: 'Digital mastery.',
+      years: [{ id: 1, badge: 'Phase 1', tabLabel: 'Mastery', tabTitle: 'Advanced Tech', contentTitle: 'Digital Systems', contentDesc: 'Designing digital architecture.', skills: ['Data Mining'], subjects: ['Informetrics'], aiTools: [{ name: 'DSpace', desc: 'Digital Lib', icon: 'Database', size: '20px' }], concepts: [{ title: 'Metadata', desc: 'Data structures', icon: '📊' }], projects: [{ name: 'Archive Design', desc: 'System build', color: '#ffb900' }] }]
+    },
+    admissionFee: makeAdmissionFee(), scholarships: makeScholarships(), whyJoin: makeWhyJoin('M.Lib.'), uniqueFeatures: makeUniqueFeatures(), applySteps: makeApplySteps(), faq: makeFaq('M.Lib.'),
+    placements: { title: "Placements", label: "Career Success", list: [{ name: "Ramesh", company: "National Archives", pkg: "9.0", img: "https://cpur.in/wp-content/uploads/2023/07/student.png" }] }, industry: makeIndustry(), testimonials: makeTestimonials(), exploreDepartment: makeExploreDept()
+  },
+  {
+    name: 'Ph.D. (All Subjects)',
+    slug: 'research-phd',
+    duration: 'Min 3 Years',
+    eligibility: 'Masters degree with minimum 55% aggregate and entrance/NET.',
+    description: 'Our Ph.D. programme is designed to cultivate original research. We provide the infrastructure and mentorship needed for high-impact academic contributions.',
+    hero: { bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', badge: 'Doctoral Excellence', title: { main: 'Doctor of', highlight: 'Philosophy', skyHighlight: '(Ph.D.)' }, description: 'The pinnacle of academic achievement.', cta: [{ label: 'Apply', link: '/apply', primary: true }], quickStats: [{ value: '3-5 Yrs', label: 'Duration' }] },
+    accomplishments: { heading: 'Research Impact', trustBadge: 'UGC Recognized', stats: makeCommonStats() },
+    overview: { sectionTitle: { main: 'Programme', highlight: 'Overview', skyHighlight: 'Ph.D.' }, subtitle: 'Original contributions.', paragraphs: ['Mentorship driven original research in Arts and Humanities.'], tags: ['Research', 'Doctorate'], gridCards: makeCommonGridCards() },
+    scope: { sectionTitle: { main: 'Future', highlight: 'Scope', skyHighlight: 'Ph.D.' }, subtitle: 'Global Academia.', bgImage: 'https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg', body: 'Professors, Lead Researchers, Policy Directors.' },
+    curriculum: {
+      sectionTitle: { main: 'Academic', highlight: 'Curriculum', skyHighlight: '& Subjects' }, subtitle: 'Doctoral Coursework.', introNote: 'Semester 1 involves strict coursework.', outroNote: 'Thesis defense concludes the programme.',
+      courseStructure: [{ category: 'Core', shortName: 'CORE', description: 'Research Methods', credits: 24 }], valueAddedCourses: [],
+      accordionSections: [
+        { id: 'sem1', title: 'Coursework', content: 'Research Ethics, Advanced Methods, Literature Review.', hasTable: true },
+        { id: 'sem2', title: 'Research Phase', content: 'Data Collection, Journal Publishing, Thesis Writing.', hasTable: true }
+      ]
+    },
+    roadmap: {
+      sectionTitle: { main: 'Student', highlight: 'Roadmap', skyHighlight: 'Ph.D.' }, subtitle: 'Doctoral milestones.',
+      years: [
+        { id: 1, badge: 'Phase 1', tabLabel: 'Synopsis', tabTitle: 'Proposal', contentTitle: 'Subject Selection', contentDesc: 'Defending the research roadmap.', skills: ['Research Design'], subjects: ['Ethics'], aiTools: [{ name: 'Scopus', desc: 'DB', icon: 'Book', size: '20px' }], concepts: [{ title: 'Epistemology', desc: 'Theory of knowledge', icon: '🧠' }], projects: [{ name: 'Proposal Defense', desc: 'Synopsis', color: '#ffb900' }] },
+        { id: 2, badge: 'Phase 2', tabLabel: 'Thesis', tabTitle: 'Completion', contentTitle: 'Viva Voce', contentDesc: 'Final defense before expert panel.', skills: ['Public Defense'], subjects: ['Synthesis'], aiTools: [{ name: 'LaTeX', desc: 'Format', icon: 'Code', size: '20px' }], concepts: [{ title: 'Originality', desc: 'New knowledge', icon: '💡' }], projects: [{ name: 'Thesis Submission', desc: 'Final', color: '#00588b' }] }
+      ]
+    },
+    admissionFee: makeAdmissionFee(), scholarships: makeScholarships(), whyJoin: makeWhyJoin('Ph.D.'), uniqueFeatures: makeUniqueFeatures(), applySteps: makeApplySteps(), faq: makeFaq('Ph.D.'),
+    placements: { title: "Placements", label: "Career Success", list: [{ name: "Dr. Sharma", company: "Delhi University", pkg: "12.0", img: "https://cpur.in/wp-content/uploads/2023/07/student.png" }] }, industry: makeIndustry(), testimonials: makeTestimonials(), exploreDepartment: makeExploreDept()
+  }
+];
+
+const outputPath = path.join(__dirname, '..', 'artsAndHumanitiesCourses.json');
+fs.writeFileSync(outputPath, JSON.stringify(coursesData, null, 2));
+console.log(`Successfully generated highly detailed courses data at ${outputPath}`);

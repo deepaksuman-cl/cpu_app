@@ -48,7 +48,8 @@ const SchoolSchema = new mongoose.Schema({
   alumni: AlumniSchema,
   industry: IndustrySchema,
   research: ResearchSchema,
-  community: CommunitySchema,
+  community: CommunitySchema,are tum kyu open krke dekh rhe ho tumko time lg jata hai
+  
   infrastructure: InfrastructureSchema,
   testimonials: TestimonialsSchema,
   exploreDepartment: ExploreDepartmentSchema
