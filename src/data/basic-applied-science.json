@@ -1482,11 +1482,593 @@
         }
       },
       "msc": {
-        "slug": "msc"
-      },
-      "research-phd": {
-        "slug": "research-phd"
+        "title": "Master of Science (M.Sc.)",
+        "duration": "2 Years",
+        "eligibility": "B.Sc. in relevant discipline with minimum 50% marks from a recognized university",
+        "description": "An intensive postgraduate program designed to create subject matter experts, elite researchers, and industry-ready scientists across multiple disciplines.",
+        "metaTitle": "Master of Science (M.Sc.) | Basic & Applied Sciences | CPU",
+        "metaDescription": "Pursue a 2-year M.Sc. degree at Career Point University. Specialize in Physics, Chemistry, Maths, Zoology, Botany, or Environmental Science with a focus on advanced R&D.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "2-Year Postgraduate Science Programme",
+          "title": {
+            "main": "Master of Science",
+            "line1": "Master of",
+            "line2": "Science",
+            "line3": "(M.Sc.)",
+            "highlight": "Science",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "15L+"
+            },
+            {
+              "label": "NET/JRF",
+              "value": "Oriented"
+            }
+          ],
+          "description": "Deepen your scientific expertise. Engage in high-level experimental research, mathematical modeling, and prepare for elite roles in academia and global R&D."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "R&D Placements",
+              "value": "1000+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Highest Package",
+              "value": "15 L"
+            },
+            {
+              "icon": "Award",
+              "label": "CSIR-NET Cleared",
+              "value": "250+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Research Papers",
+              "value": "180+"
+            },
+            {
+              "icon": "Globe",
+              "label": "International Seminars",
+              "value": "45+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni Scientists",
+              "value": "400+"
+            }
+          ],
+          "heading": "Postgraduate Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 2,000+ Future Scientists"
+        },
+        "overview": {
+          "tags": [
+            "2 Years Duration",
+            "4 Semesters",
+            "Research Intensive",
+            "CSIR-NET Aligned"
+          ],
+          "subtitle": "What is the M.Sc. Programme?",
+          "gridCards": [
+            {
+              "sub": "Quantum & Astro",
+              "icon": "Activity",
+              "label": "Physics"
+            },
+            {
+              "sub": "Synthetic & Analytical",
+              "icon": "FlaskConical",
+              "label": "Chemistry"
+            },
+            {
+              "sub": "Pure & Applied",
+              "icon": "Calculator",
+              "label": "Mathematics"
+            },
+            {
+              "sub": "Flora, Fauna & Ecology",
+              "icon": "Leaf",
+              "label": "Bio Sciences"
+            }
+          ],
+          "paragraphs": [
+            "The Master of Science (M.Sc.) is a rigorous two-year, four-semester programme built for students who want to push the boundaries of known science. It moves beyond standard textbook learning to focus on complex theoretical frameworks, mathematical modeling, and high-level laboratory research.",
+            "Whether you are aiming to crack the CSIR-NET/JRF for a Ph.D., preparing for roles in the pharmaceutical industry, or looking to join space and defense research organizations, the M.Sc. programme provides the intellectual and experimental depth required to succeed."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "An M.Sc. degree signifies a high level of academic and experimental maturity. Graduates are highly sought after as R&D Scientists, Quality Assurance Managers, Data Analysts, Subject Matter Experts, and College Professors. Furthermore, the specialized knowledge gained during this programme acts as a massive catalyst for students appearing in the UPSC Civil Services Main Examination (Science Optionals) and direct scientific recruitment drives by DRDO, ISRO, and BARC.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Elevating your scientific and professional stature",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A master-level curriculum focusing on advanced theory and research",
+          "introNote": "The M.Sc. programme is characterized by advanced computational modeling, intensive laboratory protocols, and a mandatory research dissertation.",
+          "outroNote": "Graduates leave not just with a degree, but with published scientific research and specialized expertise in their chosen domain.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 40,
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Advanced Core Science Theory"
+            },
+            {
+              "credits": 20,
+              "category": "Departmental Elective",
+              "shortName": "DE",
+              "description": "Specialization Electives"
+            },
+            {
+              "credits": 16,
+              "category": "Practical",
+              "shortName": "PR",
+              "description": "Advanced Laboratory Training"
+            },
+            {
+              "credits": 12,
+              "category": "Research",
+              "shortName": "RP",
+              "description": "Master's Thesis / Dissertation"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The Master of Science (M.Sc.) program offers diverse specializations. The first year focuses on establishing strong advanced theoretical frameworks and experimental techniques. The second year allows students to dive deep into specialized electives (e.g., Astrophysics, Organic Synthesis, Applied Mathematics) and culminates in an independent research dissertation.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Core Subjects: Advanced Theoretical Science I, Computational Methods, Analytical Techniques, Core Lab Practice I. Total Credits: 22"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Core Subjects: Advanced Theoretical Science II, Research Methodology, Statistics for Sciences, Core Lab Practice II, Seminar Presentation. Total Credits: 22"
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Advanced Studies: Specialization Paper I, Specialization Paper II, Advanced Lab Practice III, Synopsis Submission for Dissertation. Total Credits: 22"
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Research & Culmination: Master's Dissertation (Research, Writing, and Defense), Viva-Voce, Specialization Paper III. Total Credits: 22"
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "CSIR-NET/GATE Preparation Module",
+              "credits": 0
+            },
+            {
+              "name": "Scientific Data Analysis (Python/MATLAB)",
+              "credits": 2
+            },
+            {
+              "name": "Research Ethics and Patent Filing",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Simple admission process and transparent fee structure",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "20,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Advanced Lab/Development Fee",
+              "amount": "4,500/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered to students based on B.Sc. Graduation marks.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "A 50% scholarship is given to students who clear the CPU PG Entrance Exam with top ranks.",
+            "To avail merit scholarship, student has to submit supporting documents in original."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "M.Sc. serves as a gateway to high-end R&D. The program equips students with the advanced theoretical and experimental knowledge required to clear CSIR-NET/JRF and pursue a Ph.D.",
+              "icon": "TrendingUp",
+              "title": "Academic & Research Excellence"
+            },
+            {
+              "desc": "The deep analytical and data skills gained in an M.Sc. are highly valuable for senior roles in pharma, chemical industries, data science, and environmental consulting.",
+              "icon": "Briefcase",
+              "title": "Elite Industry Opportunities"
+            },
+            {
+              "desc": "M.Sc. programs emphasize independent lab research. Students are guided to execute experiments, write, and publish research papers in peer-reviewed scientific journals.",
+              "icon": "Target",
+              "title": "Original Lab Research"
+            },
+            {
+              "desc": "Dive deep into specific niches like Quantum Mechanics, Synthetic Organic Chemistry, or Advanced Bioinformatics, setting you apart as a subject matter expert.",
+              "icon": "Brain",
+              "title": "Expert Specialization"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Master's degree in Science",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Dedicated mentoring sessions for CSIR-NET/JRF and GATE examinations are integrated seamlessly into the curriculum.",
+              "icon": "BookOpen",
+              "title": "CSIR-NET/GATE Mentoring"
+            },
+            {
+              "num": "07",
+              "desc": "Students are required to conduct independent laboratory research, write a master's thesis, and defend it before a panel of scientists.",
+              "icon": "FileText",
+              "title": "Thesis Defense & Viva"
+            },
+            {
+              "num": "08",
+              "desc": "Access to the Central Instrumentation Facility equipped with high-end tools for chemical, physical, and biological analyses.",
+              "icon": "Microscope",
+              "title": "Advanced Instrumentation"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload B.Sc. graduation marksheets and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the academic form online with your chosen M.Sc. specialization.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review and submit your application for the PG entrance screening.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the M.Sc. programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have completed their B.Sc. in a relevant discipline from a recognized university with a minimum of 50% marks.",
+              "q": "What is the eligibility criteria for M.Sc. admission?"
+            },
+            {
+              "a": "M.Sc. is a 2-year (4 semester) postgraduate programme.",
+              "q": "What is the duration of the M.Sc. programme?"
+            },
+            {
+              "a": "We currently offer M.Sc. in Physics, Chemistry, Mathematics, Zoology, Botany, and Environmental Science.",
+              "q": "What subjects can I specialize in?"
+            },
+            {
+              "a": "Yes, a final semester research dissertation (based on laboratory or computational research) is a mandatory requirement to complete the M.Sc. degree.",
+              "q": "Is a research dissertation or lab project compulsory?"
+            },
+            {
+              "a": "Our curriculum is heavily aligned with the CSIR-NET and GATE syllabi, and we provide special guidance sessions to help students clear these exams for academic and PSU careers.",
+              "q": "Does this course help in preparing for CSIR-NET or GATE?"
+            },
+            {
+              "a": "Yes, completing an M.Sc. with good grades and clearing CSIR-NET/JRF makes you eligible to apply directly for our Ph.D. scientific research programs.",
+              "q": "Can I pursue a Ph.D. immediately after completing this M.Sc.?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the M.Sc. programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "CSIR-NET/GATE Preparation",
+              "Advanced Research Seminars",
+              "Guest Lectures by Scientists",
+              "Thesis & Dissertation Focus",
+              "Placement in R&D and Pharma"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Central Instrumentation Facility",
+              "High-Performance Computing Lab",
+              "Advanced Chemistry/Physics Labs",
+              "Botanical & Zoological Labs"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Faculty Patents & Publications",
+              "Student Dissertations",
+              "Academic Science Conferences",
+              "Important Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "2-Year Scientific Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from science graduate to elite researcher.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Advanced Theory & Core Labs",
+              "contentTitle": "Mastering the Frameworks & Techniques",
+              "contentDesc": "The first year is dedicated to understanding high-level scientific theories, advanced mathematical modeling, and sophisticated laboratory techniques.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Advanced Lab Protocols",
+                "Computational Analysis",
+                "Research Methodology"
+              ],
+              "aiTools": [
+                {
+                  "name": "MATLAB / Python",
+                  "desc": "Scientific Computing",
+                  "icon": "Calculator",
+                  "color": "#4285F4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Advanced Theory",
+                  "desc": "Core scientific principles",
+                  "icon": "🧠"
+                },
+                {
+                  "title": "Methodology",
+                  "desc": "How to conduct valid research",
+                  "icon": "🔍"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Advanced Lab Expts",
+                  "desc": "Replicating benchmark scientific studies",
+                  "companies": "Internal Eval",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Advanced Theoretical Science",
+                "Research Methodology & Stats",
+                "Core Laboratory Practice"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Specialization & Thesis",
+              "contentTitle": "Independent Scientific Research",
+              "contentDesc": "The second year focuses on your chosen electives and culminates in the execution, writing, and defense of your Master's Research Thesis.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Independent Experimentation",
+                "Scientific Paper Writing",
+                "Thesis Defense"
+              ],
+              "aiTools": [
+                 {
+                  "name": "Origin / GraphPad",
+                  "desc": "Data Visualization",
+                  "icon": "BarChart",
+                  "color": "#0b1bf4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Specialization",
+                  "desc": "Deep dive into niche topics",
+                  "icon": "🎯"
+                },
+                {
+                  "title": "Dissertation",
+                  "desc": "Original scientific contribution",
+                  "icon": "🎓"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Master's Thesis",
+                  "desc": "Original experimental or computational research",
+                  "companies": "Final Defense",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Specialization Electives",
+                "Master's Dissertation (Lab Work)",
+                "Seminar & Viva-Voce"
+              ]
+            }
+          ]
+        }
       }
+     
     },
     "placements": {
       "title": {

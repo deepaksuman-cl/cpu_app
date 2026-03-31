@@ -71,14 +71,21 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
             <div className="flex-1 px-8 py-8 overflow-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {currentLevel.courses?.map((course, ci) => {
-                  // 🔴 YAHAN MAGIC HAI: Ab URL theek banega
-                  const courseUrl = `/schools/${schoolSlug}/${course.slug}`;
+                  const isExternal = course.redirectUrl?.startsWith('http');
+                  const courseUrl = course.redirectUrl ? 
+                    (isExternal ? course.redirectUrl : (course.redirectUrl.startsWith('/') ? course.redirectUrl : `/${course.redirectUrl}`)) 
+                    : `/schools/${schoolSlug}/${course.slug}`;
 
                   return (
-                    <div key={ci} className="p-4 rounded-2xl bg-[#00588b]/4 border border-[#00588b]/10">
-                      <Link href={courseUrl} className="flex items-center gap-0.5 group no-underline">
-                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b]" />
-                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b] -ml-2" />
+                    <div key={ci} className="p-4 rounded-2xl bg-[#00588b]/4 border border-[#00588b]/10 group hover:border-[#00588b]/30 transition-colors">
+                      <Link 
+                        href={courseUrl} 
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
+                        className="flex items-center gap-0.5 no-underline"
+                      >
+                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b] transition-transform group-hover:translate-x-1" />
+                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b] -ml-2 transition-transform group-hover:translate-x-1" />
                         <span className="ml-1 font-semibold text-sm text-[#0a1628] group-hover:text-[#00588b] transition-colors">
                           {course.name}
                         </span>

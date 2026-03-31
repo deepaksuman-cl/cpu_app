@@ -563,10 +563,11 @@ export default function SchoolBuilderForm({ initialData = null }) {
                       <NestedListEditor 
                         label={`Courses in ${level.label || 'this level'}`}
                         items={level.courses}
-                        newItemTemplate={{ name: '', slug: '', description: '', specializations: [] }}
+                        newItemTemplate={{ name: '', slug: '', redirectUrl: '', description: '', specializations: [] }}
                         fields={[
                           {key: 'name', label: 'Course Name'}, 
                           {key: 'slug', label: 'Course Slug'}, 
+                          {key: 'redirectUrl', label: 'Custom Redirect URL (Optional)'}, 
                           {key: 'description', label: 'Short Description'},
                         ]}
                         onUpdate={cItems => {
