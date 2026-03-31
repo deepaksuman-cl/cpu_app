@@ -590,7 +590,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                         fields={[
                           {key: 'name', label: 'Course Name'}, 
                           {key: 'slug', label: 'Course Slug'}, 
-                          {key: 'redirectUrl', label: 'Custom Redirect URL (Optional)'}, 
+                          {key: 'redirectUrl', label: 'Redirect URL (e.g. /phd or http://...)'}, 
                           {key: 'description', label: 'Short Description'},
                         ]}
                         onUpdate={cItems => {

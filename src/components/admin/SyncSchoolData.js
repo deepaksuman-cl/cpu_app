@@ -6,7 +6,9 @@ const SyncSchoolData = () => {
   const schoolOptions = [
     { label: "Arts & Humanities", value: "arts-and-humanities" },
     { label: "Basic & Applied Science", value: "basic-applied-science" },
-    { label: "Computer Applications", value: "computer-applications-technology" }
+    { label: "Computer Applications", value: "computer-applications-technology" },
+    { label: 'Commerce & Management (commerce-and-management.json)', value: 'commerce-and-management' }
+    
     // Naya school add karna ho toh bas yahan add kar dena!
   ];
 

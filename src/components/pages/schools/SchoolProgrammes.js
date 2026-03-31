@@ -75,9 +75,12 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
             <div className="flex-1 px-8 py-8 overflow-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {currentLevel.courses?.map((course, ci) => {
-                  const isExternal = course.redirectUrl?.startsWith('http');
-                  const courseUrl = course.redirectUrl ? 
-                    (isExternal ? course.redirectUrl : (course.redirectUrl.startsWith('/') ? course.redirectUrl : `/${course.redirectUrl}`)) 
+                  // Determine the correct URL for the course
+                  const hasRedirect = course.redirectUrl && course.redirectUrl.trim() !== "";
+                  const isExternal = hasRedirect && course.redirectUrl.startsWith("http");
+                  
+                  const courseUrl = hasRedirect
+                    ? (isExternal ? course.redirectUrl : (course.redirectUrl.startsWith("/") ? course.redirectUrl : `/${course.redirectUrl}`))
                     : `/schools/${schoolSlug}/${course.slug}`;
 
                   return (
