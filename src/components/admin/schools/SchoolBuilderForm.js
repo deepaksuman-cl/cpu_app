@@ -1,12 +1,12 @@
 'use client';
-import Modal from '@/components/admin/ui/Modal';
 import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
-import { useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import { Pencil, Save, CheckCircle2, AlertCircle, Plus, Trash2, ChevronDown, ChevronUp, Image as ImageIcon, Settings } from 'lucide-react';
+import Modal from '@/components/admin/ui/Modal';
 import { createSchool, updateSchool } from '@/lib/actions/schoolActions';
+import { AlertCircle, CheckCircle2, Image as ImageIcon, Pencil, Plus, Save, Settings, Trash2, Layers, Box } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 // --- Shared Internal Components ---
 
@@ -598,23 +598,31 @@ export default function SchoolBuilderForm({ initialData = null }) {
                         }}
                       />
                       {/* Specializations Editor */}
-                      <div className="mt-5 pt-4 border-t border-[var(--border-light)]">
-                        <p className="text-[10px] font-black uppercase text-[var(--text-muted)] mb-3 tracking-widest">Course Specializations (Comma Separated)</p>
-                        <div className="space-y-3">
+                      <div className="mt-6 pt-5 border-t border-[var(--border-default)]">
+                        <p className="text-[11px] font-black uppercase text-[var(--text-primary)] mb-4 tracking-widest flex items-center gap-2">
+                          <Layers size={14} className="text-[var(--color-primary)]" />
+                          Course Specializations & Standalone Slugs
+                        </p>
+                        <div className="space-y-4">
                           {level.courses.map((c, ci) => (
-                            <div key={ci} className="bg-[var(--bg-muted)] p-3 border border-[var(--border-light)] rounded-none">
-                              <label className="text-[10px] block mb-1.5 font-bold uppercase text-[var(--text-primary)]">{c.name}</label>
-                              <input 
-                                type="text" 
-                                placeholder="Core, AI & ML, Data Science..."
-                                value={c.specializations?.map(s => s.name).join(', ') || ''} 
-                                onChange={e => {
-                                  const specs = e.target.value.split(',').map(s => ({ name: s.trim() })).filter(s => s.name);
+                            <div key={ci} className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none shadow-sm selection-none">
+                              <div className="flex items-center gap-2 mb-3 pb-2 border-b border-[var(--border-light)]">
+                                <Box size={14} className="text-[var(--text-muted)]" />
+                                <label className="text-[11px] font-black uppercase text-[var(--text-primary)]">{c.name}</label>
+                              </div>
+                              <NestedListEditor 
+                                label=""
+                                items={c.specializations || []}
+                                newItemTemplate={{ name: '', slug: '' }}
+                                fields={[
+                                  {key: 'name', label: 'Spec Name (e.g. AI & ML)'}, 
+                                  {key: 'slug', label: 'Standalone Slug (e.g. bca-ai-ml)'}, 
+                                ]}
+                                onUpdate={specs => {
                                   const nl = [...formData.programmes.levels];
                                   nl[lIdx].courses[ci].specializations = specs;
                                   updateSection('programmes', {...formData.programmes, levels: nl});
                                 }}
-                                className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] rounded-none"
                               />
                             </div>
                           ))}

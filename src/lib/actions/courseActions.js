@@ -1,20 +1,22 @@
 'use server';
 
-import Course from '@/models/Course';
-import School from '@/models/School';
 import { connectToDatabase } from '@/lib/db';
-import { Testimonial, FAQ } from '@/models/index';
+import Course from '@/models/Course';
+import { FAQ, Testimonial } from '@/models/index';
+import School from '@/models/School';
 import { revalidatePath } from 'next/cache';
 import { cache } from 'react';
-import fs from 'fs';
-import path from 'path';
 
 
 
 export async function getCourses(schoolId = null) {
   try {
+    console.log('[getCourses] Connecting to database...');
     await connectToDatabase();
+    
     const where = schoolId ? { schoolId } : {};
+    console.log(`[getCourses] Fetching courses with where: ${JSON.stringify(where)}`);
+    
     const courses = await Course.findAll({
       where,
       include: [{
@@ -25,10 +27,28 @@ export async function getCourses(schoolId = null) {
       order: [['createdAt', 'DESC']]
     });
     
-    const plainCourses = courses.map(c => c.get({ plain: true }));
+    console.log(`[getCourses] Successfully fetched ${courses?.length || 0} courses.`);
+    
+    // Defensive mapping to plain objects to avoid serialization issues
+    const plainCourses = courses.map(c => {
+      try {
+        return c.get({ plain: true });
+      } catch (mapError) {
+        console.error(`[getCourses] Error mapping course ID ${c.id}:`, mapError);
+        // Fallback: minimal data if full mapping fails due to JSON/Charset issues
+        return { 
+          id: c.id, 
+          name: c.name || 'Unknown Course', 
+          slug: c.slug || 'unknown',
+          school: c.school ? { name: c.school.name, slug: c.school.slug } : null
+        };
+      }
+    });
+
     return { success: true, data: plainCourses, error: null };
   } catch (error) {
-    return { success: false, data: null, error: error.message };
+    console.error('[getCourses] Critical error:', error);
+    return { success: false, data: null, error: error.message || 'Unknown Server Error' };
   }
 }
 

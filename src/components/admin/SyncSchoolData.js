@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const SyncSchoolData = () => {
   // Yahan tum apne saare school slugs ki list add kar sakte ho
@@ -7,7 +7,8 @@ const SyncSchoolData = () => {
     { label: "Arts & Humanities", value: "arts-and-humanities" },
     { label: "Basic & Applied Science", value: "basic-applied-science" },
     { label: "Computer Applications", value: "computer-applications-technology" },
-    { label: 'Commerce & Management (commerce-and-management.json)', value: 'commerce-and-management' }
+    { label: 'Commerce & Management (commerce-and-management.json)', value: 'commerce-and-management' },
+    { label: 'Health Sciences (health-sciences.json)', value: 'health-sciences' }
     
     // Naya school add karna ho toh bas yahan add kar dena!
   ];
