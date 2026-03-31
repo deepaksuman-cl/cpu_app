@@ -1,7 +1,13 @@
 "use client";
 import React from "react";
-import * as LucideIcons from "lucide-react";
+import * as Icons from "lucide-react";
 import StructuredTitle from "@/components/common/StructuredTitle";
+
+// Safer icon component that handles dynamic names without crashing SSR
+const DynamicIcon = ({ name, className }) => {
+  const IconComponent = Icons[name] || Icons.Award;
+  return <IconComponent className={className} />;
+};
 
 export default function SchoolResearch({ data }) {
   if (!data) return null;
@@ -20,26 +26,27 @@ export default function SchoolResearch({ data }) {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
-          {gallery?.map((src, i) => (
-            <div key={i} className="rounded-2xl overflow-hidden transition-transform hover:-translate-y-1 border-2 border-white/10 aspect-[16/10]">
-              <img src={src} alt="Research" className="w-full h-full object-cover" />
-            </div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats?.map((r, i) => {
-            const Icon = LucideIcons[r.icon] || LucideIcons.Award;
+          {gallery?.map((item, i) => {
+            const src = typeof item === 'string' ? item : item.link;
+            if (!src) return null;
             return (
-              <div key={i} className="rounded-2xl p-8 text-center transition-transform hover:-translate-y-1 bg-white/7 border border-white/12">
-                <div className="w-14 h-14 rounded-xl mx-auto mb-5 flex items-center justify-center bg-[#ffb900]/18">
-                  <Icon className="w-7 h-7 text-[#ffb900]" />
-                </div>
-                <div className="font-black text-white text-[2.4rem] leading-none" style={{ fontFamily: "Georgia,serif" }}>{r.value}</div>
-                <div className="text-sm mt-2 text-blue-200">{r.label}</div>
+              <div key={i} className="rounded-2xl overflow-hidden transition-transform hover:-translate-y-1 border-2 border-white/10 aspect-[16/10]">
+                <img src={src} alt="Research" className="w-full h-full object-cover" />
               </div>
             );
           })}
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats?.map((r, i) => (
+            <div key={i} className="rounded-2xl p-8 text-center transition-transform hover:-translate-y-1 bg-white/7 border border-white/12">
+              <div className="w-14 h-14 rounded-xl mx-auto mb-5 flex items-center justify-center bg-[#ffb900]/18">
+                <DynamicIcon name={r.icon} className="w-7 h-7 text-[#ffb900]" />
+              </div>
+              <div className="font-black text-white text-[2.4rem] leading-none" style={{ fontFamily: "Georgia,serif" }}>{r.value}</div>
+              <div className="text-sm mt-2 text-blue-200">{r.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

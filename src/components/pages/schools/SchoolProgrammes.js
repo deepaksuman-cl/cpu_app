@@ -1,9 +1,14 @@
-// File: src/components/pages/schools/SchoolProgrammes.js
 "use client";
 import React, { useState } from "react";
-import * as LucideIcons from "lucide-react";
+import * as Icons from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+
+// Safer icon component for dynamic names
+const DynamicIcon = ({ name, className, fallback = Icons.GraduationCap }) => {
+  const IconComponent = Icons[name] || fallback;
+  return <IconComponent className={className} />;
+};
 import StructuredTitle from "@/components/common/StructuredTitle";
 import RichTextRenderer from "@/components/common/RichTextRenderer";
 
@@ -45,7 +50,6 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
                 <p className="text-xs font-bold tracking-widest uppercase text-slate-400">Select Level</p>
               </div>
               {data.levels.map((level, i) => {
-                const Icon = LucideIcons[level.icon] || LucideIcons.GraduationCap;
                 const active = activeTab === i;
                 return (
                   <button
@@ -56,7 +60,7 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
                     }`}
                   >
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${active ? "bg-[#00588b]/10" : "bg-[#00588b]/4"}`}>
-                      <Icon className={`w-5 h-5 ${active ? "text-[#00588b]" : "text-slate-400"}`} />
+                      <DynamicIcon name={level.icon} className={`w-5 h-5 ${active ? "text-[#00588b]" : "text-slate-400"}`} />
                     </div>
                     <span className={`text-sm font-semibold leading-snug ${active ? "text-[#00588b]" : ""}`}>
                       {level.label}
@@ -71,14 +75,21 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
             <div className="flex-1 px-8 py-8 overflow-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {currentLevel.courses?.map((course, ci) => {
-                  // 🔴 YAHAN MAGIC HAI: Ab URL theek banega
-                  const courseUrl = `/schools/${schoolSlug}/${course.slug}`;
+                  const isExternal = course.redirectUrl?.startsWith('http');
+                  const courseUrl = course.redirectUrl ? 
+                    (isExternal ? course.redirectUrl : (course.redirectUrl.startsWith('/') ? course.redirectUrl : `/${course.redirectUrl}`)) 
+                    : `/schools/${schoolSlug}/${course.slug}`;
 
                   return (
-                    <div key={ci} className="p-4 rounded-2xl bg-[#00588b]/4 border border-[#00588b]/10">
-                      <Link href={courseUrl} className="flex items-center gap-0.5 group no-underline">
-                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b]" />
-                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b] -ml-2" />
+                    <div key={ci} className="p-4 rounded-2xl bg-[#00588b]/4 border border-[#00588b]/10 group hover:border-[#00588b]/30 transition-colors">
+                      <Link 
+                        href={courseUrl} 
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
+                        className="flex items-center gap-0.5 no-underline"
+                      >
+                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b] transition-transform group-hover:translate-x-1" />
+                        <ChevronRight className="w-3.5 h-3.5 text-[#00588b] -ml-2 transition-transform group-hover:translate-x-1" />
                         <span className="ml-1 font-semibold text-sm text-[#0a1628] group-hover:text-[#00588b] transition-colors">
                           {course.name}
                         </span>
@@ -86,7 +97,7 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
 
                       {course.duration && (
                         <div className="mt-1 flex items-center gap-1.5 px-1.5 py-0.5 bg-slate-100 rounded text-[10px] font-bold text-slate-500 w-fit">
-                          <LucideIcons.Clock className="w-3 h-3" />
+                          <DynamicIcon name="Clock" className="w-3 h-3" fallback={Icons.Clock} />
                           {course.duration}
                         </div>
                       )}

@@ -34,17 +34,24 @@ export default function SchoolCommunity({ data }) {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            {gallery?.map((img, i) => (
-              <div key={i} className="relative group rounded-2xl overflow-hidden cursor-pointer border border-slate-200 aspect-[4/3]" onClick={() => setLightboxIdx(i)}>
-                <img src={img.src} alt={img.caption} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 flex items-center justify-center bg-[#00588b]/55 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ZoomIn size={32} className="text-white" />
+            {gallery?.map((item, i) => {
+              const src = typeof item === 'string' ? item : item.src;
+              const caption = typeof item === 'string' ? '' : item.caption;
+              if (!src) return null;
+              return (
+                <div key={i} className="relative group rounded-2xl overflow-hidden cursor-pointer border border-slate-200 aspect-[4/3]" onClick={() => setLightboxIdx(i)}>
+                  <img src={src} alt={caption} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-[#00588b]/55 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ZoomIn size={32} className="text-white" />
+                  </div>
+                  {caption && (
+                    <div className="absolute bottom-0 left-0 right-0 px-3 py-2 text-xs font-semibold text-white bg-gradient-to-t from-black/60 to-transparent">
+                      {caption}
+                    </div>
+                  )}
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 px-3 py-2 text-xs font-semibold text-white bg-gradient-to-t from-black/60 to-transparent">
-                  {img.caption}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
@@ -52,7 +59,7 @@ export default function SchoolCommunity({ data }) {
       {lightboxIdx !== null && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4" onClick={() => setLightboxIdx(null)}>
           <button className="absolute top-8 right-8 text-white p-2" onClick={() => setLightboxIdx(null)}><X size={32} /></button>
-          <img src={gallery[lightboxIdx].src} className="max-w-full max-h-[80vh] rounded-xl" />
+          <img src={typeof gallery[lightboxIdx] === 'string' ? gallery[lightboxIdx] : gallery[lightboxIdx].src} className="max-w-full max-h-[80vh] rounded-xl" />
         </div>
       )}
     </section>

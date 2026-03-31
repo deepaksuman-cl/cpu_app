@@ -42,6 +42,19 @@ export async function uploadLocalMedia(formData) {
 
       const buffer = Buffer.from(await file.arrayBuffer());
       const originalName = file.name || 'unnamed-file';
+      const fileSize = file.size || 0;
+
+      // Duplicate Check: Same name and same byte size
+      const existingMedia = await Media.findOne({
+        where: {
+          originalName: originalName,
+          size: fileSize
+        }
+      });
+
+      if (existingMedia) {
+        throw new Error(`File '${originalName}' already exists in library!`);
+      }
 
       // 🛡️ Bulletproof: Sanitize filename (spaces to hyphens, remove special chars) & ensure uniqueness
       const sanitizedName = originalName.replace(/[^a-zA-Z0-9.-]/g, '-').replace(/-+/g, '-');
@@ -58,7 +71,7 @@ export async function uploadLocalMedia(formData) {
         url: `/api/media/media/${fileName}`,
         isExternal: false,
         mimeType: file.type || 'application/octet-stream',
-        size: file.size || 0,
+        size: fileSize,
       });
       processedMedia.push(media);
     }

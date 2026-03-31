@@ -19,17 +19,22 @@ export default function SchoolInfrastructure({ data }) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {list.map((item, i) => (
-            <div key={i} className="group rounded-2xl overflow-hidden bg-white transition-transform hover:-translate-y-1.5 border border-slate-200 shadow-[0_4px_16px_rgba(0,88,139,0.07)]">
-              <div className="overflow-hidden aspect-[16/9]">
-                <img src={item.image || item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          {list.map((item, i) => {
+            const src = typeof item === 'string' ? item : (item.image || item.img);
+            const title = typeof item === 'string' ? 'Infrastructure' : item.title;
+            const desc = typeof item === 'string' ? '' : item.desc;
+            return (
+              <div key={i} className="group rounded-2xl overflow-hidden bg-white transition-transform hover:-translate-y-1.5 border border-slate-200 shadow-[0_4px_16px_rgba(0,88,139,0.07)]">
+                <div className="overflow-hidden aspect-[16/9]">
+                  <img src={src} alt={title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                </div>
+                <div className="p-5">
+                  <h4 className="font-bold text-sm mb-1.5 text-[#0a1628]">{title}</h4>
+                  <p className="text-xs leading-relaxed text-slate-500">{desc}</p>
+                </div>
               </div>
-              <div className="p-5">
-                <h4 className="font-bold text-sm mb-1.5 text-[#0a1628]">{item.title}</h4>
-                <p className="text-xs leading-relaxed text-slate-500">{item.desc}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

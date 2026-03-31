@@ -1,0 +1,2340 @@
+{
+  "basic-applied-science": {
+    "slug": "basic-applied-science",
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "link": "/"
+      },
+      {
+        "label": "Schools & Departments",
+        "link": "/schools"
+      },
+      {
+        "label": "School of Basic & Applied Sciences",
+        "link": "/schools/basic-applied-science"
+      }
+    ],
+    "hero": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "badge": "Center of Scientific Excellence & Innovation",
+      "title": {
+        "main": "School of Basic & Applied Sciences",
+        "highlight": "Basic",
+        "skyHighlight": "& Applied Sciences"
+      },
+      "description": "Empowering the next generation of scientists, researchers, and innovators through world-class laboratories, research-driven academics, and hands-on scientific training.",
+      "cta": [
+        {
+          "label": "Apply Now",
+          "link": "#",
+          "primary": true
+        },
+        {
+          "label": "Explore Programs",
+          "link": "#programs",
+          "primary": false
+        }
+      ]
+    },
+    "stats": [
+      {
+        "value": "18L",
+        "label": "Highest Package",
+        "icon": "TrendingUp"
+      },
+      {
+        "value": "300+",
+        "label": "Research Papers",
+        "icon": "BookOpen"
+      },
+      {
+        "value": "10+",
+        "label": "Advanced Labs",
+        "icon": "FlaskConical"
+      }
+    ],
+    "about": {
+      "vision": {
+        "title": "Vision",
+        "label": "Our Purpose",
+        "icon": "Target",
+        "text": "To emerge as a premier center of scientific learning and research, fostering a culture of innovation that addresses global challenges through fundamental and applied sciences.",
+        "highlights": [
+          {
+            "value": "1200+",
+            "label": "Science Scholars"
+          },
+          {
+            "value": "92%",
+            "label": "Placement & Higher Ed"
+          },
+          {
+            "value": "25+",
+            "label": "Patents Filed"
+          }
+        ]
+      },
+      "mission": {
+        "title": "Mission",
+        "label": "Our Goal",
+        "icon": "Lightbulb",
+        "points": [
+          "Deliver rigorous, concept-driven academic programs in core scientific disciplines.",
+          "Promote interdisciplinary research that connects basic sciences with real-world industry applications.",
+          "Equip students with cutting-edge analytical, mathematical, and laboratory skills.",
+          "Collaborate with leading scientific organizations and biotech industries to ensure career readiness."
+        ]
+      }
+    },
+    "programmes": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "title": {
+        "main": "Our Programmes",
+        "highlight": "Programmes"
+      },
+      "subtitle": "Academic Offerings",
+      "description": "Explore our specialized undergraduate, postgraduate, and doctoral programs in Mathematics, Physics, Chemistry, Biology, and Biotechnology.",
+      "levels": [
+        {
+          "label": "After 12th Pass/ \"A\" Level / Equivalent",
+          "icon": "GraduationCap",
+          "courses": [
+            {
+              "name": "Bachelor of Science (B.Sc.)",
+              "slug": "bsc",
+              "specializations": [
+                {
+                  "name": "Maths",
+                  "slug": "maths"
+                },
+                {
+                  "name": "Biology",
+                  "slug": "biology"
+                }
+              ]
+            },
+            {
+              "name": "B.Sc. Bio Technology",
+              "slug": "bsc-biotech",
+              "specializations": []
+            }
+          ]
+        },
+        {
+          "label": "After Graduation / Equivalent",
+          "icon": "BookOpen",
+          "courses": [
+            {
+              "name": "Master of Science (M.Sc.)",
+              "slug": "msc",
+              "specializations": [
+                {
+                  "name": "Botany",
+                  "slug": "botany"
+                },
+                {
+                  "name": "Chemistry",
+                  "slug": "chemistry"
+                },
+                {
+                  "name": "Mathematics",
+                  "slug": "mathematics"
+                },
+                {
+                  "name": "Physics",
+                  "slug": "physics"
+                },
+                {
+                  "name": "Zoology",
+                  "slug": "zoology"
+                },
+                {
+                  "name": "Environment Science",
+                  "slug": "environment-science"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "After Post Graduation / Equivalent",
+          "icon": "Microscope",
+          "courses": [
+            {
+              "name": "Ph.D. (All Subjects)",
+              "slug": "research-phd",
+              "description": "Research-focused doctoral programme"
+            }
+          ]
+        }
+      ]
+    },
+    "courseDetails": {
+      "bsc": {
+        "title": "Bachelor of Science (B.Sc.)",
+        "duration": "3 Years",
+        "eligibility": "10+2 (Science) with minimum 50% marks from a recognized board",
+        "description": "The B.Sc. program builds a robust foundation in core sciences (Mathematics and Biology), preparing students for careers in research, healthcare, ed-tech, and analytics.",
+        "metaTitle": "Bachelor of Science (B.Sc.) | Basic & Applied Sciences | CPU",
+        "metaDescription": "Pursue a 3-year B.Sc. degree at Career Point University. Specialize in Maths or Biology with intensive laboratory training and industry-aligned curriculum.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "3-Year Undergraduate Science Programme",
+          "title": {
+            "main": "Bachelor of Science",
+            "line1": "Bachelor of",
+            "line2": "Science",
+            "line3": "(B.Sc.)",
+            "highlight": "Science",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "10L+"
+            },
+            {
+              "label": "Lab Hours/Sem",
+              "value": "150+"
+            }
+          ],
+          "description": "Master the fundamentals of nature, matter, and mathematics. Gain hands-on laboratory experience and prepare for a high-impact scientific career."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Placements So Far",
+              "value": "2000+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Highest Package",
+              "value": "10 L"
+            },
+            {
+              "icon": "Award",
+              "label": "Research Grants",
+              "value": "15+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Student Papers",
+              "value": "120+"
+            },
+            {
+              "icon": "Globe",
+              "label": "Global Internships",
+              "value": "40+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni Scientists",
+              "value": "500+"
+            }
+          ],
+          "heading": "Department's Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 6,000+ Science Innovators"
+        },
+        "overview": {
+          "tags": [
+            "3 Years Duration",
+            "6 Semesters",
+            "Lab-Intensive",
+            "Research Focused"
+          ],
+          "subtitle": "What is the B.Sc. Programme?",
+          "gridCards": [
+            {
+              "sub": "Quantum & Mechanics",
+              "icon": "Activity",
+              "label": "Physics"
+            },
+            {
+              "sub": "Organic & Inorganic",
+              "icon": "FlaskConical",
+              "label": "Chemistry"
+            },
+            {
+              "sub": "Calculus & Algebra",
+              "icon": "Calculator",
+              "label": "Mathematics"
+            },
+            {
+              "sub": "Genetics & Ecology",
+              "icon": "Leaf",
+              "label": "Life Sciences"
+            }
+          ],
+          "paragraphs": [
+            "The B.Sc. programme at Career Point University provides a comprehensive education in basic sciences, combining rigorous classroom theory with extensive laboratory practice.",
+            "Students develop strong analytical, mathematical, and problem-solving skills, making them highly sought after by R&D sectors, pharmaceuticals, ed-tech, and government scientific agencies."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "A B.Sc. degree opens doors to diverse and lucrative career paths. Graduates can pursue roles as lab technicians, research assistants, quality control analysts, data analysts, and environmental consultants. Furthermore, it serves as the essential stepping stone for higher education (M.Sc., Ph.D.) and forms a strong base for competitive exams in government scientific sectors like DRDO, ISRO, and forensic laboratories.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in the world of science",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A scientifically structured curriculum for innovators",
+          "introNote": "The B.Sc. curriculum is designed to impart foundational theoretical knowledge alongside advanced experimental and laboratory techniques.",
+          "outroNote": "Graduates are fully equipped to pursue Master's programs or enter the workforce as scientific analysts.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 60,
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Discipline Specific Core Courses (DSC)"
+            },
+            {
+              "credits": 24,
+              "category": "Skill Enhancement",
+              "shortName": "SE",
+              "description": "Laboratory & Practical Work"
+            },
+            {
+              "credits": 24,
+              "category": "Departmental Elective",
+              "shortName": "DE",
+              "description": "Discipline Specific Elective Courses (DSE)"
+            },
+            {
+              "credits": 6,
+              "category": "Project",
+              "shortName": "PR",
+              "description": "Final Year Minor Project"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The Bachelor of Science (B.Sc.) program offers a balanced mix of theoretical instruction and practical laboratory sessions. Students must choose their core combinations at the beginning of the program: either the Mathematics Group (PCM - Physics, Chemistry, Maths) or the Biology Group (CBZ - Chemistry, Botany, Zoology).",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Mechanics/Diversity of Microbes, Inorganic Chemistry I, Differential Calculus/Cell Biology, English Communication, Lab Practice I. Total Credits: 22"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Electricity & Magnetism/Plant Ecology, Organic Chemistry I, Integral Calculus/Genetics, Environmental Science, Lab Practice II. Total Credits: 22"
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Thermal Physics/Plant Anatomy, Physical Chemistry I, Real Analysis/Animal Physiology, Computer Applications in Science, Lab Practice III. Total Credits: 22"
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Optics/Plant Physiology, Organic Chemistry II, Algebra/Developmental Biology, Scientific Writing, Lab Practice IV. Total Credits: 22"
+            },
+            {
+              "id": "s5",
+              "title": "Semester-5",
+              "content": "Quantum Mechanics/Molecular Biology, Spectroscopy, Matrices/Immunology, Discipline Specific Elective I, Lab Practice V. Total Credits: 22"
+            },
+            {
+              "id": "s6",
+              "title": "Semester-6",
+              "content": "Solid State Physics/Biotechnology Basics, Biochemistry, Complex Analysis/Ecology, Minor Project / Dissertation, Lab Practice VI. Total Credits: 22"
+            },
+            {
+              "id": "de",
+              "title": "Departmental Elective",
+              "content": "Elective options include: Material Science, Analytical Chemistry, Linear Programming, Applied Zoology, and Bioinformatics."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Scientific Data Analysis (Python/R)",
+              "credits": 2
+            },
+            {
+              "name": "Laboratory Safety & Ethics",
+              "credits": 2
+            },
+            {
+              "name": "First Aid & Health Management",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Simple admission process and transparent fee structure",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "6,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "18,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,000/- per Semester"
+            },
+            {
+              "label": "Laboratory Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered to students based on 12th Board marks.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "A 50% scholarship is given to students clearing the University Science Test with distinction.",
+            "If a student fails to maintain the required CGPA, they may lose scholarship eligibility."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "Heavy emphasis on practical laboratory work ensures that you are comfortable with complex scientific instrumentation from day one.",
+              "icon": "FlaskConical",
+              "title": "Practical Focus & Labs"
+            },
+            {
+              "desc": "B.Sc. graduates have opportunities across pharmaceuticals, space research (ISRO), environmental agencies, ed-tech, and clinical research.",
+              "icon": "Briefcase",
+              "title": "Diverse Career Paths"
+            },
+            {
+              "desc": "Unlike traditional degrees, our students get to work on live scientific projects and have opportunities to publish papers at the undergraduate level.",
+              "icon": "Target",
+              "title": "Early Research Exposure"
+            },
+            {
+              "desc": "The curriculum builds a solid foundation in analytical thinking and mathematics, which is highly sought after in the emerging Data Science and Analytics sector.",
+              "icon": "Brain",
+              "title": "Analytical Skill Building"
+            },
+            {
+              "desc": "A B.Sc. degree is the perfect launching pad for higher studies like M.Sc., Ph.D., or professional courses in specialized fields like Bioinformatics.",
+              "icon": "TrendingUp",
+              "title": "Gateway to Higher Ed"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Science degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "State-of-the-art Central Instrumentation Facility equipped with HPLC, FTIR, and UV-Vis Spectrophotometers.",
+              "icon": "Microscope",
+              "title": "Advanced Labs"
+            },
+            {
+              "num": "07",
+              "desc": "Learn from former scientists and researchers who bring global industry and academic exposure to the classroom.",
+              "icon": "Users",
+              "title": "Expert Faculty"
+            },
+            {
+              "num": "08",
+              "desc": "The department regularly organizes National Science Day events, hackathons, and scientific model exhibitions.",
+              "icon": "Globe",
+              "title": "Science Forums & Fests"
+            },
+            {
+              "num": "09",
+              "desc": "Dedicated placement and internship support cell for science graduates aiming for R&D and corporate roles.",
+              "icon": "Building2",
+              "title": "Placement Assistance"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details and email address.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Confirm your identity, educational background (12th Science marksheets), and upload the documents.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select your preferred group (Maths/Bio).",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online via net banking, UPI, or card.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for processing and review.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the B.Sc. programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have passed 10+2 from a recognized board with a minimum of 50% marks in the Science stream (PCM or PCB).",
+              "q": "What is the eligibility criteria for B.Sc. admission?"
+            },
+            {
+              "a": "B.Sc. is a 3-year (6 semester) programme. The tuition fee is ₹18,000 per semester. Additional charges include a laboratory fee of ₹3,000 per semester.",
+              "q": "What is the duration and fee structure of the B.Sc. programme?"
+            },
+            {
+              "a": "Students must choose a core group in the first year: either the Mathematics group (Physics, Chemistry, Maths) or the Biology group (Chemistry, Botany, Zoology).",
+              "q": "Can I choose between Maths and Biology?"
+            },
+            {
+              "a": "Group changes are generally only permitted within the first month of the first semester, subject to seat availability and academic approval.",
+              "q": "Can I switch my specialization (e.g., from PCM to CBZ) later?"
+            },
+            {
+              "a": "B.Sc. graduates find roles in pharmaceutical companies, chemical industries, clinical labs, ed-tech platforms, and as data analysts. We provide active campus placement support.",
+              "q": "What kind of placements can I expect after completing B.Sc.?"
+            },
+            {
+              "a": "Yes. Merit-based scholarships of up to 100% on tuition fees are available for students scoring above 90% in their 12th board exams.",
+              "q": "Is there any scholarship available for B.Sc. students?"
+            },
+            {
+              "a": "Yes, our central instrumentation lab has advanced equipment like spectrophotometers, centrifuges, and microscopes which are accessible to undergraduate students during practicals.",
+              "q": "Are the laboratories equipped for advanced research?"
+            },
+            {
+              "a": "Yes, B.Sc. is the foundational degree for pursuing M.Sc. in specialized fields, MCA, MBA, or even B.Ed. for a career in teaching.",
+              "q": "Can I pursue higher studies after completing B.Sc.?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the B.Sc. programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "Expert Science Faculty",
+              "National Science Day Events",
+              "Modern Lab Facilities",
+              "Industry Collaborations",
+              "Student Research Projects",
+              "Placement Assistance"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Labs",
+            "icon": "FlaskConical",
+            "items": [
+              "Central Instrumentation Lab",
+              "Botanical & Zoological Garden",
+              "Advanced Physics Lab",
+              "Computational Math Lab"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Student Achievements",
+              "Research Papers",
+              "Latest Scientific Updates",
+              "Upcoming Activities",
+              "Important Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "3 Year Scientific Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from basic science foundation to applied research.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Core Foundations",
+              "contentTitle": "Mastering the Basics",
+              "contentDesc": "Focus on foundational scientific theories, basic mathematics, and strict laboratory safety protocols.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Basic Lab Skills",
+                "Mathematical Modeling",
+                "Data Recording"
+              ],
+              "aiTools": [
+                {
+                  "name": "WolframAlpha",
+                  "desc": "Math Computations",
+                  "icon": "Calculator",
+                  "color": "#ff7b00",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Mechanics",
+                  "desc": "Laws of motion",
+                  "icon": "⚙️"
+                },
+                {
+                  "title": "Inorganic Chem",
+                  "desc": "Periodic table trends",
+                  "icon": "🧪"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Basic Titration",
+                  "desc": "Chemical analysis",
+                  "companies": "Lab Basic",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Mechanics / Diversity of Microbes",
+                "Inorganic Chemistry",
+                "Calculus / Cell Biology",
+                "Lab Practice I"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Advanced Study",
+              "contentTitle": "Deep Dive & Experimentation",
+              "contentDesc": "Explore complex concepts like Quantum Physics, Organic Synthesis, and Genetics through advanced practicals.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Spectroscopy",
+                "Statistical Analysis",
+                "Microscopy"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Quantum Physics",
+                  "desc": "Wave functions",
+                  "icon": "⚛️"
+                },
+                {
+                  "title": "Organic Chem",
+                  "desc": "Reaction mechanisms",
+                  "icon": "🔬"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Circuit Design",
+                  "desc": "Electromagnetism applied",
+                  "companies": "Physics Lab",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Electricity & Magnetism / Genetics",
+                "Organic Chemistry",
+                "Real Analysis / Animal Physiology",
+                "Lab Practice III"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "YEAR 3",
+              "tabTitle": "Research",
+              "contentTitle": "Applied Science & Projects",
+              "contentDesc": "Final year dissertation, specialized electives, and hands-on work with advanced instrumentation.",
+              "badge": "YEAR-3",
+              "skills": [
+                "Research Writing",
+                "Advanced Instrumentation",
+                "Independent Study"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Solid State",
+                  "desc": "Crystal structures",
+                  "icon": "🧊"
+                },
+                {
+                  "title": "Biochemistry",
+                  "desc": "Metabolic pathways",
+                  "icon": "🧬"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Minor Project",
+                  "desc": "Independent scientific project",
+                  "companies": "Department",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Solid State Physics / Biotech",
+                "Biochemistry",
+                "Complex Analysis / Ecology",
+                "Minor Project"
+              ]
+            }
+          ]
+        }
+      },
+      "bsc-biotech": {
+        "title": "B.Sc. Bio Technology",
+        "duration": "3 Years",
+        "eligibility": "10+2 (Science/Biology) with minimum 50% marks from a recognized board",
+        "description": "An advanced undergraduate program bridging biology with technology to develop innovations in healthcare, agriculture, and environmental sustainability.",
+        "metaTitle": "B.Sc. Bio Technology | Basic & Applied Sciences | CPU",
+        "metaDescription": "Pursue a 3-year B.Sc. Bio Technology degree at Career Point University. Master genetics, molecular biology, and bioinformatics with intensive lab training.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "3-Year Specialized Science Programme",
+          "title": {
+            "main": "B.Sc. Bio Technology",
+            "line1": "B.Sc.",
+            "line2": "Bio",
+            "line3": "Technology",
+            "highlight": "Bio",
+            "skyHighlight": "Technology"
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "12L+"
+            },
+            {
+              "label": "Lab Hours/Sem",
+              "value": "180+"
+            }
+          ],
+          "description": "Unlock the power of cellular and biomolecular processes. Prepare for high-tech careers in pharmaceuticals, genetics, and cutting-edge R&D."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Placements So Far",
+              "value": "1200+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Highest Package",
+              "value": "12 L"
+            },
+            {
+              "icon": "Award",
+              "label": "Industry Tie-ups",
+              "value": "20+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Research Publications",
+              "value": "95+"
+            },
+            {
+              "icon": "Globe",
+              "label": "Global Fellowships",
+              "value": "25+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni Scientists",
+              "value": "300+"
+            }
+          ],
+          "heading": "Department's Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 3,000+ Biotech Innovators"
+        },
+        "overview": {
+          "tags": [
+            "3 Years Duration",
+            "6 Semesters",
+            "Industry Aligned",
+            "R&D Focused"
+          ],
+          "subtitle": "What is the B.Sc. Bio Technology Programme?",
+          "gridCards": [
+            {
+              "sub": "DNA & Gene Editing",
+              "icon": "Activity",
+              "label": "Genetics"
+            },
+            {
+              "sub": "Cellular Processes",
+              "icon": "FlaskConical",
+              "label": "Molecular Biology"
+            },
+            {
+              "sub": "Data & Biology",
+              "icon": "Network",
+              "label": "Bioinformatics"
+            },
+            {
+              "sub": "Industrial Applications",
+              "icon": "Leaf",
+              "label": "Bioprocess Engg."
+            }
+          ],
+          "paragraphs": [
+            "The B.Sc. Bio Technology program is a highly specialized course that explores the intersection of biology and modern technology. It focuses on harnessing cellular and biomolecular processes to develop technologies and products that help improve our lives and the health of our planet.",
+            "Students receive rigorous training in core subjects like Microbiology, Biochemistry, and Recombinant DNA Technology, backed by extensive hands-on laboratory sessions. This ensures they are fully prepared for the rapidly growing biotech and pharma industries."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "The scope of Biotechnology is vast and continuously expanding. Graduates are in high demand across pharmaceutical companies, clinical research organizations (CROs), agricultural biotech firms, and forensic science laboratories. Career roles include Research Associate, Quality Control Analyst, Bio-informatician, and Clinical Data Manager. Furthermore, this degree is the perfect stepping stone for advanced studies (M.Sc., Ph.D.) globally.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in modern life sciences",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "An advanced curriculum designed for biotech excellence",
+          "introNote": "The B.Sc. Bio Technology curriculum provides an in-depth understanding of biological sciences integrated with modern technological applications.",
+          "outroNote": "Graduates are fully equipped with the practical lab skills required for immediate placement in the R&D and pharma sectors.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 64,
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Core Biotech & Biological Sciences"
+            },
+            {
+              "credits": 28,
+              "category": "Skill Enhancement",
+              "shortName": "SE",
+              "description": "Intensive Laboratory Work"
+            },
+            {
+              "credits": 24,
+              "category": "Departmental Elective",
+              "shortName": "DE",
+              "description": "Specialized Biotech Electives"
+            },
+            {
+              "credits": 4,
+              "category": "Project",
+              "shortName": "PR",
+              "description": "Industrial Training / Project"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The B.Sc. Bio Technology program is deeply focused on life sciences and their technological applications. The curriculum progresses from basic biological and chemical principles in the first year to advanced molecular techniques, bioinformatics, and bioprocessing in the final year.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Cell Biology, General Microbiology, Basic Chemistry, Mathematics for Biologists, English Communication, Lab Practice I. Total Credits: 22"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Biochemistry & Metabolism, Genetics, Biostatistics, Environmental Science, Lab Practice II. Total Credits: 22"
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Molecular Biology, Plant Physiology, Immunology, Introduction to Computers, Lab Practice III. Total Credits: 22"
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Recombinant DNA Technology, Animal Physiology, Industrial Microbiology, Scientific Writing, Lab Practice IV. Total Credits: 22"
+            },
+            {
+              "id": "s5",
+              "title": "Semester-5",
+              "content": "Bioprocess Engineering, Bioinformatics, Environmental Biotechnology, Discipline Specific Elective I, Lab Practice V. Total Credits: 22"
+            },
+            {
+              "id": "s6",
+              "title": "Semester-6",
+              "content": "Genomics & Proteomics, Medical Biotechnology, Discipline Specific Elective II, Industrial Project / Dissertation. Total Credits: 22"
+            },
+            {
+              "id": "de",
+              "title": "Departmental Elective",
+              "content": "Elective options include: Food Biotechnology, Nanotechnology, Clinical Research & Trials, and Agricultural Biotechnology."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Bioinformatics Tools (BLAST, FASTA)",
+              "credits": 2
+            },
+            {
+              "name": "Intellectual Property Rights (IPR) in Biotech",
+              "credits": 2
+            },
+            {
+              "name": "Biosafety and Bioethics",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Simple admission process and transparent fee structure",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "6,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "22,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,000/- per Semester"
+            },
+            {
+              "label": "Biotech Lab Fee",
+              "amount": "5,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered to students based on 12th Board marks (PCB).",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "Special grants available for students pursuing innovative research projects.",
+            "If a student fails to maintain the required CGPA, they may lose scholarship eligibility."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "The program is heavily focused on hands-on training in molecular biology, microbiology, and genetic engineering labs.",
+              "icon": "FlaskConical",
+              "title": "Advanced Lab Training"
+            },
+            {
+              "desc": "Biotech is one of the fastest-growing sectors globally, offering roles in pharma, agriculture, and environmental management.",
+              "icon": "TrendingUp",
+              "title": "Booming Industry"
+            },
+            {
+              "desc": "Learn how to use software tools to understand biological data, bridging the gap between biology and computer science.",
+              "icon": "Network",
+              "title": "Bioinformatics Edge"
+            },
+            {
+              "desc": "Our tie-ups with leading research institutes provide excellent opportunities for high-quality industrial internships.",
+              "icon": "Briefcase",
+              "title": "Industry Internships"
+            },
+            {
+              "desc": "This degree serves as the perfect foundation for pursuing an M.Sc. or Ph.D. in specialized biotech fields.",
+              "icon": "Target",
+              "title": "Pathway to Research"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Bio Technology degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Access to specialized BSL-2 (Biosafety Level 2) laboratories equipped with PCR machines, spectrophotometers, and incubators.",
+              "icon": "Microscope",
+              "title": "BSL-2 Lab Facilities"
+            },
+            {
+              "num": "07",
+              "desc": "Learn directly from active researchers and industry experts working in the field of molecular biology and genetics.",
+              "icon": "Users",
+              "title": "Research-Active Faculty"
+            },
+            {
+              "num": "08",
+              "desc": "Strong emphasis on patent filing and intellectual property rights (IPR) to foster an entrepreneurial mindset.",
+              "icon": "Award",
+              "title": "Focus on Innovation & IPR"
+            },
+            {
+              "num": "09",
+              "desc": "Dedicated placement cell actively securing roles for our graduates in top pharmaceutical and life science companies.",
+              "icon": "Building2",
+              "title": "Pharma Placements"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload 12th standard marksheets (Biology mandatory) and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form with all required academic information.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for processing.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the Biotech programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have passed 10+2 from a recognized board with a minimum of 50% marks in the Science stream, with Biology as a mandatory subject.",
+              "q": "What is the eligibility criteria for B.Sc. Bio Technology?"
+            },
+            {
+              "a": "It is a 3-year (6 semester) programme. The tuition fee is ₹22,000 per semester, plus a specialized lab fee of ₹5,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "General B.Sc. covers pure sciences (Physics, Chemistry, general Bio), whereas B.Sc. Bio Technology is an applied science focusing on manipulating living organisms to create products (like vaccines, GM crops).",
+              "q": "How is B.Sc. Biotech different from a regular B.Sc. Biology?"
+            },
+            {
+              "a": "Our students are placed in top pharmaceutical companies, biotech firms, clinical research organizations, and food tech companies as Research Analysts, QC Executives, and Lab Technicians.",
+              "q": "What kind of placements can I expect?"
+            },
+            {
+              "a": "Yes. Merit-based scholarships of up to 100% on tuition fees are available for students scoring above 90% in their 12th board exams.",
+              "q": "Is there any scholarship available?"
+            },
+            {
+              "a": "Yes, an industrial project or internship in the final semester is a mandatory part of the curriculum to ensure students gain real-world industry experience.",
+              "q": "Is there an industrial training component?"
+            },
+            {
+              "a": "Yes, you will learn the basics of Bioinformatics, which involves using computer software and databases (like BLAST) to analyze biological data.",
+              "q": "Does the course include any computer science/IT subjects?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the B.Sc. Bio Tech programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "Industry-Aligned Curriculum",
+              "Expert Faculty",
+              "Biotech Society Memberships",
+              "Guest Lectures by Scientists",
+              "Pharma Placements",
+              "Industrial Lab Visits"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Labs",
+            "icon": "FlaskConical",
+            "items": [
+              "Recombinant DNA Lab",
+              "Microbiology Facility",
+              "Bioinformatics Computer Lab",
+              "Plant Tissue Culture Lab"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Student Research Papers",
+              "Lab Projects",
+              "Latest Biotech Updates",
+              "Upcoming Seminars",
+              "Important Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "3 Year Biotech Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from cell basics to advanced genetic engineering.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Cellular Foundations",
+              "contentTitle": "Mastering the Basics of Life",
+              "contentDesc": "Focus on the fundamental building blocks of biology, basic chemistry, and the microscopic world.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Microscopy",
+                "Basic Culturing",
+                "Biochemical Analysis"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Cell Biology",
+                  "desc": "Structure and function of cells",
+                  "icon": "🔬"
+                },
+                {
+                  "title": "Microbiology",
+                  "desc": "Study of microorganisms",
+                  "icon": "🦠"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Bacterial Culture",
+                  "desc": "Isolating and identifying microbes",
+                  "companies": "Lab Basic",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Cell Biology",
+                "General Microbiology",
+                "Biochemistry",
+                "Biostatistics"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Molecular Focus",
+              "contentTitle": "Genetics & Recombinant DNA",
+              "contentDesc": "Dive deep into the DNA level. Learn how to manipulate genes and understand the body's immune system.",
+              "badge": "YEAR-2",
+              "skills": [
+                "DNA Extraction",
+                "PCR Techniques",
+                "Immunological Assays"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "rDNA Tech",
+                  "desc": "Genetic engineering",
+                  "icon": "🧬"
+                },
+                {
+                  "title": "Immunology",
+                  "desc": "Defense mechanisms",
+                  "icon": "🛡️"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "DNA Sequencing Setup",
+                  "desc": "Preparing samples for analysis",
+                  "companies": "Genetics Lab",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Genetics",
+                "Molecular Biology",
+                "Immunology",
+                "Recombinant DNA Technology"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "YEAR 3",
+              "tabTitle": "Applied Biotech",
+              "contentTitle": "Industry Readiness & Projects",
+              "contentDesc": "Apply your knowledge to industrial bioprocessing, bioinformatics, and complete a final industrial project.",
+              "badge": "YEAR-3",
+              "skills": [
+                "Bioinformatics Tools",
+                "Bioprocess Engineering",
+                "Research Documentation"
+              ],
+              "aiTools": [
+                {
+                  "name": "BLAST",
+                  "desc": "Sequence Alignment",
+                  "icon": "Network",
+                  "color": "#0b1bf4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Bioinformatics",
+                  "desc": "Data analysis of biology",
+                  "icon": "💻"
+                },
+                {
+                  "title": "Bioprocessing",
+                  "desc": "Industrial scale production",
+                  "icon": "🏭"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Industrial Internship",
+                  "desc": "Real-world biotech application",
+                  "companies": "Pharma / R&D",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Bioprocess Engineering",
+                "Bioinformatics",
+                "Genomics & Proteomics",
+                "Industrial Project"
+              ]
+            }
+          ]
+        }
+      },
+      "msc": {
+        "title": "Master of Science (M.Sc.)",
+        "duration": "2 Years",
+        "eligibility": "B.Sc. in relevant discipline with minimum 50% marks from a recognized university",
+        "description": "An intensive postgraduate program designed to create subject matter experts, elite researchers, and industry-ready scientists across multiple disciplines.",
+        "metaTitle": "Master of Science (M.Sc.) | Basic & Applied Sciences | CPU",
+        "metaDescription": "Pursue a 2-year M.Sc. degree at Career Point University. Specialize in Physics, Chemistry, Maths, Zoology, Botany, or Environmental Science with a focus on advanced R&D.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "2-Year Postgraduate Science Programme",
+          "title": {
+            "main": "Master of Science",
+            "line1": "Master of",
+            "line2": "Science",
+            "line3": "(M.Sc.)",
+            "highlight": "Science",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "15L+"
+            },
+            {
+              "label": "NET/JRF",
+              "value": "Oriented"
+            }
+          ],
+          "description": "Deepen your scientific expertise. Engage in high-level experimental research, mathematical modeling, and prepare for elite roles in academia and global R&D."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "R&D Placements",
+              "value": "1000+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Highest Package",
+              "value": "15 L"
+            },
+            {
+              "icon": "Award",
+              "label": "CSIR-NET Cleared",
+              "value": "250+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Research Papers",
+              "value": "180+"
+            },
+            {
+              "icon": "Globe",
+              "label": "International Seminars",
+              "value": "45+"
+            },
+            {
+              "icon": "Star",
+              "label": "Alumni Scientists",
+              "value": "400+"
+            }
+          ],
+          "heading": "Postgraduate Accomplishments & Impact",
+          "trustBadge": "✓ Trusted by 2,000+ Future Scientists"
+        },
+        "overview": {
+          "tags": [
+            "2 Years Duration",
+            "4 Semesters",
+            "Research Intensive",
+            "CSIR-NET Aligned"
+          ],
+          "subtitle": "What is the M.Sc. Programme?",
+          "gridCards": [
+            {
+              "sub": "Quantum & Astro",
+              "icon": "Activity",
+              "label": "Physics"
+            },
+            {
+              "sub": "Synthetic & Analytical",
+              "icon": "FlaskConical",
+              "label": "Chemistry"
+            },
+            {
+              "sub": "Pure & Applied",
+              "icon": "Calculator",
+              "label": "Mathematics"
+            },
+            {
+              "sub": "Flora, Fauna & Ecology",
+              "icon": "Leaf",
+              "label": "Bio Sciences"
+            }
+          ],
+          "paragraphs": [
+            "The Master of Science (M.Sc.) is a rigorous two-year, four-semester programme built for students who want to push the boundaries of known science. It moves beyond standard textbook learning to focus on complex theoretical frameworks, mathematical modeling, and high-level laboratory research.",
+            "Whether you are aiming to crack the CSIR-NET/JRF for a Ph.D., preparing for roles in the pharmaceutical industry, or looking to join space and defense research organizations, the M.Sc. programme provides the intellectual and experimental depth required to succeed."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "An M.Sc. degree signifies a high level of academic and experimental maturity. Graduates are highly sought after as R&D Scientists, Quality Assurance Managers, Data Analysts, Subject Matter Experts, and College Professors. Furthermore, the specialized knowledge gained during this programme acts as a massive catalyst for students appearing in the UPSC Civil Services Main Examination (Science Optionals) and direct scientific recruitment drives by DRDO, ISRO, and BARC.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Elevating your scientific and professional stature",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "A master-level curriculum focusing on advanced theory and research",
+          "introNote": "The M.Sc. programme is characterized by advanced computational modeling, intensive laboratory protocols, and a mandatory research dissertation.",
+          "outroNote": "Graduates leave not just with a degree, but with published scientific research and specialized expertise in their chosen domain.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 40,
+              "category": "Departmental Core",
+              "shortName": "DC",
+              "description": "Advanced Core Science Theory"
+            },
+            {
+              "credits": 20,
+              "category": "Departmental Elective",
+              "shortName": "DE",
+              "description": "Specialization Electives"
+            },
+            {
+              "credits": 16,
+              "category": "Practical",
+              "shortName": "PR",
+              "description": "Advanced Laboratory Training"
+            },
+            {
+              "credits": 12,
+              "category": "Research",
+              "shortName": "RP",
+              "description": "Master's Thesis / Dissertation"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The Master of Science (M.Sc.) program offers diverse specializations. The first year focuses on establishing strong advanced theoretical frameworks and experimental techniques. The second year allows students to dive deep into specialized electives (e.g., Astrophysics, Organic Synthesis, Applied Mathematics) and culminates in an independent research dissertation.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Core Subjects: Advanced Theoretical Science I, Computational Methods, Analytical Techniques, Core Lab Practice I. Total Credits: 22"
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Core Subjects: Advanced Theoretical Science II, Research Methodology, Statistics for Sciences, Core Lab Practice II, Seminar Presentation. Total Credits: 22"
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Advanced Studies: Specialization Paper I, Specialization Paper II, Advanced Lab Practice III, Synopsis Submission for Dissertation. Total Credits: 22"
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Research & Culmination: Master's Dissertation (Research, Writing, and Defense), Viva-Voce, Specialization Paper III. Total Credits: 22"
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "CSIR-NET/GATE Preparation Module",
+              "credits": 0
+            },
+            {
+              "name": "Scientific Data Analysis (Python/MATLAB)",
+              "credits": 2
+            },
+            {
+              "name": "Research Ethics and Patent Filing",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Simple admission process and transparent fee structure",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "20,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Advanced Lab/Development Fee",
+              "amount": "4,500/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "3,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Through Majority & Scholarship Test (DPM-SAT). For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "Above 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "75% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "71% – 74%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered to students based on B.Sc. Graduation marks.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "A 50% scholarship is given to students who clear the CPU PG Entrance Exam with top ranks.",
+            "To avail merit scholarship, student has to submit supporting documents in original."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "3000",
+              "2000",
+              "1500",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "M.Sc. serves as a gateway to high-end R&D. The program equips students with the advanced theoretical and experimental knowledge required to clear CSIR-NET/JRF and pursue a Ph.D.",
+              "icon": "TrendingUp",
+              "title": "Academic & Research Excellence"
+            },
+            {
+              "desc": "The deep analytical and data skills gained in an M.Sc. are highly valuable for senior roles in pharma, chemical industries, data science, and environmental consulting.",
+              "icon": "Briefcase",
+              "title": "Elite Industry Opportunities"
+            },
+            {
+              "desc": "M.Sc. programs emphasize independent lab research. Students are guided to execute experiments, write, and publish research papers in peer-reviewed scientific journals.",
+              "icon": "Target",
+              "title": "Original Lab Research"
+            },
+            {
+              "desc": "Dive deep into specific niches like Quantum Mechanics, Synthetic Organic Chemistry, or Advanced Bioinformatics, setting you apart as a subject matter expert.",
+              "icon": "Brain",
+              "title": "Expert Specialization"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Master's degree in Science",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Dedicated mentoring sessions for CSIR-NET/JRF and GATE examinations are integrated seamlessly into the curriculum.",
+              "icon": "BookOpen",
+              "title": "CSIR-NET/GATE Mentoring"
+            },
+            {
+              "num": "07",
+              "desc": "Students are required to conduct independent laboratory research, write a master's thesis, and defend it before a panel of scientists.",
+              "icon": "FileText",
+              "title": "Thesis Defense & Viva"
+            },
+            {
+              "num": "08",
+              "desc": "Access to the Central Instrumentation Facility equipped with high-end tools for chemical, physical, and biological analyses.",
+              "icon": "Microscope",
+              "title": "Advanced Instrumentation"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload B.Sc. graduation marksheets and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the academic form online with your chosen M.Sc. specialization.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review and submit your application for the PG entrance screening.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the M.Sc. programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have completed their B.Sc. in a relevant discipline from a recognized university with a minimum of 50% marks.",
+              "q": "What is the eligibility criteria for M.Sc. admission?"
+            },
+            {
+              "a": "M.Sc. is a 2-year (4 semester) postgraduate programme.",
+              "q": "What is the duration of the M.Sc. programme?"
+            },
+            {
+              "a": "We currently offer M.Sc. in Physics, Chemistry, Mathematics, Zoology, Botany, and Environmental Science.",
+              "q": "What subjects can I specialize in?"
+            },
+            {
+              "a": "Yes, a final semester research dissertation (based on laboratory or computational research) is a mandatory requirement to complete the M.Sc. degree.",
+              "q": "Is a research dissertation or lab project compulsory?"
+            },
+            {
+              "a": "Our curriculum is heavily aligned with the CSIR-NET and GATE syllabi, and we provide special guidance sessions to help students clear these exams for academic and PSU careers.",
+              "q": "Does this course help in preparing for CSIR-NET or GATE?"
+            },
+            {
+              "a": "Yes, completing an M.Sc. with good grades and clearing CSIR-NET/JRF makes you eligible to apply directly for our Ph.D. scientific research programs.",
+              "q": "Can I pursue a Ph.D. immediately after completing this M.Sc.?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the M.Sc. programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "CSIR-NET/GATE Preparation",
+              "Advanced Research Seminars",
+              "Guest Lectures by Scientists",
+              "Thesis & Dissertation Focus",
+              "Placement in R&D and Pharma"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Central Instrumentation Facility",
+              "High-Performance Computing Lab",
+              "Advanced Chemistry/Physics Labs",
+              "Botanical & Zoological Labs"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Faculty Patents & Publications",
+              "Student Dissertations",
+              "Academic Science Conferences",
+              "Important Links"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "2-Year Scientific Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from science graduate to elite researcher.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Advanced Theory & Core Labs",
+              "contentTitle": "Mastering the Frameworks & Techniques",
+              "contentDesc": "The first year is dedicated to understanding high-level scientific theories, advanced mathematical modeling, and sophisticated laboratory techniques.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Advanced Lab Protocols",
+                "Computational Analysis",
+                "Research Methodology"
+              ],
+              "aiTools": [
+                {
+                  "name": "MATLAB / Python",
+                  "desc": "Scientific Computing",
+                  "icon": "Calculator",
+                  "color": "#4285F4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Advanced Theory",
+                  "desc": "Core scientific principles",
+                  "icon": "🧠"
+                },
+                {
+                  "title": "Methodology",
+                  "desc": "How to conduct valid research",
+                  "icon": "🔍"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Advanced Lab Expts",
+                  "desc": "Replicating benchmark scientific studies",
+                  "companies": "Internal Eval",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Advanced Theoretical Science",
+                "Research Methodology & Stats",
+                "Core Laboratory Practice"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Specialization & Thesis",
+              "contentTitle": "Independent Scientific Research",
+              "contentDesc": "The second year focuses on your chosen electives and culminates in the execution, writing, and defense of your Master's Research Thesis.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Independent Experimentation",
+                "Scientific Paper Writing",
+                "Thesis Defense"
+              ],
+              "aiTools": [
+                 {
+                  "name": "Origin / GraphPad",
+                  "desc": "Data Visualization",
+                  "icon": "BarChart",
+                  "color": "#0b1bf4",
+                  "size": "26px"
+                }
+              ],
+              "concepts": [
+                {
+                  "title": "Specialization",
+                  "desc": "Deep dive into niche topics",
+                  "icon": "🎯"
+                },
+                {
+                  "title": "Dissertation",
+                  "desc": "Original scientific contribution",
+                  "icon": "🎓"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Master's Thesis",
+                  "desc": "Original experimental or computational research",
+                  "companies": "Final Defense",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Specialization Electives",
+                "Master's Dissertation (Lab Work)",
+                "Seminar & Viva-Voce"
+              ]
+            }
+          ]
+        }
+      }
+     
+    },
+    "placements": {
+      "title": {
+        "main": "Science Graduates in Top Organizations",
+        "highlight": "Top Organizations"
+      },
+      "label": "Placement Records",
+      "subtitle": "Outstanding placements in Pharma, R&D, Ed-Tech, and Corporate sectors",
+      "list": [
+        {
+          "name": "Aditi Sharma",
+          "company": "Biocon",
+          "pkg": "12 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        },
+        {
+          "name": "Rohan Das",
+          "company": "Cipla Pharmaceuticals",
+          "pkg": "9 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
+        },
+        {
+          "name": "Vikram Singh",
+          "company": "DRDO (Research Intern)",
+          "pkg": "Stipend",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
+        },
+        {
+          "name": "Megha Nair",
+          "company": "Sun Pharma",
+          "pkg": "10.5 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg"
+        },
+        {
+          "name": "Siddharth Jain",
+          "company": "TCS (Data Analytics)",
+          "pkg": "8 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png"
+        },
+        {
+          "name": "Kavita Rao",
+          "company": "Reliance Life Sciences",
+          "pkg": "11 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Saloni.jpg"
+        }
+      ]
+    },
+    "alumni": {
+      "title": {
+        "main": "Scientists Making a Global Impact",
+        "highlight": "Impact"
+      },
+      "label": "Our Alumni",
+      "list": [
+        {
+          "name": "Dr. Sameer Khan",
+          "role": "Lead Researcher",
+          "company": "National Chemical Lab",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/aryan.jpg"
+        },
+        {
+          "name": "Ananya Patil",
+          "role": "Quality Control Head",
+          "company": "Pfizer",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        },
+        {
+          "name": "Rahul Verma",
+          "role": "Senior Data Analyst",
+          "company": "Accenture",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/harsh.jpg"
+        }
+      ]
+    },
+    "industry": {
+      "title": {
+        "main": "Scientific & Industry Tie Up's",
+        "highlight": "Tie Up's"
+      },
+      "label": "Collaborations",
+      "partners": [
+        {
+          "name": "Biocon",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "CSIR Labs",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "Serum Institute",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "Dr. Reddy's",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg"
+        }
+      ]
+    },
+    "research": {
+      "title": {
+        "main": "Scientific Research Excellence",
+        "highlight": "Excellence"
+      },
+      "label": "Eminence Research",
+      "gallery": [
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-7.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-12.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-4.jpg"
+      ],
+      "stats": [
+        {
+          "value": "300+",
+          "label": "SCI/SCOPUS Publications",
+          "icon": "BookOpen"
+        },
+        {
+          "value": "25+",
+          "label": "Patents Filed",
+          "icon": "FlaskConical"
+        },
+        {
+          "value": "12+",
+          "label": "Govt. Funded Projects",
+          "icon": "Briefcase"
+        },
+        {
+          "value": "50+",
+          "label": "International Conferences",
+          "icon": "Presentation"
+        }
+      ]
+    },
+    "community": {
+      "title": {
+        "main": "A Community of Innovators",
+        "highlight": "Innovators"
+      },
+      "label": "Community",
+      "description": [
+        "The School of Basic & Applied Sciences is a thriving ecosystem of curiosity. Our community consists of brilliant minds dedicated to unraveling the mysteries of the universe, from complex mathematical proofs to genetic sequencing.",
+        "From national-level science exhibitions and hackathons to coding clubs and environmental drives, our students are constantly engaged in activities that broaden their scientific horizons and societal impact."
+      ],
+      "gallery": [
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-7-1.jpg",
+          "caption": "Advanced Chemistry Lab Session"
+        },
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-12-1.jpg",
+          "caption": "Annual Science Exhibition"
+        }
+      ]
+    },
+    "infrastructure": {
+      "title": {
+        "main": "World-Class Science Infrastructure",
+        "highlight": "Infrastructure"
+      },
+      "label": "Campus",
+      "list": [
+        {
+          "title": "Central Instrumentation Facility",
+          "desc": "Equipped with high-end tools like HPLC, FTIR, and UV-Vis Spectrophotometers for advanced chemical and biological analysis.",
+          "img": "https://img.freepik.com/free-photo/scientists-working-laboratory_23-2149041483.jpg"
+        },
+        {
+          "title": "High-Performance Computing Lab",
+          "desc": "Dedicated computational clusters for complex mathematical modeling, simulations, and computational physics.",
+          "img": "https://img.freepik.com/free-photo/network-server-room_1048-2200.jpg"
+        },
+        {
+          "title": "Modern Bioscience & Tech Labs",
+          "desc": "Featuring bio-safety cabinets, incubators, and genetic testing equipment for life sciences students.",
+          "img": "https://img.freepik.com/free-photo/lab-dummy.jpg"
+        },
+        {
+          "title": "Smart Lecture Halls",
+          "desc": "Digitally enabled classrooms designed for interactive science learning and remote guest lectures.",
+          "img": "https://img.freepik.com/free-photo/modern-classroom-projector_1048-12346.jpg"
+        }
+      ]
+    },
+    "testimonials": {
+      "title": {
+        "main": "Our Science Scholars Speak",
+        "highlight": "Speak"
+      },
+      "label": "Testimonials",
+      "list": [
+        {
+          "name": "Aditi Sharma",
+          "batch": "M.Sc. 2022",
+          "company": "Biocon",
+          "emoji": "🧬",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+          "text": "The lab facilities here are at par with industry standards. The practical exposure I got directly helped me secure my placement in R&D."
+        },
+        {
+          "name": "Vikram Singh",
+          "batch": "B.Sc. 2021",
+          "company": "Research Intern",
+          "emoji": "🔭",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+          "text": "CPU's faculty didn't just teach us from books; they involved us in their live research projects. It completely changed my perspective on Physics."
+        },
+        {
+          "name": "Siddharth Jain",
+          "batch": "M.Sc. Maths 2020",
+          "company": "Data Analyst",
+          "emoji": "📊",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+          "text": "The rigorous mathematical training and computational skills I acquired here paved my way into the thriving field of Data Science."
+        }
+      ]
+    },
+    "exploreDepartment": {
+      "sectionTitle": {
+        "main": "Explore School of Basic & Applied Sciences",
+        "highlight": "School"
+      },
+      "subtitle": "Discover our specialized labs, research cells, and scientific societies",
+      "items": [
+        {
+          "title": "Department at a Glance",
+          "icon": "Building2",
+          "items": [
+            "National Science Fests",
+            "Guest Lectures by ISRO/CSIR Scientists",
+            "Science Club Activities",
+            "Placement Drives",
+            "Industrial Lab Visits",
+            "Patent Filing Support"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Exclusive Facilities",
+          "icon": "FlaskConical",
+          "items": [
+            "Central Instrumentation Facility",
+            "Biosafety Level 2 Lab",
+            "Computational Mathematics Lab",
+            "Botanical Garden",
+            "Research Cell"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Your Department in a Nutshell",
+          "icon": "Star",
+          "items": [
+            "Student Research Publications",
+            "Funded Projects",
+            "Alumni Achievements",
+            "Latest Scientific Discoveries",
+            "Upcoming Conferences",
+            "Important Resources"
+          ],
+          "cta": "START NOW"
+        }
+      ]
+    }
+  }
+}

@@ -84,6 +84,10 @@ export async function POST(req) {
       if (details) {
         for (const courseSlug in details) {
           const course = details[courseSlug];
+          if (!course.title && !course.name) {
+            console.warn(`Skipping empty/dummy course: ${courseSlug}`);
+            continue; 
+          }
           coursesToInsert.push({
             schoolId: school.id,
             slug: courseSlug,

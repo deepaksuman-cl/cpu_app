@@ -37,11 +37,15 @@ export default function SchoolPartners({ data }) {
           <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${active * 100}%)` }}>
             {Array.from({ length: pages }).map((_, pi) => (
               <div key={pi} className="min-w-full grid gap-4" style={{ gridTemplateColumns: `repeat(${perPage}, 1fr)` }}>
-                {partners.slice(pi * perPage, pi * perPage + perPage).map((logo, j) => (
-                  <div key={j} className="flex items-center justify-center rounded-2xl bg-white h-[84px] px-4 py-3 border-[1.5px] border-slate-200 transition-all hover:-translate-y-1 hover:shadow-lg cursor-pointer">
-                    <img src={logo.url} alt={logo.name} className="max-h-12 max-w-full object-contain" />
-                  </div>
-                ))}
+                {partners.slice(pi * perPage, pi * perPage + perPage).map((item, j) => {
+                  const src = typeof item === 'string' ? item : item.url;
+                  const name = typeof item === 'string' ? 'Partner' : item.name;
+                  return (
+                    <div key={j} className="flex items-center justify-center rounded-2xl bg-white h-[84px] px-4 py-3 border-[1.5px] border-slate-200 transition-all hover:-translate-y-1 hover:shadow-lg cursor-pointer">
+                      <img src={src} alt={name} className="max-h-12 max-w-full object-contain" />
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>

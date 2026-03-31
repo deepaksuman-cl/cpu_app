@@ -669,11 +669,12 @@ export default function HomeSetupForm({ initialData }) {
               <NestedListEditor 
                 label="Event Cards"
                 items={sections.happeningsConfig.items}
-                newItemTemplate={{ title: '', date: '', tag: '', image: '', colorClass: 'from-[#00588b] to-[#003a5c]' }}
+                newItemTemplate={{ title: '', date: '', tag: '', image: '', link: '', colorClass: 'from-[#00588b] to-[#003a5c]' }}
                 fields={[
                   {key: 'title', label: 'Event Title'},
                   {key: 'date', label: 'Date string'},
                   {key: 'tag', label: 'Category Tag'},
+                  {key: 'link', label: 'Slug / Link (URL)'},
                   {key: 'image', label: 'Image', type: 'image', fullWidth: true},
                   {key: 'colorClass', label: 'Tailwind Gradient Classes', fullWidth: true}
                 ]}
