@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRight, Calendar, Star, Zap, Microscope, Plus, Minus, Facebook, Instagram, Youtube, Twitter, Linkedin, Phone, Mail, GraduationCap, Download } from "lucide-react";
+import { ArrowRight, Calendar, Star, Zap, Microscope, Plus, Minus, Facebook, Instagram, Youtube, Twitter, Linkedin, Phone, Mail, GraduationCap, Download, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import RichTextRenderer from "../common/RichTextRenderer";
 
@@ -75,24 +75,41 @@ export function HappeningsSection({ data }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {happenings.map((h, i) => {
             const Ic = iconMapping[h.icon] || Zap;
+            const CardWrapper = h.link ? 'a' : 'div';
+            const linkProps = h.link ? {
+              href: h.link.startsWith('http') ? h.link : h.link.startsWith('/') ? h.link : `/${h.link}`,
+              target: h.link.startsWith('http') ? '_blank' : undefined,
+              rel: h.link.startsWith('http') ? 'noopener noreferrer' : undefined
+            } : {};
+            
             return (
-              <div key={i} className="rounded-2xl overflow-hidden border border-blue-100 cursor-pointer bg-white hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300">
+              <CardWrapper 
+                key={i} 
+                {...linkProps}
+                className={`group block rounded-2xl overflow-hidden border border-blue-100 cursor-pointer bg-white hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 no-underline text-inherit`}
+              >
                 <div className={`h-40 bg-gradient-to-br ${h.colorClass} flex items-center justify-center relative overflow-hidden group/hap`}>
                   {h.image ? (
-                    <img src={h.image} alt={h.title || 'Event'} className="w-full h-full object-cover group-hover/hap:scale-105 transition-transform duration-500" />
+                    <img src={h.image} alt={h.title || 'Event'} className="w-full h-full object-cover group-hover/hap:scale-110 transition-transform duration-700" />
                   ) : (
-                    <Ic size={52} className="text-white/20"/>
+                    <Ic size={52} className="text-white/20 group-hover/hap:scale-110 transition-transform duration-700"/>
                   )}
                   <div className="absolute top-2.5 right-2.5 bg-amber-400 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm z-10">{h.tag}</div>
                 </div>
-                <div className="p-4">
-                  <RichTextRenderer 
-                    content={h.title} 
-                    className="font-bold text-gray-900 text-sm mb-2" 
-                  />
-                  <div className="flex items-center gap-1.5 text-gray-400 text-xs"><Calendar size={12}/> {h.date}</div>
+                <div className="p-4 relative">
+                  <div className="flex justify-between items-start gap-2">
+                    <RichTextRenderer 
+                      content={h.title} 
+                      className="font-bold text-gray-900 text-sm mb-2 flex-1" 
+                    />
+                    <ChevronRight 
+                      size={16} 
+                      className="text-[#00588b] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mt-1" 
+                    />
+                  </div>
+                  <div className="flex items-center gap-1.5 text-gray-400 text-xs mt-1"><Calendar size={12}/> {h.date}</div>
                 </div>
-              </div>
+              </CardWrapper>
             );
           })}
         </div>

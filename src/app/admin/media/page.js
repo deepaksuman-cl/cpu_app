@@ -12,6 +12,7 @@ export default function MediaLibrary() {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(null); // stores media object
   const [uploadLoading, setUploadLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadType, setUploadType] = useState('local'); // 'local' or 'external'
   const uploadModalRef = useRef(null);
   const editModalRef = useRef(null);
@@ -159,18 +160,59 @@ export default function MediaLibrary() {
                         const files = Array.from(e.target.files);
                         if (files.length > 0) {
                           setUploadLoading(true);
-                          const formData = new FormData();
-                          files.forEach(file => formData.append('file', file));
-                          const res = await uploadLocalMedia(formData);
-                          if (res.success) {
-                            toast.success(`Successfully uploaded ${res.count || files.length} files!`);
-                            fetchMedia();
-                          } else toast.error('Upload failed: ' + res.error);
-                          setUploadLoading(false);
+                          setUploadProgress(0);
+
+                          const progressInterval = setInterval(() => {
+                            setUploadProgress(prev => {
+                              if (prev >= 90) return prev;
+                              return prev + Math.floor(Math.random() * 10) + 5;
+                            });
+                          }, 300);
+
+                          try {
+                            const formData = new FormData();
+                            files.forEach(file => formData.append('file', file));
+                            const res = await uploadLocalMedia(formData);
+                            
+                            clearInterval(progressInterval);
+                            setUploadProgress(100);
+
+                            if (res.success) {
+                              setTimeout(() => {
+                                toast.success(`Successfully uploaded ${res.count || files.length} files!`);
+                                setUploadProgress(0);
+                                setUploadLoading(false);
+                                setShowUploadModal(false);
+                                fetchMedia();
+                              }, 500);
+                            } else {
+                              toast.error('Upload failed: ' + res.error);
+                              setUploadLoading(false);
+                              setUploadProgress(0);
+                            }
+                          } catch (err) {
+                             clearInterval(progressInterval);
+                             toast.error('Upload failed: ' + err.message);
+                             setUploadLoading(false);
+                             setUploadProgress(0);
+                          }
                         }
                       }}
                     />
-                    {uploadLoading ? <Loader2 className="animate-spin mx-auto text-[var(--color-primary)]" /> : (
+                    {uploadLoading ? (
+                      <div className="w-full max-w-xs mx-auto py-2 z-20 relative">
+                        <div className="mb-3 text-xs font-bold text-[var(--color-primary)] uppercase tracking-widest flex justify-between items-center">
+                          <span className="flex items-center gap-2"><Loader2 className="animate-spin" size={14} /> Uploading...</span>
+                          <span>{uploadProgress}%</span>
+                        </div>
+                        <div className="w-full bg-[var(--border-default)] h-2.5 rounded-full overflow-hidden">
+                          <div 
+                            className="bg-[var(--color-primary)] h-full transition-all duration-300 ease-out" 
+                            style={{ width: `${uploadProgress}%` }}
+                          />
+                        </div>
+                      </div>
+                    ) : (
                       <>
                         <Upload className="mx-auto mb-2 text-[var(--color-primary)] group-hover:scale-110 transition-transform" />
                         <p className="text-[11px] font-bold text-[var(--text-primary)] uppercase tracking-wider">Drag & drop or click to browse</p>
