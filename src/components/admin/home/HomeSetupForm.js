@@ -569,10 +569,11 @@ export default function HomeSetupForm({ initialData }) {
               <NestedListEditor 
                 label="Alumni Highlights"
                 items={sections.alumniConfig.alumni}
-                newItemTemplate={{ name: '', role: '', company: '', companyBg: '#00588b', circleBg: '#fbbf24', img: '' }}
+                newItemTemplate={{ name: '', role: '', company: '', package: '', companyBg: '#00588b', circleBg: '#fbbf24', img: '' }}
                 fields={[
                   {key: 'name', label: 'Name'},
                   {key: 'role', label: 'Role/Batch'},
+                  {key: 'package', label: 'Package'},
                   {key: 'company', label: 'Company'},
                   {key: 'companyBg', label: 'Company Color', type: 'color'},
                   {key: 'circleBg', label: 'Accent Color', type: 'color'},
@@ -668,12 +669,12 @@ export default function HomeSetupForm({ initialData }) {
               <NestedListEditor 
                 label="Event Cards"
                 items={sections.happeningsConfig.items}
-                newItemTemplate={{ title: '', date: '', tag: '', icon: 'Zap', colorClass: 'from-[#00588b] to-[#003a5c]' }}
+                newItemTemplate={{ title: '', date: '', tag: '', image: '', colorClass: 'from-[#00588b] to-[#003a5c]' }}
                 fields={[
                   {key: 'title', label: 'Event Title'},
                   {key: 'date', label: 'Date string'},
                   {key: 'tag', label: 'Category Tag'},
-                  {key: 'icon', label: 'Icon', type: 'icon'},
+                  {key: 'image', label: 'Image', type: 'image', fullWidth: true},
                   {key: 'colorClass', label: 'Tailwind Gradient Classes', fullWidth: true}
                 ]}
                 onUpdate={items => updateSection('happeningsConfig', {...sections.happeningsConfig, items: items})}

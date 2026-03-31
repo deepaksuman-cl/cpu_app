@@ -10,6 +10,7 @@ export default function Swiper({
   autoInterval = 4000,
   dark = false,
   breakpoints = null,
+  hideControls = false,
 }) {
   const [winW, setWinW] = useState(1200);
   
@@ -89,7 +90,7 @@ export default function Swiper({
           ))}
         </div>
       </div>
-      {idx > 0 && (
+      {!hideControls && idx > 0 && (
         <button
           onClick={() => resetTimer(idx - 1)}
           className={`absolute -left-5 top-[42%] -translate-y-1/2 w-10 h-10 rounded-full border-none cursor-pointer flex items-center justify-center shadow-xl z-10 transition-transform hover:scale-110 ${
@@ -99,7 +100,7 @@ export default function Swiper({
           <ChevronLeft size={18} className="text-white" />
         </button>
       )}
-      {idx < max && (
+      {!hideControls && idx < max && (
         <button
           onClick={() => resetTimer(idx + 1)}
           className={`absolute -right-5 top-[42%] -translate-y-1/2 w-10 h-10 rounded-full border-none cursor-pointer flex items-center justify-center shadow-xl z-10 transition-transform hover:scale-110 ${
@@ -109,23 +110,25 @@ export default function Swiper({
           <ChevronRight size={18} className="text-white" />
         </button>
       )}
-      <div className="flex justify-center gap-1.5 mt-5">
-        {Array.from({ length: max + 1 }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => resetTimer(i)}
-            className={`h-2 rounded-full border-none cursor-pointer transition-all duration-300 ${
-              i === idx
-                ? dark
-                  ? "bg-amber-400 w-6"
-                  : "bg-[#00588b] w-6"
-                : dark
-                ? "bg-black/30 w-2"
-                : "bg-gray-300 w-2"
-            }`}
-          />
-        ))}
-      </div>
+      {!hideControls && (
+        <div className="flex justify-center gap-1.5 mt-5">
+          {Array.from({ length: max + 1 }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => resetTimer(i)}
+              className={`h-2 rounded-full border-none cursor-pointer transition-all duration-300 ${
+                i === idx
+                  ? dark
+                    ? "bg-amber-400 w-6"
+                    : "bg-[#00588b] w-6"
+                  : dark
+                  ? "bg-black/30 w-2"
+                  : "bg-gray-300 w-2"
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

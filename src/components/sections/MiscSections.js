@@ -77,9 +77,13 @@ export function HappeningsSection({ data }) {
             const Ic = iconMapping[h.icon] || Zap;
             return (
               <div key={i} className="rounded-2xl overflow-hidden border border-blue-100 cursor-pointer bg-white hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300">
-                <div className={`h-36 bg-gradient-to-br ${h.colorClass} flex items-center justify-center relative`}>
-                  <Ic size={52} className="text-white/20"/>
-                  <div className="absolute top-2.5 right-2.5 bg-amber-400 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full">{h.tag}</div>
+                <div className={`h-40 bg-gradient-to-br ${h.colorClass} flex items-center justify-center relative overflow-hidden group/hap`}>
+                  {h.image ? (
+                    <img src={h.image} alt={h.title || 'Event'} className="w-full h-full object-cover group-hover/hap:scale-105 transition-transform duration-500" />
+                  ) : (
+                    <Ic size={52} className="text-white/20"/>
+                  )}
+                  <div className="absolute top-2.5 right-2.5 bg-amber-400 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm z-10">{h.tag}</div>
                 </div>
                 <div className="p-4">
                   <RichTextRenderer 
