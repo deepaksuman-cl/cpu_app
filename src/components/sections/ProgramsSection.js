@@ -20,7 +20,7 @@ export default function ProgramsSection({ data }) {
               <a 
                 key={card.label} 
                 href={card.link || "#"}
-                className="relative overflow-hidden rounded-xl cursor-pointer group no-underline block"
+                className="bg-[#eff6ff] relative overflow-hidden rounded-xl cursor-pointer group no-underline block"
               >
                 <img
                   src={card.image}
