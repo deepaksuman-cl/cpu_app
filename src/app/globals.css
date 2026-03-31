@@ -9,6 +9,19 @@
     position: relative!important;
     z-index: 9999!important;
 }
+.university-prose ul  { 
+    margin-top: 10px !important;
+}
+.university-prose ul li {
+
+    padding-left: 0 !important;
+    margin-bottom: 10px !important;
+  
+}
+.university-prose ul li:before {
+ display: none;
+}
+
 .placement_bg_blur{
    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
       background-color: #00000030 !important;
