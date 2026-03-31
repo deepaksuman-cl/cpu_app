@@ -232,6 +232,7 @@ export default function FlipbookViewer({ pdf_url, title, cover_image, backdrop_i
         .stf__wrapper { background: transparent !important; }
         .stf__block { background: transparent !important; }
         .page-sheet { background-color: #fff; }
+        .react-pdf__Page__canvas { max-width: 100% !important; height: auto !important; object-fit: contain; }
         
         .book-loader {
           width: 80px; height: 50px; position: relative; border: 4px solid #fff; border-radius: 8px;

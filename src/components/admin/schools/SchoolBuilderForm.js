@@ -51,13 +51,30 @@ const StringListEditor = ({ value = [], onChange, label }) => (
   </div>
 );
 
-const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate }) => (
+const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate }) => {
+  const imageField = fields.find(f => f.type === 'image');
+  return (
   <div className="space-y-4">
     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 border-b border-[var(--border-light)] pb-2">
       <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">{label}</h4>
-      <button onClick={() => onUpdate([...items, newItemTemplate])} className="flex items-center gap-1 text-[10px] font-bold text-[var(--text-inverse)] bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] transition-colors px-2 py-1 uppercase tracking-wide rounded-none">
-        <Plus size={14} /> ADD
-      </button>
+      <div className="flex items-center gap-2">
+        {imageField && (
+           <MediaUploader 
+             multiple={true}
+             category="schools"
+             buttonText="Bulk Add"
+             onUploadSuccess={urls => {
+                if(Array.isArray(urls)) {
+                   const newItems = urls.map(url => ({ ...newItemTemplate, [imageField.key]: url }));
+                   onUpdate([...items, ...newItems]);
+                }
+             }}
+           />
+        )}
+        <button onClick={() => onUpdate([...items, newItemTemplate])} className="flex items-center justify-center gap-1 text-[10px] h-[34px] font-bold text-[var(--text-inverse)] bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] transition-colors px-3 uppercase tracking-wide rounded-none">
+          <Plus size={14} /> Row
+        </button>
+      </div>
     </div>
     <div className="space-y-3">
       {items.map((item, idx) => (
@@ -77,14 +94,23 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                     }} 
                   />
                 ) : field.type === 'image' ? (
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <input type="text" value={item[field.key] || ''} onChange={e => {
-                      const newItems = [...items]; newItems[idx][field.key] = e.target.value; onUpdate(newItems);
-                    }} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="Image URL..." />
-                    <div className="w-full sm:w-auto shrink-0">
-                      <MediaUploader category="schools" onUploadSuccess={url => {
-                        const newItems = [...items]; newItems[idx][field.key] = url; onUpdate(newItems);
-                      }} />
+                  <div className="space-y-2">
+                    <div className="border border-[var(--border-default)] bg-[var(--bg-muted)] overflow-hidden h-24 flex items-center justify-center">
+                      {item[field.key] ? (
+                        <img src={item[field.key]} className="w-full h-full object-cover" alt="Preview" />
+                      ) : (
+                        <ImageIcon size={24} className="text-[var(--text-muted)]" />
+                      )}
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <input type="text" value={item[field.key] || ''} onChange={e => {
+                        const newItems = [...items]; newItems[idx][field.key] = e.target.value; onUpdate(newItems);
+                      }} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="Image URL..." />
+                      <div className="w-full sm:w-auto shrink-0">
+                        <MediaUploader category="schools" onUploadSuccess={url => {
+                          const newItems = [...items]; newItems[idx][field.key] = url; onUpdate(newItems);
+                        }} />
+                      </div>
                     </div>
                   </div>
                 ) : field.type === 'richText' ? (
@@ -119,6 +145,7 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
     </div>
   </div>
 );
+}
 
 // --- Main Form Component ---
 
@@ -337,10 +364,13 @@ export default function SchoolBuilderForm({ initialData = null }) {
                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Badge Text</label>
                   <input type="text" value={formData.hero.badge || ''} onChange={e => updateSection('hero', {...formData.hero, badge: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
                 </div>
-                <div>
-                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Background Image URL</label>
+                <div className="md:col-span-2">
+                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-2">Background Image URL</label>
+                   <div className="mb-2 border border-[var(--border-default)] bg-[var(--bg-muted)] overflow-hidden h-32 flex items-center justify-center relative">
+                     {formData.hero.bgImage ? <img src={formData.hero.bgImage} className="w-full h-full object-cover" alt="Hero BG" /> : <ImageIcon size={28} className="text-[var(--text-muted)] opacity-50" />}
+                   </div>
                    <div className="flex flex-col sm:flex-row gap-2">
-                     <input type="text" value={formData.hero.bgImage || ''} onChange={e => updateSection('hero', {...formData.hero, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                     <input type="text" value={formData.hero.bgImage || ''} onChange={e => updateSection('hero', {...formData.hero, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="Click media uploader or paste URL..." />
                      <div className="w-full sm:w-auto shrink-0"><MediaUploader category="schools" onUploadSuccess={url => updateSection('hero', {...formData.hero, bgImage: url})} /></div>
                    </div>
                 </div>
@@ -490,10 +520,13 @@ export default function SchoolBuilderForm({ initialData = null }) {
                   <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Section Subtitle</label>
                   <input type="text" placeholder="Subtitle" value={formData.programmes.subtitle || ''} onChange={e => updateSection('programmes', {...formData.programmes, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
                 </div>
-                <div>
-                  <label className="text-[9px] block mb-1 font-bold uppercase text-[var(--text-muted)]">Background Image</label>
+                <div className="md:col-span-2">
+                  <label className="text-[9px] block mb-2 font-bold uppercase text-[var(--text-muted)]">Background Image</label>
+                  <div className="mb-2 border border-[var(--border-default)] bg-[var(--bg-muted)] overflow-hidden h-32 flex items-center justify-center">
+                    {formData.programmes.bgImage ? <img src={formData.programmes.bgImage} className="w-full h-full object-cover" alt="Programmes BG" /> : <ImageIcon size={28} className="text-[var(--text-muted)] opacity-50" />}
+                  </div>
                   <div className="flex flex-col sm:flex-row gap-2">
-                    <input type="text" placeholder="BG Image URL" value={formData.programmes.bgImage || ''} onChange={e => updateSection('programmes', {...formData.programmes, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                    <input type="text" placeholder="BG Image URL" value={formData.programmes.bgImage || ''} onChange={e => updateSection('programmes', {...formData.programmes, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
                     <div className="w-full sm:w-auto shrink-0"><MediaUploader category="schools" onUploadSuccess={url => updateSection('programmes', {...formData.programmes, bgImage: url})} /></div>
                   </div>
                 </div>
@@ -676,7 +709,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                     fields={[
                       {key: 'icon', label: 'Icon', type: 'icon'},
                       {key: 'label', label: 'Label'},
-                      {key: 'link', label: 'URL'},
+                      {key: 'link', label: 'URL', type: 'image'},
                       {key: 'slug', label: 'Slug'}
                     ]}
                     onUpdate={items => updateSection('research', {...formData.research, gallery: items})}

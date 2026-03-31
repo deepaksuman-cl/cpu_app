@@ -1,13 +1,15 @@
 'use client';
 
 import { Bell, ChevronDown, LogOut, Menu, Settings, User } from 'lucide-react';
-import { signOut, useSession } from 'next-auth/react'; // 🔥 NextAuth imported
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useState } from 'react';
+import SyncSchoolData from './SyncSchoolData';
 
 export default function TopHeader({ setMobileMenuOpen }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [hasNotification, setHasNotification] = useState(true);
+  const [isSyncModalOpen, setIsSyncModalOpen] = useState(false);
   
   // 🔥 Get current user session
   const { data: session } = useSession();
@@ -39,7 +41,15 @@ export default function TopHeader({ setMobileMenuOpen }) {
 
       {/* ── Right Section ── */}
       <div className="flex items-center gap-2 sm:gap-4">
-        
+        <button 
+            onClick={() => setIsSyncModalOpen(true)}
+            className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-blue-700 bg-blue-50 border border-blue-200 rounded hover:bg-blue-100 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span className="hidden sm:inline">Sync DB</span>
+          </button>
         {/* Notification Bell */}
         <button 
           className="relative p-2.5 text-[var(--text-secondary)] hover:bg-[var(--bg-muted)] hover:text-[var(--color-primary)] transition-all duration-200 rounded-none border border-transparent hover:border-[var(--border-light)] group"
@@ -123,6 +133,29 @@ export default function TopHeader({ setMobileMenuOpen }) {
           )}
         </div>
       </div>
+      {isSyncModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity">
+          <div className="relative w-full max-w-lg mx-4 bg-white rounded-xl shadow-2xl animate-in fade-in zoom-in duration-200">
+            
+            {/* Close Button */}
+            <button 
+              onClick={() => setIsSyncModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors p-1 rounded-full hover:bg-gray-100 focus:outline-none"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Sync Component Render */}
+            <div className="p-2">
+              <SyncSchoolData />
+            </div>
+
+          </div>
+        </div>
+      )}
     </header>
+    
   );
 }

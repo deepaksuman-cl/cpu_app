@@ -1,8 +1,11 @@
 "use client";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import Swiper from "../ui/Swiper";
+import CustomSwiper from "../ui/Swiper";
 import Icon from "../ui/Icon";
+import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 
 export default function PlacementSection({ data }) {
   if (!data) return null;
@@ -63,7 +66,7 @@ export default function PlacementSection({ data }) {
               </div>
             ))}
           </div>
-          <Swiper
+          <CustomSwiper
             items={slides}
             perView={2}
             gap={20}
@@ -111,17 +114,39 @@ export default function PlacementSection({ data }) {
         {recruiters.length > 0 && (
           <div className="mt-20 pt-10 border-t border-white/10">
             <p className="text-white/50 text-[10px] font-bold uppercase tracking-[0.3em] text-center mb-8">Trusted by Global Industry Leaders</p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14 transition-all duration-700">
-              {recruiters.map((logo, idx) => (
-                <div key={idx} className="relative h-7 md:h-9 w-24">
-                  <Image 
-                    src={logo.img} 
-                    alt="Recruiter" 
-                    fill
-                    className="object -0 invert" 
-                  />
-                </div>
-              ))}
+            <div className="w-full relative swraper overflow-hidden pointer-events-none">
+              <style dangerouslySetInnerHTML={{__html: `
+                .swraper .swiper-wrapper {
+                  transition-timing-function: linear !important;
+                }
+              `}} />
+              <SwiperReact
+                modules={[Autoplay]}
+                spaceBetween={40}
+                slidesPerView={6}
+                loop={true}
+                speed={3000}
+                autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
+                breakpoints={{
+                  0: { slidesPerView: 3, spaceBetween: 20 },
+                  480: { slidesPerView: 4, spaceBetween: 30 },
+                  768: { slidesPerView: 5, spaceBetween: 40 },
+                  1024: { slidesPerView: 6, spaceBetween: 50 },
+                }}
+                className="w-full h-16"
+              >
+                {[...recruiters, ...recruiters, ...recruiters].map((logo, idx) => (
+                  <SwiperSlide key={idx}>
+                    <div className="flex items-center justify-center h-full w-full">
+                      <img 
+                        src={logo.img} 
+                        alt={`Recruiter ${idx + 1}`} 
+                        className="max-h-12 max-w-[120px] object-contain filter invert opacity-60 transition-all duration-300" 
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </SwiperReact>
             </div>
           </div>
         )}

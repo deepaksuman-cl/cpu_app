@@ -541,7 +541,7 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                                  <ImageIcon size={24} />
                                </div>
                              )}
-                             <div className="scale-75 origin-top-left w-[133%]">
+                             <div className="w-full">
                                 <MediaUploader category="pages" onUploadSuccess={url => updateArrayItem(index, 'profileItems', pIdx, 'image', url)} />
                              </div>
                           </div>
@@ -658,11 +658,23 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                       </div>
                     </div>
 
-                    <div className="mb-4 flex justify-between items-end border-b border-gray-200 pb-2">
+                    <div className="mb-4 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-3 border-b border-gray-200 pb-2">
                       <label className="block text-xs font-bold text-gray-700 uppercase">Interactive Gallery Images</label>
-                      <button type="button" onClick={() => addArrayItem(index, 'galleryItems', { image: '', title: '', category: '' })} className="text-xs font-bold bg-[#00588b] text-white px-3 py-1.5 hover:bg-[#004570] transition-colors flex gap-1 items-center">
-                        <Plus size={14} /> Add Image
-                      </button>
+                      <div className="flex flex-wrap gap-2">
+                        <MediaUploader 
+                           multiple={true} 
+                           category="pages" 
+                           buttonText="Bulk Add Images" 
+                           onUploadSuccess={(urls) => {
+                             if (Array.isArray(urls)) {
+                               urls.forEach(url => addArrayItem(index, 'galleryItems', { image: url, title: '', category: '' }));
+                             }
+                           }}
+                        />
+                        <button type="button" onClick={() => addArrayItem(index, 'galleryItems', { image: '', title: '', category: '' })} className="h-[34px] text-xs font-bold bg-white border border-[#00588b] text-[#00588b] px-3 py-1.5 hover:bg-gray-50 transition-colors flex gap-1 items-center">
+                          <Plus size={14} /> Add Empty Row
+                        </button>
+                      </div>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -683,7 +695,7 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                                 <ImageIcon size={24} />
                               </div>
                             )}
-                            <div className="scale-90 origin-top-left w-[111%]">
+                            <div className="w-full">
                                 <MediaUploader category="pages" onUploadSuccess={url => updateArrayItem(index, 'galleryItems', gIdx, 'image', url)} />
                             </div>
                           </div>
