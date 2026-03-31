@@ -15,7 +15,7 @@ export default function ProgramsSection({ data }) {
           <h2 className="font-black text-3xl md:text-5xl text-gray-900 mb-8">
             {data?.title || "Explore Our"} <span className="text-[#00588b]">{data?.highlight || "70+ Programs"}</span>
           </h2>
-          <div className="grid grid-cols-2 [@media(max-width:476px)]:grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 [@media(max-width:376px)]:grid-cols-1 md:grid-cols-5 gap-4">
             {cards.map((card) => (
               <a 
                 key={card.label} 
@@ -28,9 +28,13 @@ export default function ProgramsSection({ data }) {
                   className="block w-full object-cover group-hover:scale-105 transition-transform duration-400"
                 />
                 <div className="bg-[#00588b] text-white px-4 py-3.5 flex items-center justify-between">
-                  <span className="font-bold text-md">{card.label}</span>
+                  <div>
+                    <span className="font-bold text-md block">{card.label}</span>
+                     <span className="text-sm opacity-85 block">{card.count}</span>
+                  </div>
+              
                   <div className="flex items-center gap-2">
-                    <span className="text-sm opacity-85">{card.count}</span>
+                   
                     <ArrowRight size={14} />
                   </div>
                 </div>
