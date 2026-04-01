@@ -10,7 +10,7 @@ export default function BlockRenderer({ block }) {
   if (blockType === 'RichTextFull') {
     const useProse = block.useProse !== false;
     return (
-      <div id={block.cssId || undefined} className={`w-full py-12 px-6 ${block.cssClass || ''}`}>
+      <div id={block.cssId || undefined} className={`w-full ${block.cssClass || ''}`}>
         <div className="max-w-[80%] mx-auto">
           <RichTextRenderer 
             content={block.content} 
@@ -144,7 +144,7 @@ export default function BlockRenderer({ block }) {
     const alignClass = align === 'left' ? 'mr-auto' : (align === 'right' ? 'ml-auto' : 'mx-auto');
     
     return (
-      <div id={block.cssId || undefined} className={`w-full py-12 px-6 bg-white overflow-hidden ${block.cssClass || ''}`}>
+      <div id={block.cssId || undefined} className={`w-full bg-white overflow-hidden ${block.cssClass || ''}`}>
         <div className="w-full">
           <img 
             src={path} 
