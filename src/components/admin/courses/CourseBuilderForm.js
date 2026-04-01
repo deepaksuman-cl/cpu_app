@@ -879,19 +879,19 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
           {activeSection === 'applySteps' && (
             <div className="space-y-6">
               <TitleEditor label="How to Apply Section" value={formData.applySteps.sectionTitle} onChange={val => updateSection('applySteps', {...formData.applySteps, sectionTitle: val})} />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Guide Subtitle</label>
-                  <input type="text" value={formData.applySteps.guideLabel || ''} onChange={e => updateSection('applySteps', {...formData.applySteps, guideLabel: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-2 tracking-wider">Guide Subtitle</label>
+                  <input type="text" value={formData.applySteps.guideLabel || ''} onChange={e => updateSection('applySteps', {...formData.applySteps, guideLabel: e.target.value})} className="w-full border border-[var(--border-default)] p-3 text-sm outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none shadow-sm" placeholder="e.g. Guide to Register Online" />
                 </div>
                 <div>
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">CTA Label</label>
-                  <input type="text" value={formData.applySteps.ctaLabel || ''} onChange={e => updateSection('applySteps', {...formData.applySteps, ctaLabel: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-2 tracking-wider">CTA Label</label>
+                  <input type="text" value={formData.applySteps.ctaLabel || ''} onChange={e => updateSection('applySteps', {...formData.applySteps, ctaLabel: e.target.value})} className="w-full border border-[var(--border-default)] p-3 text-sm outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none shadow-sm" placeholder="e.g. Start Your Application" />
                 </div>
-                <div>
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Background Image</label>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <input type="text" value={formData.applySteps.bgImage || ''} onChange={e => updateSection('applySteps', {...formData.applySteps, bgImage: e.target.value})} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                <div className="md:col-span-2 bg-[var(--bg-muted)] p-5 border border-[var(--border-light)] mt-2">
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-2 tracking-wider">Section Background Image (Optimized View)</label>
+                  <div className="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="text" value={formData.applySteps.bgImage || ''} onChange={e => updateSection('applySteps', {...formData.applySteps, bgImage: e.target.value})} className="w-full flex-1 border border-[var(--border-default)] p-3 text-sm outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none shadow-sm" placeholder="Enter image URL or select media..." />
                     <div className="w-full sm:w-auto shrink-0"><MediaUploader category="courses" onUploadSuccess={url => updateSection('applySteps', {...formData.applySteps, bgImage: url})} /></div>
                   </div>
                 </div>
@@ -901,21 +901,42 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                 {formData.applySteps.steps?.map((s, idx) => (
                   <div key={idx} className="bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] relative group hover:border-[var(--border-dark)] transition-colors rounded-none">
                     <button onClick={() => updateSection('applySteps', {...formData.applySteps, steps: formData.applySteps.steps.filter((_, i) => i !== idx)})} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1"><Trash2 size={16} /></button>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 sm:mt-0">
-                      <div>
-                        <label className="text-[9px] text-[var(--text-muted)] font-bold block mb-1 uppercase">Step #</label>
-                        <input type="text" value={s.step} onChange={e => { const n = [...formData.applySteps.steps]; n[idx].step = e.target.value; updateSection('applySteps', {...formData.applySteps, steps: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-2 sm:mt-0">
+                      <div className="sm:col-span-1">
+                        <label className="text-[9px] text-[var(--text-muted)] font-bold block mb-1.5 uppercase tracking-wider">Step Number</label>
+                        <input 
+                          type="text" 
+                          placeholder="e.g. 1"
+                          value={s.step} 
+                          onChange={e => { const n = [...formData.applySteps.steps]; n[idx].step = e.target.value; updateSection('applySteps', {...formData.applySteps, steps: n})}} 
+                          className="w-full border border-[var(--border-default)] p-3 text-sm font-bold outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none shadow-sm" 
+                        />
                       </div>
-                      <div>
-                        <label className="text-[9px] text-[var(--text-muted)] font-bold block mb-1 uppercase">Label</label>
-                        <input type="text" value={s.label} onChange={e => { const n = [...formData.applySteps.steps]; n[idx].label = e.target.value; updateSection('applySteps', {...formData.applySteps, steps: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs font-bold outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                      <div className="sm:col-span-1">
+                        <label className="text-[9px] text-[var(--text-muted)] font-bold block mb-1.5 uppercase tracking-wider">Step Title / Label</label>
+                        <input 
+                          type="text" 
+                          placeholder="e.g. Online Registration"
+                          value={s.label} 
+                          onChange={e => { const n = [...formData.applySteps.steps]; n[idx].label = e.target.value; updateSection('applySteps', {...formData.applySteps, steps: n})}} 
+                          className="w-full border border-[var(--border-default)] p-3 text-sm font-bold outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none shadow-sm" 
+                        />
                       </div>
                       <div className="sm:col-span-2">
-                        <label className="text-[9px] text-[var(--text-muted)] font-bold block mb-1 uppercase">Instructions</label>
-                        <textarea value={s.desc} onChange={e => { const n = [...formData.applySteps.steps]; n[idx].desc = e.target.value; updateSection('applySteps', {...formData.applySteps, steps: n})}} className="w-full border border-[var(--border-default)] p-2 text-xs h-16 outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none resize-none" />
+                        <label className="text-[9px] text-[var(--text-muted)] font-bold block mb-1.5 uppercase tracking-wider">Step Instructions (Rich Text)</label>
+                        <RichTextEditor 
+                          value={s.desc} 
+                          onChange={content => { 
+                            const n = [...formData.applySteps.steps]; 
+                            n[idx].desc = content; 
+                            updateSection('applySteps', {...formData.applySteps, steps: n})
+                          }}
+                          placeholder="Detail the steps for the student..."
+                          useProse={true}
+                        />
                       </div>
                       <div className="sm:col-span-2">
-                        <label className="text-[9px] text-[var(--text-muted)] font-bold block mb-1 uppercase">Icon</label>
+                        <label className="text-[9px] text-[var(--text-muted)] font-bold block mb-1.5 uppercase tracking-wider">Step Icon</label>
                         <IconPicker value={s.icon} onChange={val => { const n = [...formData.applySteps.steps]; n[idx].icon = val; updateSection('applySteps', {...formData.applySteps, steps: n})}} />
                       </div>
                     </div>
