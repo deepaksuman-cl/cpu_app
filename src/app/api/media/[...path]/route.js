@@ -60,6 +60,7 @@ export async function GET(request, { params }) {
       headers: {
         'Content-Type': contentType,
         'Cache-Control': 'public, max-age=31536000, immutable',
+        'Accept-Ranges': 'bytes',
       },
     });
 

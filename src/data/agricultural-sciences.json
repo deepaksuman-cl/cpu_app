@@ -1,0 +1,2491 @@
+{
+  "agricultural-sciences": {
+    "slug": "agricultural-sciences",
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "link": "/"
+      },
+      {
+        "label": "Schools & Departments",
+        "link": "/schools"
+      },
+      {
+        "label": "School of Agricultural Sciences",
+        "link": "/schools/agricultural-sciences"
+      }
+    ],
+    "hero": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+      "badge": "ICAR Aligned Premier Agriculture Institute",
+      "title": {
+        "main": "School of Agricultural Sciences",
+        "highlight": "Agricultural",
+        "skyHighlight": "Sciences"
+      },
+      "description": "Pioneering the future of farming. Master modern agronomy, soil science, and agri-tech through our ICAR-aligned curriculum, massive instructional farms, and research-driven academics.",
+      "cta": [
+        {
+          "label": "Apply Now",
+          "link": "#",
+          "primary": true
+        },
+        {
+          "label": "Explore Programs",
+          "link": "#programs",
+          "primary": false
+        }
+      ]
+    },
+    "stats": [
+      {
+        "value": "50+",
+        "label": "Acres of Farm Land",
+        "icon": "Leaf"
+      },
+      {
+        "value": "100%",
+        "label": "Field Training",
+        "icon": "Activity"
+      },
+      {
+        "value": "Top 5",
+        "label": "Agri Institutes in State",
+        "icon": "Award"
+      }
+    ],
+    "about": {
+      "vision": {
+        "title": "Vision",
+        "label": "Our Purpose",
+        "icon": "Target",
+        "text": "To emerge as a global center of excellence in agricultural education, research, and extension, dedicated to ensuring food security, sustainable farming, and empowering rural economies.",
+        "highlights": [
+          {
+            "value": "1500+",
+            "label": "Agri Graduates"
+          },
+          {
+            "value": "85%",
+            "label": "Govt/Corporate Placements"
+          },
+          {
+            "value": "30+",
+            "label": "Research Projects"
+          }
+        ]
+      },
+      "mission": {
+        "title": "Mission",
+        "label": "Our Goal",
+        "icon": "Lightbulb",
+        "points": [
+          "Deliver ICAR-aligned, rigorous academic programs combining theoretical agriculture with intensive field-level training.",
+          "Foster research in sustainable farming, precision agriculture, and modern horticulture techniques.",
+          "Equip students with the entrepreneurial skills required to launch successful Agri-Tech startups.",
+          "Facilitate extensive 'Rural Agricultural Work Experience' (RAWE) to connect students with grassroots farming communities."
+        ]
+      }
+    },
+    "programmes": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "title": {
+        "main": "Our Programmes",
+        "highlight": "Programmes"
+      },
+      "subtitle": "Academic Offerings",
+      "description": "Explore our comprehensive range of Undergraduate, Postgraduate, and Doctoral programs in modern Agricultural Sciences.",
+      "levels": [
+        {
+          "label": "After 12th Pass/ \"A\" Level",
+          "icon": "GraduationCap",
+          "courses": [
+            {
+              "name": "B.Sc. (Hons.) Agriculture",
+              "slug": "bsc-agriculture",
+              "specializations": []
+            }
+          ]
+        },
+        {
+          "label": "After Graduation / Equivalent",
+          "icon": "BookOpen",
+          "courses": [
+            {
+              "name": "M.Sc. (Agri.) Agronomy",
+              "slug": "msc-agronomy",
+              "specializations": []
+            },
+            {
+              "name": "M.Sc. (Agri.) Horticulture",
+              "slug": "msc-horticulture",
+              "specializations": []
+            }
+          ]
+        },
+        {
+          "label": "After Post Graduation / Equivalent",
+          "icon": "Microscope",
+          "courses": [
+            {
+              "name": "Ph.D. (All Subjects)",
+              "slug": "research-phd",
+              "description": "Research-focused doctoral programme in Agricultural Sciences.",
+              "redirectUrl": "/research-phd"
+            }
+          ]
+        }
+      ]
+    },
+    "courseDetails": {
+    "bsc-agriculture": {
+        "title": "B.Sc. (Hons.) Agriculture",
+        "duration": "4 Years",
+        "eligibility": "10+2 in Science (PCB/PCM) or Agriculture with minimum 50% marks from a recognized board",
+        "description": "An ICAR-aligned, 4-year professional honours degree focused on modern farming techniques, agricultural technology, and rural economics.",
+        "metaTitle": "B.Sc. (Hons.) Agriculture Course | Agricultural Sciences | CPU",
+        "metaDescription": "Pursue B.Sc. (Hons.) Agriculture at Career Point University. ICAR aligned curriculum. Massive 50-acre instructional farm. Prepare for AFO & Govt Agri Jobs.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "4-Year Professional Honours Degree",
+          "title": {
+            "main": "B.Sc. (Hons.) Agriculture",
+            "line1": "B.Sc. (Hons.)",
+            "line2": "Agriculture",
+            "line3": "",
+            "highlight": "Agriculture",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "AFO Placements",
+              "value": "High Selection"
+            },
+            {
+              "label": "Field Training",
+              "value": "Mandatory"
+            }
+          ],
+          "description": "Grow the future. Master agronomy, soil science, and agri-tech on our massive 50-acre campus farm. Get ready for elite roles in the government and corporate agricultural sectors."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Agri-Graduates Placed",
+              "value": "1200+"
+            },
+            {
+              "icon": "Briefcase",
+              "label": "Highest Package",
+              "value": "9.5 L"
+            },
+            {
+              "icon": "Award",
+              "label": "AFO/Govt Selections",
+              "value": "150+"
+            },
+            {
+              "icon": "Leaf",
+              "label": "Acres of Live Farm",
+              "value": "50+"
+            },
+            {
+              "icon": "Globe",
+              "label": "Agri-Corporate Ties",
+              "value": "25+"
+            },
+            {
+              "icon": "Star",
+              "label": "Student Agri-Startups",
+              "value": "12+"
+            }
+          ],
+          "heading": "Department's Agricultural Impact & Placements",
+          "trustBadge": "✓ Curriculum strictly aligned with ICAR (5th Deans' Committee)"
+        },
+        "overview": {
+          "tags": [
+            "4 Years Duration",
+            "8 Semesters",
+            "Field Intensive",
+            "ICAR Aligned"
+          ],
+          "subtitle": "What is the B.Sc. (Hons.) Agriculture Programme?",
+          "gridCards": [
+            {
+              "sub": "Crop Production",
+              "icon": "Leaf",
+              "label": "Agronomy"
+            },
+            {
+              "sub": "Soil & Fertilizers",
+              "icon": "FlaskConical",
+              "label": "Soil Science"
+            },
+            {
+              "sub": "Pest Management",
+              "icon": "Activity",
+              "label": "Entomology"
+            },
+            {
+              "sub": "Farm Machinery",
+              "icon": "Settings",
+              "label": "Agri-Engineering"
+            }
+          ],
+          "paragraphs": [
+            "The B.Sc. (Hons.) Agriculture is a highly prestigious 4-year professional degree. Unlike general B.Sc. programs, an 'Honours' degree in agriculture is specifically demanded by government agencies and top corporates. It is a deeply technical and scientific course that covers everything from soil health and crop genetics to farm machinery and agricultural economics.",
+            "Our curriculum does not restrict students to classrooms. A massive portion of the degree is completed out on the 50-acre instructional farm. Students get their hands dirty by actively growing crops, operating tractors, testing soil in labs, and finally spending their 7th and 8th semesters living in villages to educate real farmers through the RAWE program."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "The agricultural sector is the backbone of the Indian economy, and professional graduates are in extremely high demand. This degree is the primary gateway to secure, high-paying government jobs like Agriculture Field Officer (AFO in Banks), Agriculture Development Officer (ADO), and Forest Officer. In the private sector, graduates are recruited by seed companies (Mahyco), FMCG giants (ITC, Amul), fertilizer companies (UPL), and modern Agri-Tech startups. It is also the necessary stepping stone for pursuing an M.Sc. in specialized agricultural branches.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in Government Banks, FMCG, and Agri-Tech",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "An ICAR-aligned curriculum blending lab science with field practice",
+          "introNote": "The curriculum is meticulously structured, starting with basic allied sciences and moving into core agricultural technologies and economics.",
+          "outroNote": "The entire final year is dedicated to the Rural Agricultural Work Experience (RAWE) and Agro-Industrial Attachment (AIA).",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 40,
+              "category": "Basic Sciences",
+              "shortName": "BS",
+              "description": "Soil Science, Genetics & Botany"
+            },
+            {
+              "credits": 60,
+              "category": "Core Agriculture",
+              "shortName": "CA",
+              "description": "Agronomy, Horticulture & Entomology"
+            },
+            {
+              "credits": 30,
+              "category": "Agri-Tech & Econ",
+              "shortName": "TE",
+              "description": "Farm Machinery & Agri-Economics"
+            },
+            {
+              "credits": 40,
+              "category": "Field Work",
+              "shortName": "FW",
+              "description": "RAWE & Agro-Industrial Attachment"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The 4-year B.Sc. (Hons.) Agriculture program spans 8 semesters. Years 1 to 3 involve rigorous classroom theory paired equally with practical farm work. Students learn how to prepare soil, plant seeds, manage pests, and calculate farm profits. Year 4 is completely stripped of regular classes, focusing 100% on rural immersion (RAWE) and industrial training.",
+              "hasTable": true
+            },
+            {
+              "id": "y1",
+              "title": "Year-1: Foundation of Agricultural Sciences",
+              "content": "Fundamentals of Agronomy, Fundamentals of Soil Science, Fundamentals of Plant Biochemistry, Comprehension & Communication Skills, Introduction to Forestry, Introductory Animal Husbandry."
+            },
+            {
+              "id": "y2",
+              "title": "Year-2: Crop & Pest Management",
+              "content": "Crop Production Technology (Kharif & Rabi), Fundamentals of Entomology, Fundamentals of Plant Pathology, Agricultural Microbiology, Farm Machinery and Power, Principles of Seed Technology."
+            },
+            {
+              "id": "y3",
+              "title": "Year-3: Advanced Farming & Economics",
+              "content": "Principles of Integrated Pest and Disease Management, Manures & Fertilizers, Diseases of Field and Horticultural Crops, Agricultural Marketing Trade & Prices, Protected Cultivation (Polyhouse), Entrepreneurship Development."
+            },
+            {
+              "id": "y4",
+              "title": "Year-4: RAWE & Industrial Attachment",
+              "content": "Rural Agricultural Work Experience (RAWE) - Village Attachment, Agro-Industrial Attachment (AIA) - Working with Seed/Fertilizer companies, Plant Clinic Postings."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Bank AFO Exam Preparation Module",
+              "credits": 0
+            },
+            {
+              "name": "Organic Farming & Vermicomposting",
+              "credits": 2
+            },
+            {
+              "name": "Drone Technology in Agriculture",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for B.Sc. (Hons.) Agriculture",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "10,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "35,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Farm & Laboratory Fee",
+              "amount": "5,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "5,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Admission through 12th Board merit / CPU Entrance Exam. For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "12th Board > 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "12th Board 80% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "12th Board 70% – 79%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered based on 12th Board marks (Science/Agriculture stream only).",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "Special scholarships exist for students from farming backgrounds and rural areas.",
+            "If a student fails to maintain the required academic standards, they may lose scholarship eligibility."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "5000",
+              "3000",
+              "2000",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "This degree is highly targeted for the prestigious Agriculture Field Officer (AFO) exam in nationalized banks, offering secure and high-paying government careers.",
+              "icon": "Award",
+              "title": "Govt. Bank Jobs (AFO)"
+            },
+            {
+              "desc": "Learn practically. Our students spend hours every week on the 50-acre campus farm growing actual crops and managing live dairy units.",
+              "icon": "Leaf",
+              "title": "50-Acre Live Farm Training"
+            },
+            {
+              "desc": "Through the RAWE program, students live in villages for a semester, teaching farmers modern techniques. It is an incredible, life-changing experience.",
+              "icon": "Users",
+              "title": "Rural Immersion (RAWE)"
+            },
+            {
+              "desc": "Agri-Tech is booming. Learn modern techniques like Drone Mapping, Precision Agriculture, and Hydroponics to secure jobs in elite Agri-Tech startups.",
+              "icon": "Activity",
+              "title": "Learn Modern Agri-Tech"
+            },
+            {
+              "desc": "A B.Sc. (Hons.) is the strict prerequisite required if you want to pursue an M.Sc. in Agriculture or clear the ICAR JRF examinations.",
+              "icon": "TrendingUp",
+              "title": "Gateway to M.Sc. & Research"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Professional Agriculture Degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "A massive 50-acre instructional farm on campus dedicated to student crop production, tractor driving, and field experiments.",
+              "icon": "Activity",
+              "title": "50-Acre Instructional Farm"
+            },
+            {
+              "num": "07",
+              "desc": "Dedicated, ICAR-standard laboratories for Soil Testing, Plant Pathology, Entomology, and Agricultural Genetics.",
+              "icon": "FlaskConical",
+              "title": "Advanced Soil & Plant Labs"
+            },
+            {
+              "num": "08",
+              "desc": "Live Polyhouses and Greenhouses where students learn protected cultivation, floriculture, and modern drip irrigation techniques.",
+              "icon": "Globe",
+              "title": "Polyhouse & Protected Cultivation"
+            },
+            {
+              "num": "09",
+              "desc": "A dedicated campus Dairy and Poultry unit giving students hands-on experience in animal husbandry and veterinary basics.",
+              "icon": "Target",
+              "title": "Live Dairy & Poultry Units"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload 12th standard marksheets (Science or Agriculture stream) and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select B.Sc. (Hons.) Agriculture.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for counseling and seat allotment.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the Agriculture programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have passed 10+2 from a recognized board with a minimum of 50% marks. You MUST be from the Science stream (PCM or PCB) OR have studied Agriculture as a main subject in 12th.",
+              "q": "What is the eligibility criteria? Can Commerce/Arts students apply?"
+            },
+            {
+              "a": "It is a 4-year degree program divided into 8 semesters. The tuition fee is ₹35,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "A general B.Sc. Agriculture is 3 years and lacks strict practical guidelines. The 'Honours' degree is a 4-year professional course mandated by ICAR. Government jobs (like AFO) heavily prefer or strictly require the 4-Year Honours degree.",
+              "q": "Why should I choose an 'Honours' degree over a regular B.Sc.?"
+            },
+            {
+              "a": "Graduates are highly targeted for the Bank AFO (Agriculture Field Officer) role. They are also hired by seed companies (Mahyco), fertilizer corporations (UPL), and FMCG giants (ITC). Many students also clear state-level Agriculture Development Officer (ADO) exams.",
+              "q": "What kind of jobs will I get after B.Sc. (Hons.) Agriculture?"
+            },
+            {
+              "a": "Yes! The entire 7th semester is dedicated to RAWE, where you live and work in rural villages. The 8th semester is an Industrial Attachment where you intern at seed or fertilizer companies. There are NO regular classroom lectures in the final year.",
+              "q": "Is field work or an internship mandatory?"
+            },
+            {
+              "a": "Yes, we actively provide special classes and mentoring to help our students clear competitive exams like Bank AFO, Nabard Grade A, and State ADO.",
+              "q": "Does the university help in Bank AFO preparation?"
+            },
+            {
+              "a": "Yes, completing this 4-Year Honours degree makes you fully eligible to appear for the ICAR AIEEA (PG) exams to pursue a Master's (M.Sc.) in specific agricultural branches.",
+              "q": "Can I pursue a Master's degree after this?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the B.Sc. (Hons.) Agriculture programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "ICAR Aligned Curriculum",
+              "Bank AFO Exam Mentoring",
+              "Mandatory RAWE Program",
+              "Agri-Tech Company Placements",
+              "Extensive Farm Practical",
+              "Corporate Internships"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "50-Acre Instructional Farm",
+              "Advanced Soil Testing Lab",
+              "Polyhouses & Greenhouses",
+              "Live Dairy & Poultry Units"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Govt. Bank AFO Selections",
+              "Agri-Corporate Placement Records",
+              "Alumni Network (Govt Officers)",
+              "Latest Farming Methodologies",
+              "Upcoming Agri Conclaves",
+              "Important ICAR Resources"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "4 Year Agricultural Professional Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from a science student to an elite Agricultural Expert.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Foundation of Agri Sciences",
+              "contentTitle": "Mastering Soil and Plant Basics",
+              "contentDesc": "The first year builds your foundational knowledge in core sciences, introducing you to agronomy, soil chemistry, and the basics of farming.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Basic Crop Cultivation",
+                "Soil Sampling & Testing",
+                "Agricultural Communication"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Agronomy",
+                  "desc": "Science of soil and crop",
+                  "icon": "🌱"
+                },
+                {
+                  "title": "Soil Sci",
+                  "desc": "Understanding soil health",
+                  "icon": "🧪"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Soil Analysis",
+                  "desc": "Testing pH and nutrients",
+                  "companies": "Soil Lab",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Fundamentals of Agronomy",
+                "Fundamentals of Soil Science",
+                "Plant Biochemistry",
+                "Introduction to Forestry"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Crops & Pest Management",
+              "contentTitle": "Understanding the Ecosystem",
+              "contentDesc": "Deepen your field knowledge by learning how to protect crops. Master entomology (insects), plant pathology (diseases), and farm machinery.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Pest Identification",
+                "Disease Diagnosis",
+                "Tractor/Machinery Operation"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Entomology",
+                  "desc": "Study of crop insects",
+                  "icon": "🐛"
+                },
+                {
+                  "title": "Pathology",
+                  "desc": "Plant disease control",
+                  "icon": "🦠"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Pest Cataloging",
+                  "desc": "Identifying field insects",
+                  "companies": "Farm Visit",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Crop Production Tech (Kharif/Rabi)",
+                "Fundamentals of Entomology",
+                "Plant Pathology",
+                "Farm Machinery and Power"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "YEAR 3",
+              "tabTitle": "Advanced Farming & Econ",
+              "contentTitle": "The Business of Agriculture",
+              "contentDesc": "Transition from farming to the business of farming. Learn agricultural economics, marketing, and advanced protected cultivation (Polyhouses).",
+              "badge": "YEAR-3",
+              "skills": [
+                "Agri-Marketing Strategy",
+                "Polyhouse Management",
+                "Integrated Pest Mgmt (IPM)"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Agri-Econ",
+                  "desc": "Farming as a business",
+                  "icon": "📈"
+                },
+                {
+                  "title": "Polyhouse",
+                  "desc": "Climate controlled farming",
+                  "icon": "🏠"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Market Survey",
+                  "desc": "Analyzing local crop prices",
+                  "companies": "Mandi Visit",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Integrated Pest Management",
+                "Manures & Fertilizers",
+                "Agricultural Marketing & Trade",
+                "Protected Cultivation"
+              ]
+            },
+            {
+              "id": 4,
+              "tabLabel": "YEAR 4",
+              "tabTitle": "RAWE & Internship",
+              "contentTitle": "Real-World Immersion",
+              "contentDesc": "The final year consists entirely of field work. You will live in villages (RAWE) to teach farmers and intern at corporate seed/fertilizer companies.",
+              "badge": "YEAR-4",
+              "skills": [
+                "Rural Communication",
+                "Corporate Agri Operations",
+                "Farmer Education"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "RAWE",
+                  "desc": "Village immersion program",
+                  "icon": "🏡"
+                },
+                {
+                  "title": "Internship",
+                  "desc": "Corporate agri-business",
+                  "icon": "💼"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Village Report",
+                  "desc": "Socio-economic rural study",
+                  "companies": "RAWE Program",
+                  "color": "#9b0000"
+                }
+              ],
+              "subjects": [
+                "Rural Agricultural Work Experience (RAWE)",
+                "Agro-Industrial Attachment (AIA)",
+                "Plant Clinic Postings",
+                "Final Project Report"
+              ]
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Our Future Agri-Scientists Speak",
+            "highlight": "Speak"
+          },
+          "label": "Testimonials",
+          "list": [
+            {
+              "name": "Rahul Verma",
+              "batch": "B.Sc. (Hons.) Ag. 2022",
+              "company": "AFO, State Bank of India",
+              "emoji": "🚜",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png",
+              "text": "The rigorous practical training and ICAR-aligned syllabus made cracking the IBPS AFO exam a breeze. The faculty support here is incredible."
+            },
+            {
+              "name": "Ananya Sharma",
+              "batch": "B.Sc. (Hons.) Ag. 2021",
+              "company": "Agronomist, UPL Limited",
+              "emoji": "🌾",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+              "text": "The 6 months I spent in the Agro-Industrial Attachment program directly secured my placement at UPL. The industry exposure is unmatched."
+            },
+            {
+              "name": "Siddharth Jain",
+              "batch": "B.Sc. (Hons.) Ag. 2020",
+              "company": "Founder, Agri-Tech Startup",
+              "emoji": "💼",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+              "text": "The RAWE program changed my life. Understanding real farmer problems pushed me to launch my own startup delivering drone-based crop analysis."
+            }
+          ]
+        },
+        "exploreDepartment": {
+          "sectionTitle": {
+            "main": "Explore School of Agriculture",
+            "highlight": "School"
+          },
+          "subtitle": "Discover our massive farms, research labs, and rural engagement modules",
+          "items": [
+            {
+              "title": "Department at a Glance",
+              "icon": "Building2",
+              "items": [
+                "ICAR Aligned Curriculum",
+                "Mandatory RAWE Program",
+                "Govt. AFO Exam Coaching",
+                "Agri-Tech Startup Support",
+                "Extensive Field Practical",
+                "Corporate Placements"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Exclusive Facilities",
+              "icon": "FlaskConical",
+              "items": [
+                "50-Acre Instructional Farm",
+                "Advanced Soil Testing Lab",
+                "Polyhouses & Greenhouses",
+                "Live Dairy & Poultry Units"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Your Department in a Nutshell",
+              "icon": "Star",
+              "items": [
+                "Govt. Bank Selections (AFO)",
+                "Corporate FMCG Placements",
+                "Alumni Network (Govt Officers)",
+                "Upcoming Agri Conclaves",
+                "Important Farming Resources"
+              ],
+              "cta": "START NOW"
+            }
+          ]
+        }
+      },
+     "msc-agronomy": {
+        "title": "Master of Science (Agri.) Agronomy",
+        "duration": "2 Years",
+        "eligibility": "B.Sc. (Hons.) Agriculture with minimum 55% marks from an ICAR recognized university (ICAR AIEEA PG scores preferred)",
+        "description": "An elite ICAR-aligned postgraduate program designed to build advanced agricultural scientists, specializing in crop production, weed management, and sustainable farming technologies.",
+        "metaTitle": "M.Sc. (Agri.) Agronomy Course | Agricultural Sciences | CPU",
+        "metaDescription": "Pursue a 2-year M.Sc. Agronomy at Career Point University. Master crop modeling, weed science, and soil fertility. Complete a live field-based research dissertation.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "2-Year Postgraduate Agricultural Specialization",
+          "title": {
+            "main": "M.Sc. (Agri.) Agronomy",
+            "line1": "M.Sc. (Agri.)",
+            "line2": "Agronomy",
+            "line3": "",
+            "highlight": "Agronomy",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "12L+"
+            },
+            {
+              "label": "Field Research",
+              "value": "Mandatory"
+            }
+          ],
+          "description": "Master the science of crop production. Engage in high-level field experiments, optimize crop yields, and solve the world's most critical food security challenges."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Agronomists Placed",
+              "value": "400+"
+            },
+            {
+              "icon": "Briefcase",
+              "label": "Highest Package",
+              "value": "12 L"
+            },
+            {
+              "icon": "Leaf",
+              "label": "Live Crop Trials",
+              "value": "150+"
+            },
+            {
+              "icon": "FileText",
+              "label": "Research Publications",
+              "value": "200+"
+            },
+            {
+              "icon": "Globe",
+              "label": "Agri-Corporate Ties",
+              "value": "20+"
+            },
+            {
+              "icon": "Star",
+              "label": "ICAR Ph.D. Scholars",
+              "value": "35+"
+            }
+          ],
+          "heading": "Department's Postgraduate Agricultural Impact",
+          "trustBadge": "✓ Curriculum strictly aligned with ICAR (BSMA) Guidelines"
+        },
+        "overview": {
+          "tags": [
+            "2 Years Duration",
+            "4 Semesters",
+            "Field Research Intensive",
+            "ICAR Aligned"
+          ],
+          "subtitle": "What is the M.Sc. Agronomy Programme?",
+          "gridCards": [
+            {
+              "sub": "Maximizing Yield",
+              "icon": "Leaf",
+              "label": "Crop Production"
+            },
+            {
+              "sub": "Herbicides & Control",
+              "icon": "Activity",
+              "label": "Weed Management"
+            },
+            {
+              "sub": "Soil & Nutrients",
+              "icon": "FlaskConical",
+              "label": "Fertility Mgmt."
+            },
+            {
+              "sub": "Dryland & Irrigation",
+              "icon": "Cloud",
+              "label": "Water Management"
+            }
+          ],
+          "paragraphs": [
+            "The Master of Science (Agri.) in Agronomy is the most foundational and critical postgraduate specialization in agriculture. While a B.Sc. gives a broad overview of all farming aspects, an M.Sc. in Agronomy deeply explores the scientific principles of crop-soil-water interactions to maximize agricultural productivity and sustainability.",
+            "The program is heavily research-driven. Students spend massive amounts of time on the university's instructional farms, conducting precise field experiments, analyzing crop data using advanced statistical software, and formulating new farming techniques. The degree culminates in an extensive, field-based Master's Research Thesis."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "Agronomists are the core scientists driving the agricultural industry. Graduates are highly demanded as Senior Agronomists, Subject Matter Specialists, and Farm Managers in top seed and fertilizer companies (UPL, Mahyco, Bayer). Furthermore, it is the primary qualification to clear the Agricultural Scientist Recruitment Board (ASRB) NET, enabling graduates to become Assistant Professors in Agricultural Universities or Senior Scientists in ICAR research institutes.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in Agri-R&D, Academia, and Corporate Farming",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "An ICAR-mandated master's curriculum focusing on field research",
+          "introNote": "The curriculum dives immediately into advanced crop modeling, statistical analysis, and complex weed management techniques.",
+          "outroNote": "A mandatory, year-long field research experiment resulting in a Master's Thesis must be defended to graduate.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 20,
+              "category": "Major Core",
+              "shortName": "MC",
+              "description": "Advanced Agronomy & Weed Science"
+            },
+            {
+              "credits": 10,
+              "category": "Minor/Supporting",
+              "shortName": "MN",
+              "description": "Soil Science & Plant Physiology"
+            },
+            {
+              "credits": 10,
+              "category": "Statistics",
+              "shortName": "ST",
+              "description": "Experimental Design & Data Analysis"
+            },
+            {
+              "credits": 20,
+              "category": "Research",
+              "shortName": "RS",
+              "description": "Master's Thesis (Field Experiment)"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The 2-year M.Sc. Agronomy program operates on a 4-semester system. Semesters 1 and 2 involve intense coursework in advanced crop production, soil fertility, and statistical experimental design. Semesters 3 and 4 are completely dedicated to conducting a live field experiment, recording crop data, and writing a comprehensive Master's Thesis.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Modern Concepts in Crop Production, Principles and Practices of Soil Fertility and Nutrient Management, Statistical Methods for Applied Sciences, Minor Course (e.g., Soil Chemistry), Basic Field Research Setup."
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Principles and Practices of Weed Management, Agronomy of Major Cereals and Pulses, Experimental Designs in Agriculture, Minor Course (e.g., Plant Physiology), Research Synopsis Presentation."
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Dryland Farming and Watershed Management, Agronomy of Oilseed, Fibre and Sugar Crops, Master's Research (Field Experiment Execution & Data Collection), Master's Seminar."
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Master's Research (Data Analysis and Thesis Writing), Final Thesis Submission, Research Paper Publication, Final Viva-Voce Defense."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "ASRB-NET / ICAR-SRF Preparation Module",
+              "credits": 0
+            },
+            {
+              "name": "Statistical Data Analysis (R / SPSS)",
+              "credits": 2
+            },
+            {
+              "name": "Precision Agriculture & Drone Mapping",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for M.Sc. Agronomy",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "10,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "40,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Farm & Research Lab Fee",
+              "amount": "7,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "5,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Admission through ICAR AIEEA PG scores, B.Sc. (Hons.) Ag. marks, followed by Personal Interview / CPU Entrance Test. ",
+              "color": "#00588b"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "ICAR AIEEA Qualified",
+              "values": [
+                "100% Tuition",
+                "-",
+                "-",
+                "-"
+              ]
+            },
+            {
+              "range": "B.Sc. Ag. > 85%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "B.Sc. Ag. 75% – 84%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Students holding a valid ICAR AIEEA PG rank are given top priority and maximum scholarships.",
+            "Merit scholarship is also offered based on B.Sc. (Hons.) Agriculture graduation marks.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "Special research grants are provided for outstanding field thesis projects."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "5000",
+              "3000",
+              "2000",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "Agronomy is the most demanded and foundational branch in agriculture. It opens doors to elite R&D roles in top seed and agro-chemical companies.",
+              "icon": "TrendingUp",
+              "title": "Elite R&D Career Roles"
+            },
+            {
+              "desc": "It is the strict, mandatory qualification required by ICAR to clear the ASRB NET and become an Assistant Professor or Agricultural Scientist.",
+              "icon": "BookOpen",
+              "title": "Gateway to Academia & ICAR"
+            },
+            {
+              "desc": "Conduct a year-long, independent field experiment on our massive 50-acre instructional farm, gathering real-time crop and soil data.",
+              "icon": "Leaf",
+              "title": "Massive Field Research"
+            },
+            {
+              "desc": "Learn how to use advanced statistical software (R, SPSS) to analyze crop yields and design complex agricultural experiments.",
+              "icon": "Activity",
+              "title": "Advanced Data Analysis"
+            },
+            {
+              "desc": "The mandatory master's thesis forces you to innovate, leading to research publications in reputed national and international agricultural journals.",
+              "icon": "FileText",
+              "title": "Publish Research Papers"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Master's Degree in Agronomy",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Dedicated research plots on the 50-acre farm exclusively allocated to M.Sc. students for their thesis field trials.",
+              "icon": "Activity",
+              "title": "Dedicated Research Plots"
+            },
+            {
+              "num": "07",
+              "desc": "Learn directly from Ph.D. holding professors, former ICAR scientists, and agronomists with decades of field experience.",
+              "icon": "Users",
+              "title": "Expert Scientific Faculty"
+            },
+            {
+              "num": "08",
+              "desc": "Access to advanced soil and plant analysis laboratories to test samples collected from your field experiments.",
+              "icon": "FlaskConical",
+              "title": "Advanced Analytical Labs"
+            },
+            {
+              "num": "09",
+              "desc": "Dedicated placement support targeting the R&D wings of top corporate farming and agro-chemical companies like Bayer and UPL.",
+              "icon": "Target",
+              "title": "Corporate Agri Placements"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload B.Sc. (Hons.) Agriculture marksheets, ICAR scorecard (if applicable), and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select Master of Science (Agronomy).",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for the PG agricultural screening process.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the M.Sc. Agronomy programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates MUST hold a 4-year B.Sc. (Hons.) Agriculture degree with a minimum of 55% marks. General 3-year B.Sc. (Botany/Zoology) graduates are NOT eligible for this ICAR-aligned course.",
+              "q": "What is the eligibility criteria? Can a regular B.Sc. student apply?"
+            },
+            {
+              "a": "It is a 2-year (4 semester) postgraduate program. The tuition fee is ₹40,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "Agronomy is the foundational science of crop production, focusing on field crops (wheat, rice), soil, and weed management. Horticulture is a different specialization focusing specifically on fruits, vegetables, and flowers.",
+              "q": "What is the difference between Agronomy and Horticulture?"
+            },
+            {
+              "a": "Yes, conducting an independent, year-long field experiment and submitting a heavily researched Master's Dissertation (Thesis) is a strict mandatory requirement to obtain the degree.",
+              "q": "Is a field research project or thesis mandatory?"
+            },
+            {
+              "a": "Graduates are hired as Senior Agronomists, Farm Managers, and R&D Scientists in seed and fertilizer companies (UPL, Bayer, Mahyco). Many clear ASRB NET to become Assistant Professors in agricultural universities.",
+              "q": "What kind of jobs will I get after M.Sc. Agronomy?"
+            },
+            {
+              "a": "Yes, our curriculum heavily integrates advanced statistics, specifically teaching you how to use software like 'R' and SPSS to analyze complex crop yield data.",
+              "q": "Will I learn statistical data analysis?"
+            },
+            {
+              "a": "Yes, completing an M.Sc. in Agronomy is the standard requirement if you wish to clear the ICAR-SRF exam and pursue a Ph.D. in Agricultural Sciences.",
+              "q": "Can I pursue a Ph.D. after completing this course?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the M.Sc. Agronomy programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "ICAR (BSMA) Aligned Curriculum",
+              "ASRB-NET / ICAR-SRF Coaching",
+              "Mandatory Field Dissertation",
+              "Corporate Agri-Tech Placements",
+              "Academic Teaching Placements",
+              "Research Paper Publishing Support"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Dedicated M.Sc. Research Plots",
+              "Advanced Soil Chemistry Lab",
+              "Statistical Data Analysis Center",
+              "Modern Crop Physiology Lab"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Corporate Agronomist Placements",
+              "Student Research Publications",
+              "Alumni in ICAR / State Universities",
+              "Upcoming Agri Conclaves",
+              "Important ICAR Resources"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "2 Year Advanced Agricultural Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from an agriculture graduate to an elite Agronomist.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Advanced Theory & Stats",
+              "contentTitle": "Mastering Crop Science & Experimental Design",
+              "contentDesc": "The first year elevates your foundational knowledge, focusing on advanced crop production techniques, complex soil chemistry, and the heavy statistics required to design valid field experiments.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Advanced Crop Modeling",
+                "Statistical Analysis (SPSS/R)",
+                "Designing Field Experiments"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Agronomy",
+                  "desc": "Modern crop production",
+                  "icon": "🌱"
+                },
+                {
+                  "title": "Statistics",
+                  "desc": "Designing valid experiments",
+                  "icon": "📊"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Thesis Synopsis",
+                  "desc": "Drafting research proposals",
+                  "companies": "Research Cell",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Modern Concepts in Crop Production",
+                "Principles of Weed Management",
+                "Statistical Methods for Applied Sciences",
+                "Experimental Designs in Agriculture"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Field Research & Thesis",
+              "contentTitle": "Independent Scientific Execution",
+              "contentDesc": "The entire second year is dedicated to executing a novel field experiment on our research plots, recording crop data, writing your Master's Thesis, and defending it before a panel.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Independent Field Experimentation",
+                "Scientific Paper Writing",
+                "Thesis Defense & Presentation"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Research",
+                  "desc": "Solving live farm problems",
+                  "icon": "🧪"
+                },
+                {
+                  "title": "Thesis",
+                  "desc": "Scientific documentation",
+                  "icon": "🎓"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Master's Dissertation",
+                  "desc": "Live field experiment thesis",
+                  "companies": "Final Defense",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Master's Research (Field Experiment Execution)",
+                "Data Collection and Statistical Analysis",
+                "Master's Dissertation (Thesis Writing)",
+                "Seminar & Final Viva-Voce"
+              ]
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Our Agricultural Scientists Speak",
+            "highlight": "Speak"
+          },
+          "label": "Testimonials",
+          "list": [
+            {
+              "name": "Ananya Sharma",
+              "batch": "M.Sc. Agronomy 2022",
+              "company": "Senior Agronomist, UPL",
+              "emoji": "🌾",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+              "text": "The dedicated research plots provided for my Master's thesis allowed me to conduct precise weed management trials. This directly helped me secure my R&D role at UPL."
+            },
+            {
+              "name": "Siddharth Jain",
+              "batch": "M.Sc. Agronomy 2021",
+              "company": "Ph.D. Scholar, ICAR Institute",
+              "emoji": "🎓",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+              "text": "The rigorous training in experimental design and statistics using 'R' gave me a massive analytical advantage, helping me easily clear the ICAR-SRF examination."
+            },
+            {
+              "name": "Vikram Singh",
+              "batch": "M.Sc. Agronomy 2020",
+              "company": "Assistant Professor",
+              "emoji": "👨‍🏫",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+              "text": "The ASRB-NET mentorship provided by the faculty allowed me to seamlessly transition from a researcher into an academic teaching career in an agricultural university."
+            }
+          ]
+        },
+        "exploreDepartment": {
+          "sectionTitle": {
+            "main": "Explore School of Agriculture",
+            "highlight": "School"
+          },
+          "subtitle": "Discover our massive farms, research labs, and ASRB-NET training modules",
+          "items": [
+            {
+              "title": "Department at a Glance",
+              "icon": "Building2",
+              "items": [
+                "ICAR (BSMA) Aligned Curriculum",
+                "ASRB-NET / ICAR-SRF Coaching",
+                "Mandatory Field Dissertation",
+                "Corporate Agri-Tech Placements",
+                "Academic Teaching Placements",
+                "Research Paper Publishing Support"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Exclusive Facilities",
+              "icon": "FlaskConical",
+              "items": [
+                "Dedicated M.Sc. Research Plots",
+                "Advanced Soil Chemistry Lab",
+                "Statistical Data Analysis Center",
+                "Modern Crop Physiology Lab"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Your Department in a Nutshell",
+              "icon": "Star",
+              "items": [
+                "Corporate Agronomist Placements",
+                "Student Research Publications",
+                "Alumni in ICAR / State Universities",
+                "Upcoming Agri Conclaves",
+                "Important ICAR Resources"
+              ],
+              "cta": "START NOW"
+            }
+          ]
+        }
+      },
+     "msc-horticulture": {
+        "title": "Master of Science (Agri.) Horticulture",
+        "duration": "2 Years",
+        "eligibility": "B.Sc. (Hons.) Agriculture/Horticulture with minimum 55% marks from an ICAR recognized university",
+        "description": "A specialized postgraduate program focusing on the advanced science of fruit breeding, vegetable production, floriculture, and high-tech protected cultivation.",
+        "metaTitle": "M.Sc. (Agri.) Horticulture Course | Agricultural Sciences | CPU",
+        "metaDescription": "Pursue a 2-year M.Sc. Horticulture at Career Point University. Master Pomology, Olericulture, and Polyhouse farming. Top placements in Food Processing and Agri-Corporate.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "2-Year ICAR Aligned Postgraduate Specialization",
+          "title": {
+            "main": "M.Sc. (Agri.) Horticulture",
+            "line1": "M.Sc. (Agri.)",
+            "line2": "Horticulture",
+            "line3": "",
+            "highlight": "Horticulture",
+            "skyHighlight": ""
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "Highest Pkg",
+              "value": "11L+"
+            },
+            {
+              "label": "Polyhouse Training",
+              "value": "Mandatory"
+            }
+          ],
+          "description": "Cultivate high-value crops. Master the advanced techniques of fruit science, landscape architecture, and modern greenhouse management to dominate the commercial agriculture sector."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Horticulturists Placed",
+              "value": "300+"
+            },
+            {
+              "icon": "Briefcase",
+              "label": "Highest Package",
+              "value": "11 L"
+            },
+            {
+              "icon": "Activity",
+              "label": "Protected Cultivation Labs",
+              "value": "5+"
+            },
+            {
+              "icon": "FileText",
+              "label": "New Varieties Developed",
+              "value": "15+"
+            },
+            {
+              "icon": "Globe",
+              "label": "FMCG/Food Tie-ups",
+              "value": "18+"
+            },
+            {
+              "icon": "Star",
+              "label": "Horticulture Startups",
+              "value": "20+"
+            }
+          ],
+          "heading": "Department's Horticultural Impact & Innovation",
+          "trustBadge": "✓ Curriculum strictly aligned with ICAR (BSMA) Guidelines"
+        },
+        "overview": {
+          "tags": [
+            "2 Years Duration",
+            "4 Semesters",
+            "Commercial Farming",
+            "ICAR Aligned"
+          ],
+          "subtitle": "What is the M.Sc. Horticulture Programme?",
+          "gridCards": [
+            {
+              "sub": "Fruit Science",
+              "icon": "Activity",
+              "label": "Pomology"
+            },
+            {
+              "sub": "Vegetable Science",
+              "icon": "Leaf",
+              "label": "Olericulture"
+            },
+            {
+              "sub": "Flowers & Landscaping",
+              "icon": "Star",
+              "label": "Floriculture"
+            },
+            {
+              "sub": "Post-Harvest",
+              "icon": "FlaskConical",
+              "label": "Food Processing"
+            }
+          ],
+          "paragraphs": [
+            "The Master of Science (Agri.) in Horticulture is a high-value specialization dealing with the intense cultivation of fruits, vegetables, flowers, spices, and plantation crops. Unlike general agronomy, horticulture focuses heavily on commercial, high-profit crops, aesthetic landscaping, and the crucial post-harvest processing of perishable foods.",
+            "Our curriculum heavily leverages the university's advanced Polyhouses and Greenhouses. Students learn climate-controlled farming, hydroponics, genetic breeding of fruits, and advanced orchard management. The second year mandates an independent research thesis where students must develop, test, or optimize a specific horticultural crop variety or farming technique."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "Horticulture is the most commercially profitable branch of agriculture. Graduates are hired as Horticulture Officers in State Departments, Plantation Managers, and Landscape Architects. Massive demand exists in the FMCG and Food Processing sector (e.g., ITC, Kissan, Tropicana) for experts in post-harvest technology and cold chain management. Furthermore, the technical knowledge gained allows graduates to launch highly profitable Agri-Startups focusing on organic farming, floriculture exports, or hydroponics.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in Commercial Farming, FMCG, and Agri-Startups",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "An ICAR-mandated master's curriculum focusing on high-value crops",
+          "introNote": "The curriculum dives into advanced breeding, modern propagation techniques, and the complex engineering of climate-controlled greenhouses.",
+          "outroNote": "A mandatory, year-long experimental research thesis based in our orchards or polyhouses must be defended to graduate.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 20,
+              "category": "Major Core",
+              "shortName": "MC",
+              "description": "Fruit & Vegetable Sciences"
+            },
+            {
+              "credits": 10,
+              "category": "Minor/Supporting",
+              "shortName": "MN",
+              "description": "Plant Pathology & Genetics"
+            },
+            {
+              "credits": 10,
+              "category": "Commercial Tech",
+              "shortName": "CT",
+              "description": "Polyhouse & Post-Harvest Mgmt"
+            },
+            {
+              "credits": 20,
+              "category": "Research",
+              "shortName": "RS",
+              "description": "Master's Thesis (Field/Lab Experiment)"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The 2-year M.Sc. Horticulture program operates on a 4-semester system. Semesters 1 and 2 focus on the advanced propagation, breeding, and production technology of various horticultural crops. Semesters 3 and 4 shift focus to commercial aspects like post-harvest technology, landscaping, and executing an independent Master's Research Thesis.",
+              "hasTable": true
+            },
+            {
+              "id": "s1",
+              "title": "Semester-1",
+              "content": "Production Technology of Warm Season Fruit Crops, Fundamentals of Olericulture (Vegetable Science), Plant Propagation and Nursery Management, Statistical Methods for Applied Sciences, Horticulture Lab Practice I."
+            },
+            {
+              "id": "s2",
+              "title": "Semester-2",
+              "content": "Production Technology of Cool Season Fruit Crops, Breeding of Horticultural Crops, Protected Cultivation (Greenhouse/Polyhouse Tech), Experimental Designs in Agriculture, Research Synopsis Presentation."
+            },
+            {
+              "id": "s3",
+              "title": "Semester-3",
+              "content": "Commercial Floriculture and Landscaping, Post-Harvest Technology of Horticultural Crops, Spices and Plantation Crops, Master's Research (Data Collection & Field Execution), Master's Seminar."
+            },
+            {
+              "id": "s4",
+              "title": "Semester-4",
+              "content": "Master's Research (Data Analysis and Thesis Writing), Final Thesis Submission, Research Paper Publication, Final Viva-Voce Defense."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "Hydroponics & Soilless Cultivation",
+              "credits": 2
+            },
+            {
+              "name": "Landscape Architecture Basics",
+              "credits": 2
+            },
+            {
+              "name": "Food Processing & Cold Chain Logistics",
+              "credits": 0
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for M.Sc. Horticulture",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "10,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "40,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "3,000/- per Semester"
+            },
+            {
+              "label": "Polyhouse & Lab Fee",
+              "amount": "7,000/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "5,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Admission through ICAR AIEEA PG scores, B.Sc. (Hons.) Ag. marks, followed by Personal Interview / CPU Entrance Test. ",
+              "color": "#00588b"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "ICAR AIEEA Qualified",
+              "values": [
+                "100% Tuition",
+                "-",
+                "-",
+                "-"
+              ]
+            },
+            {
+              "range": "B.Sc. Ag. > 85%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "B.Sc. Ag. 75% – 84%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Students holding a valid ICAR AIEEA PG rank are given top priority and maximum scholarships.",
+            "Merit scholarship is also offered based on B.Sc. (Hons.) Agriculture graduation marks.",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "Special research grants are provided for outstanding thesis projects in protected cultivation."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "5000",
+              "3000",
+              "2000",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "Horticulture is highly lucrative. You learn to cultivate high-value cash crops like exotic fruits, medicinal plants, and commercial flowers.",
+              "icon": "TrendingUp",
+              "title": "High Commercial Value"
+            },
+            {
+              "desc": "It is the strict, mandatory qualification required to clear ASRB NET and become a University Professor or an ICAR Scientist specializing in Pomology/Olericulture.",
+              "icon": "BookOpen",
+              "title": "Gateway to Academia & ICAR"
+            },
+            {
+              "desc": "Master the future of farming. We heavily emphasize Polyhouse (Greenhouse) technology, hydroponics, and precision climate control.",
+              "icon": "Cloud",
+              "title": "Protected Cultivation Focus"
+            },
+            {
+              "desc": "Learn how to process, package, and preserve perishable crops to prevent waste, opening doors to top FMCG and Food Processing MNCs.",
+              "icon": "Activity",
+              "title": "Post-Harvest Expertise"
+            },
+            {
+              "desc": "The mandatory master's thesis forces you to innovate, leading to research publications in reputed national and international agricultural journals.",
+              "icon": "FileText",
+              "title": "Publish Research Papers"
+            }
+          ],
+          "subtitle": "Unlock your potential with a Master's Degree in Horticulture",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Access to advanced, climate-controlled Polyhouses on campus for specialized research in exotic and off-season crops.",
+              "icon": "Globe",
+              "title": "Live Polyhouse Access"
+            },
+            {
+              "num": "07",
+              "desc": "Extensive campus orchards featuring diverse fruit varieties for hands-on pruning, grafting, and breeding practicals.",
+              "icon": "Leaf",
+              "title": "Dedicated Orchards"
+            },
+            {
+              "num": "08",
+              "desc": "A specialized laboratory for post-harvest management, focusing on the preservation and value-addition of horticultural crops.",
+              "icon": "FlaskConical",
+              "title": "Post-Harvest Tech Lab"
+            },
+            {
+              "num": "09",
+              "desc": "Dedicated placement support targeting the State Horticulture Departments and top corporate food processing companies like ITC.",
+              "icon": "Target",
+              "title": "FMCG & Corporate Placements"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload B.Sc. (Hons.) Agriculture/Horticulture marksheets, ICAR scorecard (if applicable), and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select Master of Science (Horticulture).",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for the PG agricultural screening process.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the M.Sc. Horticulture programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates MUST hold a 4-year B.Sc. (Hons.) Agriculture or Horticulture degree with a minimum of 55% marks. General 3-year B.Sc. (Botany/Zoology) graduates are NOT eligible for this ICAR-aligned course.",
+              "q": "What is the eligibility criteria? Can a regular B.Sc. student apply?"
+            },
+            {
+              "a": "It is a 2-year (4 semester) postgraduate program. The tuition fee is ₹40,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "Agronomy is the science of broad field crops (wheat, rice) and soil management. Horticulture is a highly specialized branch focusing specifically on fruits (Pomology), vegetables (Olericulture), flowers, and greenhouse cultivation.",
+              "q": "What is the difference between Agronomy and Horticulture?"
+            },
+            {
+              "a": "Yes, conducting an independent, year-long field/polyhouse experiment and submitting a heavily researched Master's Dissertation (Thesis) is a strict mandatory requirement to obtain the degree.",
+              "q": "Is a field research project or thesis mandatory?"
+            },
+            {
+              "a": "Graduates are hired as State Horticulture Officers, Plantation Managers, and Post-Harvest Experts in FMCG companies like ITC and Reliance Fresh. Many also start highly profitable nurseries or hydroponic farms.",
+              "q": "What kind of jobs will I get after M.Sc. Horticulture?"
+            },
+            {
+              "a": "Yes! We place a heavy emphasis on protected cultivation, and you will receive practical training in operating and managing our campus Polyhouses and Greenhouses.",
+              "q": "Will I learn Polyhouse or Greenhouse farming?"
+            },
+            {
+              "a": "Yes, completing an M.Sc. in Horticulture is the standard requirement if you wish to clear the ICAR-SRF exam and pursue a Ph.D. in Agricultural Sciences.",
+              "q": "Can I pursue a Ph.D. after completing this course?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the M.Sc. Horticulture programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "ICAR (BSMA) Aligned Curriculum",
+              "ASRB-NET / ICAR-SRF Coaching",
+              "Mandatory Polyhouse Research",
+              "FMCG & Corporate Placements",
+              "Academic Teaching Placements",
+              "Research Paper Publishing Support"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Climate-Controlled Polyhouses",
+              "Advanced Post-Harvest Tech Lab",
+              "Dedicated University Orchards",
+              "Plant Tissue Culture Center"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Govt. Horticulture Officer Selections",
+              "Student Research Publications",
+              "Alumni in ICAR / FMCG Sector",
+              "Upcoming Agri Conclaves",
+              "Important ICAR Resources"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "2 Year Commercial Farming Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from an agriculture graduate to an elite Horticulturist.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Advanced Theory & Protected Cultivation",
+              "contentTitle": "Mastering Fruits, Veggies & Polyhouses",
+              "contentDesc": "The first year elevates your foundational knowledge, focusing on the production of commercial crops, advanced plant breeding, and managing greenhouse environments.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Polyhouse Operations",
+                "Advanced Crop Breeding",
+                "Statistical Analysis"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Pomology",
+                  "desc": "Advanced fruit science",
+                  "icon": "🍎"
+                },
+                {
+                  "title": "Greenhouse",
+                  "desc": "Climate controlled farming",
+                  "icon": "🏠"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Thesis Synopsis",
+                  "desc": "Drafting research proposals",
+                  "companies": "Research Cell",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Production Tech of Fruit Crops",
+                "Fundamentals of Olericulture",
+                "Protected Cultivation",
+                "Statistical Methods in Agriculture"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Research & Thesis",
+              "contentTitle": "Independent Scientific Execution",
+              "contentDesc": "The entire second year is dedicated to executing a novel experiment in the orchard or polyhouse, recording data, writing your Master's Thesis, and defending it.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Post-Harvest Management",
+                "Scientific Paper Writing",
+                "Thesis Defense & Presentation"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Research",
+                  "desc": "Solving live crop problems",
+                  "icon": "🧪"
+                },
+                {
+                  "title": "Thesis",
+                  "desc": "Scientific documentation",
+                  "icon": "🎓"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Master's Dissertation",
+                  "desc": "Live field/lab experiment thesis",
+                  "companies": "Final Defense",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Post-Harvest Technology",
+                "Commercial Floriculture",
+                "Master's Dissertation (Thesis Writing)",
+                "Seminar & Final Viva-Voce"
+              ]
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Our Horticultural Experts Speak",
+            "highlight": "Speak"
+          },
+          "label": "Testimonials",
+          "list": [
+            {
+              "name": "Ananya Sharma",
+              "batch": "M.Sc. Horticulture 2022",
+              "company": "Supply Chain Expert, ITC",
+              "emoji": "🍎",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+              "text": "The rigorous training in Post-Harvest Technology and cold chain logistics was a game-changer. It directly helped me secure my role at ITC's Agri-Business division."
+            },
+            {
+              "name": "Siddharth Jain",
+              "batch": "M.Sc. Horticulture 2021",
+              "company": "State Horticulture Officer",
+              "emoji": "🌱",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+              "text": "The ICAR-aligned syllabus and advanced knowledge of protected cultivation made cracking the State PSC exam for Horticulture Officer very straightforward."
+            },
+            {
+              "name": "Vikram Singh",
+              "batch": "M.Sc. Horticulture 2020",
+              "company": "Founder, Urban Farms",
+              "emoji": "🏠",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+              "text": "Conducting my master's thesis inside the campus Polyhouse gave me the practical confidence to launch my own commercial hydroponics and exotic vegetable startup."
+            }
+          ]
+        },
+        "exploreDepartment": {
+          "sectionTitle": {
+            "main": "Explore School of Agriculture",
+            "highlight": "School"
+          },
+          "subtitle": "Discover our polyhouses, research labs, and ASRB-NET training modules",
+          "items": [
+            {
+              "title": "Department at a Glance",
+              "icon": "Building2",
+              "items": [
+                "ICAR (BSMA) Aligned Curriculum",
+                "ASRB-NET / ICAR-SRF Coaching",
+                "Mandatory Polyhouse Research",
+                "FMCG & Corporate Placements",
+                "Academic Teaching Placements",
+                "Research Paper Publishing Support"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Exclusive Facilities",
+              "icon": "FlaskConical",
+              "items": [
+                "Climate-Controlled Polyhouses",
+                "Advanced Post-Harvest Tech Lab",
+                "Dedicated University Orchards",
+                "Statistical Data Analysis Center"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Your Department in a Nutshell",
+              "icon": "Star",
+              "items": [
+                "Govt. Horticulture Officer Selections",
+                "Student Research Publications",
+                "Alumni in ICAR / FMCG Sector",
+                "Upcoming Agri Conclaves",
+                "Important ICAR Resources"
+              ],
+              "cta": "START NOW"
+            }
+          ]
+        }
+      }
+    },
+    "placements": {
+      "title": {
+        "main": "Agri-Professionals in Top Organizations",
+        "highlight": "Top Organizations"
+      },
+      "label": "Placement Records",
+      "subtitle": "Outstanding placements across Government Banks, Seed Companies, FMCG, and Agri-Tech Startups.",
+      "list": [
+        {
+          "name": "Rahul Verma",
+          "company": "Agriculture Field Officer (AFO), SBI",
+          "pkg": "Govt. Scale",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
+        },
+        {
+          "name": "Ananya Sharma",
+          "company": "R&D Scientist, Mahyco Seeds",
+          "pkg": "8 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        },
+        {
+          "name": "Vikram Rathore",
+          "company": "Territory Manager, ITC Agri",
+          "pkg": "9.5 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
+        },
+        {
+          "name": "Priya Singh",
+          "company": "Agronomist, UPL Limited",
+          "pkg": "7 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Saloni.jpg"
+        },
+        {
+          "name": "Siddharth Jain",
+          "company": "Agri-Tech Startup Founder",
+          "pkg": "Funded",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png"
+        },
+        {
+          "name": "Megha Nair",
+          "company": "Quality Control, Amul (FMCG)",
+          "pkg": "6.5 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg"
+        }
+      ]
+    },
+    "alumni": {
+      "title": {
+        "main": "Scientists Making a Global Impact",
+        "highlight": "Impact"
+      },
+      "label": "Our Alumni",
+      "list": [
+        {
+          "name": "Dr. Sameer Khan",
+          "role": "Senior Scientist",
+          "company": "ICAR Institute",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/aryan.jpg"
+        },
+        {
+          "name": "Kavita Rao",
+          "role": "Horticulture Officer",
+          "company": "State Agriculture Dept.",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        },
+        {
+          "name": "Rohan Mehra",
+          "role": "Operations Head",
+          "company": "DeHaat (Agri-Tech)",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/harsh.jpg"
+        }
+      ]
+    },
+    "industry": {
+      "title": {
+        "main": "Corporate & Agri-Tech Tie Up's",
+        "highlight": "Tie Up's"
+      },
+      "label": "Collaborations",
+      "partners": [
+        {
+          "name": "UPL Limited",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "Mahyco Seeds",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "ITC Agri Business",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "DeHaat",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg"
+        }
+      ]
+    },
+    "research": {
+      "title": {
+        "main": "Agricultural Research & Development",
+        "highlight": "Research"
+      },
+      "label": "Agri Eminence",
+      "gallery": [
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-7.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-12.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-4.jpg"
+      ],
+      "stats": [
+        {
+          "value": "100+",
+          "label": "Research Papers Published",
+          "icon": "BookOpen"
+        },
+        {
+          "value": "20+",
+          "label": "Crop Varieties Tested",
+          "icon": "Leaf"
+        },
+        {
+          "value": "15+",
+          "label": "Govt. Funded Projects",
+          "icon": "FileText"
+        },
+        {
+          "value": "500+",
+          "label": "Farmers Trained",
+          "icon": "Users"
+        }
+      ]
+    },
+    "community": {
+      "title": {
+        "main": "A Community of Modern Farmers",
+        "highlight": "Farmers"
+      },
+      "label": "Community Action",
+      "description": [
+        "The School of Agricultural Sciences doesn't operate in closed rooms; our laboratory is the open field. Students spend massive amounts of time on our 50+ acre instructional farms, growing crops, testing soils, and managing dairy and poultry units.",
+        "Through the mandatory RAWE (Rural Agricultural Work Experience) program, our students live in villages, understanding grassroots farming problems, and educating local farmers on modern, sustainable, and organic agricultural practices."
+      ],
+      "gallery": [
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-7-1.jpg",
+          "caption": "Students testing soil samples in the lab"
+        },
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-12-1.jpg",
+          "caption": "Field training on the University Farm"
+        }
+      ]
+    },
+    "infrastructure": {
+      "title": {
+        "main": "Massive Agricultural Infrastructure",
+        "highlight": "Infrastructure"
+      },
+      "label": "Campus & Farms",
+      "list": [
+        {
+          "title": "50+ Acre Instructional Farm",
+          "desc": "Massive on-campus agricultural land dedicated purely to student crop production, research, and tractor/machinery training.",
+          "img": "https://img.freepik.com/free-photo/business-people-meeting_1048-1234.jpg"
+        },
+        {
+          "title": "Advanced Soil & Plant Labs",
+          "desc": "State-of-the-art laboratories for Soil Science, Plant Pathology, Entomology, and Genetics equipped with modern diagnostic tools.",
+          "img": "https://img.freepik.com/free-photo/modern-office-space_1170-2.jpg"
+        },
+        {
+          "title": "Polyhouse & Greenhouses",
+          "desc": "Climate-controlled structures for teaching advanced protected cultivation and modern horticulture techniques.",
+          "img": "https://img.freepik.com/free-photo/stock-market-display_1048-3333.jpg"
+        },
+        {
+          "title": "Dairy & Poultry Unit",
+          "desc": "Live animal husbandry units where students learn practical management, breeding, and veterinary basics.",
+          "img": "https://img.freepik.com/free-photo/modern-classroom-projector_1048-12346.jpg"
+        }
+      ]
+    },
+    "testimonials": {
+      "title": {
+        "main": "Our Future Scientists Speak",
+        "highlight": "Speak"
+      },
+      "label": "Testimonials",
+      "list": [
+        {
+          "name": "Rahul Verma",
+          "batch": "B.Sc. Ag. 2022",
+          "company": "AFO, State Bank of India",
+          "emoji": "🚜",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png",
+          "text": "The rigorous practical training and ICAR-aligned syllabus made cracking the IBPS AFO exam a breeze. The faculty support here is incredible."
+        },
+        {
+          "name": "Ananya Sharma",
+          "batch": "M.Sc. Agronomy 2021",
+          "company": "Scientist, Mahyco",
+          "emoji": "🌾",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+          "text": "Conducting my Master's research on the 50-acre university farm gave me the exact practical data I needed to secure a top R&D role in the seed industry."
+        },
+        {
+          "name": "Siddharth Jain",
+          "batch": "B.Sc. Ag. 2020",
+          "company": "Founder, Agri-Tech Startup",
+          "emoji": "💼",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+          "text": "The RAWE program changed my life. Understanding real farmer problems pushed me to launch my own startup delivering drone-based crop analysis."
+        }
+      ]
+    },
+    "exploreDepartment": {
+      "sectionTitle": {
+        "main": "Explore School of Agriculture",
+        "highlight": "School"
+      },
+      "subtitle": "Discover our massive farms, research labs, and rural engagement modules",
+      "items": [
+        {
+          "title": "Department at a Glance",
+          "icon": "Building2",
+          "items": [
+            "ICAR Aligned Curriculum",
+            "Mandatory RAWE Program",
+            "Govt. AFO Exam Coaching",
+            "Agri-Tech Startup Support",
+            "Extensive Field Practical",
+            "Corporate Placements"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Exclusive Facilities",
+          "icon": "FlaskConical",
+          "items": [
+            "50+ Acre Instructional Farm",
+            "Soil Testing & Pathology Labs",
+            "Polyhouse & Greenhouses",
+            "Live Dairy & Poultry Units"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Your Department in a Nutshell",
+          "icon": "Star",
+          "items": [
+            "Govt. Bank Selections (AFO)",
+            "Corporate FMCG Placements",
+            "Student Research Publications",
+            "Upcoming Agri Conclaves",
+            "Important Farming Resources"
+          ],
+          "cta": "START NOW"
+        }
+      ]
+    }
+  }
+}

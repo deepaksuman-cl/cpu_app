@@ -7,7 +7,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 // Safe resolution of upload directory in cPanel
-const getUploadDir = () => path.join(process.cwd(), 'uploads', 'media');
+const getUploadDir = () => path.join(process.cwd(), 'public', 'uploads', 'media');
 
 export async function getAllMedia() {
   try {
@@ -44,20 +44,16 @@ export async function uploadLocalMedia(formData) {
       const originalName = file.name || 'unnamed-file';
       const fileSize = file.size || 0;
 
-      // Duplicate Check: Same name and same byte size
-      const existingMedia = await Media.findOne({
-        where: {
-          originalName: originalName,
-          size: fileSize
-        }
-      });
-
+      // 🛡️ DUPLICATE CHECK: Match by original filename — return existing record instead of re-uploading
+      const trimmedName = originalName.trim();
+      const existingMedia = await Media.findOne({ where: { originalName: trimmedName } });
       if (existingMedia) {
-        throw new Error(`File '${originalName}' already exists in library!`);
+        processedMedia.push({ ...existingMedia.toJSON(), duplicate: true });
+        continue; // skip disk write and DB insert — already in library
       }
 
-      // 🛡️ Bulletproof: Sanitize filename (spaces to hyphens, remove special chars) & ensure uniqueness
-      const sanitizedName = originalName.replace(/[^a-zA-Z0-9.-]/g, '-').replace(/-+/g, '-');
+      // 🛡️ Bulletproof: Sanitize filename (spaces to hyphens, remove special chars)
+      const sanitizedName = trimmedName.replace(/[^a-zA-Z0-9.-]/g, '-').replace(/-+/g, '-');
       const uniqueSuffix = Math.random().toString(36).substring(2, 7);
       const fileName = `${Date.now()}-${uniqueSuffix}-${sanitizedName}`;
       const filePath = path.join(uploadDir, fileName);
@@ -68,12 +64,12 @@ export async function uploadLocalMedia(formData) {
       const media = await Media.create({
         displayName: originalName,
         originalName: originalName,
-        url: `/api/media/media/${fileName}`,
+        url: `/uploads/media/${fileName}`,
         isExternal: false,
         mimeType: file.type || 'application/octet-stream',
         size: fileSize,
       });
-      processedMedia.push(media);
+      processedMedia.push(media.toJSON());
     }
 
     revalidatePath('/', 'layout');
@@ -91,22 +87,70 @@ export async function uploadLocalMedia(formData) {
 }
 
 
+/**
+ * 🚀 AUTO-DOWNLOAD SYSTEM:
+ * Instead of just saving the link (which causes CORS/404 issues in browsers), 
+ * we "pull" the content to our server.
+ */
 export async function saveExternalMedia(url) {
   try {
     await connectToDatabase();
     if (!url) throw new Error('URL is required');
 
+    // 1. Fetch the remote content
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+    });
+
+    if (!response.ok) throw new Error(`Failed to fetch remote asset: ${response.statusText}`);
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+    const contentType = response.headers.get('content-type') || 'application/octet-stream';
+    const fileSize = buffer.length;
+
+    // 2. Resolve Filename & Extension
+    const urlPath = new URL(url).pathname;
+    let originalName = urlPath.split('/').pop() || 'remote-asset';
+    
+    // Add extension if missing but known from Mime
+    if (!originalName.includes('.') && contentType.includes('/')) {
+      const ext = contentType.split('/')[1].split(';')[0];
+      originalName = `${originalName}.${ext}`;
+    }
+
+    const uploadDir = getUploadDir();
+    await fs.mkdir(uploadDir, { recursive: true });
+
+    // 🛡️ DUPLICATE CHECK: Match by filename — same URL always produces the same filename
+    const existingMedia = await Media.findOne({ where: { originalName: originalName } });
+    if (existingMedia) {
+      return { success: true, data: JSON.parse(JSON.stringify(existingMedia)), error: null, duplicate: true };
+    }
+
+    // 3. Unique Local Filename
+    const sanitizedName = originalName.replace(/[^a-zA-Z0-9.-]/g, '-');
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 7)}-${sanitizedName}`;
+    const filePath = path.join(uploadDir, fileName);
+
+    // 4. Save to Persistent Disk
+    await fs.writeFile(filePath, buffer);
+
+    // 5. Create Database Local Record (Convert External to Local)
     const media = await Media.create({
-      displayName: url.split('/').pop() || 'External Link',
-      url: url,
-      isExternal: true,
-      altText: '',
+      displayName: originalName,
+      originalName: originalName,
+      url: `/uploads/media/${fileName}`,
+      isExternal: false, // It's local now
+      mimeType: contentType,
+      size: fileSize,
+      altText: `Imported from ${new URL(url).hostname}`,
     });
 
     revalidatePath('/', 'layout');
     return { success: true, data: JSON.parse(JSON.stringify(media)), error: null };
   } catch (error) {
-    console.error('saveExternalMedia Error:', error);
+    console.error('saveExternalMedia Import Error:', error);
     return { success: false, data: null, error: error.message };
   }
 }

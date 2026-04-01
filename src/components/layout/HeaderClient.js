@@ -47,6 +47,15 @@ function DynIcon({ name, size = 20, className = '', strokeWidth = 2 }) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// URL NORMALIZATION — Ensures absolute paths starting with /
+// ─────────────────────────────────────────────────────────────
+const formatHref = (href) => {
+  if (!href) return '/';
+  if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#')) return href;
+  return href.startsWith('/') ? href : `/${href}`;
+};
+
+// ─────────────────────────────────────────────────────────────
 // UI STATE — single reducer
 // ─────────────────────────────────────────────────────────────
 const INIT = {
@@ -128,7 +137,7 @@ function PanelImageCols({ menu }) {
             <ul className="space-y-2 max-h-[250px] desktop-mega-scroll pr-2">
               {col.links.map((l, j) => (
                 <li key={j}>
-                  <Link href={l.slug} className={T.megaLink}>
+                  <Link href={formatHref(l.slug)} className={T.megaLink}>
                     <span className="truncate pr-2">{l.label}</span>
                     <LucideIcons.ChevronRight size={14} className={`opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all ${T.chevron}`} />
                   </Link>
@@ -157,7 +166,7 @@ function PanelSplitAction({ menu, phone, tollFree }) {
         <div className="w-[45%] border-r border-white/10 pr-5">
           <h3 className="text-[22px] xl:text-[26px] font-bold mb-1 tracking-wide text-[#fec53a]">{promoTitle}</h3>
           <p className="text-[13px] text-gray-300 mb-6">{promoSubText}</p>
-          <Link href={actionLink}>
+          <Link href={formatHref(actionLink)}>
             <button className="bg-[#fec53a] hover:bg-white text-[#00588b] font-bold px-6 py-3 rounded-md shadow-md transition-colors w-full uppercase tracking-wider text-[13px]">{actionText}</button>
           </Link>
           <div className="bg-[#003b5e] border border-[#1c54a3] p-5 rounded-lg shadow-inner mt-8">
@@ -196,7 +205,7 @@ function PanelSplitAction({ menu, phone, tollFree }) {
           <h4 className="text-[18px] font-bold mb-6 border-b border-white/10 pb-3 text-[#fec53a]">{linksHeading}</h4>
           <div className="grid grid-cols-2 gap-x-8 gap-y-2 max-h-[220px] desktop-mega-scroll pr-4">
             {links.map((l, i) => (
-              <Link key={i} href={l.slug} className="group flex items-center justify-between py-2.5 border-b border-white/5 hover:border-[#fec53a] hover:text-[#fec53a] transition-colors text-[13px] xl:text-[14px] font-medium tracking-wide">
+              <Link key={i} href={formatHref(l.slug)} className="group flex items-center justify-between py-2.5 border-b border-white/5 hover:border-[#fec53a] hover:text-[#fec53a] transition-colors text-[13px] xl:text-[14px] font-medium tracking-wide">
                 <span>{l.label}</span>
                 <LucideIcons.ChevronRight size={16} className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#fec53a]" />
               </Link>
@@ -220,7 +229,7 @@ function PanelCols({ menu }) {
             <ul className="space-y-2 max-h-[300px] desktop-mega-scroll pr-2">
               {col.links.map((l, j) => (
                 <li key={j}>
-                  <Link href={l.slug} className={`${T.megaLink} flex-col !items-start`}>
+                  <Link href={formatHref(l.slug)} className={`${T.megaLink} flex-col !items-start`}>
                     <div className="flex justify-between items-center w-full">
                       <span className="pr-2">{l.label}</span>
                       <LucideIcons.ChevronRight size={14} className={T.chevron} />
@@ -251,7 +260,7 @@ function PanelImgTopCols({ menu }) {
             <ul className="space-y-1">
               {col.links.map((l, j) => (
                 <li key={j}>
-                  <Link href={l.slug} className="hover:text-[#fec53a] text-[13px] xl:text-[14px] text-gray-200 font-medium flex flex-col py-1.5 transition-all group-hover:translate-x-1">
+                  <Link href={formatHref(l.slug)} className="hover:text-[#fec53a] text-[13px] xl:text-[14px] text-gray-200 font-medium flex flex-col py-1.5 transition-all group-hover:translate-x-1">
                     <span>{l.label}</span>
                     {l.subText && <span className="text-[10px] text-gray-500 mt-0.5 ml-0">{l.subText}</span>}
                   </Link>
@@ -298,7 +307,7 @@ function MobPanelProgrammes({ config, navData }) {
       {progCol && (
         <div className="grid grid-cols-2 gap-3 mb-6">
           {progCol.links.map((l, i) => (
-            <Link key={i} href={l.slug} className="block p-3 border border-white/10 rounded-lg hover:border-[#fec53a] bg-[#003b5e] transition-colors shadow-sm">
+            <Link key={i} href={formatHref(l.slug)} className="block p-3 border border-white/10 rounded-lg hover:border-[#fec53a] bg-[#003b5e] transition-colors shadow-sm">
               <span className="block text-[13px] font-bold text-white">{l.label}</span>
               {l.subText && <span className="text-[10px] text-[#fec53a]">{l.subText}</span>}
             </Link>
@@ -310,7 +319,7 @@ function MobPanelProgrammes({ config, navData }) {
           <h4 className="text-md font-bold mb-3 border-b border-white/20 pb-2 text-[#fec53a]">{config.schoolsSectionLabel}</h4>
           <ul className="space-y-2 mb-6">
             {schoolCol.links.map((l, i) => (
-              <li key={i}><Link href={l.slug} className={T.mobileItem}>{l.label}<LucideIcons.ChevronRight size={14} className="text-[#fec53a] flex-shrink-0" /></Link></li>
+              <li key={i}><Link href={formatHref(l.slug)} className={T.mobileItem}>{l.label}<LucideIcons.ChevronRight size={14} className="text-[#fec53a] flex-shrink-0" /></Link></li>
             ))}
           </ul>
         </>
@@ -320,7 +329,7 @@ function MobPanelProgrammes({ config, navData }) {
           <h4 className="text-md font-bold mb-3 border-b border-white/20 pb-2 text-[#fec53a]">{col.heading}</h4>
           <ul className="space-y-2">
             {col.links.map((l, j) => (
-              <li key={j}><Link href={l.slug} className={T.mobileItem}>{l.label}<LucideIcons.ChevronRight size={14} className="text-[#fec53a] flex-shrink-0" /></Link></li>
+              <li key={j}><Link href={formatHref(l.slug)} className={T.mobileItem}>{l.label}<LucideIcons.ChevronRight size={14} className="text-[#fec53a] flex-shrink-0" /></Link></li>
             ))}
           </ul>
         </div>
@@ -354,10 +363,10 @@ function MobPanelAdmissions({ config, navData }) {
       </div>
       <ul className="space-y-3">
         {menu.links.map((l, i) => (
-          <li key={i}><Link href={l.slug} className="flex items-center justify-between text-[14px] text-gray-200 hover:text-white border-b border-white/10 pb-3">{l.label}<LucideIcons.ChevronRight size={16} className="text-[#fec53a]" /></Link></li>
+          <li key={i}><Link href={formatHref(l.slug)} className="flex items-center justify-between text-[14px] text-gray-200 hover:text-white border-b border-white/10 pb-3">{l.label}<LucideIcons.ChevronRight size={16} className="text-[#fec53a]" /></Link></li>
         ))}
       </ul>
-      <Link href={menu.actionButtonLink}>
+      <Link href={formatHref(menu.actionButtonLink)}>
         <button className="w-full mt-6 bg-[#fec53a] text-[#00588b] font-bold py-3.5 rounded-lg uppercase tracking-wide shadow-lg">{menu.actionButtonText}</button>
       </Link>
     </div>
@@ -391,7 +400,7 @@ function MobPanelLinks({ config }) {
       {config.title && <h3 className="text-xl font-bold mb-4 text-[#fec53a]">{config.title}</h3>}
       <ul className="space-y-3">
         {(config.links || []).map((l, i) => (
-          <li key={i}><Link href={l.slug} className="flex items-center justify-between text-[14px] text-gray-200 hover:text-white border-b border-white/10 pb-3">{l.label}<LucideIcons.ChevronRight size={16} className="text-[#fec53a]" /></Link></li>
+          <li key={i}><Link href={formatHref(l.slug)} className="flex items-center justify-between text-[14px] text-gray-200 hover:text-white border-b border-white/10 pb-3">{l.label}<LucideIcons.ChevronRight size={16} className="text-[#fec53a]" /></Link></li>
         ))}
       </ul>
     </div>
@@ -433,7 +442,7 @@ function AccordionItem({ menuItem, isOpen, onToggle, activeSubKey, onSubToggle }
                   <ul className="space-y-1 pl-2 border-l border-white/10 mt-1 pb-2">
                     {col.links.map(l => (
                       <li key={l.slug}>
-                        <Link href={l.slug} className="flex items-center justify-between text-[13px] text-gray-300 hover:text-[#fec53a] py-1.5 transition-colors">
+                        <Link href={formatHref(l.slug)} className="flex items-center justify-between text-[13px] text-gray-300 hover:text-[#fec53a] py-1.5 transition-colors">
                           <span>{l.label}</span>
                           <LucideIcons.ChevronRight size={12} className="text-gray-500 flex-shrink-0" />
                         </Link>
@@ -445,7 +454,7 @@ function AccordionItem({ menuItem, isOpen, onToggle, activeSubKey, onSubToggle }
             );
           })}
           {!menuItem.columns && menuItem.links && menuItem.links.map(l => (
-            <Link key={l.slug} href={l.slug} className="block text-[13px] text-gray-300 hover:text-[#fec53a] py-1.5 transition-colors">{l.label}</Link>
+            <Link key={l.slug} href={formatHref(l.slug)} className="block text-[13px] text-gray-300 hover:text-[#fec53a] py-1.5 transition-colors">{l.label}</Link>
           ))}
         </div>
       </div>
@@ -545,13 +554,13 @@ function DesktopSidebar({ navData, state, dispatch }) {
                             <div className={`transition-all duration-300 overflow-hidden pl-4 border-l-2 border-gray-200 mt-1 ${state.sidebarNestedDropdown === link.label ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'}`}>
                               <ul className="space-y-1">
                                 {link.subLinks.map(sub => (
-                                  <li key={sub.slug}><Link href={sub.slug} className="text-[13px] text-gray-500 hover:text-[#fec53a] block py-1 transition-colors">{sub.label}</Link></li>
+                                  <li key={sub.slug}><Link href={formatHref(sub.slug)} className="text-[13px] text-gray-500 hover:text-[#fec53a] block py-1 transition-colors">{sub.label}</Link></li>
                                 ))}
                               </ul>
                             </div>
                           </div>
                         ) : (
-                          <Link href={link.slug} className="hover:text-[#1c54a3] block py-1 transition-colors">{link.label}</Link>
+                          <Link href={formatHref(link.slug)} className="hover:text-[#1c54a3] block py-1 transition-colors">{link.label}</Link>
                         )}
                       </li>
                     ))}
@@ -564,7 +573,7 @@ function DesktopSidebar({ navData, state, dispatch }) {
             <ul className="space-y-3 text-[14px] font-bold text-[#00588b] mb-6">
               {sideMenu.directLinks.map(link => (
                 <li key={link.slug} className="hover:text-[#1c54a3] cursor-pointer transition-colors">
-                  <Link href={link.slug} className="w-full flex items-center justify-between group">
+                  <Link href={formatHref(link.slug)} className="w-full flex items-center justify-between group">
                     {link.label}<LucideIcons.ChevronRight size={14} className="text-gray-300 group-hover:text-[#1c54a3] transition-colors" />
                   </Link>
                 </li>

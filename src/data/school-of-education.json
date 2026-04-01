@@ -1,0 +1,1903 @@
+{
+  "school-of-education": {
+    "slug": "school-of-education",
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "link": "/"
+      },
+      {
+        "label": "Schools & Departments",
+        "link": "/schools"
+      },
+      {
+        "label": "School of Education",
+        "link": "/schools/school-of-education"
+      }
+    ],
+    "hero": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+      "badge": "NCTE Approved Premier Teaching Institute",
+      "title": {
+        "main": "School of Education",
+        "highlight": "School of",
+        "skyHighlight": "Education"
+      },
+      "description": "Shaping the educators of tomorrow. Master the art of pedagogy, educational psychology, and classroom management through our highly integrated, NCTE-approved teaching programs.",
+      "cta": [
+        {
+          "label": "Apply Now",
+          "link": "#",
+          "primary": true
+        },
+        {
+          "label": "Explore Programs",
+          "link": "#programs",
+          "primary": false
+        }
+      ]
+    },
+    "stats": [
+      {
+        "value": "100%",
+        "label": "Placement Assistance",
+        "icon": "Briefcase"
+      },
+      {
+        "value": "Top 10",
+        "label": "Ed-Tech Placements",
+        "icon": "TrendingUp"
+      },
+      {
+        "value": "500+",
+        "label": "Schools Tie-ups",
+        "icon": "Building2"
+      }
+    ],
+    "about": {
+      "vision": {
+        "title": "Vision",
+        "label": "Our Purpose",
+        "icon": "Target",
+        "text": "To be a center of excellence in teacher education, producing innovative, empathetic, and highly skilled educators who can transform the landscape of modern education and inspire future generations.",
+        "highlights": [
+          {
+            "value": "2000+",
+            "label": "Teachers Placed"
+          },
+          {
+            "value": "95%",
+            "label": "CTET/TET Success Rate"
+          },
+          {
+            "value": "100+",
+            "label": "Govt. School Selections"
+          }
+        ]
+      },
+      "mission": {
+        "title": "Mission",
+        "label": "Our Goal",
+        "icon": "Lightbulb",
+        "points": [
+          "Deliver NCTE-approved, integrated curriculums that combine core subjects (Science/Arts) with advanced teaching methodologies.",
+          "Foster practical teaching skills through rigorous internship programs in top-tier schools.",
+          "Equip future educators with modern Ed-Tech tools and digital classroom management skills.",
+          "Provide intensive mentoring for competitive teaching exams like CTET, State TETs, and KVS/NVS recruitments."
+        ]
+      }
+    },
+    "programmes": {
+      "bgImage": "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+      "title": {
+        "main": "Our Programmes",
+        "highlight": "Programmes"
+      },
+      "subtitle": "Academic Offerings",
+      "description": "Explore our comprehensive, integrated 4-year undergraduate programs designed to fast-track your career in education.",
+      "levels": [
+        {
+          "label": "After 12th Pass/ \"A\" Level",
+          "icon": "GraduationCap",
+          "courses": [
+            {
+              "name": "B.Sc. + B.Ed. (Integrated)",
+              "slug": "bsc-bed",
+              "specializations": []
+            },
+            {
+              "name": "B.A. + B.Ed. (Integrated)",
+              "slug": "ba-bed",
+              "specializations": []
+            }
+          ]
+        },
+        {
+          "label": "After Post Graduation / Equivalent",
+          "icon": "Microscope",
+          "courses": [
+            {
+              "name": "Ph.D. (Education)",
+              "slug": "research-phd",
+              "description": "Research-focused doctoral programme in Educational methodologies and policies.",
+              "redirectUrl": "/research-phd"
+            }
+          ]
+        }
+      ]
+    },
+    "courseDetails": {
+     "bsc-bed": {
+        "title": "B.Sc. + B.Ed. (Integrated)",
+        "duration": "4 Years",
+        "eligibility": "10+2 in Science (PCM/PCB) with minimum 50% marks from a recognized board",
+        "description": "An NCTE-approved 4-year integrated program that combines advanced scientific learning with modern teaching methodologies, forging the next generation of elite STEM educators.",
+        "metaTitle": "B.Sc. + B.Ed. (Integrated) Course | School of Education | CPU",
+        "metaDescription": "Pursue a 4-year integrated B.Sc. B.Ed. at Career Point University. NCTE approved. Master Science, Maths, and Pedagogy. Prepare for CTET, KVS, and top Ed-Tech roles.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "4-Year NCTE Approved Integrated Degree",
+          "title": {
+            "main": "B.Sc. + B.Ed. (Integrated)",
+            "line1": "B.Sc. + B.Ed.",
+            "line2": "Integrated",
+            "line3": "Degree",
+            "highlight": "B.Sc.",
+            "skyHighlight": "+ B.Ed."
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "CTET Cleared",
+              "value": "95%+"
+            },
+            {
+              "label": "School Internship",
+              "value": "16 Weeks"
+            }
+          ],
+          "description": "Inspire the scientific minds of tomorrow. Save one academic year while mastering Physics, Chemistry, Mathematics/Biology alongside advanced educational psychology and pedagogy."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "STEM Teachers Placed",
+              "value": "1200+"
+            },
+            {
+              "icon": "Briefcase",
+              "label": "Highest Ed-Tech Pkg",
+              "value": "9 L"
+            },
+            {
+              "icon": "Award",
+              "label": "Govt. School Selections",
+              "value": "250+"
+            },
+            {
+              "icon": "Monitor",
+              "label": "Smart Classroom Hours",
+              "value": "800+"
+            },
+            {
+              "icon": "Globe",
+              "label": "Partner Schools",
+              "value": "50+"
+            },
+            {
+              "icon": "Star",
+              "label": "CTET Pass Percentage",
+              "value": "95%"
+            }
+          ],
+          "heading": "Department's Teaching Excellence & Impact",
+          "trustBadge": "✓ Approved by National Council for Teacher Education (NCTE)"
+        },
+        "overview": {
+          "tags": [
+            "4 Years Duration",
+            "8 Semesters",
+            "CTET Oriented",
+            "NCTE Approved"
+          ],
+          "subtitle": "What is the B.Sc. + B.Ed. Programme?",
+          "gridCards": [
+            {
+              "sub": "Core Concepts",
+              "icon": "FlaskConical",
+              "label": "Basic Sciences"
+            },
+            {
+              "sub": "Student Mindset",
+              "icon": "Brain",
+              "label": "Child Psychology"
+            },
+            {
+              "sub": "Art of Teaching",
+              "icon": "BookOpen",
+              "label": "Pedagogy"
+            },
+            {
+              "sub": "Classroom Control",
+              "icon": "Users",
+              "label": "Micro-Teaching"
+            }
+          ],
+          "paragraphs": [
+            "The B.Sc. + B.Ed. is a 4-Year Integrated Teacher Education Programme (ITEP) that intelligently blends the rigorous study of Science (Physics, Chemistry, Maths/Biology) with the professional training of a Bachelor of Education. Doing this integrated course saves students one entire academic year compared to pursuing a 3-year B.Sc. followed by a 2-year B.Ed.",
+            "Recognized by the NCTE, the curriculum goes far beyond traditional blackboard teaching. Students are heavily trained in modern digital pedagogy, micro-teaching (simulated classrooms), and educational psychology. The program culminates in a rigorous 16-week teaching internship where students actively teach and manage classes in real schools."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "A B.Sc. + B.Ed. graduate is a dual-threat professional—a master of science and a trained educator. Graduates are fully eligible to apply for high-paying Government Teacher posts like TGT (Trained Graduate Teacher) in Kendriya Vidyalayas (KVS), Navodaya Vidyalayas (NVS), and State Board Schools. Furthermore, the explosion of the Ed-Tech industry has created massive demand for specialized science educators in companies like Byju's, Unacademy, and Allen, offering lucrative corporate salaries to top teachers.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in Govt. Schools, Elite Private Institutes, and Ed-Tech",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "An integrated NCTE curriculum blending STEM with Pedagogy",
+          "introNote": "The curriculum runs science and education subjects in parallel. The first two years build your science base, while the last two years focus intensely on the art of teaching.",
+          "outroNote": "A mandatory 16-week School Internship and an Action Research Project are required to complete the degree.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 70,
+              "category": "Core Sciences",
+              "shortName": "CS",
+              "description": "Physics, Chemistry, Maths/Biology"
+            },
+            {
+              "credits": 50,
+              "category": "Education Core",
+              "shortName": "ED",
+              "description": "Child Psychology & Teaching Methods"
+            },
+            {
+              "credits": 20,
+              "category": "Clinical Pedagogy",
+              "shortName": "CP",
+              "description": "Micro-Teaching & Smart Classrooms"
+            },
+            {
+              "credits": 20,
+              "category": "Internship",
+              "shortName": "IN",
+              "description": "16-Week Live School Teaching"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The 4-year B.Sc.+B.Ed program spans 8 semesters. Students select their science group (PCM or CBZ). Alongside their science subjects, they study core education papers like Childhood & Growing Up, Learning & Teaching, and Assessment for Learning. The 7th and 8th semesters are almost entirely practical, focusing on School Internships and Ed-Tech mastery.",
+              "hasTable": true
+            },
+            {
+              "id": "y1",
+              "title": "Year-1: Foundations of Science & Education",
+              "content": "Mechanics/Diversity of Microbes, Calculus/Cell Biology, Inorganic Chemistry, Childhood and Growing Up, Contemporary India and Education, Language Proficiency, Science Practicals."
+            },
+            {
+              "id": "y2",
+              "title": "Year-2: Advanced Science & Psychology",
+              "content": "Electricity & Magnetism/Plant Ecology, Algebra/Genetics, Organic Chemistry, Learning and Teaching, Knowledge and Curriculum, Yoga & Health Education, Science Practicals."
+            },
+            {
+              "id": "y3",
+              "title": "Year-3: Pedagogy & Micro-Teaching",
+              "content": "Quantum Physics/Molecular Bio, Biochemistry, Pedagogy of Science Subject I, Pedagogy of Science Subject II, Assessment for Learning, Micro-Teaching Workshops (Simulated Teaching)."
+            },
+            {
+              "id": "y4",
+              "title": "Year-4: Internship & Action Research",
+              "content": "Gender, School and Society, Creating an Inclusive School, Understanding ICT in Education, 16-Week Mandatory School Internship Program (SIP), Action Research Project."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "CTET & State TET Preparation Module",
+              "credits": 0
+            },
+            {
+              "name": "Smart Classroom & Ed-Tech Tools Mastery",
+              "credits": 2
+            },
+            {
+              "name": "Vedic Mathematics & Value Education",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for B.Sc.-B.Ed.",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "30,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Science & Pedagogy Lab Fee",
+              "amount": "3,500/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "5,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Admission through 12th Board merit / CPU Entrance Test. For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "12th Board > 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "12th Board 80% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "12th Board 70% – 79%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered based on 12th Board marks (Science stream only).",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "Special scholarships exist for wards of teaching professionals and defense personnel.",
+            "If a student fails to maintain the required academic standards, they may lose scholarship eligibility."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "5000",
+              "3000",
+              "2000",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "Doing a B.Sc. (3 Years) and then a B.Ed. (2 Years) takes 5 years. Our integrated program completes both in 4 years, saving you a full academic year.",
+              "icon": "TrendingUp",
+              "title": "Save One Academic Year"
+            },
+            {
+              "desc": "The curriculum is meticulously mapped to the CTET and State TET syllabi, ensuring our students clear these mandatory government exams on their first attempt.",
+              "icon": "Award",
+              "title": "CTET & TET Focused"
+            },
+            {
+              "desc": "Beyond traditional boards, we train you heavily on digital podiums, interactive panels, and LMS platforms to make you ready for modern Ed-Tech companies.",
+              "icon": "Monitor",
+              "title": "Master Ed-Tech Tools"
+            },
+            {
+              "desc": "Step into real classrooms before you graduate. The 16-week mandatory school internship provides unmatched practical experience in student management.",
+              "icon": "Users",
+              "title": "16-Week Real School Internship"
+            },
+            {
+              "desc": "As an NCTE-approved degree, you are instantly eligible to apply for high-paying Govt. Teacher (TGT) jobs in KVS, NVS, and state schools across India.",
+              "icon": "Briefcase",
+              "title": "Direct Govt. Job Eligibility"
+            }
+          ],
+          "subtitle": "Unlock your potential with an Integrated Teaching Degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Dedicated Micro-Teaching Studios equipped with AV recording where students practice teaching and review their body language and delivery.",
+              "icon": "Activity",
+              "title": "Micro-Teaching Studios"
+            },
+            {
+              "num": "07",
+              "desc": "Advanced science labs for Physics, Chemistry, and Biology, allowing future teachers to master the practical experiments they will eventually teach.",
+              "icon": "FlaskConical",
+              "title": "Advanced Science Labs"
+            },
+            {
+              "num": "08",
+              "desc": "A specialized psychology lab with behavioral assessment tools to help future teachers understand child psychology and learning disabilities.",
+              "icon": "Brain",
+              "title": "Educational Psychology Lab"
+            },
+            {
+              "num": "09",
+              "desc": "Dedicated placement cells targeting top-tier private schools (DPS, GD Goenka) and major Ed-Tech startups (Byju's, Unacademy).",
+              "icon": "Target",
+              "title": "Premium School & Ed-Tech Placements"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload 12th Science marksheets (PCM/PCB) and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select B.Sc.+B.Ed. Integrated.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for counseling and seat allotment.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the Integrated B.Ed. programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have passed 10+2 from a recognized board with a minimum of 50% marks. You MUST be from the Science stream (PCM or PCB). Arts/Commerce students should apply for B.A.+B.Ed.",
+              "q": "What is the eligibility criteria? Can Commerce students apply?"
+            },
+            {
+              "a": "It is a 4-year integrated degree program divided into 8 semesters. The tuition fee is ₹30,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "Doing a normal B.Sc. (3 years) + standard B.Ed. (2 years) takes 5 years total. This integrated program merges both, allowing you to complete both degrees in just 4 years, saving time and money.",
+              "q": "Why should I choose 4-Year B.Sc.+B.Ed over a regular B.Ed.?"
+            },
+            {
+              "a": "Yes! The program is fully approved by the National Council for Teacher Education (NCTE). Upon graduation, you are fully eligible for CTET and all State/Central Government teaching jobs.",
+              "q": "Is this degree approved by the NCTE?"
+            },
+            {
+              "a": "Graduates are hired as TGT Science/Math teachers in Government Schools (KVS, NVS), premium private schools, and as Subject Matter Experts (SMEs) in corporate Ed-Tech companies.",
+              "q": "What kind of jobs will I get after B.Sc.+B.Ed.?"
+            },
+            {
+              "a": "Yes, you must complete a rigorous 16-week School Internship Program (SIP) in your final year, where you will actively teach in a recognized school under supervision.",
+              "q": "Is there a mandatory school teaching internship?"
+            },
+            {
+              "a": "Absolutely. Our syllabus is rigorously mapped to the CTET framework, and we provide extra mentoring sessions specifically for clearing Teacher Eligibility Tests.",
+              "q": "Does the university help in CTET preparation?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the B.Sc.-B.Ed. programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "NCTE Approved Curriculum",
+              "CTET/TET Exam Mentoring",
+              "16-Week School Internships",
+              "Ed-Tech Company Placements",
+              "Micro-Teaching Workshops",
+              "Educational Psychology Seminars"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Micro-Teaching AV Studios",
+              "Educational Psychology Lab",
+              "Advanced Science Labs (PCM/CBZ)",
+              "Ed-Tech Smart Classrooms"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Govt. School Selections",
+              "Ed-Tech Placement Records",
+              "Alumni Network (Principals)",
+              "Latest Teaching Methodologies",
+              "Upcoming Education Conclaves",
+              "Important Resources"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "4 Year Integrated Educator Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from a science student to an elite STEM Educator.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Science & Mindset",
+              "contentTitle": "Foundations of Science and Child Development",
+              "contentDesc": "The first year builds your core scientific knowledge while introducing you to the psychology of how children learn and grow.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Scientific Core Concepts",
+                "Understanding Child Psychology",
+                "Communication Skills"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Science",
+                  "desc": "Physics, Chem, Math/Bio",
+                  "icon": "🧪"
+                },
+                {
+                  "title": "Psychology",
+                  "desc": "Childhood & Growing Up",
+                  "icon": "🧠"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Behavioral Study",
+                  "desc": "Analyzing learning patterns",
+                  "companies": "Psychology Lab",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Core Science Subject I, II & III",
+                "Childhood and Growing Up",
+                "Contemporary India and Education",
+                "Language Proficiency"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Advanced Sci & Pedagogy",
+              "contentTitle": "Curriculum Design & Advanced Sciences",
+              "contentDesc": "Deepen your science mastery and begin understanding how to structure a curriculum and assess student learning effectively.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Advanced Science Experiments",
+                "Curriculum Planning",
+                "Classroom Assessment"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Pedagogy",
+                  "desc": "The method of teaching",
+                  "icon": "📚"
+                },
+                {
+                  "title": "Assessment",
+                  "desc": "Evaluating student progress",
+                  "icon": "📝"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Lesson Planning",
+                  "desc": "Designing a course structure",
+                  "companies": "Education Dept",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Advanced Science Subjects",
+                "Learning and Teaching",
+                "Knowledge and Curriculum",
+                "Assessment for Learning"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "YEAR 3",
+              "tabTitle": "Micro-Teaching",
+              "contentTitle": "The Art of Classroom Delivery",
+              "contentDesc": "This year transitions heavily into practical teaching. You will specialize in the pedagogy of your specific science subjects and practice in Micro-Teaching studios.",
+              "badge": "YEAR-3",
+              "skills": [
+                "Subject Specific Pedagogy",
+                "Public Speaking & Delivery",
+                "Smart Board Utilization"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Micro-Teaching",
+                  "desc": "Simulated classroom practice",
+                  "icon": "🎥"
+                },
+                {
+                  "title": "Ed-Tech",
+                  "desc": "Digital teaching tools",
+                  "icon": "💻"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Demo Classes",
+                  "desc": "Recorded peer-teaching sessions",
+                  "companies": "AV Studio",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Pedagogy of Science Subject I",
+                "Pedagogy of Science Subject II",
+                "Understanding ICT in Education",
+                "Micro-Teaching Workshops"
+              ]
+            },
+            {
+              "id": 4,
+              "tabLabel": "YEAR 4",
+              "tabTitle": "School Internship",
+              "contentTitle": "Real-World Educator Experience",
+              "contentDesc": "The final year is defined by a massive 16-week School Internship where you act as a full-time teacher, preparing you for immediate employment.",
+              "badge": "YEAR-4",
+              "skills": [
+                "Live Classroom Management",
+                "Action Research",
+                "Inclusive Education Strategies"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Internship",
+                  "desc": "16 Weeks live teaching",
+                  "icon": "🏫"
+                },
+                {
+                  "title": "Action Research",
+                  "desc": "Solving real school problems",
+                  "icon": "📊"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "School Internship",
+                  "desc": "Full-time teaching duty",
+                  "companies": "Partner Schools",
+                  "color": "#9b0000"
+                }
+              ],
+              "subjects": [
+                "16-Week School Internship Program (SIP)",
+                "Action Research Project",
+                "Creating an Inclusive School",
+                "Gender, School and Society"
+              ]
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Our Future Educators Speak",
+            "highlight": "Speak"
+          },
+          "label": "Testimonials",
+          "list": [
+            {
+              "name": "Neha Agarwal",
+              "batch": "B.Sc.-B.Ed. 2022",
+              "company": "TGT Science, KVS",
+              "emoji": "👩‍🏫",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+              "text": "The CTET preparation classes integrated directly into our curriculum were a game-changer. I cleared my CTET in the very first attempt while still in my final year."
+            },
+            {
+              "name": "Aman Gupta",
+              "batch": "B.Sc.-B.Ed. 2021",
+              "company": "SME, Unacademy",
+              "emoji": "💻",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+              "text": "The focus on Ed-Tech tools and digital teaching methodologies gave me a massive advantage in securing a high-paying role as a Subject Matter Expert at Unacademy."
+            },
+            {
+              "name": "Priya Sharma",
+              "batch": "B.Sc.-B.Ed. 2020",
+              "company": "PGT Teacher, DPS",
+              "emoji": "🏫",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+              "text": "The 16-week mandatory school internship was an incredible experience. It transformed my theoretical knowledge of educational psychology into practical classroom management."
+            }
+          ]
+        },
+        "exploreDepartment": {
+          "sectionTitle": {
+            "main": "Explore School of Education",
+            "highlight": "School"
+          },
+          "subtitle": "Discover our specialized teaching labs, CTET mentoring, and school internship modules",
+          "items": [
+            {
+              "title": "Department at a Glance",
+              "icon": "Building2",
+              "items": [
+                "NCTE Approved Curriculum",
+                "CTET/TET Exam Mentoring",
+                "16-Week School Internships",
+                "Ed-Tech Company Placements",
+                "Micro-Teaching Workshops",
+                "Educational Psychology Seminars"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Exclusive Facilities",
+              "icon": "FlaskConical",
+              "items": [
+                "Micro-Teaching AV Studios",
+                "Educational Psychology Lab",
+                "Advanced Science Labs (PCM/CBZ)",
+                "Ed-Tech Smart Classrooms"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Your Department in a Nutshell",
+              "icon": "Star",
+              "items": [
+                "Govt. School Selections",
+                "Ed-Tech Placement Records",
+                "Alumni Network (Principals)",
+                "Latest Teaching Methodologies",
+                "Upcoming Education Conclaves",
+                "Important Resources"
+              ],
+              "cta": "START NOW"
+            }
+          ]
+        }
+      },
+     "ba-bed": {
+        "title": "B.A. + B.Ed. (Integrated)",
+        "duration": "4 Years",
+        "eligibility": "10+2 in any stream (Arts/Humanities preferred) with minimum 50% marks from a recognized board",
+        "description": "An NCTE-approved 4-year integrated program combining deep Humanities studies with advanced pedagogy, creating exceptional educators in Arts and Social Sciences.",
+        "metaTitle": "B.A. + B.Ed. (Integrated) Course | School of Education | CPU",
+        "metaDescription": "Pursue a 4-year integrated B.A. B.Ed. at Career Point University. NCTE approved. Master Humanities, Arts, and Pedagogy. Guaranteed CTET guidance and school placements.",
+        "hero": {
+          "cta": [
+            {
+              "link": "#apply",
+              "label": "Apply Now",
+              "primary": true
+            },
+            {
+              "link": "#overview",
+              "label": "Explore Programme",
+              "primary": false
+            }
+          ],
+          "badge": "4-Year NCTE Approved Integrated Degree",
+          "title": {
+            "main": "B.A. + B.Ed. (Integrated)",
+            "line1": "B.A. + B.Ed.",
+            "line2": "Integrated",
+            "line3": "Degree",
+            "highlight": "B.A.",
+            "skyHighlight": "+ B.Ed."
+          },
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "quickStats": [
+            {
+              "label": "CTET Cleared",
+              "value": "94%+"
+            },
+            {
+              "label": "School Internship",
+              "value": "16 Weeks"
+            }
+          ],
+          "description": "Shape the thinkers of tomorrow. Save one academic year while mastering History, Political Science, and Literature alongside advanced educational psychology and teaching methods."
+        },
+        "accomplishments": {
+          "stats": [
+            {
+              "icon": "Users",
+              "label": "Humanities Teachers Placed",
+              "value": "1500+"
+            },
+            {
+              "icon": "Briefcase",
+              "label": "Highest Ed-Tech Pkg",
+              "value": "8.5 L"
+            },
+            {
+              "icon": "Award",
+              "label": "Govt. School Selections",
+              "value": "300+"
+            },
+            {
+              "icon": "Globe",
+              "label": "Partner Schools",
+              "value": "50+"
+            },
+            {
+              "icon": "BookOpen",
+              "label": "Curriculum Drafts Created",
+              "value": "120+"
+            },
+            {
+              "icon": "Star",
+              "label": "CTET Pass Percentage",
+              "value": "94%"
+            }
+          ],
+          "heading": "Department's Teaching Excellence & Impact",
+          "trustBadge": "✓ Approved by National Council for Teacher Education (NCTE)"
+        },
+        "overview": {
+          "tags": [
+            "4 Years Duration",
+            "8 Semesters",
+            "CTET Oriented",
+            "NCTE Approved"
+          ],
+          "subtitle": "What is the B.A. + B.Ed. Programme?",
+          "gridCards": [
+            {
+              "sub": "History & Pol. Science",
+              "icon": "Globe",
+              "label": "Humanities Core"
+            },
+            {
+              "sub": "Student Mindset",
+              "icon": "Brain",
+              "label": "Child Psychology"
+            },
+            {
+              "sub": "Art of Teaching",
+              "icon": "BookOpen",
+              "label": "Pedagogy"
+            },
+            {
+              "sub": "Classroom Control",
+              "icon": "Users",
+              "label": "Micro-Teaching"
+            }
+          ],
+          "paragraphs": [
+            "The B.A. + B.Ed. is a 4-Year Integrated Teacher Education Programme (ITEP) that merges a Bachelor of Arts with a Bachelor of Education. This course saves students one entire academic year compared to the traditional route (3-year B.A. + 2-year B.Ed.) and is specifically designed for students who want to become expert teachers in Social Sciences, History, Languages, and Political Science.",
+            "Recognized by the NCTE, the curriculum balances deep subject knowledge with the psychology of learning. Students undergo heavy training in micro-teaching (simulated classrooms), digital pedagogy, and curriculum design. The degree culminates in a rigorous 16-week school internship where students independently manage real classrooms."
+          ],
+          "sectionTitle": {
+            "main": "Overview",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "scope": {
+          "body": "A B.A. + B.Ed. graduate is highly qualified to teach Arts and Humanities across the country. Graduates are immediately eligible to sit for central and state-level exams to secure high-paying Government Teacher posts (TGT) in Kendriya Vidyalayas (KVS), Navodaya Vidyalayas (NVS), and DSSSB schools. Beyond traditional schools, massive demand exists in the Ed-Tech sector (Unacademy, Vedantu) for Subject Matter Experts, Content Developers, and online educators in Social Sciences and Languages.",
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Expanding opportunities in Govt. Schools, Premium Institutes, and Ed-Tech",
+          "sectionTitle": {
+            "main": "Scope",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "curriculum": {
+          "subtitle": "An integrated NCTE curriculum blending Arts with Pedagogy",
+          "introNote": "The curriculum runs humanities and education subjects in parallel. The first two years build your core arts base, while the last two years focus intensely on the art of teaching.",
+          "outroNote": "A mandatory 16-week School Internship and an Action Research Project are required to complete the degree.",
+          "sectionTitle": {
+            "main": "Structure",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "courseStructure": [
+            {
+              "credits": 70,
+              "category": "Humanities Core",
+              "shortName": "HC",
+              "description": "History, Geography, Pol. Science, English"
+            },
+            {
+              "credits": 50,
+              "category": "Education Core",
+              "shortName": "ED",
+              "description": "Child Psychology & Teaching Methods"
+            },
+            {
+              "credits": 20,
+              "category": "Clinical Pedagogy",
+              "shortName": "CP",
+              "description": "Micro-Teaching & Smart Classrooms"
+            },
+            {
+              "credits": 20,
+              "category": "Internship",
+              "shortName": "IN",
+              "description": "16-Week Live School Teaching"
+            }
+          ],
+          "accordionSections": [
+            {
+              "id": "cs",
+              "title": "Course Structure Overview",
+              "content": "The 4-year B.A.+B.Ed program spans 8 semesters. Students select three core Arts subjects (e.g., History, Political Science, Geography, or English Literature). Alongside these, they study core education papers like Childhood & Growing Up, Learning & Teaching, and Assessment for Learning. The 7th and 8th semesters are highly practical, focusing on School Internships and Ed-Tech mastery.",
+              "hasTable": true
+            },
+            {
+              "id": "y1",
+              "title": "Year-1: Foundations of Arts & Education",
+              "content": "Core Arts Subject I (e.g., History), Core Arts Subject II (e.g., Pol. Science), Core Arts Subject III, Childhood and Growing Up, Contemporary India and Education, Language Proficiency."
+            },
+            {
+              "id": "y2",
+              "title": "Year-2: Advanced Humanities & Psychology",
+              "content": "Advanced Core Arts Subjects I, II & III, Learning and Teaching, Knowledge and Curriculum, Yoga & Health Education, Environmental Studies."
+            },
+            {
+              "id": "y3",
+              "title": "Year-3: Pedagogy & Micro-Teaching",
+              "content": "Final Core Arts Subjects, Pedagogy of Social Science Subject I, Pedagogy of Language Subject II, Assessment for Learning, Micro-Teaching Workshops (Simulated Teaching)."
+            },
+            {
+              "id": "y4",
+              "title": "Year-4: Internship & Action Research",
+              "content": "Gender, School and Society, Creating an Inclusive School, Understanding ICT in Education, 16-Week Mandatory School Internship Program (SIP), Action Research Project."
+            }
+          ],
+          "valueAddedCourses": [
+            {
+              "name": "CTET & State TET Preparation Module",
+              "credits": 0
+            },
+            {
+              "name": "Smart Classroom & Ed-Tech Tools Mastery",
+              "credits": 2
+            },
+            {
+              "name": "Storytelling & Expressive Arts in Education",
+              "credits": 2
+            }
+          ]
+        },
+        "admissionFee": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "subtitle": "Transparent fee structure for B.A.-B.Ed.",
+          "feeDetails": [
+            {
+              "label": "Admission Fee (one-time)",
+              "amount": "8,000/- (at time of admission)"
+            },
+            {
+              "label": "Tuition Fee",
+              "amount": "25,000/- per Semester"
+            },
+            {
+              "label": "Examination Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Pedagogy & Language Lab Fee",
+              "amount": "2,500/- per Semester"
+            },
+            {
+              "label": "Caution Money (one-time)",
+              "amount": "5,000/- (Refundable)"
+            }
+          ],
+          "sectionTitle": {
+            "main": "Admission",
+            "highlight": "",
+            "skyHighlight": ""
+          },
+          "youtubeVideoId": "dQw4w9WgXcQ",
+          "admissionCriteria": [
+            {
+              "link": "Click here",
+              "text": "Admission through 12th Board merit / CPU Entrance Test. For details, ",
+              "color": "#00588b"
+            },
+            {
+              "link": "Click Here",
+              "text": "Admission procedure: For follow-up admissions process. To apply, ",
+              "color": "#ffb900"
+            }
+          ]
+        },
+        "scholarships": {
+          "rows": [
+            {
+              "range": "12th Board > 90%",
+              "values": [
+                "100% Tuition",
+                "75% Tuition",
+                "50% Tuition",
+                "No Offer"
+              ]
+            },
+            {
+              "range": "12th Board 80% – 89%",
+              "values": [
+                "75% Tuition",
+                "50% Tuition",
+                "35% Tuition",
+                "No Use"
+              ]
+            },
+            {
+              "range": "12th Board 70% – 79%",
+              "values": [
+                "50% Tuition",
+                "35% Tuition",
+                "20% Tuition",
+                "No Use"
+              ]
+            }
+          ],
+          "notes": [
+            "Merit scholarship is offered based on 12th Board marks (Any stream, Arts preferred).",
+            "Tuition and fees may be net once your scholarship criteria is evaluated.",
+            "Special scholarships exist for wards of teaching professionals and defense personnel.",
+            "If a student fails to maintain the required academic standards, they may lose scholarship eligibility."
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "subtitle": "Scholarship for Session 2026-27",
+          "earlyBird": {
+            "label": "Early Admission Benefit (One-Time) INR",
+            "values": [
+              "5000",
+              "3000",
+              "2000",
+              "No Use"
+            ]
+          },
+          "dateHeaders": [
+            "Till 31st June",
+            "Till 13th July",
+            "Till 31st July",
+            "After 31st July"
+          ],
+          "sectionTitle": {
+            "main": "Scholarships",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "whyJoin": {
+          "reasons": [
+            {
+              "desc": "Doing a B.A. (3 Years) and then a B.Ed. (2 Years) takes 5 years. Our integrated program completes both in 4 years, saving you a full academic year.",
+              "icon": "TrendingUp",
+              "title": "Save One Academic Year"
+            },
+            {
+              "desc": "The curriculum is meticulously mapped to the CTET and State TET syllabi, ensuring our students clear these mandatory government exams on their first attempt.",
+              "icon": "Award",
+              "title": "CTET & TET Focused"
+            },
+            {
+              "desc": "Beyond traditional boards, we train you heavily on digital podiums, interactive panels, and LMS platforms to make you ready for modern Ed-Tech companies.",
+              "icon": "Monitor",
+              "title": "Master Ed-Tech Tools"
+            },
+            {
+              "desc": "Step into real classrooms before you graduate. The 16-week mandatory school internship provides unmatched practical experience in student management.",
+              "icon": "Users",
+              "title": "16-Week Real School Internship"
+            },
+            {
+              "desc": "As an NCTE-approved degree, you are instantly eligible to apply for high-paying Govt. Teacher (TGT) jobs in KVS, NVS, and state schools across India.",
+              "icon": "Briefcase",
+              "title": "Direct Govt. Job Eligibility"
+            }
+          ],
+          "subtitle": "Unlock your potential with an Integrated Teaching Degree",
+          "sectionTitle": {
+            "main": "Why Join",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "uniqueFeatures": {
+          "bgImage": "https://cpur.in/wp-content/uploads/2023/07/banner-005.webp",
+          "features": [
+            {
+              "num": "06",
+              "desc": "Dedicated Micro-Teaching Studios equipped with AV recording where students practice teaching and review their body language and delivery.",
+              "icon": "Activity",
+              "title": "Micro-Teaching Studios"
+            },
+            {
+              "num": "07",
+              "desc": "A digital Language & Phonetics Lab to perfect English communication, accent training, and linguistic proficiency for future English educators.",
+              "icon": "Headphones",
+              "title": "Advanced Language Lab"
+            },
+            {
+              "num": "08",
+              "desc": "A specialized psychology lab with behavioral assessment tools to help future teachers understand child psychology and learning disabilities.",
+              "icon": "Brain",
+              "title": "Educational Psychology Lab"
+            },
+            {
+              "num": "09",
+              "desc": "Dedicated placement cells targeting top-tier private schools (DPS, GD Goenka) and major Ed-Tech startups (Vedantu, Unacademy).",
+              "icon": "Target",
+              "title": "Premium School & Ed-Tech Placements"
+            }
+          ],
+          "subtitle": "Setting us apart from the rest",
+          "sectionTitle": {
+            "main": "Features",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "applySteps": {
+          "steps": [
+            {
+              "desc": "Create your account on the portal with your basic personal details.",
+              "icon": "UserCheck",
+              "step": "01",
+              "label": "Register Yourself"
+            },
+            {
+              "desc": "Upload 12th marksheets (Any stream) and verify identity.",
+              "icon": "FileText",
+              "step": "02",
+              "label": "Verify Details"
+            },
+            {
+              "desc": "Complete the online application form and select B.A.+B.Ed. Integrated.",
+              "icon": "ClipboardList",
+              "step": "03",
+              "label": "Fill Application Online"
+            },
+            {
+              "desc": "Securely pay the application processing fee online.",
+              "icon": "IndianRupee",
+              "step": "04",
+              "label": "Pay Application Fee"
+            },
+            {
+              "desc": "Review your complete application and submit it for counseling and seat allotment.",
+              "icon": "BadgeCheck",
+              "step": "05",
+              "label": "Submit Application"
+            }
+          ],
+          "bgImage": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
+          "ctaLink": "#",
+          "ctaLabel": "Start Your Application",
+          "subtitle": "Simple 5-step process to join the Integrated B.Ed. programme",
+          "guideLabel": "Guide to Register Online",
+          "sectionTitle": {
+            "main": "Apply",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "faq": {
+          "items": [
+            {
+              "a": "Candidates must have passed 10+2 from a recognized board with a minimum of 50% marks. Students from ANY stream (Arts, Commerce, Science) can apply, though it is specifically beneficial for those wanting to teach Humanities or Languages.",
+              "q": "What is the eligibility criteria? Can Science/Commerce students apply?"
+            },
+            {
+              "a": "It is a 4-year integrated degree program divided into 8 semesters. The tuition fee is ₹25,000 per semester.",
+              "q": "What is the duration and fee structure?"
+            },
+            {
+              "a": "Doing a normal B.A. (3 years) + standard B.Ed. (2 years) takes 5 years total. This integrated program merges both, allowing you to complete both degrees in just 4 years, saving time and money.",
+              "q": "Why should I choose 4-Year B.A.+B.Ed over a regular B.Ed.?"
+            },
+            {
+              "a": "Yes! The program is fully approved by the National Council for Teacher Education (NCTE). Upon graduation, you are fully eligible for CTET and all State/Central Government teaching jobs.",
+              "q": "Is this degree approved by the NCTE?"
+            },
+            {
+              "a": "Graduates are hired as TGT Social Science/Language teachers in Government Schools (KVS, NVS), premium private schools, and as Content Developers or Subject Matter Experts (SMEs) in corporate Ed-Tech companies.",
+              "q": "What kind of jobs will I get after B.A.+B.Ed.?"
+            },
+            {
+              "a": "Yes, you must complete a rigorous 16-week School Internship Program (SIP) in your final year, where you will actively teach in a recognized school under supervision.",
+              "q": "Is there a mandatory school teaching internship?"
+            },
+            {
+              "a": "Absolutely. Our syllabus is rigorously mapped to the CTET framework, and we provide extra mentoring sessions specifically for clearing Teacher Eligibility Tests.",
+              "q": "Does the university help in CTET preparation?"
+            }
+          ],
+          "subtitle": "Everything you need to know about the B.A.-B.Ed. programme",
+          "sectionTitle": {
+            "main": "FAQ",
+            "highlight": "",
+            "skyHighlight": ""
+          }
+        },
+        "deptSlides": [
+          {
+            "title": "Department at a Glance",
+            "icon": "Building2",
+            "items": [
+              "NCTE Approved Curriculum",
+              "CTET/TET Exam Mentoring",
+              "16-Week School Internships",
+              "Ed-Tech Company Placements",
+              "Micro-Teaching Workshops",
+              "Educational Psychology Seminars"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Exclusive Facilities",
+            "icon": "FlaskConical",
+            "items": [
+              "Micro-Teaching AV Studios",
+              "Educational Psychology Lab",
+              "Digital Language & Phonetics Lab",
+              "Ed-Tech Smart Classrooms"
+            ],
+            "cta": "VIEW MORE"
+          },
+          {
+            "title": "Your Department in a Nutshell",
+            "icon": "Star",
+            "items": [
+              "Govt. School Selections",
+              "Ed-Tech Placement Records",
+              "Alumni Network (Principals)",
+              "Latest Teaching Methodologies",
+              "Upcoming Education Conclaves",
+              "Important Resources"
+            ],
+            "cta": "START NOW"
+          }
+        ],
+        "roadmap": {
+          "sectionTitle": {
+            "main": "4 Year Integrated Educator Roadmap",
+            "highlight": "Roadmap",
+            "skyHighlight": ""
+          },
+          "subtitle": "Your journey from high school to an elite Humanities Educator.",
+          "years": [
+            {
+              "id": 1,
+              "tabLabel": "YEAR 1",
+              "tabTitle": "Arts & Mindset",
+              "contentTitle": "Foundations of Humanities and Child Development",
+              "contentDesc": "The first year builds your core knowledge in Arts (History/Pol.Sci) while introducing you to the psychology of how children learn and grow.",
+              "badge": "YEAR-1",
+              "skills": [
+                "Humanities Core Concepts",
+                "Understanding Child Psychology",
+                "Linguistic Communication Skills"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Arts",
+                  "desc": "History, Pol Sci, English",
+                  "icon": "🌍"
+                },
+                {
+                  "title": "Psychology",
+                  "desc": "Childhood & Growing Up",
+                  "icon": "🧠"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Behavioral Study",
+                  "desc": "Analyzing learning patterns",
+                  "companies": "Psychology Lab",
+                  "color": "#3ccc8b"
+                }
+              ],
+              "subjects": [
+                "Core Arts Subject I, II & III",
+                "Childhood and Growing Up",
+                "Contemporary India and Education",
+                "Language Proficiency"
+              ]
+            },
+            {
+              "id": 2,
+              "tabLabel": "YEAR 2",
+              "tabTitle": "Advanced Arts & Pedagogy",
+              "contentTitle": "Curriculum Design & Advanced Humanities",
+              "contentDesc": "Deepen your mastery of Arts subjects and begin understanding how to structure a curriculum and assess student learning effectively.",
+              "badge": "YEAR-2",
+              "skills": [
+                "Historical/Political Analysis",
+                "Curriculum Planning",
+                "Classroom Assessment"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Pedagogy",
+                  "desc": "The method of teaching",
+                  "icon": "📚"
+                },
+                {
+                  "title": "Assessment",
+                  "desc": "Evaluating student progress",
+                  "icon": "📝"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Lesson Planning",
+                  "desc": "Designing a course structure",
+                  "companies": "Education Dept",
+                  "color": "#3bc3e2"
+                }
+              ],
+              "subjects": [
+                "Advanced Arts Subjects",
+                "Learning and Teaching",
+                "Knowledge and Curriculum",
+                "Assessment for Learning"
+              ]
+            },
+            {
+              "id": 3,
+              "tabLabel": "YEAR 3",
+              "tabTitle": "Micro-Teaching",
+              "contentTitle": "The Art of Classroom Delivery",
+              "contentDesc": "This year transitions heavily into practical teaching. You will specialize in the pedagogy of Social Sciences/Languages and practice in Micro-Teaching studios.",
+              "badge": "YEAR-3",
+              "skills": [
+                "Subject Specific Pedagogy",
+                "Public Speaking & Delivery",
+                "Smart Board Utilization"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Micro-Teaching",
+                  "desc": "Simulated classroom practice",
+                  "icon": "🎥"
+                },
+                {
+                  "title": "Ed-Tech",
+                  "desc": "Digital teaching tools",
+                  "icon": "💻"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "Demo Classes",
+                  "desc": "Recorded peer-teaching sessions",
+                  "companies": "AV Studio",
+                  "color": "#e87211"
+                }
+              ],
+              "subjects": [
+                "Pedagogy of Social Science / Language",
+                "Final Core Arts Subjects",
+                "Understanding ICT in Education",
+                "Micro-Teaching Workshops"
+              ]
+            },
+            {
+              "id": 4,
+              "tabLabel": "YEAR 4",
+              "tabTitle": "School Internship",
+              "contentTitle": "Real-World Educator Experience",
+              "contentDesc": "The final year is defined by a massive 16-week School Internship where you act as a full-time teacher, preparing you for immediate employment.",
+              "badge": "YEAR-4",
+              "skills": [
+                "Live Classroom Management",
+                "Action Research",
+                "Inclusive Education Strategies"
+              ],
+              "aiTools": [],
+              "concepts": [
+                {
+                  "title": "Internship",
+                  "desc": "16 Weeks live teaching",
+                  "icon": "🏫"
+                },
+                {
+                  "title": "Action Research",
+                  "desc": "Solving real school problems",
+                  "icon": "📊"
+                }
+              ],
+              "projects": [
+                {
+                  "name": "School Internship",
+                  "desc": "Full-time teaching duty",
+                  "companies": "Partner Schools",
+                  "color": "#9b0000"
+                }
+              ],
+              "subjects": [
+                "16-Week School Internship Program (SIP)",
+                "Action Research Project",
+                "Creating an Inclusive School",
+                "Gender, School and Society"
+              ]
+            }
+          ]
+        },
+        "testimonials": {
+          "title": {
+            "main": "Our Future Educators Speak",
+            "highlight": "Speak"
+          },
+          "label": "Testimonials",
+          "list": [
+            {
+              "name": "Priya Sharma",
+              "batch": "B.A.-B.Ed. 2022",
+              "company": "TGT SST, KVS",
+              "emoji": "👩‍🏫",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+              "text": "The CTET preparation classes integrated directly into our curriculum were a game-changer. I cleared my CTET in the very first attempt while still in my final year."
+            },
+            {
+              "name": "Aman Gupta",
+              "batch": "B.A.-B.Ed. 2021",
+              "company": "SME, Unacademy",
+              "emoji": "💻",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+              "text": "The focus on Ed-Tech tools and digital teaching methodologies gave me a massive advantage in securing a high-paying role as a Subject Matter Expert at Unacademy."
+            },
+            {
+              "name": "Neha Agarwal",
+              "batch": "B.A.-B.Ed. 2020",
+              "company": "PGT Teacher, DPS",
+              "emoji": "🏫",
+              "rating": 5,
+              "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+              "text": "The 16-week mandatory school internship was an incredible experience. It transformed my theoretical knowledge of educational psychology into practical classroom management."
+            }
+          ]
+        },
+        "exploreDepartment": {
+          "sectionTitle": {
+            "main": "Explore School of Education",
+            "highlight": "School"
+          },
+          "subtitle": "Discover our specialized teaching labs, CTET mentoring, and school internship modules",
+          "items": [
+            {
+              "title": "Department at a Glance",
+              "icon": "Building2",
+              "items": [
+                "NCTE Approved Curriculum",
+                "CTET/TET Exam Mentoring",
+                "16-Week School Internships",
+                "Ed-Tech Company Placements",
+                "Micro-Teaching Workshops",
+                "Educational Psychology Seminars"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Exclusive Facilities",
+              "icon": "FlaskConical",
+              "items": [
+                "Micro-Teaching AV Studios",
+                "Educational Psychology Lab",
+                "Digital Language & Phonetics Lab",
+                "Ed-Tech Smart Classrooms"
+              ],
+              "cta": "VIEW MORE"
+            },
+            {
+              "title": "Your Department in a Nutshell",
+              "icon": "Star",
+              "items": [
+                "Govt. School Selections",
+                "Ed-Tech Placement Records",
+                "Alumni Network (Principals)",
+                "Latest Teaching Methodologies",
+                "Upcoming Education Conclaves",
+                "Important Resources"
+              ],
+              "cta": "START NOW"
+            }
+          ]
+        }
+      }
+    },
+    "placements": {
+      "title": {
+        "main": "Educators in Top Schools & Ed-Tech",
+        "highlight": "Top Placements"
+      },
+      "label": "Placement Records",
+      "subtitle": "Outstanding placements across Kendriya Vidyalayas, Premium Private Schools, and leading Ed-Tech platforms like Byju's and Unacademy.",
+      "list": [
+        {
+          "name": "Ananya Sharma",
+          "company": "Kendriya Vidyalaya (TGT)",
+          "pkg": "Govt. Scale",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        },
+        {
+          "name": "Rahul Verma",
+          "company": "Subject Matter Expert, Byju's",
+          "pkg": "8 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Tarun-Jain.png"
+        },
+        {
+          "name": "Priya Singh",
+          "company": "Delhi Public School (PGT)",
+          "pkg": "6 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Saloni.jpg"
+        },
+        {
+          "name": "Vikram Rathore",
+          "company": "Curriculum Developer, Unacademy",
+          "pkg": "9 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png"
+        },
+        {
+          "name": "Megha Nair",
+          "company": "Navodaya Vidyalaya (TGT)",
+          "pkg": "Govt. Scale",
+          "img": "https://cpur.in/wp-content/uploads/2023/07/1-d.jpg"
+        },
+        {
+          "name": "Siddharth Jain",
+          "company": "Academic Coordinator, Allen",
+          "pkg": "7.5 LPA",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png"
+        }
+      ]
+    },
+    "alumni": {
+      "title": {
+        "main": "Educators Making an Impact",
+        "highlight": "Impact"
+      },
+      "label": "Our Alumni",
+      "list": [
+        {
+          "name": "Dr. Sameer Khan",
+          "role": "Principal",
+          "company": "Global Indian International School",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/aryan.jpg"
+        },
+        {
+          "name": "Kavita Rao",
+          "role": "Senior PGT (Science)",
+          "company": "Kendriya Vidyalaya Sangathan",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png"
+        },
+        {
+          "name": "Rohan Mehra",
+          "role": "Ed-Tech Content Head",
+          "company": "Vedantu",
+          "img": "https://cpur.in/wp-content/uploads/2023/08/harsh.jpg"
+        }
+      ]
+    },
+    "industry": {
+      "title": {
+        "main": "School & Ed-Tech Tie Up's",
+        "highlight": "Tie Up's"
+      },
+      "label": "Collaborations",
+      "partners": [
+        {
+          "name": "Delhi Public School",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/tcs-logo-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "Kendriya Vidyalaya",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/infosys-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "Byju's Learning",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/wipro-as-Smart-Object-1.jpg"
+        },
+        {
+          "name": "Allen Career Institute",
+          "url": "https://cpur.in/wp-content/uploads/2023/08/google-as-Smart-Object-1.jpg"
+        }
+      ]
+    },
+    "research": {
+      "title": {
+        "main": "Educational Research & Pedagogy",
+        "highlight": "Research"
+      },
+      "label": "Eminence in Education",
+      "gallery": [
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-7.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/slider-1-1.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-12.jpg",
+        "https://cpur.in/wp-content/uploads/2023/07/gallery-4.jpg"
+      ],
+      "stats": [
+        {
+          "value": "150+",
+          "label": "Research Papers Published",
+          "icon": "BookOpen"
+        },
+        {
+          "value": "50+",
+          "label": "National Seminars",
+          "icon": "Presentation"
+        },
+        {
+          "value": "20+",
+          "label": "Curriculum Innovations",
+          "icon": "FileText"
+        },
+        {
+          "value": "100%",
+          "label": "Internship Completion",
+          "icon": "Users"
+        }
+      ]
+    },
+    "community": {
+      "title": {
+        "main": "A Community of Future Teachers",
+        "highlight": "Teachers"
+      },
+      "label": "Community Action",
+      "description": [
+        "The School of Education is built on the philosophy of experiential learning. Our students actively engage in micro-teaching sessions, lesson planning workshops, and educational psychology seminars.",
+        "Through mandatory school internships and rural teaching camps, students gain first-hand experience in managing real classrooms, understanding diverse student needs, and deploying modern educational technologies."
+      ],
+      "gallery": [
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-7-1.jpg",
+          "caption": "Students conducting a Micro-Teaching Session"
+        },
+        {
+          "src": "https://cpur.in/wp-content/uploads/2023/07/gallery-12-1.jpg",
+          "caption": "Interactive Smart Classroom Training"
+        }
+      ]
+    },
+    "infrastructure": {
+      "title": {
+        "main": "Advanced Pedagogical Infrastructure",
+        "highlight": "Infrastructure"
+      },
+      "label": "Campus Labs",
+      "list": [
+        {
+          "title": "Micro-Teaching Studios",
+          "desc": "Specially designed rooms with AV recording capabilities where students practice teaching and receive immediate peer and faculty feedback.",
+          "img": "https://img.freepik.com/free-photo/business-people-meeting_1048-1234.jpg"
+        },
+        {
+          "title": "Educational Psychology Lab",
+          "desc": "Equipped with standardized psychological tests, aptitude scales, and personality assessments to understand student behavior.",
+          "img": "https://img.freepik.com/free-photo/modern-office-space_1170-2.jpg"
+        },
+        {
+          "title": "Curriculum & Language Lab",
+          "desc": "A digital lab focusing on linguistic proficiency, phonetics, and modern curriculum design software.",
+          "img": "https://img.freepik.com/free-photo/stock-market-display_1048-3333.jpg"
+        },
+        {
+          "title": "Ed-Tech & Smart Classrooms",
+          "desc": "Training centers where students learn to use interactive whiteboards, digital podiums, and modern LMS software.",
+          "img": "https://img.freepik.com/free-photo/modern-classroom-projector_1048-12346.jpg"
+        }
+      ]
+    },
+    "testimonials": {
+      "title": {
+        "main": "Our Future Educators Speak",
+        "highlight": "Speak"
+      },
+      "label": "Testimonials",
+      "list": [
+        {
+          "name": "Priya Sharma",
+          "batch": "B.Sc.-B.Ed. 2022",
+          "company": "TGT Science, KVS",
+          "emoji": "👩‍🏫",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Archana-Kumari.png",
+          "text": "The CTET preparation classes integrated directly into our curriculum were a game-changer. I cleared my CTET in the very first attempt while still in my final year."
+        },
+        {
+          "name": "Aman Gupta",
+          "batch": "B.A.-B.Ed. 2021",
+          "company": "SME, Unacademy",
+          "emoji": "💻",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Siraj-Ali.png",
+          "text": "The focus on Ed-Tech tools and digital teaching methodologies gave me a massive advantage in securing a high-paying role as a Subject Matter Expert at Unacademy."
+        },
+        {
+          "name": "Neha Agarwal",
+          "batch": "B.Sc.-B.Ed. 2020",
+          "company": "PGT Teacher, DPS",
+          "emoji": "🏫",
+          "rating": 5,
+          "photo": "https://cpur.in/wp-content/uploads/2023/08/Prateek-Dhaman.png",
+          "text": "The 16-week mandatory school internship was an incredible experience. It transformed my theoretical knowledge of educational psychology into practical classroom management."
+        }
+      ]
+    },
+    "exploreDepartment": {
+      "sectionTitle": {
+        "main": "Explore School of Education",
+        "highlight": "School"
+      },
+      "subtitle": "Discover our specialized teaching labs, CTET mentoring, and school internship modules",
+      "items": [
+        {
+          "title": "Department at a Glance",
+          "icon": "Building2",
+          "items": [
+            "NCTE Approved Curriculum",
+            "CTET/TET Exam Mentoring",
+            "16-Week School Internships",
+            "Ed-Tech Company Placements",
+            "Micro-Teaching Workshops",
+            "Educational Psychology Seminars"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Exclusive Facilities",
+          "icon": "FlaskConical",
+          "items": [
+            "Micro-Teaching AV Studios",
+            "Educational Psychology Lab",
+            "Digital Language & Phonetics Lab",
+            "Ed-Tech Smart Classrooms"
+          ],
+          "cta": "VIEW MORE"
+        },
+        {
+          "title": "Your Department in a Nutshell",
+          "icon": "Star",
+          "items": [
+            "Govt. School Selections",
+            "Ed-Tech Placement Records",
+            "Alumni Network (Principals/Teachers)",
+            "Latest Teaching Methodologies",
+            "Upcoming Education Conclaves",
+            "Important Resources"
+          ],
+          "cta": "START NOW"
+        }
+      ]
+    }
+  }
+}

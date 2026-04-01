@@ -4,6 +4,7 @@ import { connectToDatabase } from '@/lib/db';
 import Navigation from '@/models/Navigation';
 import fs from 'fs';
 import path from 'path';
+import { revalidatePath } from 'next/cache';
 
 // GET: Data laane ke liye (Auto-seed ke sath)
 export async function GET() {
@@ -44,6 +45,9 @@ export async function POST(req) {
       { data: body },
       { new: true, upsert: true }
     );
+    
+    // Clear whole site layout cache to show updated menus/logos
+    revalidatePath('/', 'layout');
 
     return NextResponse.json({ success: true, message: 'Header Updated Successfully!', data: updatedNav });
   } catch (error) {

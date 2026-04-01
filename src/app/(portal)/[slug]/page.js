@@ -1,4 +1,6 @@
 import { getPageBySlug } from '@/lib/actions/pageActions';
+import { getFlipbookBySlug } from '@/lib/actions/flipbookActions';
+import FlipbookViewer from '@/components/FlipbookViewerWrapper';
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 import { notFound } from 'next/navigation';
@@ -8,11 +10,24 @@ import '@/app/university-prose.css'; // Load global university CMS prose styles
 export async function generateMetadata(props) {
   const params = await props.params;
   const { data: page } = await getPageBySlug(params.slug);
-  if (!page) return {};
-  return {
-    title: page.meta?.title || page.title,
-    description: page.meta?.description || '',
-  };
+  
+  if (page) {
+    return {
+      title: page.meta?.title || page.title,
+      description: page.meta?.description || '',
+    };
+  }
+
+  // Check for Flipbook if page is not found
+  const { data: flipbook } = await getFlipbookBySlug(params.slug);
+  if (flipbook) {
+    return {
+      title: flipbook.meta_title || `${flipbook.title} | Career Point University`,
+      description: flipbook.meta_description || `View the interactive brochure: ${flipbook.title}`,
+    };
+  }
+
+  return {};
 }
 
 export default async function DynamicCMSPage(props) {
@@ -20,8 +35,24 @@ export default async function DynamicCMSPage(props) {
   const { data: page } = await getPageBySlug(params.slug);
 
   if (!page) {
-    // Graceful trigger of the Next.js 404 boundary if the slug is not found in MongoDB Collection Page
-    notFound(); 
+    // Attempt to fetch Flipbook if Page is not found
+    const { data: flipbook, success: fbSuccess } = await getFlipbookBySlug(params.slug);
+    
+    if (!fbSuccess || !flipbook) {
+      notFound(); 
+    }
+
+    // Render Flipbook in immersive dark container
+    return (
+      <div className="fixed inset-0 w-full h-screen bg-slate-900 overflow-hidden flex flex-col items-center justify-center z-[1000]">
+        <FlipbookViewer 
+          pdf_url={flipbook.pdf_url} 
+          title={flipbook.title} 
+          cover_image={flipbook.cover_image}
+          backdrop_image={flipbook.backdrop_image}
+        />
+      </div>
+    );
   }
 
   return (

@@ -14,16 +14,19 @@ import {
   Plus, 
   Library, 
   Check, 
-  ExternalLink 
+  ExternalLink,
+  FileText,
+  Globe
 } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import toast from 'react-hot-toast';
 
 export default function MediaUploader({ onUploadSuccess, category = 'general', multiple = false, buttonText = "Select / Upload Media" }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('library'); // 'library' or 'upload'
-  const [uploadType, setUploadType] = useState('local'); // 'local' or 'external'
+  const [activeTab, setActiveTab] = useState('library');
+  const [uploadType, setUploadType] = useState('local');
   const [selectedItems, setSelectedItems] = useState([]);
+  const [multiMode, setMultiMode] = useState(multiple); // can be toggled by user inside modal
   const modalRef = useRef(null);
   
   // Library State
@@ -56,7 +59,7 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
   }, [isOpen]);
 
   const handleSelect = (url) => {
-    if (multiple) {
+    if (multiMode) {
       setSelectedItems(prev => prev.includes(url) ? prev.filter(u => u !== url) : [...prev, url]);
     } else {
       if (onUploadSuccess) onUploadSuccess(url);
@@ -91,7 +94,14 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
 
       if (res.success) {
         setTimeout(() => {
-          toast.success(`Successfully uploaded ${res.count || files.length} files to library!`);
+          const duplicates = (res.data || []).filter(f => f.duplicate).length;
+          const newCount   = (res.data || []).length - duplicates;
+          if (duplicates > 0 && newCount === 0)
+            toast('All files already in your library!', { icon: '📂' });
+          else if (duplicates > 0)
+            toast.success(`${newCount} uploaded • ${duplicates} already in library`);
+          else
+            toast.success(`${res.data?.length || files.length} file(s) added to library!`);
           setActiveTab('library');
           setUploadProgress(0);
           setUploadLoading(false);
@@ -115,7 +125,11 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
     setUploadLoading(true);
     const res = await saveExternalMedia(externalUrl);
     if (res.success) {
-      toast.success('External link saved!');
+      if (res.duplicate) {
+        toast('This file is already in your media library!', { icon: '📂' });
+      } else {
+        toast.success('External link imported to library!');
+      }
       setActiveTab('library');
       setExternalUrl('');
       fetchLibrary();
@@ -194,16 +208,30 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
               
               {activeTab === 'library' && (
                 <div className="h-full flex flex-col space-y-4">
-                  {/* Search Bar */}
-                  <div className="relative max-w-md">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={14} />
-                    <input 
-                      type="text" 
-                      placeholder="Search assets..." 
-                      value={searchQuery}
-                      onChange={e => setSearchQuery(e.target.value)}
-                      className="w-full bg-[var(--bg-muted)] border border-[var(--border-default)] pl-10 pr-4 py-2 text-sm outline-none focus:border-[var(--color-primary)]"
-                    />
+                  {/* Search + Multi-Select Toggle */}
+                  <div className="flex gap-3 items-center">
+                    <div className="relative flex-1 max-w-md">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={14} />
+                      <input 
+                        type="text" 
+                        placeholder="Search assets..." 
+                        value={searchQuery}
+                        onChange={e => setSearchQuery(e.target.value)}
+                        className="w-full bg-[var(--bg-muted)] border border-[var(--border-default)] pl-10 pr-4 py-2 text-sm outline-none focus:border-[var(--color-primary)]"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => { setMultiMode(v => !v); setSelectedItems([]); }}
+                      className={`flex items-center gap-1.5 px-3 py-2 border text-[10px] font-black uppercase tracking-widest transition-all ${
+                        multiMode
+                          ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
+                          : 'border-[var(--border-default)] text-[var(--text-muted)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]'
+                      }`}
+                      title={multiMode ? 'Click to disable multi-select' : 'Click to enable multi-select'}
+                    >
+                      <Check size={12} /> Multi-Select
+                    </button>
                   </div>
 
                   {/* Media Grid */}
@@ -215,14 +243,21 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
                     ) : (
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                         {filteredMedia.map(item => (
-                          <div 
+                        <div 
                             key={item.id} 
                             onClick={() => handleSelect(item.url)}
-                            className={`group relative aspect-square bg-[var(--bg-muted)] border transition-all cursor-pointer overflow-hidden shadow-sm ${multiple && selectedItems.includes(item.url) ? 'border-[var(--color-primary)] ring-2 ring-[var(--color-primary)] ring-offset-2' : 'border-[var(--border-default)] hover:border-[var(--color-primary)]'}`}
+                            className={`group relative aspect-square bg-[var(--bg-muted)] border transition-all cursor-pointer overflow-hidden shadow-sm ${multiMode && selectedItems.includes(item.url) ? 'border-[var(--color-primary)] ring-2 ring-[var(--color-primary)] ring-offset-2' : 'border-[var(--border-default)] hover:border-[var(--color-primary)]'}`}
                           >
-                            <img src={item.url} className={`w-full h-full object-cover transition-transform duration-500 ${!selectedItems.includes(item.url) ? 'group-hover:scale-110' : ''}`} alt={item.displayName} />
+                            {item.url.toLowerCase().endsWith('.pdf') ? (
+                              <div className="w-full h-full flex flex-col items-center justify-center bg-red-50 text-red-500 gap-2">
+                                <FileText size={32} strokeWidth={1.5} />
+                                <span className="text-[9px] font-black uppercase tracking-widest">PDF Document</span>
+                              </div>
+                            ) : (
+                              <img src={item.url} className={`w-full h-full object-cover transition-transform duration-500 ${!selectedItems.includes(item.url) ? 'group-hover:scale-110' : ''}`} alt={item.displayName} />
+                            )}
                             
-                            {multiple && selectedItems.includes(item.url) && (
+                            {multiMode && selectedItems.includes(item.url) && (
                                 <div className="absolute top-2 right-2 bg-[var(--color-primary)] text-white p-1 rounded-full z-10 shadow-md">
                                    <Check size={14} strokeWidth={3} />
                                 </div>
@@ -251,8 +286,8 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
                     )}
                   </div>
                   
-                  {/* Modal Footer (Multiple Select Mode) */}
-                  {multiple && selectedItems.length > 0 && (
+                  {/* Modal Footer (Multi-Select Mode) */}
+                  {multiMode && selectedItems.length > 0 && (
                     <div className="bg-[var(--bg-surface)] border-t border-[var(--border-default)] py-3 px-4 flex justify-between items-center shadow-lg -mx-6 -mb-6 mt-2">
                        <div className="text-xs font-bold text-[var(--color-primary)]">{selectedItems.length} Asset(s) Selected</div>
                        <div className="flex gap-2">
@@ -308,7 +343,7 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
                       <h3 className="text-xs font-black text-[var(--text-primary)] uppercase tracking-widest border-l-4 border-purple-500 pl-3">Paste External Link</h3>
                       <div className="flex gap-2">
                         <div className="relative flex-1">
-                          <Link2 className="absolute left-3 top-1/2 -track-y-1/2 text-[var(--text-muted)] mt-[-7px]" size={14} />
+                          <Link2 className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] mt-[-7px]" size={14} />
                           <input 
                             type="url" 
                             placeholder="https://images.unsplash.com/..." 
@@ -322,10 +357,20 @@ export default function MediaUploader({ onUploadSuccess, category = 'general', m
                           type="button"
                           onClick={handleExternalSave}
                           disabled={uploadLoading || !externalUrl}
-                          className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white px-6 font-bold text-xs uppercase tracking-widest transition-colors flex items-center gap-2"
+                          style={{ minWidth: '160px' }}
+                          className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white px-6 font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2"
                         >
-                          {uploadLoading ? <Loader2 className="animate-spin" size={14} /> : <Check size={14} />}
-                          Save Link
+                          {uploadLoading ? (
+                            <>
+                              <Loader2 className="animate-spin" size={14} /> 
+                              Processing...
+                            </>
+                          ) : (
+                            <>
+                              <Globe size={14} /> 
+                              Automate Import
+                            </>
+                          )}
                         </button>
                       </div>
                       <p className="text-[10px] text-[var(--text-muted)]">Perfect for using assets from Unsplash, Pexels, or Cloudinary without downloading.</p>

@@ -125,7 +125,7 @@ export default function FlipbookManager() {
       });
       const data = await res.json();
       
-      if (data.success) {
+    if (data.success) {
         toast.success(editingId ? 'Updated successfully' : 'Created successfully');
         setIsModalOpen(false);
         resetForm();
@@ -138,6 +138,12 @@ export default function FlipbookManager() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const normalizeSlug = (val) => {
+    if (!val) return '';
+    // Strip leading slash — slugs are stored clean (e.g. "academic-calender", NOT "/academic-calender")
+    return val.trim().toLowerCase().replace(/^\/+/, '').replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-');
   };
 
   const resetForm = () => {
@@ -155,7 +161,8 @@ export default function FlipbookManager() {
   };
 
   const copyToClipboard = (slug) => {
-    const url = `${window.location.origin}/flipbook/${slug}`;
+    const cleanSlug = slug.replace(/^\/+/, ''); // strip leading slash(es) to prevent //slug URL bug
+    const url = `${window.location.origin}/${cleanSlug}`;
     navigator.clipboard.writeText(url);
     toast.success('Public URL copied!');
   };
@@ -166,7 +173,8 @@ export default function FlipbookManager() {
   };
 
   const handlePreview = (slug) => {
-    window.open(`/flipbook/${slug}`, '_blank');
+    const cleanSlug = slug.replace(/^\/+/, ''); // strip leading slash(es)
+    window.open(`/${cleanSlug}`, '_blank');
   };
 
   return (
@@ -336,10 +344,15 @@ export default function FlipbookManager() {
               <input 
                 type="text" 
                 value={formData.slug} 
-                onChange={e => setFormData({ ...formData, slug: e.target.value })}
+                onChange={e => setFormData({ ...formData, slug: normalizeSlug(e.target.value) })}
                 className="w-full bg-[#f8fafc] border border-slate-200 px-5 py-4 text-[13px] outline-none focus:border-[#1c54a3] font-mono text-slate-400"
                 placeholder="admission-prospectus"
               />
+              {formData.slug && (
+                <p className="text-[10px] text-slate-400 font-mono mt-1">
+                  Preview: <span className="text-[#1c54a3]">{typeof window !== 'undefined' ? window.location.origin : ''}/{formData.slug}</span>
+                </p>
+              )}
             </div>
           </div>
 
@@ -402,11 +415,22 @@ export default function FlipbookManager() {
                 <div className="w-1.5 h-3 bg-red-500"></div> PDF Source Module
              </label>
              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-                <input 
-                  type="text" readOnly value={formData.pdf_url}
-                  className="md:col-span-2 w-full bg-[#f8fafc] border border-slate-100 px-5 py-4 text-[11px] font-mono outline-none text-[#1c54a3] opacity-60"
-                  placeholder="Awaiting asset deployment..."
-                />
+                <div className="md:col-span-2 relative">
+                  <input 
+                    type="text" readOnly value={formData.pdf_url}
+                    className="w-full bg-[#f8fafc] border border-slate-100 px-5 py-4 text-[11px] font-mono outline-none text-[#1c54a3] opacity-60 pr-20"
+                    placeholder="Awaiting asset deployment..."
+                  />
+                  {formData.pdf_url && (
+                    <a 
+                      href={formData.pdf_url} 
+                      target="_blank" 
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-[9px] font-black text-[#1c54a3] hover:underline uppercase tracking-widest flex items-center gap-1"
+                    >
+                      <Eye size={12} /> View
+                    </a>
+                  )}
+                </div>
                 <MediaUploader 
                   onUploadSuccess={(url) => setFormData({ ...formData, pdf_url: url })}
                   category="flipbooks"

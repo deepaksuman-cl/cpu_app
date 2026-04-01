@@ -129,7 +129,13 @@ function LinkRow({ link, onUpdate, onRemove }) {
             <input
               value={link.slug}
               placeholder="/path"
-              onChange={(e) => onUpdate('slug', e.target.value)}
+              onChange={(e) => {
+                let val = e.target.value;
+                if (val && !val.startsWith('/') && !val.startsWith('http') && !val.startsWith('mailto:') && !val.startsWith('tel:') && !val.startsWith('#')) {
+                  val = '/' + val;
+                }
+                onUpdate('slug', val);
+              }}
               className="w-full text-[11px] text-gray-400 bg-transparent outline-none font-mono
                 border-b border-transparent focus:border-gray-200 placeholder:text-gray-300 transition-colors"
             />
@@ -332,7 +338,14 @@ function MenuEditContent({
                   className={inputCls} placeholder="APPLY NOW" />
               </Field>
               <Field label="Action Button Link">
-                <input value={m.actionButtonLink || ''} onChange={(e) => onUpdateField('actionButtonLink', e.target.value)}
+                <input value={m.actionButtonLink || ''} 
+                  onChange={(e) => {
+                    let val = e.target.value;
+                    if (val && !val.startsWith('/') && !val.startsWith('http') && !val.startsWith('mailto:') && !val.startsWith('tel:') && !val.startsWith('#')) {
+                      val = '/' + val;
+                    }
+                    onUpdateField('actionButtonLink', val);
+                  }}
                   className={inputCls} placeholder="/apply" />
               </Field>
               <Field label="Helpdesk Title">
