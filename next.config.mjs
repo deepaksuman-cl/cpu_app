@@ -11,8 +11,9 @@ const nextConfig = {
   // Without this, Turbopack cannot resolve their exports and components become undefined.
   transpilePackages: ['react-pdf', 'pdfjs-dist', 'react-pageflip'],
   experimental: {
+    middlewareClientMaxBodySize: '28mb',
     serverActions: {
-      bodySizeLimit: '100mb',
+      bodySizeLimit: '28mb',
     },
   },
   serverExternalPackages: ['sequelize', 'mariadb'],
