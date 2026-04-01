@@ -6,8 +6,13 @@ import { revalidatePath } from 'next/cache';
 import fs from 'fs/promises';
 import path from 'path';
 
-// Safe resolution of upload directory in cPanel
-const getUploadDir = () => path.join(process.cwd(), 'public', 'uploads', 'media');
+// ✅ Upload dir is at PROJECT ROOT /uploads/media (NOT inside /public/)
+// This avoids write-permission errors on cPanel/production servers where /public is read-only.
+// Files are served via the existing /api/media/[...path] route handler.
+const getUploadDir = () => path.join(process.cwd(), 'uploads', 'media');
+
+// URL prefix — served by /api/media/[...path] route
+const getMediaUrl = (fileName) => `/api/media/media/${fileName}`;
 
 export async function getAllMedia() {
   try {
@@ -32,7 +37,7 @@ export async function uploadLocalMedia(formData) {
     if (files.length === 0) throw new Error('No files uploaded');
 
     const uploadDir = getUploadDir();
-    // 🛡️ Bulletproof: Ensure directory exists without crashing
+    // Ensure directory exists (recursive = no error if already exists)
     await fs.mkdir(uploadDir, { recursive: true });
 
     const processedMedia = [];
@@ -44,15 +49,15 @@ export async function uploadLocalMedia(formData) {
       const originalName = file.name || 'unnamed-file';
       const fileSize = file.size || 0;
 
-      // 🛡️ DUPLICATE CHECK: Match by original filename — return existing record instead of re-uploading
+      // 🛡️ DUPLICATE CHECK: Match by original filename — return existing record
       const trimmedName = originalName.trim();
       const existingMedia = await Media.findOne({ where: { originalName: trimmedName } });
       if (existingMedia) {
         processedMedia.push({ ...existingMedia.toJSON(), duplicate: true });
-        continue; // skip disk write and DB insert — already in library
+        continue;
       }
 
-      // 🛡️ Bulletproof: Sanitize filename (spaces to hyphens, remove special chars)
+      // Sanitize filename (spaces → hyphens, remove special chars)
       const sanitizedName = trimmedName.replace(/[^a-zA-Z0-9.-]/g, '-').replace(/-+/g, '-');
       const uniqueSuffix = Math.random().toString(36).substring(2, 7);
       const fileName = `${Date.now()}-${uniqueSuffix}-${sanitizedName}`;
@@ -64,7 +69,7 @@ export async function uploadLocalMedia(formData) {
       const media = await Media.create({
         displayName: originalName,
         originalName: originalName,
-        url: `/uploads/media/${fileName}`,
+        url: getMediaUrl(fileName),        // ✅ served via API route
         isExternal: false,
         mimeType: file.type || 'application/octet-stream',
         size: fileSize,
@@ -140,7 +145,7 @@ export async function saveExternalMedia(url) {
     const media = await Media.create({
       displayName: originalName,
       originalName: originalName,
-      url: `/uploads/media/${fileName}`,
+      url: getMediaUrl(fileName),          // ✅ served via API route
       isExternal: false, // It's local now
       mimeType: contentType,
       size: fileSize,
