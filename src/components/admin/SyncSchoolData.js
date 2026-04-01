@@ -9,7 +9,7 @@ const SyncSchoolData = () => {
     // { label: "Computer Applications", value: "computer-applications-technology" },
     // { label: 'Commerce & Management (commerce-and-management.json)', value: 'commerce-and-management' },
     // { label: 'Health Sciences (health-sciences.json)', value: 'health-sciences' },
-    // { label: 'Legal Studies (legal-studies.json)', value: 'legal-studies' },
+    { label: 'Legal Studies (legal-studies.json)', value: 'legal-studies' },
     { label: 'Engineering & Technology (engineering-and-technology.json)', value: 'engineering-and-technology' },
     { label: 'School of Education (school-of-education.json)', value: 'school-of-education' },
     { label: 'Agricultural Sciences (agricultural-sciences.json)', value: 'agricultural-sciences' },
