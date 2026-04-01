@@ -1,266 +1,361 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { Document, Page, pdfjs } from 'react-pdf';
-import HTMLFlipBook from 'react-pageflip';
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  ZoomIn, 
-  ZoomOut, 
-  Download, 
-  X
+import {
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  X,
+  ZoomIn,
+  ZoomOut,
+  BookOpen,
+  Loader2,
+  Maximize2,
+  ChevronsLeft,
+  ChevronsRight,
 } from 'lucide-react';
 
-// Configure the PDF worker
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+const PDFJS_CDN  = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+const WORKER_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
+/**
+ * FlipbookViewer — Professional canvas-based PDF viewer.
+ * Uses PDF.js loaded from CDN to avoid all Next.js/Turbopack bundling issues.
+ * Zero npm dependencies for PDF rendering.
+ */
 export default function FlipbookViewer({ pdf_url, title, cover_image, backdrop_image }) {
-  const router = useRouter();
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [scale, setScale] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isFullyReady, setIsFullyReady] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-  
-  const bookRef = useRef(null);
+  const router  = useRouter();
+  const canvasRef = useRef(null);
+  const renderTaskRef = useRef(null);
 
-  // Responsive Check and body overflow lock
+  const [pdfDoc,       setPdfDoc]       = useState(null);
+  const [numPages,     setNumPages]     = useState(0);
+  const [currentPage,  setCurrentPage]  = useState(1);
+  const [scale,        setScale]        = useState(1.4);
+  const [loading,      setLoading]      = useState(true);
+  const [pageLoading,  setPageLoading]  = useState(false);
+  const [error,        setError]        = useState(null);
+  const [isReady,      setIsReady]      = useState(false);
+  const [isClosing,    setIsClosing]    = useState(false);
+  const [showCover,    setShowCover]    = useState(!!cover_image);
+  const [pageInput,    setPageInput]    = useState('1');
+  const [isMobile,     setIsMobile]     = useState(false);
+
+  /* ── Layout ── */
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    document.body.style.overflow = 'hidden';
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) setScale(0.85);
+    };
     handleResize();
     window.addEventListener('resize', handleResize);
-    document.body.style.overflow = 'hidden';
-    
-    // Controlled entry animation delay
-    const timer = setTimeout(() => setIsFullyReady(true), 1200);
-
+    const t = setTimeout(() => setIsReady(true), 200);
     return () => {
+      document.body.style.overflow = '';
       window.removeEventListener('resize', handleResize);
-      document.body.style.overflow = 'auto';
-      clearTimeout(timer);
+      clearTimeout(t);
     };
   }, []);
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-    setLoading(false);
+  /* ── Load PDF.js & Document ── */
+  useEffect(() => {
+    if (showCover) return;
+    let cancelled = false;
+
+    const loadPdf = async () => {
+      try {
+        // Inject PDF.js from CDN if not already loaded
+        if (!window.pdfjsLib) {
+          await new Promise((res, rej) => {
+            const s = document.createElement('script');
+            s.src = PDFJS_CDN;
+            s.onload = res;
+            s.onerror = rej;
+            document.head.appendChild(s);
+          });
+        }
+        if (cancelled) return;
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER_CDN;
+
+        const pdf = await window.pdfjsLib.getDocument({ url: pdf_url }).promise;
+        if (cancelled) return;
+
+        setPdfDoc(pdf);
+        setNumPages(pdf.numPages);
+        setLoading(false);
+      } catch (err) {
+        if (!cancelled) {
+          setError('Failed to load PDF. Please check the file URL.');
+          setLoading(false);
+        }
+      }
+    };
+
+    loadPdf();
+    return () => { cancelled = true; };
+  }, [pdf_url, showCover]);
+
+  /* ── Render Page to Canvas ── */
+  const renderPage = useCallback(async (doc, pageNum, sc) => {
+    if (!doc || !canvasRef.current) return;
+    setPageLoading(true);
+    try {
+      // cancel() may not return a Promise — use try/catch instead of .catch()
+      if (renderTaskRef.current) {
+        try { renderTaskRef.current.cancel(); } catch (_) {}
+        renderTaskRef.current = null;
+      }
+      const page     = await doc.getPage(pageNum);
+
+      // Use devicePixelRatio for crisp HD rendering on Retina / high-DPI screens
+      const dpr      = window.devicePixelRatio || 1;
+      const viewport = page.getViewport({ scale: sc * dpr });
+      const canvas   = canvasRef.current;
+      const ctx      = canvas.getContext('2d');
+
+      // Physical canvas size = viewport size (already multiplied by dpr)
+      canvas.width   = viewport.width;
+      canvas.height  = viewport.height;
+
+      // CSS display size = logical size (divided back by dpr) → looks sharp
+      canvas.style.width  = `${viewport.width  / dpr}px`;
+      canvas.style.height = `${viewport.height / dpr}px`;
+
+      const task = page.render({ canvasContext: ctx, viewport });
+      renderTaskRef.current = task;
+      await task.promise;
+    } catch (e) {
+      if (e?.name !== 'RenderingCancelledException') console.error(e);
+    } finally {
+      setPageLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (pdfDoc) renderPage(pdfDoc, currentPage, scale);
+  }, [pdfDoc, currentPage, scale, renderPage]);
+
+  /* ── Navigation ── */
+  const goTo = (n) => {
+    const p = Math.max(1, Math.min(n, numPages));
+    setCurrentPage(p);
+    setPageInput(String(p));
   };
+  const prev = () => goTo(currentPage - 1);
+  const next = () => goTo(currentPage + 1);
+
+  /* ── Keyboard ── */
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  next();
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')    prev();
+      if (e.key === 'Escape') handleClose();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  });
 
   const handleClose = () => {
     setIsClosing(true);
-    setTimeout(() => router.back(), 500); 
+    setTimeout(() => router.back(), 450);
   };
 
-  const nextSide = () => bookRef.current?.pageFlip().flipNext();
-  const prevSide = () => bookRef.current?.pageFlip().flipPrev();
-
-  // Professional Page Dimensions (Responsive Magazine View)
-  const pageWidth = isMobile ? 315 : 520;
-  const pageHeight = isMobile ? 470 : 715;
+  const clampedScale = Math.min(3, Math.max(0.5, scale));
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden flex flex-col items-center justify-center select-none bg-[#020617] font-sans transition-all duration-700 ${isClosing ? 'opacity-0 scale-95 blur-2xl' : 'opacity-100 scale-100'}`}>
-      
-      {/* ── High-Fidelity Backdrop (Clear Image) ── */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Subtle overlay to ensure text readability without killing the image visibility */}
-        <div className="absolute inset-0 bg-black/15 backdrop-blur-[2px] z-10"></div>
-        {backdrop_image ? (
-          <img src={backdrop_image} alt="" className="w-full h-full object-cover scale-100 opacity-90 transition-opacity duration-1000" />
-        ) : cover_image ? (
-          <img src={cover_image} alt="" className="w-full h-full object-cover scale-100 opacity-70 blur-[4px] transition-opacity duration-1000" />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#020617]" />
+    <div
+      className={`fixed inset-0 z-[9999] flex flex-col transition-all duration-500 ${
+        isClosing
+          ? 'opacity-0 scale-95'
+          : isReady ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.98]'
+      }`}
+      style={{ background: '#050a18' }}
+    >
+
+      {/* ── Ambient Backdrop ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {(backdrop_image || cover_image) && (
+          <img
+            src={backdrop_image || cover_image}
+            alt=""
+            className="w-full h-full object-cover opacity-10 blur-2xl scale-110"
+          />
         )}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050a18]/60 via-transparent to-[#050a18]/80" />
       </div>
 
-      {/* ── Fixed Control Interface ── */}
-      <div className="absolute top-0 right-0 z-[120] p-6 lg:p-10">
-        <button 
-          onClick={handleClose}
-          className="text-white/60 hover:text-white bg-black/20 hover:bg-[#1c54a3] p-3 rounded-full transition-all border border-white/10 hover:border-[#1c54a3]/40 backdrop-blur-3xl cursor-pointer group shadow-2xl"
-          title="Exit Magazine View"
-        >
-          <X size={24} className="group-hover:rotate-90 transition-transform duration-300" />
-        </button>
-      </div>
+      {/* ── Top Bar ── */}
+      <header className="relative z-20 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/[0.07] flex-shrink-0"
+        style={{ background: 'rgba(5,10,24,0.85)', backdropFilter: 'blur(20px)' }}>
 
-      {/* Branding Overlay */}
-      <div className="absolute top-0 left-0 z-[110] p-10 hidden lg:block">
-        <div className="flex flex-col">
-          <div className="flex items-center gap-4">
-             <div className="h-6 w-1 bg-[#1c54a3] shadow-[0_0_15px_#1c54a3]"></div>
-             <h2 className="text-white font-black text-sm uppercase tracking-[0.4em] drop-shadow-2xl">{title || "Active Module"}</h2>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Professional Navigation Arrows (Fixed at screen edges) ── */}
-      {!loading && !isMobile && (
-        <>
-          <button 
-            onClick={prevSide}
-            disabled={pageNumber <= 1}
-            className="absolute left-10 top-1/2 -translate-y-1/2 z-[110] text-white/20 hover:text-white bg-black/20 hover:bg-[#1c54a3]/20 p-6 rounded-full transition-all border border-white/5 hover:border-[#1c54a3]/40 backdrop-blur-sm disabled:opacity-0 disabled:pointer-events-none group shadow-3xl"
-          >
-            <ChevronLeft size={44} strokeWidth={1.5} className="group-hover:-translate-x-1.5 transition-transform" />
-          </button>
-          <button 
-            onClick={nextSide}
-            disabled={pageNumber >= (numPages + (cover_image ? 1 : 0))}
-            className="absolute right-10 top-1/2 -translate-y-1/2 z-[110] text-white/20 hover:text-white bg-black/20 hover:bg-[#1c54a3]/20 p-6 rounded-full transition-all border border-white/5 hover:border-[#1c54a3]/40 backdrop-blur-sm disabled:opacity-0 disabled:pointer-events-none group shadow-3xl"
-          >
-            <ChevronRight size={44} strokeWidth={1.5} className="group-hover:translate-x-1.5 transition-transform" />
-          </button>
-        </>
-      )}
-
-      {/* ── Main Book Engine (Centering Force) ── */}
-      <div 
-        className={`relative z-[10] transition-all duration-[1000ms] cubic-bezier(0.34,1.56,0.64,1) flex items-center justify-center w-full h-full pb-32 pt-20 ${isFullyReady ? 'scale-100 opacity-100' : 'scale-[0.8] opacity-0 blur-xl'}`}
-      >
-        <div style={{ transform: `scale(${scale})` }} className="transition-transform duration-500 ease-out flex items-center justify-center">
-          {!loadError && (
-            <Document 
-              file={pdf_url} 
-              onLoadSuccess={onDocumentLoadSuccess}
-              onLoadError={(err) => setLoadError(err.message)}
-              
-            >
-              {numPages && (
-                <HTMLFlipBook 
-                  width={pageWidth} height={pageHeight}
-                  size="stretch"
-                  minWidth={300} maxWidth={1400}
-                  minHeight={400} maxHeight={1600}
-                  maxShadowOpacity={0.3}
-                  showCover={true}
-                  mobileScrollSupport={true}
-                  usePortrait={isMobile}
-                  onFlip={(e) => setPageNumber(e.data + 1)}
-                  className="mx-auto shadow-[0_50px_100px_rgba(0,0,0,1)]"
-                  ref={bookRef}
-                  useMouseEvents={!loading}
-                  flippingTime={1000}
-                  startPage={0}
-                  drawShadow={true}
-                >
-                  {/* Page 1: Custom Cover (Ensured white background for transparency) */}
-                  {cover_image && (
-                    <div className="bg-white overflow-hidden shadow-inner relative page-sheet flex items-center justify-center">
-                       <img src={cover_image} alt="Front Cover" className="w-full h-full object-cover" />
-                       <div className="absolute inset-0 bg-gradient-to-l from-black/5 via-transparent to-transparent"></div>
-                       {/* Spine realism */}
-                       <div className="absolute right-0 top-0 bottom-0 w-1 bg-black/10"></div>
-                    </div>
-                  )}
-
-                  {/* Following PDF Pages */}
-                  {Array.from(new Array(numPages), (el, index) => (
-                    <div key={`page_${index + 1}`} className="bg-white overflow-hidden shadow-inner relative page-sheet">
-                       <div className="w-full h-full relative">
-                        <Page 
-                           pageNumber={index + 1} 
-                           scale={2.5}
-                           renderAnnotationLayer={false}
-                           renderTextLayer={false}
-                           className="bg-white flex items-center justify-center w-full h-full"
-                         />
-                          {/* Page spine shadow */}
-                          <div className={`absolute inset-0 pointer-events-none ${index % 2 === 0 ? 'bg-gradient-to-l' : 'bg-gradient-to-r'} from-black/[0.1] via-transparent to-transparent`}></div>
-                       </div>
-                    </div>
-                  ))}
-                </HTMLFlipBook>
-              )}
-            </Document>
+        <div className="flex items-center gap-3 min-w-0">
+          <BookOpen size={16} className="text-[#4f9cf9] flex-shrink-0" />
+          <h1 className="text-white/90 font-bold text-[12px] sm:text-[13px] uppercase tracking-[0.2em] truncate">
+            {title || 'Brochure Viewer'}
+          </h1>
+          {numPages > 0 && (
+            <span className="hidden sm:block text-[10px] text-white/30 font-mono ml-2">
+              {numPages} pages
+            </span>
           )}
         </div>
-      </div>
 
-      {/* ── Fixed Bottom Telemetry (Professional & Never Cut-off) ── */}
-      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[110] flex items-center gap-6 animate-in fade-in slide-in-from-bottom-10 duration-1000">
-        <div className="bg-black/30 backdrop-blur-3xl border border-white/10 h-16 px-10 rounded-[32px] flex items-center gap-10 shadow-3xl">
-          <div className="flex flex-col items-start justify-center border-r border-white/10 pr-10">
-            <span className="text-[10px] font-black text-[#1c54a3] uppercase tracking-[0.4em] mb-1 opacity-100">BROCHURE</span>
-            <span className="text-white font-mono text-base font-black tracking-widest leading-none">
-              {pageNumber.toString().padStart(2, '0')}<span className="opacity-10 mx-2 tracking-tighter">/</span>{(numPages + (cover_image ? 1 : 0)).toString().padStart(2, '0')}
-            </span>
-          </div>
-          
-          <div className="flex items-center gap-8">
-             <button onClick={() => setScale(prev => Math.max(0.5, prev - 0.25))} className="text-white/20 hover:text-white transition-all transform active:scale-90"><ZoomOut size={20} /></button>
-             <button onClick={() => setScale(prev => Math.min(2.5, prev + 0.25))} className="text-white/20 hover:text-white transition-all transform active:scale-90"><ZoomIn size={20} /></button>
-          </div>
-
-          <a href={pdf_url} download className="bg-[#1c54a3] hover:bg-white text-white hover:text-[#1c54a3] p-4 rounded-[18px] transition-all shadow-[0_15px_40px_rgba(28,84,163,0.3)] active:scale-95 ml-2">
-            <Download size={24} strokeWidth={2.5} />
+        <div className="flex items-center gap-2 flex-shrink-0">
+          {cover_image && (
+            <button
+              onClick={() => { setShowCover(v => !v); }}
+              className="text-[9px] font-black uppercase tracking-widest px-3 py-2 border border-white/10 text-white/50 hover:text-white hover:border-white/30 transition-all"
+            >
+              {showCover ? 'Read PDF' : 'Cover'}
+            </button>
+          )}
+          <a
+            href={pdf_url} download
+            className="flex items-center gap-1.5 px-3 py-2 text-[9px] font-black uppercase tracking-widest text-white bg-[#1a56db] hover:bg-[#2563eb] transition-colors"
+          >
+            <Download size={12} /> <span className="hidden sm:block">Download</span>
           </a>
+          <button onClick={handleClose}
+            className="p-2 border border-white/10 text-white/50 hover:text-white hover:border-red-500/50 hover:bg-red-500/10 transition-all group"
+          >
+            <X size={16} className="group-hover:rotate-90 transition-transform duration-300" />
+          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile-Only Navigation Controls (Compact & Screen-Edge) */}
-      {isMobile && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[110] flex items-center gap-14 bg-black/80 backdrop-blur-3xl border border-white/10 rounded-full px-12 py-5 shadow-3xl">
-           <button onClick={prevSide} disabled={pageNumber <= 1} className="text-white/40 active:text-[#1c54a3] disabled:opacity-5"><ChevronLeft size={32} /></button>
-           <div className="h-8 w-[1px] bg-white/10"></div>
-           <button onClick={nextSide} disabled={pageNumber >= (numPages + (cover_image ? 1 : 0))} className="text-white/40 active:text-[#1c54a3] disabled:opacity-5"><ChevronRight size={32} /></button>
-        </div>
+      {/* ── Main Viewer ── */}
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center overflow-hidden">
+
+        {/* Cover Mode */}
+        {showCover && cover_image ? (
+          <div
+            className="flex flex-col items-center gap-6 animate-in fade-in-0 duration-500 cursor-pointer group"
+            onClick={() => setShowCover(false)}
+          >
+            <div className="relative" style={{ perspective: '1000px' }}>
+              <img
+                src={cover_image} alt="Cover"
+                className="h-[65vh] max-h-[550px] w-auto object-contain shadow-[0_40px_100px_rgba(0,0,0,0.8)] border border-white/10 group-hover:scale-[1.02] transition-transform duration-500"
+                style={{ boxShadow: '8px 8px 40px rgba(0,0,0,0.9), -2px 0 20px rgba(0,0,0,0.5)' }}
+              />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="bg-[#1a56db] text-white px-5 py-2.5 text-[11px] font-black uppercase tracking-widest shadow-2xl">
+                  Open PDF Reader →
+                </div>
+              </div>
+            </div>
+            <p className="text-white/25 text-[10px] uppercase tracking-[0.4em] font-bold">
+              Click to open PDF reader
+            </p>
+          </div>
+
+        ) : (
+          /* PDF Canvas Mode */
+          <div className="flex-1 w-full flex flex-col items-center overflow-auto py-4 px-2">
+
+            {/* Loading / Error states */}
+            {loading && (
+              <div className="flex flex-col items-center justify-center gap-4 h-full">
+                <Loader2 className="animate-spin text-[#4f9cf9]" size={36} />
+                <p className="text-white/40 text-[11px] uppercase tracking-[0.3em] font-bold animate-pulse">
+                  Loading PDF...
+                </p>
+              </div>
+            )}
+            {error && (
+              <div className="flex items-center justify-center h-full px-8">
+                <div className="text-center max-w-sm">
+                  <div className="text-red-400 text-4xl mb-4">⚠</div>
+                  <p className="text-white/60 text-sm">{error}</p>
+                  <a href={pdf_url} target="_blank" rel="noreferrer"
+                    className="inline-block mt-4 px-4 py-2 bg-[#1a56db] text-white text-xs font-bold uppercase tracking-wide">
+                    Open PDF Directly →
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {!loading && !error && (
+              <div className="relative inline-block">
+                {/* Page Loading Overlay */}
+                {pageLoading && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#050a18]/60 backdrop-blur-sm">
+                    <Loader2 className="animate-spin text-[#4f9cf9]" size={28} />
+                  </div>
+                )}
+                {/* Page counter badge */}
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-white/30 tracking-widest">
+                  {currentPage} / {numPages}
+                </div>
+                <canvas
+                  ref={canvasRef}
+                  className="block shadow-[0_30px_80px_rgba(0,0,0,0.7)] border border-white/[0.05] max-w-full"
+                  style={{ background: '#fff' }}
+                />
+              </div>
+            )}
+          </div>
+        )}
+      </main>
+
+      {/* ── Bottom Controls ── */}
+      {!showCover && !loading && !error && (
+        <footer className="relative z-20 flex items-center justify-between gap-4 px-4 sm:px-8 py-3 border-t border-white/[0.07] flex-shrink-0"
+          style={{ background: 'rgba(5,10,24,0.9)', backdropFilter: 'blur(20px)' }}>
+
+          {/* Page Navigation */}
+          <div className="flex items-center gap-1">
+            <button onClick={() => goTo(1)} disabled={currentPage === 1}
+              className="p-2 text-white/40 hover:text-white disabled:opacity-30 transition-colors"
+              title="First page"><ChevronsLeft size={16} /></button>
+            <button onClick={prev} disabled={currentPage === 1}
+              className="p-2 text-white/40 hover:text-white disabled:opacity-30 transition-colors"
+              title="Previous (←)"><ChevronLeft size={18} /></button>
+
+            {/* Page jump input */}
+            <div className="flex items-center gap-1 px-2">
+              <input
+                type="number" min={1} max={numPages}
+                value={pageInput}
+                onChange={e => setPageInput(e.target.value)}
+                onBlur={() => goTo(parseInt(pageInput) || currentPage)}
+                onKeyDown={e => e.key === 'Enter' && goTo(parseInt(pageInput) || currentPage)}
+                className="w-12 text-center bg-white/5 border border-white/10 text-white text-[12px] font-mono py-1 outline-none focus:border-[#4f9cf9]/50 transition-colors rounded-none"
+              />
+              <span className="text-white/30 text-[11px] font-mono">/ {numPages}</span>
+            </div>
+
+            <button onClick={next} disabled={currentPage === numPages}
+              className="p-2 text-white/40 hover:text-white disabled:opacity-30 transition-colors"
+              title="Next (→)"><ChevronRight size={18} /></button>
+            <button onClick={() => goTo(numPages)} disabled={currentPage === numPages}
+              className="p-2 text-white/40 hover:text-white disabled:opacity-30 transition-colors"
+              title="Last page"><ChevronsRight size={16} /></button>
+          </div>
+
+          {/* Zoom Controls */}
+          <div className="flex items-center gap-1">
+            <button onClick={() => setScale(s => Math.max(0.5, s - 0.2))}
+              className="p-2 text-white/40 hover:text-white transition-colors" title="Zoom out">
+              <ZoomOut size={16} />
+            </button>
+            <span className="text-[10px] font-mono text-white/30 w-10 text-center">
+              {Math.round(clampedScale * 100)}%
+            </span>
+            <button onClick={() => setScale(s => Math.min(3, s + 0.2))}
+              className="p-2 text-white/40 hover:text-white transition-colors" title="Zoom in">
+              <ZoomIn size={16} />
+            </button>
+            <button onClick={() => setScale(isMobile ? 0.85 : 1.4)}
+              className="text-[9px] px-2 py-1 border border-white/10 text-white/30 hover:text-white hover:border-white/30 font-mono transition-all ml-1">
+              Reset
+            </button>
+          </div>
+        </footer>
       )}
-
-      {/* Loader Engine */}
-      {loading && (
-        <div className="absolute inset-0 z-[130] flex flex-col items-center justify-center bg-[#020617] gap-10">
-           <div className="book-loader">
-              <div className="book-page"></div>
-              <div className="book-page"></div>
-              <div className="book-page"></div>
-           </div>
-           <div className="text-center">
-              <h3 className="text-white font-black text-xs uppercase tracking-[1em] animate-pulse">Initializing Assets</h3>
-           </div>
-        </div>
-      )}
-
-      <style jsx global>{`
-        body { overflow: hidden !important; background: #020617 !important; margin: 0; }
-        .stf__wrapper { background: transparent !important; }
-        .stf__block { background: transparent !important; }
-        .page-sheet { background-color: #fff; }
-        .react-pdf__Page__canvas { max-width: 100% !important; height: auto !important; object-fit: contain; }
-        
-        .book-loader {
-          width: 80px; height: 50px; position: relative; border: 4px solid #fff; border-radius: 8px;
-          box-shadow: 0 40px 90px rgba(0,0,0,0.8);
-        }
-        .book-page {
-          width: 50%; height: 100%; background: #fff; position: absolute; right: 0; transform-origin: left;
-           animation: flip-engine 2s infinite ease-in-out; border-left: 2px solid #e2e8f0;
-        }
-        .book-page:nth-child(2) { animation-delay: 0.5s; }
-        .book-page:nth-child(3) { animation-delay: 1s; }
-        
-        @keyframes flip-engine {
-          0% { transform: perspective(400px) rotateY(0deg); opacity: 1; }
-          80% { opacity: 1; }
-          100% { transform: perspective(400px) rotateY(-180deg); opacity: 0; }
-        }
-
-        .react-pdf__Page__canvas { 
-          margin: 0 auto; 
-          max-width: 100% !important; 
-          max-height: 100% !important; 
-          width: 100% !important; 
-          height: auto !important; 
-          object-fit: contain; 
-        }
-        .react-pdf__Document { display: flex; justify-content: center; align-items: center; }
-      `}</style>
     </div>
   );
 }

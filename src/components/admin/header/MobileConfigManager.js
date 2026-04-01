@@ -170,7 +170,13 @@ export default function MobileConfigManager({ initialData, initialMobileConfig }
                           <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Path / Action Key</label>
                           <input 
                             value={tab.path} 
-                            onChange={(e) => updateTab(idx, 'path', e.target.value)}
+                            onChange={(e) => {
+                              let val = e.target.value;
+                              if (val && !val.startsWith('/') && !val.startsWith('http') && !val.startsWith('mailto:') && !val.startsWith('tel:') && !val.startsWith('#')) {
+                                val = '/' + val;
+                              }
+                              updateTab(idx, 'path', val);
+                            }}
                             className="w-full bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none px-4 py-3 text-sm font-bold focus:border-[var(--color-primary)] outline-none transition-all text-[var(--text-primary)]" 
                           />
                         </div>

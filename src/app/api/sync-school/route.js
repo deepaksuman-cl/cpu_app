@@ -4,6 +4,7 @@ import path from 'path';
 import sequelize from '@/lib/db'; // Tumhara Sequelize connection path (Update if needed)
 import School from '@/models/School'; // Tumhara School model path
 import Course from '@/models/Course'; // Tumhara Course model path
+import { revalidatePath } from 'next/cache';
 
 export async function POST(req) {
   try {
@@ -125,6 +126,10 @@ export async function POST(req) {
       }
 
       await t.commit();
+      
+      // Clear cache for all portal pages so they reflect the new school/course data
+      revalidatePath('/', 'layout');
+
       return NextResponse.json({ success: true, message: `'${slug}' Synced Successfully!` });
 
     } catch (dbError) {

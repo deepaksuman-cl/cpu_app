@@ -230,7 +230,15 @@ export default function SidebarMenuManager({ initialData, initialSideMenu }) {
                               
                               <div className="flex flex-col md:flex-row gap-3 pr-8">
                                 <input placeholder="Link Label" value={link.label} onChange={(e) => updateLinkField(catIdx, lIdx, 'label', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none px-3 py-2 text-[13px] font-bold outline-none focus:border-[var(--color-primary)] text-[var(--text-primary)]" />
-                                <input placeholder="/path" value={link.slug} onChange={(e) => updateLinkField(catIdx, lIdx, 'slug', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none px-3 py-2 text-[12px] text-[var(--text-secondary)] outline-none focus:border-[var(--color-primary)]" />
+                                <input placeholder="/path" value={link.slug} 
+                                  onChange={(e) => {
+                                    let val = e.target.value;
+                                    if (val && !val.startsWith('/') && !val.startsWith('http') && !val.startsWith('mailto:') && !val.startsWith('tel:') && !val.startsWith('#')) {
+                                      val = '/' + val;
+                                    }
+                                    updateLinkField(catIdx, lIdx, 'slug', val);
+                                  }} 
+                                  className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none px-3 py-2 text-[12px] text-[var(--text-secondary)] outline-none focus:border-[var(--color-primary)]" />
                               </div>
 
                               {cat.type === 'nested-dropdown' && (
@@ -246,7 +254,15 @@ export default function SidebarMenuManager({ initialData, initialSideMenu }) {
                                       <div key={sIdx} className="flex gap-2 items-center">
                                         <div className="text-[var(--border-default)]"><ChevronRight size={14} strokeWidth={3} /></div>
                                         <input placeholder="Sub Label" value={sub.label} onChange={(e) => updateSubLinkField(catIdx, lIdx, sIdx, 'label', e.target.value)} className="flex-1 bg-transparent border-b border-[var(--border-light)] py-1 text-[12px] font-bold text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)]" />
-                                        <input placeholder="/sub-path" value={sub.slug} onChange={(e) => updateSubLinkField(catIdx, lIdx, sIdx, 'slug', e.target.value)} className="flex-1 bg-transparent border-b border-[var(--border-light)] py-1 text-[11px] text-[var(--text-secondary)] outline-none focus:border-[var(--color-primary)]" />
+                                        <input placeholder="/sub-path" value={sub.slug} 
+                                          onChange={(e) => {
+                                            let val = e.target.value;
+                                            if (val && !val.startsWith('/') && !val.startsWith('http') && !val.startsWith('mailto:') && !val.startsWith('tel:') && !val.startsWith('#')) {
+                                              val = '/' + val;
+                                            }
+                                            updateSubLinkField(catIdx, lIdx, sIdx, 'slug', val);
+                                          }} 
+                                          className="flex-1 bg-transparent border-b border-[var(--border-light)] py-1 text-[11px] text-[var(--text-secondary)] outline-none focus:border-[var(--color-primary)]" />
                                         <button onClick={() => removeSubLink(catIdx, lIdx, sIdx)} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] transition-colors p-1">
                                           <Trash2 size={14} />
                                         </button>
@@ -302,7 +318,13 @@ export default function SidebarMenuManager({ initialData, initialSideMenu }) {
                       <input 
                         value={link.slug}
                         placeholder="/destination-url"
-                        onChange={(e) => updateDirectLinkField(idx, 'slug', e.target.value)}
+                        onChange={(e) => {
+                          let val = e.target.value;
+                          if (val && !val.startsWith('/') && !val.startsWith('http') && !val.startsWith('mailto:') && !val.startsWith('tel:') && !val.startsWith('#')) {
+                            val = '/' + val;
+                          }
+                          updateDirectLinkField(idx, 'slug', val);
+                        }}
                         className="w-full bg-transparent border-b border-[var(--border-default)] py-1 text-[11px] text-[var(--text-secondary)] focus:border-[var(--color-primary)] outline-none"
                       />
                     </div>

@@ -7,6 +7,9 @@ const nextConfig = {
       { hostname: 'images.unsplash.com' },
     ],
   },
+  // Required: react-pdf and pdfjs-dist are ESM-only packages.
+  // Without this, Turbopack cannot resolve their exports and components become undefined.
+  transpilePackages: ['react-pdf', 'pdfjs-dist', 'react-pageflip'],
   experimental: {
     serverActions: {
       bodySizeLimit: '100mb',

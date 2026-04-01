@@ -1,4 +1,6 @@
 import { ArrowRight, GraduationCap } from 'lucide-react';
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getSchools } from '@/lib/actions/schoolActions';
