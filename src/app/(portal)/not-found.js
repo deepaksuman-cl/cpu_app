@@ -22,7 +22,7 @@ export default function PortalNotFound() {
           
           <div className="flex items-center gap-2 mb-3 text-[#00588b] font-bold tracking-widest uppercase text-xs">
             <span className="w-8 h-px bg-[#00588b]/40"></span>
-            Error 404
+         Comming Soon
           </div>
           
           <h1 className="text-4xl sm:text-5xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-700 mb-4 leading-tight">
