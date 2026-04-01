@@ -11,7 +11,7 @@ const nextConfig = {
   // Without this, Turbopack cannot resolve their exports and components become undefined.
   transpilePackages: ['react-pdf', 'pdfjs-dist', 'react-pageflip'],
   experimental: {
-    proxyClientMaxBodySize: '28mb',
+    middlewareClientMaxBodySize: '28mb',
     serverActions: {
       bodySizeLimit: '28mb',
     },
