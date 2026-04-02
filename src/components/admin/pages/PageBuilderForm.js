@@ -41,7 +41,7 @@ const BLOCK_DEFINITIONS = [
 const getEmptyBlock = (type) => {
   const base = { blockType: type, content: '', useProse: true, image: '', imageHeight: '', imageWidth: '', isReversed: false, cssId: '', cssClass: '', splitConfig: '50-50', singleImage: { path: '', height: '', width: '', align: 'center' }, galleryHeading: { badge: '', title: '', highlight: '', description: '' }, accordionItems: [], profileItems: [], statsItems: [] };
   if (type === 'Accordion') base.accordionItems = [{ title: '', content: '' }];
-  if (type === 'ProfileGrid') base.profileItems = [{ name: '', designation: '', company: '', image: '' }];
+  if (type === 'ProfileGrid') base.profileItems = [{ name: '', designation: '', company: '', slug: '', image: '' }];
   if (type === 'StatsGrid') base.statsItems = [{ label: '', value: '', icon: '' }];
   if (type === 'GalleryBlock') base.galleryItems = [{ image: '', title: '', category: '' }];
   
@@ -522,7 +522,7 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                   <div>
                     <div className="mb-4 flex justify-between items-end border-b border-gray-200 pb-2">
                       <label className="block text-xs font-bold text-gray-700 uppercase">Profile Grid Members</label>
-                      <button type="button" onClick={() => addArrayItem(index, 'profileItems', { name: '', designation: '', company: '', image: '' })} className="text-xs font-bold bg-[#00588b] text-white px-3 py-1.5 hover:bg-[#004570] transition-colors flex gap-1 items-center">
+                      <button type="button" onClick={() => addArrayItem(index, 'profileItems', { name: '', designation: '', company: '', slug: '', image: '' })} className="text-xs font-bold bg-[#00588b] text-white px-3 py-1.5 hover:bg-[#004570] transition-colors flex gap-1 items-center">
                         <Plus size={14} /> Add Profile
                       </button>
                     </div>
@@ -558,6 +558,10 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                             <div>
                                <label className="block text-[10px] font-bold text-gray-500 uppercase">Company / Sub-text</label>
                                <input type="text" value={profile.company} onChange={e => updateArrayItem(index, 'profileItems', pIdx, 'company', e.target.value)} className="w-full border border-gray-300 p-1.5 text-sm outline-none" />
+                            </div>
+                            <div>
+                               <label className="block text-[10px] font-bold text-gray-400 uppercase">Profile Slug / Page URL (Optional)</label>
+                               <input type="text" value={profile.slug || ''} onChange={e => updateArrayItem(index, 'profileItems', pIdx, 'slug', e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))} className="w-full border border-gray-300 p-1.5 text-sm outline-none font-mono" placeholder="e.g. dr-john-doe" />
                             </div>
                           </div>
                         </div>
