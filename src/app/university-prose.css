@@ -1,263 +1,742 @@
-/* 
-   =============================================
-   UNIVERSITY PROSE STYLING - PREMIUM EDITION
-   Optimized for Editor.js Content & CPanel SSR
-   ============================================= 
-*/
+/* =============================================
+   UNIVERSITY PROSE — PREMIUM EDITION v2
+   Scoped to .university-prose | SSR-safe
+   ============================================= */
 
-:root {
-  --u-primary: #00588b;       /* Signature Blue */
-  --u-primary-dark: #004570;
-  --u-accent: #ffb900;        /* Signature Gold/Yellow */
-  --u-accent-soft: rgba(255, 185, 0, 0.1);
-  --u-text-main: #334155;     /* Slate 700 */
-  --u-text-dark: #0f172a;     /* Slate 900 */
-  --u-bg-light: #f8fafc;      /* Slate 50 */
-  --u-border: #e2e8f0;        /* Slate 200 */
-  --u-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --u-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+/* ── Variables ── */
+.university-prose {
+  --u-primary:       #00598c;
+  --u-primary-dark:  #004570;
+  --u-primary-light: #0072b5;
+  --u-header-grad:   linear-gradient(135deg, #00598c 0%, #00487a 100%);
+  --u-header-border: rgba(255, 255, 255, 0.12);
+  --u-accent:        #ffb900;
+  --u-accent-soft:   rgba(255, 185, 0, 0.08);
+  --u-accent-mid:    rgba(255, 185, 0, 0.25);
+  --u-text-main:     #334155;
+  --u-text-dark:     #0f172a;
+  --u-text-muted:    #64748b;
+  --u-bg-light:      #f8fafc;
+  --u-bg-white:      #ffffff;
+  --u-border:        #e2e8f0;
+  --u-border-dark:   #cbd5e1;
+  --u-radius-sm:     4px;
+  --u-radius-md:     8px;
+  --u-shadow-xs:     0 1px 2px rgba(0, 0, 0, 0.05);
+  --u-shadow-sm:     0 2px 8px rgba(0, 0, 0, 0.07);
+  --u-shadow-md:     0 4px 16px rgba(0, 0, 0, 0.08);
+  --u-transition:    0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --u-font-sans:     'Inter', system-ui, -apple-system, sans-serif;
+
+  font-family:    var(--u-font-sans);
+  font-size:      1.05rem;
+  line-height:    1.8;
+  color:          inherit; /* 🔥 Respect parent/context color */
+  max-width:      100%;
+  overflow-wrap:  break-word;
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* 
-   🔥 REVERTED TO TAG-BASED PREMIUM STYLING 
-   We use :where() so these rules have ZERO weight. 
-   - They follow the parent's color (text-blue-100) by default.
-   - They provide the premium university look only when enabled.
-*/
+/* ── Zero-specificity defaults ── */
+/* Using :where() ensures Tailwind classes win, and 'inherit' ensures parent colors flow down. */
+:where(.university-prose) * {
+  box-sizing: border-box;
+}
+
+:where(.university-prose) p,
+:where(.university-prose) li,
+:where(.university-prose) span,
+:where(.university-prose) div,
+:where(.university-prose) strong,
+:where(.university-prose) em {
+  color: inherit;
+}
+
 :where(.university-prose) h1,
 :where(.university-prose) h2,
 :where(.university-prose) h3,
-:where(.university-prose) h4,
-:where(.university-prose) p,
-:where(.university-prose) span,
-:where(.university-prose) li,
-:where(.university-prose) strong,
-:where(.university-prose) em {
-  color: currentColor; /* Follow parent color by default */
+:where(.university-prose) h4 {
+  color: inherit;
 }
 
-.university-prose {
-  line-height: 1.8;
+
+/* ════════════════════════════════════════
+   TYPOGRAPHY — HEADINGS
+   ════════════════════════════════════════ */
+
+.university-prose h1,
+.university-prose h2,
+.university-prose h3,
+.university-prose h4 {
   font-family: var(--u-font-sans);
-  font-size: 1.05rem;
-  max-width: 100%;
-  overflow-wrap: break-word;
-}
-
-/* ── Headings ── */
-.university-prose h1 { 
-  font-size: 2.5rem !important; 
-  border-left: 6px solid var(--u-accent) !important;
-  padding-left: 1.25rem !important;
+  line-height: 1.25 !important;
   font-weight: 700 !important;
-  margin-top: 2.5rem !important;
-  margin-bottom: 1.25rem !important;
+  letter-spacing: -0.02em;
 }
 
-.university-prose h2 { 
-  font-size: 1.875rem !important; 
-  padding-bottom: 0.75rem !important;
-  border-bottom: 2px solid var(--u-border) !important;
-  position: relative !important;
-  font-weight: 600 !important;
-  margin-top: 2rem !important;
-  margin-bottom: 1rem !important;
+/* H1 — Gold accent bar + strong presence */
+.university-prose h1 {
+  font-size:     2.25rem !important;
+  font-weight:   800 !important;
+  margin-top:    2.75rem !important;
+  margin-bottom: 1.25rem !important;
+  padding-left:  1.1rem !important;
+  border-left:   4px solid var(--u-accent) !important;
+  position:      relative;
+}
+
+/* H2 — Underline with animated gold accent */
+.university-prose h2 {
+  font-size:      1.75rem !important;
+  font-weight:    700 !important;
+  margin-top:     2.25rem !important;
+  margin-bottom:  1rem !important;
+  padding-bottom: 0.6rem !important;
+  border-bottom:  1px solid var(--u-border) !important;
+  position:       relative !important;
+  display:        block;
 }
 
 .university-prose h2::after {
-  content: "" !important;
-  position: absolute !important;
-  bottom: -2px !important;
-  left: 0 !important;
-  width: 80px !important;
-  height: 2px !important;
+  content:          "" !important;
+  position:         absolute !important;
+  bottom:           -1px !important;
+  left:             0 !important;
+  width:            56px !important;
+  height:           2px !important;
   background-color: var(--u-accent) !important;
+  border-radius:    2px !important;
+  transition:       width var(--u-transition);
 }
 
-.university-prose h3 { font-size: 1.5rem !important; font-weight: 600 !important; }
-.university-prose h4 { font-size: 1.25rem !important; font-weight: 600 !important; }
-.university-prose h5 { font-size: 1.125rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; }
+/* H3 — Subtle dot prefix */
+.university-prose h3 {
+  font-size:     1.35rem !important;
+  font-weight:   700 !important;
+  margin-top:    2rem !important;
+  margin-bottom: 0.75rem !important;
+  padding-left:  0.9rem !important;
+  border-left:   3px solid var(--u-border-dark) !important;
+}
 
-/* ── Core Text ── */
-.university-prose p { margin-bottom: 1rem; }
-.university-prose strong { font-weight: 700; }
-.university-prose em { font-style: italic; }
+/* H4 — Colored, slightly smaller */
+.university-prose h4 {
+  font-size:     1.1rem !important;
+  font-weight:   600 !important;
+  margin-top:    1.5rem !important;
+  margin-bottom: 0.5rem !important;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
 
-/* ── Professional Links ── */
+
+/* ════════════════════════════════════════
+   TYPOGRAPHY — BODY
+   ════════════════════════════════════════ */
+
+.university-prose p {
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.012em;
+}
+
+.university-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.university-prose strong {
+  font-weight: 700;
+}
+
+.university-prose em {
+  font-style: italic;
+  color: inherit;
+}
+
+.university-prose mark {
+  background-color: var(--u-accent-mid);
+  color: var(--u-text-dark);
+  padding: 0 3px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.university-prose u {
+  text-decoration: underline;
+  text-decoration-color: var(--u-accent);
+  text-underline-offset: 4px;
+}
+
+.university-prose hr {
+  border: none;
+  border-top: 1px solid var(--u-border);
+  margin: 2.5rem 0;
+}
+
+.university-prose code {
+  font-family: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', monospace;
+  font-size: 0.875em;
+  background-color: var(--u-bg-light);
+  color: var(--u-primary-dark);
+  border: 1px solid var(--u-border);
+  border-radius: var(--u-radius-sm);
+  padding: 0.15em 0.45em;
+}
+
+.university-prose pre {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  border-radius: var(--u-radius-md);
+  padding: 1.5rem;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 2rem 0;
+  border: 1px solid #1e293b;
+  box-shadow: var(--u-shadow-sm);
+}
+
+.university-prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+
+/* ════════════════════════════════════════
+   LINKS
+   ════════════════════════════════════════ */
+
 .university-prose a {
   color: var(--u-primary);
   text-decoration: none;
-  font-weight: 600;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s ease;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 88, 139, 0.25);
+  padding-bottom: 1px;
+  transition:
+    color var(--u-transition),
+    border-color var(--u-transition),
+    background-color var(--u-transition);
 }
 
 .university-prose a:hover {
   color: var(--u-primary-dark);
   border-bottom-color: var(--u-accent);
   background-color: var(--u-accent-soft);
+  border-radius: 2px;
+  padding-inline: 2px;
+  margin-inline: -2px;
 }
 
-/* ── Lists ── */
-.university-prose ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 2rem;
-  color: inherit;
-}
-
-.university-prose ul li {
-  position: relative;
-  padding-left: 1.75rem;
-  margin-bottom: 0.75rem;
-  color: inherit;
-}
-
-.university-prose ul li::before {
-  content: "";
-  position: absolute;
-  left: -1.25rem;
-  top: 0.65rem;
-  width: 10px;
-  height: 2px;
-  background-color: var(--u-accent);
+.university-prose a:focus-visible {
+  outline: 2px solid var(--u-accent);
+  outline-offset: 2px;
   border-radius: 2px;
 }
 
+
+/* ════════════════════════════════════════
+   LISTS
+   ════════════════════════════════════════ */
+
+.university-prose ul {
+  list-style: none !important;
+  padding-left: 0rem !important;
+  margin: 1.25rem 0 1.5rem !important;
+}
+
+.university-prose ul li {
+  position:     relative;
+  padding-left: 1.75rem !important;
+  margin-bottom: 0.75rem !important;
+  color: var(--u-text-main);
+  line-height: 1.6;
+}
+
+.university-prose ul li::before {
+  content:          "";
+  position:         absolute;
+  left:             0.15rem;
+  top:              0.6rem;
+  width:            8px;
+  height:           8px;
+  background-color: var(--u-accent);
+  border-radius:    50%;
+  box-shadow:       0 0 0 3px var(--u-accent-soft);
+  display: inline-block;
+}
+
+/* — Ordered — */
 .university-prose ol {
-  list-style-type: decimal !important;
-  padding-left: 2rem;
-  margin-bottom: 2rem;
-  color: inherit;
+  list-style: none;
+  counter-reset: u-counter;
+  padding-left: 0.25rem;
+  margin: 0.75rem 0 1.5rem;
 }
 
 .university-prose ol li {
-  padding-left: 0.5rem;
-  margin-bottom: 0.75rem;
-  color: inherit;
+  position:      relative;
+  padding-left:  2.25rem;
+  margin-bottom: 0.55rem;
+  counter-increment: u-counter;
+  color: var(--u-text-main);
 }
 
-.university-prose ol li::marker {
-  color: inherit; /* Marker also inherits color */
+.university-prose ol li::before {
+  content:          counter(u-counter);
+  position:         absolute;
+  left:             0;
+  top:              0.05rem;
+  width:            1.5rem;
+  height:           1.5rem;
+  background-color: var(--u-primary);
+  color:            #ffffff;
+  font-size:        0.7rem;
+  font-weight:      700;
+  border-radius:    50%;
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  line-height:      1;
+  flex-shrink:      0;
+}
+
+/* — Nested lists — */
+.university-prose ul ul,
+.university-prose ol ol,
+.university-prose ul ol,
+.university-prose ol ul {
+  margin-top:    0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.university-prose ul ul li::before {
+  width:            5px;
+  height:           5px;
+  border-radius:    50%;
+  top:              0.55rem;
+  background-color: var(--u-text-muted);
+}
+
+.university-prose ol ol li::before {
+  background-color: var(--u-accent);
+  color:            var(--u-text-dark);
+}
+
+
+/* ════════════════════════════════════════
+   BLOCKQUOTES
+   ════════════════════════════════════════ */
+
+.university-prose blockquote {
+  position:      relative;
+  margin:        2.25rem 0;
+  padding:       1.5rem 1.75rem 1.5rem 2.25rem;
+  background:    linear-gradient(135deg, var(--u-bg-light) 0%, #f1f5f9 100%);
+  border-left:   4px solid var(--u-primary);
+  border-radius: 0 var(--u-radius-md) var(--u-radius-md) 0;
+  box-shadow:    var(--u-shadow-sm);
+  font-size:     1.08rem;
+  font-style:    italic;
+  color:         var(--u-text-dark);
+  overflow:      hidden;
+}
+
+/* Decorative quote mark */
+.university-prose blockquote::before {
+  content:     "\201C";
+  position:    absolute;
+  top:         -0.5rem;
+  left:        0.75rem;
+  font-size:   4rem;
   font-weight: 800;
-  font-family: inherit;
+  font-style:  normal;
+  line-height: 1;
+  color:       var(--u-accent);
+  opacity:     0.5;
+  font-family: Georgia, serif;
+  pointer-events: none;
 }
 
-/* ── Table UI (Matched to Reference Image) ── */
-.university-prose div.table-wrapper {
-  margin: 2.5rem 0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--u-shadow);
-  border: 1px solid var(--u-border);
+/* Gold accent bar at top */
+.university-prose blockquote::after {
+  content:    "";
+  position:   absolute;
+  top:        0;
+  left:       0;
+  right:      0;
+  height:     2px;
+  background: linear-gradient(90deg, var(--u-accent) 0%, transparent 100%);
 }
-.university-prose table,
-.university-prose .tc-table {
-  width: 100%;
+
+.university-prose blockquote p {
+  margin-bottom: 0;
+  position:      relative;
+  z-index:       1;
+}
+
+.university-prose blockquote cite,
+.university-prose blockquote footer {
+  display:     block;
+  margin-top:  0.75rem;
+  font-style:  normal;
+  font-size:   0.85rem;
+  font-weight: 600;
+  color:       var(--u-primary);
+}
+
+.university-prose blockquote cite::before,
+.university-prose blockquote footer::before {
+  content: "— ";
+}
+
+
+/* ════════════════════════════════════════
+   TABLES — HTML + EDITOR.JS (.tc-table)
+   ════════════════════════════════════════ */
+
+/* Wrapper */
+.university-prose div.table-wrapper,
+.university-prose .cdx-block:has(.tc-table),
+.university-prose .tc-wrap {
+  margin:        2rem 0 !important;
+  overflow-x:    auto !important;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--u-radius-md) !important;
+  border:        1px solid var(--u-border) !important;
+  box-shadow:    0 2px 12px rgba(0, 89, 140, 0.08), 0 1px 3px rgba(0,0,0,0.06) !important;
+  background:    var(--u-bg-white) !important;
+}
+
+/* Standard table */
+.university-prose table {
+  width:           100%;
   border-collapse: collapse;
-  background-color: #ffffff;
-  font-size: 0.95rem;
-  text-align: left;
-  border: 1px solid var(--u-border) !important;
+  background:      var(--u-bg-white);
+  font-size:       0.94rem;
+  text-align:      left;
 }
 
-/* Editor table rows */
+/* — Sticky header — */
+.university-prose thead {
+  position: sticky;
+  top:      0;
+  z-index:  2;
+}
+
+/* Header cells — standard & forced blue for first row fallback */
+.university-prose thead th,
+.university-prose thead td,
+.university-prose table:not(:has(thead)) tr:first-child td,
+.university-prose table:not(:has(thead)) tr:first-child th {
+  background:       linear-gradient(135deg, #00598c 0%, #00487a 100%) !important;
+  color:            #ffffff !important;
+  font-weight:      600 !important;
+  font-size:        0.82rem !important;
+  padding:          1rem 1.35rem !important;
+  text-transform:   uppercase !important;
+  letter-spacing:   0.07em !important;
+  border:           none !important;
+  border-right:     1px solid rgba(255, 255, 255, 0.12) !important;
+  border-bottom:    3px solid var(--u-accent) !important;
+  white-space:      nowrap;
+}
+
+.university-prose thead th:last-child,
+.university-prose thead td:last-child {
+  border-right: none !important;
+}
+
+/* Body cells — standard */
+.university-prose tbody td,
+.university-prose tbody th {
+  padding:       0.875rem 1.25rem !important;
+  border-top:    1px solid var(--u-border) !important;
+  border-bottom: none !important;
+  border-left:   none !important;
+  border-right:  none !important;
+  color:         var(--u-text-main) !important;
+  vertical-align: middle;
+  transition:    background-color var(--u-transition);
+}
+
+/* Zebra striping */
+.university-prose tbody tr:nth-child(even) td,
+.university-prose tbody tr:nth-child(even) th {
+  background-color: var(--u-bg-light) !important;
+}
+
+/* Row hover */
+.university-prose tbody tr:hover td,
+.university-prose tbody tr:hover th {
+  background-color: var(--u-accent-soft) !important;
+}
+
+/* Last row — no border bleed */
+.university-prose tbody tr:last-child td,
+.university-prose tbody tr:last-child th {
+  border-bottom: none !important;
+}
+
+/* ── Editor.js tc-table ── */
+.university-prose .tc-table {
+  width:           100% !important;
+  border-collapse: collapse !important;
+  font-size:       0.94rem !important;
+  background:      var(--u-bg-white) !important;
+  box-shadow:      none !important;
+  margin:          0 !important;
+  border:          none !important;
+  border-radius:   0 !important;
+}
+
 .university-prose .tc-row {
   display: flex;
-  width: 100%;
+  width:   100%;
   border-bottom: 1px solid var(--u-border);
+  transition: background-color var(--u-transition);
 }
 
-.university-prose .tc-cell {
-  flex: 1;
-  padding: 1.15rem 1.5rem !important;
-  border-left: 1px solid var(--u-border) !important;
-  vertical-align: middle;
+.university-prose .tc-row:last-child {
+  border-bottom: none;
 }
 
-.university-prose .tc-cell:first-child {
-  border-left: none !important;
-}
-
-/* Editor Table Header Row (First Row) */
+/* Editor.js header row */
 .university-prose .tc-row:first-child {
-  background-color: var(--u-primary) !important;
-  color: #ffffff !important;
-  font-weight: 700;
+  background:    linear-gradient(135deg, #00598c 0%, #00487a 100%) !important;
+  border-bottom: 3px solid var(--u-accent) !important;
+  position: sticky;
+  top:      0;
+  z-index:  2;
 }
 
 .university-prose .tc-row:first-child .tc-cell {
-  color: #ffffff !important;
+  color:          #ffffff !important;
+  font-weight:    600 !important;
+  font-size:      0.82rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.07em !important;
+  border-color:   rgba(255, 255, 255, 0.12) !important;
+  padding:        1rem 1.35rem !important;
 }
 
-/* Editor Striped Rows (Even rows) */
+/* Editor.js body rows */
 .university-prose .tc-row:nth-child(even):not(:first-child) {
   background-color: var(--u-bg-light) !important;
 }
 
-/* Scroll support for mobile */
-@media (max-width: 768px) {
-  .university-prose table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+.university-prose .tc-row:not(:first-child):hover {
+  background-color: var(--u-accent-soft) !important;
+}
+
+.university-prose .tc-cell {
+  flex:       1;
+  padding:    0.875rem 1.25rem !important;
+  border-right: 1px solid var(--u-border) !important;
+  color:      var(--u-text-main) !important;
+  vertical-align: middle;
+  min-width:  120px;
+  word-break: break-word;
+}
+
+.university-prose .tc-cell:last-child {
+  border-right: none !important;
+}
+
+/* Responsive override for small screens */
+@media (max-width: 640px) {
+  .university-prose .tc-cell,
+  .university-prose tbody td,
+  .university-prose tbody th,
+  .university-prose thead th {
+    padding: 0.65rem 0.875rem !important;
+    font-size: 0.85rem !important;
   }
 }
 
-.university-prose thead th {
-  background-color: var(--u-primary);
-  color: #ffffff;
-  font-weight: 700;
-  padding: 1.25rem 1.5rem;
+
+/* ════════════════════════════════════════
+   IMAGES & FIGURES
+   ════════════════════════════════════════ */
+
+.university-prose figure {
+  margin:     2.5rem 0;
+  text-align: center;
+}
+
+.university-prose img {
+  max-width:    100%;
+  height:       auto;
+  border-radius: var(--u-radius-md);
+  box-shadow:   var(--u-shadow-md);
+  transition:
+    transform  0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display:      block;
+}
+
+.university-prose figure img:hover {
+  transform:  scale(1.015);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.university-prose figcaption {
+  margin-top:  0.75rem;
+  font-size:   0.82rem;
+  color:       var(--u-text-muted);
+  font-style:  italic;
+  line-height: 1.5;
+}
+
+/* Standalone image (outside figure) */
+.university-prose p > img {
+  border-radius: var(--u-radius-md);
+  box-shadow:    var(--u-shadow-md);
+  margin:        1.5rem auto;
+}
+
+/* ── EditorJS Image Tool Specifics ── */
+.university-prose .image-tool--withBorder img {
+  border: 1px solid var(--u-border);
+}
+
+.university-prose .image-tool--withBackground {
+  background-color: var(--u-bg-light);
+  padding: 2rem;
+  border-radius: var(--u-radius-md);
+}
+
+.university-prose .image-tool--stretched img {
+  width: 100%;
+}
+
+
+/* ════════════════════════════════════════
+   UTILITY COMPONENTS
+   ════════════════════════════════════════ */
+
+/* — Callout / Info box (Editor.js warning block or div.callout) — */
+.university-prose .cdx-warning,
+.university-prose .callout {
+  display:       flex;
+  gap:           1rem;
+  align-items:   flex-start;
+  background:    var(--u-bg-light);
+  border:        1px solid var(--u-border);
+  border-left:   4px solid var(--u-primary);
+  border-radius: var(--u-radius-md);
+  padding:       1.1rem 1.25rem;
+  margin:        1.75rem 0;
+  font-size:     0.96rem;
+}
+
+.university-prose .cdx-warning__icon,
+.university-prose .callout-icon {
+  flex-shrink: 0;
+  font-size:   1.25rem;
+  line-height: 1.5;
+}
+
+/* — Chip / Tag — */
+.university-prose .tag {
+  display:          inline-block;
+  padding:          0.2em 0.65em;
+  font-size:        0.78rem;
+  font-weight:      600;
+  border-radius:    999px;
+  background-color: var(--u-accent-soft);
+  color:            var(--u-primary-dark);
+  border:           1px solid var(--u-accent-mid);
+  letter-spacing:   0.03em;
+  vertical-align:   middle;
+}
+
+/* — Divider with label — */
+.university-prose .divider-label {
+  display:      flex;
+  align-items:  center;
+  gap:          1rem;
+  margin:       2rem 0;
+  color:        var(--u-text-muted);
+  font-size:    0.8rem;
+  font-weight:  600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.85rem;
-  border-bottom: 2px solid var(--u-primary-dark);
+  letter-spacing: 0.08em;
 }
 
-.university-prose tbody td {
-  padding: 1.15rem 1.5rem;
-  border-bottom: 1px solid var(--u-border);
-  vertical-align: middle;
-  transition: background-color 0.15s ease;
+.university-prose .divider-label::before,
+.university-prose .divider-label::after {
+  content:    "";
+  flex:       1;
+  height:     1px;
+  background: var(--u-border);
 }
 
-.university-prose tbody tr:last-child td {
-  border-bottom: none;
+
+/* ════════════════════════════════════════
+   FOCUS & ACCESSIBILITY
+   ════════════════════════════════════════ */
+
+.university-prose :focus-visible {
+  outline:        2px solid var(--u-accent);
+  outline-offset: 3px;
+  border-radius:  var(--u-radius-sm);
 }
 
-.university-prose tbody tr:nth-child(even) {
-  background-color: var(--u-bg-light);
+
+/* ════════════════════════════════════════
+   PRINT
+   ════════════════════════════════════════ */
+
+@media print {
+  .university-prose a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: var(--u-text-muted);
+  }
+
+  .university-prose blockquote::before {
+    display: none;
+  }
+
+  .university-prose img {
+    box-shadow: none;
+  }
 }
 
-.university-prose tbody tr:hover {
-  background-color: #f1f5f9;
-}
+/* ════════════════════════════════════════
+   ADMIN EDITOR UI FIXES
+   (Functionally required for RichTextEditor)
+   ════════════════════════════════════════ */
 
-/* ── Blockquotes ── */
-.university-prose blockquote {
-  border-left: 5px solid var(--u-primary);
-  background-color: var(--u-bg-light);
-  padding: 1.5rem 2rem;
-  margin: 2rem 0;
-  font-size: 1.2rem;
-  font-style: italic;
-  color: #334155;
-  border-radius: 0 8px 8px 0;
-  position: relative;
-}
+.custom-editor-scrollbar::-webkit-scrollbar { width: 8px; }
+.custom-editor-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+.custom-editor-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; border: 2px solid #f1f5f9; }
+.custom-editor-scrollbar::-webkit-scrollbar-thumb:hover { background: #00588b; }
 
-.university-prose blockquote::before {
-  content: "“";
-  position: absolute;
-  top: -10px;
-  left: 10px;
-  font-size: 4rem;
-  color: var(--u-primary);
-  opacity: 0.1;
-  font-family: serif;
-}
+/* Editor Layout & Toolbar Alignment */
+.university-prose .ce-block__content { max-width: 100% !important; margin-left: 0 !important; }
+.ce-toolbar__content { max-width: 100% !important; }
+.ce-toolbar__actions { left: -45px !important; }
+.ce-settings { background-color: white !important; border: 1px solid #e2e8f0 !important; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important; z-index: 100; }
+.ce-settings__button--active { background-color: #ffb900 !important; color: white !important; }
+.ce-inline-toolbar { border-radius: 8px !important; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important; border: 1px solid #e2e8f0 !important; }
+.ce-inline-tool--active { color: #00588b !important; background-color: #f1f5f9 !important; }
 
-/* ── Custom Utilities for Editor.js ── */
-.university-prose figure { margin: 2rem 0; text-align: center; }
-.university-prose figcaption { font-size: 0.875rem; color: #64748b; margin-top: 0.75rem; font-style: italic; }
+/* Mirror Prose styling inside Editor */
+.university-prose .ce-paragraph { line-height: 1.8; color: #334155; font-size: 1.05rem; }
+.university-prose .ce-header { color: #0f172a; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+.university-prose h1.ce-header { font-size: 2.25rem !important; border-left: 4px solid #ffb900 !important; padding-left: 1rem !important; }
+.university-prose h2.ce-header { font-size: 1.75rem !important; border-bottom: 1px solid #e2e8f0 !important; padding-bottom: 0.5rem !important; }
+.ce-paragraph { margin-bottom: 1.25rem !important; }
+.ce-block--selected .ce-block__content { background: rgba(255, 185, 0, 0.08) !important; }
+
+/* List & Bullet alignment in Editor View */
+.university-prose ul { padding-left: 0 !important; list-style: none !important; }
+.university-prose li { position: relative !important; margin-bottom: 0.5rem !important; }
+
+/* Image tweaks in Editor */
+.cdx-input.image-tool__caption { font-style: italic; color: #64748b; text-align: center; border: none !important; box-shadow: none !important; }
+.image-tool__image { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }

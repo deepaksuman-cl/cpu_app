@@ -69,7 +69,7 @@ export default function HeroSection({ data }) {
           style={{ zIndex: 1 }}
         />
         <div
-          className="relative max-w-7xl mx-auto px-5 py-24 flex items-center"
+          className="relative max-w-7xl mx-auto px-5 py-24 flex items-center hero_title"
           style={{ zIndex: 2 }}
         >
           <div key={animKey} className="max-w-[660px] animate-heroUp">

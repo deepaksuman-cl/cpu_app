@@ -5,6 +5,10 @@
 [id^="content-year-"] {
   scroll-margin-top: 140px;
 }
+
+.hero_title{
+   line-height: 1.6!important;
+}
   .gg-detail {
     position: relative!important;
     z-index: 9999!important;

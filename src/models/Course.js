@@ -133,6 +133,12 @@ const Course = sequelize.define('courses', {
     type: DataTypes.INTEGER,
     defaultValue: 1,
   },
+  layoutOrder: {
+    type: DataTypes.JSON,
+  },
+  customSections: {
+    type: DataTypes.JSON,
+  },
 }, {
   timestamps: true,
   indexes: [

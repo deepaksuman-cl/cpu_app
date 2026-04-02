@@ -413,7 +413,7 @@ export default function GalleryClient({ items, heading, id, className }) {
   if (!items || items.length === 0) return null;
 
   return (
-    <div id={id || undefined} className={`w-full py-16 px-6 bg-white border-y border-gray-200 ${className || ''}`}>
+    <div id={id || undefined} className={`w-full py-4 px-3 bg-white border-y border-gray-200 ${className || ''}`}>
       <div className="max-w-7xl mx-auto">
         
         {/* ── Section Title ───────────────────────────────── */}

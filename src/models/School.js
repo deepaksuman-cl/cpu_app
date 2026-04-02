@@ -114,6 +114,12 @@ const School = sequelize.define('schools', {
   exploreDepartment: {
     type: DataTypes.JSON,
   },
+  layoutOrder: {
+    type: DataTypes.JSON,
+  },
+  customSections: {
+    type: DataTypes.JSON,
+  },
   status: {
     type: DataTypes.ENUM('draft', 'published'),
     defaultValue: 'draft',
