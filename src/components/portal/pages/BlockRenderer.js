@@ -2,6 +2,7 @@ import AccordionClient from './AccordionClient';
 import * as LucideIcons from 'lucide-react';
 import GalleryClient from './GalleryClient';
 import RichTextRenderer from '@/components/common/RichTextRenderer';
+import Link from 'next/link';
 
 export default function BlockRenderer({ block }) {
   const { blockType } = block;
@@ -81,18 +82,19 @@ export default function BlockRenderer({ block }) {
       <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-white ${block.cssClass || ''}`}>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {block.profileItems.map((profile, idx) => (
-              <div key={idx} className="bg-white border border-gray-200 shadow-sm overflow-hidden text-center group transition-shadow hover:shadow-xl">
-                 <div className="aspect-square w-full overflow-hidden border-b border-gray-200 relative bg-gray-50">
+            {block.profileItems.map((profile, idx) => {
+              const cardContent = (
+                <>
+                  <div className="aspect-square w-full overflow-hidden border-b border-gray-200 relative bg-gray-50">
                     <img 
                       src={profile.image} 
                       alt={profile.name} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[600ms] " 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[600ms]" 
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                 </div>
-                 <div className="p-5 relative bg-white">
+                  </div>
+                  <div className="p-5 relative bg-white">
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-[3px] bg-[#ffb900] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <h3 className="font-extrabold text-[#00588b] text-lg mb-0.5 leading-tight">{profile.name}</h3>
                     <p className="text-sm font-bold text-gray-600 mb-2">{profile.designation}</p>
@@ -101,9 +103,28 @@ export default function BlockRenderer({ block }) {
                         {profile.company}
                       </p>
                     )}
-                 </div>
-              </div>
-            ))}
+                  </div>
+                </>
+              );
+
+              if (profile.slug) {
+                return (
+                  <Link 
+                    key={idx} 
+                    href={`/${profile.slug}`}
+                    className="bg-white border border-gray-200 shadow-sm overflow-hidden text-center group transition-shadow hover:shadow-xl block hover:border-[var(--color-primary)] transition-colors"
+                  >
+                    {cardContent}
+                  </Link>
+                );
+              }
+
+              return (
+                <div key={idx} className="bg-white border border-gray-200 shadow-sm overflow-hidden text-center group transition-shadow hover:shadow-xl">
+                  {cardContent}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
