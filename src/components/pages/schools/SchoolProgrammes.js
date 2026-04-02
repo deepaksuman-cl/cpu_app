@@ -37,7 +37,7 @@ export default function SchoolProgrammes({ data, schoolSlug }) {
           <RichTextRenderer 
             content={data.description} 
             useProse={data.useProse !== false}
-            className="mt-3 max-w-2xl mx-auto text-sm lg:text-base leading-relaxed text-white/65" 
+            className="mt-3 max-w-2xl mx-auto text-sm lg:text-base leading-relaxed text-white" 
           />
         </div>
 
