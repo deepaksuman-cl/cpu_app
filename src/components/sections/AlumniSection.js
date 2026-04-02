@@ -39,7 +39,7 @@ export default function AlumniSection({ data }) {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
               <div
-                className="absolute top-0 right-0 bottom-0 w-11 flex items-center justify-center z-20"
+                className="absolute  placement_bg_blur  top-0 right-0 bottom-0 w-11 flex items-center justify-center z-20"
                 style={{ backgroundColor: alum.companyBg || '#00588b' }}
               >
                 <span className="[writing-mode:vertical-rl] rotate-180 text-white font-black text-sm tracking-wide">
@@ -52,13 +52,13 @@ export default function AlumniSection({ data }) {
               >
                 {alum.company}
               </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-8 pb-4 px-3.5 z-40">
-                <div className="text-white font-extrabold text-base">{alum.name}</div>
-                <div className="text-white/70 text-xs mt-0.5">{alum.role}</div>
+              <div className="absolute placement_bg_blur  text-center bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-2 pb-4 px-3.5 z-40">
+                <h5 className="text-center font-extrabold text-base font-extrabold text-[16px] text-white">{alum.name}</h5>
+                <span className="text-white/70 text-xs mt-0.4">{alum.role}</span>
                 {alum.package && (
-                  <div className="text-amber-400 font-black text-xs mt-1.5 bg-black/40 inline-flex px-2 py-0.5 rounded shadow-sm border border-white/10">
+                  <h5 className="text-center text-amber-400 font-black text-xs text-[20px] ">
                     {alum.package}
-                  </div>
+                  </h5>
                 )}
               </div>
             </div>
