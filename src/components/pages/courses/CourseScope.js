@@ -39,7 +39,7 @@ export default function CourseScope({ data }) {
         <SectionTitle light subtitle={data.subtitle}>
           {data.sectionTitle}
         </SectionTitle>
-        <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20">
+        <div className="max-w-4xl mx-auto bg-white/10 text-white  backdrop-blur rounded-2xl p-8 border border-white/20">
           <RichTextRenderer 
             content={data.body} 
             useProse={data.useProse !== false}

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 import StructuredTitle from "@/components/common/StructuredTitle";
+import RichTextRenderer from "@/components/common/RichTextRenderer";
 
 export default function SchoolTestimonials({ data }) {
   const [active, setActive] = useState(0);
@@ -42,7 +43,9 @@ export default function SchoolTestimonials({ data }) {
                     <div className="h-1 bg-gradient-to-r from-[#ffb900] to-orange-500" />
                     <div className="p-8">
                       <Quote className="w-9 h-9 mb-5 text-[#ffb900] opacity-40" />
-                      <p className="text-base lg:text-lg leading-relaxed mb-8 text-white/85">"{t.text || t.content}"</p>
+                      <div className="text-base lg:text-lg leading-relaxed mb-8 text-white/85 excerpt-rich-text">
+                        <RichTextRenderer content={t.text || t.content} useProse={false} />
+                      </div>
                       <div className="flex items-center justify-between flex-wrap gap-4">
                         <div className="flex items-center gap-4">
                           <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-[#ffb900]/35 flex-shrink-0">
