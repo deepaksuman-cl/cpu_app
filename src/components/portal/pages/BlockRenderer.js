@@ -38,7 +38,7 @@ export default function BlockRenderer({ block }) {
     const useProse = block.useProse !== false;
 
     return (
-      <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-white ${block.cssClass || ''}`}>
+      <div id={block.cssId || undefined} className={`w-full py-4 px-3 bg-white ${block.cssClass || ''}`}>
         <div className={`max-w-7xl mx-auto flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-16 items-center`}>
           <div className={`w-full ${textCol}`}>
              <RichTextRenderer 
