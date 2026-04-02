@@ -10,6 +10,34 @@ import '@/app/university-prose.css'; // 🔥 Advanced Table & Prose Styling
 export default function RichTextRenderer({ content, className = "", variant = "default", style = {}, useProse = true }) {
   const containerRef = useRef(null);
 
+  // 🔥 Smart Semantic Detection: 
+  // Only apply prose if it's actual "Content" (JSON blocks or HTML with lists/tables/etc.)
+  const isRichContent = useMemo(() => {
+    if (!content) return false;
+    
+    // 1. Check if it's a pre-parsed blocks object
+    if (typeof content === 'object' && content !== null && 'blocks' in content) return true;
+    
+    if (typeof content === 'string') {
+      const trimmed = content.trim();
+      
+      // 2. Check for JSON format (EditorJS)
+      if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
+        try {
+          const parsed = JSON.parse(trimmed);
+          return !!(parsed && parsed.blocks);
+        } catch (e) {}
+      }
+
+      // 3. Check for HTML tags that specifically need prose styling (Lists, Tables, Blockquotes)
+      // Simple strings or plain <p> tags won't trigger this, keeping Hero/UI text clean.
+      const hasProseTags = /<(li|table|blockquote|h1|h2|h3|h4|hr)/i.test(trimmed);
+      if (hasProseTags) return true;
+    }
+    
+    return false;
+  }, [content]);
+
   const htmlContent = useMemo(() => {
     let html = parseEditorContent(content);
     
@@ -36,10 +64,15 @@ export default function RichTextRenderer({ content, className = "", variant = "d
   
   if (!htmlContent) return null;
 
+  // 🚀 THE PERMANENT FIX: 
+  // ONLY apply 'university-prose' if it is verified complex JSON from the editor.
+  // This GUARANTEES that Hero descriptions/Banners/Simple strings never get hit.
+  const applyProse = !!(useProse && isRichContent);
+
   return (
     <div 
       ref={containerRef}
-      className={`${useProse ? 'university-prose' : ''} max-w-none ${variant === 'checkmarks' ? 'list-none' : ''} ${className}`}
+      className={`${applyProse ? 'university-prose' : ''} max-w-none ${variant === 'checkmarks' ? 'list-none' : ''} ${className}`}
       dangerouslySetInnerHTML={{ __html: htmlContent }}
       style={style}
     />

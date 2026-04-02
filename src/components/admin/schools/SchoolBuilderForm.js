@@ -6,7 +6,9 @@ import Modal from '@/components/admin/ui/Modal';
 import { createSchool, updateSchool } from '@/lib/actions/schoolActions';
 import { AlertCircle, CheckCircle2, Image as ImageIcon, Pencil, Plus, Save, Settings, Trash2, Layers, Box } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import { GripVertical, FileText } from 'lucide-react';
 
 // --- Shared Internal Components ---
 
@@ -227,7 +229,16 @@ export default function SchoolBuilderForm({ initialData = null }) {
       };
     }
 
-    return base;
+    const defaultOrder = [
+      'hero', 'stats', 'about', 'programmes', 'placements', 'alumni', 
+      'industry', 'research', 'community', 'infrastructure', 'testimonials', 'exploreDepartment'
+    ];
+
+    return {
+      ...base,
+      layoutOrder: base.layoutOrder || defaultOrder,
+      customSections: base.customSections || {}
+    };
   });
 
   const updateSection = useCallback((section, data) => {
@@ -252,33 +263,63 @@ export default function SchoolBuilderForm({ initialData = null }) {
     }
   };
 
-  const SectionCard = ({ id, title, description, isComplete, isHidden, onToggleHide }) => (
-    <div className={`border border-[var(--border-default)] p-3 flex flex-col sm:flex-row justify-between sm:items-center gap-3 hover:border-[var(--color-primary)] transition-all rounded-none group shadow-[var(--shadow-sm)] ${isHidden ? 'opacity-60 bg-gray-50' : 'bg-[var(--bg-surface)]'}`}>
-      <div className="flex items-center gap-3">
+  const onDragEnd = (result) => {
+    if (!result.destination) return;
+    const items = Array.from(formData.layoutOrder);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setFormData(prev => ({ ...prev, layoutOrder: items }));
+  };
+
+  const addCustomBlock = () => {
+    const id = `custom_${Date.now()}`;
+    const newOrder = [...formData.layoutOrder, id];
+    const newCustoms = { ...formData.customSections, [id]: { title: 'New Custom Block', content: '', handle: 'custom' } };
+    setFormData(prev => ({ ...prev, layoutOrder: newOrder, customSections: newCustoms }));
+    setActiveSection(id);
+    setIsModalOpen(true);
+  };
+
+  const SectionCard = ({ id, title, description, isComplete, isHidden, onToggleHide, dragHandleProps, isCustom }) => (
+    <div className={`border border-[var(--border-default)] p-4 flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:border-[var(--color-primary)] transition-all rounded-none group shadow-[var(--shadow-sm)] ${isHidden ? 'opacity-60 bg-gray-50' : 'bg-[var(--bg-surface)]'}`}>
+      <div className="flex items-center gap-4">
+        <div {...dragHandleProps} className="cursor-grab active:cursor-grabbing text-[var(--text-muted)] hover:text-[var(--color-primary)] transition-colors p-1">
+          <GripVertical size={20} />
+        </div>
         <div className={`w-8 h-8 flex items-center justify-center rounded-none shrink-0 ${isComplete ? 'bg-[var(--color-success-light)] text-[var(--color-success-dark)]' : 'bg-[var(--bg-muted)] text-[var(--text-muted)]'}`}>
-          {isComplete ? <CheckCircle2 size={16} strokeWidth={2.5} /> : <AlertCircle size={16} strokeWidth={2} />}
+          {isCustom ? <FileText size={16} /> : isComplete ? <CheckCircle2 size={16} strokeWidth={2.5} /> : <AlertCircle size={16} strokeWidth={2} />}
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="font-bold text-[var(--text-primary)] text-[12px] uppercase tracking-wide leading-tight">{title}</h3>
+            <h3 className="font-bold text-[var(--text-primary)] text-[12px] uppercase tracking-wide leading-tight line-clamp-1">{title}</h3>
             {isHidden && <span className="text-[8px] bg-red-100 text-red-600 px-1.5 py-0.5 font-black uppercase tracking-tighter">Hidden</span>}
+            {isCustom && <span className="text-[8px] bg-blue-100 text-blue-600 px-1.5 py-0.5 font-black uppercase tracking-tighter">Custom</span>}
           </div>
-          <p className="text-[10px] text-[var(--text-secondary)] mt-0.5">{description}</p>
+          <p className="text-[10px] text-[var(--text-secondary)] mt-0.5 line-clamp-1 italic">{description}</p>
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input 
-            type="checkbox" 
-            checked={!!isHidden} 
-            onChange={(e) => onToggleHide(e.target.checked)}
-            className="w-3.5 h-3.5 accent-[var(--color-primary)]"
-          />
-          <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Hide</span>
-        </label>
+      <div className="flex items-center gap-4">
+        {isCustom ? (
+           <button onClick={() => {
+              const newOrder = formData.layoutOrder.filter(itemId => itemId !== id);
+              const newCustoms = { ...formData.customSections };
+              delete newCustoms[id];
+              setFormData(prev => ({ ...prev, layoutOrder: newOrder, customSections: newCustoms }));
+           }} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1.5 border border-transparent hover:border-[var(--color-danger-light)] transition-all"><Trash2 size={14}/></button>
+        ) : (
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input 
+              type="checkbox" 
+              checked={!!isHidden} 
+              onChange={(e) => onToggleHide(e.target.checked)}
+              className="w-3.5 h-3.5 accent-[var(--color-primary)]"
+            />
+            <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest hidden sm:inline">Hide</span>
+          </label>
+        )}
         <button 
           onClick={() => { setActiveSection(id); setIsModalOpen(true); }}
-          className="px-3 py-1.5 border border-[var(--border-dark)] text-[var(--text-secondary)] font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--text-primary)] hover:border-[var(--text-primary)] hover:text-[var(--bg-surface)] transition-all rounded-none flex items-center justify-center gap-1.5"
+          className="px-4 py-2 border border-[var(--border-dark)] text-[var(--text-secondary)] font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--text-primary)] hover:border-[var(--text-primary)] hover:text-[var(--bg-surface)] transition-all rounded-none flex items-center justify-center gap-1.5"
         >
           <Pencil size={12} strokeWidth={2} /> EDIT
         </button>
@@ -322,23 +363,69 @@ export default function SchoolBuilderForm({ initialData = null }) {
         </div>
       </div>
 
-      {/* --- Structured Sections List --- */}
+      {/* --- Dynamic Sections Layout (Drag & Drop) --- */}
       <div className="space-y-4">
-        <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide border-b border-[var(--border-light)] pb-2">Page Layout Sections</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          <SectionCard id="hero" title="Hero Header" description="Top banner & title." isComplete={!!formData.hero?.title?.main} isHidden={formData.hero?.hide} onToggleHide={(val) => updateSection('hero', {...formData.hero, hide: val})} />
-          <SectionCard id="stats" title="Quick Stats" description="University numbers." isComplete={formData.stats?.length > 0} isHidden={formData.stats?.[0]?.hide} onToggleHide={(val) => { const n = [...(formData.stats || [])]; if (n[0]) n[0].hide = val; updateSection('stats', n); }} />
-          <SectionCard id="about" title="Vision & Mission" description="School's core values." isComplete={!!formData.about?.vision?.text} isHidden={formData.about?.hide} onToggleHide={(val) => updateSection('about', {...formData.about, hide: val})} />
-          <SectionCard id="programmes" title="Programmes" description="Course levels & links." isComplete={formData.programmes?.levels?.length > 0} isHidden={formData.programmes?.hide} onToggleHide={(val) => updateSection('programmes', {...formData.programmes, hide: val})} />
-          <SectionCard id="placements" title="Placements" description="Student placement list." isComplete={formData.placements?.list?.length > 0} isHidden={formData.placements?.hide} onToggleHide={(val) => updateSection('placements', {...formData.placements, hide: val})} />
-          <SectionCard id="alumni" title="Alumni" description="Alumni success stories." isComplete={formData.alumni?.list?.length > 0} isHidden={formData.alumni?.hide} onToggleHide={(val) => updateSection('alumni', {...formData.alumni, hide: val})} />
-          <SectionCard id="industry" title="Industry Partners" description="Logos of tie-ups." isComplete={formData.industry?.partners?.length > 0} isHidden={formData.industry?.hide} onToggleHide={(val) => updateSection('industry', {...formData.industry, hide: val})} />
-          <SectionCard id="research" title="Research & Dev" description="Patents and stats." isComplete={formData.research?.stats?.length > 0} isHidden={formData.research?.hide} onToggleHide={(val) => updateSection('research', {...formData.research, hide: val})} />
-          <SectionCard id="community" title="Community" description="Campus vibe & gallery." isComplete={formData.community?.description?.length > 0} isHidden={formData.community?.hide} onToggleHide={(val) => updateSection('community', {...formData.community, hide: val})} />
-          <SectionCard id="infrastructure" title="Infrastructure" description="Labs & facilities." isComplete={formData.infrastructure?.list?.length > 0} isHidden={formData.infrastructure?.hide} onToggleHide={(val) => updateSection('infrastructure', {...formData.infrastructure, hide: val})} />
-          <SectionCard id="testimonials" title="Testimonials" description="Student feedback." isComplete={formData.testimonials?.list?.length > 0} isHidden={formData.testimonials?.hide} onToggleHide={(val) => updateSection('testimonials', {...formData.testimonials, hide: val})} />
-          <SectionCard id="exploreDepartment" title="Department" description="Specialized wings." isComplete={formData.exploreDepartment?.items?.length > 0} isHidden={formData.exploreDepartment?.hide} onToggleHide={(val) => updateSection('exploreDepartment', {...formData.exploreDepartment, hide: val})} />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-light)] pb-3">
+          <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide">Page Layout Sections</h2>
+          <button 
+            onClick={addCustomBlock}
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--bg-surface)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-secondary)] transition-all rounded-none w-full sm:w-auto"
+          >
+            <Plus size={14} strokeWidth={2.5} /> ADD CUSTOM CONTENT BLOCK
+          </button>
         </div>
+
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="sections-list">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-3">
+                {formData.layoutOrder.map((id, index) => {
+                  const isCustom = id.startsWith('custom_');
+                  let sectionProps = {};
+
+                  if (isCustom) {
+                    const customData = formData.customSections[id];
+                    sectionProps = {
+                      id,
+                      title: customData?.title || 'Custom Block',
+                      description: 'Custom rich text content.',
+                      isComplete: !!customData?.content,
+                      isCustom: true
+                    };
+                  } else {
+                    // Mapping for fixed sections
+                    const mappings = {
+                      hero: { title: "Hero Header", description: "Top banner & title.", isComplete: !!formData.hero?.title?.main, isHidden: formData.hero?.hide, onToggleHide: (v) => updateSection('hero', {...formData.hero, hide: v}) },
+                      stats: { title: "Quick Stats", description: "University numbers.", isComplete: formData.stats?.length > 0, isHidden: formData.stats?.[0]?.hide, onToggleHide: (v) => { const n = [...(formData.stats || [])]; if (n[0]) n[0].hide = v; updateSection('stats', n); } },
+                      about: { title: "Vision & Mission", description: "School's core values.", isComplete: !!formData.about?.vision?.text, isHidden: formData.about?.hide, onToggleHide: (v) => updateSection('about', {...formData.about, hide: v}) },
+                      programmes: { title: "Programmes", description: "Course levels & links.", isComplete: formData.programmes?.levels?.length > 0, isHidden: formData.programmes?.hide, onToggleHide: (v) => updateSection('programmes', {...formData.programmes, hide: v}) },
+                      placements: { title: "Placements", description: "Student placement list.", isComplete: formData.placements?.list?.length > 0, isHidden: formData.placements?.hide, onToggleHide: (v) => updateSection('placements', {...formData.placements, hide: v}) },
+                      alumni: { title: "Alumni", description: "Alumni success stories.", isComplete: formData.alumni?.list?.length > 0, isHidden: formData.alumni?.hide, onToggleHide: (v) => updateSection('alumni', {...formData.alumni, hide: v}) },
+                      industry: { title: "Industry Partners", description: "Logos of tie-ups.", isComplete: formData.industry?.partners?.length > 0, isHidden: formData.industry?.hide, onToggleHide: (v) => updateSection('industry', {...formData.industry, hide: v}) },
+                      research: { title: "Research & Dev", description: "Patents and stats.", isComplete: formData.research?.stats?.length > 0, isHidden: formData.research?.hide, onToggleHide: (v) => updateSection('research', {...formData.research, hide: v}) },
+                      community: { title: "Community", description: "Campus vibe & gallery.", isComplete: formData.community?.description?.length > 0, isHidden: formData.community?.hide, onToggleHide: (v) => updateSection('community', {...formData.community, hide: v}) },
+                      infrastructure: { title: "Infrastructure", description: "Labs & facilities.", isComplete: formData.infrastructure?.list?.length > 0, isHidden: formData.infrastructure?.hide, onToggleHide: (v) => updateSection('infrastructure', {...formData.infrastructure, hide: v}) },
+                      testimonials: { title: "Testimonials", description: "Student feedback.", isComplete: formData.testimonials?.list?.length > 0, isHidden: formData.testimonials?.hide, onToggleHide: (v) => updateSection('testimonials', {...formData.testimonials, hide: v}) },
+                      exploreDepartment: { title: "Department", description: "Specialized wings.", isComplete: formData.exploreDepartment?.items?.length > 0, isHidden: formData.exploreDepartment?.hide, onToggleHide: (v) => updateSection('exploreDepartment', {...formData.exploreDepartment, hide: v}) }
+                    };
+                    sectionProps = { id, ...mappings[id] };
+                  }
+
+                  return (
+                    <Draggable key={id} draggableId={id} index={index}>
+                      {(provided) => (
+                        <div ref={provided.innerRef} {...provided.draggableProps} className="transition-transform duration-200">
+                          <SectionCard {...sectionProps} dragHandleProps={provided.dragHandleProps} />
+                        </div>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
 
       {/* --- Minimal Floating Save Bar --- */}
@@ -375,6 +462,42 @@ export default function SchoolBuilderForm({ initialData = null }) {
       >
         <div className="p-2 pb-8">
           
+          {activeSection?.startsWith('custom_') && (
+            <div className="space-y-6">
+              <div className="bg-[var(--bg-muted)] p-5 border-l-2 border-[var(--color-primary)] rounded-none">
+                <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase mb-2 tracking-widest">Custom Block Header</label>
+                <input 
+                  type="text" 
+                  value={formData.customSections[activeSection]?.title || ''} 
+                  onChange={e => {
+                    const newCustoms = { ...formData.customSections };
+                    newCustoms[activeSection] = { ...newCustoms[activeSection], title: e.target.value };
+                    setFormData(prev => ({ ...prev, customSections: newCustoms }));
+                  }} 
+                  className="w-full border border-[var(--border-default)] p-3 text-sm font-bold outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" 
+                  placeholder="e.g. Scholarship Information" 
+                />
+              </div>
+              <div className="space-y-3">
+                <label className="block text-[10px] font-black text-[var(--text-primary)] uppercase tracking-widest">Block Content (Rich Text)</label>
+                <RichTextEditor 
+                  value={formData.customSections[activeSection]?.content || ''} 
+                  onChange={content => {
+                    const newCustoms = { ...formData.customSections };
+                    newCustoms[activeSection] = { ...newCustoms[activeSection], content: content };
+                    setFormData(prev => ({ ...prev, customSections: newCustoms }));
+                  }} 
+                  useProse={formData.customSections[activeSection]?.useProse !== false}
+                  onProseChange={val => {
+                    const newCustoms = { ...formData.customSections };
+                    newCustoms[activeSection] = { ...newCustoms[activeSection], useProse: val };
+                    setFormData(prev => ({ ...prev, customSections: newCustoms }));
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
           {activeSection === 'hero' && (
             <div className="space-y-6">
               <TitleEditor label="Hero Title" value={formData.hero.title} onChange={val => updateSection('hero', {...formData.hero, title: val})} />

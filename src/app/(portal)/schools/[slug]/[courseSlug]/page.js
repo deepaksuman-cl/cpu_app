@@ -62,6 +62,8 @@ function AccomplishmentsCard({ data }) {
   );
 }
 
+import RichTextRenderer from "@/components/common/RichTextRenderer";
+
 /* ══════════ PAGE ══════════ */
 export default async function CourseSlugPage({ params }) {
   const resolvedParams = await params;
@@ -73,34 +75,96 @@ export default async function CourseSlugPage({ params }) {
   if (!course) {
     notFound();
   }
-  
+
+  // Fallback layout if not defined
+  const layoutOrder = course.layoutOrder || [
+    'hero', 'overview', 'scope', 'curriculum', 'roadmap', 
+    'exploreDepartment', 'admissionFee', 'scholarships', 
+    'whyJoin', 'uniqueFeatures', 'applySteps', 'faq', 
+    'placements', 'industry', 'testimonials'
+  ];
+
+  const renderSection = (id) => {
+    // 1. Handle Custom Blocks
+    if (id.startsWith('custom_')) {
+      const custom = course.customSections?.[id];
+      if (!custom || !custom.content) return null;
+      return (
+        <section key={id} className="py-16 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            {custom.title && <h2 className="text-3xl font-black text-[#00588b] mb-8 uppercase tracking-tight">{custom.title}</h2>}
+            <RichTextRenderer content={custom.content} useProse={custom.useProse !== false} />
+          </div>
+        </section>
+      );
+    }
+
+    // 2. Handle System Sections
+    switch (id) {
+      case 'hero':
+        if (!course.hero || course.hero.hide) return null;
+        // In Course detail pages, accomplishments are historically nested in hero for the "Premium Card" look
+        // We render it inside hero if it exists in data and isn't hidden elsewhere
+        return (
+          <SchoolHero key="hero" data={{ ...course.hero, duration: course.duration, eligibility: course.eligibility }}>
+            {course.accomplishments && !course.accomplishments.hide && <AccomplishmentsCard data={course.accomplishments} />}
+          </SchoolHero>
+        );
+      
+      case 'accomplishments':
+        // Handled inside hero for fixed design consistency
+        return null;
+
+      case 'overview':
+        return course.overview && !course.overview.hide ? <CourseOverview key="overview" data={course.overview} /> : null;
+      
+      case 'scope':
+        return course.scope && !course.scope.hide ? <CourseScope key="scope" data={course.scope} /> : null;
+      
+      case 'curriculum':
+        return course.curriculum && !course.curriculum.hide ? <CourseCurriculum key="curriculum" data={course.curriculum} /> : null;
+      
+      case 'roadmap':
+        return course.roadmap && !course.roadmap.hide ? <CourseRoadmap key="roadmap" data={course.roadmap} /> : null;
+      
+      case 'exploreDepartment':
+        return course.exploreDepartment && !course.exploreDepartment.hide ? <CourseDeptSlider key="exploreDepartment" data={course.exploreDepartment} /> : null;
+      
+      case 'admissionFee':
+        return course.admissionFee && !course.admissionFee.hide ? <CourseAdmissionFee key="admissionFee" data={course.admissionFee} /> : null;
+      
+      case 'scholarships':
+        return course.scholarships && !course.scholarships.hide ? <CourseScholarships key="scholarships" data={course.scholarships} /> : null;
+      
+      case 'whyJoin':
+        return course.whyJoin && !course.whyJoin.hide ? <CourseWhyJoin key="whyJoin" data={course.whyJoin} /> : null;
+      
+      case 'uniqueFeatures':
+        return course.uniqueFeatures && !course.uniqueFeatures.hide ? <CourseUniqueFeatures key="uniqueFeatures" data={course.uniqueFeatures} /> : null;
+      
+      case 'applySteps':
+        return course.applySteps && !course.applySteps.hide ? <CourseApplySteps key="applySteps" data={course.applySteps} /> : null;
+      
+      case 'faq':
+        return course.faq && !course.faq.hide ? <CourseFAQ key="faq" data={course.faq} /> : null;
+      
+      case 'placements':
+        return course.placements && !course.placements.hide ? <SchoolPlacements key="placements" data={course.placements} /> : null;
+      
+      case 'industry':
+        return course.industry && !course.industry.hide ? <SchoolPartners key="industry" data={course.industry} /> : null;
+      
+      case 'testimonials':
+        return course.testimonials && !course.testimonials.hide ? <SchoolTestimonials key="testimonials" data={course.testimonials} /> : null;
+      
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden">
-      
-      {course.hero && !course.hero.hide && (
-        <SchoolHero data={{ ...course.hero, duration: course.duration, eligibility: course.eligibility }}>
-          {course.accomplishments && !course.accomplishments.hide && <AccomplishmentsCard data={course.accomplishments} />}
-        </SchoolHero>
-      )}
-
-      {course.overview && !course.overview.hide && <CourseOverview data={course.overview} />}
-      {course.scope && !course.scope.hide && <CourseScope data={course.scope} />}
-      {course.curriculum && !course.curriculum.hide && <CourseCurriculum data={course.curriculum} />}
-      {course.roadmap && !course.roadmap.hide && <CourseRoadmap data={course.roadmap} />}
-      {course.exploreDepartment && !course.exploreDepartment.hide && <CourseDeptSlider data={course.exploreDepartment} />}
-      {course.admissionFee && !course.admissionFee.hide && <CourseAdmissionFee data={course.admissionFee} />}
-      {course.scholarships && !course.scholarships.hide && <CourseScholarships data={course.scholarships} />}
-      {course.whyJoin && !course.whyJoin.hide && <CourseWhyJoin data={course.whyJoin} />}
-      {course.uniqueFeatures && !course.uniqueFeatures.hide && <CourseUniqueFeatures data={course.uniqueFeatures} />}
-      {course.applySteps && !course.applySteps.hide && <CourseApplySteps data={course.applySteps} />}
-      {course.faq && !course.faq.hide && <CourseFAQ data={course.faq} />}
-
-
-      {/* Course specific versions of common sections if available */}
-      {course.placements && !course.placements.hide && <SchoolPlacements data={course.placements} />}
-      {course.industry && !course.industry.hide && <SchoolPartners data={course.industry} />}
-      {course.testimonials && !course.testimonials.hide && <SchoolTestimonials data={course.testimonials} />}
+      {layoutOrder.map(sectionId => renderSection(sectionId))}
     </div>
   );
 }

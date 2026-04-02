@@ -31,28 +31,33 @@
   font-family:    var(--u-font-sans);
   font-size:      1.05rem;
   line-height:    1.8;
-  color:          var(--u-text-main);
+  color:          inherit; /* 🔥 Respect parent/context color */
   max-width:      100%;
   overflow-wrap:  break-word;
   -webkit-font-smoothing:  antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Low-specificity resets ── */
+/* ── Zero-specificity defaults ── */
+/* Using :where() ensures Tailwind classes win, and 'inherit' ensures parent colors flow down. */
 :where(.university-prose) * {
   box-sizing: border-box;
+}
+
+:where(.university-prose) p,
+:where(.university-prose) li,
+:where(.university-prose) span,
+:where(.university-prose) div,
+:where(.university-prose) strong,
+:where(.university-prose) em {
+  color: inherit;
 }
 
 :where(.university-prose) h1,
 :where(.university-prose) h2,
 :where(.university-prose) h3,
-:where(.university-prose) h4,
-:where(.university-prose) p,
-:where(.university-prose) span,
-:where(.university-prose) li,
-:where(.university-prose) strong,
-:where(.university-prose) em {
-  color: currentColor;
+:where(.university-prose) h4 {
+  color: inherit;
 }
 
 
@@ -64,7 +69,6 @@
 .university-prose h2,
 .university-prose h3,
 .university-prose h4 {
-  color:       var(--u-text-dark) !important;
   font-family: var(--u-font-sans);
   line-height: 1.25 !important;
   font-weight: 700 !important;
@@ -122,7 +126,6 @@
   font-weight:   600 !important;
   margin-top:    1.5rem !important;
   margin-bottom: 0.5rem !important;
-  color:         var(--u-primary) !important;
   text-transform: none;
   letter-spacing: 0.01em;
 }
@@ -135,7 +138,6 @@
 .university-prose p {
   margin-bottom: 1.35rem;
   letter-spacing: 0.012em;
-  color: var(--u-text-main);
 }
 
 .university-prose p:last-child {
@@ -144,12 +146,11 @@
 
 .university-prose strong {
   font-weight: 700;
-  color: var(--u-text-dark);
 }
 
 .university-prose em {
   font-style: italic;
-  color: #475569;
+  color: inherit;
 }
 
 .university-prose mark {
