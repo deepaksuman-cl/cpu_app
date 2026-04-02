@@ -1,100 +1,309 @@
 "use client";
-import { ArrowLeft, BookOpen, GraduationCap, Home, MapPin, Phone } from 'lucide-react';
-import Link from 'next/link';
 
-export default function PortalNotFound() {
-  // University navigation quick links for the portal
-  const quickLinks = [
-    { name: 'Admissions & Apply', icon: <GraduationCap size={20} className="text-[#00588b]" />, desc: 'Start your journey', href: '/admission' },
-    { name: 'Academic Programs', icon: <BookOpen size={20} className="text-[#00588b]" />, desc: 'Explore our courses', href: '/programmes' },
-    { name: 'Campus Facilities', icon: <MapPin size={20} className="text-[#00588b]" />, desc: 'Discover campus life', href: '/about' },
-    { name: 'Contact Helpdesk', icon: <Phone size={20} className="text-[#00588b]" />, desc: 'Get in touch with us', href: '/contact-us' },
-  ];
+import { useState, useEffect } from "react";
+import { BookOpen, GraduationCap, MapPin, Phone, Bell, CheckCircle } from "lucide-react";
+
+/* ── Change this to your real launch date ── */
+const LAUNCH_DATE = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
+function useCountdown(target) {
+  const calc = () => {
+    const diff = Math.max(0, target - Date.now());
+    return {
+  days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+
+  hours: Math.floor(
+    (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  ),
+
+  minutes: Math.floor(
+    (diff % (1000 * 60 * 60)) / (1000 * 60)
+  ),
+
+  seconds: Math.floor(
+    (diff % (1000 * 60)) / 1000
+  ),
+};
+  };
+  const [time, setTime] = useState(calc);
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+const pad = (n) => String(n).padStart(2, "0");
+
+const quickLinks = [
+  { name: "Admissions & Apply", Icon: GraduationCap, desc: "Start your journey"    },
+  { name: "Academic Programs",  Icon: BookOpen,       desc: "Explore our courses"  },
+  { name: "Campus Facilities",  Icon: MapPin,         desc: "Discover campus life" },
+  { name: "Contact Helpdesk",   Icon: Phone,          desc: "Get in touch with us" },
+];
+
+export default function ComingSoon() {
+  const { days, hours, minutes, seconds } = useCountdown(LAUNCH_DATE);
+  const [email,     setEmail]     = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleNotify = () => {
+    if (email && email.includes("@")) setSubmitted(true);
+  };
 
   return (
-    <div className="bg-slate-50 min-h-[calc(100vh-200px)] flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans selection:bg-[#00588b] selection:text-white">
-      
-      {/* Main Professional Card Layout - Mobile Responsive */}
-      <div className="max-w-6xl w-full bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden flex flex-col md:flex-row border border-slate-100">
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(26px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeLeft {
+          from { opacity: 0; transform: translateX(32px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes floatY {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-12px); }
+        }
+        @keyframes shimmer {
+          0%   { background-position: -220% center; }
+          100% { background-position:  220% center; }
+        }
+        @keyframes pulseRing {
+          0%   { box-shadow: 0 0 0 0   rgba(0,88,139,.40); }
+          70%  { box-shadow: 0 0 0 14px rgba(0,88,139,0);  }
+          100% { box-shadow: 0 0 0 0   rgba(0,88,139,0);   }
+        }
+        @keyframes blinkDot {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: .2; }
+        }
+        @keyframes numFlip {
+          from { transform: translateY(-6px); opacity: 0; }
+          to   { transform: translateY(0);    opacity: 1; }
+        }
+
+        .cs-page { font-family: 'DM Sans', sans-serif; }
+
+        .fu1 { animation: fadeUp  .55s cubic-bezier(.22,1,.36,1) both .05s; }
+        .fu2 { animation: fadeUp  .55s cubic-bezier(.22,1,.36,1) both .18s; }
+        .fu3 { animation: fadeUp  .55s cubic-bezier(.22,1,.36,1) both .30s; }
+        .fu4 { animation: fadeUp  .55s cubic-bezier(.22,1,.36,1) both .42s; }
+        .fu5 { animation: fadeUp  .55s cubic-bezier(.22,1,.36,1) both .55s; }
+        .fl  { animation: fadeLeft .65s cubic-bezier(.22,1,.36,1) both .10s; }
+
+        .float-anim { animation: floatY 4.5s ease-in-out infinite; }
+
+        /* Primary notify button */
+        .notify-btn {
+          background-size: 220% auto;
+          background-image: linear-gradient(110deg, #00588b 0%, #0077b6 40%, #00588b 80%);
+          transition: transform .22s ease, box-shadow .22s ease;
+        }
+        .notify-btn:hover {
+          animation: shimmer 1.3s linear infinite, pulseRing .7s ease-out;
+          background-image: linear-gradient(110deg,#00588b 0%,#0077b6 32%,#fec53a 50%,#0077b6 68%,#00588b 100%);
+          transform: translateY(-2px) scale(1.04);
+          box-shadow: 0 8px 26px rgba(0,88,139,.36);
+        }
+        .notify-btn:active { transform: scale(.97); }
+
+        /* Countdown cards */
+        .cd-card {
+          transition: transform .22s ease, box-shadow .22s ease;
+        }
+        .cd-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 32px rgba(0,88,139,.18);
+        }
+        .cd-num { animation: numFlip .3s ease; }
+
+        /* Quick link cards */
+        .lc-card {
+          transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+        .lc-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 20px rgba(0,88,139,.11);
+          border-color: rgba(0,88,139,.28) !important;
+        }
+        .lc-card:hover .lc-ico  { background: #fff; box-shadow: 0 2px 8px rgba(0,88,139,.12); }
+        .lc-card:hover .lc-name { color: #00588b; }
+
+        /* Right panel grid */
+        .rp-grid {
+          position: absolute; inset: 0;
+          background-image:
+            linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+          background-size: 2.5rem 2.5rem;
+          -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, #000 65%, transparent 100%);
+          mask-image:         radial-gradient(ellipse 85% 85% at 50% 50%, #000 65%, transparent 100%);
+          opacity: .50;
+          transition: opacity .5s;
+        }
+        .rp:hover .rp-grid { opacity: .88; }
+
+        .rp-ring-outer { transition: all .6s ease; }
+        .rp:hover .rp-ring-outer {
+          transform: translate(-50%,-50%) scale(1.12);
+          background: rgba(0,88,139,.09);
+        }
+
+        .social-row { opacity: 0; transition: opacity .35s .1s; }
+        .rp:hover .social-row { opacity: 1; }
+
+        .dot-blink { animation: blinkDot 1.2s step-end infinite; }
+      `}</style>
+
+      <div className="cs-page min-h-screen bg-slate-50 flex items-center justify-center p-4 sm:p-6 md:p-8 selection:bg-[#00588b] selection:text-white">
+
+        {/* ── Card shell ── */}
+        <div className="max-w-5xl w-full bg-white rounded-[2rem] shadow-xl shadow-slate-200/60 overflow-hidden flex flex-col md:flex-row border border-slate-100">
+
+          {/* ════════════════════════════
+               LEFT — text + form + links
+              ════════════════════════════ */}
+          <div className="p-6 sm:p-8 md:p-10 lg:p-14 flex-1 flex flex-col justify-center order-last md:order-first bg-white">
+
+            {/* eyebrow */}
+            <div className="fu1 flex items-center gap-2 mb-3 text-[#00588b] font-bold tracking-widest uppercase text-[.68rem]">
+              <span className="w-7 h-px bg-[#00588b]/35 rounded-full"></span>
+              We're Launching Soon
+              <span className="w-7 h-px bg-[#00588b]/35 rounded-full"></span>
+            </div>
+
+            {/* heading */}
+            <h1 className="fu2 text-3xl sm:text-4xl md:text-[2.6rem] font-extrabold text-slate-900 leading-[1.12] mb-3">
+              Something{" "}
+              <span className="relative inline-block text-[#00588b]">
+                Amazing
+                <span className="absolute -bottom-1 left-0 w-full h-[5px] bg-[#fec53a]/50 rounded-full -z-10"></span>
+              </span>
+              <br className="hidden sm:block" /> Is On Its Way
+            </h1>
+
+            {/* body */}
+            <p className="fu3 text-sm sm:text-[.95rem] text-slate-500 leading-relaxed mb-7 max-w-xs sm:max-w-sm">
+              We're crafting a world-class learning experience. Our new platform will
+              be ready before you know it — stay tuned and be the first to know!
+            </p>
+
+            {/* ── Email notify form ── */}
         
-        {/* Left Content Area (Details aur buttons) - Mobile pe niche, Desktop pe left */}
-        <div className="p-6 sm:p-8 md:p-12 lg:p-16 flex-1 flex flex-col justify-center order-last md:order-first z-10 bg-white">
-          
-          <div className="flex items-center gap-2 mb-3 text-[#00588b] font-bold tracking-widest uppercase text-xs">
-            <span className="w-8 h-px bg-[#00588b]/40"></span>
-         Comming Soon
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-700 mb-4 leading-tight">
-            Page Not Found
-          </h1>
-          
-          <p className="text-base sm:text-lg text-slate-500 mb-8 md:mb-10 max-w-md leading-relaxed">
-            We're sorry, but the page you are looking for doesn't exist, has been removed, or the URL was typed incorrectly. Please use the links below to navigate back.
-          </p>
 
-          {/* Primary Call to Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10 md:mb-12">
-            <Link 
-              href="/" 
-              className="w-full sm:w-auto bg-[#00588b] text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-[#1c54a3] transition-colors flex items-center justify-center gap-2 shadow-sm"
-            >
-              <Home size={18} /> Go to Homepage
-            </Link>
-            
-            <button 
-              onClick={() => window.history.back()} 
-              className="w-full sm:w-auto bg-white text-slate-700 border border-slate-200 px-7 py-3.5 rounded-xl font-semibold hover:bg-slate-50 hover:text-[#00588b] hover:border-[#00588b]/30 transition-all flex items-center justify-center gap-2"
-            >
-              <ArrowLeft size={18} /> Go Back
-            </button>
+            {/* ── Quick links grid ── */}
+            <div className="fu5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {quickLinks.map(({ name, Icon, desc }) => (
+                <a key={name} href="#"
+                  className="lc-card flex items-center gap-3 p-3.5 rounded-xl border border-slate-100 bg-white cursor-pointer no-underline"
+                >
+                  <div className="lc-ico w-9 h-9 rounded-lg bg-[#00588b]/[.07] flex items-center justify-center flex-shrink-0 transition-all duration-200">
+                    <Icon size={16} className="text-[#00588b]" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="lc-name text-[.8rem] font-semibold text-slate-800 truncate transition-colors duration-200">{name}</div>
+                    <div className="text-[.7rem] text-slate-400 truncate mt-0.5">{desc}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+
           </div>
 
-          {/* Clean Quick Links Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-            {quickLinks.map((link, index) => (
-              <Link 
-                key={index} 
-                href={link.href} 
-                className="group flex items-center gap-4 p-4 rounded-xl border border-slate-100 hover:border-[#00588b]/20 hover:bg-slate-50 transition-all shadow-sm shadow-slate-100/50 hover:shadow-md"
-              >
-                <div className="p-2.5 bg-blue-50/50 rounded-lg group-hover:bg-white group-hover:shadow-sm transition-all flex-shrink-0">
-                  {link.icon}
+          {/* ══════════════════════════════
+               RIGHT — countdown + visuals
+              ══════════════════════════════ */}
+          <div className="rp fl flex w-full md:w-auto md:flex-[1.05] min-h-[280px] md:min-h-auto bg-[#f8fafc] items-center justify-center relative overflow-hidden border-b md:border-b-0 md:border-l border-slate-100 order-first md:order-last">
+
+            {/* Blueprint grid */}
+            <div className="rp-grid"></div>
+
+            {/* Accent rings */}
+            <div
+              className="rp-ring-outer absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[26rem] md:h-[26rem] rounded-full bg-[#00588b]/[.05] border border-[#00588b]/10"
+            ></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 rounded-full border border-[#fec53a]/20 pointer-events-none"></div>
+
+            {/* Countdown block */}
+            <div className="float-anim relative z-10 flex flex-col items-center gap-5 px-5 py-8">
+
+              {/* Badge */}
+              <div className="flex items-center gap-2 bg-[#00588b]/[.08] border border-[#00588b]/15 rounded-full px-4 py-1.5">
+                <span className="dot-blink w-2 h-2 rounded-full bg-[#fec53a]"></span>
+                <span className="text-[.62rem] font-bold text-[#00588b] uppercase tracking-widest">Launching in</span>
+              </div>
+
+              {/* Tiles row */}
+              <div className="flex items-center gap-1.5 sm:gap-2.5">
+
+                {/* Days — primary */}
+                {/* <div className="cd-card flex flex-col items-center bg-white rounded-2xl px-3 sm:px-5 py-4 sm:py-5 shadow-lg shadow-[#00588b]/10 border-t-[3px] border-[#00588b] min-w-[66px] sm:min-w-[80px]">
+                  <span key={days} className="cd-num text-[1.9rem] sm:text-[2.4rem] font-black text-[#00588b] leading-none tracking-tight">{pad(days)}</span>
+                  <span className="text-[.55rem] font-bold text-slate-400 uppercase tracking-widest mt-1.5">Days</span>
+                </div> */}
+
+                <span className="text-xl font-black text-[#00588b]/25 pb-4">:</span>
+
+                {/* Hours — accent */}
+                <div className="cd-card flex flex-col items-center bg-white rounded-2xl px-3 sm:px-5 py-4 sm:py-5 shadow-lg shadow-[#fec53a]/20 border-t-[3px] border-[#fec53a] min-w-[66px] sm:min-w-[80px]">
+                  <span key={hours} className="cd-num text-[1.9rem] sm:text-[2.4rem] font-black text-[#b8860b] leading-none tracking-tight">{pad(hours)}</span>
+                  <span className="text-[.55rem] font-bold text-slate-400 uppercase tracking-widest mt-1.5">Hours</span>
                 </div>
-                <div className="min-w-0">
-                  <h4 className="font-semibold text-slate-800 text-sm group-hover:text-[#00588b] transition-colors truncate">
-                    {link.name}
-                  </h4>
-                  <p className="text-xs text-slate-500 mt-0.5 truncate">
-                    {link.desc}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-          
-        </div>
 
-        {/* Right/Top Visual Area - Mobile pe badi 404 header, Desktop pe right side */}
-        <div className="flex w-full md:w-auto md:flex-1 h-48 sm:h-60 md:h-auto bg-[#f8fafc] items-center justify-center relative overflow-hidden border-b md:border-b-0 md:border-l border-slate-100 group order-first md:order-last">
-          
-          {/* Subtle Blueprint Grid Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] md:bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_75%,transparent_100%)] opacity-60 transition-opacity duration-700 group-hover:opacity-80"></div>
-          
-          {/* Elegant 404 Typography watermark */}
-          <div className="relative z-10 text-center select-none transform transition-transform duration-700 group-hover:scale-105">
-            <span className="text-[9rem] sm:text-[12rem] lg:text-[16rem] font-black text-slate-200 leading-none drop-shadow-sm tracking-tighter">
-              404
-            </span>
-            {/* Minimal accent line */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] md:w-[120%]">
-               <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#00588b]/30 to-transparent"></div>
+                <span className="text-xl font-black text-[#00588b]/25 pb-4">:</span>
+
+                {/* Minutes — primary */}
+                <div className="cd-card flex flex-col items-center bg-white rounded-2xl px-3 sm:px-5 py-4 sm:py-5 shadow-lg shadow-[#00588b]/10 border-t-[3px] border-[#00588b] min-w-[66px] sm:min-w-[80px]">
+                  <span key={minutes} className="cd-num text-[1.9rem] sm:text-[2.4rem] font-black text-[#00588b] leading-none tracking-tight">{pad(minutes)}</span>
+                  <span className="text-[.55rem] font-bold text-slate-400 uppercase tracking-widest mt-1.5">Mins</span>
+                </div>
+
+                <span className="text-xl font-black text-[#00588b]/25 pb-4">:</span>
+
+                {/* Seconds — accent */}
+                <div className="cd-card flex flex-col items-center bg-white rounded-2xl px-3 sm:px-5 py-4 sm:py-5 shadow-lg shadow-[#fec53a]/20 border-t-[3px] border-[#fec53a] min-w-[66px] sm:min-w-[80px]">
+                  <span key={seconds} className="cd-num text-[1.9rem] sm:text-[2.4rem] font-black text-[#b8860b] leading-none tracking-tight">{pad(seconds)}</span>
+                  <span className="text-[.55rem] font-bold text-slate-400 uppercase tracking-widest mt-1.5">Secs</span>
+                </div>
+
+              </div>
+
+              {/* Progress bar */}
+              <div className="w-full max-w-[300px]">
+                <div className="flex justify-between text-[.62rem] text-slate-400 font-semibold mb-1.5 uppercase tracking-wider">
+                  <span>Progress</span>
+                  <span className="text-[#00588b]">Almost there!</span>
+                </div>
+                <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full"
+                    style={{ width: "72%", background: "linear-gradient(90deg,#00588b 0%,#0077b6 55%,#fec53a 100%)" }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Social — appears on hover */}
+              <div className="social-row flex items-center gap-2.5">
+                {[["f","#"], ["t","#"], ["in","#"]].map(([label, href]) => (
+                  <a
+                    key={label}
+                    href={href}
+                    className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[.6rem] font-bold text-[#00588b] uppercase tracking-wide hover:bg-[#00588b] hover:text-white hover:border-[#00588b] transition-all duration-200"
+                  >
+                    {label}
+                  </a>
+                ))}
+              </div>
+
             </div>
           </div>
-          
-        </div>
 
+        </div>
       </div>
-    </div>
+    </>
   );
 }
