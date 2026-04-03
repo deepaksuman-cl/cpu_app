@@ -91,7 +91,7 @@ export default function BlockRenderer({ block }) {
                     <img 
                       src={profile.image} 
                       alt={profile.name} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[600ms]" 
+                      className="w-full group-hover:scale-110 transition-transform duration-[600ms]" 
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
