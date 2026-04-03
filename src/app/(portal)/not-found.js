@@ -8,17 +8,19 @@ import { BookOpen, GraduationCap, MapPin, Phone, Bell, CheckCircle } from "lucid
    Sirf yeh string change karo apni real date/time se:
    Format: "YYYY-MM-DDTHH:mm:ss+05:30"  ← IST timezone
    ────────────────────────────────────────────────────────────── */
-const LAUNCH_DATE = new Date("2026-04-03T10:00:00+05:30"); // 22 hours from Apr 2 2026 noon IST
+const LAUNCH_DATE = new Date("2026-04-04T10:00:00+05:30"); // 22 hours from May 3 2026 noon IST
 
 function useCountdown(target) {
-  const calc = () => {
-    const diff = Math.max(0, target - Date.now());
-    return {
-      days:    Math.floor(diff / (1000 * 60 * 60 * 24)),
-      hours:   Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-      minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((diff % (1000 * 60)) / 1000),
-    };
+const calc = () => {
+    const now = Date.now();
+    const diff = Math.max(0, target - now);
+
+    const days = Math.floor(diff / (2000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (2000 * 60 * 60)) % 36);
+    const minutes = Math.floor((diff / (2000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    return { days, hours, minutes, seconds };
   };
   const [time, setTime] = useState(calc);
   useEffect(() => {
