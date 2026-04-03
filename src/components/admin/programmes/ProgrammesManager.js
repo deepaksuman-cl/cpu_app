@@ -5,9 +5,10 @@ import IconPicker from '@/components/admin/ui/IconPicker';
 import Modal from '@/components/admin/ui/Modal';
 import { createCategory, createCourse, createSidebarLink, deleteCategory, deleteCourse, deleteSidebarLink, updateCourse, updateProgrammeSettings, updateSidebarLink } from '@/lib/actions/programmeActions';
 import { seedDatabase } from '@/lib/actions/seedActions';
-import { AlertCircle, AlertTriangle, BookMarked, CheckCircle2, ChevronRight, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Settings, Trash2, X } from 'lucide-react';
+import { AlertTriangle, BookMarked, ChevronRight, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Settings, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -39,7 +40,41 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const [settingsForm, setSettingsForm] = useState(initialSettings || {});
   const [activeTab, setActiveTab] = useState('courses'); // courses | links | settings
   const [courseFilter, setCourseFilter] = useState('all');
+  const [courses, setCourses] = useState(initialCourses || []);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isFetching, setIsFetching] = useState(false);
   const [showFilterMenu, setShowFilterMenu] = useState(false);
+
+  useEffect(() => {
+    setCourses(initialCourses);
+  }, [initialCourses]);
+
+  // Server-Side Search & Filter Effect
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsFetching(true);
+      try {
+        const res = await getCourses({ 
+          categoryId: courseFilter, 
+          search: searchQuery 
+        });
+        if (res.success) {
+          setCourses(res.data);
+        }
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      } finally {
+        setIsFetching(false);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      fetchData();
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [courseFilter, searchQuery]);
+
 
   // --- Handlers ---
   const handleAddCategory = async (e) => {
@@ -232,9 +267,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
     return label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   };
 
-  const filteredCourses = courseFilter === 'all' 
-    ? initialCourses 
-    : initialCourses.filter(c => (c.category?.id || c.categoryId) === courseFilter);
+  const filteredCourses = courses;
 
   return (
     <>
@@ -438,15 +471,31 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
             <h2 className="text-[15px] font-black flex items-center gap-2 text-[var(--text-primary)] uppercase tracking-wide">
               <Monitor size={18} className="text-[var(--color-primary)]" strokeWidth={2.5} /> All Master Courses
             </h2>
+
+            {/* Search Input */}
+            <div className="relative flex items-center h-[34px] w-full md:w-[240px]">
+              <div className="absolute left-3 text-[var(--text-muted)] pointer-events-none">
+                {isFetching ? <Loader2 size={14} className="animate-spin" /> : <Search size={14} strokeWidth={2.5} />}
+              </div>
+              <input
+                type="text"
+                placeholder="Search by title, school..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="h-full w-full pl-9 pr-4 bg-[var(--bg-body)] border border-[var(--border-default)] focus:border-[var(--color-primary)] outline-none text-[11px] font-bold uppercase tracking-wider rounded-none transition-all placeholder:text-[var(--text-muted)]/50"
+              />
+            </div>
+
             <div className="relative">
+
               <button 
                 type="button"
                 onClick={() => setShowFilterMenu(!showFilterMenu)}
                 className="flex items-center gap-2 h-[34px] px-4 bg-[var(--bg-body)] border border-[var(--border-default)] hover:border-[var(--color-primary)] text-[var(--color-primary)] transition-all shadow-sm rounded-none text-[11px] font-bold uppercase tracking-widest whitespace-nowrap min-w-[160px] justify-between"
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-[var(--text-muted)]">Show:</span>
-                  <span>{courseFilter === 'all' ? 'All Categories' : initialCategories.find(c => c.id === courseFilter)?.label}</span>
+                  <span className="text-[10px] text-[var(--text-muted)]">Courses:</span>
+                  <span>{courseFilter === 'all' ? 'All Courses' : initialCategories.find(c => c.id === courseFilter)?.label}</span>
                 </div>
                 <ChevronRight size={14} className={`transition-transform ${showFilterMenu ? 'rotate-90' : ''}`} />
               </button>
@@ -463,7 +512,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
                       }}
                       className={`flex items-center gap-3 w-full px-3 py-2 text-left transition-colors border border-transparent uppercase tracking-wider text-[10px] font-bold ${courseFilter === 'all' ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]' : 'hover:bg-[var(--bg-muted)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
                     >
-                      All Categories
+                      All Courses
                     </button>
                     <div className="h-px bg-[var(--border-light)] my-1"></div>
                     <div className="max-h-[250px] overflow-y-auto custom-scrollbar">
@@ -499,13 +548,13 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
 
         {/* Mobile Responsive Data Table / Cards */}
         <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none overflow-hidden shadow-sm">
-          <div className="w-full overflow-x-auto">
-            <table className="w-full border-collapse text-left block md:table md:min-w-[700px]">
-              <thead className="hidden md:table-header-group bg-[var(--bg-muted)] border-b border-[var(--border-default)]">
+          <div className="w-full max-w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-200 max-h-[calc(100vh-280px)] overflow-y-auto">
+            <table className="w-full border-collapse text-left block md:table min-w-full md:min-w-[850px]">
+              <thead className="hidden md:table-header-group bg-[var(--bg-muted)] border-b border-[var(--border-default)] sticky top-0 z-[20]">
                 <tr className="md:table-row">
-                  <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[40%]">Course / School</th>
-                  <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[40%]">Category</th>
-                  <th className="py-2.5 px-4 text-center font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] w-[20%]">Actions</th>
+                  <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[40%] bg-[var(--bg-muted)]">Course / School</th>
+                  <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[40%] bg-[var(--bg-muted)]">Category</th>
+                  <th className="py-2.5 px-4 text-center font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] w-[20%] bg-[var(--bg-muted)]">Actions</th>
                 </tr>
               </thead>
               <tbody className="block md:table-row-group divide-y divide-[var(--border-light)]">
@@ -514,9 +563,9 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
                     <td colSpan="3" className="block md:table-cell py-10 text-center">
                       <div className="flex flex-col items-center gap-2">
                          <Monitor size={24} className="text-[var(--text-muted)]" strokeWidth={1.5} />
-                         <span className="text-[11px] font-bold text-[var(--text-muted)] uppercase tracking-widest">
-                           {courseFilter === 'all' ? 'No courses added yet' : 'No courses found in this category'}
-                         </span>
+                          <span className="text-[11px] font-bold text-[var(--text-muted)] uppercase tracking-widest">
+                            {searchQuery ? `No courses matching "${searchQuery}"` : (courseFilter === 'all' ? 'No courses added yet' : 'No courses found in this category')}
+                          </span>
                       </div>
                     </td>
                   </tr>

@@ -5,20 +5,32 @@ import { connectToDatabase } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { cache } from 'react';
 
-export async function getAllPages() {
+export async function getAllPages(search = '') {
   try {
     await connectToDatabase();
 
+    const where = {};
+    if (search) {
+      const { Op } = require('sequelize');
+      where[Op.or] = [
+        { title: { [Op.like]: `%${search}%` } },
+        { slug: { [Op.like]: `%${search}%` } }
+      ];
+    }
+
     const pages = await Page.findAll({
-      attributes: ['id', 'title', 'slug', 'pageCssId', 'blocks', 'createdAt', 'updatedAt']
+      where,
+      attributes: ['id', 'title', 'slug', 'pageCssId', 'pageCssClass', 'blocks', 'createdAt', 'updatedAt'],
+      order: [['updatedAt', 'DESC']]
     });
     const plainPages = pages.map(p => p.get({ plain: true }));
     return { success: true, data: plainPages, error: null };
   } catch (error) {
     console.error('getAllPages Error:', error.message);
-    return { success: true, data: [], error: error.message };
+    return { success: false, data: [], error: error.message };
   }
 }
+
 
 export const getPageBySlug = cache(async (slug) => {
   try {

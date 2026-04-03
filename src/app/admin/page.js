@@ -109,8 +109,8 @@ export default function AdminDashboard() {
             </button>
           </div>
           
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-200">
+            <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
                 <tr className="bg-[var(--bg-muted)] text-[var(--text-muted)] text-[11px] uppercase tracking-wider">
                   <th className="p-4 font-bold border-b border-[var(--border-light)]">Applicant Name</th>

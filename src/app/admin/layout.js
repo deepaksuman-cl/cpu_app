@@ -52,12 +52,12 @@ export default function AdminLayout({ children }) {
 
           {/* MAIN CONTENT AREA - Smooth transform */}
           <div 
-            className="flex-1 flex flex-col transition-all duration-300 ease-in-out h-screen max-h-screen relative overflow-hidden"
+            className="flex-1 flex flex-col transition-all duration-300 ease-in-out h-screen max-h-screen relative overflow-hidden min-w-0"
             style={{ marginLeft: contentMargin }}
           >
             <AdminTopbar setMobileMenuOpen={setMobileMenuOpen} />
             
-            <main className="flex-1 overflow-auto bg-[var(--bg-body)]">
+            <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[var(--bg-body)]">
               {children}
             </main>
           </div>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import AccordionClient from './AccordionClient';
 import GalleryClient from './GalleryClient';
 import TabbedContent from './TabbedContent';
+import AdvancedSliderGrid from './AdvancedSliderGrid';
 
 export default function BlockRenderer({ block }) {
   const { blockType } = block;
@@ -358,6 +359,11 @@ export default function BlockRenderer({ block }) {
         <TabbedContent data={{ layout: block.layout, tabs: block.tabs }} />
       </div>
     );
+  }
+
+  // 12. Advanced Slider/Grid Block
+  if (blockType === 'slider-grid') {
+    return <AdvancedSliderGrid block={block} />;
   }
 
   return null;
