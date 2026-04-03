@@ -1,8 +1,8 @@
-import Link from 'next/link';
-import { getSchools } from '@/lib/actions/schoolActions';
-import { Plus, Edit, Eye, AlertCircle } from 'lucide-react';
 import DeleteSchoolButton from '@/components/admin/schools/DeleteSchoolButton';
 import SeedDatabaseButton from '@/components/admin/schools/SeedDatabaseButton';
+import { getSchools } from '@/lib/actions/schoolActions';
+import { AlertCircle, Edit, Eye, Plus } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function SchoolsPage() {
   const { data: schools, error } = await getSchools();
@@ -48,16 +48,16 @@ export default async function SchoolsPage() {
           
           /* Data Table / Cards */
           <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none overflow-hidden shadow-sm">
-            <div className="w-full overflow-x-auto">
-              <table className="w-full border-collapse text-left block md:table md:min-w-[700px]">
+            <div className="w-full max-w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-200 max-h-[calc(100vh-280px)] overflow-y-auto">
+              <table className="w-full border-collapse text-left block md:table min-w-full md:min-w-[850px]">
                 
                 {/* Compact Table Header (Hidden on Mobile) */}
-                <thead className="hidden md:table-header-group bg-[var(--bg-muted)] border-b border-[var(--border-default)]">
+                <thead className="hidden md:table-header-group bg-[var(--bg-muted)] border-b border-[var(--border-default)] sticky top-0 z-[20]">
                   <tr>
-                    <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[40%]">Name</th>
-                    <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[25%]">Slug</th>
-                    <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[20%]">Created Date</th>
-                    <th className="py-2.5 px-4 text-center font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] w-[15%]">Actions</th>
+                    <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[40%] bg-[var(--bg-muted)]">Name</th>
+                    <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[25%] bg-[var(--bg-muted)]">Slug</th>
+                    <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[20%] bg-[var(--bg-muted)]">Created Date</th>
+                    <th className="py-2.5 px-4 text-center font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] w-[15%] bg-[var(--bg-muted)]">Actions</th>
                   </tr>
                 </thead>
                 

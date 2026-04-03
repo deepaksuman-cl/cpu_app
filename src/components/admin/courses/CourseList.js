@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import Link from 'next/link';
-import { Edit, Eye, FolderOpen, Filter, ChevronDown } from 'lucide-react';
 import DeleteCourseButton from '@/components/admin/courses/DeleteCourseButton';
+import { ChevronDown, Edit, Eye, Filter, FolderOpen } from 'lucide-react';
+import Link from 'next/link';
+import { useMemo, useState } from 'react';
 
 export default function CourseList({ courses }) {
   const [selectedSchool, setSelectedSchool] = useState('');
@@ -34,7 +34,7 @@ export default function CourseList({ courses }) {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] rounded-none shadow-sm">
           <div className="flex items-center gap-2 text-[var(--text-secondary)]">
             <Filter size={16} />
-            <span className="text-[11px] font-bold uppercase tracking-widest">Filter by School</span>
+            <span className="text-[11px] font-bold uppercase tracking-widest">Select Category / Course</span>
           </div>
           <div className="relative w-full sm:w-72">
             <button
@@ -43,7 +43,7 @@ export default function CourseList({ courses }) {
               className="flex items-center justify-between w-full px-4 py-2.5 bg-[var(--bg-body)] border border-[var(--border-default)] hover:bg-[var(--bg-muted)] text-[var(--text-primary)] text-[11px] font-bold uppercase tracking-widest transition-colors shadow-sm focus:border-[var(--color-primary)] outline-none"
             >
               <span className="truncate">
-                {selectedSchool === '' ? `All Schools (${courses.length})` : selectedSchool === 'No School' ? 'No School (Unassigned)' : selectedSchool}
+                {selectedSchool === '' ? `All Courses (${courses.length})` : selectedSchool === 'No School' ? 'No School (Unassigned)' : selectedSchool}
               </span>
               <ChevronDown size={14} className={`transition-transform duration-200 ml-2 flex-shrink-0 ${showDropdown ? 'rotate-180' : ''}`} />
             </button>
@@ -58,7 +58,7 @@ export default function CourseList({ courses }) {
                       onClick={() => { setSelectedSchool(''); setShowDropdown(false); }}
                       className={`flex items-center gap-3 w-full px-3 py-2.5 text-left transition-colors border border-transparent ${selectedSchool === '' ? 'bg-[var(--color-primary-light)] text-[var(--color-primary-dark)] border-[var(--color-primary)]' : 'hover:bg-[var(--bg-muted)] hover:border-[var(--border-light)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
                     >
-                      <span className="text-[11px] font-bold uppercase tracking-wider">All Schools ({courses.length})</span>
+                      <span className="text-[11px] font-bold uppercase tracking-wider">All Courses ({courses.length})</span>
                     </button>
                     {uniqueSchools.map(sch => (
                       <button
@@ -87,15 +87,15 @@ export default function CourseList({ courses }) {
 
       {/* ── Table Container ── */}
       <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-none overflow-hidden shadow-sm">
-        <div className="w-full overflow-x-auto custom-scrollbar">
+        <div className="w-full max-w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-200 max-h-[calc(100vh-280px)] overflow-y-auto">
           <table className="w-full border-collapse text-left block md:table md:min-w-[700px]">
             {/* Table Header */}
-            <thead className="hidden md:table-header-group bg-[var(--bg-muted)] border-b border-[var(--border-default)]">
+            <thead className="hidden md:table-header-group bg-[var(--bg-muted)] border-b border-[var(--border-default)] sticky top-0 z-[20]">
               <tr>
-                <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[35%]">Course Name</th>
-                <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[30%]">Parent School</th>
-                <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[20%]">Slug</th>
-                <th className="py-2.5 px-4 text-center font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] w-[15%]">Actions</th>
+                <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[35%] bg-[var(--bg-muted)]">Course Name</th>
+                <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[30%] bg-[var(--bg-muted)]">Parent School</th>
+                <th className="py-2.5 px-4 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[20%] bg-[var(--bg-muted)]">Slug</th>
+                <th className="py-2.5 px-4 text-center font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] w-[15%] bg-[var(--bg-muted)]">Actions</th>
               </tr>
             </thead>
             

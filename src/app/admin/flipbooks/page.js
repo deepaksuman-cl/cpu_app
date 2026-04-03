@@ -1,27 +1,25 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { 
-  Plus, 
-  Edit, 
-  Trash2, 
-  Copy, 
-  BookOpen, 
-  Link as LinkIcon, 
-  Save, 
-  X, 
-  Loader2, 
-  Check, 
-  ToggleLeft,
-  ToggleRight,
-  Eye,
-  Image as ImageIcon,
-  MousePointer2
-} from 'lucide-react';
-import toast, { Toaster } from 'react-hot-toast';
 import MediaUploader from '@/components/admin/MediaUploader';
 import Modal from '@/components/admin/ui/Modal';
+import {
+  BookOpen,
+  Copy,
+  Edit,
+  Eye,
+  Image as ImageIcon,
+  Link as LinkIcon,
+  Loader2,
+  MousePointer2,
+  Plus,
+  Save,
+  ToggleLeft,
+  ToggleRight,
+  Trash2
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function FlipbookManager() {
   const router = useRouter();
@@ -204,8 +202,8 @@ export default function FlipbookManager() {
 
       <div className="p-4 sm:p-6 lg:p-8">
         <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-left block md:table md:min-w-[800px]">
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-200 w-full max-w-full">
+            <table className="w-full border-collapse text-left block md:table min-w-full md:min-w-[900px]">
               <thead className="hidden md:table-header-group bg-[var(--bg-muted)] border-b border-[var(--border-default)]">
                 <tr>
                   <th className="py-3 px-6 font-bold text-[var(--text-secondary)] uppercase tracking-widest text-[10px] border-r border-[var(--border-light)] w-[30%]">Brochure Metadata</th>

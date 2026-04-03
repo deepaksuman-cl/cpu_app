@@ -4,7 +4,7 @@ import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import { createPage, updatePage } from '@/lib/actions/pageActions';
-import { AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Megaphone, Plus, Save, Trash2, Type, Users, CheckCircle2, AlertCircle, X, Mail, ChevronRight, SquareStack, Columns } from 'lucide-react';
+import { AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Megaphone, Plus, Save, Trash2, Type, Users, CheckCircle2, AlertCircle, X, Mail, ChevronRight, SquareStack, Columns, Settings, Monitor, MousePointer2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useCallback, useMemo } from 'react';
 
@@ -36,7 +36,8 @@ const BLOCK_DEFINITIONS = [
   { type: 'HeroWithStats', label: 'Hero Section with Stats', icon: Layout },
   { type: 'LeaderProfile', label: 'Leader Profile & Message', icon: Users },
   { type: 'CTABanner', label: 'Call-to-Action Banner', icon: Megaphone },
-  { type: 'tabbed', label: 'Tabbed / Accordion Block', icon: SquareStack }
+  { type: 'tabbed', label: 'Tabbed / Accordion Block', icon: SquareStack },
+  { type: 'slider-grid', label: 'Advanced Slider/Grid Block', icon: Columns }
 ];
 
 const getEmptyBlock = (type) => {
@@ -53,6 +54,30 @@ const getEmptyBlock = (type) => {
   if (type === 'tabbed') {
     base.layout = 'sidebar';
     base.tabs = [{ _id: Date.now().toString(), title: 'New Tab', icon: 'SquareStack', content: '' }];
+  }
+
+  if (type === 'slider-grid') {
+    return {
+      ...base,
+      showHeader: false,
+      headerTitle: "",
+      headerSubtitle: "",
+      bgImage: "",
+      bgOverlay: false,
+      bgParallax: false,
+      displayMode: "slider", 
+      gridColumns: "3", 
+      sliderAutoplay: true,
+      sliderLoop: true,
+      sliderArrows: true,
+      sliderDots: true,
+      aspectRatio: "16:9", 
+      imageFit: "cover", 
+      cardStyle: "elevated", 
+      items: [ 
+        { "_id": "item_1", "image": "", "title": "New Item", "subtitle": "", "link": "", "newTab": false } 
+      ]
+    };
   }
 
   return base;
@@ -160,22 +185,29 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
     setBlocks(prev => {
       const newBlocks = [...prev];
       const newArray = [...newBlocks[blockIndex][arrayField]];
-      newArray[itemIndex] = { ...newArray[itemIndex], [field]: value };
-      newBlocks[blockIndex] = { ...newBlocks[blockIndex], [arrayField]: newArray };
-      return newBlocks;
-    });
-  }, []);
+  newArray[itemIndex] = { ...newArray[itemIndex], [field]: value };
+  newBlocks[blockIndex] = { ...newBlocks[blockIndex], [arrayField]: newArray };
+  return newBlocks;
+});
+}, []);
 
-  const moveArrayItem = useCallback((blockIndex, arrayField, itemIndex, dir) => {
-    setBlocks(prev => {
-      const newBlocks = [...prev];
-      const newArray = [...newBlocks[blockIndex][arrayField]];
-      if ((dir === -1 && itemIndex === 0) || (dir === 1 && itemIndex === newArray.length - 1)) return prev;
-      [newArray[itemIndex], newArray[itemIndex + dir]] = [newArray[itemIndex + dir], newArray[itemIndex]];
-      newBlocks[blockIndex] = { ...newBlocks[blockIndex], [arrayField]: newArray };
-      return newBlocks;
-    });
-  }, []);
+const moveArrayItem = useCallback((blockIndex, arrayField, itemIndex, dir) => {
+setBlocks(prev => {
+  const newBlocks = [...prev];
+  const newArray = [...newBlocks[blockIndex][arrayField]];
+  if ((dir === -1 && itemIndex === 0) || (dir === 1 && itemIndex === newArray.length - 1)) return prev;
+  [newArray[itemIndex], newArray[itemIndex + dir]] = [newArray[itemIndex + dir], newArray[itemIndex]];
+  newBlocks[blockIndex] = { ...newBlocks[blockIndex], [arrayField]: newArray };
+  return newBlocks;
+});
+}, []);
+
+// Tab state for the new Slider/Grid block (managed per block index)
+const [activeSettingsTab, setActiveSettingsTab] = useState({});
+
+const setSettingsTab = (blockIndex, tab) => {
+setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
+};
 
   const pageTitle = initialData?.title || 'New Page';
   const pageSlug = initialData?.slug || '';
@@ -365,7 +397,7 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
             {showBlockMenu && (
               <>
                 <div className="fixed inset-0 z-[40]" onClick={() => setShowBlockMenu(false)}></div>
-                <div className="absolute right-0 top-full mt-1.5 z-[50] w-[240px] bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-xl p-1 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute right-0 top-full mt-1.5 z-[50] w-[240px] bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-xl p-1 animate-in fade-in slide-in-from-top-2 duration-200 max-h-[min(450px,70vh)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-200">
                   <div className="grid grid-cols-1 gap-0.5">
                     {BLOCK_DEFINITIONS.map(bd => {
                       const Icon = bd.icon;
@@ -973,96 +1005,349 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                   </div>
                 )}
 
-                {block.blockType === 'tabbed' && (
-                  <div>
-                    <div className="mb-4 flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 pb-2 gap-4">
-                      <div className="flex items-center gap-4">
-                        <label className="block text-xs font-bold text-gray-700 uppercase">Interactive Tab Items</label>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-bold text-gray-500 uppercase">Layout:</span>
-                          <select 
-                            value={block.layout || 'sidebar'} 
-                            onChange={e => updateBlock(index, 'layout', e.target.value)}
-                            className="border border-gray-300 outline-none p-1 text-sm bg-white"
-                          >
-                            <option value="sidebar">Sidebar Tabs</option>
-                            <option value="top">Top Tabs / Horizontal</option>
-                          </select>
-                        </div>
-                      </div>
-                      <button 
-                        type="button" 
-                        onClick={() => addArrayItem(index, 'tabs', { _id: Date.now().toString(), title: 'New Tab', content: '' })} 
-                        className="text-xs font-bold bg-[#00588b] text-white px-3 py-1.5 hover:bg-[#004570] transition-colors flex gap-1 items-center"
-                      >
-                        <Plus size={14} /> Add New Tab Entry
-                      </button>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      {(block.tabs || []).map((item, tIdx) => (
-                        <div key={item._id || tIdx} className="border border-gray-300 p-4 bg-gray-50 relative group">
-                          {/* Tab Controls */}
-                          <div className="absolute top-2 right-2 flex gap-1">
-                            <button 
-                              type="button" 
-                              onClick={() => moveArrayItem(index, 'tabs', tIdx, -1)} 
-                              disabled={tIdx === 0}
-                              className="text-gray-400 hover:text-gray-600 disabled:opacity-20 p-1 bg-white border border-gray-100"
-                            >
-                              <ArrowUp size={14} />
-                            </button>
-                            <button 
-                              type="button" 
-                              onClick={() => moveArrayItem(index, 'tabs', tIdx, 1)} 
-                              disabled={tIdx === ((block.tabs?.length || 0) - 1)}
-                              className="text-gray-400 hover:text-gray-600 disabled:opacity-20 p-1 bg-white border border-gray-100"
-                            >
-                              <ArrowDown size={14} />
-                            </button>
-                            <button 
-                              type="button" 
-                              onClick={() => removeArrayItem(index, 'tabs', tIdx)} 
-                              className="text-red-500 hover:text-red-700 bg-red-50 p-1 border border-red-100"
-                            >
-                              <Trash2 size={14} />
-                            </button>
-                          </div>
-                          
-                          <div className="mb-3 pr-24 flex flex-col md:flex-row gap-4">
-                            <div className="flex-1">
-                              <label className="block text-xs font-bold text-gray-600 mb-1 tracking-widest uppercase">Tab Heading Title</label>
-                              <input 
-                                type="text" 
-                                value={item.title} 
-                                onChange={e => updateArrayItem(index, 'tabs', tIdx, 'title', e.target.value)} 
-                                className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[#00588b] font-bold" 
-                                placeholder="e.g. Admission Criteria" 
-                              />
-                            </div>
-                            <div className="w-full md:w-48">
-                              <label className="block text-xs font-bold text-gray-600 mb-1 tracking-widest uppercase">Tab Icon</label>
-                              <IconPicker 
-                                value={item.icon || 'SquareStack'} 
-                                onChange={val => updateArrayItem(index, 'tabs', tIdx, 'icon', val)} 
-                              />
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <label className="block text-xs font-bold text-gray-600 mb-1 tracking-widest uppercase">Tab Detailed Content (Rich HTML)</label>
-                            <RichTextEditor 
-                              value={item.content} 
-                              onChange={val => updateArrayItem(index, 'tabs', tIdx, 'content', val)} 
-                              useProse={item.useProse !== false}
-                              onProseChange={val => updateArrayItem(index, 'useProse', val)}
-                            />
-                          </div>
-                        </div>
+                {block.blockType === 'slider-grid' && (
+                  <div className="space-y-6">
+                    {/* Settings Tabs */}
+                    <div className="flex bg-white border border-gray-200 p-0.5 shadow-sm overflow-x-auto whitespace-nowrap scrollbar-hide">
+                      {[
+                        { id: 'header', icon: Type, label: 'Header' },
+                        { id: 'bg', icon: ImageIcon, label: 'Background' },
+                        { id: 'layout', icon: Layout, label: 'Layout' },
+                        { id: 'design', icon: Monitor, label: 'Card Design' },
+                        { id: 'items', icon: Images, label: 'Manage Items' }
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          type="button"
+                          onClick={() => setSettingsTab(index, tab.id)}
+                          className={`flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase tracking-widest transition-all ${
+                            (activeSettingsTab[index] || 'header') === tab.id
+                              ? 'bg-[var(--color-primary)] text-white shadow-md'
+                              : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'
+                          }`}
+                        >
+                          <tab.icon size={12} />
+                          {tab.label}
+                        </button>
                       ))}
-                      {(!block.tabs || block.tabs.length === 0) && (
-                        <div className="py-8 text-center bg-gray-100 border border-dashed border-gray-300 text-gray-400 text-xs font-bold uppercase tracking-widest">
-                          No tabs configured. Add your first tab above.
+                    </div>
+
+                    {/* Tab Content */}
+                    <div className="bg-white border border-gray-200 p-5 shadow-sm min-h-[200px]">
+                      
+                      {(activeSettingsTab[index] || 'header') === 'header' && (
+                        <div className="space-y-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                          <div className="flex items-center justify-between border-b border-gray-100 pb-2 mb-4">
+                            <h3 className="text-[11px] font-bold text-[#00588b] uppercase tracking-widest">Section Header Settings</h3>
+                            <label className="flex items-center gap-2 cursor-pointer group">
+                              <input 
+                                type="checkbox" 
+                                checked={block.showHeader} 
+                                onChange={e => updateBlock(index, 'showHeader', e.target.checked)} 
+                                className="w-3.5 h-3.5 accent-[#00588b]" 
+                              />
+                              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest group-hover:text-black">Show Header</span>
+                            </label>
+                          </div>
+                          {block.showHeader && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Header Title</label>
+                                <input 
+                                  type="text" 
+                                  value={block.headerTitle || ''} 
+                                  onChange={e => updateBlock(index, 'headerTitle', e.target.value)} 
+                                  className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b]" 
+                                  placeholder="e.g. Our Infrastructure" 
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Header Subtitle / Tagline</label>
+                                <input 
+                                  type="text" 
+                                  value={block.headerSubtitle || ''} 
+                                  onChange={e => updateBlock(index, 'headerSubtitle', e.target.value)} 
+                                  className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b]" 
+                                  placeholder="e.g. World class facilities for our students" 
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {(activeSettingsTab[index] || 'header') === 'bg' && (
+                        <div className="space-y-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                          <h3 className="text-[11px] font-bold text-[#00588b] uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Block Background Configuration</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div className="space-y-4">
+                              <div>
+                                <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Background Image URL</label>
+                                <div className="flex gap-2">
+                                  <input 
+                                    type="text" 
+                                    value={block.bgImage || ''} 
+                                    readOnly 
+                                    className="flex-1 border border-gray-200 bg-gray-50 p-2 text-xs outline-none text-gray-400 font-mono" 
+                                    placeholder="Upload image ->" 
+                                  />
+                                </div>
+                              </div>
+                              <div className="flex flex-wrap gap-6 p-3 bg-gray-50 border border-gray-100">
+                                <label className="flex items-center gap-2 cursor-pointer group">
+                                  <input 
+                                    type="checkbox" 
+                                    checked={block.bgOverlay} 
+                                    onChange={e => updateBlock(index, 'bgOverlay', e.target.checked)} 
+                                    className="w-3.5 h-3.5 accent-[#00588b]" 
+                                  />
+                                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest group-hover:text-black">Dark Overlay</span>
+                                </label>
+                                <label className="flex items-center gap-2 cursor-pointer group">
+                                  <input 
+                                    type="checkbox" 
+                                    checked={block.bgParallax} 
+                                    onChange={e => updateBlock(index, 'bgParallax', e.target.checked)} 
+                                    className="w-3.5 h-3.5 accent-[#00588b]" 
+                                  />
+                                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest group-hover:text-black">Parallax Effect</span>
+                                </label>
+                              </div>
+                            </div>
+                            <div className="border border-dashed border-gray-300 p-2 bg-gray-50 flex flex-col gap-2">
+                              {block.bgImage ? (
+                                <img src={block.bgImage} className="w-full h-24 object-cover border border-gray-200" alt="BG Preview" />
+                              ) : (
+                                <div className="w-full h-24 flex items-center justify-center text-gray-300"><ImageIcon size={24} /></div>
+                              )}
+                              <MediaUploader category="pages" onUploadSuccess={url => updateBlock(index, 'bgImage', url)} />
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {(activeSettingsTab[index] || 'header') === 'layout' && (
+                        <div className="space-y-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                          <h3 className="text-[11px] font-bold text-[#00588b] uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Display & Layout Controls</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-4">
+                              <div>
+                                <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1.5">Display Mode</label>
+                                <div className="flex gap-1 p-1 bg-gray-100 rounded-none border border-gray-200">
+                                  <button 
+                                    type="button" 
+                                    onClick={() => updateBlock(index, 'displayMode', 'slider')}
+                                    className={`flex-1 py-1.5 px-3 text-[10px] font-black uppercase tracking-wider transition-all ${block.displayMode === 'slider' ? 'bg-[#00588b] text-white shadow-sm' : 'text-gray-400 hover:text-gray-600'}`}
+                                  >Slider</button>
+                                  <button 
+                                    type="button" 
+                                    onClick={() => updateBlock(index, 'displayMode', 'grid')}
+                                    className={`flex-1 py-1.5 px-3 text-[10px] font-black uppercase tracking-wider transition-all ${block.displayMode === 'grid' ? 'bg-[#00588b] text-white shadow-sm' : 'text-gray-400 hover:text-gray-600'}`}
+                                  >Grid</button>
+                                </div>
+                              </div>
+
+                              {block.displayMode === 'grid' && (
+                                <div className="animate-in fade-in slide-in-from-left-2 duration-200">
+                                  <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Grid Columns</label>
+                                  <select 
+                                    value={block.gridColumns || '3'} 
+                                    onChange={e => updateBlock(index, 'gridColumns', e.target.value)}
+                                    className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
+                                  >
+                                    <option value="2">2 Columns</option>
+                                    <option value="3">3 Columns</option>
+                                    <option value="4">4 Columns</option>
+                                  </select>
+                                </div>
+                              )}
+                            </div>
+
+                            {block.displayMode === 'slider' && (
+                              <div className="grid grid-cols-2 gap-4 p-4 bg-blue-50/50 border border-blue-100 animate-in fade-in slide-in-from-right-2 duration-200">
+                                <label className="flex items-center justify-between cursor-pointer group">
+                                  <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Autoplay</span>
+                                  <input type="checkbox" checked={block.sliderAutoplay} onChange={e => updateBlock(index, 'sliderAutoplay', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
+                                </label>
+                                <label className="flex items-center justify-between cursor-pointer group">
+                                  <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Infinite Loop</span>
+                                  <input type="checkbox" checked={block.sliderLoop} onChange={e => updateBlock(index, 'sliderLoop', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
+                                </label>
+                                <label className="flex items-center justify-between cursor-pointer group">
+                                  <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Show Arrows</span>
+                                  <input type="checkbox" checked={block.sliderArrows} onChange={e => updateBlock(index, 'sliderArrows', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
+                                </label>
+                                <label className="flex items-center justify-between cursor-pointer group">
+                                  <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Show Dots</span>
+                                  <input type="checkbox" checked={block.sliderDots} onChange={e => updateBlock(index, 'sliderDots', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
+                                </label>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                      {(activeSettingsTab[index] || 'header') === 'design' && (
+                        <div className="space-y-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                          <h3 className="text-[11px] font-bold text-[#00588b] uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Card Visual Design</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                              <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Image Aspect Ratio</label>
+                              <select 
+                                value={block.aspectRatio || '16:9'} 
+                                onChange={e => updateBlock(index, 'aspectRatio', e.target.value)}
+                                className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
+                              >
+                                <option value="1:1">1:1 (Square)</option>
+                                <option value="16:9">16:9 (Landscape)</option>
+                                <option value="4:5">4:5 (Portrait)</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Image Fit Mode</label>
+                              <select 
+                                value={block.imageFit || 'cover'} 
+                                onChange={e => updateBlock(index, 'imageFit', e.target.value)}
+                                className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
+                              >
+                                <option value="cover">Cover (Fill)</option>
+                                <option value="contain">Contain (Fit)</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Card Container Style</label>
+                              <select 
+                                value={block.cardStyle || 'elevated'} 
+                                onChange={e => updateBlock(index, 'cardStyle', e.target.value)}
+                                className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
+                              >
+                                <option value="flat">Flat / Minimal</option>
+                                <option value="elevated">Elevated / Shadows</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {(activeSettingsTab[index] || 'header') === 'items' && (
+                        <div className="space-y-6 animate-in fade-in slide-in-from-top-1 duration-200">
+                          <div className="flex justify-between items-center border-b border-gray-100 pb-2 mb-4">
+                            <h3 className="text-[11px] font-bold text-[#00588b] uppercase tracking-widest">Manage Grid/Slider Cards</h3>
+                            <button 
+                              type="button" 
+                              onClick={() => addArrayItem(index, 'items', { _id: Date.now().toString(), image: '', title: 'New Item', subtitle: '', link: '', newTab: false })} 
+                              className="text-xs font-bold bg-[#00588b] text-white px-3 py-1.5 hover:bg-[#004570] transition-colors flex gap-1 items-center"
+                            >
+                              <Plus size={14} /> Add New Card
+                            </button>
+                          </div>
+
+                          <div className="space-y-4">
+                            {(block.items || []).map((item, iIdx) => (
+                              <div key={item._id || iIdx} className="bg-gray-50 border border-gray-200 p-4 relative group shadow-sm hover:border-gray-300 transition-colors">
+                                <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                  <button 
+                                    type="button" 
+                                    onClick={() => moveArrayItem(index, 'items', iIdx, -1)} 
+                                    disabled={iIdx === 0}
+                                    className="p-1.5 bg-white border border-gray-100 text-gray-400 hover:text-gray-600 disabled:opacity-20 transition-all shadow-sm"
+                                  >
+                                    <ArrowUp size={14} />
+                                  </button>
+                                  <button 
+                                    type="button" 
+                                    onClick={() => moveArrayItem(index, 'items', iIdx, 1)} 
+                                    disabled={iIdx === (block.items.length - 1)}
+                                    className="p-1.5 bg-white border border-gray-100 text-gray-400 hover:text-gray-600 disabled:opacity-20 transition-all shadow-sm"
+                                  >
+                                    <ArrowDown size={14} />
+                                  </button>
+                                  <button 
+                                    type="button" 
+                                    onClick={() => removeArrayItem(index, 'items', iIdx)} 
+                                    className="p-1.5 bg-red-50 border border-red-100 text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-sm"
+                                  >
+                                    <Trash2 size={14} />
+                                  </button>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+                                  {/* Item Image */}
+                                  <div className="md:col-span-3 space-y-2">
+                                    <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest">Card Image</label>
+                                    <div className="aspect-[16/9] bg-gray-200 border border-gray-300 relative overflow-hidden group/img">
+                                      {item.image ? (
+                                        <img src={item.image} className="w-full h-full object-cover" alt={item.title} />
+                                      ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-gray-400">
+                                          <ImageIcon size={24} />
+                                        </div>
+                                      )}
+                                    </div>
+                                    <MediaUploader category="pages" onUploadSuccess={url => updateArrayItem(index, 'items', iIdx, 'image', url)} />
+                                  </div>
+
+                                  {/* Item Content */}
+                                  <div className="md:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="md:col-span-2">
+                                      <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1">Title</label>
+                                      <input 
+                                        type="text" 
+                                        value={item.title} 
+                                        onChange={e => updateArrayItem(index, 'items', iIdx, 'title', e.target.value)} 
+                                        className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold" 
+                                        placeholder="Enter card title..." 
+                                      />
+                                    </div>
+                                    <div className="md:col-span-2">
+                                      <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1">Subtitle / Description</label>
+                                      <textarea 
+                                        value={item.subtitle} 
+                                        onChange={e => updateArrayItem(index, 'items', iIdx, 'subtitle', e.target.value)} 
+                                        className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white h-16 resize-none" 
+                                        placeholder="Enter short description..." 
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1">Action Link / Slug</label>
+                                      <input 
+                                        type="text" 
+                                        value={item.link} 
+                                        onChange={e => updateArrayItem(index, 'items', iIdx, 'link', e.target.value)} 
+                                        className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-mono" 
+                                        placeholder="/path-or-slug" 
+                                      />
+                                    </div>
+                                    <div className="flex items-end">
+                                      <label className="flex items-center gap-2 cursor-pointer pb-2 group">
+                                        <input 
+                                          type="checkbox" 
+                                          checked={item.newTab} 
+                                          onChange={e => updateArrayItem(index, 'items', iIdx, 'newTab', e.target.checked)} 
+                                          className="w-3.5 h-3.5 accent-[#00588b]" 
+                                        />
+                                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest group-hover:text-black transition-colors">Open in New Tab</span>
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+
+                            {(block.items || []).length === 0 && (
+                              <div className="py-12 text-center border-2 border-dashed border-gray-200 bg-white text-gray-400">
+                                <Images size={32} className="mx-auto mb-2 opacity-50" />
+                                <p className="text-[11px] font-bold uppercase tracking-widest">No cards added yet</p>
+                                <button 
+                                  type="button" 
+                                  onClick={() => addArrayItem(index, 'items', { _id: Date.now().toString(), image: '', title: 'New Item', subtitle: '', link: '', newTab: false })}
+                                  className="mt-3 text-[10px] font-black text-[#00588b] uppercase border-b-2 border-transparent hover:border-[#00588b] transition-all"
+                                >
+                                  Click here to add your first card
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       )}
                     </div>

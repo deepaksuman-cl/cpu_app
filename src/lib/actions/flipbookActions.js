@@ -1,7 +1,7 @@
 'use server';
 
-import { Flipbook } from '@/models';
 import { connectToDatabase } from '@/lib/db';
+import { Flipbook } from '@/models';
 import { Op } from 'sequelize';
 
 export async function getFlipbookBySlug(slug) {
