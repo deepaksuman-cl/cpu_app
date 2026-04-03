@@ -1005,6 +1005,97 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                   </div>
                 )}
 
+                {block.blockType === 'tabbed' && (
+                  <div className="space-y-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 bg-gray-50 p-4 border border-gray-200">
+                      <div className="flex items-center gap-2">
+                        <Layout size={14} className="text-[#00588b]" />
+                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Navigation Layout:</span>
+                      </div>
+                      <div className="flex gap-1.5">
+                        <button 
+                          type="button" 
+                          onClick={() => updateBlock(index, 'layout', 'sidebar')}
+                          className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest border transition-all ${block.layout === 'sidebar' ? 'bg-[#00588b] text-white border-[#00588b] shadow-sm' : 'bg-white text-gray-400 border-gray-200 hover:border-gray-300'}`}
+                        >Sidebar Tabs</button>
+                        <button 
+                          type="button" 
+                          onClick={() => updateBlock(index, 'layout', 'top')}
+                          className={`px-4 py-1.5 text-[10px] font-black uppercase tracking-widest border transition-all ${block.layout === 'top' ? 'bg-[#00588b] text-white border-[#00588b] shadow-sm' : 'bg-white text-gray-400 border-gray-200 hover:border-gray-300'}`}
+                        >Top Navigation</button>
+                      </div>
+                    </div>
+
+                    <div className="mb-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 border-b border-gray-100 pb-3">
+                      <div className="flex items-center gap-2">
+                         <SquareStack size={14} className="text-[#fec53a]" />
+                         <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide">Manage Content Tabs / Sections</label>
+                      </div>
+                      <button 
+                        type="button" 
+                        onClick={() => addArrayItem(index, 'tabs', { _id: Date.now().toString(), title: 'New Tab', icon: 'SquareStack', content: '' })} 
+                        className="text-[10px] font-black bg-[#00588b] text-white px-4 py-2 hover:bg-[#004570] transition-colors flex gap-2 items-center uppercase tracking-widest shadow-sm"
+                      >
+                        <Plus size={14} strokeWidth={3} /> Add New Tab
+                      </button>
+                    </div>
+
+                    <div className="space-y-5">
+                      {(block.tabs || []).map((tab, tIdx) => (
+                        <div key={tab._id || tIdx} className="border border-gray-200 p-5 bg-white relative group shadow-sm hover:border-gray-300 transition-colors">
+                          
+                          {/* Item Toolbar */}
+                          <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button type="button" onClick={() => moveArrayItem(index, 'tabs', tIdx, -1)} disabled={tIdx === 0} className="p-1.5 bg-gray-50 border border-gray-100 text-gray-400 hover:text-gray-600 disabled:opacity-20 transition-all"><ArrowUp size={14} /></button>
+                            <button type="button" onClick={() => moveArrayItem(index, 'tabs', tIdx, 1)} disabled={tIdx === (block.tabs || []).length - 1} className="p-1.5 bg-gray-50 border border-gray-100 text-gray-400 hover:text-gray-600 disabled:opacity-20 transition-all"><ArrowDown size={14} /></button>
+                            <div className="w-px h-5 bg-gray-200 mx-1"></div>
+                            <button type="button" onClick={() => removeArrayItem(index, 'tabs', tIdx)} className="p-1.5 bg-red-50 border border-red-100 text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-sm"><Trash2 size={14} /></button>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mb-5 border-b border-gray-50 pb-4">
+                             <div className="md:col-span-8">
+                                <label className="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1.5">Tab Label / Navigation Title</label>
+                                <input 
+                                  type="text" 
+                                  value={tab.title} 
+                                  onChange={e => updateArrayItem(index, 'tabs', tIdx, 'title', e.target.value)} 
+                                  className="w-full border border-gray-200 p-2.5 text-[13px] font-bold outline-none focus:border-[#00588b] bg-gray-50 focus:bg-white transition-all" 
+                                  placeholder="e.g. Admission Criteria" 
+                                />
+                             </div>
+                             <div className="md:col-span-4">
+                                <label className="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1.5">Navigation Icon</label>
+                                <IconPicker 
+                                  value={tab.icon} 
+                                  onChange={val => updateArrayItem(index, 'tabs', tIdx, 'icon', val)} 
+                                />
+                             </div>
+                          </div>
+                          
+                          <div className="bg-gray-50/50 p-4 border border-gray-100">
+                            <label className="block text-[9px] font-black text-[#00588b] uppercase tracking-widest mb-2.5 flex items-center gap-2">
+                               <Monitor size={12} /> Rich Content Editor
+                            </label>
+                            <RichTextEditor 
+                              value={tab.content} 
+                              onChange={val => updateArrayItem(index, 'tabs', tIdx, 'content', val)} 
+                              useProse={block.useProse !== false}
+                              onProseChange={val => updateBlock(index, 'useProse', val)}
+                            />
+                          </div>
+                        </div>
+                      ))}
+
+                      {(block.tabs || []).length === 0 && (
+                        <div className="py-10 text-center border-2 border-dashed border-gray-100 bg-gray-50/30 text-gray-400">
+                           <SquareStack size={28} className="mx-auto mb-2 opacity-50" />
+                           <p className="text-[10px] font-black uppercase tracking-widest">No tabs configured for this block</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {block.blockType === 'slider-grid' && (
                   <div className="space-y-6">
                     {/* Settings Tabs */}
