@@ -42,9 +42,12 @@ export default function ProgramsSection({ data }) {
             ))}
           </div>
           <div className="text-center mt-6">
-            <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
+            <a 
+              href="/programmes?type=All+Categories" 
+              className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform"
+            >
               View All Programs <ArrowRight size={14} />
-            </button>
+            </a>
           </div>
         </div>
       </section>

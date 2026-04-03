@@ -115,15 +115,15 @@ export function HappeningsSection({ data }) {
         <div className="text-center mt-8">
           {data.viewAllBtn ? (
             <a 
-              href={data.viewAllBtn.link || "#"}
+              href={data.viewAllBtn.link || ""}
               className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform no-underline"
             >
               {data.viewAllBtn.text} {data.viewAllBtn.icon && <Icon name={data.viewAllBtn.icon} size={14}/>}
             </a>
           ) : (
-            <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
-              View All Events <ArrowRight size={14}/>
-            </button>
+            <a href="https://cpur.in/blog/" className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
+              View All Blog <ArrowRight size={14}/>
+            </a>
           )}
         </div>
       </div>
