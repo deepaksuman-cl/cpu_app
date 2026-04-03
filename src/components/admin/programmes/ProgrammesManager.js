@@ -5,9 +5,9 @@ import IconPicker from '@/components/admin/ui/IconPicker';
 import Modal from '@/components/admin/ui/Modal';
 import { createCategory, createCourse, createSidebarLink, deleteCategory, deleteCourse, deleteSidebarLink, getCourses, updateCourse, updateProgrammeSettings, updateSidebarLink } from '@/lib/actions/programmeActions';
 import { seedDatabase } from '@/lib/actions/seedActions';
-import { AlertTriangle, BookMarked, ChevronRight, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Settings, Trash2,Search } from 'lucide-react';
+import { AlertTriangle, BookMarked, ChevronRight, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Search, Settings, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 import toast, { Toaster } from 'react-hot-toast';
