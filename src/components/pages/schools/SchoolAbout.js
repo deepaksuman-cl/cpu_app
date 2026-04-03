@@ -9,8 +9,8 @@ export default function SchoolAbout({ data }) {
   if (!data) return null;
   const { vision, mission } = data;
 
-  const VisionIcon = LucideIcons[vision.icon] || LucideIcons.Target;
-  const MissionIcon = LucideIcons[mission.icon] || LucideIcons.Lightbulb;
+  const VisionIcon = (vision?.icon && LucideIcons[vision.icon]) ? LucideIcons[vision.icon] : LucideIcons.Target;
+  const MissionIcon = (mission?.icon && LucideIcons[mission.icon]) ? LucideIcons[mission.icon] : LucideIcons.Lightbulb;
 
   return (
     <section id="about" className="py-0 overflow-hidden">

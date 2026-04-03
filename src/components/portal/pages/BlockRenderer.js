@@ -1,8 +1,9 @@
-import AccordionClient from './AccordionClient';
-import * as LucideIcons from 'lucide-react';
-import GalleryClient from './GalleryClient';
 import RichTextRenderer from '@/components/common/RichTextRenderer';
+import * as LucideIcons from 'lucide-react';
 import Link from 'next/link';
+import AccordionClient from './AccordionClient';
+import GalleryClient from './GalleryClient';
+import TabbedContent from './TabbedContent';
 
 export default function BlockRenderer({ block }) {
   const { blockType } = block;
@@ -69,7 +70,7 @@ export default function BlockRenderer({ block }) {
   if (blockType === 'Accordion') {
     return (
       <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-gray-50 border-y border-gray-200 ${block.cssClass || ''}`}>
-        <div className="max-w-[56rem] mx-auto">
+        <div className="max-w-[full] mx-auto">
           <AccordionClient items={block.accordionItems} useProse={block.useProse !== false} />
         </div>
       </div>
@@ -347,6 +348,15 @@ export default function BlockRenderer({ block }) {
           </div>
         </div>
       </section>
+    );
+  }
+
+  // 11. Tabbed / Accordion Block
+  if (blockType === 'tabbed') {
+    return (
+      <div id={block.cssId || undefined} className={`w-full ${block.cssClass || ''}`}>
+        <TabbedContent data={{ layout: block.layout, tabs: block.tabs }} />
+      </div>
     );
   }
 

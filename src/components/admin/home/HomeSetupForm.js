@@ -368,23 +368,42 @@ export default function HomeSetupForm({ initialData }) {
               <NestedListEditor 
                 label="Hero Slides"
                 items={sections.heroConfig.slides}
-                newItemTemplate={{ bg: '', tagline: '', title: '', subtitle: '', desc: '', badge: '', btn1Text: '', btn1Icon: '', btn1Link: '', btn2Text: '', btn2Icon: '', btn2Link: '' }}
+                newItemTemplate={{ bg: '', tagline: '', title: '', subtitle: '', desc: '', badge: '', showOverlay: true, buttons: [] }}
                 fields={[
                   {key: 'title', label: 'Main Title'},
                   {key: 'subtitle', label: 'Subtitle'},
                   {key: 'tagline', label: 'Tagline'},
                   {key: 'badge', label: 'Badge Text'},
                   {key: 'bg', label: 'Background Image', type: 'image', fullWidth: true},
+                  {key: 'showOverlay', label: 'Show Dark Overlay', type: 'checkbox'},
                   {key: 'desc', label: 'Description', type: 'textarea', fullWidth: true},
-                  {key: 'btn1Text', label: 'Button 1 Text'},
-                  {key: 'btn1Icon', label: 'Button 1 Icon', type: 'icon'},
-                  {key: 'btn1Link', label: 'Button 1 Link', fullWidth: true},
-                  {key: 'btn2Text', label: 'Button 2 Text'},
-                  {key: 'btn2Icon', label: 'Button 2 Icon', type: 'icon'},
-                  {key: 'btn2Link', label: 'Button 2 Link', fullWidth: true}
                 ]}
                 onUpdate={items => updateSection('heroConfig', {...sections.heroConfig, slides: items})}
               />
+              <div className="space-y-4">
+                {sections.heroConfig.slides.map((slide, sIdx) => (
+                  <div key={sIdx} className="p-4 bg-gray-50 border border-gray-200">
+                    <p className="text-[10px] font-black text-[#00588b] uppercase mb-3">Buttons for Slide {sIdx + 1}: {slide.title || 'Untitled'}</p>
+                    <NestedListEditor 
+                      label=""
+                      items={slide.buttons || []}
+                      newItemTemplate={{ text: '', icon: 'ArrowRight', link: '#', style: 'gradient', iconPosition: 'right' }}
+                      fields={[
+                        {key: 'text', label: 'Button Text'},
+                        {key: 'link', label: 'Slug / Link', fullWidth: true},
+                        {key: 'icon', label: 'Icon', type: 'icon'},
+                        {key: 'style', label: 'Style (gradient/outline)'},
+                        {key: 'iconPosition', label: 'Icon Position (left/right)'}
+                      ]}
+                      onUpdate={newBtns => {
+                        const newSlides = [...sections.heroConfig.slides];
+                        newSlides[sIdx].buttons = newBtns;
+                        updateSection('heroConfig', {...sections.heroConfig, slides: newSlides});
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
@@ -429,20 +448,19 @@ export default function HomeSetupForm({ initialData }) {
               </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-[var(--bg-muted)] p-3">
-                 <div>
-                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Button 1 Text</label>
-                   <input type="text" value={sections.aboutConfig.btnText} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, btnText: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                 </div>
-                 <div>
-                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Button 1 Icon</label>
-                   <IconPicker value={sections.aboutConfig.btnIcon} onChange={val => updateSection('aboutConfig', {...sections.aboutConfig, btnIcon: val})} />
-                 </div>
-                 <div>
-                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Button 1 Link</label>
-                   <input type="text" value={sections.aboutConfig.btnLink} onChange={e => updateSection('aboutConfig', {...sections.aboutConfig, btnLink: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
-                 </div>
-              </div>
+              <NestedListEditor 
+                label="About Action Buttons"
+                items={sections.aboutConfig.buttons || []}
+                newItemTemplate={{ text: '', icon: 'ArrowRight', link: '#', style: 'gradient', iconPosition: 'right' }}
+                fields={[
+                  {key: 'text', label: 'Button Text'},
+                  {key: 'link', label: 'Slug / Link', fullWidth: true},
+                  {key: 'icon', label: 'Icon', type: 'icon'},
+                  {key: 'style', label: 'Style (gradient/outline)'},
+                  {key: 'iconPosition', label: 'Icon Position (left/right)'}
+                ]}
+                onUpdate={btns => updateSection('aboutConfig', {...sections.aboutConfig, buttons: btns})}
+              />
               
               <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-4">
                  <label className="block text-[10px] font-black text-[var(--text-primary)] uppercase mb-3 tracking-widest">Description (Rich Text)</label>
@@ -666,6 +684,36 @@ export default function HomeSetupForm({ initialData }) {
                 value={{ main: sections.happeningsConfig.title, highlight: sections.happeningsConfig.highlight }} 
                 onChange={val => updateSection('happeningsConfig', {...sections.happeningsConfig, title: val.main, highlight: val.highlight})} 
               />
+              <div className="p-4 bg-blue-50 border border-blue-100 space-y-4">
+                <p className="text-[10px] font-black text-[#00588b] uppercase tracking-widest">"View All" Button Configuration</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Button Text</label>
+                    <input 
+                      type="text" 
+                      value={sections.happeningsConfig.viewAllBtn?.text || ''} 
+                      onChange={e => updateSection('happeningsConfig', {...sections.happeningsConfig, viewAllBtn: {...(sections.happeningsConfig.viewAllBtn || {}), text: e.target.value}})} 
+                      className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Button Icon</label>
+                    <IconPicker 
+                      value={sections.happeningsConfig.viewAllBtn?.icon || 'ArrowRight'} 
+                      onChange={val => updateSection('happeningsConfig', {...sections.happeningsConfig, viewAllBtn: {...(sections.happeningsConfig.viewAllBtn || {}), icon: val}})} 
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Button Link</label>
+                    <input 
+                      type="text" 
+                      value={sections.happeningsConfig.viewAllBtn?.link || ''} 
+                      onChange={e => updateSection('happeningsConfig', {...sections.happeningsConfig, viewAllBtn: {...(sections.happeningsConfig.viewAllBtn || {}), link: e.target.value}})} 
+                      className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" 
+                    />
+                  </div>
+                </div>
+              </div>
               <NestedListEditor 
                 label="Event Cards"
                 items={sections.happeningsConfig.items}
@@ -755,11 +803,15 @@ export default function HomeSetupForm({ initialData }) {
                 onChange={val => updateSection('socialWallConfig', {...sections.socialWallConfig, title: val.main, highlight: val.highlight})} 
               />
               <NestedListEditor 
-                label="Social Wall Images"
-                items={sections.socialWallConfig.images.map(img => ({ url: img }))}
-                newItemTemplate={{ url: '' }}
-                fields={[{key: 'url', label: 'Image URL', type: 'image', fullWidth: true}]}
-                onUpdate={items => updateSection('socialWallConfig', {...sections.socialWallConfig, images: items.map(i => i.url)})}
+                label="Social Wall Images & Links"
+                items={sections.socialWallConfig.images.map(item => typeof item === 'string' ? { img: item, icon: 'Instagram', link: '' } : item)}
+                newItemTemplate={{ img: '', icon: 'Instagram', link: '' }}
+                fields={[
+                  {key: 'img', label: 'Image URL', type: 'image', fullWidth: true},
+                  {key: 'icon', label: 'Hover Icon', type: 'icon'},
+                  {key: 'link', label: 'Slug / Link (URL)'}
+                ]}
+                onUpdate={items => updateSection('socialWallConfig', {...sections.socialWallConfig, images: items})}
               />
             </div>
           )}

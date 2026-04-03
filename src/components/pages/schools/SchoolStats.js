@@ -9,7 +9,7 @@ export default function SchoolStats({ data }) {
     <section className="py-12 max-w-7xl mx-auto px-4 lg:px-16">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {data.map((s, i) => {
-          const Icon = LucideIcons[s.icon] || LucideIcons.BarChart3;
+          const Icon = (s.icon && LucideIcons[s.icon]) ? LucideIcons[s.icon] : LucideIcons.BarChart3;
           return (
             <div key={i} className={`rounded-2xl p-7 flex items-center gap-5 transition-transform hover:-translate-y-1.5 shadow-[0_4px_24px_rgba(0,88,139,0.08)] ${
               i === 1 ? "bg-[#00588b] border border-[#00588b]" : "bg-white border border-slate-200"

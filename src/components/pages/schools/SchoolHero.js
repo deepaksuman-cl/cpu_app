@@ -104,7 +104,7 @@ export default function SchoolHero({ data, children }) {
             </div>
 
             {/* Optional quick stats row (course pages) */}
-            {/* {data.quickStats && (
+            {data.quickStats && data.quickStats.length > 0 && (
               <div className="flex flex-wrap gap-8 mt-12 pt-6 border-t border-white/20">
                 {data.quickStats.map((s, i) => {
                   const Icon = LucideIcons[s.icon] || Star;
@@ -115,13 +115,13 @@ export default function SchoolHero({ data, children }) {
                       </div>
                       <div>
                         <div className="text-[#ffb900] font-black text-2xl leading-none">{s.value}</div>
-                        <div className="text-blue-200 text-[10px] uppercase font-bold tracking-wider mt-1">{s.label}</div>
+                        <div className="text-blue-200 text-[10px] uppercase font-bold tracking-widest mt-1.5">{s.label}</div>
                       </div>
                     </div>
                   );
                 })}
               </div>
-            )} */}
+            )}
           </div>
 
           {/* Right — injected from course page (Accomplishments card, etc.) */}

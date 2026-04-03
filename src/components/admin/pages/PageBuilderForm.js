@@ -4,7 +4,7 @@ import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import { createPage, updatePage } from '@/lib/actions/pageActions';
-import { AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Megaphone, Plus, Save, Trash2, Type, Users, CheckCircle2, AlertCircle, X, Mail, ChevronRight } from 'lucide-react';
+import { AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Megaphone, Plus, Save, Trash2, Type, Users, CheckCircle2, AlertCircle, X, Mail, ChevronRight, SquareStack, Columns } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useCallback, useMemo } from 'react';
 
@@ -35,7 +35,8 @@ const BLOCK_DEFINITIONS = [
   { type: 'GalleryBlock', label: 'Interactive Gallery', icon: Images },
   { type: 'HeroWithStats', label: 'Hero Section with Stats', icon: Layout },
   { type: 'LeaderProfile', label: 'Leader Profile & Message', icon: Users },
-  { type: 'CTABanner', label: 'Call-to-Action Banner', icon: Megaphone }
+  { type: 'CTABanner', label: 'Call-to-Action Banner', icon: Megaphone },
+  { type: 'tabbed', label: 'Tabbed / Accordion Block', icon: SquareStack }
 ];
 
 const getEmptyBlock = (type) => {
@@ -48,6 +49,11 @@ const getEmptyBlock = (type) => {
   if (type === 'HeroWithStats') base.heroStats = { badgeText: '', titleMain: '', titleHighlight: '', subtitle: '', stats: [] };
   if (type === 'LeaderProfile') base.leaderProfile = { image: '', name: '', role: '', organization: '', qualifications: [], greeting: '', welcomeHeadline: '', messageHTML: '', visionQuote: '', signatureQuals: '' };
   if (type === 'CTABanner') base.ctaBanner = { badgeText: '', titleMain: '', titleHighlight: '', primaryBtnText: '', primaryBtnUrl: '', primaryBtnIcon: 'ChevronRight', secondaryBtnText: '', secondaryBtnUrl: '', secondaryBtnIcon: 'Mail' };
+
+  if (type === 'tabbed') {
+    base.layout = 'sidebar';
+    base.tabs = [{ _id: Date.now().toString(), title: 'New Tab', icon: 'SquareStack', content: '' }];
+  }
 
   return base;
 };
@@ -155,6 +161,17 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
       const newBlocks = [...prev];
       const newArray = [...newBlocks[blockIndex][arrayField]];
       newArray[itemIndex] = { ...newArray[itemIndex], [field]: value };
+      newBlocks[blockIndex] = { ...newBlocks[blockIndex], [arrayField]: newArray };
+      return newBlocks;
+    });
+  }, []);
+
+  const moveArrayItem = useCallback((blockIndex, arrayField, itemIndex, dir) => {
+    setBlocks(prev => {
+      const newBlocks = [...prev];
+      const newArray = [...newBlocks[blockIndex][arrayField]];
+      if ((dir === -1 && itemIndex === 0) || (dir === 1 && itemIndex === newArray.length - 1)) return prev;
+      [newArray[itemIndex], newArray[itemIndex + dir]] = [newArray[itemIndex + dir], newArray[itemIndex]];
       newBlocks[blockIndex] = { ...newBlocks[blockIndex], [arrayField]: newArray };
       return newBlocks;
     });
@@ -952,6 +969,102 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
                              </div>
                           </div>
                        </div>
+                    </div>
+                  </div>
+                )}
+
+                {block.blockType === 'tabbed' && (
+                  <div>
+                    <div className="mb-4 flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 pb-2 gap-4">
+                      <div className="flex items-center gap-4">
+                        <label className="block text-xs font-bold text-gray-700 uppercase">Interactive Tab Items</label>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] font-bold text-gray-500 uppercase">Layout:</span>
+                          <select 
+                            value={block.layout || 'sidebar'} 
+                            onChange={e => updateBlock(index, 'layout', e.target.value)}
+                            className="border border-gray-300 outline-none p-1 text-sm bg-white"
+                          >
+                            <option value="sidebar">Sidebar Tabs</option>
+                            <option value="top">Top Tabs / Horizontal</option>
+                          </select>
+                        </div>
+                      </div>
+                      <button 
+                        type="button" 
+                        onClick={() => addArrayItem(index, 'tabs', { _id: Date.now().toString(), title: 'New Tab', content: '' })} 
+                        className="text-xs font-bold bg-[#00588b] text-white px-3 py-1.5 hover:bg-[#004570] transition-colors flex gap-1 items-center"
+                      >
+                        <Plus size={14} /> Add New Tab Entry
+                      </button>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      {(block.tabs || []).map((item, tIdx) => (
+                        <div key={item._id || tIdx} className="border border-gray-300 p-4 bg-gray-50 relative group">
+                          {/* Tab Controls */}
+                          <div className="absolute top-2 right-2 flex gap-1">
+                            <button 
+                              type="button" 
+                              onClick={() => moveArrayItem(index, 'tabs', tIdx, -1)} 
+                              disabled={tIdx === 0}
+                              className="text-gray-400 hover:text-gray-600 disabled:opacity-20 p-1 bg-white border border-gray-100"
+                            >
+                              <ArrowUp size={14} />
+                            </button>
+                            <button 
+                              type="button" 
+                              onClick={() => moveArrayItem(index, 'tabs', tIdx, 1)} 
+                              disabled={tIdx === ((block.tabs?.length || 0) - 1)}
+                              className="text-gray-400 hover:text-gray-600 disabled:opacity-20 p-1 bg-white border border-gray-100"
+                            >
+                              <ArrowDown size={14} />
+                            </button>
+                            <button 
+                              type="button" 
+                              onClick={() => removeArrayItem(index, 'tabs', tIdx)} 
+                              className="text-red-500 hover:text-red-700 bg-red-50 p-1 border border-red-100"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </div>
+                          
+                          <div className="mb-3 pr-24 flex flex-col md:flex-row gap-4">
+                            <div className="flex-1">
+                              <label className="block text-xs font-bold text-gray-600 mb-1 tracking-widest uppercase">Tab Heading Title</label>
+                              <input 
+                                type="text" 
+                                value={item.title} 
+                                onChange={e => updateArrayItem(index, 'tabs', tIdx, 'title', e.target.value)} 
+                                className="w-full border border-gray-300 p-2 text-sm outline-none focus:border-[#00588b] font-bold" 
+                                placeholder="e.g. Admission Criteria" 
+                              />
+                            </div>
+                            <div className="w-full md:w-48">
+                              <label className="block text-xs font-bold text-gray-600 mb-1 tracking-widest uppercase">Tab Icon</label>
+                              <IconPicker 
+                                value={item.icon || 'SquareStack'} 
+                                onChange={val => updateArrayItem(index, 'tabs', tIdx, 'icon', val)} 
+                              />
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <label className="block text-xs font-bold text-gray-600 mb-1 tracking-widest uppercase">Tab Detailed Content (Rich HTML)</label>
+                            <RichTextEditor 
+                              value={item.content} 
+                              onChange={val => updateArrayItem(index, 'tabs', tIdx, 'content', val)} 
+                              useProse={item.useProse !== false}
+                              onProseChange={val => updateArrayItem(index, 'useProse', val)}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                      {(!block.tabs || block.tabs.length === 0) && (
+                        <div className="py-8 text-center bg-gray-100 border border-dashed border-gray-300 text-gray-400 text-xs font-bold uppercase tracking-widest">
+                          No tabs configured. Add your first tab above.
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}

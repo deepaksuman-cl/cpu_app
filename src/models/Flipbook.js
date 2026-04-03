@@ -43,10 +43,6 @@ const Flipbook = sequelize.define('flipbooks', {
     type: DataTypes.BOOLEAN,
     defaultValue: true
   },
-  cover_image: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
   backdrop_image: {
     type: DataTypes.STRING,
     allowNull: true
