@@ -8,13 +8,16 @@ import RichTextRenderer from '@/components/common/RichTextRenderer';
 export default function TabbedContent({ data }) {
   // CMS se data aayega: data.layout (sidebar/top) aur data.tabs (array of objects)
   const layout = data?.layout || 'sidebar'; 
-  const tabs = data?.tabs || [];
+  
+  // 🔥 FIX: Filter out null/undefined tabs to prevent crashes
+  const tabs = (data?.tabs || []).filter(t => t && typeof t === 'object');
 
   const [activeTab, setActiveTab] = useState(null);
 
   // Default first tab ko active karne ke liye
   useEffect(() => {
-    if (tabs.length > 0 && activeTab === null) {
+    // 🔥 FIX: Added safety check for tabs[0]
+    if (tabs.length > 0 && activeTab === null && tabs[0]) {
       setActiveTab(tabs[0]._id || 0);
     }
   }, [tabs, activeTab]);
@@ -29,74 +32,67 @@ export default function TabbedContent({ data }) {
         layout === 'sidebar' ? 'flex-row gap-8' : 'flex-col gap-6'
       }`}>
         
-        {/* Tab Triggers Container */}
-        <div className={`transition-all duration-300 ${
-          layout === 'sidebar' 
-            ? 'flex flex-col w-1/3 shrink-0 gap-2 border-r border-gray-100 pr-6' 
-            : 'flex flex-row flex-wrap items-center gap-2 w-full border-b border-gray-100 pb-4'
+        {/* Navigation Area */}
+        <div className={`flex shrink-0 ${
+          layout === 'sidebar' ? 'flex-col w-72' : 'flex-row w-full overflow-x-auto scrollbar-hide border-b border-gray-100'
         }`}>
           {tabs.map((tab, index) => {
-            const tabId = tab._id || index;
+            // 🔥 FIX: Fallback to index if _id is missing
+            const tabId = tab?._id || index;
             const isActive = activeTab === tabId;
-            
+
             return (
               <button
                 key={tabId}
                 onClick={() => setActiveTab(tabId)}
-                className={`group flex items-center gap-4 rounded-lg font-semibold transition-all duration-300 ${
-                  layout === 'sidebar' ? 'px-5 py-4 w-full text-left' : 'px-6 py-3 w-auto'
-                } ${
-                  isActive
-                    ? 'bg-[#00588b] text-white shadow-md ' + (layout === 'sidebar' ? 'translate-x-1' : '')
-                    : 'bg-transparent text-[#00588b] hover:bg-gray-50 hover:text-[#00588b]'
-                }`}
+                className={`flex items-center gap-4 px-5 py-4 text-left transition-all duration-300 relative group
+                  ${layout === 'sidebar' ? 'border-l-4 mb-2' : 'border-b-4 min-w-[200px] justify-center'}
+                  ${isActive 
+                    ? 'border-[#00588b] bg-[#00588b]/5 text-[#00588b]' 
+                    : 'border-transparent text-gray-500 hover:bg-gray-50'
+                  }`}
               >
-                <div className="flex items-center gap-3 flex-1">
-                  {tab.icon && (
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                      isActive ? 'bg-white/20' : 'bg-[#00588b]/10'
-                    }`}>
-                      {(() => {
-                        const Icon = LucideIcons[tab.icon] || LucideIcons.SquareStack;
-                        return <Icon size={18} className={isActive ? 'text-[#fec53a]' : 'text-[#00588b]'} />;
-                      })()}
-                    </div>
-                  )}
-                  <span className={layout === 'top' ? 'text-sm tracking-wide' : 'text-base'}>
-                    {tab.title}
-                  </span>
-                </div>
+                {tab?.icon && (
+                  <div className={`p-2 rounded-lg transition-colors ${
+                    isActive ? 'bg-[#00588b] text-white' : 'bg-gray-100 text-gray-400 group-hover:text-[#00588b]'
+                  }`}>
+                    {(() => {
+                      // 🔥 FIX: Safe icon lookup
+                      const Icon = LucideIcons[tab.icon] || LucideIcons.SquareStack;
+                      return <Icon size={18} />;
+                    })()}
+                  </div>
+                )}
+                <span className={`font-bold text-sm tracking-wide ${isActive ? 'text-[#00588b]' : 'text-gray-600'}`}>
+                  {tab?.title || `Tab ${index + 1}`}
+                </span>
                 
-                {/* 🔥 Sleek Hover Arrow (Only for Sidebar Layout) */}
-                {layout === 'sidebar' && (
-                  <ArrowRight 
-                    size={18} 
-                    className={`transition-all duration-300 ${
-                      isActive 
-                        ? 'text-[#fec53a] translate-x-0 opacity-100' 
-                        : 'text-[#00588b] -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0'
-                    }`} 
-                  />
+                {/* Active Indicator for Sidebar */}
+                {isActive && layout === 'sidebar' && (
+                  <ArrowRight size={16} className="ml-auto text-[#fec53a] animate-pulse" />
                 )}
               </button>
-            );
+            )
           })}
         </div>
 
-        {/* Tab Content Container */}
-        <div className={`${layout === 'sidebar' ? 'w-2/3 flex-grow pl-2' : 'w-full pt-2'}`}>
+        {/* Content Area */}
+        <div className="flex-1 min-w-0">
           {tabs.map((tab, index) => {
-            const tabId = tab._id || index;
-            return activeTab === tabId && (
-              <div key={tabId} className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-                <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-[#fec53a]">
-                  <h2 className="text-2xl md:text-3xl font-bold text-[#00588b]">
-                    {tab.title}
+            const tabId = tab?._id || index;
+            if (activeTab !== tabId) return null;
+
+            return (
+              <div key={tabId} className="animate-in fade-in slide-in-from-right-4 duration-500">
+                <div className="flex items-center gap-3 mb-6">
+                   <div className="w-1.5 h-8 bg-[#fec53a] rounded-full" />
+                   <h2 className="text-2xl font-black text-slate-800 uppercase tracking-tight">
+                    {tab?.title || 'Section Content'}
                   </h2>
                 </div>
                 {/* 🔥 Yahan tumhara RichTextRenderer render karega CMS ka data */}
                 <div className={data?.useProse !== false ? "prose max-w-none" : ""}>
-                  <RichTextRenderer content={tab.content} useProse={data?.useProse !== false} />
+                  <RichTextRenderer content={tab?.content} useProse={data?.useProse !== false} />
                 </div>
               </div>
             )
@@ -107,7 +103,7 @@ export default function TabbedContent({ data }) {
       {/* --- MOBILE VIEW: Accordion --- */}
       <div className="md:hidden flex flex-col gap-3">
         {tabs.map((tab, index) => {
-          const tabId = tab._id || index;
+          const tabId = tab?._id || index;
           const isActive = activeTab === tabId;
 
           return (
@@ -126,7 +122,7 @@ export default function TabbedContent({ data }) {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  {tab.icon && (
+                  {tab?.icon && (
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
                       isActive ? 'bg-white/20' : 'bg-[#00588b]/10'
                     }`}>
@@ -136,7 +132,7 @@ export default function TabbedContent({ data }) {
                       })()}
                     </div>
                   )}
-                  <span className="text-left pr-4">{tab.title}</span>
+                  <span className="text-left pr-4">{tab?.title || `Tab ${index + 1}`}</span>
                 </div>
                 {isActive ? (
                   <ChevronUp size={20} className="text-[#fec53a] shrink-0" />
@@ -148,7 +144,7 @@ export default function TabbedContent({ data }) {
               {isActive && (
                 <div className="p-4 bg-white border-t border-gray-100 animate-in fade-in slide-in-from-top-2 duration-300">
                   <div className={data?.useProse !== false ? "prose max-w-none" : ""}>
-                    <RichTextRenderer content={tab.content} useProse={data?.useProse !== false} />
+                    <RichTextRenderer content={tab?.content} useProse={data?.useProse !== false} />
                   </div>
                 </div>
               )}
