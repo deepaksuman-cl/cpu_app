@@ -233,9 +233,11 @@
   "ctaConfig": {
     "title": "Take the First Step Toward Your Future",
     "description": "Join Career Point University and build a career with 25+ years of academic excellence and global opportunities.",
-    "applyLabel": "Apply for 2024-25",
-    "phone": "+91 80941 57000",
-    "brochureLabel": "Download Brochure"
+    "buttons": [
+      { "text": "Apply for 2024-25", "icon": "GraduationCap", "link": "/admission", "style": "gradient" },
+      { "text": "+91 80941 57000", "icon": "Phone", "link": "tel:+918094157000", "style": "outline" },
+      { "text": "Download Brochure", "icon": "Download", "link": "#", "style": "outline" }
+    ]
   },
   "virtuallyNewsConfig": {
     "video": {

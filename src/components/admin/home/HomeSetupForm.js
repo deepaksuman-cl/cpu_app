@@ -755,6 +755,18 @@ export default function HomeSetupForm({ initialData }) {
                    <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Verify Label</label>
                    <input type="text" value={sections.testimonialConfig.verifyLabel} onChange={e => updateSection('testimonialConfig', {...sections.testimonialConfig, verifyLabel: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none" />
                  </div>
+                 <NestedListEditor 
+                  label="CTA Action Buttons"
+                  items={sections.ctaConfig.buttons || []}
+                  newItemTemplate={{ text: '', icon: 'ArrowRight', link: '#', style: 'gradient' }}
+                  fields={[
+                    {key: 'text', label: 'Button Text'},
+                    {key: 'link', label: 'Slug / Link (use tel:+91... for phone)', fullWidth: true},
+                    {key: 'icon', label: 'Icon', type: 'icon'},
+                    {key: 'style', label: 'Style (gradient/outline)'}
+                  ]}
+                  onUpdate={btns => updateSection('ctaConfig', {...sections.ctaConfig, buttons: btns})}
+                />
               </div>
               <NestedListEditor 
                 label="Student Feed"
