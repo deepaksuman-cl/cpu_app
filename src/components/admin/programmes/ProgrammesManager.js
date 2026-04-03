@@ -5,7 +5,7 @@ import IconPicker from '@/components/admin/ui/IconPicker';
 import Modal from '@/components/admin/ui/Modal';
 import { createCategory, createCourse, createSidebarLink, deleteCategory, deleteCourse, deleteSidebarLink, updateCourse, updateProgrammeSettings, updateSidebarLink } from '@/lib/actions/programmeActions';
 import { seedDatabase } from '@/lib/actions/seedActions';
-import { AlertTriangle, BookMarked, ChevronRight, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Settings, Trash2 } from 'lucide-react';
+import { AlertTriangle, BookMarked, ChevronRight, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Settings, Trash2,Search  } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
