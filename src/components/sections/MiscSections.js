@@ -115,15 +115,15 @@ export function HappeningsSection({ data }) {
         <div className="text-center mt-8">
           {data.viewAllBtn ? (
             <a 
-              href={data.viewAllBtn.link || "#"}
+              href={data.viewAllBtn.link || ""}
               className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform no-underline"
             >
               {data.viewAllBtn.text} {data.viewAllBtn.icon && <Icon name={data.viewAllBtn.icon} size={14}/>}
             </a>
           ) : (
-            <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
-              View All Events <ArrowRight size={14}/>
-            </button>
+            <a href="https://cpur.in/blog/" className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
+              View All Blog <ArrowRight size={14}/>
+            </a>
           )}
         </div>
       </div>
@@ -271,15 +271,33 @@ export function CTASection({ data }) {
           className="text-white/80 text-base max-w-xl mx-auto mb-8 leading-[1.75]" 
         />
         <div className="flex justify-center gap-3.5 flex-wrap">
-          <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3.5 font-extrabold text-[15px] cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
-            <GraduationCap size={16}/> {applyLabel}
-          </button>
-          <a href={`tel:${phone}`} className="bg-transparent text-white border-2 border-white/60 rounded-full px-7 py-3.5 font-bold text-[15px] flex items-center gap-2 no-underline hover:bg-white/15 hover:border-white transition-all">
-            <Phone size={15}/> {phone}
-          </a>
-          <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-7 py-3.5 font-bold text-[15px] cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
-            <Download size={15}/> {brochureLabel}
-          </button>
+          {data.buttons && data.buttons.length > 0 ? (
+            data.buttons.map((btn, bIdx) => (
+              <a 
+                key={bIdx}
+                href={btn.link || "#"}
+                className={`${
+                  btn.style === 'outline'
+                  ? 'bg-transparent text-white border-2 border-white/60 hover:bg-white/15 hover:border-white'
+                  : 'bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none shadow-lg hover:scale-105'
+                } rounded-full px-8 py-3.5 font-extrabold text-[15px] cursor-pointer flex items-center gap-1.5 transition-all no-underline`}
+              >
+                {btn.icon && <Icon name={btn.icon} size={16}/>} {btn.text}
+              </a>
+            ))
+          ) : (
+            <>
+              <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3.5 font-extrabold text-[15px] cursor-pointer flex items-center gap-1.5 hover:scale-105 transition-transform">
+                <GraduationCap size={16}/> {applyLabel}
+              </button>
+              <a href={`tel:${phone}`} className="bg-transparent text-white border-2 border-white/60 rounded-full px-7 py-3.5 font-bold text-[15px] flex items-center gap-2 no-underline hover:bg-white/15 hover:border-white transition-all">
+                <Phone size={15}/> {phone}
+              </a>
+              <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-7 py-3.5 font-bold text-[15px] cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
+                <Download size={15}/> {brochureLabel}
+              </button>
+            </>
+          )}
         </div>
       </div>
     </section>
