@@ -523,7 +523,7 @@ export default function SchoolPage() {
             <h2 className="font-black text-white" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>
               Our <span className="text-[#ffb900]">Programme</span>
             </h2>
-            <p className="mt-3 max-w-2xl mx-auto text-sm lg:text-base leading-relaxed text-white/65">
+            <p className="mt-3 max-w-2xl text-white mx-auto text-sm lg:text-base leading-relaxed ">
               Over the years, Career Point University has earned several accolades for playing a dynamic role in elevating research and the learning process of the institution.
             </p>
           </div>
