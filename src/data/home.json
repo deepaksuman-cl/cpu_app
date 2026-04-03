@@ -8,12 +8,11 @@
         "subtitle": "Campus Life",
         "desc": "Sprawling green campus with 300+ labs, smart classrooms, hostels, sports complex and innovation centers.",
         "badge": "🏛️ 150+ Acres Green Campus",
-        "btn1Text": "Apply Now",
-        "btn1Icon": "ArrowRight",
-        "btn1Link": "/admission",
-        "btn2Text": "Explore Programs",
-        "btn2Icon": "BookOpen",
-        "btn2Link": "/programmes"
+        "showOverlay": true,
+        "buttons": [
+          { "text": "Apply Now", "icon": "ArrowRight", "link": "/admission", "style": "gradient", "iconPosition": "right" },
+          { "text": "Explore Programs", "icon": "BookOpen", "link": "/programmes", "style": "outline", "iconPosition": "left" }
+        ]
       },
       {
         "bg": "https://cpur.in/wp-content/uploads/2024/01/bg_12-1.jpg",
@@ -22,12 +21,11 @@
         "subtitle": "For Your Future",
         "desc": "Build a future-ready career with industry-aligned programs across Engineering, Management, Law, Pharmacy & more.",
         "badge": "🎓 NAAC A | 25+ Years of Excellence",
-        "btn1Text": "Apply Now",
-        "btn1Icon": "ArrowRight",
-        "btn1Link": "/admission",
-        "btn2Text": "View Courses",
-        "btn2Icon": "Search",
-        "btn2Link": "/programmes"
+        "showOverlay": true,
+        "buttons": [
+          { "text": "Apply Now", "icon": "ArrowRight", "link": "/admission", "style": "gradient", "iconPosition": "right" },
+          { "text": "View Courses", "icon": "Search", "link": "/programmes", "style": "outline", "iconPosition": "left" }
+        ]
       },
       {
         "bg": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1600&q=80",
@@ -37,12 +35,11 @@
         "heroimg": "https://cpur.in/wp-content/uploads/2023/12/aryan-mathuria.png",
         "desc": "Our placement cell connects you with 400+ top recruiters including Amazon, Microsoft, TCS, Infosys & more.",
         "badge": "💼 90% Placement Record",
-        "btn1Text": "Apply Now",
-        "btn1Icon": "ArrowRight",
-        "btn1Link": "/admission",
-        "btn2Text": "Watch Video",
-        "btn2Icon": "Play",
-        "btn2Link": "#"
+        "showOverlay": true,
+        "buttons": [
+          { "text": "Apply Now", "icon": "ArrowRight", "link": "/admission", "style": "gradient", "iconPosition": "right" },
+          { "text": "Watch Video", "icon": "Play", "link": "#", "style": "outline", "iconPosition": "left" }
+        ]
       }
     ]
   },
@@ -72,10 +69,10 @@
       { "icon": "Users", "title": "500+ Faculty", "subtitle": "Expert Professors" },
       { "icon": "TrendingUp", "title": "90% Placement", "subtitle": "Industry Connect" }
     ],
-    "btnText": "Explore More",
-    "btnIcon": "ArrowRight",
-    "btnLink": "/about",
-    "brochureLabel": "Download Brochure"
+    "buttons": [
+      { "text": "Explore More", "icon": "ArrowRight", "link": "/about", "style": "gradient", "iconPosition": "right" },
+      { "text": "Download Brochure", "icon": "Download", "link": "#", "style": "outline", "iconPosition": "right" }
+    ]
   },
   "programsConfig": {
     "tagline": "EXPLORE CAREERS",
@@ -184,6 +181,7 @@
   "happeningsConfig": {
     "title": "Happenings",
     "highlight": "@CPU",
+    "viewAllBtn": { "text": "View All Events", "icon": "ArrowRight", "link": "/events" },
     "items": [
       { "title": "Annual Tech Fest Koshish 2026", "date": "Mar 18, 2026", "tag": "Event", "icon": "Zap", "colorClass": "from-[#00588b] to-[#003a5c]" },
       { "title": "International Research Seminar", "date": "Mar 22, 2026", "tag": "Research", "icon": "Microscope", "colorClass": "from-[#003a5c] to-[#002040]" },
@@ -227,9 +225,9 @@
     "title": "CPU",
     "highlight": "Social Wall",
     "images": [
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80",
-      "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80",
-      "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?w=600&q=80"
+      { "img": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80", "icon": "Instagram", "link": "https://instagram.com" },
+      { "img": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80", "icon": "Facebook", "link": "https://facebook.com" },
+      { "img": "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?w=600&q=80", "icon": "Youtube", "link": "https://youtube.com" }
     ]
   },
   "ctaConfig": {

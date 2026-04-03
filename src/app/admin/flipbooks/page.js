@@ -367,9 +367,19 @@ export default function FlipbookManager() {
                     <ImageIcon size={14} className="text-amber-500" /> Brochure Front Cover
                   </label>
                   <div className="flex gap-6">
-                    <div className="w-28 h-36 bg-slate-100 border border-slate-200 flex flex-col items-center justify-center overflow-hidden flex-shrink-0 shadow-inner">
+                    <div className="w-28 h-36 bg-slate-100 border border-slate-200 flex flex-col items-center justify-center overflow-hidden flex-shrink-0 shadow-inner relative group">
                       {formData.cover_image ? (
-                        <img src={formData.cover_image} alt="" className="w-full h-full object-cover" />
+                        <>
+                          <img src={formData.cover_image} alt="" className="w-full h-full object-cover" />
+                          <button 
+                            type="button"
+                            onClick={() => setFormData({ ...formData, cover_image: '' })}
+                            className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600 shadow-md"
+                            title="Remove image"
+                          >
+                            <Trash2 size={12} />
+                          </button>
+                        </>
                       ) : (
                         <ImageIcon size={24} className="opacity-10 text-[#1c54a3]" />
                       )}
@@ -390,9 +400,19 @@ export default function FlipbookManager() {
                     <ImageIcon size={14} className="text-blue-500" /> Viewer Backdrop Image
                   </label>
                   <div className="flex gap-6">
-                    <div className="w-28 h-36 bg-slate-100 border border-slate-200 flex flex-col items-center justify-center overflow-hidden flex-shrink-0 shadow-inner">
+                    <div className="w-28 h-36 bg-slate-100 border border-slate-200 flex flex-col items-center justify-center overflow-hidden flex-shrink-0 shadow-inner relative group">
                       {formData.backdrop_image ? (
-                        <img src={formData.backdrop_image} alt="" className="w-full h-full object-cover" />
+                        <>
+                          <img src={formData.backdrop_image} alt="" className="w-full h-full object-cover" />
+                          <button 
+                            type="button"
+                            onClick={() => setFormData({ ...formData, backdrop_image: '' })}
+                            className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600 shadow-md"
+                            title="Remove image"
+                          >
+                            <Trash2 size={12} />
+                          </button>
+                        </>
                       ) : (
                         <ImageIcon size={24} className="opacity-10 text-blue-300" />
                       )}

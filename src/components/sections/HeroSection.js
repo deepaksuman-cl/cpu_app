@@ -64,48 +64,65 @@ export default function HeroSection({ data }) {
             }}
           />
         ))}
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-[#00121f]/90 via-[#002848]/72 to-[#00121f]/28"
-          style={{ zIndex: 1 }}
-        />
+        {((hs.showOverlay !== false && (hs.badge || hs.tagline || hs.title || hs.subtitle || hs.desc || (hs.buttons && hs.buttons.length > 0))) || hs.showOverlay === true) && (
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-[#00121f]/90 via-[#002848]/72 to-[#00121f]/28"
+            style={{ zIndex: 1 }}
+          />
+        )}
         <div
           className="relative max-w-7xl mx-auto px-5 py-24 flex items-center hero_title"
           style={{ zIndex: 2 }}
         >
           <div key={animKey} className="max-w-[660px] animate-heroUp">
-            <span className="inline-flex items-center gap-1.5 bg-amber-400 text-black text-xs font-extrabold px-4 py-1.5 rounded-full mb-5" dangerouslySetInnerHTML={{ __html: hs.badge }} />
-            <p className="text-amber-400 font-bold text-xs uppercase tracking-[0.2em] mb-2.5" dangerouslySetInnerHTML={{ __html: hs.tagline }} />
-            <h1 className="text-white font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] m-0" dangerouslySetInnerHTML={{ __html: hs.title }} />
-            <h1 className="text-amber-400 font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] mt-0 mb-6" dangerouslySetInnerHTML={{ __html: hs.subtitle }} />
-            <p className="text-white/80 text-base leading-[1.75] max-w-[520px] mb-8" dangerouslySetInnerHTML={{ __html: hs.desc }} />
-            <div className="flex gap-3.5 flex-wrap">
-              {hs.btn1Text && (
-                <a 
-                  href={hs.btn1Link || "#"} 
-                  className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3 text-[15px] font-extrabold cursor-pointer flex items-center gap-2 shadow-lg hover:scale-105 transition-transform no-underline"
-                >
-                  {hs.btn1Text} {hs.btn1Icon && <Icon name={hs.btn1Icon} size={15} />}
-                </a>
-              )}
-              {hs.btn2Text && (
-                <a 
-                  href={hs.btn2Link || "#"} 
-                  className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all no-underline"
-                >
-                  {hs.btn2Icon && <Icon name={hs.btn2Icon} size={15} />} {hs.btn2Text}
-                </a>
-              )}
-              {!hs.btn1Text && !hs.btn2Text && (
-                <>
-                  <button className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3 text-[15px] font-extrabold cursor-pointer flex items-center gap-2 shadow-lg hover:scale-105 transition-transform">
-                    Apply Now <Icon name="ArrowRight" size={15} />
-                  </button>
-                  <button className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all">
-                    Explore Programs
-                  </button>
-                </>
-              )}
-            </div>
+            {(hs.badge || hs.tagline || hs.title || hs.subtitle || hs.desc || (hs.buttons && hs.buttons.length > 0)) && (
+              <>
+                {hs.badge && <span className="inline-flex items-center gap-1.5 bg-amber-400 text-black text-xs font-extrabold px-4 py-1.5 rounded-full mb-5" dangerouslySetInnerHTML={{ __html: hs.badge }} />}
+                {hs.tagline && <p className="text-amber-400 font-bold text-xs uppercase tracking-[0.2em] mb-2.5" dangerouslySetInnerHTML={{ __html: hs.tagline }} />}
+                {hs.title && <h1 className="text-white font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] m-0" dangerouslySetInnerHTML={{ __html: hs.title }} />}
+                {hs.subtitle && <h1 className="text-amber-400 font-black text-5xl md:text-6xl lg:text-[66px] leading-[1.02] mt-0 mb-6" dangerouslySetInnerHTML={{ __html: hs.subtitle }} />}
+                {hs.desc && <p className="text-white/80 text-base leading-[1.75] max-w-[520px] mb-8" dangerouslySetInnerHTML={{ __html: hs.desc }} />}
+                
+                <div className="flex gap-3.5 flex-wrap">
+                  {hs.buttons && hs.buttons.length > 0 ? (
+                    hs.buttons.map((btn, bIdx) => (
+                      <a 
+                        key={bIdx}
+                        href={btn.link || "#"} 
+                        className={`${
+                          btn.style === 'outline' 
+                          ? 'bg-transparent text-white border-2 border-white/60 hover:bg-white/15 hover:border-white' 
+                          : 'bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none shadow-lg hover:scale-105'
+                        } rounded-full px-8 py-3 text-[15px] font-extrabold cursor-pointer flex items-center gap-2 transition-all no-underline`}
+                      >
+                        {btn.iconPosition === 'left' && btn.icon && <Icon name={btn.icon} size={15} />}
+                        {btn.text} 
+                        {btn.iconPosition !== 'left' && btn.icon && <Icon name={btn.icon} size={15} />}
+                      </a>
+                    ))
+                  ) : (
+                    <>
+                      {hs.btn1Text && (
+                        <a 
+                          href={hs.btn1Link || "#"} 
+                          className="bg-gradient-to-br from-amber-400 to-amber-600 text-white border-none rounded-full px-8 py-3 text-[15px] font-extrabold cursor-pointer flex items-center gap-2 shadow-lg hover:scale-105 transition-transform no-underline"
+                        >
+                          {hs.btn1Text} {hs.btn1Icon && <Icon name={hs.btn1Icon} size={15} />}
+                        </a>
+                      )}
+                      {hs.btn2Text && (
+                        <a 
+                          href={hs.btn2Link || "#"} 
+                          className="bg-transparent text-white border-2 border-white/60 rounded-full px-6 py-3 text-[15px] font-bold cursor-pointer flex items-center gap-2 hover:bg-white/15 hover:border-white transition-all no-underline"
+                        >
+                          {hs.btn2Icon && <Icon name={hs.btn2Icon} size={15} />} {hs.btn2Text}
+                        </a>
+                      )}
+                    </>
+                  )}
+                </div>
+              </>
+            )}
           </div>
           {hs.heroimg && (
             <div className="hero_img animate-heroUp">

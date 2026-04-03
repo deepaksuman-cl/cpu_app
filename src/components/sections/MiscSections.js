@@ -1,5 +1,6 @@
 "use client";
 import { ArrowRight, Calendar, Star, Zap, Microscope, Plus, Minus, Facebook, Instagram, Youtube, Twitter, Linkedin, Phone, Mail, GraduationCap, Download, ChevronRight } from "lucide-react";
+import Icon from "../ui/Icon";
 import { useState } from "react";
 import RichTextRenderer from "../common/RichTextRenderer";
 
@@ -57,7 +58,6 @@ export function ResearchSection({ data }) {
   );
 }
 
-const iconMapping = { Zap, Microscope, Briefcase: Zap, Star }; 
 
 export function HappeningsSection({ data }) {
   const happenings = data?.items || [];
@@ -74,7 +74,6 @@ export function HappeningsSection({ data }) {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {happenings.map((h, i) => {
-            const Ic = iconMapping[h.icon] || Zap;
             const CardWrapper = h.link ? 'a' : 'div';
             const linkProps = h.link ? {
               href: h.link.startsWith('http') ? h.link : h.link.startsWith('/') ? h.link : `/${h.link}`,
@@ -92,7 +91,7 @@ export function HappeningsSection({ data }) {
                   {h.image ? (
                     <img src={h.image} alt={h.title || 'Event'} className="w-full h-full object-cover group-hover/hap:scale-110 transition-transform duration-700" />
                   ) : (
-                    <Ic size={52} className="text-white/20 group-hover/hap:scale-110 transition-transform duration-700"/>
+                    <Icon name={h.icon || "Zap"} size={52} className="text-white/20 group-hover/hap:scale-110 transition-transform duration-700"/>
                   )}
                   <div className="absolute top-2.5 right-2.5 bg-amber-400 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm z-10">{h.tag}</div>
                 </div>
@@ -114,9 +113,18 @@ export function HappeningsSection({ data }) {
           })}
         </div>
         <div className="text-center mt-8">
-          <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
-            View All Events <ArrowRight size={14}/>
-           </button>
+          {data.viewAllBtn ? (
+            <a 
+              href={data.viewAllBtn.link || "#"}
+              className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform no-underline"
+            >
+              {data.viewAllBtn.text} {data.viewAllBtn.icon && <Icon name={data.viewAllBtn.icon} size={14}/>}
+            </a>
+          ) : (
+            <button className="bg-gradient-to-br from-[#00588b] to-[#003a5c] text-white border-none rounded-full px-7 py-3 font-bold text-sm cursor-pointer inline-flex items-center gap-1.5 hover:scale-105 transition-transform">
+              View All Events <ArrowRight size={14}/>
+            </button>
+          )}
         </div>
       </div>
     </section>
@@ -188,18 +196,43 @@ export function SocialWallSection({ data }) {
             <div className="w-14 h-1 bg-amber-400 rounded mx-auto mt-4"/>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {images.map((src, i) => (
-              <div 
-                key={i} 
-                className="rounded-2xl overflow-hidden aspect-square cursor-pointer hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 group relative"
-                onClick={() => setLightbox({ src, title: "CPU Campus Life" })}
-              >
-                <img src={src} alt={`Social ${i+1}`} loading="lazy" className="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-400"/>
-                <div className="absolute inset-0 bg-[#00588b]/0 group-hover:bg-[#00588b]/25 transition-all duration-300 flex items-center justify-center">
-                  <Instagram size={28} className="text-white/0 group-hover:text-white/80 transition-all duration-300"/>
+            {images.map((item, i) => {
+              const isString = typeof item === 'string';
+              const src = isString ? item : item.img;
+              const link = isString ? null : item.link;
+              const icon = isString ? 'Instagram' : (item.icon || 'Instagram');
+
+              const CardContent = (
+                <>
+                  <img src={src} alt={`Social ${i+1}`} loading="lazy" className="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-400"/>
+                  <div className="absolute inset-0 bg-[#00588b]/0 group-hover:bg-[#00588b]/25 transition-all duration-300 flex items-center justify-center">
+                    <Icon name={icon} size={28} className="text-white/0 group-hover:text-white/80 transition-all duration-300"/>
+                  </div>
+                </>
+              );
+
+              if (link) {
+                return (
+                  <a 
+                    key={i} 
+                    href={link}
+                    className="rounded-2xl overflow-hidden aspect-square cursor-pointer hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 group relative no-underline block"
+                  >
+                    {CardContent}
+                  </a>
+                );
+              }
+
+              return (
+                <div 
+                  key={i} 
+                  className="rounded-2xl overflow-hidden aspect-square cursor-pointer hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 group relative"
+                  onClick={() => setLightbox({ src, title: "CPU Campus Life" })}
+                >
+                  {CardContent}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="flex justify-center gap-5 mt-5 flex-wrap">

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { Users, Globe, GraduationCap, Briefcase, TrendingUp, BookOpen } from "lucide-react";
+import Icon from "../ui/Icon";
 
 function useCounter(target, dur = 1800, active = false) {
   const [v, setV] = useState(0);
@@ -19,20 +19,15 @@ function useCounter(target, dur = 1800, active = false) {
   return v;
 }
 
-const iconMap = {
-  Users, Globe, GraduationCap, Briefcase, TrendingUp, BookOpen
-};
 
 function StatCard({ value, suffix, label, icon: IconName, inView }) {
   const dv = value >= 1000 ? Math.round(value / 1000) : value;
   const c = useCounter(dv, 1600, inView);
   const d = value >= 1000 ? `${c}K${suffix.replace("K+", "+")}` : `${c}${suffix}`;
-  const Icon = iconMap[IconName];
-
   return (
     <div className="bg-gradient-to-br from-white to-blue-50 border border-blue-100 rounded-2xl p-5 text-center hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 cursor-default">
       <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center mx-auto mb-5">
-        {Icon && <Icon size={40} className="text-[#00588b]" />}
+        <Icon name={IconName || "Star"} size={28} className="text-[#00588b]" />
       </div>
       <div className="font-black text-3xl text-[#00588b] leading-none">{d}</div>
       <div className="text-xs text-gray-500 mt-1.5" dangerouslySetInnerHTML={{ __html: label }} />

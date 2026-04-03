@@ -2,340 +2,379 @@
 
 import {
   Award,
-  BookOpen,
-  Building2,
   Calendar,
-  ChevronRight,
-  ExternalLink,
-  GraduationCap,
-  Home,
-  House,
-  MapPin,
-  Star,
+  ChevronDown,
+  ChevronUp,
+  FileText,
+  Info,
+  Link as LinkIcon,
+  PanelLeft,
+  PanelTop,
+  Search,
+  Settings,
+  Target,
   Users
-} from "lucide-react";
+} from 'lucide-react';
+import Image from 'next/image';
+import { useState } from 'react';
 
+export default function IPRCell() {
+  const [activeTab, setActiveTab] = useState(1);
+  const [layout, setLayout] = useState('sidebar'); // 'sidebar' | 'top'
 
-// ── Data ────────────────────────────────────────────────────────────────────
-
-const heroData = {
-  badge: "Providing Quality Education Since 1993",
-  title: "Our Roots",
-  subtitle: "Career Point Ltd",
-  description:
-    "Founded in May 1993 by Mr. Pramod Maheshwari, an IIT-Delhi alumnus, Career Point embarked on its mission in Kota to provide quality education to students preparing for competitive examinations. Starting with just 50 students focused on IIT-JEE preparation, Career Point has grown into a leading educational organization in India.",
-  description2:
-    "Today, Career Point offers a comprehensive educational experience, helping thousands of students from various backgrounds achieve their academic goals. Our programs cater to students pursuing formal education as well as those preparing for various entrance exams, ensuring a holistic approach to learning. With over 30 years of dedication, our management and faculty have continuously addressed the evolving challenges in education.",
-  description3:
-    "Career Point takes pride in the trust and respect earned from countless students since its inception. As a publicly listed company on the NSE and BSE in India, Career Point Limited remains committed to transparency, excellence, and educational innovation.",
-};
-
-const bannerText =
-  `The University is sponsored by the Gopi Bai Foundation and supported by Career Point Ltd, an educational group known for its strong commitment to providing quality education. Career Point has a legacy of over 30 years. Its journey began in May 1993 in Kota with a mission to provide "Excellent Education and Training to Students from KG to PhD." The group supports two universities, five schools (KG to 12th), three residential school campuses, and numerous skill development and coaching institutions across India.`;
-
-const stats = [
-  { icon: Calendar, value: "30+", label: "Years of Excellence", desc: "Since 1993", gradient: "from-[#ffb900]/30 to-[#ff8c00]/10" },
-  { icon: Users, value: "50K+", label: "Students Enrolled", desc: "Across India", gradient: "from-cyan-400/30 to-sky-400/10" },
-  { icon: Building2, value: "2", label: "Universities", desc: "Kota & Hamirpur", gradient: "from-emerald-400/30 to-teal-400/10" },
-  { icon: Star, value: "5", label: "Schools KG-12th", desc: "Pan India", gradient: "from-purple-400/30 to-pink-400/10" },
-];
-
-const tableHeaders = [
-  { key: "school", label: "School Education", icon: BookOpen },
-  { key: "higher", label: "Higher Education", icon: GraduationCap },
-  { key: "coaching", label: "Coaching Institute", icon: Award },
-  { key: "hostel", label: "CP Hostels", icon: Home },
-];
-
-const badgeRow = {
-  school: "KG To K12",
-  higher: "Diploma To Ph.D",
-  coaching: "IIT, AIEEE, AIPMT",
-  hostel: "Within/Outside Campus",
-};
-
-const institutions = [
-  {
-    school: { label: "Global Public School, Kota", href: "http://www.globalpublicschool.com/" },
-    higher: { label: "CP University, Kota (Rajasthan)", href: "http://cpur.in/" },
-    coaching: { label: "CAREER POINT Coaching, Kota", href: "http://www.careerpoint.ac.in/" },
-    hostel: { label: "Ashirwad Hostel within Campus, Kota", href: null },
-  },
-  {
-    school: { label: "Career Point Gurukul School, Kota", href: "http://www.jbsschool.in/" },
-    higher: { label: "CP University, Hamirpur (H.P.)", href: "http://cpuh.in/" },
-    coaching: {
-      label: "CP Gurukul, Kota (Rajasthan)",
-      sub: "Residential School with Integrated Coaching",
-      href: "http://www.cpgurukul.com/",
+  const tabsData = [
+    {
+      id: 1,
+      title: 'About',
+      icon: Info,
+      content: (
+        <div className="space-y-4 text-gray-700">
+          <Image 
+            src="http://cpur.in/wp-content/uploads/2022/09/iprc.jpg" 
+            alt="IPRC Logo"
+            width={192}
+            height={192}
+            className="mb-4 rounded shadow-sm w-48 h-auto" 
+          />
+          <p>Career Point University (CPU), Kota has set up an Intellectual Property Rights Cell (IPRC) at the University to deal with the available and growing knowledge wealth in the University. The IPRC will immensely support the rapidly growing activities on IP education and management in this University.</p>
+          <p>The IPR Cell was established in the university with the aim to provide assistance to the students and alumni interested in the matters of IPR. The cell offers assistance by protecting student's interests by making them aware of: the rights over their Intellectual Property, prior-art search report, patentability opinion, drafting patent specifications, preparing filing documents, filing application and follow-up, prosecuting the filled application by responding to office action such as FER, advisory services on various IPR, IP management. To this end, the committee organizes various capacity-building workshops and conferences on IPR and reviews the IP policy of the university. The IPR cell of the university ensures speedy and accurate identification and protection of innovations arising out of the research work carried out by the students and alumni of the university. IPR cells will facilitate the transfer of knowledge and technology from the university to industry and enhance the scope of their commercialization.</p>
+          <p>Moreover, the cell also aims to offer assistance to grass-root innovators in the local area.</p>
+          <p>As the Cell gains experience, it would also act as a think tank on policy matters related to IPR in India with special emphasis on issues relevant to the local area.</p>
+        </div>
+      ),
     },
-    hostel: { label: "Matruchhaya Hostel, Kota", href: null },
-  },
-  {
-    school: { label: "Global Kids School, Kota", href: "http://cpwsjodhpur.com/" },
-    higher: null,
-    coaching: {
-      label: "CP Gurukul, Mohali (Punjab)",
-      sub: "Residential School with Integrated Coaching",
-      href: "http://cpmohali.in/",
+    {
+      id: 2,
+      title: 'Members of IPR CELL',
+      icon: Users,
+      content: (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-[#00588b] text-white">
+                <th className="p-3 border border-[#00588b]">Sno.</th>
+                <th className="p-3 border border-[#00588b]">Name</th>
+                <th className="p-3 border border-[#00588b]">Address</th>
+                <th className="p-3 border border-[#00588b]">Designation</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-700">
+              <tr className="bg-gray-50"><td className="p-3 border">1.</td><td className="p-3 border">Dr. Abid Hussain</td><td className="p-3 border">Dean, Research</td><td className="p-3 border">Chairperson</td></tr>
+              <tr><td className="p-3 border">2.</td><td className="p-3 border">Prof. (Dr.) M.K. Gupta</td><td className="p-3 border">Dean, SOHAS</td><td className="p-3 border">Ex-officio Member</td></tr>
+              <tr className="bg-gray-50"><td className="p-3 border">3.</td><td className="p-3 border">Dr. Rakhee Chaudhary</td><td className="p-3 border">Dean, SOBAS</td><td className="p-3 border">Ex-officio Member</td></tr>
+              <tr><td className="p-3 border">4.</td><td className="p-3 border">Dr. Mithlesh Malviya</td><td className="p-3 border">Assistant Professor, SOLSG</td><td className="p-3 border">Ex-officio Member</td></tr>
+              <tr className="bg-gray-50"><td className="p-3 border">5.</td><td className="p-3 border">Dr. Arun Sharma</td><td className="p-3 border">Associate Professor, SOBAS</td><td className="p-3 border">Ex-officio Member</td></tr>
+              <tr><td className="p-3 border">6.</td><td className="p-3 border">Dr. Gunnjeet Kaur</td><td className="p-3 border">Associate Dean, SOAS</td><td className="p-3 border">Ex-officio Member</td></tr>
+              <tr className="bg-gray-50"><td className="p-3 border">7.</td><td className="p-3 border">Dr. Garima Tyagi</td><td className="p-3 border">Professor, SOCAT</td><td className="p-3 border">Ex-officio Member</td></tr>
+              <tr><td className="p-3 border">8.</td><td className="p-3 border">Prof. (Dr.) Hemlata Saxena</td><td className="p-3 border">Professor, SOBAS</td><td className="p-3 border">Ex-officio Member & Secretary</td></tr>
+            </tbody>
+          </table>
+        </div>
+      ),
     },
-    hostel: { label: "Gurukul, Kota Hostel within Campus", href: "http://www.cpgurukul.com/" },
-  },
-  {
-    school: { label: "Career Point World School, Jodhpur", href: "http://www.cpwsjodhpur.com/" },
-    higher: null,
-    coaching: {
-      label: "CP Gurukul, Rajsamand (Rajasthan)",
-      sub: "Residential School with Integrated Coaching",
-      href: "http://cprajsamand.in/",
-    },
-    hostel: {
-      label: "Associated Hostels List",
-      href: "http://careerpoint.ac.in/academicinfo/associatedhostel.asp",
-    },
-  },
-  {
-    school: { label: "Career Point World School, Bilaspur", href: "http://www.cpwsbilaspur.com/" },
-    higher: null,
-    coaching: null,
-    hostel: null,
-  },
-];
-
-// ── Sub-components ───────────────────────────────────────────────────────────
-
-
-function InstitutionLink({ data }) {
-  if (!data) return <span className="text-gray-300 text-sm">—</span>;
-  const inner = (
-    <>
-      <span className="font-medium text-sm leading-snug">{data.label}</span>
-      {data.sub && (
-        <span className="block text-xs text-gray-500 mt-0.5 italic">{data.sub}</span>
-      )}
-    </>
-  );
-  if (data.href) {
-    return (
-      <a
-        href={data.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group flex items-start gap-1.5 text-[#00588b] hover:text-[#ffb900] transition-colors duration-200"
-      >
-        <ExternalLink className="w-3.5 h-3.5 mt-0.5 shrink-0 opacity-60 group-hover:opacity-100" />
-        <span>{inner}</span>
-      </a>
-    );
-  }
-  return <span className="text-gray-700 text-sm">{inner}</span>;
-}
-
-function StatCard({ icon: Icon, value, label, desc, gradient }) {
-  return (
-    <div className="relative overflow-hidden rounded-2xl group cursor-default">
-      {/* Gradient glow bg */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
-
-      {/* Glass card body */}
-      <div className="relative z-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 flex flex-col gap-2 transition-all duration-300 group-hover:border-white/40 group-hover:-translate-y-1.5 group-hover:shadow-2xl">
-
-        {/* Icon row */}
-        <div className="flex items-start justify-between mb-1">
-          <div className="w-12 h-12 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center group-hover:bg-[#ffb900]/25 group-hover:border-[#ffb900]/40 transition-all duration-300 shadow-inner">
-            <Icon className="w-5 h-5 text-white/80 group-hover:text-[#ffb900] transition-colors duration-300" />
+    {
+      id: 3,
+      title: 'Objectives',
+      icon: Target,
+      content: (
+        <div className="space-y-6 text-gray-700">
+          <p>The main objective of an IPR Cell under academics is to integrate IPR with the education process...</p>
+          <div>
+            <h4 className="text-lg font-bold text-[#00588b] mb-2 border-l-4 border-[#fec53a] pl-2">Benefits of Cell</h4>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>In contemporary times, the research is translational and transforms into services or products.</li>
+              <li>Possession of IPR makes it safer to enter it in award competitions.</li>
+              <li>Even if the Institute would end up becoming the sole owner of students' work, it would provide official letters giving credit.</li>
+            </ul>
           </div>
-          {/* Animated pulse dot */}
-          <span className="relative flex h-2.5 w-2.5 mt-1">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ffb900] opacity-50" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#ffb900]" />
-          </span>
+          <div>
+            <h4 className="text-lg font-bold text-[#00588b] mb-2 border-l-4 border-[#fec53a] pl-2">Strategies of Cell</h4>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Conducting IPR outreach activities among college faculty, students, and alumni.</li>
+              <li>Counseling on career opportunities in IPR specifically to interested students.</li>
+            </ul>
+          </div>
         </div>
-
-        {/* Big number */}
-        <p className="text-5xl font-black text-white leading-none tracking-tighter drop-shadow">
-          {value}
-        </p>
-
-        {/* Yellow underline bar */}
-        <div className="flex items-center gap-2">
-          <div className="h-0.5 w-10 rounded-full bg-[#ffb900]" />
-          <div className="h-0.5 w-4 rounded-full bg-[#ffb900]/30" />
+      ),
+    },
+    {
+      id: 4,
+      title: 'Services',
+      icon: Settings,
+      content: (
+        <ul className="list-disc pl-5 space-y-3 text-gray-700 marker:text-[#fec53a]">
+          <li>Assisting department to develop and introduce course curriculum on IPR.</li>
+          <li>Conducting IPR outreach activities</li>
+          <li>Celebrating World IP Day on 26 April</li>
+          <li>Counseling on career opportunities in IPR</li>
+          <li>Providing prior-art search reports for analyzing Intellectual property</li>
+          <li>Drafting patent specifications and preparation of documents</li>
+        </ul>
+      ),
+    },
+    {
+      id: 5,
+      title: 'Events of IPR Cell',
+      icon: Calendar,
+      content: (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-[#00588b] text-white">
+                <th className="p-3 border border-[#00588b] w-16">SL NO</th>
+                <th className="p-3 border border-[#00588b]">Name of the Conference/Seminar/Workshops</th>
+                <th className="p-3 border border-[#00588b]">Date</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-700">
+              <tr className="bg-gray-50"><td className="p-3 border">1</td><td className="p-3 border">National e-Conference on Insights into Patent filing Procedure</td><td className="p-3 border">30 May 2020</td></tr>
+              <tr><td className="p-3 border">2</td><td className="p-3 border">Workshop on "Intellectual Property Rights and IP Management for Start-up"</td><td className="p-3 border">17 Apr 2021</td></tr>
+              <tr className="bg-gray-50"><td className="p-3 border">3</td><td className="p-3 border">Legal Workshop on IPR</td><td className="p-3 border">24 Feb 2022</td></tr>
+            </tbody>
+          </table>
         </div>
+      ),
+    },
+    {
+      id: 6,
+      title: 'IP of the University',
+      icon: Award,
+      content: (
+        <div className="grid md:grid-cols-2 gap-6 text-gray-700">
+          <div>
+            <h5 className="font-bold text-[#00588b] text-lg">Copyrights</h5>
+            <p className="text-sm">Copyright is a right given by the law to creators of literary, dramatic, musical, and artistic works...</p>
+          </div>
+          <div>
+            <h5 className="font-bold text-[#00588b] text-lg">Patents</h5>
+            <p className="text-sm">A Patent is a statutory right for an invention granted for a limited period to the patentee by the government...</p>
+          </div>
+          <div>
+            <h5 className="font-bold text-[#00588b] text-lg">Trademarks</h5>
+            <p className="text-sm">A trademark is a visual symbol that may be a word signature, name, device, label, numeral...</p>
+          </div>
+          <div>
+            <h5 className="font-bold text-[#00588b] text-lg">Designs</h5>
+            <p className="text-sm">'Design' means only the features of shape, configuration, pattern or ornament...</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 7,
+      title: 'Published Patents',
+      icon: FileText,
+      content: (
+        <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
+          <table className="w-full text-left border-collapse text-sm">
+            <thead className="sticky top-0 bg-[#00588b] text-white z-10">
+              <tr>
+                <th className="p-3 border border-[#00588b]">SI NO</th>
+                <th className="p-3 border border-[#00588b]">Name of the Faculty/student</th>
+                <th className="p-3 border border-[#00588b]">Title of Patent</th>
+                <th className="p-3 border border-[#00588b]">Patent Number</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-700">
+              <tr className="bg-gray-50"><td className="p-2 border">1</td><td className="p-2 border">Dr. Abid Hussain, Dr. Amit Sharma</td><td className="p-2 border">A SMART MANGALSUTRA TO GUIDE A PREGNANT WOMAN AND IN EMERGENCY USING IOT.</td><td className="p-2 border">202221019898</td></tr>
+              <tr><td className="p-2 border">2</td><td className="p-2 border">Dr. Abid Hussain, Ms. Garima Tyagi</td><td className="p-2 border">A SYSTEMATIC MODEL TO DETECT BLACK FUNGUS APPEARED DURING COVID -19...</td><td className="p-2 border">202211042624</td></tr>
+              <tr className="bg-gray-50"><td className="p-2 border">3</td><td className="p-2 border">Vinay Kumar Singh</td><td className="p-2 border">ARTIFICIAL INTELLIGENCE BASED APPROACH TO MONITOR THE GROWTH OF OYSTER MUSHROOM...</td><td className="p-2 border">202241071317</td></tr>
+            </tbody>
+          </table>
+        </div>
+      ),
+    },
+    {
+      id: 8,
+      title: 'Useful Links',
+      icon: LinkIcon,
+      content: (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-[#00588b] text-white">
+                <th className="p-3 border border-[#00588b] w-16">Sno.</th>
+                <th className="p-3 border border-[#00588b]">Name</th>
+                <th className="p-3 border border-[#00588b]">Website URL</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-700">
+              <tr className="bg-gray-50">
+                <td className="p-3 border">1.</td>
+                <td className="p-3 border font-medium">IPR India</td>
+                <td className="p-3 border"><a href="http://www.ipindia.nic.in/" target="_blank" rel="noopener noreferrer" className="text-[#00588b] hover:text-[#fec53a] underline">http://www.ipindia.nic.in/</a></td>
+              </tr>
+              <tr>
+                <td className="p-3 border">2.</td>
+                <td className="p-3 border font-medium">IP services India</td>
+                <td className="p-3 border"><a href="http://ipindiaservices.gov.in/" target="_blank" rel="noopener noreferrer" className="text-[#00588b] hover:text-[#fec53a] underline">http://ipindiaservices.gov.in/</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      ),
+    },
+    {
+      id: 9,
+      title: 'Patent search',
+      icon: Search,
+      content: (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-[#00588b] text-white">
+                <th className="p-3 border border-[#00588b] w-16">Sno.</th>
+                <th className="p-3 border border-[#00588b]">Name</th>
+                <th className="p-3 border border-[#00588b]">Website URL</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-700">
+              <tr className="bg-gray-50">
+                <td className="p-3 border">1.</td><td className="p-3 border">InPass</td>
+                <td className="p-3 border"><a href="http://ipindiaservices.gov.in/publicsearch/" target="_blank" rel="noopener noreferrer" className="text-[#00588b] hover:text-[#fec53a] underline break-all">http://ipindiaservices.gov.in/publicsearch/</a></td>
+              </tr>
+              <tr>
+                <td className="p-3 border">2.</td><td className="p-3 border">WIPO Patentscope</td>
+                <td className="p-3 border"><a href="https://patentscope.wipo.int/search/en/structuredSearch.jsf" target="_blank" rel="noopener noreferrer" className="text-[#00588b] hover:text-[#fec53a] underline break-all">https://patentscope.wipo.int/</a></td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="p-3 border">3.</td><td className="p-3 border">Google Patents</td>
+                <td className="p-3 border"><a href="https://patents.google.com/" target="_blank" rel="noopener noreferrer" className="text-[#00588b] hover:text-[#fec53a] underline break-all">https://patents.google.com/</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      ),
+    }
+  ];
 
-        {/* Label */}
-        <p className="text-xs font-bold text-white uppercase tracking-widest leading-snug">
-          {label}
-        </p>
-
-        {/* Sub desc badge */}
-        <span className="self-start mt-1 text-[10px] font-semibold text-[#ffb900]/80 bg-[#ffb900]/10 border border-[#ffb900]/20 px-2 py-0.5 rounded-full uppercase tracking-wide">
-          {desc}
-        </span>
+  return (
+    <div className="w-full max-w-7xl mx-auto p-4 md:p-6 font-sans">
+      
+      {/* --- DESKTOP VIEW LAYOUT CONTROLS --- */}
+      <div className="hidden md:flex items-center justify-end gap-3 mb-4">
+        <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Layout View</span>
+        <div className="flex bg-gray-100 p-1 rounded-lg border border-gray-200">
+          <button
+            onClick={() => setLayout('sidebar')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md transition-all text-sm font-medium ${
+              layout === 'sidebar' 
+                ? 'bg-white text-[#00588b] shadow-sm' 
+                : 'text-gray-500 hover:text-[#00588b]'
+            }`}
+          >
+            <PanelLeft size={16} /> Sidebar
+          </button>
+          <button
+            onClick={() => setLayout('top')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md transition-all text-sm font-medium ${
+              layout === 'top' 
+                ? 'bg-white text-[#00588b] shadow-sm' 
+                : 'text-gray-500 hover:text-[#00588b]'
+            }`}
+          >
+            <PanelTop size={16} /> Top Tabs
+          </button>
+        </div>
       </div>
-    </div>
-  );
-}
 
-// ── Main Component ───────────────────────────────────────────────────────────
-
-export default function OurRoots() {
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
-
-
-      {/* ── Page Container ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-
-        {/* ── Announcement Banner ── */}
-        <div className="bg-white border-2 border-dashed border-[#00588b] rounded-xl p-5">
-          <p className="text-sm text-gray-700 leading-relaxed">
-            <span className="font-bold text-[#00588b]">
-              The University is sponsored by the Gopi Bai Foundation
-            </span>{" "}
-            and supported by Career Point Ltd, an educational group known for its strong commitment to
-            providing quality education. Career Point has a legacy of over 30 years. Its journey began
-            in May 1993 in Kota with a mission to provide{" "}
-            <span className="font-semibold text-[#00588b]">
-              &ldquo;Excellent Education and Training to Students from KG to PhD.&rdquo;
-            </span>{" "}
-            The group supports two universities, five schools (KG to 12th), three residential school
-            campuses, and numerous skill development and coaching institutions across India.
-          </p>
+      {/* --- DESKTOP VIEW --- */}
+      <div className={`hidden md:flex bg-white rounded-xl shadow-lg border border-gray-100 p-6 transition-all duration-500 ${
+        layout === 'sidebar' ? 'flex-row gap-8' : 'flex-col gap-6'
+      }`}>
+        
+        {/* Tab Triggers Container */}
+        <div className={`transition-all duration-300 ${
+          layout === 'sidebar' 
+            ? 'flex flex-col w-1/3 shrink-0 gap-2 border-r border-gray-100 pr-6' 
+            : 'flex flex-row flex-wrap items-center gap-2 w-full border-b border-gray-100 pb-4'
+        }`}>
+          {tabsData.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 rounded-lg font-semibold transition-all duration-300 group ${
+                  layout === 'sidebar' ? 'px-5 py-4 w-full text-left' : 'px-4 py-2 w-auto'
+                } ${
+                  isActive
+                    ? 'bg-[#00588b] text-white shadow-md ' + (layout === 'sidebar' ? 'translate-x-1' : '')
+                    : 'bg-transparent text-[#00588b] hover:bg-[#fec53a]/20 hover:text-[#00588b]'
+                }`}
+              >
+                <Icon 
+                  size={layout === 'sidebar' ? 20 : 18} 
+                  className={isActive ? 'text-[#fec53a]' : 'text-[#00588b] group-hover:text-[#fec53a] transition-colors'} 
+                />
+                <span className={layout === 'top' ? 'text-sm' : ''}>{tab.title}</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* ── Hero Section ── */}
-        <section className="relative bg-gradient-to-br from-[#00588b] via-[#006fa8] to-[#004d7a] overflow-hidden rounded-3xl">
-          {/* Decorative circles */}
-          <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/5" />
-          <div className="absolute -bottom-20 -left-10 w-80 h-80 rounded-full bg-[#ffb900]/10" />
-          <div className="absolute top-1/2 right-1/4 w-32 h-32 rounded-full bg-white/5" />
-
-          <div className="relative px-6 py-12 md:px-12 md:py-16 lg:flex lg:items-center lg:gap-12">
-            {/* Text */}
-            <div className="flex-1">
-              <div className="inline-flex items-center gap-2 bg-[#ffb900]/20 border border-[#ffb900]/40 rounded-full px-4 py-1.5 mb-5">
-                <Star className="w-3.5 h-3.5 text-[#ffb900]" />
-                <span className="text-[#ffb900] text-xs font-semibold uppercase tracking-widest">
-                  {heroData.badge}
-                </span>
+        {/* Tab Content Container */}
+        <div className={`${layout === 'sidebar' ? 'w-2/3 flex-grow pl-2' : 'w-full pt-2'}`}>
+          {tabsData.map((tab) => (
+            activeTab === tab.id && (
+              <div key={tab.id} className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+                <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-[#fec53a]">
+                  <tab.icon size={28} className="text-[#00588b]" />
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#00588b]">
+                    {tab.title}
+                  </h2>
+                </div>
+                <div className="prose max-w-none">
+                  {tab.content}
+                </div>
               </div>
+            )
+          ))}
+        </div>
+      </div>
 
-              <h1 className="text-4xl md:text-5xl font-black text-white leading-tight">
-                {heroData.title}
-                <span className="block text-[#ffb900]">{heroData.subtitle}</span>
-              </h1>
+      {/* --- MOBILE VIEW: Accordion (Remains unchanged) --- */}
+      <div className="md:hidden flex flex-col gap-3">
+        {tabsData.map((tab) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
 
-              <div className="mt-6 space-y-3 text-white/80 text-sm leading-relaxed max-w-xl">
-                <p>{heroData.description}</p>
-                <p>{heroData.description2}</p>
-                <p>{heroData.description3}</p>
-              </div>
-
-              <div className="mt-6 flex items-center gap-2 text-[#ffb900] text-sm font-semibold">
-                <MapPin className="w-4 h-4" />
-                <span>Kota, Rajasthan — Established 1993</span>
-              </div>
-            </div>
-
-            {/* Stats grid */}
-            <div className="mt-10 lg:mt-0 lg:w-96 grid grid-cols-2 gap-4 shrink-0">
-              {stats.map((s) => (
-                <StatCard key={s.label} {...s} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Institutions Table Section ── */}
-        <section className="pb-6">
-          {/* Section heading */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-1.5 h-8 rounded-full bg-[#ffb900]" />
-            <h2 className="text-2xl font-black text-[#00588b]">
-              Career Point Education Institutions
-            </h2>
-            <ChevronRight className="w-5 h-5 text-[#00588b]/40" />
-          </div>
-
-          {/* Cards grid (mobile) */}
-          <div className="grid grid-cols-1 gap-4 md:hidden">
-            {institutions.map((row, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
+          return (
+            <div 
+              key={tab.id} 
+              className={`border rounded-lg overflow-hidden transition-all duration-300 ${
+                isActive ? 'border-[#00588b] shadow-md' : 'border-gray-200'
+              }`}
+            >
+              {/* Accordion Header */}
+              <button
+                onClick={() => setActiveTab(isActive ? null : tab.id)}
+                className={`flex items-center justify-between w-full px-4 py-4 font-semibold transition-colors ${
+                  isActive 
+                    ? 'bg-[#00588b] text-white' 
+                    : 'bg-white text-[#00588b] hover:bg-gray-50'
+                }`}
               >
-                {tableHeaders.map(({ key, label, icon: Icon }) =>
-                  row[key] ? (
-                    <div key={key} className="flex gap-3 px-4 py-3 border-b border-gray-50 last:border-0">
-                      <div className="w-8 h-8 rounded-lg bg-[#00588b]/10 flex items-center justify-center shrink-0">
-                        <Icon className="w-4 h-4 text-[#00588b]" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-0.5 font-semibold">
-                          {label}
-                        </p>
-                        <InstitutionLink data={row[key]} />
-                      </div>
-                    </div>
-                  ) : null
-                )}
-              </div>
-            ))}
-          </div>
+                <div className="flex items-center gap-3 text-left">
+                  <Icon size={20} className={isActive ? 'text-[#fec53a]' : 'text-[#00588b]'} />
+                  <span>{tab.title}</span>
+                </div>
+                {isActive ? <ChevronUp size={20} className="text-[#fec53a] shrink-0" /> : <ChevronDown size={20} className="shrink-0" />}
+              </button>
 
-          {/* Table (desktop) */}
-          <div className="hidden md:block bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-[#00588b]">
-                  {tableHeaders.map(({ key, label, icon: Icon }) => (
-                    <th
-                      key={key}
-                      className="w-1/4 px-5 py-4 text-left text-white text-sm font-bold tracking-wide"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Icon className="w-4 h-4 text-[#ffb900]" />
-                        {label}
-                      </div>
-                    </th>
-                  ))}
-                </tr>
+              {/* Accordion Content */}
+              {isActive && (
+                <div className="p-4 bg-white border-t border-gray-100 animate-in fade-in slide-in-from-top-2 duration-300">
+                  {tab.content}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
 
-                {/* Badge row */}
-                <tr className="border-b-2 border-[#ffb900] bg-[#00588b]/5">
-                  {tableHeaders.map(({ key }) => (
-                    <td key={key} className="px-5 py-3">
-                      <span className="inline-block bg-[#ffb900] text-[#00588b] text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
-                        {badgeRow[key]}
-                      </span>
-                    </td>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody>
-                {institutions.map((row, i) => (
-                  <tr
-                    key={i}
-                    className="border-b border-gray-100 hover:bg-[#00588b]/4 transition-colors duration-150"
-                  >
-                    {tableHeaders.map(({ key }) => (
-                      <td key={key} className="px-5 py-4 align-top">
-                        <InstitutionLink data={row[key]} />
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Footer note */}
-    
-        </section>
-
-      </div>{/* end container */}
     </div>
   );
 }
