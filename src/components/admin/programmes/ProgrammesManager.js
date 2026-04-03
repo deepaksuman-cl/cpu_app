@@ -3,9 +3,9 @@
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import Modal from '@/components/admin/ui/Modal';
-import { createCategory, createCourse, createSidebarLink, deleteCategory, deleteCourse, deleteSidebarLink, updateCourse, updateProgrammeSettings, updateSidebarLink } from '@/lib/actions/programmeActions';
+import { createCategory, createCourse, createSidebarLink, deleteCategory, deleteCourse, deleteSidebarLink, getCourses, updateCourse, updateProgrammeSettings, updateSidebarLink } from '@/lib/actions/programmeActions';
 import { seedDatabase } from '@/lib/actions/seedActions';
-import { AlertTriangle, BookMarked, ChevronRight, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Settings, Trash2 } from 'lucide-react';
+import { AlertTriangle, BookMarked, ChevronRight, Database, Edit, Layers, Loader2, Monitor, Plus, Save, Settings, Trash2,Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -109,7 +109,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const handleSaveCourse = async (e) => {
     e.preventDefault();
     if (!courseForm.title || !courseForm.school || !courseForm.categoryId) {
-      showToast('Please fill in title, school and category!', 'error');
+      toast.error('Please fill in title, school and category!');
       return;
     }
 
@@ -185,7 +185,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
   const handleSaveLink = async (e) => {
     e.preventDefault();
     if (!linkForm.label || !linkForm.slug || !linkForm.icon || !linkForm.colorClass) {
-      showToast('Please fill in all required link fields!', 'error');
+      toast.error('Please fill in all required link fields!');
       return;
     }
 

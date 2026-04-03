@@ -95,8 +95,8 @@ export default function TabbedContent({ data }) {
                   </h2>
                 </div>
                 {/* 🔥 Yahan tumhara RichTextRenderer render karega CMS ka data */}
-                <div className="prose max-w-none">
-                  <RichTextRenderer content={tab.content} useProse={true} />
+                <div className={data?.useProse !== false ? "prose max-w-none" : ""}>
+                  <RichTextRenderer content={tab.content} useProse={data?.useProse !== false} />
                 </div>
               </div>
             )
@@ -147,9 +147,12 @@ export default function TabbedContent({ data }) {
 
               {isActive && (
                 <div className="p-4 bg-white border-t border-gray-100 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <RichTextRenderer content={tab.content} useProse={true} />
+                  <div className={data?.useProse !== false ? "prose max-w-none" : ""}>
+                    <RichTextRenderer content={tab.content} useProse={data?.useProse !== false} />
+                  </div>
                 </div>
               )}
+
             </div>
           );
         })}
