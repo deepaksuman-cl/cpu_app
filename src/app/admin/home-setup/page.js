@@ -42,12 +42,12 @@ export default async function HomeSetupPage() {
           <div className="hidden md:block w-[1px] h-4 bg-[var(--border-default)]"></div>
           
           <span className="hidden md:inline-block text-[12px] text-[var(--text-secondary)] font-bold tracking-wide italic">
-            Centralized Dynamic Configuration
+            Centralized Dynamic Configuratio
           </span>
         </div>
 
       </div>
-      
+       
       {/* ── Form Container ── */}
       <div className="pt-[42px] w-full">
         <div className="pt-2 sm:pt-4">
