@@ -50,7 +50,7 @@ export default function AlumniSection({ data }) {
                 className="absolute top-3 left-5 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full z-30"
                 style={{ backgroundColor: alum.companyBg || '#00588b' }}
               >
-                {alum.company}
+                {alum.badgeText || alum.company}
               </div>
               <div className="absolute placement_bg_blur  text-center bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent pt-2 pb-4 px-3.5 z-40">
                 <h5 className="text-center font-extrabold text-base font-extrabold text-[16px] text-white">{alum.name}</h5>

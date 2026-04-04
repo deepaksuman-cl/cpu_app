@@ -14,7 +14,7 @@ export default function BlockRenderer({ block }) {
     const useProse = block.useProse !== false;
     return (
       <div id={block.cssId || undefined} className={`w-full ${block.cssClass || ''}`}>
-        <div className="max-w-[80%] mx-auto">
+        <div className="p-6 mx-auto">
           <RichTextRenderer 
             content={block.content} 
             useProse={useProse}

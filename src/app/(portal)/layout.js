@@ -5,6 +5,7 @@ import Footer from "../../components/layout/Footer";
 import HeaderServer from '../../components/layout/HeaderServer';
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import { getCustomCss } from '@/lib/actions/systemActions';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,9 +44,12 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const { customCss } = await getCustomCss();
+
   return (
   
       <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {customCss && <style dangerouslySetInnerHTML={{ __html: customCss }} />}
         <HeaderServer /> 
         
         <main className="pt-[64px] lg:pt-[112px]">
