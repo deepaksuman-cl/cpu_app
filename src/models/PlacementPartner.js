@@ -22,6 +22,10 @@ const PlacementPartner = sequelize.define('placementpartners', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  youtubeLink: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   city: {
     type: DataTypes.STRING,
     allowNull: true,

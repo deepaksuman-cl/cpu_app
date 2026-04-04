@@ -94,7 +94,8 @@ export async function createSchool(data) {
         await PlacementPartner.create({
           companyName: item.company, logoUrl: item.image || item.img || '',
           packageOffered: item.package || null, studentName: item.name || null,
-          courseName: item.course || null, city: item.city || null, schoolId: newSchool.id
+          courseName: item.course || null, city: item.city || null, schoolId: newSchool.id,
+          youtubeLink: item.youtubeLink || null
         });
       }
     }
@@ -143,7 +144,8 @@ export async function updateSchool(id, data) {
         await PlacementPartner.create({
           companyName: item.company, logoUrl: item.image || item.img || '',
           packageOffered: item.package || null, studentName: item.name || null,
-          courseName: item.course || null, city: item.city || null, schoolId: id
+          courseName: item.course || null, city: item.city || null, schoolId: id,
+          youtubeLink: item.youtubeLink || null
         });
       }
     }

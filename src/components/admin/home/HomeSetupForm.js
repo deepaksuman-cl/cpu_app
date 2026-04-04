@@ -666,10 +666,13 @@ export default function HomeSetupForm({ initialData }) {
               <NestedListEditor 
                 label="Research Items"
                 items={sections.researchConfig.items}
-                newItemTemplate={{ title: '', img: '', desc: '', tag: '' }}
+                newItemTemplate={{ title: '', author: '', img: '', desc: '', tag: '', link: '', buttonText: '' }}
                 fields={[
                   {key: 'title', label: 'Item Title'},
+                  {key: 'author', label: 'Researcher / Author Name'},
                   {key: 'tag', label: 'Category Tag'},
+                  {key: 'link', label: 'Slug / URL (e.g. /research/nano)'},
+                  {key: 'buttonText', label: 'Button Text (e.g. Read Case Study)'},
                   {key: 'img', label: 'Image', type: 'image', fullWidth: true},
                   {key: 'desc', label: 'Short Description', type: 'textarea', fullWidth: true}
                 ]}
