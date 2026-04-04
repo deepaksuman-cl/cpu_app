@@ -21,52 +21,88 @@ export async function getSchools() {
   }
 }
 
-export const getSchoolById = cache(async (id) => {
+export const getSchoolById = async (id) => {
   try {
     await connectToDatabase();
-    const school = await School.findByPk(id, {
-      include: [
-        { model: Testimonial, as: 'testimonialsRel' },
-        { model: FAQ, as: 'faqsRel' },
-        { model: PlacementPartner, as: 'placementPartnersRel' },
-        { model: Facility, as: 'facilitiesRel' }
-      ]
-    });
     
-    if (!school) {
-      console.warn(`[getSchoolById] School with ID ${id} not found.`);
-      return { success: false, data: null, error: 'School not found' };
+    // 1. PRIMARY FETCH (With all associations)
+    try {
+      const school = await School.findByPk(id, {
+        include: [
+          { model: Testimonial, as: 'testimonialsRel' },
+          { model: FAQ, as: 'faqsRel' },
+          { model: PlacementPartner, as: 'placementPartnersRel' },
+          { model: Facility, as: 'facilitiesRel' }
+        ]
+      });
+      
+      if (school) {
+        return { success: true, data: school.get({ plain: true }), error: null };
+      }
+    } catch (assocError) {
+      console.warn(`[getSchoolById] Relational fetch failed for ID ${id}. Retrying without associations... Error:`, assocError.message);
     }
-    
-    return { success: true, data: school.get({ plain: true }), error: null };
-  } catch (error) {
-    console.error(`[getSchoolById] Error fetching school ${id}:`, error);
-    return { success: false, data: null, error: error.message };
-  }
-});
 
-export const getSchoolBySlug = cache(async (slug) => {
-  try {
-    await connectToDatabase();
-    const school = await School.findOne({
-      where: { slug },
-      include: [
-        { model: Testimonial, as: 'testimonialsRel' },
-        { model: FAQ, as: 'faqsRel' },
-        { model: PlacementPartner, as: 'placementPartnersRel' },
-        { model: Facility, as: 'facilitiesRel' }
-      ]
-    });
-    
-    if (!school) {
+    // 2. FALLBACK FETCH (Core data only - Prevents 404/Crash)
+    const basicSchool = await School.findByPk(id);
+    if (!basicSchool) {
       return { success: false, data: null, error: 'School not found' };
     }
-    
-    return { success: true, data: school.get({ plain: true }), error: null };
+
+    return { 
+      success: true, 
+      data: { ...basicSchool.get({ plain: true }), _partial: true }, 
+      error: 'Loaded partial data due to relational error.' 
+    };
   } catch (error) {
+    console.error(`[getSchoolById] Critical error fetching school ${id}:`, error);
     return { success: false, data: null, error: error.message };
   }
-});
+};
+
+export const getSchoolBySlug = async (slug) => {
+  try {
+    await connectToDatabase();
+    
+    // Normalize slug: trim whitespace and slashes
+    const normalizedSlug = (slug || '').replace(/^\/|\/$/g, '').trim();
+
+    // 1. PRIMARY FETCH (With all associations)
+    try {
+      const school = await School.findOne({
+        where: { slug: normalizedSlug },
+        include: [
+          { model: Testimonial, as: 'testimonialsRel' },
+          { model: FAQ, as: 'faqsRel' },
+          { model: PlacementPartner, as: 'placementPartnersRel' },
+          { model: Facility, as: 'facilitiesRel' }
+        ]
+      });
+      
+      if (school) {
+        return { success: true, data: school.get({ plain: true }), error: null };
+      }
+    } catch (assocError) {
+      console.warn(`[getSchoolBySlug] Relational fetch failed for slug '${normalizedSlug}'. Retrying without associations... Error:`, assocError.message);
+    }
+
+    // 2. FALLBACK FETCH (Core data only - Prevents 404/Crash)
+    const basicSchool = await School.findOne({ where: { slug: normalizedSlug } });
+    if (!basicSchool) {
+      console.warn(`[getSchoolBySlug] No school found for normalized slug: ${normalizedSlug}`);
+      return { success: false, data: null, error: 'School not found' };
+    }
+
+    return { 
+      success: true, 
+      data: { ...basicSchool.get({ plain: true }), _partial: true }, 
+      error: 'Loaded partial data due to relational error.' 
+    };
+  } catch (error) {
+    console.error(`[getSchoolBySlug] Critical error for slug '${slug}':`, error);
+    return { success: false, data: null, error: error.message };
+  }
+};
 
 export async function createSchool(data) {
   try {
@@ -108,6 +144,9 @@ export async function createSchool(data) {
     }
 
     revalidatePath('/', 'layout');
+    revalidatePath('/admin/schools');
+    revalidatePath('/schools');
+    revalidatePath(`/schools/${newSchool.slug}`);
     return { success: true, data: newSchool.get({ plain: true }), error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
@@ -172,6 +211,9 @@ export async function updateSchool(id, data) {
     }
     
     revalidatePath('/', 'layout');
+    revalidatePath('/admin/schools');
+    revalidatePath('/schools');
+    revalidatePath(`/schools/${updatedSchool.slug}`);
     return { success: true, data: updatedSchool.get({ plain: true }), error: null };
   } catch (error) {
     return { success: false, data: null, error: error.message };
@@ -189,6 +231,8 @@ export async function deleteSchool(id) {
     });
     
     revalidatePath('/', 'layout');
+    revalidatePath('/admin/schools');
+    revalidatePath('/schools');
     return { success: true, message: 'School deleted successfully', data: school.get({ plain: true }) };
   } catch (error) {
     console.error(`[deleteSchool] Error:`, error);

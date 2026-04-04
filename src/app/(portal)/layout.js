@@ -6,6 +6,7 @@ import HeaderServer from '../../components/layout/HeaderServer';
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import { getCustomCss } from '@/lib/actions/systemActions';
+import FloatingEnquiry from '@/components/common/FloatingEnquiry';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,6 +59,7 @@ export default async function RootLayout({ children }) {
         </main>
 
         <Footer />
+        <FloatingEnquiry />
         <ScrollToTop />
       </div>
 
