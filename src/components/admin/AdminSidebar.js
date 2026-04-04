@@ -9,6 +9,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   PanelTop,
+  Settings,
   X
 } from 'lucide-react';
 import Link from 'next/link';
@@ -26,8 +27,8 @@ const SIDEBAR_MENUS = [
   {
     category: 'CONTENT MANAGEMENT',
     items: [
-      { 
-        name: 'Header Settings', 
+      {
+        name: 'Header Settings',
         icon: PanelTop,
         isCollapsible: true,
         subItems: [
@@ -48,9 +49,9 @@ const SIDEBAR_MENUS = [
   {
     category: 'ACADEMICS',
     items: [
-      { 
-        name: 'Academics', 
-        icon: Building, 
+      {
+        name: 'Academics',
+        icon: Building,
         isCollapsible: true,
         subItems: [
           { name: 'School Management', href: '/admin/schools' },
@@ -77,12 +78,20 @@ const SIDEBAR_MENUS = [
   //     { name: 'API Keys', href: '/admin/api-keys', icon: Key },
   //   ]
   // },
-  // {
-  //   category: 'SYSTEM',
-  //   items: [
-  //     { name: 'Global Settings', href: '/admin/settings', icon: Settings },
-  //   ]
-  // }
+  {
+    category: 'SYSTEM',
+    items: [
+      {
+        name: 'System Settings',
+        icon: Settings,
+        isCollapsible: true,
+        subItems: [
+
+          { name: 'Custom CSS', href: '/admin/settings/custom-css' },
+        ]
+      }
+    ]
+  }
 ];
 
 // ─── Sub Item Tree Row ────────────────────────────────────────────────────────
@@ -94,8 +103,8 @@ function SubItem({ sub, index, total, activeSubIndex, isMobile, setMobileMenuOpe
   const bottomLineBlue = index < activeSubIndex;
   const isLast = index === total - 1;
 
-  const TRUNK_BLUE = 'var(--color-primary)'; 
-  const TRUNK_GRAY = 'var(--border-default)'; 
+  const TRUNK_BLUE = 'var(--color-primary)';
+  const TRUNK_GRAY = 'var(--border-default)';
   const trunkTop = topLineBlue ? TRUNK_BLUE : TRUNK_GRAY;
   const trunkBottom = bottomLineBlue ? TRUNK_BLUE : TRUNK_GRAY;
   const arrowColor = isSubActive ? TRUNK_BLUE : (topLineBlue ? TRUNK_BLUE : TRUNK_GRAY);
@@ -131,7 +140,7 @@ function SubItem({ sub, index, total, activeSubIndex, isMobile, setMobileMenuOpe
       >
         <path d="M1 10 H16" stroke={arrowColor} strokeWidth="2" className="transition-all duration-300" />
       </svg>
-      
+
       <Link
         href={sub.href}
         onClick={() => isMobile && setMobileMenuOpen(false)}
@@ -151,7 +160,7 @@ function SubItem({ sub, index, total, activeSubIndex, isMobile, setMobileMenuOpe
           style={{ backgroundColor: isSubActive ? 'var(--color-primary)' : 'var(--color-gray-300)' }}
         >
           {isSubActive && (
-            <span 
+            <span
               className="absolute inline-flex h-full w-full animate-ping rounded-none opacity-40"
               style={{ backgroundColor: 'var(--color-primary-light)' }}
             ></span>
@@ -164,17 +173,17 @@ function SubItem({ sub, index, total, activeSubIndex, isMobile, setMobileMenuOpe
 }
 
 // ─── Main Sidebar ────────────────────────────────────────────────────────────
-export default function AdminSidebar({ 
-  isPinned, setIsPinned, isHovered, setIsHovered, isMobile, mobileMenuOpen, setMobileMenuOpen 
+export default function AdminSidebar({
+  isPinned, setIsPinned, isHovered, setIsHovered, isMobile, mobileMenuOpen, setMobileMenuOpen
 }) {
   const pathname = usePathname();
   const [expandedGroups, setExpandedGroups] = useState({});
-  const [expandedItems, setExpandedItems] = useState({}); 
-  
+  const [expandedItems, setExpandedItems] = useState({});
+
   useEffect(() => {
     const initialGroups = {};
     const initialItems = {};
-    
+
     SIDEBAR_MENUS.forEach(group => {
       let hasActiveChild = false;
       group.items.forEach(item => {
@@ -212,14 +221,14 @@ export default function AdminSidebar({
     <>
       {/* ── Mobile Overlay Backdrop ── */}
       {isMobile && mobileMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-[var(--bg-overlay)] z-40 transition-opacity duration-300"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
       {/* ── Main Sidebar Container ── */}
-      <aside 
+      <aside
         onMouseEnter={() => !isPinned && !isMobile && setIsHovered(true)}
         onMouseLeave={() => !isPinned && !isMobile && setIsHovered(false)}
         className={`
@@ -233,10 +242,10 @@ export default function AdminSidebar({
       >
         {/* ── Brand Header with Smart Logo Integration ── */}
         <div className="flex border-b border-[var(--border-light)] bg-[var(--bg-surface)] rounded-none relative h-[72px] shrink-0 items-center overflow-hidden">
-          
+
           {/* Mobile Close Button */}
           {isMobile && (
-            <button 
+            <button
               onClick={() => setMobileMenuOpen(false)}
               className="absolute right-4 p-1.5 text-[var(--text-muted)] hover:bg-[var(--bg-muted)] hover:text-[var(--color-danger)] transition-colors rounded-none z-20"
             >
@@ -246,29 +255,27 @@ export default function AdminSidebar({
 
           {/* Logo Container */}
           <Link href="/admin" className="relative w-full h-full flex items-center cursor-pointer">
-            
+
             {/* 1. Collapsed Icon (Shows only when sidebar is narrow) */}
-            <div 
-              className={`absolute left-0 w-[76px] h-full flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                isExpanded ? 'opacity-0 scale-50 pointer-events-none' : 'opacity-100 scale-100 delay-100'
-              }`}
+            <div
+              className={`absolute left-0 w-[76px] h-full flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${isExpanded ? 'opacity-0 scale-50 pointer-events-none' : 'opacity-100 scale-100 delay-100'
+                }`}
             >
-              <img 
-                src="/icon.png" 
-                alt="CPU Icon" 
-                className="w-10 h-10 object-contain drop-shadow-sm rounded-full" 
+              <img
+                src="/icon.png"
+                alt="CPU Icon"
+                className="w-10 h-10 object-contain drop-shadow-sm rounded-full"
               />
             </div>
 
             {/* 2. Expanded Full Logo (Shows when sidebar is wide) */}
-            <div 
-              className={`absolute left-6 pr-4 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-left ${
-                !isExpanded ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100 delay-100'
-              }`}
+            <div
+              className={`absolute left-6 pr-4 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-left ${!isExpanded ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100 delay-100'
+                }`}
             >
-              <img 
-                src="https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png" 
-                alt="Career Point University" 
+              <img
+                src="https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png"
+                alt="Career Point University"
                 className="max-h-[44px] w-auto object-contain"
               />
             </div>
@@ -283,14 +290,14 @@ export default function AdminSidebar({
 
             return (
               <div key={group.category} className="mb-2">
-                <button 
+                <button
                   onClick={() => toggleGroup(group.category)}
                   className={`w-full flex items-center justify-between px-6 py-3 bg-[var(--bg-body)] border-y border-[var(--border-light)] hover:bg-[var(--color-gray-200)] transition-colors group rounded-none ${!isExpanded ? 'justify-center px-0' : ''}`}
                 >
                   <span className={`text-[11px] font-bold text-[var(--text-secondary)] tracking-[0.15em] uppercase group-hover:text-[var(--text-primary)] transition-colors whitespace-nowrap overflow-hidden ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 hidden'}`}>
                     {group.category}
                   </span>
-                  
+
                   {isExpanded && (
                     <ChevronDown
                       size={15}
@@ -394,8 +401,8 @@ export default function AdminSidebar({
               onClick={() => setIsPinned(!isPinned)}
               className={`
                 w-full flex items-center justify-center py-4 px-6 rounded-none transition-all duration-200
-                ${isPinned 
-                  ? 'bg-[var(--bg-body)] text-[var(--text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-lighter)] justify-end' 
+                ${isPinned
+                  ? 'bg-[var(--bg-body)] text-[var(--text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-lighter)] justify-end'
                   : 'bg-[var(--bg-surface)] text-[var(--text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--bg-body)]'
                 }
               `}
