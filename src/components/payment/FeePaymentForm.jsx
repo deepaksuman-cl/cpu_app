@@ -392,12 +392,6 @@ export default function FeePaymentForm() {
         </div>
       </div>
 
-      <div className="z-10 mt-auto w-full pt-12 pb-6 text-center">
-        <p className="text-sm text-gray-500">
-          Copyright © {new Date().getFullYear()} Career Point University. All Rights Reserved
-        </p>
-      </div>
-
       <style
         dangerouslySetInnerHTML={{
           __html: `

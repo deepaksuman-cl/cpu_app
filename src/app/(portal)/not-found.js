@@ -6,9 +6,9 @@ import { BookOpen, GraduationCap, MapPin, Phone, Bell, CheckCircle } from "lucid
 /* ──────────────────────────────────────────────────────────────
    FIXED launch date — page reload par countdown reset NAHI hoga
    Sirf yeh string change karo apni real date/time se:
-   Format: "YYYY-MM-DDTHH:mm:ss+05:30"  ← IST timezone
+   Format: "YYYY-MM-DDTHH:mm:ss+08:30"  ← IST timezone
    ────────────────────────────────────────────────────────────── */
-const LAUNCH_DATE = new Date("2026-04-04T10:00:00+05:30"); // 22 hours from May 3 2026 noon IST
+const LAUNCH_DATE = new Date("2026-04-06T10:00:00+08:30"); // 22 hours from May 3 2026 noon IST
 
 function useCountdown(target) {
 const calc = () => {
@@ -167,34 +167,7 @@ export default function ComingSoon() {
             </p>
 
             {/* Email notify */}
-            <div className="fu4 mb-7">
-              <p className="flex items-center gap-1.5 text-[.7rem] font-bold text-[#00588b] uppercase tracking-widest mb-2.5">
-                <Bell size={11} className="text-[#fec53a]" />
-                Notify me when it's live
-              </p>
-              {submitted ? (
-                <div className="flex items-center gap-3 bg-[#00588b]/[.07] border border-[#00588b]/15 rounded-2xl px-4 py-3.5 max-w-sm">
-                  <CheckCircle size={19} className="text-[#fec53a] flex-shrink-0" />
-                  <span className="text-[.82rem] font-semibold text-[#00588b]">
-                    You're on the list! We'll notify you at launch.
-                  </span>
-                </div>
-              ) : (
-                <div className="flex max-w-sm rounded-2xl overflow-hidden shadow-md shadow-[#00588b]/12">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleNotify()}
-                    placeholder="Enter your email address..."
-                    className="flex-1 px-4 py-3.5 text-sm text-slate-700 bg-white outline-none placeholder:text-slate-300 border-y border-l border-slate-200"
-                  />
-                  <button onClick={handleNotify} className="notify-btn px-5 py-3.5 text-white text-sm font-semibold whitespace-nowrap">
-                    Notify Me
-                  </button>
-                </div>
-              )}
-            </div>
+           
 
             {/* Quick links */}
             <div className="fu5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
