@@ -16,6 +16,7 @@ import PlacementPartner from './PlacementPartner.js';
 import Facility from './Facility.js';
 import User from './User.js';
 import Flipbook from './Flipbook.js';
+import Payment from './payment.js';
 
 // Define Associations here to ensure correct initialization order
 // School & Course
@@ -69,7 +70,8 @@ const db = {
   PlacementPartner,
   Facility,
   User,
-  Flipbook
+  Flipbook,
+  Payment
 };
 
 export {
@@ -89,7 +91,8 @@ export {
   PlacementPartner,
   Facility,
   User,
-  Flipbook
+  Flipbook,
+  Payment
 };
 
 export default db;
