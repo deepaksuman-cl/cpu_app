@@ -71,11 +71,13 @@ const getEmptyBlock = (type) => {
       sliderLoop: true,
       sliderArrows: true,
       sliderDots: true,
+      isFullWidth: false, 
+      itemHeight: "450px", 
       aspectRatio: "16:9", 
       imageFit: "cover", 
       cardStyle: "elevated", 
       items: [ 
-        { "_id": "item_1", "image": "", "title": "New Item", "subtitle": "", "link": "", "newTab": false } 
+        { "_id": "item_1", "image": "", "title": "New Item", "subtitle": "", "link": "", "buttonText": "", "newTab": false } 
       ]
     };
   }
@@ -1182,6 +1184,13 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                                     className="flex-1 border border-gray-200 bg-gray-50 p-2 text-xs outline-none text-gray-400 font-mono" 
                                     placeholder="Upload image ->" 
                                   />
+                                  {block.bgImage && (
+                                    <button 
+                                      type="button" 
+                                      onClick={() => updateBlock(index, 'bgImage', '')} 
+                                      className="px-3 bg-red-50 text-red-500 border border-red-100 hover:bg-red-500 hover:text-white transition-all text-[10px] font-bold uppercase"
+                                    >Clear</button>
+                                  )}
                                 </div>
                               </div>
                               <div className="flex flex-wrap gap-6 p-3 bg-gray-50 border border-gray-100">
@@ -1238,42 +1247,59 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                                 </div>
                               </div>
 
-                              {block.displayMode === 'grid' && (
-                                <div className="animate-in fade-in slide-in-from-left-2 duration-200">
-                                  <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Grid Columns</label>
-                                  <select 
-                                    value={block.gridColumns || '3'} 
-                                    onChange={e => updateBlock(index, 'gridColumns', e.target.value)}
-                                    className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
-                                  >
-                                    <option value="2">2 Columns</option>
-                                    <option value="3">3 Columns</option>
-                                    <option value="4">4 Columns</option>
-                                  </select>
+                               {block.displayMode === 'grid' && (
+                                <div className="animate-in fade-in slide-in-from-left-2 duration-200 space-y-4">
+                                  <div>
+                                    <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Grid Columns</label>
+                                    <select 
+                                      value={block.gridColumns || '3'} 
+                                      onChange={e => updateBlock(index, 'gridColumns', e.target.value)}
+                                      className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
+                                    >
+                                      <option value="2">2 Columns</option>
+                                      <option value="3">3 Columns</option>
+                                      <option value="4">4 Columns</option>
+                                    </select>
+                                  </div>
+                                  <label className="flex items-center gap-2 cursor-pointer group">
+                                    <input 
+                                       type="checkbox" 
+                                       checked={block.isFullWidth} 
+                                       onChange={e => updateBlock(index, 'isFullWidth', e.target.checked)} 
+                                       className="w-3.5 h-3.5 accent-[#00588b]" 
+                                    />
+                                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest group-hover:text-black">Full Screen Stretch</span>
+                                  </label>
                                 </div>
                               )}
                             </div>
 
-                            {block.displayMode === 'slider' && (
-                              <div className="grid grid-cols-2 gap-4 p-4 bg-blue-50/50 border border-blue-100 animate-in fade-in slide-in-from-right-2 duration-200">
-                                <label className="flex items-center justify-between cursor-pointer group">
-                                  <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Autoplay</span>
-                                  <input type="checkbox" checked={block.sliderAutoplay} onChange={e => updateBlock(index, 'sliderAutoplay', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
-                                </label>
-                                <label className="flex items-center justify-between cursor-pointer group">
-                                  <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Infinite Loop</span>
-                                  <input type="checkbox" checked={block.sliderLoop} onChange={e => updateBlock(index, 'sliderLoop', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
-                                </label>
-                                <label className="flex items-center justify-between cursor-pointer group">
-                                  <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Show Arrows</span>
-                                  <input type="checkbox" checked={block.sliderArrows} onChange={e => updateBlock(index, 'sliderArrows', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
-                                </label>
-                                <label className="flex items-center justify-between cursor-pointer group">
-                                  <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Show Dots</span>
-                                  <input type="checkbox" checked={block.sliderDots} onChange={e => updateBlock(index, 'sliderDots', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
-                                </label>
-                              </div>
-                            )}
+                             {block.displayMode === 'slider' && (
+                                <div className="space-y-4">
+                                  <div className="grid grid-cols-2 gap-4 p-4 bg-blue-50/50 border border-blue-100 animate-in fade-in slide-in-from-right-2 duration-200">
+                                    <label className="flex items-center justify-between cursor-pointer group col-span-2 border-b border-blue-100 pb-2 mb-1">
+                                      <span className="text-[10px] font-black text-blue-900 uppercase tracking-widest">Full Width Hero Mode</span>
+                                      <input type="checkbox" checked={block.isFullWidth} onChange={e => updateBlock(index, 'isFullWidth', e.target.checked)} className="w-4 h-4 accent-[#00588b]" />
+                                    </label>
+                                    <label className="flex items-center justify-between cursor-pointer group">
+                                      <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Autoplay</span>
+                                      <input type="checkbox" checked={block.sliderAutoplay} onChange={e => updateBlock(index, 'sliderAutoplay', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
+                                    </label>
+                                    <label className="flex items-center justify-between cursor-pointer group">
+                                      <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Infinite Loop</span>
+                                      <input type="checkbox" checked={block.sliderLoop} onChange={e => updateBlock(index, 'sliderLoop', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
+                                    </label>
+                                    <label className="flex items-center justify-between cursor-pointer group">
+                                      <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Show Arrows</span>
+                                      <input type="checkbox" checked={block.sliderArrows} onChange={e => updateBlock(index, 'sliderArrows', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
+                                    </label>
+                                    <label className="flex items-center justify-between cursor-pointer group">
+                                      <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Show Dots</span>
+                                      <input type="checkbox" checked={block.sliderDots} onChange={e => updateBlock(index, 'sliderDots', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
+                                    </label>
+                                  </div>
+                                </div>
+                              )}
                           </div>
                         </div>
                       )}
@@ -1282,6 +1308,16 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                         <div className="space-y-4 animate-in fade-in slide-in-from-top-1 duration-200">
                           <h3 className="text-[11px] font-bold text-[#00588b] uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Card Visual Design</h3>
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="md:col-span-1">
+                              <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Container Height (e.g. 500px)</label>
+                              <input 
+                                type="text" 
+                                value={block.itemHeight || '450px'} 
+                                onChange={e => updateBlock(index, 'itemHeight', e.target.value)}
+                                className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-mono" 
+                                placeholder="450px"
+                              />
+                            </div>
                             <div>
                               <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Image Aspect Ratio</label>
                               <select 
@@ -1292,6 +1328,7 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                                 <option value="1:1">1:1 (Square)</option>
                                 <option value="16:9">16:9 (Landscape)</option>
                                 <option value="4:5">4:5 (Portrait)</option>
+                                <option value="original">Original Ratio</option>
                               </select>
                             </div>
                             <div>
@@ -1303,17 +1340,6 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                               >
                                 <option value="cover">Cover (Fill)</option>
                                 <option value="contain">Contain (Fit)</option>
-                              </select>
-                            </div>
-                            <div>
-                              <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Card Container Style</label>
-                              <select 
-                                value={block.cardStyle || 'elevated'} 
-                                onChange={e => updateBlock(index, 'cardStyle', e.target.value)}
-                                className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
-                              >
-                                <option value="flat">Flat / Minimal</option>
-                                <option value="elevated">Elevated / Shadows</option>
                               </select>
                             </div>
                           </div>
@@ -1407,6 +1433,16 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                                         onChange={e => updateArrayItem(index, 'items', iIdx, 'link', e.target.value)} 
                                         className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-mono" 
                                         placeholder="/path-or-slug" 
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1">Button Label (Optional)</label>
+                                      <input 
+                                        type="text" 
+                                        value={item.buttonText || ''} 
+                                        onChange={e => updateArrayItem(index, 'items', iIdx, 'buttonText', e.target.value)} 
+                                        className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white" 
+                                        placeholder="e.g. Learn More" 
                                       />
                                     </div>
                                     <div className="flex items-end">

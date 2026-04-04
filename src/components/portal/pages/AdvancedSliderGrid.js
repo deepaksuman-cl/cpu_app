@@ -24,6 +24,8 @@ export default function AdvancedSliderGrid({ block }) {
     sliderLoop,
     sliderArrows,
     sliderDots,
+    isFullWidth,
+    itemHeight,
     aspectRatio,
     imageFit,
     cardStyle,
@@ -35,6 +37,7 @@ export default function AdvancedSliderGrid({ block }) {
     switch (ratio) {
       case '1:1': return 'aspect-square';
       case '4:5': return 'aspect-[4/5]';
+      case 'original': return '';
       case '16:9':
       default: return 'aspect-video';
     }
@@ -60,6 +63,49 @@ export default function AdvancedSliderGrid({ block }) {
   };
 
   const renderCard = (item, idx) => {
+    // FULL WIDTH BANNER MODE
+    if (isFullWidth) {
+      return (
+        <div key={item._id || idx} className="relative w-full group overflow-hidden" style={{ height: itemHeight || '500px' }}>
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            {item.image ? (
+              <img 
+                src={item.image} 
+                className={`w-full h-full ${imageFit === 'contain' ? 'object-contain' : 'object-cover'} transition-transform duration-[2000ms] group-hover:scale-105`} 
+                alt={item.title} 
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-200" />
+            )}
+            <div className="absolute inset-0 bg-black/40 z-10" />
+          </div>
+
+          {/* Content Overlay */}
+          <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto">
+            <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4 tracking-tight drop-shadow-lg transform transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+              {item.title}
+            </h3>
+            {item.subtitle && (
+              <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl drop-shadow-md transform transition-all duration-700 delay-100 translate-y-4 group-hover:translate-y-0">
+                {item.subtitle}
+              </p>
+            )}
+            {item.link && (
+               <Link 
+                href={item.link} 
+                target={item.newTab ? '_blank' : '_self'}
+                className="inline-flex items-center gap-2 bg-[#ffb900] hover:bg-yellow-500 text-white font-bold px-8 py-3.5 rounded-none transition-all duration-300 shadow-xl hover:shadow-2xl uppercase tracking-widest text-sm transform delay-200 translate-y-4 group-hover:translate-y-0"
+               >
+                {item.buttonText || 'Explore More'} <LucideIcons.ArrowRight size={18} />
+               </Link>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    // STANDARD CARD MODE
     const CardWrapper = item.link ? 'a' : 'div';
     const wrapperProps = item.link ? {
       href: item.link,
@@ -72,7 +118,7 @@ export default function AdvancedSliderGrid({ block }) {
       <CardWrapper {...wrapperProps} key={item._id || idx}>
         <div className={getCardClasses(cardStyle)}>
           {/* Card Image */}
-          <div className={`relative ${getAspectClass(aspectRatio)} overflow-hidden bg-gray-100`}>
+          <div className={`relative ${getAspectClass(aspectRatio)} overflow-hidden bg-gray-100`} style={aspectRatio === 'original' ? { height: itemHeight || 'auto' } : {}}>
             {item.image ? (
               <img 
                 src={item.image} 
@@ -102,7 +148,7 @@ export default function AdvancedSliderGrid({ block }) {
               {item.title}
             </h4>
             {item.subtitle && (
-              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+              <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3 font-medium">
                 {item.subtitle}
               </p>
             )}
@@ -110,7 +156,7 @@ export default function AdvancedSliderGrid({ block }) {
             {/* Footer with link if applicable */}
             {item.link && (
                <div className="mt-auto pt-4 border-t border-gray-100 flex items-center gap-2 text-xs font-bold text-[#00588b] uppercase tracking-widest">
-                  View Details <LucideIcons.ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  {item.buttonText || 'View Details'} <LucideIcons.ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
                </div>
             )}
           </div>
@@ -122,21 +168,23 @@ export default function AdvancedSliderGrid({ block }) {
   return (
     <div 
       id={block.cssId}
-      className={`relative w-full py-20 px-6 overflow-hidden ${block.cssClass || ''}`}
+      className={`relative w-full py-20 pt-0 overflow-hidden ${block.cssClass || ''}`}
       style={{
         backgroundImage: bgImage ? `url(${bgImage})` : 'none',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: bgParallax ? 'fixed' : 'scroll'
+        backgroundAttachment: bgParallax ? 'fixed' : 'scroll',
+        paddingLeft: isFullWidth ? '0' : '1.5rem',
+        paddingRight: isFullWidth ? '0' : '1.5rem'
       }}
     >
       {/* Background Overlay */}
       {bgOverlay && <div className="absolute inset-0 bg-black/50 z-0" />}
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className={`relative z-10 ${isFullWidth ? 'w-full max-w-full' : 'max-w-7xl mx-auto'}`}>
         {/* Header Section */}
         {showHeader && (
-          <div className={`mb-16 text-center ${bgOverlay ? 'text-white' : 'text-gray-900'}`}>
+          <div className={`mb-16 text-center ${bgOverlay ? 'text-white' : 'text-gray-900'} ${isFullWidth ? 'px-6' : ''}`}>
             <h2 className="text-3xl lg:text-5xl font-black mb-4 tracking-tight drop-shadow-sm">
               {headerTitle}
             </h2>
@@ -155,27 +203,27 @@ export default function AdvancedSliderGrid({ block }) {
 
         {/* Content Section */}
         {displayMode === 'grid' ? (
-          <div className={`grid gap-8 ${getGridCols(gridColumns)}`}>
+          <div className={`grid gap-8 ${isFullWidth ? 'grid-cols-1' : getGridCols(gridColumns)}`}>
             {items.map((item, idx) => renderCard(item, idx))}
           </div>
         ) : (
-          <div className="relative swiper-custom-container">
+          <div className={`relative swiper-custom-container ${isFullWidth ? 'full-width-swiper' : ''}`}>
             <Swiper
               modules={[Autoplay, Navigation, Pagination]}
-              spaceBetween={30}
+              spaceBetween={isFullWidth ? 0 : 30}
               slidesPerView={1}
               loop={sliderLoop}
-              autoplay={sliderAutoplay ? { delay: 4000, disableOnInteraction: false } : false}
+              autoplay={sliderAutoplay ? { delay: 5000, disableOnInteraction: false } : false}
               navigation={sliderArrows ? {
                 nextEl: '.swiper-next-custom',
                 prevEl: '.swiper-prev-custom',
               } : false}
               pagination={sliderDots ? { clickable: true } : false}
-              breakpoints={{
+              breakpoints={isFullWidth ? {} : {
                 640: { slidesPerView: 2 },
                 1024: { slidesPerView: parseInt(gridColumns) || 3 }
               }}
-              className="pb-12"
+              className={isFullWidth ? "h-full" : "pb-12"}
             >
               {items.map((item, idx) => (
                 <SwiperSlide key={item._id || idx}>
@@ -187,10 +235,10 @@ export default function AdvancedSliderGrid({ block }) {
             {/* Custom Navigation Arrows */}
             {sliderArrows && (
               <>
-                <button className="swiper-prev-custom absolute left-[-20px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-gray-200 bg-white/90 flex items-center justify-center text-[#00588b] shadow-xl hover:bg-[#00588b] hover:text-white transition-all duration-300 hidden lg:flex">
+                <button className={`swiper-prev-custom absolute ${isFullWidth ? 'left-6' : 'left-[-20px]'} top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-gray-200 bg-white/90 flex items-center justify-center text-[#00588b] shadow-xl hover:bg-[#00588b] hover:text-white transition-all duration-300 hidden lg:flex`}>
                   <LucideIcons.ChevronLeft size={24} />
                 </button>
-                <button className="swiper-next-custom absolute right-[-20px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-gray-200 bg-white/90 flex items-center justify-center text-[#00588b] shadow-xl hover:bg-[#00588b] hover:text-white transition-all duration-300 hidden lg:flex">
+                <button className={`swiper-next-custom absolute ${isFullWidth ? 'right-6' : 'right-[-20px]'} top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-gray-200 bg-white/90 flex items-center justify-center text-[#00588b] shadow-xl hover:bg-[#00588b] hover:text-white transition-all duration-300 hidden lg:flex`}>
                   <LucideIcons.ChevronRight size={24} />
                 </button>
               </>
@@ -198,12 +246,15 @@ export default function AdvancedSliderGrid({ block }) {
             
             <style jsx global>{`
               .swiper-custom-container .swiper-pagination-bullet-active {
-                background: #00588b !important;
+                background: ${isFullWidth ? '#ffb900' : '#00588b'} !important;
                 width: 24px;
                 border-radius: 4px;
               }
               .swiper-custom-container .swiper-pagination {
-                bottom: 0px !important;
+                bottom: ${isFullWidth ? '30px' : '0px'} !important;
+              }
+              .full-width-swiper {
+                margin: 0;
               }
             `}</style>
           </div>
