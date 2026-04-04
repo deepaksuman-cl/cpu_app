@@ -551,12 +551,14 @@ export default function HomeSetupForm({ initialData }) {
                 <NestedListEditor 
                   label="Featured Placement Stories"
                   items={sections.placementConfig.slides}
-                  newItemTemplate={{ name: '', course: '', company: '', img: '' }}
+                  newItemTemplate={{ name: '', title: '', youtubeLink: '', course: '', company: '', img: '' }}
                   fields={[
+                    {key: 'title', label: 'Item Title (e.g. \"Juhi\'s Journey @ CPU\")', fullWidth: true},
                     {key: 'name', label: 'Student Name'},
+                    {key: 'youtubeLink', label: 'YouTube Slug / URL'},
                     {key: 'course', label: 'Course'},
                     {key: 'company', label: 'Company'},
-                    {key: 'img', label: 'Photo', type: 'image', fullWidth: true}
+                    {key: 'img', label: 'Photo (Transparent PNG Recommended)', type: 'image', fullWidth: true}
                   ]}
                   onUpdate={items => updateSection('placementConfig', {...sections.placementConfig, slides: items})}
                 />

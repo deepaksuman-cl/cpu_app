@@ -8,95 +8,101 @@ import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
-const PlacementSlideCard = ({ slide }) => {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
+const PlacementSlideCard = ({ slide, onWatchVideo }) => {
   const extractVideoId = (url) => {
-    if (!url) return null;
-    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})/);
-    return match ? match[1] : null;
+    if (!url || typeof url !== 'string') return null;
+    const t = url.trim();
+    if (t.length === 11 && !t.includes('/') && !t.includes('?')) return t;
+    if (t.includes('youtu.be/')) {
+      const id = t.split('youtu.be/')[1]?.split(/[?#&]/)[0];
+      if (id?.length === 11) return id;
+    }
+    if (t.includes('/shorts/')) {
+      const id = t.split('/shorts/')[1]?.split(/[?#&]/)[0];
+      if (id?.length === 11) return id;
+    }
+    const regex = /(?:v=|v\/|embed\/|watch\?v=|&v=)([a-zA-Z0-9_-]{11})/;
+    const match = t.match(regex);
+    if (match && match[1]) return match[1];
+    const fallbackMatch = t.match(/[a-zA-Z0-9_-]{11}/);
+    return fallbackMatch ? fallbackMatch[0] : null;
   };
   const videoId = extractVideoId(slide.youtubeLink);
 
   return (
-    <>
-      <div className="rounded-2xl overflow-hidden relative h-[360px] sm:h-[400px] shadow-2xl group bg-[#25155c] flex flex-col justify-between border border-white/5">
-        {/* Background Decorations (Confetti) */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-80 z-0">
-          <div className="absolute top-[25%] left-[10%] w-1.5 h-6 bg-[#ff4a3b] transform rotate-45 rounded-sm"></div>
-          <div className="absolute top-[45%] right-[15%] w-1.5 h-4 bg-[#ff4a3b] transform -rotate-12 rounded-sm"></div>
-          <div className="absolute top-[50%] left-[8%] w-4 h-4 border-2 border-amber-400 rounded-full border-t-transparent border-r-transparent transform -rotate-45"></div>
-          <div className="absolute bottom-[20%] left-[5%] w-2 h-2 rounded-full bg-amber-400"></div>
-          <div className="absolute bottom-[30%] right-[10%] w-1.5 h-5 bg-[#ff4a3b] transform rotate-12 rounded-sm"></div>
-        </div>
-
-        {/* Text Content */}
-        <div className="relative z-20 pt-8 px-6 w-[90%]">
-          <div className="text-amber-400 font-serif text-5xl leading-[0] mb-6">“</div>
-          <h4 className="text-white font-extrabold text-[15px] sm:text-[17px] leading-snug mb-3 drop-shadow-md">
-            "Hear Why {slide.name} Loves Studying at CPU!"
-          </h4>
-          <p className="text-white/80 text-[13px] drop-shadow-md">
-             {slide.name}
-          </p>
-        </div>
-
-        {/* Image */}
-        {slide.img && (
-          <div className="absolute inset-x-0 bottom-0 top-[30%] z-10 w-full pointer-events-none">
-            <Image
-              src={slide.img}
-              alt={slide.name || 'Placement'}
-              fill
-              className="object-cover sm:object-contain object-bottom block group-hover:scale-105 transition-transform duration-400"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </div>
-        )}
-
-        {/* Video Button */}
-        {slide.youtubeLink && (
-          <div className="absolute bottom-5 right-5 z-20">
-            <button 
-              onClick={() => setIsVideoOpen(true)} 
-              className="flex items-center bg-[#5642ea] hover:bg-[#4a3bc6] rounded-full pl-5 pr-1.5 py-1.5 shadow-[0_4px_12px_rgba(86,66,234,0.4)] transform transition-transform hover:scale-105"
-            >
-              <span className="text-white font-bold text-[12px] sm:text-[13px] mr-3 ml-1">Watch Video</span>
-              <div className="bg-[#fcb323] hover:bg-amber-400 rounded-full w-8 h-8 flex items-center justify-center">
-                <Play size={14} className="text-[#362208] ml-0.5" fill="currentColor" strokeWidth={1} />
-              </div>
-            </button>
-          </div>
-        )}
+    <div className="rounded-3xl overflow-hidden relative h-[420px] sm:h-[460px] shadow-2xl group bg-gradient-to-br from-[#1a0b45] to-[#25155c] flex flex-col justify-between border border-white/10 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+      {/* Background Decorations (Confetti/Shapes) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-40 z-0">
+        <div className="absolute top-[25%] left-[10%] w-1.5 h-6 bg-[#ff4a3b] transform rotate-45 rounded-full"></div>
+        <div className="absolute top-[45%] right-[15%] w-1.5 h-4 bg-[#ff4a3b] transform -rotate-12 rounded-full"></div>
+        <div className="absolute top-[50%] left-[8%] w-5 h-5 border-2 border-amber-400 rounded-full border-t-transparent border-r-transparent transform -rotate-45"></div>
+        <div className="absolute bottom-[40%] left-[5%] w-2 h-2 rounded-full bg-amber-400 opacity-50"></div>
+        <div className="absolute top-[15%] right-[25%] w-2.5 h-2.5 bg-blue-400 rounded-full opacity-30 transform rotate-12"></div>
+        <div className="absolute bottom-[30%] right-[10%] w-1.5 h-5 bg-[#ff4a3b] transform rotate-12 rounded-full"></div>
       </div>
 
-      {/* Video Modal */}
-      {isVideoOpen && videoId && (
-        <div className="fixed inset-0 z-[99999] p-4 sm:p-10 flex items-center justify-center bg-black/90 backdrop-blur-sm"
-             onClick={() => setIsVideoOpen(false)}>
-           <div className="bg-transparent w-full max-w-5xl aspect-video relative" onClick={e => e.stopPropagation()}>
-             <button 
-               onClick={() => setIsVideoOpen(false)} 
-               className="absolute -top-12 right-0 text-white/70 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full p-2"
-             >
-               <X size={24} />
-             </button>
-             <iframe 
-               src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} 
-               title="YouTube video player" 
-               frameBorder="0" 
-               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-               allowFullScreen
-               className="w-full h-full rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10"
-             ></iframe>
-           </div>
+      {/* Quote Icon */}
+      <div className="absolute top-8 left-8 z-20">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-amber-400 opacity-80">
+          <path d="M10 11L8 17H5L7 11V7H11V11H10Z" fill="currentColor"/>
+          <path d="M19 11L17 17H14L16 11V7H20V11H19Z" fill="currentColor"/>
+        </svg>
+      </div>
+
+      {/* Text Content */}
+      <div className="relative z-20 pt-20 px-8 w-[95%]">
+        <h4 className="text-white font-black text-[18px] sm:text-[20px] leading-[1.3] mb-3 drop-shadow-lg tracking-tight">
+           {slide.title || `"${slide.name}'s Success Story at CPU"`}
+        </h4>
+        <p className="text-white/60 text-[14px] font-bold uppercase tracking-widest drop-shadow-md">
+           {slide.name}
+        </p>
+      </div>
+
+      {/* Image - Student Photo */}
+      {slide.img && (
+        <div className="absolute inset-x-0 bottom-0 top-[35%] z-10 w-full pointer-events-none select-none">
+          <Image
+            src={slide.img}
+            alt={slide.name || 'Placement'}
+            fill
+            className="object-contain object-bottom block group-hover:scale-[1.03] transition-transform duration-700"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
         </div>
       )}
-    </>
+
+      <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#1a0b45] to-transparent z-[15] pointer-events-none opacity-60"></div>
+
+      {/* Professional Video Button */}
+      {slide.youtubeLink && (
+        <div className="absolute bottom-8 right-8 z-30">
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              if (videoId) {
+                onWatchVideo(videoId, slide.name);
+              } else {
+                window.open(slide.youtubeLink, '_blank');
+              }
+            }}
+            className="flex items-center bg-[#5e48ff] hover:bg-[#4d3ce6] rounded-full pl-6 pr-2 py-2 shadow-[0_10px_25px_rgba(94,72,255,0.4)] transition-all duration-300 hover:-translate-y-1 active:scale-95 group/btn"
+          >
+            <span className="text-white font-black text-[13px] sm:text-[14px] mr-4 tracking-wide">Watch Video</span>
+            <div className="bg-[#fcb323] group-hover/btn:bg-amber-400 rounded-full w-9 h-9 flex items-center justify-center transition-colors shadow-inner">
+              <Play size={14} className="text-[#362208] ml-0.5 fill-current" strokeWidth={0} />
+            </div>
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 
 
 export default function PlacementSection({ data }) {
+  const [activeVideo, setActiveVideo] = useState(null); // { id, name }
+
   if (!data) return null;
   const { 
     stats = [], 
@@ -105,12 +111,11 @@ export default function PlacementSection({ data }) {
     highlight = "Opportunities at CPU"
   } = data;
 
-  // Prefer relational data over legacy JSON
   const relationalSides = data?.placementPartnersRel?.filter(p => p.studentName).map(p => ({
     name: p.studentName,
     course: p.courseName,
     company: p.companyName,
-    img: p.logoUrl, // Assuming logoUrl was used for student photo in migration if no other img
+    img: p.logoUrl,
     youtubeLink: p.youtubeLink
   })) || [];
 
@@ -120,6 +125,10 @@ export default function PlacementSection({ data }) {
 
   const slides = relationalSides.length > 0 ? relationalSides : (data?.slides || []);
   const recruiters = relationalRecruiters.length > 0 ? relationalRecruiters : (data?.recruiters || []);
+
+  const handleWatchVideo = (id, name) => {
+    setActiveVideo({ id, name });
+  };
 
   return (
     <section
@@ -163,7 +172,12 @@ export default function PlacementSection({ data }) {
             autoInterval={4000}
             dark={true}
             breakpoints={{ 0: 1, 768: 2 }}
-            renderSlide={(slide) => <PlacementSlideCard slide={slide} />}
+            renderSlide={(slide) => (
+              <PlacementSlideCard 
+                slide={slide} 
+                onWatchVideo={handleWatchVideo} 
+              />
+            )}
           />
         </div>
 
@@ -208,6 +222,44 @@ export default function PlacementSection({ data }) {
           </div>
         )}
       </div>
+
+      {/* --- GLOBAL SMART MODAL --- */}
+      {activeVideo && (
+        <div 
+          className="fixed inset-0 z-[100000] flex items-center justify-center p-4 sm:p-10 transition-all duration-500 ease-out animate-in fade-in"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.92)', backdropFilter: 'blur(20px)' }}
+          onClick={() => setActiveVideo(null)}
+        >
+          <div 
+            className="relative w-full max-w-6xl aspect-video bg-black rounded-3xl overflow-hidden shadow-[0_0_120px_rgba(94,72,255,0.25)] border border-white/10 animate-in zoom-in-95 duration-500 ease-out"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Close Button UI */}
+            <button 
+              onClick={() => setActiveVideo(null)} 
+              className="absolute top-5 right-5 z-[60] bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition-all duration-300 hover:rotate-90 border border-white/10 group"
+              title="Close Player"
+            >
+              <X size={24} className="opacity-70 group-hover:opacity-100" />
+            </button>
+
+            {/* Video Player */}
+            <iframe 
+              src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3&showinfo=0`} 
+              title={`${activeVideo.name} Success Story`}
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
+            
+            {/* Bottom Info Bar (Premium Touch) */}
+            <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/80 to-transparent flex items-center px-8">
+               <p className="text-white/40 text-[11px] font-black uppercase tracking-[0.2em]">Now Playing: {activeVideo.name} Story</p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
