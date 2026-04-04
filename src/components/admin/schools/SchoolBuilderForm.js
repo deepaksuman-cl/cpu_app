@@ -4,7 +4,7 @@ import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import Modal from '@/components/admin/ui/Modal';
 import { createSchool, updateSchool } from '@/lib/actions/schoolActions';
-import { AlertCircle, CheckCircle2, Image as ImageIcon, Pencil, Plus, Save, Settings, Trash2, Layers, Box } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Image as ImageIcon, Pencil, Plus, Save, Settings, Trash2, Layers, Box, Eye } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
@@ -430,7 +430,19 @@ export default function SchoolBuilderForm({ initialData = null }) {
       </div>
 
       {/* --- Minimal Floating Save Bar --- */}
-      <div className="fixed bottom-6 right-6 z-50 flex items-center justify-end">
+      <div className="fixed bottom-6 right-6 z-50 flex items-center justify-end gap-3">
+        {/* Live Preview Button */}
+        {formData.slug && (
+          <a 
+            href={`/schools/${formData.slug?.replace(/^\/|\/$/g, '').trim()}`}
+            target="_blank"
+            className="bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border-dark)] px-4 py-2.5 font-bold text-[11px] uppercase tracking-widest hover:bg-[var(--bg-muted)] transition-all flex items-center justify-center gap-2 rounded-none shadow-xl"
+          >
+            <Eye size={16} strokeWidth={2.5} />
+            LIVE PREVIEW
+          </a>
+        )}
+
         <div className="bg-[var(--bg-surface)] border border-[var(--border-dark)] p-2 shadow-2xl flex items-center gap-3 rounded-none">
           <div className="hidden sm:flex flex-col text-right px-3 border-r border-[var(--border-light)]">
             <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Status</span>

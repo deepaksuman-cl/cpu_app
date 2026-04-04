@@ -4,6 +4,9 @@ import { getSchools } from '@/lib/actions/schoolActions';
 import { AlertCircle, Edit, Eye, Plus } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 export default async function SchoolsPage() {
   const { data: schools, error } = await getSchools();
 
@@ -104,7 +107,7 @@ export default async function SchoolsPage() {
                         <td className="block md:table-cell py-2 md:py-2 px-0 md:px-4 border-t border-[var(--border-light)] pt-3 md:border-none md:pt-0">
                           <div className="flex justify-start md:justify-center items-center gap-3 md:gap-2">
                             <Link 
-                              href={`/schools/${school.slug}`}
+                              href={`/schools/${school.slug?.replace(/^\/|\/$/g, '').trim()}`}
                               target="_blank"
                               className="p-2 md:p-1 bg-[var(--bg-body)] text-[var(--text-secondary)] hover:bg-[var(--color-primary)] hover:text-[var(--text-inverse)] border border-[var(--border-default)] transition-colors rounded-none flex items-center justify-center"
                               title="Preview"
