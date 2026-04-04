@@ -31,7 +31,7 @@ export default async function PagesManager({ searchParams }) {
       <Toaster position="bottom-right" />
 
       {/* Sticky Header */}
-      <div className="sticky top-0 z-[40] flex items-center justify-between h-[44px] w-full bg-[var(--bg-surface)] border-b border-[var(--border-default)] shadow-sm">
+      <div className="sticky top-0 z-[20] flex items-center justify-between h-[44px] w-full bg-[var(--bg-surface)] border-b border-[var(--border-default)] shadow-sm">
         <div className="flex items-center h-full px-4 gap-3">
           <FileText size={16} className="text-[#1c54a3]" strokeWidth={2.5} />
           <h1 className="text-[13px] font-black text-[var(--text-primary)] uppercase tracking-wider">Page Manager</h1>
@@ -74,7 +74,7 @@ export default async function PagesManager({ searchParams }) {
             </thead>
             <tbody className="divide-y divide-[var(--border-light)] overflow-visible">
               {pages.map(page => (
-                <tr key={page.id} className="hover:bg-slate-50 transition-colors group relative hover:z-[50]">
+                <tr key={page.id} className="hover:bg-slate-50 transition-colors group relative hover:z-[20]">
                   <td className="px-4 py-3 font-black text-[#1c54a3] text-[13px] uppercase tracking-wide">
                     {page.title}
                   </td>

@@ -587,12 +587,13 @@ export default function HomeSetupForm({ initialData }) {
               <NestedListEditor 
                 label="Alumni Highlights"
                 items={sections.alumniConfig.alumni}
-                newItemTemplate={{ name: '', role: '', company: '', package: '', companyBg: '#00588b', circleBg: '#fbbf24', img: '' }}
+                newItemTemplate={{ name: '', role: '', company: '', badgeText: '', package: '', companyBg: '#00588b', circleBg: '#fbbf24', img: '' }}
                 fields={[
                   {key: 'name', label: 'Name'},
                   {key: 'role', label: 'Role/Batch'},
                   {key: 'package', label: 'Package'},
                   {key: 'company', label: 'Company'},
+                  {key: 'badgeText', label: 'Badge Text'},
                   {key: 'companyBg', label: 'Company Color', type: 'color'},
                   {key: 'circleBg', label: 'Accent Color', type: 'color'},
                   {key: 'img', label: 'Photo', type: 'image', fullWidth: true}

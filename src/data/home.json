@@ -126,10 +126,10 @@
     "title": "Our",
     "highlight": "Alumni",
     "alumni": [
-      { "name": "Aryan Mathuria", "role": "BCA Class of 2018", "company": "evertz", "companyBg": "#16a34a", "circleBg": "#2dd4bf", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_01.png" },
-      { "name": "Kiran Bablani", "role": "BCA Class of 2018", "company": "zalando", "companyBg": "#db2777", "circleBg": "#facc15", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_02.png" },
-      { "name": "Priya Lakhotiya", "role": "MBA Class of 2021", "company": "upGrad", "companyBg": "#1e3a8a", "circleBg": "#ef4444", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_03.png" },
-      { "name": "Naman Nandwana", "role": "MBA | Class of 2020", "company": "Quick Heal", "companyBg": "#f59e0b", "circleBg": "#c084fc", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_04.png" }
+      { "name": "Aryan Mathuria", "role": "BCA Class of 2018", "company": "evertz", "badgeText": "evertz", "companyBg": "#16a34a", "circleBg": "#2dd4bf", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_01.png" },
+      { "name": "Kiran Bablani", "role": "BCA Class of 2018", "company": "zalando", "badgeText": "zalando", "companyBg": "#db2777", "circleBg": "#facc15", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_02.png" },
+      { "name": "Priya Lakhotiya", "role": "MBA Class of 2021", "company": "upGrad", "badgeText": "upGrad", "companyBg": "#1e3a8a", "circleBg": "#ef4444", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_03.png" },
+      { "name": "Naman Nandwana", "role": "MBA | Class of 2020", "company": "Quick Heal", "badgeText": "Quick Heal", "companyBg": "#f59e0b", "circleBg": "#c084fc", "img": "https://cpur.in/wp-content/uploads/2023/12/alumni_04.png" }
     ]
   },
   "campusConfig": {
