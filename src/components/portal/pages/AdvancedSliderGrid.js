@@ -194,7 +194,7 @@ export default function AdvancedSliderGrid({ block }) {
   return (
     <div 
       id={block.cssId}
-      className={`relative w-full py-16 overflow-hidden ${block.cssClass || ''}`}
+      className={`relative w-full pb-3 pt-0 overflow-hidden ${block.cssClass || ''}`}
       style={{
         backgroundImage: bgImage ? `url(${bgImage})` : 'none',
         backgroundSize: 'cover',

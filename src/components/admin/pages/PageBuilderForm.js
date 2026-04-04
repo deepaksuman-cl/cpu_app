@@ -4,9 +4,9 @@ import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import { createPage, updatePage } from '@/lib/actions/pageActions';
-import { AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, GripVertical, Image as ImageIcon, Images, Layout, Loader2, Megaphone, Plus, Save, Trash2, Type, Users, CheckCircle2, AlertCircle, X, Mail, ChevronRight, SquareStack, Columns, Settings, Monitor, MousePointer2 } from 'lucide-react';
+import { AlertCircle, AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, CheckCircle2, Columns, GripVertical, Image as ImageIcon, Images, Layout, Megaphone, Monitor, Plus, Save, SquareStack, Trash2, Type, Users, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState, useCallback, useMemo } from 'react';
+import { useCallback, useState } from 'react';
 
 // --- Toast Notification Pattern ---
 function Toast({ msg, type, onClose }) {

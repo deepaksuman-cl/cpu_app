@@ -41,11 +41,30 @@ export function ResearchSection({ data }) {
                   <img src={item.img} alt={item.title} className="w-full h-full object-cover block hover:scale-105 transition-transform duration-400"/>
                 </div>
                 <div className="p-5">
-                  <span className="bg-blue-50 text-[#00588b] text-[11px] font-bold px-2.5 py-0.5 rounded-full">{item.tag}</span>
-                  <h3 className="font-extrabold text-gray-900 text-base my-2.5">{item.title}</h3>
-                  <p className="text-gray-500 text-sm leading-[1.65] m-0">{item.desc}</p>
-                  <a href="#" className="text-[#00588b] font-bold text-[13px] flex items-center gap-1 mt-3 no-underline hover:gap-2 transition-all">
-                    Learn More <ArrowRight size={13}/>
+                  <span className="bg-blue-50 text-[#00588b] text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">{item.tag}</span>
+                  <h3 className="font-extrabold text-gray-900 text-base mt-2.5 mb-1 leading-snug">{item.title}</h3>
+                  
+                  {/* Researcher / Author Attribution */}
+                  {item.author && (
+                    <div className="text-[12px] font-bold text-[#00588b] uppercase tracking-wider mb-3 flex items-center gap-1.5 opacity-90 italic">
+                      <div className="w-5 h-[1px] bg-[#00588b]/30"></div>
+                      {item.author}
+                    </div>
+                  )}
+
+                  <p className="text-gray-500 text-sm leading-[1.65] m-0 mb-4 line-clamp-2">{item.desc}</p>
+                  
+                  <a 
+                    href={item.link || "#"} 
+                    onClick={(e) => {
+                      if (item.link) e.stopPropagation();
+                    }}
+                    className="text-[#00588b] font-bold text-[13px] flex items-center gap-1.5 no-underline hover:gap-2.5 transition-all group/btn w-fit"
+                  >
+                    <span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-[#00588b] after:transition-all group-hover/btn:after:w-full">
+                      {item.buttonText || "Learn More"}
+                    </span>
+                    <ArrowRight size={13} className="group-hover/btn:translate-x-0.5 transition-transform"/>
                   </a>
                 </div>
               </div>
