@@ -216,7 +216,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
         ...base.placements,
         list: initialData.placementPartnersRel.map(p => ({
           name: p.studentName, company: p.companyName, pkg: p.packageOffered, 
-          city: p.city, img: p.logoUrl, slug: p.slug || ''
+          city: p.city, img: p.logoUrl, slug: p.slug || '', course: p.courseName || '', 
+          youtubeLink: p.youtubeLink || ''
         }))
       };
     }
@@ -772,15 +773,13 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 </div>
               </div>
               <NestedListEditor 
-                label="Student Placements"
+                label="Featured Placement Stories"
                 items={formData.placements.list}
-                newItemTemplate={{ name: '', company: '', pkg: '', city: '', img: '', slug: '' }}
+                newItemTemplate={{ name: '', youtubeLink: '', img: '' }}
                 fields={[
-                  {key: 'name', label: 'Student Name'},
-                  {key: 'company', label: 'Company'},
-                  {key: 'pkg', label: 'Package'},
-                  {key: 'img', label: 'Photo URL', type: 'image'},
-                  {key: 'slug', label: 'Slug'}
+                  {key: 'name', label: 'Student Name / Title'},
+                  {key: 'youtubeLink', label: 'YouTube Video Link'},
+                  {key: 'img', label: 'Photo / Thumbnail', type: 'image'}
                 ]}
                 onUpdate={items => updateSection('placements', {...formData.placements, list: items})}
               />

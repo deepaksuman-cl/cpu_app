@@ -1,11 +1,100 @@
 "use client";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight, Play, X } from "lucide-react";
 import Image from "next/image";
 import CustomSwiper from "../ui/Swiper";
 import Icon from "../ui/Icon";
 import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+
+const PlacementSlideCard = ({ slide }) => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const extractVideoId = (url) => {
+    if (!url) return null;
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})/);
+    return match ? match[1] : null;
+  };
+  const videoId = extractVideoId(slide.youtubeLink);
+
+  return (
+    <>
+      <div className="rounded-2xl overflow-hidden relative h-[360px] sm:h-[400px] shadow-2xl group bg-[#25155c] flex flex-col justify-between border border-white/5">
+        {/* Background Decorations (Confetti) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-80 z-0">
+          <div className="absolute top-[25%] left-[10%] w-1.5 h-6 bg-[#ff4a3b] transform rotate-45 rounded-sm"></div>
+          <div className="absolute top-[45%] right-[15%] w-1.5 h-4 bg-[#ff4a3b] transform -rotate-12 rounded-sm"></div>
+          <div className="absolute top-[50%] left-[8%] w-4 h-4 border-2 border-amber-400 rounded-full border-t-transparent border-r-transparent transform -rotate-45"></div>
+          <div className="absolute bottom-[20%] left-[5%] w-2 h-2 rounded-full bg-amber-400"></div>
+          <div className="absolute bottom-[30%] right-[10%] w-1.5 h-5 bg-[#ff4a3b] transform rotate-12 rounded-sm"></div>
+        </div>
+
+        {/* Text Content */}
+        <div className="relative z-20 pt-8 px-6 w-[90%]">
+          <div className="text-amber-400 font-serif text-5xl leading-[0] mb-6">“</div>
+          <h4 className="text-white font-extrabold text-[15px] sm:text-[17px] leading-snug mb-3 drop-shadow-md">
+            "Hear Why {slide.name} Loves Studying at CPU!"
+          </h4>
+          <p className="text-white/80 text-[13px] drop-shadow-md">
+             {slide.name}
+          </p>
+        </div>
+
+        {/* Image */}
+        {slide.img && (
+          <div className="absolute inset-x-0 bottom-0 top-[30%] z-10 w-full pointer-events-none">
+            <Image
+              src={slide.img}
+              alt={slide.name || 'Placement'}
+              fill
+              className="object-cover sm:object-contain object-bottom block group-hover:scale-105 transition-transform duration-400"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+        )}
+
+        {/* Video Button */}
+        {slide.youtubeLink && (
+          <div className="absolute bottom-5 right-5 z-20">
+            <button 
+              onClick={() => setIsVideoOpen(true)} 
+              className="flex items-center bg-[#5642ea] hover:bg-[#4a3bc6] rounded-full pl-5 pr-1.5 py-1.5 shadow-[0_4px_12px_rgba(86,66,234,0.4)] transform transition-transform hover:scale-105"
+            >
+              <span className="text-white font-bold text-[12px] sm:text-[13px] mr-3 ml-1">Watch Video</span>
+              <div className="bg-[#fcb323] hover:bg-amber-400 rounded-full w-8 h-8 flex items-center justify-center">
+                <Play size={14} className="text-[#362208] ml-0.5" fill="currentColor" strokeWidth={1} />
+              </div>
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Video Modal */}
+      {isVideoOpen && videoId && (
+        <div className="fixed inset-0 z-[99999] p-4 sm:p-10 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+             onClick={() => setIsVideoOpen(false)}>
+           <div className="bg-transparent w-full max-w-5xl aspect-video relative" onClick={e => e.stopPropagation()}>
+             <button 
+               onClick={() => setIsVideoOpen(false)} 
+               className="absolute -top-12 right-0 text-white/70 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full p-2"
+             >
+               <X size={24} />
+             </button>
+             <iframe 
+               src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} 
+               title="YouTube video player" 
+               frameBorder="0" 
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+               allowFullScreen
+               className="w-full h-full rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10"
+             ></iframe>
+           </div>
+        </div>
+      )}
+    </>
+  );
+};
+
 
 export default function PlacementSection({ data }) {
   if (!data) return null;
@@ -21,7 +110,8 @@ export default function PlacementSection({ data }) {
     name: p.studentName,
     course: p.courseName,
     company: p.companyName,
-    img: p.logoUrl // Assuming logoUrl was used for student photo in migration if no other img
+    img: p.logoUrl, // Assuming logoUrl was used for student photo in migration if no other img
+    youtubeLink: p.youtubeLink
   })) || [];
 
   const relationalRecruiters = data?.placementPartnersRel?.map(p => ({
@@ -73,40 +163,7 @@ export default function PlacementSection({ data }) {
             autoInterval={4000}
             dark={true}
             breakpoints={{ 0: 1, 768: 2 }}
-            renderSlide={(slide) => (
-              <div className="rounded-2xl overflow-hidden relative h-[360px] sm:h-[400px] shadow-2xl group">
-                <Image
-                  src={slide.img}
-                  alt={slide.name}
-                  fill
-                  className="object-cover object-top block group-hover:scale-105 transition-transform duration-400"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                {/* Only show overlay and text if at least one field exists */}
-                {(slide.name || slide.course || slide.company) && (
-                  <>
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85" />
-                    <div className="placement_bg_blur absolute bottom-0 left-0 right-0 p-3.5">
-                      {slide.name && (
-                        <h6 className="font-extrabold text-[13px] text-white">
-                          {slide.name}
-                        </h6>
-                      )}
-                      {slide.course && (
-                        <small className="text-[11px] text-white/70 mt-0.5 mb-2">
-                          {slide.course}
-                        </small>
-                      )}
-                      {/* {slide.company && (
-                        <span className="bg-amber-400 text-black text-[10px] font-extrabold px-2.5 py-0.5 rounded">
-                          {slide.company}
-                        </span>
-                      )} */}
-                    </div>
-                  </>
-                )}
-              </div>
-            )}
+            renderSlide={(slide) => <PlacementSlideCard slide={slide} />}
           />
         </div>
 
