@@ -165,11 +165,6 @@ export default function HeroSection({ data }) {
         >
           <ChevronRight size={20} className="text-white" />
         </button>
-        <div className="absolute -bottom-0.5 left-0 right-0" style={{ zIndex: 2 }}>
-          <svg viewBox="0 0 1440 60" fill="none">
-            <path d="M0,60 C360,0 1080,60 1440,20 L1440,60 Z" fill="white" />
-          </svg>
-        </div>
       </section>
     </>
   );
