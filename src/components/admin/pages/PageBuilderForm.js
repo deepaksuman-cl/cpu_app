@@ -73,6 +73,15 @@ const getEmptyBlock = (type) => {
       sliderDots: true,
       isFullWidth: false, 
       itemHeight: "450px", 
+      itemWidth: "100%", 
+      useItemOverlay: true, 
+      slidesPerViewMobile: "1", 
+      slidesPerViewTablet: "2", 
+      navStyle: "outside", 
+      sliderGap: "30", 
+      overlayOpacity: "40", 
+      imageHeight: "100%", 
+      imageWidth: "100%", 
       aspectRatio: "16:9", 
       imageFit: "cover", 
       cardStyle: "elevated", 
@@ -1248,18 +1257,59 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                               </div>
 
                                {block.displayMode === 'grid' && (
-                                <div className="animate-in fade-in slide-in-from-left-2 duration-200 space-y-4">
+                                <div className="animate-in fade-in slide-in-from-left-2 duration-200 space-y-5">
                                   <div>
-                                    <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Grid Columns</label>
+                                    <label className="block text-[10px] font-bold text-gray-500 uppercase mb-2">Slides Per View (Desktop)</label>
                                     <select 
                                       value={block.gridColumns || '3'} 
                                       onChange={e => updateBlock(index, 'gridColumns', e.target.value)}
                                       className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
                                     >
-                                      <option value="2">2 Columns</option>
-                                      <option value="3">3 Columns</option>
-                                      <option value="4">4 Columns</option>
+                                      <option value="1">1 Slide (Full Width)</option>
+                                      <option value="2">2 Slides</option>
+                                      <option value="3">3 Slides</option>
+                                      <option value="4">4 Slides</option>
                                     </select>
+                                  </div>
+                                  <div>
+                                    <label className="block text-[10px] font-bold text-gray-500 uppercase mb-2">Space Between Cards (Gap)</label>
+                                    <select 
+                                      value={block.sliderGap || '30'} 
+                                      onChange={e => updateBlock(index, 'sliderGap', e.target.value)}
+                                      className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white text-xs"
+                                    >
+                                      <option value="0">0px (No Gap)</option>
+                                      <option value="10">10px (Very Small)</option>
+                                      <option value="20">20px (Small)</option>
+                                      <option value="30">30px (Default / Regular)</option>
+                                      <option value="40">40px (Large)</option>
+                                      <option value="50">50px (Very Large)</option>
+                                    </select>
+                                  </div>
+                                  <div className="grid grid-cols-2 gap-3">
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-gray-500 uppercase mb-2">Slides (Tablet)</label>
+                                      <select 
+                                        value={block.slidesPerViewTablet || '2'} 
+                                        onChange={e => updateBlock(index, 'slidesPerViewTablet', e.target.value)}
+                                        className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
+                                      >
+                                        <option value="1">1 Slide</option>
+                                        <option value="2">2 Slides</option>
+                                        <option value="3">3 Slides</option>
+                                      </select>
+                                    </div>
+                                    <div>
+                                      <label className="block text-[10px] font-bold text-gray-500 uppercase mb-2">Slides (Mobile)</label>
+                                      <select 
+                                        value={block.slidesPerViewMobile || '1'} 
+                                        onChange={e => updateBlock(index, 'slidesPerViewMobile', e.target.value)}
+                                        className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-bold"
+                                      >
+                                        <option value="1">1 Slide</option>
+                                        <option value="2">2 Slides</option>
+                                      </select>
+                                    </div>
                                   </div>
                                   <label className="flex items-center gap-2 cursor-pointer group">
                                     <input 
@@ -1281,6 +1331,25 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                                       <span className="text-[10px] font-black text-blue-900 uppercase tracking-widest">Full Width Hero Mode</span>
                                       <input type="checkbox" checked={block.isFullWidth} onChange={e => updateBlock(index, 'isFullWidth', e.target.checked)} className="w-4 h-4 accent-[#00588b]" />
                                     </label>
+                                    <label className="flex items-center justify-between cursor-pointer group col-span-2 border-b border-blue-100 pb-2 mb-1">
+                                      <span className="text-[10px] font-black text-blue-900 uppercase tracking-widest">Enable Text Overlay (Dark Shade)</span>
+                                      <input type="checkbox" checked={block.useItemOverlay !== false} onChange={e => updateBlock(index, 'useItemOverlay', e.target.checked)} className="w-4 h-4 accent-[#00588b]" />
+                                    </label>
+                                    <div className="col-span-2 border-b border-blue-100 pb-2 mb-1 pt-1">
+                                      <label className="block text-[10px] font-black text-blue-900 uppercase tracking-widest mb-2">Text Overlay / Shade Opacity</label>
+                                      <select 
+                                        value={block.overlayOpacity || '40'} 
+                                        onChange={e => updateBlock(index, 'overlayOpacity', e.target.value)}
+                                        className="w-full border border-blue-200 p-1.5 text-xs outline-none focus:border-[#00588b] bg-white font-bold"
+                                      >
+                                        <option value="0">0% (Completely Off)</option>
+                                        <option value="10">10% (Very Light)</option>
+                                        <option value="20">20% (Light)</option>
+                                        <option value="40">40% (Medium - Default)</option>
+                                        <option value="60">60% (Strong)</option>
+                                        <option value="80">80% (Darker)</option>
+                                      </select>
+                                    </div>
                                     <label className="flex items-center justify-between cursor-pointer group">
                                       <span className="text-[9px] font-black text-blue-900 uppercase tracking-widest">Autoplay</span>
                                       <input type="checkbox" checked={block.sliderAutoplay} onChange={e => updateBlock(index, 'sliderAutoplay', e.target.checked)} className="w-3.5 h-3.5 accent-[#00588b]" />
@@ -1317,6 +1386,35 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                                 className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-mono" 
                                 placeholder="450px"
                               />
+                            </div>
+                            <div className="md:col-span-1">
+                              <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Container Width (e.g. 100%, 1200px)</label>
+                              <input 
+                                type="text" 
+                                value={block.itemWidth || '100%'} 
+                                onChange={e => updateBlock(index, 'itemWidth', e.target.value)}
+                                className="w-full border border-gray-200 p-2 text-sm outline-none focus:border-[#00588b] bg-white font-mono" 
+                                placeholder="100%"
+                              />
+                            </div>
+                            <div className="md:col-span-1">
+                              <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Image Size (e.g. 100%, 250px)</label>
+                              <div className="flex gap-2">
+                                <input 
+                                  type="text" 
+                                  value={block.imageWidth || '100%'} 
+                                  onChange={e => updateBlock(index, 'imageWidth', e.target.value)}
+                                  className="flex-1 border border-gray-200 p-2 text-[10px] outline-none focus:border-[#00588b] bg-white font-mono" 
+                                  placeholder="Width"
+                                />
+                                <input 
+                                  type="text" 
+                                  value={block.imageHeight || '100%'} 
+                                  onChange={e => updateBlock(index, 'imageHeight', e.target.value)}
+                                  className="flex-1 border border-gray-200 p-2 text-[10px] outline-none focus:border-[#00588b] bg-white font-mono" 
+                                  placeholder="Height"
+                                />
+                              </div>
                             </div>
                             <div>
                               <label className="block text-[10px] font-bold text-gray-500 uppercase mb-1">Image Aspect Ratio</label>
