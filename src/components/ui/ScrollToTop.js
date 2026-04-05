@@ -31,7 +31,7 @@ export default function ScrollToTop() {
   }, []);
 
   return (
-    <div className="fixed bottom-8 right-8 z-[9999]">
+    <div className="fixed bottom-20 lg:bottom-8 right-8 z-[9999]">
       <button
         type="button"
         onClick={scrollToTop}
