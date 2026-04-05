@@ -500,9 +500,10 @@ function MobPanelRouter({ tab, navData, state, dispatch }) {
     case 'admissions':
       return <MobPanelAdmissions config={tab.panel || { type: 'admissions', sourceMenu: 'Admissions' }} navData={navData} />;
     case 'enquiry':
-      return <MobPanelEnquiry formConfig={navData.mobileConfig.enquiryForm} />;
-    case 'open-enquiry': // Handle as drawer if configured as such
-      return <MobPanelEnquiry formConfig={navData.mobileConfig.enquiryForm} />;
+      // Handled by custom event in handleMobileTab/runDynamicAction
+      return null;
+    case 'open-enquiry': // Handle as drawer if configured as such (now disabled)
+      return null;
     case 'full-menu':
       return <MobPanelFullMenu config={tab.panel || { type: 'full-menu' }} navData={navData} state={state} dispatch={dispatch} />;
     case 'links':
@@ -669,8 +670,8 @@ export default function HeaderClient({ navData }) {
         window.location.href = `tel:${phone}`;
         break;
       case 'open-enquiry':
-        const enquiryTab = mobileConfig?.bottomTabs?.find(t => t.panel?.type === 'enquiry');
-        if (enquiryTab) dispatch({ type: 'SET_TAB', key: enquiryTab.key });
+        window.dispatchEvent(new CustomEvent('open-floating-enquiry'));
+        dispatch({ type: 'CLOSE_TAB' });
         break;
       default:
         console.warn(`Unknown action: ${actionKey}`);
@@ -678,6 +679,12 @@ export default function HeaderClient({ navData }) {
   };
 
   const handleMobileTab = (tab) => {
+    // Intercept "Enquiry" and ensure it triggers the floating form
+    if (tab.path === 'enquiry' || tab.path === 'open-enquiry' || tab.key === 'enquiry') {
+      runDynamicAction('open-enquiry');
+      return;
+    }
+
     switch (tab.type) {
       case 'link':
         if (tab.path) window.location.href = tab.path;

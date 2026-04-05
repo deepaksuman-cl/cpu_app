@@ -357,8 +357,8 @@
         "key": "enquiry",
         "label": "Enquiry",
         "icon": "MessageSquare",
-        "type": "drawer",
-        "path": "enquiry"
+        "type": "action",
+        "path": "open-enquiry"
       },
       {
         "key": "admissions",
