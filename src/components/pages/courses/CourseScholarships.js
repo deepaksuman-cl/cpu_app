@@ -9,7 +9,7 @@ function SectionTitle({ children, subtitle }) {
       <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">
         <StructuredTitle title={children} highlightClass="text-[#ffb900]" />
       </h2>
-      {subtitle && <p className="text-sm max-w-2xl mx-auto text-blue-200">{subtitle}</p>}
+      {subtitle && <p className="text-lg max-w-2xl mx-auto text-blue-200">{subtitle}</p>}
       <div className="flex gap-1 mt-3 justify-center">
         <div className="h-1 w-14 rounded-full bg-[#ffb900]" />
         <div className="h-1 w-5 rounded-full bg-[#00588b]" />
@@ -87,7 +87,7 @@ export default function CourseScholarships({ data }) {
                     <div className="w-10 h-10 rounded-xl bg-[#ffb900]/15 flex items-center justify-center flex-shrink-0 text-[#ffb900] group-hover:scale-110 transition-transform">
                       {isString ? <span className="font-black text-xs">{i + 1}</span> : <Icon size={20} />}
                     </div>
-                    <div className="text-blue-100/90 text-[13px] leading-relaxed font-medium">
+                    <div className="text-blue-100/90 text-[20px] leading-relaxed font-medium">
                       {isString ? note : note.text}
                     </div>
                   </div>

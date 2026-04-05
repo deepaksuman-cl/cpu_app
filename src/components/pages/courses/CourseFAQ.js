@@ -10,7 +10,7 @@ function SectionTitle({ children, subtitle }) {
       <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-[#00588b]">
         <StructuredTitle title={children} />
       </h2>
-      {subtitle && <p className="text-sm max-w-2xl mx-auto text-gray-500">{subtitle}</p>}
+      {subtitle && <p className="text-lg max-w-2xl mx-auto text-gray-500">{subtitle}</p>}
       <div className="flex gap-1 mt-3 justify-center">
         <div className="h-1 w-14 rounded-full bg-[#ffb900]" />
         <div className="h-1 w-5 rounded-full bg-[#00588b]" />

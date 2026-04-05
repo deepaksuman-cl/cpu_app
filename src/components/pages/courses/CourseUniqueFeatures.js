@@ -12,7 +12,7 @@ function SectionTitle({ children, subtitle }) {
       <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-[#00588b]">
         <StructuredTitle title={children} />
       </h2>
-      {subtitle && <p className="text-sm max-w-2xl mx-auto text-gray-500">{subtitle}</p>}
+      {subtitle && <p className="text-lg max-w-2xl mx-auto text-gray-500">{subtitle}</p>}
       <div className="flex gap-1 mt-3 justify-center">
         <div className="h-1 w-14 rounded-full bg-[#ffb900]" />
         <div className="h-1 w-5 rounded-full bg-[#00588b]" />
@@ -48,8 +48,8 @@ export default function CourseUniqueFeatures({ data }) {
                 <div className="w-12 h-12 bg-[#00588b]/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#00588b] transition-colors">
                   <Icon size={22} className="text-[#00588b] group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-[#00588b] font-extrabold mb-2 text-sm">{feat.title}</h3>
-                <p className="text-gray-500 text-xs leading-relaxed">{feat.desc}</p>
+                <h3 className="text-[#00588b] font-extrabold mb-2 text-md">{feat.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{feat.desc}</p>
               </div>
             );
           })}

@@ -640,7 +640,7 @@ export default function SchoolPage() {
                 style={{ transform: `translateX(-${pSlider.active * cardW}%)` }}
               >
                 {[...placements, ...placements].map((p, j) => (
-                  <div key={j} className="flex-shrink-0 px-2.5" style={{ width: `${cardW}%` }}>
+                  <div key={j} className="flex-shrink-0 py-5 px-2.5" style={{ width: `${cardW}%` }}>
                     <div className="rounded-2xl overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-xl bg-gradient-to-br from-[#f8fbff] to-[#dbeafe] border border-[#dde8f5] shadow-[0_4px_16px_rgba(0,88,139,0.08)]">
                       <div className="relative" style={{ aspectRatio: "3/4" }}>
                         <img src={p.img} alt={p.name} className="w-full"
