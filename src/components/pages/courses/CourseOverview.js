@@ -37,8 +37,7 @@ export default function CourseOverview({ data }) {
           </SectionTitle>
           <RichTextRenderer 
             content={data.paragraphs?.join('')} 
-            className="text-gray-600 leading-relaxed text-sm" 
-          />
+            className="text-gray-600 leading-relaxed text-md"/>
           <div className="flex flex-wrap gap-3 mt-2">
             {data.tags?.map((tag, i) => (
               <span key={i} className="bg-[#00588b]/10 text-[#00588b] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#00588b]/20">
@@ -55,7 +54,7 @@ export default function CourseOverview({ data }) {
             return (
               <div key={i} className="group bg-white border border-gray-100 rounded-2xl p-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">
                 <div className="w-12 h-12 bg-[#00588b]/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-[#00588b] transition-colors">
-                  <Icon size={22} className="text-[#00588b] group-hover:text-white transition-colors" />
+                  <Icon size={32} className="text-[#00588b] group-hover:text-white transition-colors" />
                 </div>
                 <div className="font-bold text-[#00588b] text-sm">{item.label}</div>
                 <div className="text-gray-400 text-xs mt-0.5">{item.sub}</div>

@@ -54,7 +54,7 @@ export default function SchoolPlacements({ data }) {
           <div className="overflow-hidden">
             <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${active * 100}%)` }}>
               {list.map((p, j) => (
-                <div key={j} className="flex-shrink-0 px-2.5" style={{ width: `${cardW}%` }}>
+                <div key={j} className="flex-shrink-0 py-5 px-2.5" style={{ width: `${cardW}%` }}>
                   <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#f8fbff] to-[#dbeafe] border border-[#dde8f5] shadow-[0_4px_16px_rgba(0,88,139,0.08)] transition-all hover:-translate-y-2 hover:shadow-xl">
                     <div className="relative aspect-[3/4]">
                       <img src={p.img || p.image} alt={p.name} className="w-full" />

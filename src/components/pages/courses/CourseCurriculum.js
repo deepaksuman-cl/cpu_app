@@ -230,20 +230,20 @@ export function CourseCurriculum({ data }) {
   if (!data) return null;
 
   return (
-    <section className="w-full py-20">
+    <section className="w-full py-20 bg-blue-50">
       <div className="max-w-7xl mx-auto px-4 mb-10">
         <SectionTitle subtitle={data.subtitle}>{data.sectionTitle}</SectionTitle>
         {data.introNote && (
           <RichTextRenderer 
             content={data.introNote} 
             useProse={data.useProse !== false}
-            className="mt-6 text-gray-600 leading-relaxed text-sm" 
+            className="mt-6 text-gray-600 leading-relaxed text-lg" 
           />
         )}
       </div>
 
       {/* Full-width accordion */}
-      <div className="px-4 md:px-8 lg:px-16">
+      <div className="max-w-7xl mx-auto px-4">
         <CourseAccordion
           sections={data.accordionSections || []}
           courseStructure={data.courseStructure}
@@ -256,7 +256,7 @@ export function CourseCurriculum({ data }) {
           <RichTextRenderer 
             content={data.outroNote} 
             useProse={data.useProse !== false}
-            className="text-gray-600 leading-relaxed text-sm border-t border-gray-100 pt-8" 
+            className="text-gray-600 leading-relaxed text-md border-t border-gray-100 pt-8 mb-4" 
           />
         )}
         {data.valueAddedCourses && data.valueAddedCourses.length > 0 && (

@@ -48,7 +48,7 @@ function AccomplishmentsCard({ data }) {
           const Icon = LucideIcons[s.icon] || Star;
           return (
             <div key={i} className="bg-white/10 rounded-2xl p-3 text-center hover:bg-white/20 transition cursor-default">
-              <Icon size={26} className="mx-auto mb-1.5 text-[#ffb900]" />
+              <Icon size={30} className="mx-auto mb-1.5 text-[#ffb900]" />
               <div className="text-white font-black text-md leading-tight">{s.value}</div>
               <div className="text-blue-200 text-[14px] mt-0.5 leading-tight">{s.label}</div>
             </div>
