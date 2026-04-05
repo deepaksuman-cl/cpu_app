@@ -217,7 +217,7 @@ export default function TestimonialSection({ data }) {
                 <img
                   src={item.img}
                   alt={item.name}
-                  className="w-full h-full object-cover object-top"
+                  className="w-full"
                 />
               </button>
             ))}
