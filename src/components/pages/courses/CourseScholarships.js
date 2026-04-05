@@ -43,7 +43,7 @@ export default function CourseScholarships({ data }) {
                 <tr className="bg-[#00588b]/5">
                   <th className="px-6 py-4 text-left text-[#00588b] font-black uppercase tracking-wider">Scholarship Slab</th>
                   {dateHeaders?.map((d, i) => (
-                    <th key={i} className="px-4 py-4 text-center text-[#00588b] font-black text-xs uppercase tracking-wider">{d}</th>
+                    <th key={i} className="px-4 py-4 text-center text-[#00588b] font-black text-lg uppercase tracking-wider">{d}</th>
                   ))}
                 </tr>
               </thead>
@@ -85,9 +85,9 @@ export default function CourseScholarships({ data }) {
                 return (
                   <div key={i} className="flex items-start gap-4 group p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all">
                     <div className="w-10 h-10 rounded-xl bg-[#ffb900]/15 flex items-center justify-center flex-shrink-0 text-[#ffb900] group-hover:scale-110 transition-transform">
-                      {isString ? <span className="font-black text-xs">{i + 1}</span> : <Icon size={20} />}
+                      {isString ? <span className="font-black text-lg">{i + 1}</span> : <Icon size={20} />}
                     </div>
-                    <div className="text-blue-100/90 text-[20px] leading-relaxed font-medium">
+                    <div className="text-blue-100/90 text-[18px] leading-relaxed font-medium">
                       {isString ? note : note.text}
                     </div>
                   </div>
