@@ -31,7 +31,7 @@
   font-family:    var(--u-font-sans);
   font-size:      1.05rem;
   line-height:    1.8;
-  color:          inherit; /* 🔥 Respect parent/context color */
+  /* color:          inherit;  */
   max-width:      100%;
   overflow-wrap:  break-word;
   -webkit-font-smoothing:  antialiased;
@@ -251,7 +251,7 @@
   position:     relative;
   padding-left: 1.75rem !important;
   margin-bottom: 0.75rem !important;
-  color: var(--u-text-main);
+  /* color: var(--u-text-main); */
   line-height: 1.6;
 }
 
