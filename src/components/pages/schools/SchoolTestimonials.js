@@ -49,7 +49,7 @@ export default function SchoolTestimonials({ data }) {
                       <div className="flex items-center justify-between flex-wrap gap-4">
                         <div className="flex items-center gap-4">
                           <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-[#ffb900]/35 flex-shrink-0">
-                            <img src={t.photo || t.avatar || "https://cpur.in/wp-content/uploads/2023/07/student.png"} alt={t.name} className="w-full h-full object-cover object-top" />
+                            <img src={t.photo || t.avatar || "https://cpur.in/wp-content/uploads/2023/07/student.png"} alt={t.name} className="w-full" />
                           </div>
                           <div>
                             <div className="font-bold text-white text-base">{t.name}</div>

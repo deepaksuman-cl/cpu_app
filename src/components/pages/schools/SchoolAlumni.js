@@ -40,10 +40,10 @@ export default function SchoolAlumni({ data }) {
           <div className="overflow-hidden">
             <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${active * 100}%)` }}>
               {list.map((a, j) => (
-                <div key={j} className="flex-shrink-0 px-3" style={{ width: `${cardW}%` }}>
+                <div key={j} className="flex-shrink-0 px-3 py-5 " style={{ width: `${cardW}%` }}>
                   <div className="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-[0_4px_16px_rgba(0,88,139,0.07)] transition-all hover:-translate-y-2 hover:shadow-xl">
                     <div className="aspect-[4/5] overflow-hidden">
-                      <img src={a.image || a.img} alt={a.name} className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105" />
+                      <img src={a.image || a.img} alt={a.name} className="w-full h-full transition-transform duration-500 hover:scale-105" />
                     </div>
                     <div className="p-4 text-center border-t-[3px] border-[#00588b]">
                       <h4 className="font-bold text-sm text-[#0a1628]">{a.name}</h4>

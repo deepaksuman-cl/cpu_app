@@ -643,7 +643,7 @@ export default function SchoolPage() {
                   <div key={j} className="flex-shrink-0 px-2.5" style={{ width: `${cardW}%` }}>
                     <div className="rounded-2xl overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-xl bg-gradient-to-br from-[#f8fbff] to-[#dbeafe] border border-[#dde8f5] shadow-[0_4px_16px_rgba(0,88,139,0.08)]">
                       <div className="relative" style={{ aspectRatio: "3/4" }}>
-                        <img src={p.img} alt={p.name} className="w-full h-full object-cover object-top"
+                        <img src={p.img} alt={p.name} className="w-full"
                           onError={e => { e.target.parentElement.innerHTML = `<div class="w-full h-full bg-blue-100 flex items-center justify-center text-5xl">👨‍💻</div>`; }} />
                         <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#00588b] rounded-tl" />
                         <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#00588b] rounded-br" />
@@ -693,7 +693,7 @@ export default function SchoolPage() {
                   <div key={j} className="flex-shrink-0 px-3" style={{ width: `${cardW}%` }}>
                     <div className="rounded-2xl overflow-hidden bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-default border border-slate-200 shadow-[0_4px_16px_rgba(0,88,139,0.07)]">
                       <div className="overflow-hidden" style={{ aspectRatio: "4/5" }}>
-                        <img src={a.img} alt={a.name} className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
+                        <img src={a.img} alt={a.name} className="w-full transition-transform duration-500 hover:scale-105"
                           onError={e => { e.target.parentElement.innerHTML = `<div class="w-full h-full bg-slate-100 flex items-center justify-center text-6xl">👤</div>`; }} />
                       </div>
                       <div className="p-4 text-center border-t-[3px] border-[#00588b]">
@@ -881,7 +881,7 @@ export default function SchoolPage() {
               <div className="rounded-2xl p-4 w-full opacity-40 pointer-events-none bg-white/5 border border-white/8">
                 <div className="w-8 h-8 rounded-lg overflow-hidden mb-3">
                   <img src={testimonials[(tSlider.active - 1 + testimonials.length) % testimonials.length].photo}
-                    alt="" className="w-full h-full object-cover object-top" />
+                    alt="" className="w-full" />
                 </div>
                 <p className="text-xs text-white/60 leading-relaxed line-clamp-3">
                   {testimonials[(tSlider.active - 1 + testimonials.length) % testimonials.length].text.slice(0, 80)}...
@@ -903,7 +903,7 @@ export default function SchoolPage() {
                         <div className="flex items-center justify-between flex-wrap gap-4">
                           <div className="flex items-center gap-4">
                             <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 border-2 border-[#ffb900]/35">
-                              <img src={t.photo} alt={t.name} className="w-full h-full object-cover object-top"
+                              <img src={t.photo} alt={t.name} className="w-full"
                                 onError={e => { e.target.parentElement.innerHTML = `<div class="w-full h-full flex items-center justify-center text-2xl bg-[#ffb900]/10">${t.emoji}</div>`; }} />
                             </div>
                             <div>
@@ -940,7 +940,7 @@ export default function SchoolPage() {
               <div className="rounded-2xl p-4 w-full opacity-40 pointer-events-none bg-white/5 border border-white/8">
                 <div className="w-8 h-8 rounded-lg overflow-hidden mb-3">
                   <img src={testimonials[(tSlider.active + 1) % testimonials.length].photo}
-                    alt="" className="w-full h-full object-cover object-top" />
+                    alt="" className="w-full " />
                 </div>
                 <p className="text-xs text-white/60 leading-relaxed line-clamp-3">
                   {testimonials[(tSlider.active + 1) % testimonials.length].text.slice(0, 80)}...
