@@ -5,7 +5,9 @@
 [id^="content-year-"] {
   scroll-margin-top: 140px;
 }
-
+.text-white {
+    color: var(--color-white)!important;
+}
 .hero_title{
    line-height: 1.6!important;
 }
