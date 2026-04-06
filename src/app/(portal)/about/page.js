@@ -25,7 +25,7 @@ const aboutData = {
       location: "Kota (Rajasthan)",
       established: "2012",
       campus: "50 Acres",
-      image: "https://cpur.in/wp-content/uploads/2022/04/CPU-Kota-1024x533.png",
+      image: "https://cpur.in/api/media/media/1775474758951-4mnj2-cpu-kota.png",
       website: "www.cpur.in",
       websiteUrl: "https://www.cpur.in",
       description:
@@ -44,7 +44,7 @@ const aboutData = {
       location: "Hamirpur (Himachal Pradesh)",
       established: "2012",
       campus: "30 Acres",
-      image: "https://cpur.in/wp-content/uploads/2022/04/cpu-hamirpur.jpg",
+      image: "https://cpur.in/api/media/media/1775474758954-77mfp-cpur-hamirpur.png",
       website: "www.cpuh.in",
       websiteUrl: "https://www.cpuh.in",
       description:

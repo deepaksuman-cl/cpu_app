@@ -189,7 +189,7 @@ export default function CourseApplySteps({ data }) {
 
         <div className="text-center mt-14">
           <a
-            href={ctaLink || "#"}
+            href={"https://admission.cpur.in/"}
             className="inline-flex items-center gap-2 bg-[#ffb900] text-[#00588b] font-extrabold text-base px-10 py-4 rounded-full shadow-2xl hover:bg-yellow-300 hover:scale-105 transition-all"
           >
             {ctaLabel || "Start Your Application"} <ArrowRight size={20} />
