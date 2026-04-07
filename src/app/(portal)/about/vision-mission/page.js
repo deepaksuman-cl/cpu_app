@@ -1,13 +1,12 @@
-"use client";
-
 import {
   Target, Compass, Lightbulb, Heart, Star,
   BookOpen, Globe, Link2, Brain, Shuffle,
   TrendingUp, Award, Shield, Quote, CheckCircle2, Infinity,
 } from "lucide-react";
+import db from "@/models";
 
-// ─── DATA JSON ───────────────────────────────────────────────────────────────
-const pageData = {
+// ─── STATIC FALLBACK DATA ───────────────────────────────────────────────────
+const staticPageData = {
   quote: {
     text: "We have embarked upon a mission that envisions a new dimension in learning.",
   },
@@ -223,7 +222,18 @@ function ValuesSection({ data }) {
 }
 
 // ─── MAIN PAGE ───────────────────────────────────────────────────────────────
-export default function VisionMissionPage() {
+export default async function VisionMissionPage() {
+  // Fetch dynamic content from DB
+  let pageData = staticPageData;
+  try {
+    const record = await db.AboutPageContent.findOne({ where: { section_key: 'vision_mission' } });
+    if (record && record.content) {
+      pageData = record.content;
+    }
+  } catch (error) {
+    console.error("Failed to fetch Vision & Mission content:", error);
+  }
+
   const { quote, vision, mission, approach, values, heroChips } = pageData;
 
   return (
@@ -263,9 +273,9 @@ export default function VisionMissionPage() {
 
           {/* Stat chips */}
           <div className="flex flex-wrap gap-3 mt-6">
-            {heroChips.map((chip) => (
+            {heroChips.map((chip, idx) => (
               <div
-                key={chip.label}
+                key={idx}
                 className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white bg-white/10 backdrop-blur-sm border border-white/[0.15]"
               >
                 <DynIcon name={chip.icon} size={14} className="text-[#ffb900]" />

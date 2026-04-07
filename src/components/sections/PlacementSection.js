@@ -1,12 +1,11 @@
 "use client";
-import { useState } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, Play, X } from "lucide-react";
+import { ArrowRight, Play, X } from "lucide-react";
 import Image from "next/image";
-import CustomSwiper from "../ui/Swiper";
-import Icon from "../ui/Icon";
-import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { useState } from 'react';
 import 'swiper/css';
+import { Autoplay } from 'swiper/modules';
+import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
+import CustomSwiper from "../ui/Swiper";
 
 const PlacementSlideCard = ({ slide, onWatchVideo }) => {
   const extractVideoId = (url) => {
@@ -29,6 +28,8 @@ const PlacementSlideCard = ({ slide, onWatchVideo }) => {
   };
   const videoId = extractVideoId(slide.youtubeLink);
 
+  const hasContent = !!slide.name?.trim();
+
   return (
     <div className="rounded-3xl overflow-hidden relative h-[420px] sm:h-[460px] shadow-2xl group bg-gradient-to-br from-[#1a0b45] to-[#25155c] flex flex-col justify-between border border-white/10 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
       {/* Background Decorations (Confetti/Shapes) */}
@@ -41,27 +42,44 @@ const PlacementSlideCard = ({ slide, onWatchVideo }) => {
         <div className="absolute bottom-[30%] right-[10%] w-1.5 h-5 bg-[#ff4a3b] transform rotate-12 rounded-full"></div>
       </div>
 
-      {/* Quote Icon */}
-      <div className="absolute top-8 left-8 z-20">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-amber-400 opacity-80">
-          <path d="M10 11L8 17H5L7 11V7H11V11H10Z" fill="currentColor"/>
-          <path d="M19 11L17 17H14L16 11V7H20V11H19Z" fill="currentColor"/>
-        </svg>
-      </div>
+      {hasContent && (
+        <>
+          {/* Quote Icon */}
+          <div className="absolute top-8 left-8 z-20">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-amber-400 opacity-80">
+              <path d="M10 11L8 17H5L7 11V7H11V11H10Z" fill="currentColor"/>
+              <path d="M19 11L17 17H14L16 11V7H20V11H19Z" fill="currentColor"/>
+            </svg>
+          </div>
 
-      {/* Text Content */}
-      <div className="relative z-20 pt-20 px-8 w-[95%]">
-        <h4 className="text-white font-black text-[18px] sm:text-[20px] leading-[1.3] mb-3 drop-shadow-lg tracking-tight">
-           {slide.title || `"${slide.name}'s Success Story at CPU"`}
-        </h4>
-        <p className="text-white/60 text-[14px] font-bold uppercase tracking-widest drop-shadow-md">
-           {slide.name}
-        </p>
-      </div>
+          {/* Text Content */}
+          <div className="relative z-20 pt-20 px-8 w-[95%]">
+            <h4 className="text-white font-black text-[24px] sm:text-[30px] leading-tight mb-1 drop-shadow-xl tracking-tight">
+               {slide.name}
+            </h4>
+            {slide.designation && (
+              <p className="text-amber-400 text-[15px] sm:text-[17px] font-extrabold tracking-wide drop-shadow-md mb-0.5">
+                {slide.designation}
+              </p>
+            )}
+            {slide.classOf && (
+              <p className="text-white/70 text-[13px] font-black uppercase tracking-[0.2em] drop-shadow-sm flex items-center gap-2">
+                 <span className="w-1.5 h-1.5 bg-amber-400 rounded-full" />
+                 Class of {slide.classOf}
+              </p>
+            )}
+            {slide.course && !slide.designation && (
+               <p className="text-white/60 text-[14px] font-bold uppercase tracking-widest drop-shadow-md mt-2">
+                 {slide.course}
+              </p>
+            )}
+          </div>
+        </>
+      )}
 
       {/* Image - Student Photo */}
       {slide.img && (
-        <div className="absolute inset-x-0 bottom-0 top-[35%] z-10 w-full pointer-events-none select-none">
+        <div className={`absolute inset-x-0 bottom-0 ${hasContent ? 'top-[35%]' : 'top-0'} z-10 w-full pointer-events-none select-none`}>
           <Image
             src={slide.img}
             alt={slide.name || 'Placement'}
@@ -111,19 +129,35 @@ export default function PlacementSection({ data }) {
     highlight = "Opportunities at CPU"
   } = data;
 
-  const relationalSides = data?.placementPartnersRel?.filter(p => p.studentName).map(p => ({
+  const relationalSides = data?.placementPartnersRel?.filter(p => !!p.studentName || !!p.logoUrl).map(p => ({
     name: p.studentName,
     course: p.courseName,
     company: p.companyName,
     img: p.logoUrl,
-    youtubeLink: p.youtubeLink
+    youtubeLink: p.youtubeLink,
+    designation: p.designation,
+    classOf: p.classOf
   })) || [];
 
   const relationalRecruiters = data?.placementPartnersRel?.map(p => ({
     img: p.logoUrl
   })) || [];
 
-  const slides = relationalSides.length > 0 ? relationalSides : (data?.slides || []);
+  const rawSlides = relationalSides.length > 0 ? relationalSides : (data?.list || data?.slides || []);
+  const slides = rawSlides.map(s => {
+    // If it's already mapped via relationalSides, it will have 'name' etc.
+    // If it's raw JSON, it might use 'studentName' or 'logoUrl'
+    return {
+      name: s.name || s.studentName,
+      course: s.course || s.courseName,
+      company: s.company || s.companyName,
+      img: s.img || s.logoUrl,
+      youtubeLink: s.youtubeLink,
+      designation: s.designation,
+      classOf: s.classOf
+    };
+  });
+
   const recruiters = relationalRecruiters.length > 0 ? relationalRecruiters : (data?.recruiters || []);
 
   const handleWatchVideo = (id, name) => {

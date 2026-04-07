@@ -1,9 +1,8 @@
-"use client";
-
 import { MapPin, Calendar, Award, BookOpen, Users, GraduationCap, CheckCircle2, ExternalLink, Building2, Star, ChevronRight } from "lucide-react";
+import db from "@/models";
 
-// ─── DATA ────────────────────────────────────────────────────────────────────
-const aboutData = {
+// ─── STATIC FALLBACK DATA ───────────────────────────────────────────────────
+const staticAboutData = {
   group: {
     tagline: "Three Decades of Excellence",
     heading: "Shaping Futures,\nBuilding Excellence",
@@ -66,7 +65,18 @@ const aboutData = {
 const IconMap = { GraduationCap, Users, BookOpen, Award };
 
 // ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
-export default function AboutPage() {
+export default async function AboutPage() {
+  // Fetch dynamic content from DB
+  let aboutData = staticAboutData;
+  try {
+    const record = await db.AboutPageContent.findOne({ where: { section_key: 'main_about' } });
+    if (record && record.content) {
+      aboutData = record.content;
+    }
+  } catch (error) {
+    console.error("Failed to fetch About Page content:", error);
+  }
+
   return (
     <main className="min-h-screen bg-[#f5f9fc] font-sans overflow-x-hidden">
 
@@ -89,7 +99,7 @@ export default function AboutPage() {
 
             {/* Heading */}
             <h1 className="text-5xl lg:text-7xl font-black text-white leading-tight mb-6 tracking-tight">
-              {aboutData.group.heading.split("\n").map((line, i) => (
+              {(aboutData.group.heading || "").split("\n").map((line, i) => (
                 <span key={i} className="block">
                   {i === 1 ? (
                     <span className="text-[#ffb900]">{line}</span>
@@ -116,7 +126,7 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 -mt-8">
             {aboutData.stats.map((stat, i) => {
-              const Icon = IconMap[stat.icon];
+              const Icon = IconMap[stat.icon] || GraduationCap;
               return (
                 <div
                   key={i}
@@ -159,7 +169,7 @@ export default function AboutPage() {
         </div>
 
         {aboutData.universities.map((uni, idx) => (
-          <UniversityCard key={uni.id} uni={uni} reverse={idx % 2 !== 0} />
+          <UniversityCard key={uni.id || idx} uni={uni} reverse={idx % 2 !== 0} />
         ))}
       </section>
 
@@ -242,7 +252,7 @@ function UniversityCard({ uni, reverse }) {
 
         {/* Highlights */}
         <ul className="space-y-2 mb-7">
-          {uni.highlights.map((point, i) => (
+          {(uni.highlights || []).map((point, i) => (
             <li key={i} className="flex items-center gap-2.5 text-sm text-gray-700">
               <CheckCircle2 className="w-4 h-4 text-[#00588b] shrink-0" />
               {point}
