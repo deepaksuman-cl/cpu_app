@@ -215,9 +215,15 @@ export default function SchoolBuilderForm({ initialData = null }) {
       base.placements = {
         ...base.placements,
         list: initialData.placementPartnersRel.map(p => ({
-          name: p.studentName, company: p.companyName, pkg: p.packageOffered, 
-          city: p.city, img: p.logoUrl, slug: p.slug || '', course: p.courseName || '', 
-          youtubeLink: p.youtubeLink || ''
+          name: p.studentName, 
+          company: p.companyName, 
+          package: p.packageOffered, 
+          city: p.city, 
+          img: p.logoUrl, 
+          course: p.courseName || '', 
+          youtubeLink: p.youtubeLink || '', 
+          designation: p.designation || '', 
+          classOf: p.classOf || ''
         }))
       };
     }
@@ -787,9 +793,15 @@ export default function SchoolBuilderForm({ initialData = null }) {
               <NestedListEditor 
                 label="Featured Placement Stories"
                 items={formData.placements.list}
-                newItemTemplate={{ name: '', youtubeLink: '', img: '' }}
+                newItemTemplate={{ name: '', company: '', package: '', city: '', course: '', youtubeLink: '', img: '', designation: '', classOf: '' }}
                 fields={[
                   {key: 'name', label: 'Student Name / Title'},
+                  {key: 'designation', label: 'Designation'},
+                  {key: 'classOf', label: 'Class Of'},
+                  {key: 'company', label: 'Company Name'},
+                  {key: 'course', label: 'Course Name'},
+                  {key: 'package', label: 'Package (e.g. 12 LPA)'},
+                  {key: 'city', label: 'City'},
                   {key: 'youtubeLink', label: 'YouTube Video Link'},
                   {key: 'img', label: 'Photo / Thumbnail', type: 'image'}
                 ]}

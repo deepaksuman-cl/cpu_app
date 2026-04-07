@@ -131,7 +131,9 @@ export async function createSchool(data) {
           companyName: item.company, logoUrl: item.image || item.img || '',
           packageOffered: item.package || null, studentName: item.name || null,
           courseName: item.course || null, city: item.city || null, schoolId: newSchool.id,
-          youtubeLink: item.youtubeLink || null
+          youtubeLink: item.youtubeLink || null,
+          designation: item.designation || null,
+          classOf: item.classOf || null
         });
       }
     }
@@ -184,7 +186,9 @@ export async function updateSchool(id, data) {
           companyName: item.company, logoUrl: item.image || item.img || '',
           packageOffered: item.package || null, studentName: item.name || null,
           courseName: item.course || null, city: item.city || null, schoolId: id,
-          youtubeLink: item.youtubeLink || null
+          youtubeLink: item.youtubeLink || null,
+          designation: item.designation || null,
+          classOf: item.classOf || null
         });
       }
     }

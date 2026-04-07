@@ -1,5 +1,3 @@
-"use client";
-
 import {
   BookOpen,
   GraduationCap,
@@ -15,11 +13,11 @@ import {
   Globe,
   House,
 } from "lucide-react";
+import { parseEditorContent } from "@/lib/utils/editorParser";
+import db from "@/models";
 
-
-// ── Data ────────────────────────────────────────────────────────────────────
-
-const heroData = {
+// ── Static Fallback Data ────────────────────────────────────────────────────
+const staticHeroData = {
   badge: "Providing Quality Education Since 1993",
   title: "Our Roots",
   subtitle: "Career Point Ltd",
@@ -31,108 +29,22 @@ const heroData = {
     "Career Point takes pride in the trust and respect earned from countless students since its inception. As a publicly listed company on the NSE and BSE in India, Career Point Limited remains committed to transparency, excellence, and educational innovation.",
 };
 
-const bannerText =
+const staticBannerText =
   `The University is sponsored by the Gopi Bai Foundation and supported by Career Point Ltd, an educational group known for its strong commitment to providing quality education. Career Point has a legacy of over 30 years. Its journey began in May 1993 in Kota with a mission to provide "Excellent Education and Training to Students from KG to PhD." The group supports two universities, five schools (KG to 12th), three residential school campuses, and numerous skill development and coaching institutions across India.`;
 
-const stats = [
-  { icon: Calendar, value: "30+", label: "Years of Excellence", desc: "Since 1993", gradient: "from-[#ffb900]/30 to-[#ff8c00]/10" },
-  { icon: Users, value: "50K+", label: "Students Enrolled", desc: "Across India", gradient: "from-cyan-400/30 to-sky-400/10" },
-  { icon: Building2, value: "2", label: "Universities", desc: "Kota & Hamirpur", gradient: "from-emerald-400/30 to-teal-400/10" },
-  { icon: Star, value: "5", label: "Schools KG-12th", desc: "Pan India", gradient: "from-purple-400/30 to-pink-400/10" },
+const staticStats = [
+  { icon: "Calendar", value: "30+", label: "Years of Excellence", desc: "Since 1993", gradient: "from-[#ffb900]/30 to-[#ff8c00]/10" },
+  { icon: "Users", value: "50K+", label: "Students Enrolled", desc: "Across India", gradient: "from-cyan-400/30 to-sky-400/10" },
+  { icon: "Building2", value: "2", label: "Universities", desc: "Kota & Hamirpur", gradient: "from-emerald-400/30 to-teal-400/10" },
+  { icon: "Star", value: "5", label: "Schools KG-12th", desc: "Pan India", gradient: "from-purple-400/30 to-pink-400/10" },
 ];
 
-const tableHeaders = [
-  { key: "school", label: "School Education", icon: BookOpen },
-  { key: "higher", label: "Higher Education", icon: GraduationCap },
-  { key: "coaching", label: "Coaching Institute", icon: Award },
-  { key: "hostel", label: "CP Hostels", icon: Home },
-];
-
-const badgeRow = {
-  school: "KG To K12",
-  higher: "Diploma To Ph.D",
-  coaching: "IIT, AIEEE, AIPMT",
-  hostel: "Within/Outside Campus",
-};
-
-const institutions = [
-  {
-    school: { label: "Global Public School, Kota", href: "http://www.globalpublicschool.com/" },
-    higher: { label: "CP University, Kota (Rajasthan)", href: "http://cpur.in/" },
-    coaching: { label: "CAREER POINT Coaching, Kota", href: "http://www.careerpoint.ac.in/" },
-    hostel: { label: "Ashirwad Hostel within Campus, Kota", href: null },
-  },
-  {
-    school: { label: "Career Point Gurukul School, Kota", href: "http://www.jbsschool.in/" },
-    higher: { label: "CP University, Hamirpur (H.P.)", href: "http://cpuh.in/" },
-    coaching: {
-      label: "CP Gurukul, Kota (Rajasthan)",
-      sub: "Residential School with Integrated Coaching",
-      href: "http://www.cpgurukul.com/",
-    },
-    hostel: { label: "Matruchhaya Hostel, Kota", href: null },
-  },
-  {
-    school: { label: "Global Kids School, Kota", href: "http://cpwsjodhpur.com/" },
-    higher: null,
-    coaching: {
-      label: "CP Gurukul, Mohali (Punjab)",
-      sub: "Residential School with Integrated Coaching",
-      href: "http://cpmohali.in/",
-    },
-    hostel: { label: "Gurukul, Kota Hostel within Campus", href: "http://www.cpgurukul.com/" },
-  },
-  {
-    school: { label: "Career Point World School, Jodhpur", href: "http://www.cpwsjodhpur.com/" },
-    higher: null,
-    coaching: {
-      label: "CP Gurukul, Rajsamand (Rajasthan)",
-      sub: "Residential School with Integrated Coaching",
-      href: "http://cprajsamand.in/",
-    },
-    hostel: {
-      label: "Associated Hostels List",
-      href: "http://careerpoint.ac.in/academicinfo/associatedhostel.asp",
-    },
-  },
-  {
-    school: { label: "Career Point World School, Bilaspur", href: "http://www.cpwsbilaspur.com/" },
-    higher: null,
-    coaching: null,
-    hostel: null,
-  },
-];
+const IconMap = { Calendar, Users, Building2, Star };
 
 // ── Sub-components ───────────────────────────────────────────────────────────
 
-
-function InstitutionLink({ data }) {
-  if (!data) return <span className="text-gray-300 text-sm">—</span>;
-  const inner = (
-    <>
-      <span className="font-medium text-sm leading-snug">{data.label}</span>
-      {data.sub && (
-        <span className="block text-xs text-gray-500 mt-0.5 italic">{data.sub}</span>
-      )}
-    </>
-  );
-  if (data.href) {
-    return (
-      <a
-        href={data.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group flex items-start gap-1.5 text-[#00588b] hover:text-[#ffb900] transition-colors duration-200"
-      >
-        <ExternalLink className="w-3.5 h-3.5 mt-0.5 shrink-0 opacity-60 group-hover:opacity-100" />
-        <span>{inner}</span>
-      </a>
-    );
-  }
-  return <span className="text-gray-700 text-sm">{inner}</span>;
-}
-
-function StatCard({ icon: Icon, value, label, desc, gradient }) {
+function StatCard({ icon: IconKey, value, label, desc, gradient }) {
+  const Icon = IconMap[IconKey] || Star;
   return (
     <div className="relative overflow-hidden rounded-2xl group cursor-default">
       {/* Gradient glow bg */}
@@ -180,10 +92,29 @@ function StatCard({ icon: Icon, value, label, desc, gradient }) {
 
 // ── Main Component ───────────────────────────────────────────────────────────
 
-export default function OurRoots() {
+export default async function OurRoots() {
+  // Fetch dynamic content from DB
+  let heroData = staticHeroData;
+  let bannerText = staticBannerText;
+  let stats = staticStats;
+  let institutions_html = "";
+  let useProse = true; // Default to true since that's our goal
+
+  try {
+    const record = await db.AboutPageContent.findOne({ where: { section_key: 'our_roots' } });
+    if (record && record.content) {
+      heroData = record.content.hero || staticHeroData;
+      bannerText = record.content.bannerText || staticBannerText;
+      stats = record.content.stats || staticStats;
+      institutions_html = parseEditorContent(record.content.institutions_html) || "";
+      useProse = record.content.useProse !== undefined ? record.content.useProse : true;
+    }
+  } catch (error) {
+    console.error("Failed to fetch Our Roots content:", error);
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-
 
       {/* ── Page Container ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
@@ -191,17 +122,14 @@ export default function OurRoots() {
         {/* ── Announcement Banner ── */}
         <div className="bg-white border-2 border-dashed border-[#00588b] rounded-xl p-5">
           <p className="text-sm text-gray-700 leading-relaxed">
-            <span className="font-bold text-[#00588b]">
-              The University is sponsored by the Gopi Bai Foundation
-            </span>{" "}
-            and supported by Career Point Ltd, an educational group known for its strong commitment to
-            providing quality education. Career Point has a legacy of over 30 years. Its journey began
-            in May 1993 in Kota with a mission to provide{" "}
-            <span className="font-semibold text-[#00588b]">
-              &ldquo;Excellent Education and Training to Students from KG to PhD.&rdquo;
-            </span>{" "}
-            The group supports two universities, five schools (KG to 12th), three residential school
-            campuses, and numerous skill development and coaching institutions across India.
+            {bannerText.includes("sponsored by the Gopi Bai Foundation") ? (
+              <>
+                <span className="font-bold text-[#00588b]">The University is sponsored by the Gopi Bai Foundation</span>{" "}
+                and supported by Career Point Ltd, an educational group known for its strong commitment to providing quality education. Career Point has a legacy of over 30 years. Its journey began in May 1993 in Kota with a mission to provide{" "}
+                <span className="font-semibold text-[#00588b]">&ldquo;Excellent Education and Training to Students from KG to PhD.&rdquo;</span>{" "}
+                The group supports two universities, five schools (KG to 12th), three residential school campuses, and numerous skill development and coaching institutions across India.
+              </>
+            ) : bannerText}
           </p>
         </div>
 
@@ -259,80 +187,22 @@ export default function OurRoots() {
             <ChevronRight className="w-5 h-5 text-[#00588b]/40" />
           </div>
 
-          {/* Cards grid (mobile) */}
-          <div className="grid grid-cols-1 gap-4 md:hidden">
-            {institutions.map((row, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden"
-              >
-                {tableHeaders.map(({ key, label, icon: Icon }) =>
-                  row[key] ? (
-                    <div key={key} className="flex gap-3 px-4 py-3 border-b border-gray-50 last:border-0">
-                      <div className="w-8 h-8 rounded-lg bg-[#00588b]/10 flex items-center justify-center shrink-0">
-                        <Icon className="w-4 h-4 text-[#00588b]" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-0.5 font-semibold">
-                          {label}
-                        </p>
-                        <InstitutionLink data={row[key]} />
-                      </div>
-                    </div>
-                  ) : null
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Table (desktop) */}
-          <div className="hidden md:block bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-[#00588b]">
-                  {tableHeaders.map(({ key, label, icon: Icon }) => (
-                    <th
-                      key={key}
-                      className="w-1/4 px-5 py-4 text-left text-white text-sm font-bold tracking-wide"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Icon className="w-4 h-4 text-[#ffb900]" />
-                        {label}
-                      </div>
-                    </th>
-                  ))}
-                </tr>
-
-                {/* Badge row */}
-                <tr className="border-b-2 border-[#ffb900] bg-[#00588b]/5">
-                  {tableHeaders.map(({ key }) => (
-                    <td key={key} className="px-5 py-3">
-                      <span className="inline-block bg-[#ffb900] text-[#00588b] text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
-                        {badgeRow[key]}
-                      </span>
-                    </td>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody>
-                {institutions.map((row, i) => (
-                  <tr
-                    key={i}
-                    className="border-b border-gray-100 hover:bg-[#00588b]/4 transition-colors duration-150"
-                  >
-                    {tableHeaders.map(({ key }) => (
-                      <td key={key} className="px-5 py-4 align-top">
-                        <InstitutionLink data={row[key]} />
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Footer note */}
+          {/* Dynamic Rich Text Content */}
+          {institutions_html ? (
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 overflow-hidden">
+              <div 
+                className={`${useProse ? 'university-prose' : 'prose max-w-none prose-sm md:prose-base'} 
+                  prose-headings:text-[#00588b] prose-headings:font-black
+                  prose-a:text-[#00588b] prose-a:no-underline hover:prose-a:text-[#ffb900]
+                  prose-strong:text-gray-900`}
+                dangerouslySetInnerHTML={{ __html: institutions_html }} 
+              />
+            </div>
+          ) : (
+            <div className="text-center py-12 text-gray-400 bg-white rounded-2xl border-2 border-dashed border-gray-100 italic">
+               Institution data will be updated soon.
+            </div>
+          )}
     
         </section>
 

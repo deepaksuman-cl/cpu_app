@@ -35,6 +35,14 @@ const PlacementPartner = sequelize.define('placementpartners', {
     allowNull: true,
     references: { model: 'schools', key: 'id' },
   },
+  designation: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  classOf: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 }, {
   timestamps: true,
 });

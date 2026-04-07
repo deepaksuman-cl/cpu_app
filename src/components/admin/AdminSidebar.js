@@ -4,6 +4,7 @@ import {
   Building,
   ChevronDown,
   FileText, Home, ImageIcon,
+  Info,
   LayoutDashboard,
   PanelBottom,
   PanelLeftClose,
@@ -41,6 +42,7 @@ const SIDEBAR_MENUS = [
       },
       { name: 'Footer Settings', href: '/admin/footer-manager', icon: PanelBottom },
       { name: 'Home Page Setup', href: '/admin/home-setup', icon: Home },
+      { name: 'About Manager', href: '/admin/pages/about-manager', icon: Info },
       { name: 'Page Builder', href: '/admin/pages', icon: FileText },
       { name: 'Flipbook Manager', href: '/admin/flipbooks', icon: FileText },
       { name: 'Media Library', href: '/admin/media', icon: ImageIcon },
@@ -274,7 +276,7 @@ export default function AdminSidebar({
                 }`}
             >
               <img
-                src="https://cpur.in/wp-content/uploads/2026/01/logo__cpu_naac.png"
+                src="https://cpur.in/api/media/media/1775536609451-ohn16-logo--cpu-naac.png"
                 alt="Career Point University"
                 className="max-h-[44px] w-auto object-contain"
               />
@@ -312,8 +314,8 @@ export default function AdminSidebar({
                   <div className="overflow-hidden">
                     <ul className="py-2 flex flex-col m-0">
                       {group.items.map((item) => {
-                        const isChildActive = item.subItems?.some(s => pathname.startsWith(s.href));
-                        const isDirectActive = item.href && (item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href));
+                        const isDirectActive = item.href && (item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href)) && !group.items.some(other => other !== item && other.href && pathname.startsWith(other.href) && other.href.length > item.href.length);
+                        const isChildActive = !isDirectActive && item.subItems?.some(s => pathname === s.href || pathname.startsWith(s.href + '/'));
                         const isActive = isDirectActive || isChildActive;
                         const isItemExpanded = expandedItems[item.name];
                         const Icon = item.icon;

@@ -1,23 +1,29 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import { 
-  Pencil, Save, CheckCircle2, AlertCircle, Settings, 
-  Trash2, Plus, MoveUp, MoveDown, Image as ImageIcon 
-} from 'lucide-react';
-import Modal from '@/components/admin/ui/Modal';
 import MediaUploader from '@/components/admin/MediaUploader';
+import ColorPicker from '@/components/admin/ui/ColorPicker';
+import IconPicker from '@/components/admin/ui/IconPicker';
+import Modal from '@/components/admin/ui/Modal';
+import { updateHomePageData } from "@/lib/actions/homeActions";
+import { seedDatabase } from "@/lib/actions/seedActions";
+import {
+    AlertCircle,
+    CheckCircle2,
+    MoveDown,
+    MoveUp,
+    Pencil,
+    Plus,
+    Settings,
+    Trash2
+} from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
+import Icon from "../../ui/Icon";
 const RichTextEditor = dynamic(() => import('@/components/admin/RichTextEditor'), { 
   ssr: false,
   loading: () => <div className="h-[500px] bg-gray-50 border border-gray-200 animate-pulse flex items-center justify-center text-sm text-gray-400">Loading Editor...</div>
 });
-import IconPicker from '@/components/admin/ui/IconPicker';
-import ColorPicker from '@/components/admin/ui/ColorPicker';
-import { updateHomePageData } from "@/lib/actions/homeActions";
-import { seedDatabase } from "@/lib/actions/seedActions";
-import Icon from "../../ui/Icon";
 
 // --- Section Metadata ---
 const SECTION_MAP = {
