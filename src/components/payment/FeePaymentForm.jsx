@@ -390,7 +390,7 @@ export default function FeePaymentForm() {
                   type="number"
                   min="100"
                   value={formData.fee}
-                  onChange={handleAmountChange}
+                  onBlur={handleAmountChange}
                   icon={IndianRupee}
                   required
                 />
