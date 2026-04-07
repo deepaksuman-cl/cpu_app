@@ -43,6 +43,7 @@ function FloatingInput({
   hidden = false,
   icon: Icon,
   placeholder = ' ',
+  min = null,
 }) {
   if (hidden) {
     return null;
@@ -80,6 +81,7 @@ function FloatingInput({
           className={`peer block w-full appearance-none rounded-lg border border-gray-200 bg-white pt-5 pb-2.5 text-sm text-gray-900 transition-all focus:border-[#00588b] focus:outline-none focus:ring-1 focus:ring-[#00588b] ${Icon ? 'pl-10' : 'pl-4'}`}
           placeholder={placeholder}
           required={required}
+          min={min}
         />
       )}
 
@@ -120,6 +122,12 @@ export default function FeePaymentForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (Number(formData.fee) < 100) {
+      showMessage('error', 'Minimum fee amount is Rs. 100.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -156,6 +164,12 @@ export default function FeePaymentForm() {
         notes: {
           studentType: isOldStudent ? 'Old Student' : 'New Student',
           studentId: formData.studentId || '',
+          fatherName: formData.fatherName || '',
+          address: formData.address || '',
+          city: formData.city || '',
+          state: formData.state || '',
+          pincode: formData.pincode || '',
+
         },
         theme: {
           color: '#00588b',
@@ -222,11 +236,10 @@ export default function FeePaymentForm() {
 
       {notification ? (
         <div
-          className={`fixed top-6 right-6 z-50 flex max-w-sm items-center rounded-lg border-l-4 bg-white p-4 text-sm shadow-lg ${
-            notification.type === 'success'
-              ? 'border-green-500 text-green-800'
-              : 'border-red-500 text-red-800'
-          }`}
+          className={`fixed top-6 right-6 z-50 flex max-w-sm items-center rounded-lg border-l-4 bg-white p-4 text-sm shadow-lg ${notification.type === 'success'
+            ? 'border-green-500 text-green-800'
+            : 'border-red-500 text-red-800'
+            }`}
         >
           {notification.type === 'success' ? (
             <CheckCircle2 className="mr-3 h-5 w-5 text-green-500" />
@@ -303,6 +316,7 @@ export default function FeePaymentForm() {
                   value={formData.fatherName}
                   onChange={handleChange}
                   icon={User}
+                  required
                 />
 
                 <FloatingInput
@@ -332,6 +346,8 @@ export default function FeePaymentForm() {
                     value={formData.address}
                     onChange={handleChange}
                     icon={MapPin}
+                    required
+
                   />
                 </div>
 
@@ -341,6 +357,8 @@ export default function FeePaymentForm() {
                   value={formData.city}
                   onChange={handleChange}
                   icon={Building}
+                  required
+
                 />
 
                 <FloatingInput
@@ -349,6 +367,8 @@ export default function FeePaymentForm() {
                   value={formData.state}
                   onChange={handleChange}
                   icon={Map}
+                  required
+
                 />
 
                 <FloatingInput
@@ -358,12 +378,15 @@ export default function FeePaymentForm() {
                   value={formData.pincode}
                   onChange={handleChange}
                   icon={MapPin}
+                  required
+
                 />
 
                 <FloatingInput
                   label="Fee Amount"
                   name="fee"
                   type="number"
+                  min="100"
                   value={formData.fee}
                   onChange={handleChange}
                   icon={IndianRupee}
