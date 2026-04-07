@@ -110,6 +110,16 @@ export default function FeePaymentForm() {
     const { name, value } = event.target;
     setFormData((previous) => ({ ...previous, [name]: value }));
   };
+  const handleAmountChange = (event) => {
+    const { name, value } = event.target;
+    const numericValue = value.replace(/\D/g, '');
+    if (numericValue === '' || parseInt(numericValue, 10) < 100) {
+      showMessage('error', 'minimum fee amount is ₹100');
+      setFormData((previous) => ({ ...previous, [name]: '' }));
+    } else {
+      setFormData((previous) => ({ ...previous, [name]: numericValue }));
+    }
+  }
 
   const showMessage = (type, text) => {
     setNotification({ type, text });
@@ -380,7 +390,7 @@ export default function FeePaymentForm() {
                   type="number"
                   min="100"
                   value={formData.fee}
-                  onChange={handleChange}
+                  onChange={handleAmountChange}
                   icon={IndianRupee}
                   required
                 />
