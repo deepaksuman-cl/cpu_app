@@ -43,6 +43,7 @@ function FloatingInput({
   hidden = false,
   icon: Icon,
   placeholder = ' ',
+  min = null,
 }) {
   if (hidden) {
     return null;
@@ -80,6 +81,7 @@ function FloatingInput({
           className={`peer block w-full appearance-none rounded-lg border border-gray-200 bg-white pt-5 pb-2.5 text-sm text-gray-900 transition-all focus:border-[#00588b] focus:outline-none focus:ring-1 focus:ring-[#00588b] ${Icon ? 'pl-10' : 'pl-4'}`}
           placeholder={placeholder}
           required={required}
+          min={min}
         />
       )}
 
@@ -110,16 +112,6 @@ export default function FeePaymentForm() {
     const { name, value } = event.target;
     setFormData((previous) => ({ ...previous, [name]: value }));
   };
-  const handleAmountChange = (event) => {
-    const { name, value } = event.target;
-    const numericValue = value.replace(/\D/g, '');
-    if (numericValue === '' || parseInt(numericValue, 10) < 100) {
-      showMessage('error', 'minimum fee amount is ₹100');
-      setFormData((previous) => ({ ...previous, [name]: '' }));
-    } else {
-      setFormData((previous) => ({ ...previous, [name]: numericValue }));
-    }
-  }
 
   const showMessage = (type, text) => {
     setNotification({ type, text });
@@ -130,6 +122,12 @@ export default function FeePaymentForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (Number(formData.fee) < 100) {
+      showMessage('error', 'Minimum fee amount is Rs. 100.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -390,7 +388,7 @@ export default function FeePaymentForm() {
                   type="number"
                   min="100"
                   value={formData.fee}
-                  onBlur={handleAmountChange}
+                  onChange={handleChange}
                   icon={IndianRupee}
                   required
                 />
