@@ -25,7 +25,7 @@ export default async function SchoolsPage() {
 
         {/* Right: Actions */}
         <div className="flex items-center h-full px-4 gap-2.5">
-          <SeedDatabaseButton />
+          {/* <SeedDatabaseButton /> */}
           <Link 
             href="/admin/schools/create"
             className="flex items-center justify-center h-[32px] px-3 sm:px-4 bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-[var(--text-inverse)] transition-colors rounded-sm shadow-sm"

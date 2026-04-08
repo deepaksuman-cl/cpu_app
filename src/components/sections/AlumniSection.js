@@ -1,6 +1,6 @@
 "use client";
-import Swiper from "../ui/Swiper";
 import Image from "next/image";
+import Swiper from "../ui/Swiper";
 
 export default function AlumniSection({ data }) {
   const alumni = data?.alumni || [];

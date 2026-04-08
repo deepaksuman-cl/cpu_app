@@ -164,14 +164,14 @@ export default function FooterManagerForm({ initialData }) {
           <span className="hidden md:inline-block text-[12px] text-[var(--text-secondary)] font-bold tracking-wide">Branding, links, columns & SEO</span>
         </div>
         <div className="flex items-center h-full px-4 gap-2">
-          <button 
+          {/* <button 
             onClick={handleSync}
             disabled={isSyncing}
             className="flex items-center justify-center h-[32px] px-3 sm:px-4 bg-[var(--bg-muted)] hover:bg-[var(--bg-hover)] text-[var(--text-primary)] border border-[var(--border-default)] transition-colors rounded-none text-[11px] font-bold uppercase tracking-widest gap-1.5 disabled:opacity-50"
           >
             {isSyncing ? <div className="w-3.5 h-3.5 border-2 border-[var(--border-default)] border-t-[var(--text-primary)] rounded-full animate-spin" /> : <RefreshCw size={13} strokeWidth={2.5} />}
             <span className="hidden sm:block">{isSyncing ? 'Syncing...' : 'Sync JSON'}</span>
-          </button>
+          </button> */}
           <button 
             onClick={handleSave}
             disabled={isSaving}

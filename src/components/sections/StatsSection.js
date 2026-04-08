@@ -4,6 +4,10 @@ import Icon from "../ui/Icon";
 
 function useCounter(target, dur = 1800, active = false) {
   const [v, setV] = useState(0);
+  
+  // Calculate precision (number of decimal places)
+  const precision = (target.toString().split('.')[1] || '').length;
+
   useEffect(() => {
     if (!active) return;
     let st = null;
@@ -11,25 +15,29 @@ function useCounter(target, dur = 1800, active = false) {
       if (!st) st = ts;
       const p = Math.min((ts - st) / dur, 1);
       const e = 1 - Math.pow(1 - p, 3);
-      setV(Math.floor(e * target));
+      
+      const currentVal = e * target;
+      // Fixed precision to avoid floating point flicker
+      setV(currentVal.toFixed(precision));
+      
       if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
-  }, [target, dur, active]);
+  }, [target, dur, active, precision]);
   return v;
 }
 
 
 function StatCard({ value, suffix, label, icon: IconName, inView }) {
-  const dv = value >= 1000 ? Math.round(value / 1000) : value;
-  const c = useCounter(dv, 1600, inView);
-  const d = value >= 1000 ? `${c}K${suffix.replace("K+", "+")}` : `${c}${suffix}`;
+  const c = useCounter(value, 1600, inView);
   return (
     <div className="bg-gradient-to-br from-white to-blue-50 border border-blue-100 rounded-2xl p-5 text-center hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 cursor-default">
       <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center mx-auto mb-5">
         <Icon name={IconName || "Star"} size={28} className="text-[#00588b]" />
       </div>
-      <div className="font-black text-3xl text-[#00588b] leading-none">{d}</div>
+      <div className="font-black text-3xl text-[#00588b] leading-none">
+        {c}{suffix}
+      </div>
       <div className="text-xs text-gray-500 mt-1.5" dangerouslySetInnerHTML={{ __html: label }} />
     </div>
   );
