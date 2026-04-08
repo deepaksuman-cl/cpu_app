@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import SchoolHero from "@/components/pages/schools/SchoolHero";
 import SchoolPartners from "@/components/pages/schools/SchoolPartners";
 import SchoolPlacements from "@/components/pages/schools/SchoolPlacements";
-import SchoolTestimonials from "@/components/pages/schools/SchoolTestimonials";
+import TestimonialSection from "@/components/sections/TestimonialSection";
 
 // Modular Course components
 import CourseAdmissionFee from "@/components/pages/courses/CourseAdmissionFee";
@@ -155,7 +155,7 @@ export default async function CourseSlugPage({ params }) {
         return course.industry && !course.industry.hide ? <SchoolPartners key="industry" data={course.industry} /> : null;
       
       case 'testimonials':
-        return course.testimonials && !course.testimonials.hide ? <SchoolTestimonials key="testimonials" data={course.testimonials} /> : null;
+        return course.testimonials && !course.testimonials.hide ? <TestimonialSection key="testimonials" data={course.testimonials} /> : null;
       
       default:
         return null;

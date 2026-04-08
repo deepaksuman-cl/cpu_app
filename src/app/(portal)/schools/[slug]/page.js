@@ -12,7 +12,7 @@ import SchoolExploreDepartment from "@/components/pages/schools/SchoolExploreDep
 import SchoolResearch from "@/components/pages/schools/SchoolResearch";
 import SchoolCommunity from "@/components/pages/schools/SchoolCommunity";
 import SchoolInfrastructure from "@/components/pages/schools/SchoolInfrastructure";
-import SchoolTestimonials from "@/components/pages/schools/SchoolTestimonials";
+import TestimonialSection from "@/components/sections/TestimonialSection";
 import RichTextRenderer from "@/components/common/RichTextRenderer";
 import { getSchoolBySlug } from "@/lib/actions/schoolActions";
 
@@ -82,7 +82,7 @@ export default async function SchoolPage({ params }) {
       case 'infrastructure':
         return school.infrastructure && !school.infrastructure.hide && <SchoolInfrastructure key={id} data={school.infrastructure} />;
       case 'testimonials':
-        return school.testimonials && !school.testimonials.hide && <SchoolTestimonials key={id} data={school.testimonials} />;
+        return school.testimonials && !school.testimonials.hide && <TestimonialSection key={id} data={school.testimonials} />;
       case 'exploreDepartment':
         return school.exploreDepartment && !school.exploreDepartment.hide && <SchoolExploreDepartment key={id} data={school.exploreDepartment} />;
       default:
