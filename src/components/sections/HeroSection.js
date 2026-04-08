@@ -56,13 +56,31 @@ export default function HeroSection({ data }) {
         {slides.map((slide, i) => (
           <div
             key={i}
-            className="absolute inset-0 bg-cover bg-top transition-opacity duration-[900ms]"
+            className="absolute inset-0 transition-opacity duration-[900ms]"
             style={{
-              backgroundImage: `url(${slide.bg})`,
               opacity: i === idx ? 1 : 0,
               zIndex: 0,
             }}
-          />
+          >
+            {/* Desktop Background */}
+            <Image 
+              src={slide.bg} 
+              alt={slide.title || "Hero Background"} 
+              fill 
+              priority={i === idx}
+              className={`object-cover object-center ${slide.bg_mobile ? 'hidden md:block' : 'block'}`}
+            />
+            {/* Mobile Background */}
+            {slide.bg_mobile && (
+              <Image 
+                src={slide.bg_mobile} 
+                alt={slide.title || "Hero Mobile Background"} 
+                fill 
+                priority={i === idx}
+                className="object-cover object-center block md:hidden"
+              />
+            )}
+          </div>
         ))}
         {((hs.showOverlay !== false && (hs.badge || hs.tagline || hs.title || hs.subtitle || hs.desc || (hs.buttons && hs.buttons.length > 0))) || hs.showOverlay === true) && (
           <div
@@ -129,9 +147,9 @@ export default function HeroSection({ data }) {
               <Image
                 src={hs.heroimg}
                 alt={hs.title || "Hero Slide"}
-                width={500} // Example width, adjust as needed
-                height={300} // Example height, adjust as needed
-                priority={idx === 0} // Apply priority if it's the first slide
+                width={500}
+                height={300}
+                priority={idx === 0}
                 className="ml-30 w-[80%] block m-auto rounded-2xl transition-transform duration-400"
               />
             </div>

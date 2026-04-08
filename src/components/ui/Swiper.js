@@ -75,12 +75,10 @@ export default function Swiper({
     <div className="relative">
       <div className="overflow-hidden rounded-xl">
         <div
-          className="flex"
+          className="flex transition-transform duration-550 ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{
             gap,
             transform: `translateX(${translateX})`,
-            transition: "transform 0.55s cubic-bezier(0.4,0,0.2,1)",
-            willChange: "transform",
           }}
         >
           {items.map((item, i) => (
@@ -90,25 +88,32 @@ export default function Swiper({
           ))}
         </div>
       </div>
-      {!hideControls && idx > 0 && (
-        <button
-          onClick={() => resetTimer(idx - 1)}
-          className={`absolute -left-5 top-[42%] -translate-y-1/2 w-10 h-10 rounded-full border-none cursor-pointer flex items-center justify-center shadow-xl z-10 transition-transform hover:scale-110 ${
-            dark ? "bg-amber-400" : "bg-[#00588b]"
-          }`}
-        >
-          <ChevronLeft size={18} className="text-white" />
-        </button>
-      )}
-      {!hideControls && idx < max && (
-        <button
-          onClick={() => resetTimer(idx + 1)}
-          className={`absolute -right-5 top-[42%] -translate-y-1/2 w-10 h-10 rounded-full border-none cursor-pointer flex items-center justify-center shadow-xl z-10 transition-transform hover:scale-110 ${
-            dark ? "bg-amber-400" : "bg-[#00588b]"
-          }`}
-        >
-          <ChevronRight size={18} className="text-white" />
-        </button>
+      {!hideControls && (
+        <>
+          <button
+            onClick={() => idx > 0 && resetTimer(idx - 1)}
+            disabled={idx === 0}
+            className={`absolute -left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border-none flex items-center justify-center shadow-xl z-20 transition-all ${
+               idx === 0 ? "opacity-30 cursor-not-allowed" : "cursor-pointer hover:scale-110 active:scale-95"
+            } ${
+              dark ? "bg-amber-400" : "bg-[#00588b]"
+            }`}
+          >
+            <ChevronLeft size={18} className="text-white" />
+          </button>
+          
+          <button
+            onClick={() => idx < max && resetTimer(idx + 1)}
+            disabled={idx === max}
+            className={`absolute -right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border-none flex items-center justify-center shadow-xl z-20 transition-all ${
+               idx === max ? "opacity-30 cursor-not-allowed" : "cursor-pointer hover:scale-110 active:scale-95"
+            } ${
+               dark ? "bg-amber-400" : "bg-[#00588b]"
+            }`}
+          >
+            <ChevronRight size={18} className="text-white" />
+          </button>
+        </>
       )}
       {!hideControls && (
         <div className="flex justify-center gap-1.5 mt-5">

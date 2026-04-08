@@ -334,14 +334,14 @@ export default function HomeSetupForm({ initialData }) {
             <span className="text-[11px] font-black text-[var(--color-primary)] uppercase">{isSaving ? 'Saving...' : 'Draft Ready'}</span>
           </div>
           <div className="flex items-center gap-3">
-            <button
+            {/* <button
               onClick={handleSeed}
               disabled={isSeeding || isSaving}
               className="px-5 py-2.5 bg-white border border-[#00588b] text-[#00588b] text-[11px] font-black uppercase tracking-widest hover:bg-gray-50 flex items-center gap-2 group transition-all disabled:opacity-50"
             >
               <Icon name="RefreshCw" size={14} className={isSeeding ? "animate-spin" : "group-hover:rotate-180 transition-transform duration-500"} />
               {isSeeding ? 'Seeding...' : 'Seed Default Data'}
-            </button>
+            </button> */}
             <button
               onClick={handleSave}
               disabled={isSaving || isSeeding}
@@ -374,13 +374,14 @@ export default function HomeSetupForm({ initialData }) {
               <NestedListEditor 
                 label="Hero Slides"
                 items={sections.heroConfig.slides}
-                newItemTemplate={{ bg: '', tagline: '', title: '', subtitle: '', desc: '', badge: '', showOverlay: true, buttons: [] }}
+                newItemTemplate={{ bg: '', bg_mobile: '', tagline: '', title: '', subtitle: '', desc: '', badge: '', showOverlay: true, buttons: [] }}
                 fields={[
                   {key: 'title', label: 'Main Title'},
                   {key: 'subtitle', label: 'Subtitle'},
                   {key: 'tagline', label: 'Tagline'},
                   {key: 'badge', label: 'Badge Text'},
-                  {key: 'bg', label: 'Background Image', type: 'image', fullWidth: true},
+                  {key: 'bg', label: 'Background Image (Desktop)', type: 'image', fullWidth: true},
+                  {key: 'bg_mobile', label: 'Background Image (Mobile)', type: 'image', fullWidth: true},
                   {key: 'showOverlay', label: 'Show Dark Overlay', type: 'checkbox'},
                   {key: 'desc', label: 'Description', type: 'textarea', fullWidth: true},
                 ]}

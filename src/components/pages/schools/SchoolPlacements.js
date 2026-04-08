@@ -1,41 +1,18 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import StructuredTitle from "@/components/common/StructuredTitle";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
 
 export default function SchoolPlacements({ data }) {
-  const [active, setActive] = useState(0);
-  const [perPage, setPerPage] = useState(4);
-  const timer = useRef(null);
+  const swiperRef = useRef(null);
 
   if (!data || !data.list || !Array.isArray(data.list) || data.list.length === 0) return null;
   const { list, title, label, subtitle } = data;
-  const pages = Math.ceil(list.length / perPage);
-
-  useEffect(() => {
-    const calc = () => setPerPage(window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 4);
-    calc();
-    window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
-  }, []);
-
-  const startAuto = () => {
-    clearInterval(timer.current);
-    timer.current = setInterval(() => {
-      setActive(p => (p + 1) % pages);
-    }, 3000);
-  };
-
-  useEffect(() => {
-    startAuto();
-    return () => clearInterval(timer.current);
-  }, [pages]);
-
-  const go = (i) => { setActive(i); startAuto(); };
-  const prev = () => go((active - 1 + pages) % pages);
-  const next = () => go((active + 1) % pages);
-
-  const cardW = 100 / perPage;
 
   return (
     <section id="placement" className="py-20 overflow-hidden bg-[#f0f6fb]">
@@ -50,43 +27,86 @@ export default function SchoolPlacements({ data }) {
           <p className="text-slate-500 text-sm mt-3">{subtitle}</p>
         </div>
 
-        <div className="relative">
-          <div className="overflow-hidden">
-            <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${active * 100}%)` }}>
-              {list.map((p, j) => (
-                <div key={j} className="flex-shrink-0 py-5 px-2.5" style={{ width: `${cardW}%` }}>
-                  <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#f8fbff] to-[#dbeafe] border border-[#dde8f5] shadow-[0_4px_16px_rgba(0,88,139,0.08)] transition-all hover:-translate-y-2 hover:shadow-xl">
-                    <div className="relative aspect-[3/4]">
-                      <img src={p.img || p.image} alt={p.name} className="w-full" />
-                      {/* Only show overlay and text if at least one field exists */}
-                      {(p.name || p.company || p.pkg) && (
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 flex flex-col justify-end">
-                          {p.name && <p className="text-white font-black text-sm">{p.name}</p>}
-                          {p.company && <p className="text-[#ffb900] text-xs font-bold leading-tight">{p.company}</p>}
-                          {p.pkg && <p className="text-sky-300 text-[10px] font-black uppercase mt-1 tracking-widest">{p.pkg} LPA</p>}
-                        </div>
-                      )}
-                      <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#ffb900] rounded-tl" />
-                      <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#00588b] rounded-br" />
-                    </div>
+        <div 
+          className="relative group/placement-slider"
+          onMouseEnter={() => swiperRef.current?.autoplay.stop()}
+          onMouseLeave={() => swiperRef.current?.autoplay.start()}
+        >
+          <SwiperReact
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={20}
+            slidesPerView={4}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false
+            }}
+            navigation={{
+              nextEl: '.placement-next',
+              prevEl: '.placement-prev',
+            }}
+            pagination={{
+              clickable: true,
+              el: '.placement-pagination',
+              bulletClass: 'placement-bullet',
+              bulletActiveClass: 'placement-bullet-active',
+              renderBullet: (index, className) => `<span class="${className}"></span>`
+            }}
+            breakpoints={{ 
+              0: { slidesPerView: 1 }, 
+              640: { slidesPerView: 2 }, 
+              1024: { slidesPerView: 4 } 
+            }}
+            loop={list.length > 4}
+            grabCursor={true}
+          >
+            {list.map((p, j) => (
+              <SwiperSlide key={j} className="py-5">
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#f8fbff] to-[#dbeafe] border border-[#dde8f5] shadow-[0_4px_16px_rgba(0,88,139,0.08)] transition-all hover:-translate-y-2 hover:shadow-xl">
+                  <div className="relative aspect-[3/4]">
+                    <img src={p.img || p.image} alt={p.name} className="w-full h-full object-cover" />
+                    {(p.name || p.company || p.pkg) && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 flex flex-col justify-end">
+                        {p.name && <p className="text-white font-black text-sm">{p.name}</p>}
+                        {p.company && <p className="text-[#ffb900] text-xs font-bold leading-tight">{p.company}</p>}
+                        {p.pkg && <p className="text-sky-300 text-[10px] font-black uppercase mt-1 tracking-widest">{p.pkg} LPA</p>}
+                      </div>
+                    )}
+                    <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#ffb900] rounded-tl" />
+                    <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#00588b] rounded-br" />
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-          <button onClick={prev} className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 w-11 h-11 rounded-full flex items-center justify-center bg-white text-[#00588b] border border-[#dde8f5] shadow-lg hover:scale-110 transition-transform">
+              </SwiperSlide>
+            ))}
+          </SwiperReact>
+
+          <button className="placement-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 w-11 h-11 rounded-full flex items-center justify-center bg-white text-[#00588b] border border-[#dde8f5] shadow-lg hover:scale-110 transition-all opacity-0 group-hover/placement-slider:opacity-100 group-hover/placement-slider:-translate-x-2">
             <ChevronLeft size={20} />
           </button>
-          <button onClick={next} className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 w-11 h-11 rounded-full flex items-center justify-center bg-[#00588b] text-white border-none shadow-lg hover:scale-110 transition-transform">
+          <button className="placement-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 w-11 h-11 rounded-full flex items-center justify-center bg-[#00588b] text-white border-none shadow-lg hover:scale-110 transition-all opacity-0 group-hover/placement-slider:opacity-100 group-hover/placement-slider:translate-x-2">
             <ChevronRight size={20} />
           </button>
+
+          <div className="placement-pagination flex justify-center gap-2 mt-8"></div>
         </div>
 
-        <div className="flex justify-center gap-2 mt-8">
-          {Array.from({ length: pages }).map((_, i) => (
-            <button key={i} onClick={() => go(i)} className={`h-2.5 rounded-full transition-all border-none cursor-pointer ${active === i ? "bg-[#00588b] w-7" : "bg-slate-300 w-2.5"}`} />
-          ))}
-        </div>
+        <style dangerouslySetInnerHTML={{ __html: `
+          .placement-bullet {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s;
+          }
+          .placement-bullet-active {
+            width: 28px;
+            background: #00588b;
+          }
+        `}} />
       </div>
     </section>
   );

@@ -286,7 +286,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
 
         {/* Right: Actions */}
         <div className="flex items-center h-full px-4 gap-2.5">
-          <button
+          {/* <button
             onClick={handleSeedData}
             disabled={loading}
             className={`h-[32px] px-3 flex items-center justify-center gap-1.5 rounded-sm transition-colors border text-[10px] font-bold shadow-sm uppercase tracking-widest shrink-0
@@ -298,7 +298,7 @@ export default function ProgrammesManager({ initialCategories, initialCourses, i
           >
             {loading ? <Loader2 size={14} className="animate-spin" /> : <Database size={14} strokeWidth={2} />}
             <span className="hidden sm:block">{loading ? 'Seeding...' : 'Seed Database'}</span>
-          </button>
+          </button> */}
         </div>
       </div>
 
