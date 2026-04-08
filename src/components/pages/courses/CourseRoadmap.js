@@ -227,7 +227,7 @@ export default function CourseRoadmap({ data }) {
       
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 lg:gap-10 max-w-[1200px] mx-auto items-start">
         {/* TABS SIDEBAR */}
-        <div className="flex flex-row lg:flex-col gap-2 lg:gap-4 sticky top-[63px] lg:top-[120px] z-[99] bg-[#f8fbff] lg:bg-transparent p-2 lg:p-0 rounded-lg lg:rounded-none overflow-x-auto lg:overflow-visible">
+        <div className="flex flex-row lg:flex-col gap-2 lg:gap-4 sticky top-[63px] lg:top-[40px] z-[99] bg-[#f8fbff] lg:bg-transparent p-2 lg:p-0 rounded-lg lg:rounded-none overflow-x-auto lg:overflow-visible">
           {yearsData.map((year, idx) => {
             const idToMatch = year.id || idx;
             const isActive = activeYear === idToMatch;
