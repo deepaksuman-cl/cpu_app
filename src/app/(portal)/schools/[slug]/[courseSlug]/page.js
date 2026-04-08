@@ -163,7 +163,7 @@ export default async function CourseSlugPage({ params }) {
   };
 
   return (
-    <div className="font-sans text-gray-800 bg-white overflow-x-hidden">
+    <div className="font-sans text-gray-800 bg-white ">
       {layoutOrder.map(sectionId => renderSection(sectionId))}
     </div>
   );
