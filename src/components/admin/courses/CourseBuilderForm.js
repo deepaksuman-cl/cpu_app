@@ -151,7 +151,15 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       roadmap: { sectionTitle: { main: '4 Year Learning Roadmap', highlight: 'Roadmap' }, subtitle: 'Your journey from foundation to industry expert.', years: [] },
       placements: { sectionTitle: { main: 'Placements' }, subtitle: '', stats: [], list: [] },
       industry: { sectionTitle: { main: 'Industry Partners' }, subtitle: '', partners: [] },
-      testimonials: { label: 'Testimonials', title: { main: 'Student Stories' }, list: [] },
+      testimonials: { 
+        title: 'Student Stories', 
+        highlight: 'Stories',
+        tagline: 'OUR STUDENTS SPEAK',
+        location: 'LADYBIRD, DELHI',
+        packageLabel: 'OFFERED PACKAGE',
+        verifyLabel: 'VERIFIED STUDENT',
+        testimonials: [] 
+      },
       breadcrumb: [],
       layoutOrder: null,
       customSections: {}
@@ -1219,27 +1227,47 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
           {/* TESTIMONIALS */}
           {activeSection === 'testimonials' && (
             <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Section Label</label>
-                  <input type="text" value={formData.testimonials.label || ''} onChange={e => updateSection('testimonials', {...formData.testimonials, label: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                <TitleEditor 
+                  label="Testimonials Title" 
+                  value={{ main: formData.testimonials.title, highlight: formData.testimonials.highlight }} 
+                  onChange={val => updateSection('testimonials', {...formData.testimonials, title: val.main, highlight: val.highlight})} 
+                />
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[var(--bg-muted)] p-3">
+                   <div>
+                     <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Section Tagline</label>
+                     <input type="text" value={formData.testimonials.tagline} onChange={e => updateSection('testimonials', {...formData.testimonials, tagline: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                   </div>
+                   <div>
+                     <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Map/Location Label</label>
+                     <input type="text" value={formData.testimonials.location} onChange={e => updateSection('testimonials', {...formData.testimonials, location: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                   </div>
+                   <div>
+                     <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Package Label</label>
+                     <input type="text" value={formData.testimonials.packageLabel} onChange={e => updateSection('testimonials', {...formData.testimonials, packageLabel: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                   </div>
+                   <div>
+                     <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Verify Label</label>
+                     <input type="text" value={formData.testimonials.verifyLabel} onChange={e => updateSection('testimonials', {...formData.testimonials, verifyLabel: e.target.value})} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" />
+                   </div>
                 </div>
-                <TitleEditor label="Testimonials Title" value={formData.testimonials.title} onChange={val => updateSection('testimonials', {...formData.testimonials, title: val})} />
-              </div>
-              <NestedListEditor 
-                label="Student Testimonials"
-                items={formData.testimonials.list || []}
-                newItemTemplate={{ name: '', text: '', photo: '', batch: '', company: '', rating: 5 }}
-                fields={[
-                  {key: 'name', label: 'Student Name'}, 
-                  {key: 'text', label: 'Review Text', type: 'richText'}, 
-                  {key: 'photo', label: 'Photo URL', type: 'image'}, 
-                  {key: 'batch', label: 'Batch'}, 
-                  {key: 'company', label: 'Company'}, 
-                  {key: 'rating', label: 'Rating (1-5)', type: 'number'}
-                ]}
-                onUpdate={items => updateSection('testimonials', {...formData.testimonials, list: items})}
-              />
+
+                <NestedListEditor 
+                  label="Student Feed"
+                  items={formData.testimonials.testimonials || []}
+                  newItemTemplate={{ name: '', course: '', company: '', package: '', rating: 5, batch: '', quote: '', img: '' }}
+                  fields={[
+                    {key: 'name', label: 'Name'},
+                    {key: 'course', label: 'Course/Degree'},
+                    {key: 'company', label: 'Placed Company'},
+                    {key: 'package', label: 'Salary/Offer'},
+                    {key: 'batch', label: 'Batch'},
+                    {key: 'rating', label: 'Rating (1-5)', type: 'number'},
+                    {key: 'img', label: 'Student Photo', type: 'image', fullWidth: true},
+                    {key: 'quote', label: 'Testimonial Quote', type: 'textarea', fullWidth: true}
+                  ]}
+                  onUpdate={items => updateSection('testimonials', {...formData.testimonials, testimonials: items})}
+                />
             </div>
           )}
 

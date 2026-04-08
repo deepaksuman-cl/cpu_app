@@ -11,7 +11,8 @@ import {
   Info, 
   Eye,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Pencil
 } from "lucide-react";
 import RichTextEditor from "@/components/admin/RichTextEditor";
 import MediaUploader from "@/components/admin/MediaUploader";
@@ -21,7 +22,7 @@ import Modal from "@/components/admin/ui/Modal";
 // --- Shared Local Components (Zero-Radius Design) ---
 
 const Label = ({ children }) => (
-  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">
+  <label className="block text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest mb-1.5">
     {children}
   </label>
 );
@@ -29,21 +30,21 @@ const Label = ({ children }) => (
 const Input = ({ ...props }) => (
   <input 
     {...props} 
-    className="w-full border border-gray-300 p-2 text-xs outline-none focus:border-[#00588b] bg-white text-gray-800 rounded-none transition-colors" 
+    className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" 
   />
 );
 
 const TextArea = ({ ...props }) => (
   <textarea 
     {...props} 
-    className="w-full border border-gray-300 p-2 text-xs h-24 outline-none focus:border-[#00588b] bg-white text-gray-800 rounded-none transition-colors resize-none" 
+    className="w-full border border-[var(--border-default)] p-2 text-xs h-24 outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors resize-none" 
   />
 );
 
 const StringListEditor = ({ value = [], onChange, label }) => (
   <div className="space-y-2 mt-3">
     <Label>{label}</Label>
-    <div className="space-y-2 border-l-2 border-gray-100 pl-3">
+    <div className="space-y-2 border-l-2 border-[var(--border-light)] pl-3">
       {value.map((item, idx) => (
         <div key={idx} className="flex gap-2">
           <Input 
@@ -57,7 +58,7 @@ const StringListEditor = ({ value = [], onChange, label }) => (
           />
           <button 
             onClick={() => onChange(value.filter((_, i) => i !== idx))}
-            className="text-gray-400 hover:text-red-600 p-2 border border-gray-300 hover:border-red-200 hover:bg-red-50 transition-colors rounded-none"
+            className="text-[var(--text-muted)] hover:text-[var(--color-danger)] p-2 border border-[var(--border-default)] hover:border-[var(--color-danger-light)] hover:bg-[var(--color-danger-light)] transition-colors rounded-none"
           >
             <Trash2 size={14} />
           </button>
@@ -65,7 +66,7 @@ const StringListEditor = ({ value = [], onChange, label }) => (
       ))}
       <button 
         onClick={() => onChange([...value, ""])}
-        className="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#00588b] hover:text-[#00446b] uppercase tracking-wide mt-1"
+        className="inline-flex items-center gap-1.5 text-[10px] font-bold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] uppercase tracking-wide mt-1"
       >
         <Plus size={14} /> Add Item
       </button>
@@ -73,21 +74,83 @@ const StringListEditor = ({ value = [], onChange, label }) => (
   </div>
 );
 
+const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate }) => (
+  <div className="space-y-4">
+    <div className="flex justify-between items-center border-b border-[var(--border-light)] pb-2">
+      <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">{label}</h4>
+      <button 
+        onClick={() => onUpdate([...items, newItemTemplate])} 
+        className="flex items-center justify-center gap-1 text-[10px] font-bold text-[var(--text-inverse)] bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] transition-colors px-3 py-1.5 uppercase tracking-wide rounded-none"
+      >
+        <Plus size={14} /> Row
+      </button>
+    </div>
+    <div className="space-y-3">
+      {items.map((item, idx) => (
+        <div key={idx} className="border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 relative group hover:border-[var(--border-dark)] transition-colors rounded-none">
+          <button 
+            onClick={() => onUpdate(items.filter((_, i) => i !== idx))} 
+            className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 transition-colors bg-[var(--bg-surface)] border border-transparent hover:border-[var(--color-danger-light)] rounded-none"
+          >
+            <Trash2 size={16} />
+          </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+            {fields.map(field => (
+              <div key={field.key} className={field.type === 'textArea' ? 'md:col-span-2' : ''}>
+                <Label>{field.label}</Label>
+                {field.type === 'icon' ? (
+                  <IconPicker 
+                    value={item[field.key]} 
+                    onChange={val => {
+                      const newItems = [...items]; 
+                      newItems[idx] = { ...newItems[idx], [field.key]: val }; 
+                      onUpdate(newItems);
+                    }} 
+                  />
+                ) : field.type === 'textArea' ? (
+                  <TextArea 
+                    value={item[field.key] || ''} 
+                    onChange={e => {
+                      const newItems = [...items]; 
+                      newItems[idx] = { ...newItems[idx], [field.key]: e.target.value }; 
+                      onUpdate(newItems);
+                    }}
+                    className="h-20"
+                  />
+                ) : (
+                  <Input 
+                    value={item[field.key] || ''} 
+                    onChange={e => {
+                      const newItems = [...items]; 
+                      newItems[idx] = { ...newItems[idx], [field.key]: e.target.value }; 
+                      onUpdate(newItems);
+                    }} 
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
 // --- Main Admin Page ---
 
 export default function AboutManager() {
-  const [activeTab, setActiveTab] = useState("main");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState({ type: null, text: "" });
+
+  // Dashboard State
+  const [activeSection, setActiveSection] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Page Data States
   const [mainAbout, setMainAbout] = useState(null);
   const [ourRoots, setOurRoots] = useState(null);
   const [visionMission, setVisionMission] = useState(null);
-
-  // Modals for array editing
-  const [editingItem, setEditingItem] = useState({ type: null, index: -1, data: null });
 
   useEffect(() => {
     fetchData();
@@ -133,94 +196,177 @@ export default function AboutManager() {
     }
   };
 
+  const SectionCard = ({ id, title, description, icon: Icon }) => (
+    <div className="border border-[var(--border-default)] bg-[var(--bg-surface)] p-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:border-[var(--color-primary)] transition-all rounded-none group shadow-[var(--shadow-sm)]">
+      <div className="flex items-center gap-4">
+        <div className="w-12 h-12 flex items-center justify-center rounded-none shrink-0 bg-[var(--color-primary-lighter)] text-[var(--color-primary)] transition-colors group-hover:bg-[var(--color-primary)] group-hover:text-[var(--text-inverse)]">
+          <Icon size={20} />
+        </div>
+        <div>
+          <h3 className="font-bold text-[var(--text-primary)] text-[13px] uppercase tracking-wide leading-tight">{title}</h3>
+          <p className="text-[10px] text-[var(--text-muted)] mt-1 uppercase tracking-widest font-medium">{description}</p>
+        </div>
+      </div>
+      <button 
+        onClick={() => { setActiveSection(id); setIsModalOpen(true); }}
+        className="w-full sm:w-auto px-5 py-2 border border-[var(--border-dark)] text-[var(--text-secondary)] font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--text-primary)] hover:border-[var(--text-primary)] hover:text-[var(--text-inverse)] transition-all rounded-none flex items-center justify-center gap-2"
+      >
+        <Pencil size={12} strokeWidth={2.5} /> Edit Section
+      </button>
+    </div>
+  );
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#00588b]"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-primary)]"></div>
       </div>
     );
   }
 
+  const SECTION_MAP = {
+    main: { title: "Main About", desc: "Hero tags, group intro, and stats.", icon: Info },
+    roots: { title: "Our Roots", desc: "History, heritage, and institutions.", icon: Settings },
+    vision: { title: "Vision & Mission", desc: "Core values, vision, and approach.", icon: Eye },
+  };
+
+  const handleGlobalSave = async () => {
+    setIsSaving(true);
+    try {
+      // Save all sections sequentially for simplicity, or use Promise.all
+      await Promise.all([
+        fetch("/api/admin/content/about", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ section_key: "main_about", content: mainAbout }),
+        }),
+        fetch("/api/admin/content/about", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ section_key: "our_roots", content: ourRoots }),
+        }),
+        fetch("/api/admin/content/about", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ section_key: "vision_mission", content: visionMission }),
+        })
+      ]);
+      setMessage({ type: "success", text: "All sections updated successfully!" });
+    } catch (error) {
+      setMessage({ type: "error", text: "An error occurred during global save." });
+    } finally {
+      setIsSaving(false);
+      setTimeout(() => setMessage({ type: null, text: "" }), 3000);
+    }
+  };
+
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-6 max-w-7xl mx-auto space-y-8 pb-32">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-gray-200 p-5 rounded-none shadow-sm">
-        <div className="flex items-center gap-3">
-          <div className="bg-[#00588b] p-2 rounded-none">
-            <Layout className="text-white" size={20} />
+      <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-6 shadow-[var(--shadow-sm)] space-y-4 rounded-none">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="flex items-center gap-3">
+            <div className="bg-[var(--color-primary)] p-2.5 rounded-none">
+              <Layout className="text-[var(--text-inverse)]" size={24} />
+            </div>
+            <div>
+              <h1 className="text-xl font-black text-[var(--text-primary)] uppercase tracking-tight">About Manager</h1>
+              <p className="text-[10px] text-[var(--text-muted)] font-bold uppercase tracking-widest mt-0.5">Centralized dashboard for About Us pages</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-lg font-black text-gray-900 uppercase tracking-tight">About Manager</h1>
-            <p className="text-[10px] text-gray-500 font-medium uppercase tracking-widest mt-0.5">Manage dynamic content for About pages</p>
-          </div>
+          
+          {message.text && (
+            <div className={`flex items-center gap-2 px-4 py-2 rounded-none border text-xs font-bold uppercase tracking-wide animate-in fade-in slide-in-from-top-2 duration-300 ${
+              message.type === "success" ? "bg-[var(--color-success-light)] border-[var(--color-success)] text-[var(--color-success-dark)]" : "bg-[var(--color-danger-light)] border-[var(--color-danger)] text-[var(--color-danger-dark)]"
+            }`}>
+              {message.type === "success" ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
+              {message.text}
+            </div>
+          )}
         </div>
-        
-        {message.text && (
-          <div className={`flex items-center gap-2 px-4 py-2 rounded-none border text-xs font-bold uppercase tracking-wide ${
-            message.type === "success" ? "bg-green-50 border-green-200 text-green-700" : "bg-red-50 border-red-200 text-red-700"
-          }`}>
-            {message.type === "success" ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
-            {message.text}
-          </div>
-        )}
+        <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed max-w-3xl">
+          Manage the structural content of your university's "About" sections. 
+          Each card below represents a major block of information. Click <strong>Edit Section</strong> to modify details in a modal. 
+          Remember to save your changes using the floating bar at the bottom.
+        </p>
       </div>
 
-      {/* Tabs */}
-      <div className="flex bg-white border border-gray-200 p-1 rounded-none shadow-sm overflow-x-auto">
-        {[
-          { id: "main", label: "Main About", icon: Info },
-          { id: "roots", label: "Our Roots", icon: Settings },
-          { id: "vision", label: "Vision & Mission", icon: Eye },
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 px-6 py-3 text-[11px] font-black uppercase tracking-widest transition-all duration-200 whitespace-nowrap rounded-none border-b-2 ${
-              activeTab === tab.id 
-                ? "bg-[#00588b]/5 border-[#00588b] text-[#00588b]" 
-                : "bg-transparent border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            <tab.icon size={14} strokeWidth={2.5} />
-            {tab.label}
-          </button>
+      {/* Grid Dashboard */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {Object.entries(SECTION_MAP).map(([key, section]) => (
+          <SectionCard 
+            key={key}
+            id={key}
+            title={section.title}
+            description={section.desc}
+            icon={section.icon}
+          />
         ))}
       </div>
 
-      {/* Tab Content */}
-      <div className="bg-white border border-gray-200 p-8 rounded-none shadow-sm min-h-[500px]">
-        {activeTab === "main" && mainAbout && (
-          <MainAboutTab 
-            data={mainAbout} 
-            onChange={setMainAbout} 
-            onSave={() => handleSave("main_about", mainAbout)}
-            isSaving={isSaving}
-          />
-        )}
-        {activeTab === "roots" && ourRoots && (
-          <OurRootsTab 
-            data={ourRoots} 
-            onChange={setOurRoots} 
-            onSave={() => handleSave("our_roots", ourRoots)}
-            isSaving={isSaving}
-          />
-        )}
-        {activeTab === "vision" && visionMission && (
-          <VisionMissionTab 
-            data={visionMission} 
-            onChange={setVisionMission} 
-            onSave={() => handleSave("vision_mission", visionMission)}
-            isSaving={isSaving}
-          />
-        )}
+      {/* Floating Save Bar */}
+      <div className="fixed bottom-8 right-8 z-50 flex items-center justify-end">
+        <div className="bg-[var(--bg-surface)] border border-[var(--border-dark)] p-2.5 shadow-[var(--shadow-lg)] flex items-center gap-4 rounded-none">
+          <div className="hidden sm:flex flex-col text-right px-4 border-r border-[var(--border-light)]">
+            <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Global State</span>
+            <span className="text-[11px] font-black text-[var(--color-primary)] uppercase">{isSaving ? 'Saving...' : 'Changes Ready'}</span>
+          </div>
+          <button
+            onClick={handleGlobalSave}
+            disabled={isSaving}
+            className="px-10 py-3 bg-[var(--color-success-dark)] text-[var(--text-inverse)] text-[11px] font-black uppercase tracking-widest hover:bg-[var(--color-success)] flex items-center gap-3 transition-all active:scale-95 disabled:opacity-50 shadow-[var(--shadow-md)]"
+          >
+            <Save size={16} />
+            {isSaving ? "Saving..." : "Save All Changes"}
+          </button>
+        </div>
       </div>
+
+      {/* Edit Modal */}
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        title={`Edit ${SECTION_MAP[activeSection]?.title}`}
+        footer={
+          <div className="flex justify-between items-center w-full">
+            <p className="text-[9px] text-[var(--text-muted)] font-bold uppercase tracking-widest">Click Done to keep changes locally</p>
+            <button 
+              onClick={() => setIsModalOpen(false)}
+              className="px-8 py-2.5 bg-[var(--text-primary)] text-[var(--text-inverse)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-secondary)] transition-colors rounded-none"
+            >
+              Done Editing
+            </button>
+          </div>
+        }
+      >
+        <div className="p-1 space-y-6">
+          {activeSection === "main" && mainAbout && (
+            <MainAboutTab 
+              data={mainAbout} 
+              onChange={setMainAbout} 
+            />
+          )}
+          {activeSection === "roots" && ourRoots && (
+            <OurRootsTab 
+              data={ourRoots} 
+              onChange={setOurRoots} 
+            />
+          )}
+          {activeSection === "vision" && visionMission && (
+            <VisionMissionTab 
+              data={visionMission} 
+              onChange={setVisionMission} 
+            />
+          )}
+        </div>
+      </Modal>
     </div>
   );
 }
 
 // --- Tab: Main About ---
 
-function MainAboutTab({ data, onChange, onSave, isSaving }) {
+function MainAboutTab({ data, onChange }) {
   const [isUniModalOpen, setIsUniModalOpen] = useState(false);
   const [editingUni, setEditingUni] = useState(null);
   const [uniIdx, setUniIdx] = useState(-1);
@@ -247,17 +393,6 @@ function MainAboutTab({ data, onChange, onSave, isSaving }) {
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center border-b border-gray-100 pb-4">
-        <h2 className="text-sm font-black text-gray-900 uppercase tracking-widest">Main About Configuration</h2>
-        <button 
-          onClick={onSave}
-          disabled={isSaving}
-          className="flex items-center gap-2 bg-[#00588b] hover:bg-[#00446b] text-white px-6 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all rounded-none disabled:opacity-50"
-        >
-          <Save size={14} /> {isSaving ? "Saving..." : "Save Main About"}
-        </button>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div>
@@ -286,25 +421,25 @@ function MainAboutTab({ data, onChange, onSave, isSaving }) {
       </div>
 
       {/* Stats Editor */}
-      <div className="pt-6 border-t border-gray-100">
+      <div className="pt-6 border-t border-[var(--border-light)]">
         <Label>Quick Stats (4 items recommended)</Label>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-3">
           {data.stats.map((stat, idx) => (
-            <div key={idx} className="border border-gray-200 p-4 space-y-3 relative group bg-gray-50">
+            <div key={idx} className="border border-[var(--border-default)] p-4 space-y-3 relative group bg-[var(--bg-muted)]/50">
               <button 
                 onClick={() => onChange({...data, stats: data.stats.filter((_, i) => i !== idx)})}
-                className="absolute top-2 right-2 text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <Trash2 size={14} />
               </button>
-              <div className="flex gap-2">
-                <div className="w-1/3">
+              <div className="space-y-3">
+                <div className="z-[60]">
                   <Label>Icon</Label>
                   <IconPicker value={stat.icon} onChange={val => {
                     const newList = [...data.stats]; newList[idx].icon = val; onChange({...data, stats: newList});
                   }} />
                 </div>
-                <div className="w-2/3">
+                <div>
                   <Label>Value</Label>
                   <Input value={stat.value} onChange={e => {
                     const newList = [...data.stats]; newList[idx].value = e.target.value; onChange({...data, stats: newList});
@@ -321,7 +456,7 @@ function MainAboutTab({ data, onChange, onSave, isSaving }) {
           ))}
           <button 
             onClick={() => onChange({...data, stats: [...data.stats, {icon: "Star", value: "", label: ""}]})}
-            className="border-2 border-dashed border-gray-200 p-4 flex flex-col items-center justify-center text-gray-400 hover:text-[#00588b] hover:border-[#00588b] transition-all gap-2 h-full min-h-[120px]"
+            className="border-2 border-dashed border-[var(--border-default)] p-4 flex flex-col items-center justify-center text-[var(--text-muted)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-lighter)] transition-all gap-2 h-full min-h-[120px] rounded-none"
           >
             <Plus size={20} />
             <span className="text-[10px] font-bold uppercase tracking-widest">Add Stat</span>
@@ -330,35 +465,35 @@ function MainAboutTab({ data, onChange, onSave, isSaving }) {
       </div>
 
       {/* Universities Editor */}
-      <div className="pt-6 border-t border-gray-100">
+      <div className="pt-6 border-t border-[var(--border-light)]">
         <div className="flex justify-between items-center mb-4">
-          <Label>Universities</Label>
+          <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Universities</h4>
           <button 
             onClick={() => openUniModal()}
-            className="flex items-center gap-1.5 text-[10px] font-bold text-[#00588b] uppercase tracking-widest"
+            className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--color-primary)] uppercase tracking-widest"
           >
             <Plus size={14} /> Add University
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {data.universities.map((uni, idx) => (
-            <div key={uni.id} className="flex gap-4 border border-gray-200 p-4 bg-gray-50 group">
-              <div className="w-24 h-24 shrink-0 bg-white border border-gray-200 overflow-hidden">
-                {uni.image ? <img src={uni.image} className="w-full h-full object-cover" /> : <ImageIcon className="w-full h-full p-6 text-gray-200" />}
+            <div key={uni.id} className="flex gap-4 border border-[var(--border-default)] p-4 bg-[var(--bg-muted)]/50 group rounded-none">
+              <div className="w-24 h-24 shrink-0 bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-hidden rounded-none">
+                {uni.image ? <img src={uni.image} className="w-full h-full object-cover" /> : <ImageIcon className="w-full h-full p-6 text-[var(--border-default)]" />}
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-[11px] font-bold text-gray-900 truncate">{uni.name}</h4>
-                <p className="text-[10px] text-gray-500 font-medium">{uni.location}</p>
+                <h4 className="text-[11px] font-bold text-[var(--text-primary)] truncate uppercase tracking-wide">{uni.name}</h4>
+                <p className="text-[10px] text-[var(--text-muted)] font-medium uppercase tracking-widest">{uni.location}</p>
                 <div className="flex gap-2 mt-4">
                   <button 
                     onClick={() => openUniModal(uni, idx)}
-                    className="text-[9px] font-bold text-[#00588b] border border-[#00588b] px-3 py-1 hover:bg-[#00588b] hover:text-white transition-all uppercase tracking-widest"
+                    className="text-[9px] font-bold text-[var(--color-primary)] border border-[var(--color-primary)] px-3 py-1 hover:bg-[var(--color-primary)] hover:text-[var(--text-inverse)] transition-all uppercase tracking-widest rounded-none"
                   >
                     Edit Info
                   </button>
                   <button 
                     onClick={() => onChange({...data, universities: data.universities.filter((_, i) => i !== idx)})}
-                    className="text-[9px] font-bold text-red-500 border border-red-500 px-3 py-1 hover:bg-red-50 transition-all uppercase tracking-widest"
+                    className="text-[9px] font-bold text-[var(--color-danger)] border border-[var(--color-danger)] px-3 py-1 hover:bg-[var(--color-danger-light)] transition-all uppercase tracking-widest rounded-none"
                   >
                     Delete
                   </button>
@@ -427,13 +562,13 @@ function MainAboutTab({ data, onChange, onSave, isSaving }) {
             <div className="flex justify-end gap-3 pt-6 border-t border-gray-100 mt-6">
               <button 
                 onClick={() => setIsUniModalOpen(false)}
-                className="px-6 py-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest hover:bg-gray-50 transition-all rounded-none"
+                className="px-6 py-2 text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest hover:bg-[var(--bg-muted)] transition-all rounded-none"
               >
                 Cancel
               </button>
               <button 
                 onClick={saveUni}
-                className="px-8 py-2 bg-[#00588b] text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#00446b] transition-all rounded-none"
+                className="px-8 py-2 bg-[var(--color-primary)] text-[var(--text-inverse)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--color-primary-dark)] transition-all rounded-none"
               >
                 Apply Changes
               </button>
@@ -447,20 +582,9 @@ function MainAboutTab({ data, onChange, onSave, isSaving }) {
 
 // --- Tab: Our Roots ---
 
-function OurRootsTab({ data, onChange, onSave, isSaving }) {
+function OurRootsTab({ data, onChange }) {
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center border-b border-gray-100 pb-4">
-        <h2 className="text-sm font-black text-gray-900 uppercase tracking-widest">Our Roots Configuration</h2>
-        <button 
-          onClick={onSave}
-          disabled={isSaving}
-          className="flex items-center gap-2 bg-[#00588b] hover:bg-[#00446b] text-white px-6 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all rounded-none disabled:opacity-50"
-        >
-          <Save size={14} /> {isSaving ? "Saving..." : "Save Our Roots"}
-        </button>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div>
@@ -514,24 +638,13 @@ function OurRootsTab({ data, onChange, onSave, isSaving }) {
 
 // --- Tab: Vision & Mission ---
 
-function VisionMissionTab({ data, onChange, onSave, isSaving }) {
+function VisionMissionTab({ data, onChange }) {
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center border-b border-gray-100 pb-4">
-        <h2 className="text-sm font-black text-gray-900 uppercase tracking-widest">Vision & Mission Configuration</h2>
-        <button 
-          onClick={onSave}
-          disabled={isSaving}
-          className="flex items-center gap-2 bg-[#00588b] hover:bg-[#00446b] text-white px-6 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all rounded-none disabled:opacity-50"
-        >
-          <Save size={14} /> {isSaving ? "Saving..." : "Save Vision & Mission"}
-        </button>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Quote and Hero Chips */}
         <div className="space-y-6">
-          <div>
+          <div className="bg-[var(--bg-muted)]/30 p-5 border-l-2 border-[var(--color-primary)]">
             <Label>Top Quote Text</Label>
             <TextArea 
               value={data.quote.text} 
@@ -540,12 +653,12 @@ function VisionMissionTab({ data, onChange, onSave, isSaving }) {
             />
           </div>
 
-          <div className="pt-6 border-t border-gray-100">
+          <div className="pt-6 border-t border-[var(--border-light)]">
             <Label>Hero Chips (3 featured values)</Label>
             <div className="space-y-3 mt-3">
               {data.heroChips.map((chip, idx) => (
-                <div key={idx} className="flex gap-3 bg-gray-50 p-3 border border-gray-200">
-                  <div className="w-20">
+                <div key={idx} className="flex gap-3 bg-[var(--bg-muted)]/50 p-3 border border-[var(--border-default)] rounded-none">
+                  <div className="w-40 shrink-0">
                     <Label>Icon</Label>
                     <IconPicker 
                       value={chip.icon} 
@@ -571,147 +684,88 @@ function VisionMissionTab({ data, onChange, onSave, isSaving }) {
 
         {/* Vision and Approach */}
         <div className="space-y-6">
-          <div className="border border-gray-200 p-5 bg-[#f0f7ff]/30">
-            <div className="flex gap-3 items-center mb-4">
-              <div className="w-10 h-10 bg-[#00588b]/10 flex items-center justify-center">
+          <div className="border border-[var(--border-default)] p-5 bg-[var(--bg-surface)] rounded-none shadow-sm">
+            <div className="flex gap-3 items-center mb-6 pb-2 border-b border-[var(--border-light)]">
+               <div className="w-40 shrink-0">
                 <IconPicker 
                   value={data.vision.icon} 
                   onChange={val => onChange({...data, vision: {...data.vision, icon: val}})} 
                 />
               </div>
-              <h3 className="text-[11px] font-black text-[#00588b] uppercase tracking-widest">Vision Section</h3>
+              <h3 className="text-[12px] font-black text-[var(--color-primary)] uppercase tracking-widest flex-1">Vision Section</h3>
             </div>
             <div className="space-y-4">
-              <div>
-                <Label>Tag</Label>
-                <Input value={data.vision.tag} onChange={e => onChange({...data, vision: {...data.vision, tag: e.target.value}})} />
-              </div>
-              <div>
-                <Label>Heading</Label>
-                <Input value={data.vision.heading} onChange={e => onChange({...data, vision: {...data.vision, heading: e.target.value}})} />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Label>Tag</Label>
+                  <Input value={data.vision.tag} onChange={e => onChange({...data, vision: {...data.vision, tag: e.target.value}})} />
+                </div>
+                <div>
+                  <Label>Heading</Label>
+                  <Input value={data.vision.heading} onChange={e => onChange({...data, vision: {...data.vision, heading: e.target.value}})} />
+                </div>
               </div>
               <div>
                 <Label>Description</Label>
-                <TextArea value={data.vision.description} onChange={e => onChange({...data, vision: {...data.vision, description: e.target.value}})} />
+                <TextArea value={data.vision.description} onChange={e => onChange({...data, vision: {...data.vision, description: e.target.value}})} className="h-28" />
               </div>
             </div>
           </div>
 
-          <div className="border border-gray-200 p-5 bg-[#ffb900]/5">
-            <div className="flex gap-3 items-center mb-4">
-              <div className="w-10 h-10 bg-[#ffb900]/10 flex items-center justify-center">
+          <div className="border border-[var(--border-default)] p-5 bg-[var(--bg-surface)] rounded-none shadow-sm">
+            <div className="flex gap-3 items-center mb-6 pb-2 border-b border-[var(--border-light)]">
+              <div className="w-40 shrink-0">
                 <IconPicker 
                   value={data.approach.icon} 
                   onChange={val => onChange({...data, approach: {...data.approach, icon: val}})} 
                 />
               </div>
-              <h3 className="text-[11px] font-black text-gray-800 uppercase tracking-widest">Approach Section</h3>
+              <h3 className="text-[12px] font-black text-[var(--color-warning-dark)] uppercase tracking-widest flex-1">Approach Section</h3>
             </div>
             <div className="space-y-4">
-              <div>
-                <Label>Tag</Label>
-                <Input value={data.approach.tag} onChange={e => onChange({...data, approach: {...data.approach, tag: e.target.value}})} />
-              </div>
-              <div>
-                <Label>Heading</Label>
-                <Input value={data.approach.heading} onChange={e => onChange({...data, approach: {...data.approach, heading: e.target.value}})} />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Label>Tag</Label>
+                  <Input value={data.approach.tag} onChange={e => onChange({...data, approach: {...data.approach, tag: e.target.value}})} />
+                </div>
+                <div>
+                  <Label>Heading</Label>
+                  <Input value={data.approach.heading} onChange={e => onChange({...data, approach: {...data.approach, heading: e.target.value}})} />
+                </div>
               </div>
               <div>
                 <Label>Description</Label>
-                <TextArea value={data.approach.description} onChange={e => onChange({...data, approach: {...data.approach, description: e.target.value}})} />
+                <TextArea value={data.approach.description} onChange={e => onChange({...data, approach: {...data.approach, description: e.target.value}})} className="h-28" />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-gray-100">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-[var(--border-light)]">
         {/* Mission Section */}
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Label>Mission Items</Label>
-            <button 
-              onClick={() => onChange({...data, mission: {...data.mission, items: [...data.mission.items, {id: Date.now(), icon: "Star", text: ""}]}})}
-              className="text-[10px] font-bold text-[#00588b] uppercase tracking-widest flex items-center gap-1"
-            >
-              <Plus size={14} /> Add Mission Point
-            </button>
-          </div>
-          <div className="space-y-3">
-            {data.mission.items.map((item, idx) => (
-              <div key={item.id} className="border border-gray-200 p-4 bg-gray-50 flex gap-4">
-                <div className="w-16">
-                  <Label>Icon</Label>
-                  <IconPicker 
-                    value={item.icon} 
-                    onChange={val => {
-                      const newList = [...data.mission.items]; newList[idx].icon = val; onChange({...data, mission: {...data.mission, items: newList}});
-                    }} 
-                  />
-                </div>
-                <div className="flex-1">
-                  <Label>Point Text</Label>
-                  <TextArea 
-                    value={item.text} 
-                    onChange={e => {
-                      const newList = [...data.mission.items]; newList[idx].text = e.target.value; onChange({...data, mission: {...data.mission, items: newList}});
-                    }}
-                    className="h-20"
-                  />
-                </div>
-                <button 
-                  onClick={() => onChange({...data, mission: {...data.mission, items: data.mission.items.filter((_, i) => i !== idx)}})}
-                  className="self-start text-gray-400 hover:text-red-500 mt-6"
-                >
-                  <Trash2 size={16} />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
+        <NestedListEditor 
+          label="Mission Items"
+          items={data.mission.items}
+          newItemTemplate={{ id: Date.now(), icon: "Star", text: "" }}
+          fields={[
+            { key: 'icon', label: 'Icon', type: 'icon' },
+            { key: 'text', label: 'Point Text', type: 'textArea' }
+          ]}
+          onUpdate={newItems => onChange({...data, mission: {...data.mission, items: newItems}})}
+        />
 
         {/* Values Section */}
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <Label>Core Values</Label>
-            <button 
-              onClick={() => onChange({...data, values: {...data.values, items: [...data.values.items, {id: Date.now(), icon: "Star", label: ""}]}})}
-              className="text-[10px] font-bold text-[#00588b] uppercase tracking-widest flex items-center gap-1"
-            >
-              <Plus size={14} /> Add Value
-            </button>
-          </div>
-          <div className="space-y-3">
-            {data.values.items.map((item, idx) => (
-              <div key={item.id} className="border border-gray-200 p-4 bg-gray-50 flex gap-4 items-center">
-                <div className="w-16">
-                  <Label>Icon</Label>
-                  <IconPicker 
-                    value={item.icon} 
-                    onChange={val => {
-                      const newList = [...data.values.items]; newList[idx].icon = val; onChange({...data, values: {...data.values, items: newList}});
-                    }} 
-                  />
-                </div>
-                <div className="flex-1">
-                  <Label>Value Name</Label>
-                  <Input 
-                    value={item.label} 
-                    onChange={e => {
-                      const newList = [...data.values.items]; newList[idx].label = e.target.value; onChange({...data, values: {...data.values, items: newList}});
-                    }} 
-                  />
-                </div>
-                <button 
-                  onClick={() => onChange({...data, values: {...data.values, items: data.values.items.filter((_, i) => i !== idx)}})}
-                  className="text-gray-400 hover:text-red-500 mt-4"
-                >
-                  <Trash2 size={16} />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
+        <NestedListEditor 
+          label="Core Values"
+          items={data.values.items}
+          newItemTemplate={{ id: Date.now(), icon: "Star", label: "" }}
+          fields={[
+            { key: 'icon', label: 'Icon', type: 'icon' },
+            { key: 'label', label: 'Value Name', type: 'text' }
+          ]}
+          onUpdate={newItems => onChange({...data, values: {...data.values, items: newItems}})}
+        />
       </div>
     </div>
   );

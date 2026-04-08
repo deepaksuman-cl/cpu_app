@@ -189,7 +189,7 @@ export default async function OurRoots() {
 
           {/* Dynamic Rich Text Content */}
           {institutions_html ? (
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 overflow-hidden">
+            <div className="">
               <div 
                 className={`${useProse ? 'university-prose' : 'prose max-w-none prose-sm md:prose-base'} 
                   prose-headings:text-[#00588b] prose-headings:font-black
