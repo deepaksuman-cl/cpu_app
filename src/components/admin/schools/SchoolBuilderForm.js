@@ -831,8 +831,10 @@ export default function SchoolBuilderForm({ initialData = null }) {
                 newItemTemplate={{ name: '', company: '', role: '', image: '', desc: '', slug: '' }}
                 fields={[
                   {key: 'name', label: 'Full Name'},
+                  {key: 'role', label: 'Role / Designation'},
                   {key: 'company', label: 'Current Company'},
                   {key: 'image', label: 'Photo URL', type: 'image'},
+                  {key: 'desc', label: 'Short Description', type: 'textarea'},
                   {key: 'slug', label: 'Slug'}
                 ]}
                 onUpdate={items => updateSection('alumni', {...formData.alumni, list: items})}

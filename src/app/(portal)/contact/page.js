@@ -62,7 +62,7 @@ export default function ContactPage() {
                 </div>
                 
                 {/* ⚠️ DO NOT CHANGE THIS FORM CODE ⚠️ */}
-                <div className="p-4 bg-gray-50 min-h-[480px]">
+                <div className="bg-gray-50">
                   <div className="npf_wgts" data-height="450px" data-w="f0dace2ba1b9cc96517a3a6aa12f701c"></div>
                   <Script 
                     src="https://widgets.in8.nopaperforms.com/emwgts.js" 

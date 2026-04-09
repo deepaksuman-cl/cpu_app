@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Script from 'next/script';
+import { useEffect, useState } from 'react';
 
 export default function FloatingEnquiry() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +16,7 @@ export default function FloatingEnquiry() {
     <>
       {/* 1. WHATSAPP BUTTON (Bottom Right - Fixed) */}
       <a
-        href="https://wa.me/+15559057959the Details of Career Point University"
+       href="https://wa.me/15559057959"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-20 lg:bottom-8 left-6 bg-[#25D366] text-white w-12 h-12 rounded-full shadow-[0_4px_15px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300 z-50 flex items-center justify-center"
