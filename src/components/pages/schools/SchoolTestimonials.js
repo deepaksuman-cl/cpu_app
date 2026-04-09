@@ -76,7 +76,12 @@ export default function SchoolTestimonials({ data }) {
                             </div>
                             <div>
                               <div className="font-bold text-white text-base">{t.name}</div>
-                              <div className="text-sm mt-0.5 text-slate-400">{t.batch} · {t.company}</div>
+                              <div className="text-sm mt-0.5 text-slate-400">
+                                {t.course && <span>{t.course} · </span>}
+                                {t.batch && <span>{t.batch} · </span>}
+                                {t.company && <span>{t.company}</span>}
+                                {t.package && <span className="text-[#ffb900] ml-2 font-bold tracking-tight">({t.package})</span>}
+                              </div>
                             </div>
                           </div>
                           <div className="flex gap-1">

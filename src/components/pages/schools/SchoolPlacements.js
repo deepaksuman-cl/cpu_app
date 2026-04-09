@@ -67,11 +67,26 @@ export default function SchoolPlacements({ data }) {
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#f8fbff] to-[#dbeafe] border border-[#dde8f5] shadow-[0_4px_16px_rgba(0,88,139,0.08)] transition-all hover:-translate-y-2 hover:shadow-xl">
                   <div className="relative aspect-[3/4]">
                     <img src={p.img || p.image} alt={p.name} className="w-full h-full object-cover" />
-                    {(p.name || p.company || p.pkg) && (
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 flex flex-col justify-end">
+                    {(p.name || p.company || p.package || p.pkg || p.classOf || p.designation) && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 flex flex-col justify-end">
                         {p.name && <p className="text-white font-black text-sm">{p.name}</p>}
-                        {p.company && <p className="text-[#ffb900] text-xs font-bold leading-tight">{p.company}</p>}
-                        {p.pkg && <p className="text-sky-300 text-[10px] font-black uppercase mt-1 tracking-widest">{p.pkg} LPA</p>}
+                        
+                        {(p.designation || p.courseName || p.course) && (
+                          <p className="text-white/80 text-[10px] font-bold leading-tight line-clamp-1">
+                            {p.designation}{ (p.designation && (p.courseName || p.course)) ? ' | ' : ''}{p.courseName || p.course}
+                          </p>
+                        )}
+
+                        {p.company && <p className="text-[#ffb900] text-xs font-black leading-tight mt-0.5">{p.company}</p>}
+                        
+                        <div className="flex items-center justify-between mt-1 pt-1 border-t border-white/10">
+                          {(p.package || p.pkg) && (
+                            <p className="text-sky-300 text-[10px] font-black uppercase tracking-widest">{(p.package || p.pkg)} LPA</p>
+                          )}
+                          {p.classOf && (
+                            <p className="text-white/60 text-[9px] font-bold uppercase tracking-tighter">Class of {p.classOf}</p>
+                          )}
+                        </div>
                       </div>
                     )}
                     <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#ffb900] rounded-tl" />

@@ -68,6 +68,11 @@ const PlacementSlideCard = ({ slide, onWatchVideo }) => {
                  Class of {slide.classOf}
               </p>
             )}
+            {slide.package && (
+              <p className="text-amber-400 text-[18px] font-black mt-2 drop-shadow-md">
+                 {slide.package} {slide.package.toLowerCase().includes('lpa') ? '' : 'LPA'}
+              </p>
+            )}
             {slide.course && !slide.designation && (
                <p className="text-white/60 text-[14px] font-bold uppercase tracking-widest drop-shadow-md mt-2">
                  {slide.course}
@@ -136,7 +141,8 @@ export default function PlacementSection({ data }) {
     img: p.logoUrl,
     youtubeLink: p.youtubeLink,
     designation: p.designation,
-    classOf: p.classOf
+    classOf: p.classOf,
+    package: p.packageOffered || p.package
   })) || [];
 
   const relationalRecruiters = data?.placementPartnersRel?.map(p => ({
@@ -154,7 +160,8 @@ export default function PlacementSection({ data }) {
       img: s.img || s.logoUrl,
       youtubeLink: s.youtubeLink,
       designation: s.designation,
-      classOf: s.classOf
+      classOf: s.classOf,
+      package: s.package
     };
   });
 
