@@ -17,7 +17,7 @@ export default function FloatingEnquiry() {
     <>
       {/* 1. WHATSAPP BUTTON (Bottom Right - Fixed) */}
       <a
-        href="https://wa.me/919079134713?text=Hi, I want to Know the Details of Career Point University"
+        href="https://wa.me/+15559057959the Details of Career Point University"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-20 lg:bottom-8 left-6 bg-[#25D366] text-white w-12 h-12 rounded-full shadow-[0_4px_15px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300 z-50 flex items-center justify-center"
@@ -32,7 +32,7 @@ export default function FloatingEnquiry() {
       {/* 2. ENQUIRY FORM WIDGET (Vertically Centered) */}
       {/* top-1/2 aur -translate-y-1/2 isko exact screen ke center me rakhenge */}
       <div 
-        className={`fixed top-1/2 -translate-y-1/2 right-0 z-50 transition-transform duration-500 ease-in-out ${
+        className={`hidden lg:block fixed top-1/2 -translate-y-1/2 right-0 z-50 transition-transform duration-500 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-[320px]'
         }`}
       >
