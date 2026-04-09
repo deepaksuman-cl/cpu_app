@@ -7,6 +7,7 @@ import IconPicker from '@/components/admin/ui/IconPicker';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import { updateFooter } from '@/lib/actions/footerActions';
 import { seedDatabase } from '@/lib/actions/seedActions';
+import Link from "next/link";
 
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -429,6 +430,31 @@ export default function FooterManagerForm({ initialData }) {
 
       </div>
       <Toaster position="bottom-right" />
+      <div id="form_wrapper">
+         <div className="form-clickOuter"><span className="form-click opacityprimary open">Enquiry Now </span> </div>
+         <div className="form-sec card" id="enquiry-now">
+            <div className="adm-txt">Enquiry Now</div>
+     
+			 <div className="npf_wgts" data-height="428px" data-w="f0dace2ba1b9cc96517a3a6aa12f701c"></div>
+<script type="text/javascript">var s=document.createElement("script");     s.type="text/javascript"; s.async=true; s.src="https://widgets.in8.nopaperforms.com/emwgts.js";     document.body.appendChild(s);</script>
+
+         </div>
+      </div>
+
+
+      <Link
+  href="https://api.whatsapp.com/send/?phone=919079134713&text=Hi%27I+want+to+Know+the+Details+of+Career+Point+University"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="whatsapp__chat"
+>
+  <i className="fab fa-whatsapp"></i>
+</Link>
     </div>
+
+
+
+
+
   );
 }

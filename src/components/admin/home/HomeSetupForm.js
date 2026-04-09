@@ -109,6 +109,12 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                   <textarea value={item[field.key] || ''} onChange={e => {
                     const newItems = [...items]; newItems[idx][field.key] = e.target.value; onUpdate(newItems);
                   }} className="w-full border border-[var(--border-default)] p-2 text-xs h-20 outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none resize-none" />
+                ) : field.type === 'checkbox' ? (
+                  <div className="flex items-center h-full">
+                    <input type="checkbox" checked={!!item[field.key]} onChange={e => {
+                      const newItems = [...items]; newItems[idx][field.key] = e.target.checked; onUpdate(newItems);
+                    }} className="w-4 h-4 cursor-pointer accent-[var(--color-primary)]" />
+                  </div>
                 ) : (
                   <input type={field.type || 'text'} value={item[field.key] || ''} onChange={e => {
                     const newItems = [...items]; newItems[idx][field.key] = e.target.value; onUpdate(newItems);
@@ -374,7 +380,7 @@ export default function HomeSetupForm({ initialData }) {
               <NestedListEditor 
                 label="Hero Slides"
                 items={sections.heroConfig.slides}
-                newItemTemplate={{ bg: '', bg_mobile: '', tagline: '', title: '', subtitle: '', desc: '', badge: '', showOverlay: true, buttons: [] }}
+                newItemTemplate={{ bg: '', bg_mobile: '', tagline: '', title: '', subtitle: '', desc: '', badge: '', showOverlay: true, heightFix: false, buttons: [] }}
                 fields={[
                   {key: 'title', label: 'Main Title'},
                   {key: 'subtitle', label: 'Subtitle'},
@@ -383,6 +389,7 @@ export default function HomeSetupForm({ initialData }) {
                   {key: 'bg', label: 'Background Image (Desktop)', type: 'image', fullWidth: true},
                   {key: 'bg_mobile', label: 'Background Image (Mobile)', type: 'image', fullWidth: true},
                   {key: 'showOverlay', label: 'Show Dark Overlay', type: 'checkbox'},
+                  {key: 'heightFix', label: 'Height Fix (Min 680px)', type: 'checkbox'},
                   {key: 'desc', label: 'Description', type: 'textarea', fullWidth: true},
                 ]}
                 onUpdate={items => updateSection('heroConfig', {...sections.heroConfig, slides: items})}

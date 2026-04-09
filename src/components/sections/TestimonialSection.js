@@ -1,5 +1,5 @@
 "use client";
-import { BadgeCheck, ChevronLeft, ChevronRight, MapPin, Sparkles, Star } from "lucide-react";
+import { BadgeCheck, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, MapPin, Sparkles, Star } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 function StarRating({ rating, max = 5 }) {
@@ -36,31 +36,47 @@ export default function TestimonialSection({ data }) {
   const testimonials = relationalTestimonials.length > 0 ? relationalTestimonials : (data?.testimonials || []);
   const [active, setActive] = useState(0);
   const [animKey, setAnimKey] = useState(0);
-  const timerRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [showReadMore, setShowReadMore] = useState(false);
+  const quoteRef = useRef(null);
   const total = testimonials.length;
 
   const go = useCallback(
     (n) => {
       if (total === 0) return;
-      clearInterval(timerRef.current);
       setActive((n + total) % total);
       setAnimKey((k) => k + 1);
-      timerRef.current = setInterval(() => {
-        setActive((p) => (p + 1) % total);
-        setAnimKey((k) => k + 1);
-      }, 5000);
+      setIsExpanded(false);
     },
     [total]
   );
 
   useEffect(() => {
-    if (total === 0) return;
-    timerRef.current = setInterval(() => {
+    if (total === 0 || isHovered) return;
+    const timer = setInterval(() => {
       setActive((p) => (p + 1) % total);
       setAnimKey((k) => k + 1);
+      setIsExpanded(false);
     }, 5000);
-    return () => clearInterval(timerRef.current);
-  }, [total]);
+    return () => clearInterval(timer);
+  }, [total, isHovered, active]);
+
+  useEffect(() => {
+    if (!isExpanded) {
+      const check = () => {
+        if (quoteRef.current) {
+          setShowReadMore(quoteRef.current.scrollHeight > quoteRef.current.clientHeight);
+        }
+      };
+      const tid = setTimeout(check, 10);
+      window.addEventListener('resize', check);
+      return () => {
+        clearTimeout(tid);
+        window.removeEventListener('resize', check);
+      };
+    }
+  }, [active, isExpanded, testimonials]);
 
   if (total === 0) return null;
 
@@ -90,7 +106,11 @@ export default function TestimonialSection({ data }) {
           }
         }
       `}</style>
-      <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-20 px-4 overflow-hidden">
+      <section 
+        className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-20 px-4 overflow-hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/40 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-100/40 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
         <div className="max-w-6xl mx-auto relative z-10">
@@ -174,7 +194,25 @@ export default function TestimonialSection({ data }) {
                       <BadgeCheck size={13} /> {data?.verifyLabel || "Verified Student"}
                     </span>
                   </div>
-                  <blockquote className="text-slate-700 text-lg md:text-xl font-semibold italic leading-relaxed mb-8 m-0" dangerouslySetInnerHTML={{ __html: `"${t.quote}"` }} />
+                  <div className="mb-8">
+                    <blockquote 
+                      ref={quoteRef}
+                      className={`text-slate-700 text-lg md:text-xl font-semibold italic leading-relaxed m-0 ${isExpanded ? '' : 'line-clamp-5'}`} 
+                      dangerouslySetInnerHTML={{ __html: `"${t.quote}"` }} 
+                    />
+                    {showReadMore && (
+                      <button 
+                        onClick={() => setIsExpanded(!isExpanded)} 
+                        className="flex items-center gap-1 text-[13px] font-bold text-[#00588b] hover:text-[#ffb900] transition-colors mt-3"
+                      >
+                        {isExpanded ? (
+                          <>Read Less <ChevronUp size={14} /></>
+                        ) : (
+                          <>Read More <ChevronDown size={14} /></>
+                        )}
+                      </button>
+                    )}
+                  </div>
                   <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-3">
                    
