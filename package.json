@@ -28,11 +28,7 @@
     "editorjs-undo": "^2.0.28",
     "lucide-react": "^0.577.0",
     "mariadb": "^3.5.2",
-<<<<<<< HEAD
-    "next": "^15.5.14",
-=======
     "next": "^15.5.15",
->>>>>>> 8106128e5ffb68ead128f1908d662a6f0f90f276
     "next-auth": "^4.24.13",
     "nextjs-toploader": "^3.9.17",
     "pg": "^8.20.0",
