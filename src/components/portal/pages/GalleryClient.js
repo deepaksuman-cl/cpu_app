@@ -350,20 +350,26 @@ function ImageCard({ image, colCount, index, onOpen }) {
     5: "h-36 sm:h-44",
   };
 
-  return (
-    <div className="gs-card">
+  const hasLink = !!image.slug;
+
+  const cardContent = (
+    <div className="gs-card h-full">
       <div className={`w-full ${heights[colCount] || "h-52"}`}>
         <img src={image.image} alt={image.title} />
       </div>
 
-      {/* Hover overlay — displays title, category, and zoom icon */}
       <div className="gs-overlay" style={{ flexDirection: 'column' }}>
         <button
-          onClick={(e) => { e.preventDefault(); onOpen(index); }}
+          onClick={(e) => { 
+            if (hasLink) return; // Link component handles it
+            e.preventDefault(); 
+            e.stopPropagation();
+            onOpen(index); 
+          }}
           className="gs-zoom mb-3"
-          title="View full image"
+          title={hasLink ? "View page" : "View full image"}
         >
-          <ZoomIn size={22} />
+          {hasLink ? <ChevronRight size={22} /> : <ZoomIn size={22} />}
         </button>
         {image.title && (
           <h3 className="text-white font-bold text-sm tracking-wide px-4 text-center drop-shadow-md">
@@ -378,13 +384,23 @@ function ImageCard({ image, colCount, index, onOpen }) {
       </div>
     </div>
   );
+
+  if (hasLink) {
+    return (
+      <Link href={image.slug} className="block h-full">
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return cardContent;
 }
 
 /* ═══════════════════════════════════════════════════════════════
    🏠 MAIN GALLERY SECTION 
 ═══════════════════════════════════════════════════════════════ */
-export default function GalleryClient({ items, heading, id, className }) {
-  const [gridCols, setGridCols] = useState(3);
+export default function GalleryClient({ items, heading, gridCols: adminGridCols, id, className }) {
+  const [gridCols, setGridCols] = useState(Number(adminGridCols) || 3);
   const [lightbox, setLightbox] = useState({ open: false, index: 0 });
 
   /* Inject styles on mount, remove on unmount */
@@ -442,23 +458,7 @@ export default function GalleryClient({ items, heading, id, className }) {
           </div>
         )}
 
-        {/* ── Grid Selector ───────────────────────────────── */}
-        <div className="flex items-center justify-end gap-2 mb-6">
-          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider mr-1">
-            Grid
-          </span>
-          {[2, 3, 4, 5].map((col) => (
-            <button
-              key={col}
-              onClick={() => setGridCols(col)}
-              className={`gs-grid-btn ${gridCols === col ? "active" : ""}`}
-              title={`${col} columns`}
-            >
-              <GridIcon cols={col} />
-              <span>{col}</span>
-            </button>
-          ))}
-        </div>
+        {/* Grid Selector Removed - Controlled by Admin */}
 
         {/* ── Gallery Grid ──────────────────────────────────── */}
         <div className={`grid gap-4 ${gridClass[gridCols]}`}>
