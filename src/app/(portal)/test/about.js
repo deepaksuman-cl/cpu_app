@@ -250,7 +250,7 @@ function UniversityCard({ uni, reverse }) {
           ))}
         </ul>
 
-        {/* CTA */}
+ 
         <a
           href={uni.websiteUrl}
           target="_blank"
