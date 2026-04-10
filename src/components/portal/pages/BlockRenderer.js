@@ -182,7 +182,7 @@ export default function BlockRenderer({ block }) {
   }
   // 7. Interactive Gallery Block
   if (blockType === 'GalleryBlock') {
-    return <GalleryClient items={block.galleryItems} heading={block.galleryHeading} id={block.cssId} className={block.cssClass} />;
+    return <GalleryClient items={block.galleryItems} heading={block.galleryHeading} gridCols={block.gridCols} id={block.cssId} className={block.cssClass} />;
   }
 
   // 8. Hero with Stats

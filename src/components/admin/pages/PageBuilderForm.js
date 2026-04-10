@@ -45,7 +45,10 @@ const getEmptyBlock = (type) => {
   if (type === 'Accordion') base.accordionItems = [{ title: '', content: '' }];
   if (type === 'ProfileGrid') base.profileItems = [{ name: '', designation: '', company: '', slug: '', image: '' }];
   if (type === 'StatsGrid') base.statsItems = [{ label: '', value: '', icon: '' }];
-  if (type === 'GalleryBlock') base.galleryItems = [{ image: '', title: '', category: '' }];
+  if (type === 'GalleryBlock') {
+    base.galleryItems = [{ image: '', title: '', category: '', slug: '' }];
+    base.gridCols = '3';
+  }
   
   if (type === 'HeroWithStats') base.heroStats = { badgeText: '', titleMain: '', titleHighlight: '', subtitle: '', stats: [] };
   if (type === 'LeaderProfile') base.leaderProfile = { image: '', name: '', role: '', organization: '', qualifications: [], greeting: '', welcomeHeadline: '', messageHTML: '', visionQuote: '', signatureQuals: '' };
@@ -719,6 +722,19 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                           <label className="block text-[10px] font-bold text-gray-500 uppercase">Subtext Description</label>
                           <textarea value={block.galleryHeading?.description || ''} onChange={e => updateBlock(index, 'galleryHeading', { ...block.galleryHeading, description: e.target.value })} className="w-full border border-gray-300 p-1.5 text-sm outline-none h-10 resize-y" placeholder="Brief intro to the gallery..." />
                         </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-gray-500 uppercase">Grid Columns (Public Site)</label>
+                          <select 
+                            value={block.gridCols || '3'} 
+                            onChange={e => updateBlock(index, 'gridCols', e.target.value)} 
+                            className="w-full border border-gray-300 p-1.5 text-sm outline-none bg-white"
+                          >
+                            <option value="2">2 Columns</option>
+                            <option value="3">3 Columns</option>
+                            <option value="4">4 Columns</option>
+                            <option value="5">5 Columns</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
 
@@ -735,7 +751,7 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                              }
                            }}
                         />
-                        <button type="button" onClick={() => addArrayItem(index, 'galleryItems', { image: '', title: '', category: '' })} className="h-[34px] text-xs font-bold bg-white border border-[#00588b] text-[#00588b] px-3 py-1.5 hover:bg-gray-50 transition-colors flex gap-1 items-center">
+                        <button type="button" onClick={() => addArrayItem(index, 'galleryItems', { image: '', title: '', category: '', slug: '' })} className="h-[34px] text-xs font-bold bg-white border border-[#00588b] text-[#00588b] px-3 py-1.5 hover:bg-gray-50 transition-colors flex gap-1 items-center">
                           <Plus size={14} /> Add Empty Row
                         </button>
                       </div>
@@ -773,6 +789,10 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                             <div>
                               <label className="block text-[10px] font-bold text-gray-500 uppercase">Category</label>
                               <input type="text" value={item.category} onChange={e => updateArrayItem(index, 'galleryItems', gIdx, 'category', e.target.value)} className="w-full border border-gray-300 p-1.5 text-sm outline-none bg-white" placeholder="e.g. Infrastructure" />
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-bold text-gray-500 uppercase text-blue-600">Redirect Slug / URL</label>
+                              <input type="text" value={item.slug || ''} onChange={e => updateArrayItem(index, 'galleryItems', gIdx, 'slug', e.target.value)} className="w-full border border-blue-200 p-1.5 text-sm outline-none bg-blue-50 focus:border-blue-400" placeholder="e.g. /about or #section" />
                             </div>
                           </div>
 
