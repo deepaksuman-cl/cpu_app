@@ -52,7 +52,10 @@ export default function HeroSection({ data }) {
         }
       `}</style>
 
-      <section className="relative overflow-hidden w-full">
+      <section
+        className="relative overflow-hidden w-full"
+        style={hs.heightFix ? { minHeight: '680px' } : {}}
+      >
         {/* Background Image Layer */}
         {slides.map((slide, i) => (
           <div
@@ -61,20 +64,29 @@ export default function HeroSection({ data }) {
             style={{
               opacity: i === idx ? 1 : 0,
               zIndex: 0,
+              ...(slide.heightFix ? { minHeight: '680px' } : {}),
             }}
           >
             {/* Desktop Background */}
             <img
               src={slide.bg}
               alt={slide.title || "Hero Background"}
-              className={`w-full ${slide.heightFix ? 'min-h-[640px] lg:min-h-[680px] h-full object-cover' : 'h-auto'} ${slide.bg_mobile ? 'hidden md:block' : 'block'}`}
+              className={`w-full ${slide.bg_mobile ? 'hidden md:block' : 'block'}`}
+              style={slide.heightFix
+                ? { minHeight: '680px', height: '680px', objectFit: 'cover', objectPosition: 'center' }
+                : { height: 'auto' }
+              }
             />
             {/* Mobile Background */}
             {slide.bg_mobile && (
               <img
                 src={slide.bg_mobile}
                 alt={slide.title || "Hero Mobile Background"}
-                className={`w-full ${slide.heightFix ? 'min-h-[640px] lg:min-h-[680px] h-full object-cover' : 'h-auto'} block md:hidden`}
+                className="w-full block md:hidden"
+                style={slide.heightFix
+                  ? { minHeight: '640px', height: '640px', objectFit: 'cover', objectPosition: 'center' }
+                  : { height: 'auto' }
+                }
               />
             )}
           </div>
