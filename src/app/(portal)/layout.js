@@ -53,7 +53,7 @@ export default async function RootLayout({ children }) {
         {customCss && <style dangerouslySetInnerHTML={{ __html: customCss }} />}
         <HeaderServer /> 
         
-        <main className="pt-[64px] lg:pt-[112px]">
+        <main className="pt-[64px] lg:pt-[80px]">
           <Breadcrumb />
           {children}
         </main>
