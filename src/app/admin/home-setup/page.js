@@ -47,8 +47,7 @@ export default async function HomeSetupPage() {
         </div>
 
       </div>
-       
-      {/* ── Form Container ── */}
+
       <div className="pt-[42px] w-full">
         <div className="pt-2 sm:pt-4">
           <HomeSetupForm initialData={homeData} />
