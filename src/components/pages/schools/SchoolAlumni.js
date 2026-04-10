@@ -26,7 +26,7 @@ export default function SchoolAlumni({ data }) {
           </h2>
         </div>
 
-        <div 
+        <div
           className="relative group/alumni-slider"
           onMouseEnter={() => swiperRef.current?.autoplay.stop()}
           onMouseLeave={() => swiperRef.current?.autoplay.start()}
@@ -53,10 +53,10 @@ export default function SchoolAlumni({ data }) {
               bulletActiveClass: 'alumni-bullet-active',
               renderBullet: (index, className) => `<span class="${className}"></span>`
             }}
-            breakpoints={{ 
-              0: { slidesPerView: 1 }, 
-              640: { slidesPerView: 2 }, 
-              1024: { slidesPerView: 4 } 
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 4 }
             }}
             loop={list.length > 4}
             grabCursor={true}
@@ -64,7 +64,7 @@ export default function SchoolAlumni({ data }) {
             {list.map((a, j) => (
               <SwiperSlide key={j} className="py-5">
                 <div className="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-[0_4px_16px_rgba(0,88,139,0.07)] transition-all hover:-translate-y-2 hover:shadow-xl h-full">
-                  <div className="aspect-[4/5] overflow-hidden">
+                  <div className=" overflow-hidden">
                     <img src={a.image || a.img} alt={a.name} className="w-full transition-transform duration-500 hover:scale-105" />
                   </div>
                   <div className="p-4 text-center border-t-[3px] border-[#00588b]">
@@ -89,7 +89,8 @@ export default function SchoolAlumni({ data }) {
           <div className="alumni-pagination flex justify-center gap-2 mt-8"></div>
         </div>
 
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style dangerouslySetInnerHTML={{
+          __html: `
           .alumni-bullet {
             display: inline-block;
             width: 10px;
