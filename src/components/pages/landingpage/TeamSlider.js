@@ -155,8 +155,7 @@ export default function TeamSlider() {
           box-shadow: 0 15px 30px -5px rgba(0,0,0,0.1);
         }
       `}} />
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center mb-16 max-w-4xl mx-auto">
@@ -180,8 +179,8 @@ export default function TeamSlider() {
 
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={24}
-            slidesPerView={1}
+            spaceBetween={32}
+            slidesPerView={1.2}
             loop={true}
             autoplay={{
               delay: 3500,
@@ -194,23 +193,23 @@ export default function TeamSlider() {
             }}
             pagination={{ clickable: true }}
             breakpoints={{
-              640: { slidesPerView: 2 },
+              640: { slidesPerView: 2.2 },
               1024: { slidesPerView: 3 },
-              1280: { slidesPerView: 4 },
+              1440: { slidesPerView: 3.5 },
             }}
             className="team-swiper"
           >
             {teamData.map((member, index) => (
               <SwiperSlide key={index} className="h-auto">
-                <div className="advisor-card-inner bg-white rounded-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-slate-100 flex flex-col h-full overflow-hidden relative group">
+                <div className="advisor-card-inner bg-white rounded-[20px] shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-100 flex flex-col h-full overflow-hidden relative group">
                   
                   {/* Top Dark Blue Background Block */}
-                  <div className="h-40 bg-[#0f347c] w-full shrink-0"></div>
+                  <div className="h-32 bg-[#0f347c] w-full shrink-0"></div>
 
-                  {/* Overlapping Image Container */}
-                  <div className="px-6 -mt-32 relative z-10 flex justify-center">
-                    <div className="bg-white p-3 rounded-[24px] shadow-sm w-full max-w-[240px]">
-                      <div className="aspect-[4/5] bg-slate-50 rounded-[18px] overflow-hidden grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500">
+                  {/* Overlapping Image - Now wider and without the white strip */}
+                  <div className="px-5 -mt-24 relative z-10 flex justify-center">
+                    <div className="w-full">
+                      <div className="aspect-[4.5/5] bg-slate-100 rounded-[24px] overflow-hidden group-hover:shadow-xl transition-all duration-500">
                         <img 
                           src={member.image} 
                           alt={member.name} 
@@ -221,22 +220,22 @@ export default function TeamSlider() {
                   </div>
 
                   {/* Content Area */}
-                  <div className="px-8 pb-8 pt-6 flex-grow flex flex-col items-start translate-z-0">
-                    <h4 className="text-[20px] font-black text-[#0f347c] mb-3 leading-tight">
+                  <div className="px-6 pb-8 pt-6 flex-grow flex flex-col items-start translate-z-0">
+                    <h4 className="text-[22px] font-black text-[#0f347c] mb-2 leading-tight tracking-tight">
                       {member.name}
                     </h4>
-                    <p className="text-[14px] text-slate-500 font-bold mb-8 leading-[1.6] flex-grow pr-2">
+                    <p className="text-[14px] text-slate-500 font-bold mb-6 leading-[1.6] line-clamp-3 min-h-[4.8rem] flex-grow pr-1">
                       {member.role}
                     </p>
 
-                    {/* Logo Bar - Bottom Aligned */}
-                    <div className="flex flex-wrap items-center gap-3 mt-auto pt-6 w-full opacity-80 group-hover:opacity-100 transition-opacity">
+                    {/* Logo Bar - Matching the screenshot style */}
+                    <div className="flex flex-wrap items-center gap-2.5 mt-auto pt-4 w-full">
                       {member.logos.map((logo, idx) => (
-                        <div key={idx} className="h-10 px-2 py-1 flex items-center justify-center bg-white border border-slate-100 rounded-lg shadow-sm">
+                        <div key={idx} className="h-10 w-10 flex items-center justify-center bg-white border border-slate-200 rounded-xl shadow-sm hover:border-slate-400 transition-colors">
                           <img 
                             src={logo} 
                             alt="partner logo" 
-                            className="max-h-full max-w-[50px] object-contain"
+                            className="max-h-[70%] max-w-[70%] object-contain"
                           />
                         </div>
                       ))}
