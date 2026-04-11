@@ -1,0 +1,814 @@
+{
+  "hero": {
+    "title": "AI-First B.Tech in CS",
+    "tagline": "Learn AI. Build AI. Become AI-Ready.",
+    "stats": [
+      {
+        "label": "Duration",
+        "value": "4 Years"
+      },
+      {
+        "label": "Degree",
+        "value": "B.Tech · UGC Recognised"
+      },
+      {
+        "label": "Campus",
+        "value": "Kota, Rajasthan"
+      }
+    ],
+    "specializations": [
+      {
+        "icon": "fa-solid fa-robot",
+        "name": "AI & ML"
+      },
+      {
+        "icon": "fa-solid fa-code",
+        "name": "Full Stack Dev. & Cloud Computing"
+      },
+      {
+        "icon": "fa-solid fa-cloud",
+        "name": "Cyber Security & Cloud Computing"
+      }
+    ],
+    "ctaButtons": [
+      {
+        "text": "Apply Now",
+        "type": "primary"
+      },
+      {
+        "text": "Download Brochure",
+        "type": "secondary-white"
+      }
+    ]
+  },
+  "highlights": [
+    {
+      "icon": "fa-solid fa-laptop-code",
+      "title": "Learn by Building",
+      "description": "Future-proof curriculum with AI embedded from day one"
+    },
+    {
+      "icon": "fa-solid fa-flask",
+      "title": "Industry Led Innovation Lab",
+      "description": "India's only deep tech lab for UG with funding support for startup"
+    },
+    {
+      "icon": "fa-solid fa-robot",
+      "title": "AI First",
+      "description": "Every semester is built around real AI tools, APIs & projects"
+    },
+    {
+      "icon": "fa-solid fa-code",
+      "title": "70%",
+      "description": "Hands-on coding from Day 1 - no theory overload"
+    },
+    {
+      "icon": "fa-solid fa-users",
+      "title": "250+",
+      "description": "Hiring partners across India's top tech companies"
+    }
+  ],
+  "features": [
+    {
+      "id": 1,
+      "title": "AI First Curriculum",
+      "shortText": "AI First Curriculum",
+      "description": "Every course integrates AI tools and concepts from semester one. Build AI-powered projects that solve real problems.",
+      "icon": "fa-solid fa-book-open-reader"
+    },
+    {
+      "id": 2,
+      "title": "Coding from Day One",
+      "shortText": "Coding from Day One",
+      "description": "No theory overload. 70% hands-on coding with industry-standard tools and practices from the start.",
+      "icon": "fa-solid fa-code"
+    },
+    {
+      "id": 3,
+      "title": "Industry Experts",
+      "shortText": "Learn from Industry experts",
+      "description": "Learn from engineers at Google, Microsoft, and Amazon. Real insights, real experience, real connections.",
+      "icon": "fa-solid fa-users-gear"
+    },
+    {
+      "id": 4,
+      "title": "Tech-First Campus",
+      "shortText": "Campus Built for Techies",
+      "description": "AI-powered smart classrooms, 24/7 coding labs, high-speed internet. Spaces designed for innovation.",
+      "icon": "fa-solid fa-building-columns"
+    },
+    {
+      "id": 5,
+      "title": "Career Launch Ecosystem",
+      "shortText": "Career Launch Ecosystem",
+      "description": "250+ hiring partners, resume workshops, mock interviews. Your career journey starts from year one.",
+      "icon": "fa-solid fa-arrow-trend-up"
+    },
+    {
+      "id": 6,
+      "title": "Selective Peer Group",
+      "shortText": "Selective Peer Group",
+      "description": "Rigorous CPUEST selection ensures you learn alongside motivated, talented future tech leaders.",
+      "icon": "fa-solid fa-user-group"
+    }
+  ],
+  "team": [
+    {
+      "name": "Pramod Maheshwari",
+      "title": "B.Tech., IIT Delhi | OPM, Harvard Business School, Harvard University, USA | Founder-Career Point Group",
+      "image": "assets/img/team/pm-sir.jpg",
+      "logos": [
+        "assets/img/logo/A_02.jpg",
+        "assets/img/logo/b_02.jpg",
+        "assets/img/logo/A_01.jpg"
+      ]
+    },
+    {
+      "name": "Puneet Sharma",
+      "title": "B.Tech., IIT Delhi, Ph.D., University of Southern California, USA, HPE Fellow & VP – Hewlett Packard Enterprise",
+      "image": "assets/img/team/puneet-sharma.jpg",
+      "logos": [
+        "assets/img/logo/b_01.jpg",
+        "assets/img/logo/b_02.jpg",
+        "assets/img/logo/b_03.jpg"
+      ]
+    },
+    {
+      "name": "Vidushi Maheshwari",
+      "title": "BS & MS in Computer Science, Georgia Tech | Software Engineers at Google",
+      "image": "assets/img/team/Vidushi Maheshwari.jpg",
+      "logos": [
+        "assets/img/logo/c_01.jpg",
+        "assets/img/logo/c_02.jpg"
+      ]
+    },
+    {
+      "name": "Abhishek Soni",
+      "title": "B.Tech + M.Tech, IIT Delhi | Co-Founder & CEO, Upwards | Times 40U40",
+      "image": "assets/img/team/Abhishek Soni.jpg",
+      "logos": [
+        "assets/img/logo/ibm_logo.jpg",
+        "assets/img/logo/go_upwards_logo.jpg",
+        "assets/img/logo/lendingkart_logo.jpg",
+        "assets/img/logo/b_02.jpg"
+      ]
+    },
+    {
+      "name": "Shailendra Upadhyay",
+      "title": "B.Tech + M.Tech, IIT(BHU) Varanasi | AI Engineer at IBM",
+      "image": "assets/img/team/shailendraupadhyay.jpg",
+      "logos": [
+        "assets/img/logo/iit.jpg",
+        "assets/img/logo/ibm_logo.jpg",
+        "assets/img/logo/avalara_logo.jpg"
+      ]
+    },
+    {
+      "name": "Avinash Raju",
+      "title": "BE, University of Illinois Urbana-Champaign USA | AI and Tech Advisory at KPMG",
+      "image": "assets/img/team/Avinash Raju.jpg",
+      "logos": [
+        "assets/img/logo/university_of_illinois_at_urbana_champaign.jpg",
+        "assets/img/logo/aptai_systems_logo.jpg"
+      ]
+    },
+    {
+      "name": "Davis Zhu",
+      "title": "AI Advisor Associated with KPMG USA",
+      "image": "assets/img/team/Davis-Zhu.jpg",
+      "logos": [
+        "assets/img/logo/kpmg_us.jpg",
+        "assets/img/logo/university_of_illinois_at_urbana_champaign.jpg"
+      ]
+    }
+  ],
+  "curriculum": {
+    "title": "Career Point University 4 Year Learning Roadmap",
+    "years": [
+      {
+        "year": 1,
+        "theme": "Foundation",
+        "title": "Build",
+        "description": "Learn by building from day 1, strengthening your foundations in core CS concepts and AI thinking.",
+        "skills": [
+          "C++", "HTML", "CSS", "JavaScript", "Git & GitHub", "VS Code", "Figma Basics", "Command Line", "Linux Basics"
+        ],
+        "aiTools": [
+          {
+            "name": "ChatGPT",
+            "description": "Prompt engineering & AI-assisted learning",
+            "icon": "fa-solid fa-robot",
+            "color": "#10a37f"
+          },
+          {
+            "name": "Notion AI",
+            "description": "Smart documentation & notes",
+            "icon": "fa-solid fa-file-lines",
+            "color": "#000"
+          }
+        ],
+        "concepts": [
+          {
+            "icon": "🖥️",
+            "title": "Data Structures & Algorithms",
+            "description": "Unlock the building blocks of any form of programming"
+          },
+          {
+            "icon": "🌐",
+            "title": "Web Development",
+            "description": "Learn to build modern, fully functional websites from scratch"
+          },
+          {
+            "icon": "📐",
+            "title": "Core Maths",
+            "description": "Explore the math behind computers and how 1s and 0s come to life"
+          }
+        ],
+        "projects": [
+          {
+            "name": "Personal Portfolio Website",
+            "description": "Design and build your developer portfolio from scratch",
+            "companies": "Google · Airbnb · Stripe",
+            "accentColor": "rgb(60, 204, 139)"
+          },
+          {
+            "name": "E-Commerce Product Page",
+            "description": "Build a fully responsive product showcase with cart functionality",
+            "companies": "Amazon · Flipkart · Shopify",
+            "accentColor": "rgb(59, 195, 226)"
+          },
+          {
+            "name": "AI-Powered Quiz App",
+            "description": "Create an interactive quiz app using ChatGPT API",
+            "companies": "Duolingo · Quizlet · Khan Academy",
+            "accentColor": "rgb(252, 192, 50)"
+          },
+          {
+            "name": "Task Management Dashboard",
+            "description": "Full-stack CRUD app with React and local storage",
+            "companies": "Notion · Asana · Trello",
+            "accentColor": "rgb(34, 172, 209)"
+          }
+        ],
+        "subjects": [
+          "Programming Fundamentals (C++)",
+          "Web Essentials (HTML, CSS, JS)",
+          "Discrete Mathematics",
+          "Computer Organization",
+          "Data Structures & Algorithms I",
+          "Frontend Development (React.js)",
+          "Probability & Statistics",
+          "Communication Skills"
+        ]
+      },
+      {
+        "year": 2,
+        "theme": "Development",
+        "title": "Develop",
+        "description": "Go deeper into backend systems, databases, and start your AI engineering journey with hands-on LLM projects.",
+        "skills": [
+          "Node.js", "MongoDB", "SQL", "Java", "REST APIs", "Express.js", "LLM APIs", "Postman", "Docker Basics", "Agile"
+        ],
+        "aiTools": [
+          {
+            "name": "Google Gemini API",
+            "description": "Build applications powered by Gemini",
+            "icon": "fa-solid fa-brain",
+            "color": "#4285f4"
+          },
+          {
+            "name": "OpenAI API",
+            "description": "Integrate GPT models into your apps",
+            "icon": "fa-solid fa-bolt",
+            "color": "#000"
+          },
+          {
+            "name": "Hugging Face",
+            "description": "Access pre-trained AI models",
+            "icon": "fa-solid fa-face-smile",
+            "color": "#ffd21e"
+          }
+        ],
+        "concepts": [
+          {
+            "icon": "⚙️",
+            "title": "Backend Engineering",
+            "description": "Build scalable server-side applications and REST APIs"
+          },
+          {
+            "icon": "🤖",
+            "title": "AI Engineering with LLMs",
+            "description": "Learn to build AI-powered products using large language models"
+          },
+          {
+            "icon": "🗄️",
+            "title": "Database Systems",
+            "description": "Master SQL, NoSQL, and data modeling for real applications"
+          }
+        ],
+        "projects": [
+          {
+            "name": "Social Media Platform",
+            "description": "Full-stack social app with feeds, auth, and real-time features",
+            "companies": "Meta · Twitter · LinkedIn",
+            "accentColor": "rgb(59, 195, 226)"
+          },
+          {
+            "name": "AI Chatbot Assistant",
+            "description": "Build a conversational AI bot using OpenAI API & LangChain",
+            "companies": "OpenAI · Intercom · Drift",
+            "accentColor": "rgb(252, 192, 50)"
+          },
+          {
+            "name": "Food Ordering System",
+            "description": "End-to-end food delivery app with payment integration",
+            "companies": "Zomato · Swiggy · DoorDash",
+            "accentColor": "rgb(60, 204, 139)"
+          },
+          {
+            "name": "GenAI-Powered CRM",
+            "description": "Build an AI CRM that auto-generates customer insights",
+            "companies": "Salesforce · HubSpot · Zoho",
+            "accentColor": "rgb(34, 172, 209)"
+          }
+        ],
+        "subjects": [
+          "Object Oriented Programming (Java)",
+          "Data Structures & Algorithms II",
+          "Backend Development (Node.js)",
+          "Database Management Systems",
+          "Operating Systems",
+          "AI Engineering with LLMs",
+          "Computer Networks",
+          "API Design & Microservices"
+        ]
+      },
+      {
+        "year": 3,
+        "theme": "AI Immersed Learning",
+        "title": "Specialize",
+        "description": "Dive deep into AI/ML, system design, and cloud — while gaining real industry exposure through internships.",
+        "skills": [
+          "TensorFlow", "PyTorch", "AWS", "Docker", "Kubernetes", "System Design", "NLP", "Computer Vision", "MLOps", "CI/CD", "Redis", "GraphQL"
+        ],
+        "aiTools": [
+          {
+            "name": "TensorFlow",
+            "description": "Build & train production ML models",
+            "icon": "fa-solid fa-network-wired",
+            "color": "#ff6f00"
+          },
+          {
+            "name": "Stable Diffusion",
+            "description": "Generate images with AI diffusion models",
+            "icon": "fa-solid fa-image",
+            "color": "#8b5cf6"
+          },
+          {
+            "name": "AutoML",
+            "description": "Automated machine learning pipelines",
+            "icon": "fa-solid fa-gears",
+            "color": "#0ea5e9"
+          }
+        ],
+        "concepts": [
+          {
+            "icon": "🧠",
+            "title": "Machine Learning & Deep Learning",
+            "description": "Build intelligent systems that learn from data"
+          },
+          {
+            "icon": "🏗️",
+            "title": "System Design",
+            "description": "Architect scalable, distributed systems like the pros"
+          },
+          {
+            "icon": "☁️",
+            "title": "DevOps & Cloud",
+            "description": "Deploy, monitor, and scale applications on AWS"
+          }
+        ],
+        "projects": [
+          {
+            "name": "AI Image Generator",
+            "description": "Build a Stable Diffusion-powered image generation tool",
+            "companies": "Midjourney · Adobe · Canva",
+            "accentColor": "rgb(252, 192, 50)"
+          },
+          {
+            "name": "Video Streaming Platform",
+            "description": "Netflix-like app with adaptive streaming and recommendations",
+            "companies": "Netflix · YouTube · Hotstar",
+            "accentColor": "rgb(59, 195, 226)"
+          },
+          {
+            "name": "Real-time Chat Application",
+            "description": "WebSocket-based chat with AI-powered smart replies",
+            "companies": "Slack · Discord · WhatsApp",
+            "accentColor": "rgb(60, 204, 139)"
+          },
+          {
+            "name": "ML Model Deployment Pipeline",
+            "description": "End-to-end MLOps pipeline on AWS with CI/CD",
+            "companies": "Google · Amazon · Microsoft",
+            "accentColor": "rgb(34, 172, 209)"
+          }
+        ],
+        "subjects": [
+          "System Design & Architecture",
+          "DevOps & Cloud Computing (AWS)",
+          "Machine Learning Fundamentals",
+          "Natural Language Processing",
+          "Entrepreneurship & Product Thinking",
+          "Software Engineering & Testing",
+          "Computer Vision"
+        ]
+      },
+      {
+        "year": 4,
+        "theme": "Career Ready",
+        "title": "Launch",
+        "description": "Get placement-ready with intensive bootcamps, capstone projects, and real-world industry immersion.",
+        "skills": [
+          "System Design", "Selenium", "CI/CD", "Git", "Interview Prep", "Portfolio Dev", "Leadership", "AI Product Mgmt", "QA Testing", "Agile/Scrum"
+        ],
+        "aiTools": [
+          {
+            "name": "Claude AI",
+            "description": "Advanced AI reasoning & code generation",
+            "icon": "fa-solid fa-message",
+            "color": "#d97757"
+          },
+          {
+            "name": "Cursor",
+            "description": "AI-first code editor for 10x productivity",
+            "icon": "fa-solid fa-terminal",
+            "color": "#000"
+          },
+          {
+            "name": "Vercel AI SDK",
+            "description": "Build & deploy AI-powered web apps",
+            "icon": "fa-solid fa-triangle-exclamation",
+            "color": "#000"
+          }
+        ],
+        "concepts": [
+          {
+            "icon": "🎯",
+            "title": "Placement Bootcamps",
+            "description": "Intensive interview prep with mock drives and DSA drills"
+          },
+          {
+            "icon": "🚀",
+            "title": "AI Product Development",
+            "description": "Build and ship a complete AI product from idea to launch"
+          },
+          {
+            "icon": "💼",
+            "title": "Industry Capstone",
+            "description": "Work on a real company problem as your final project"
+          }
+        ],
+        "projects": [
+          {
+            "name": "AI Code Assistant",
+            "description": "Build an intelligent coding assistant like GitHub Copilot",
+            "companies": "GitHub · Cursor · Replit",
+            "accentColor": "rgb(252, 192, 50)"
+          },
+          {
+            "name": "Job Portal Platform",
+            "description": "Full-stack job board with AI-powered resume matching",
+            "companies": "LinkedIn · Naukri · Indeed",
+            "accentColor": "rgb(59, 195, 226)"
+          },
+          {
+            "name": "Final Capstone Project",
+            "description": "Industry-grade project solving a real business problem",
+            "companies": "Google · Razorpay · Zerodha",
+            "accentColor": "rgb(60, 204, 139)"
+          }
+        ],
+        "subjects": [
+          "Software Quality Assurance",
+          "AI Product Development",
+          "Placement Bootcamp II",
+          "Interview Preparation",
+          "Portfolio Development",
+          "Capstone Project"
+        ]
+      }
+    ]
+  },
+  "admissions": {
+    "title": "Admission Process",
+    "eligibility": {
+      "title": "Eligibility",
+      "description": "Class 10+2 with PCM and 50%+ marks. Admission via CPUEST and personal interview. Top 20–25% of applicants are selected."
+    },
+    "steps": [
+      {
+        "step": 1,
+        "title": "Register & Apply Online",
+        "description": "Submit application with 10+2 marksheet and PCM details.",
+        "date": "Opens March 2025"
+      },
+      {
+        "step": 2,
+        "title": "Appear for CPUEST",
+        "description": "Career Point Scholastic Aptitude Test — Maths, English & Aptitude. Online and on-campus at Kota.",
+        "date": "March 28, 2026"
+      },
+      {
+        "step": 3,
+        "title": "Personal Interview",
+        "description": "Faculty panel interview — tests problem-solving ability and passion for building with technology."
+      },
+      {
+        "step": 4,
+        "title": "Counselling & Seat Confirmation",
+        "description": "One-on-one counselling session. Submit documents and confirm your seat with the confirmation fee.",
+        "date": "Batch begins July 2026"
+      }
+    ]
+  },
+  "placement": {
+    "title": "Placement Ecosystem",
+    "subtitle": "Your career journey starts from Day 1 — not in the final year",
+    "pillars": [
+      {
+        "icon": "fa-solid fa-file-pen",
+        "title": "Semester Assessments",
+        "description": "Regular evaluations every semester to track your technical growth."
+      },
+      {
+        "icon": "fa-solid fa-code",
+        "title": "Coding Profile Tracking",
+        "description": "We monitor your LeetCode & Codeforces to ensure consistent practice."
+      },
+      {
+        "icon": "fa-brands fa-github",
+        "title": "GitHub Project Tracking",
+        "description": "Your projects are tracked on GitHub to build a recruiter-ready profile."
+      },
+      {
+        "icon": "fa-solid fa-rocket",
+        "title": "MAANG Ready",
+        "description": "DSA bootcamps, mock interviews, and resume building workshops."
+      }
+    ],
+    "companies": [
+      "https://cpur.in/lp/admission-2023/assets/img/5-Microsoft.webp",
+      "https://cpur.in/lp/admission-2023/assets/img/7-TCS.webp",
+      "https://cpur.in/lp/admission-2023/assets/img/11-Infosys-BPM.webp",
+      "https://cpur.in/lp/admission-2023/assets/img/22-Bajaj-Fin.webp"
+    ]
+  },
+  "comparison": {
+    "title": "CPU Curated vs Traditional College Experience",
+    "subtitle": "Why is CPU Curated experience better than traditional colleges?",
+    "headers": ["", "Career Point University", "Other Colleges"],
+    "rows": [
+      {
+        "category": "Internships & Jobs",
+        "icon": "fa-solid fa-briefcase",
+        "cpu": "Programme designed to make you internship-ready by Year 2 - backed by 250+ hiring partners.",
+        "others": "<25% students receive an internship by their 3rd year"
+      },
+      {
+        "category": "AI Tools & Learning",
+        "icon": "fa-solid fa-robot",
+        "cpu": "12+ AI tools used in real projects from Semester 1 - ChatGPT, OpenAI API, LangChain, TensorFlow & more",
+        "others": "AI introduced only in Year 3–4 as a late elective, rarely applied to real projects"
+      },
+      {
+        "category": "Career Prep Start",
+        "icon": "fa-solid fa-chart-line",
+        "cpu": "LeetCode, GitHub tracking, DSA bootcamps & mock interviews from Week 1, Year 1",
+        "others": "Placements and interview prep typically begin only in Year 3–4"
+      },
+      {
+        "category": "Projects & Portfolio",
+        "icon": "fa-solid fa-folder-open",
+        "cpu": "15 portfolio-grade, deployed projects shipped across 4 years - recruiter-ready GitHub",
+        "others": "1–2 final-year projects, rarely deployed or production-grade"
+      },
+      {
+        "category": "Faculties & Curriculum",
+        "icon": "fa-solid fa-chalkboard-teacher",
+        "cpu": "Industry-relevant curriculum built and taught by experts from Google & Amazon",
+        "others": "Rarely updated curriculum, mostly academic-only faculty"
+      },
+      {
+        "category": "Curriculum",
+        "icon": "fa-solid fa-book",
+        "cpu": "Start coding and build real projects from Day 1",
+        "others": "Build real world projects only by the end of 3rd–4th year"
+      },
+      {
+        "category": "Entrepreneurship",
+        "icon": "fa-solid fa-lightbulb",
+        "cpu": "₹1 Cr StartX fund, expert mentors, coding events, GSOC, ICPC",
+        "others": "Good startup culture but mostly without funding support"
+      },
+      {
+        "category": "Industry Exposure",
+        "icon": "fa-solid fa-globe",
+        "cpu": "Frequent sessions with tech leaders, CTOs, VCs and startup founders",
+        "others": "Industry exposure limited to top students only"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Plan your next step with confidence",
+    "subtitle": "Connect with our Admission Counsellor to:",
+    "points": [
+      "Understand the admission process step by step",
+      "Explore scholarships — up to 100% tuition waiver",
+      "Discover if CPU is the right fit for your goals",
+      "Learn about AI-First B.Tech curriculum & career outcomes"
+    ],
+    "buttonText": "REQUEST CALLBACK",
+    "buttonIcon": "fa-solid fa-phone-volume",
+    "image": "assets/img/cta.avif"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about CPU's AI-First B.Tech before you take the next step.",
+    "categories": [
+      {
+        "id": "admission",
+        "name": "Admission",
+        "icon": "fa-solid fa-graduation-cap",
+        "questions": [
+          {
+            "question": "What are the eligibility criteria for admission?",
+            "answer": "You must have completed Class 10+2 with Physics, Chemistry & Mathematics (PCM) and secured a minimum of 50% marks. Admission is competitive — only the top 20–25% of applicants are selected via CPUEST and a Personal Interview."
+          },
+          {
+            "question": "What is the CPUEST and how do I prepare for it?",
+            "answer": "CPUEST stands for Career Point Scholastic Aptitude Test. It covers three areas: Mathematics (Class 11–12 level), Physics (Class 11–12 level), Chemistry (Class 11–12 level). The test can be taken online or at the Kota campus. It is scheduled for 28 March 2026. Brush up on your Class 12 Maths, Physics, Chemistry and practice aptitude questions to prepare."
+          },
+          {
+            "question": "What are the key dates for Batch 2026–27?",
+            "answer": "Applications Open: March 2026, Application Deadline: 27 March 2026, CPUEST Date: 28 March 2026, Personal Interviews: Shortly after CPUEST results, Batch Begins: July 2026. Seats are limited and selection is competitive. Apply early to secure your spot."
+          },
+          {
+            "question": "What is the step-by-step admission process?",
+            "answer": "Step 1 — Register & Apply Online: Submit your application with 10+2 marksheet and PCM details. Step 2 — Appear for CPUEST: Take the aptitude test online or at campus (Maths, Chemistry, Physics). Step 3 — Personal Interview: Faculty panel interview testing problem-solving ability and passion for technology. Step 4 — Counselling & Seat Confirmation: One-on-one session to submit documents and confirm your seat."
+          },
+          {
+            "question": "Is the B.Tech degree recognised? Will employers accept it?",
+            "answer": "Yes, absolutely. The B.Tech degree from Career Point University is fully recognised: UGC Recognised — valid for all government and private sector roles, AICTE Approved — the national regulator for technical education, NAAC Accredited — quality-accredited university. It carries the same weight as any other UGC-recognised B.Tech for jobs, higher studies, GATE, and more."
+          }
+        ]
+      },
+      {
+        "id": "curriculum",
+        "name": "Curriculum",
+        "icon": "fa-solid fa-book-open",
+        "questions": [
+          {
+            "question": "When does AI learning begin — and what tools will I use?",
+            "answer": "AI begins from Semester 1, Day 1 — not Year 4. You'll use 12+ AI tools across the programme, including: Year 1: ChatGPT, Notion AI, Year 2: OpenAI API, Google Gemini API, Hugging Face, LangChain, Year 3: TensorFlow, PyTorch, Stable Diffusion, Year 4: Claude AI, Cursor, Vercel AI SDK. Every tool is used inside real shipped projects — not just mentioned in a lecture."
+          },
+          {
+            "question": "What real projects will I build during the 4 years?",
+            "answer": "You will ship 15 portfolio-grade projects — all deployed and recruiter-ready. Highlights include: Personal Portfolio Website, E-Commerce Page, AI Quiz App (Year 1), Social Media Platform, AI Chatbot, GenAI-Powered CRM (Year 2), AI Image Generator, Video Streaming Platform, ML Deploy Pipeline (Year 3), AI Code Assistant, Job Portal with AI Resume Match, Industry Capstone (Year 4). You graduate with an active GitHub portfolio of 15 live, deployed applications."
+          },
+          {
+            "question": "Who teaches the courses? Are they working professionals?",
+            "answer": "The curriculum is built and taught by industry practitioners from companies like Google, Amazon, and Microsoft — not just academics with textbooks. You'll also have weekly sessions from MAANG engineers, CTOs, VCs, and startup founders throughout the programme."
+          },
+          {
+            "question": "What is the structure of the 4-year programme?",
+            "answer": "Each year has a clear theme with 29 subjects across 8 semesters: Year 1 — Build: C++, HTML/CSS/JS, React, DSA, Discrete Maths, Year 2 — Develop: Node.js, MongoDB, Java, AI Engineering with LLMs, APIs, Year 3 — Specialize: ML, NLP, Computer Vision, AWS, System Design + 6-month Internship, Year 4 — Launch: AI Product Development, Placement Bootcamp, Industry Capstone."
+          }
+        ]
+      },
+      {
+        "id": "placements",
+        "name": "Placements",
+        "icon": "fa-solid fa-briefcase",
+        "questions": [
+          {
+            "question": "What is the internship and placement track record?",
+            "answer": "93% of 2nd year students secured paid internships, Average internship stipend: ₹25,000/month, 6-month formal internship in Year 3 with a partner company, 1000+ hiring partner companies in the network. Compare this to Tier 1 colleges where fewer than 50% of students receive an internship by their 3rd year."
+          },
+          {
+            "question": "When does career preparation actually start?",
+            "answer": "Career prep starts from Week 1 — not Year 4: LeetCode & GitHub profiles set up at orientation, Weekly coding sessions via AlgoSphere club from Semester 1, MAANG engineers deliver weekly sessions in Year 2, Intensive DSA bootcamp + 6-month internship in Year 3, Mock drives, system design prep, company-specific coaching in Year 4."
+          },
+          {
+            "question": "Is there support for entrepreneurship and startups?",
+            "answer": "Yes. CPU has a strong entrepreneurship ecosystem: ₹1 Crore StartX Fund for student startups, Expert mentors, VCs, and startup founders on campus regularly, Participation supported in GSOC, ICPC, SIH hackathons, The AI Foundry — innovation arena for demo days and ideation, Idea Lab entrepreneurship club for like-minded builders."
+          },
+          {
+            "question": "What certifications can I earn alongside the degree?",
+            "answer": "Students are guided to earn globally recognised certifications during Year 3–4, including: AWS / Google Cloud certifications, DeepLearning.AI specialisations, MLOps and DevOps credentials. These complement the B.Tech degree and significantly strengthen your resume for MAANG-level roles."
+          }
+        ]
+      },
+      {
+        "id": "fees",
+        "name": "Fees & Scholarships",
+        "icon": "fa-solid fa-indian-rupee-sign",
+        "questions": [
+          {
+            "question": "What scholarships are available and how do I get them?",
+            "answer": "CPU offers merit-based scholarships to make quality education accessible: Merit Excellence Scholarship — Up to 100% tuition (based on CPUEST score & interview), Bright Minds Scholarship — Up to 50% tuition (based on Class 12 marks or JEE Mains score), Women in Tech Scholarship — Up to 30% tuition (high-potential female students), CP Alumni Benefit — Special fee waiver for wards & siblings of CP alumni. Perform well in CPUEST to maximise your scholarship eligibility. The better you score, the higher the scholarship."
+          },
+          {
+            "question": "Are education loans available? Which banks support CPU?",
+            "answer": "Yes. CPU has official finance partnerships with leading institutions: Axis Bank — up to 100% loan coverage, IDFC First Bank — flexible repayment options, Propelld — education-focused fintech loans. Our admission counsellors can guide you through the loan process during the counselling session."
+          },
+          {
+            "question": "Can I pay fees in instalments?",
+            "answer": "Yes. Fees are structured semester-wise, so you pay in instalments over 8 semesters rather than the full amount upfront. Speak to our admission counsellor for the exact fee schedule and instalment plan — contact us at info@cpuniverse.in or call +91-9079134713."
+          }
+        ]
+      },
+      {
+        "id": "campus",
+        "name": "Campus & Life",
+        "icon": "fa-solid fa-building-columns",
+        "questions": [
+          {
+            "question": "Is hostel accommodation available on campus?",
+            "answer": "Yes. Campus accommodation at CP Tower, Kota includes: AC rooms with high-speed Wi-Fi, Quality food (mess facility), 24/7 power backup, CCTV security throughout, On-campus medical facility."
+          },
+          {
+            "question": "What tech infrastructure is available for students?",
+            "answer": "CPU is built for builders: 24/7 AI Coding Hub — open round the clock at CP Tower to build, debug and ship at any hour, AI Smart Classrooms — high-speed Wi-Fi, digital screens, state-of-the-art AV systems, The AI Foundry — innovation arena for hackathons, demo days and collaboration."
+          },
+          {
+            "question": "Are there student clubs and extracurricular activities?",
+            "answer": "Campus life is vibrant with 5 active student clubs: AlgoSphere — Weekly coding sessions & competitive programming, HackTheWeb — AI & Web Dev hackathons, Idea Lab — Entrepreneurship, startup ideation, StageLab — Cultural events & performing arts, StriveX — Sports & fitness."
+          },
+          {
+            "question": "Where is the campus located and why Kota?",
+            "answer": "The campus is at CP Tower, Kota, Rajasthan 324005. Kota is India's education capital — known for producing top engineers and IITians for over 30 years. Career Point has been at the heart of Kota's education ecosystem since 1993, giving you access to a deeply competitive, high-performance academic environment."
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "logo": "assets/img/footer-logo.png",
+    "description": "India's first AI-powered B.Tech program designed for the next generation of tech leaders. Build real projects from day one and launch your career in tech.",
+    "quickLinks": [
+      {
+        "text": "About Us",
+        "href": "#about"
+      },
+      {
+        "text": "Admissions",
+        "href": "#admissions"
+      },
+      {
+        "text": "Campus Life",
+        "href": "#campuses"
+      },
+      {
+        "text": "Curriculum",
+        "href": "#curriculum"
+      }
+    ],
+    "contact": {
+      "address": "National Highway 12, Alaniya, Kota, Rajasthan 325003",
+      "phone": "+91-9079134713",
+      "email": "info@cpuniverse.in"
+    },
+    "copyright": "© 2026 Career Point University Kota. All rights reserved."
+  },
+  "navbar": {
+    "logo": "assets/img/cp-logo.png",
+    "favicon": "assets/img/cp-favicon.png",
+    "links": [
+      {
+        "text": "Home",
+        "href": "#"
+      },
+      {
+        "text": "Features",
+        "href": "#features"
+      },
+      {
+        "text": "Campus",
+        "href": "#campuses"
+      },
+      {
+        "text": "Curriculum",
+        "href": "#curriculum"
+      },
+      {
+        "text": "Admissions",
+        "href": "#admissions"
+      },
+      {
+        "text": "FAQ",
+        "href": "#faq"
+      }
+    ]
+  }
+}
