@@ -1,9 +1,9 @@
 "use client"
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 
 // ==========================================
-// 1. DEFAULT DATA (Fallback)
+// 1. DEFAULT DATA (DO NOT MODIFY - For Admin Panel)
 // ==========================================
 const defaultConfig = {
   sectionTitle: "Career Point University 4 Year Learning Roadmap",
@@ -18,8 +18,8 @@ const defaultConfig = {
 
 const fallbackYears = [
   {
-    id: "1", tabLabel: "YEAR 1", tabTitle: "Foundation", contentTitle: "Build", contentDesc: "Learn by building from day 1, strengthening your foundations in core CS concepts and AI thinking.", badge: "YEAR-1",
-    skills: ["C++", "HTML", "CSS", "JavaScript", "Git & GitHub", "VS Code", "Figma Basics", "Command Line", "Linux Basics"],
+    id: "1", tabLabel: "YEAR 1", tabTitle: "Foundation", contentTitle: "AI Foundations", contentDesc: "Learn by building from day 1, strengthening your foundations in core CS concepts and AI thinking.", badge: "YEAR-1",
+    skills: ["Advanced Legal Drafting", "Courtroom Advocacy", "Arbitration & Mediation", "C++", "HTML & CSS"],
     aiTools: [
       { name: "ChatGPT", desc: "Prompt engineering & AI-assisted learning", iconName: "fa-robot", iconColor: "#10a37f" },
       { name: "Notion AI", desc: "Smart documentation & notes", iconName: "fa-file-lines", iconColor: "#000" }
@@ -42,8 +42,8 @@ const fallbackYears = [
     ]
   },
   {
-    id: "2", tabLabel: "YEAR 2", tabTitle: "Development", contentTitle: "Develop", contentDesc: "Go deeper into backend systems, databases, and start your AI engineering journey with hands-on LLM projects.", badge: "YEAR-2",
-    skills: ["Node.js", "MongoDB", "SQL", "Java", "REST APIs", "Express.js", "LLM APIs", "Postman", "Docker Basics", "Agile"],
+    id: "2", tabLabel: "YEAR 2", tabTitle: "Development", contentTitle: "Building AI Products", contentDesc: "Go deeper into backend systems, databases, and start your AI engineering journey with hands-on LLM projects.", badge: "YEAR-2",
+    skills: ["Node.js", "MongoDB", "SQL", "Java", "REST APIs", "Express.js", "LLM APIs", "Agile"],
     aiTools: [
       { name: "Google Gemini API", desc: "Build applications powered by Gemini", iconName: "fa-brain", iconColor: "#4285f4" },
       { name: "OpenAI API", desc: "Integrate GPT models into your apps", iconName: "fa-bolt", iconColor: "#000" },
@@ -67,8 +67,8 @@ const fallbackYears = [
     ]
   },
   {
-    id: "3", tabLabel: "YEAR 3", tabTitle: "AI Immersed Learning", contentTitle: "Specialize", contentDesc: "Dive deep into AI/ML, system design, and cloud — while gaining real industry exposure through internships.", badge: "YEAR-3",
-    skills: ["TensorFlow", "PyTorch", "AWS", "Docker", "Kubernetes", "System Design", "NLP", "Computer Vision", "MLOps", "CI/CD", "Redis", "GraphQL"],
+    id: "3", tabLabel: "YEAR 3", tabTitle: "AI Immersed Learning", contentTitle: "Scaling AI Systems", contentDesc: "Dive deep into AI/ML, system design, and cloud — while gaining real industry exposure through internships.", badge: "YEAR-3",
+    skills: ["TensorFlow", "PyTorch", "AWS", "Docker", "Kubernetes", "System Design", "NLP"],
     aiTools: [
       { name: "TensorFlow", desc: "Build & train production ML models", iconName: "fa-network-wired", iconColor: "#ff6f00" },
       { name: "Stable Diffusion", desc: "Generate images with AI diffusion models", iconName: "fa-image", iconColor: "#8b5cf6" },
@@ -92,8 +92,8 @@ const fallbackYears = [
     ]
   },
   {
-    id: "4", tabLabel: "YEAR 4", tabTitle: "Career Ready", contentTitle: "Launch", contentDesc: "Get placement-ready with intensive bootcamps, capstone projects, and real-world industry immersion.", badge: "YEAR-4",
-    skills: ["System Design", "Selenium", "CI/CD", "Git", "Interview Prep", "Portfolio Dev", "Leadership", "AI Product Mgmt", "QA Testing", "Agile/Scrum"],
+    id: "4", tabLabel: "YEAR 4", tabTitle: "Career Ready", contentTitle: "Autonomous AI & Future", contentDesc: "Get placement-ready with intensive bootcamps, capstone projects, and real-world industry immersion.", badge: "YEAR-4",
+    skills: ["System Design", "Selenium", "CI/CD", "Git", "Interview Prep", "Portfolio Dev", "Leadership"],
     aiTools: [
       { name: "Claude AI", desc: "Advanced AI reasoning & code generation", iconName: "fa-message", iconColor: "#d97757" },
       { name: "Cursor", desc: "AI-first code editor for 10x productivity", iconName: "fa-terminal", iconColor: "#000" },
@@ -119,54 +119,48 @@ const fallbackYears = [
 // ==========================================
 // 1.5. HELPER COMPONENTS
 // ==========================================
-const DynamicIcon = ({ icon, color, size = 26 }) => {
+const DynamicIcon = ({ icon, color, size = 18 }) => {
   if (!icon) return null;
 
-  // Handle FontAwesome (starts with fa-)
   if (typeof icon === 'string' && icon.startsWith('fa-')) {
     return (
       <i 
-        className={`fa-solid ${icon} mb-2.5 block`} 
-        style={{ color: color, fontSize: typeof size === 'number' ? `${size}px` : size }}
+        className={`fa-solid ${icon} block`} 
+        style={{ color: color, fontSize: `${size}px` }}
       ></i>
     );
   }
 
-  // Handle Lucide Icons
   const LucideIcon = LucideIcons[icon];
   if (LucideIcon) {
     return (
-      <div className="mb-2.5 block" style={{ color: color }}>
+      <div className="block" style={{ color: color }}>
         <LucideIcon size={size} strokeWidth={2.5} />
       </div>
     );
   }
 
-  // Fallback to text/emoji
-  return <span className="mb-2.5 block" style={{ fontSize: typeof size === 'number' ? `${size}px` : size }}>{icon}</span>;
+  return <span className="block" style={{ fontSize: `${size}px` }}>{icon}</span>;
 };
 
 // ==========================================
-// 2. REACT COMPONENT
+// 2. MAIN REACT COMPONENT
 // ==========================================
 export default function CourseRoadmap({ data }) {
-  // Handle both old array format and new object format
   const roadmapData = data && !Array.isArray(data) ? data : { years: data || [] };
   const yearsData = roadmapData.years && roadmapData.years.length > 0 ? roadmapData.years : fallbackYears;
   
-  // Dynamic Titles
   const titleData = roadmapData.sectionTitle || {};
-  const displayTitle = titleData.main ? titleData.main : defaultConfig.sectionTitle;
+  const displayTitle = titleData.main ? titleData.main : "The Curriculum";
   const highlightText = titleData.highlight || "";
-  const subtitleText = roadmapData.subtitle || "";
+  const subtitleText = roadmapData.subtitle || "8 semesters of hands-on learning. Designed by AI researchers. Updated annually.";
   
-  // Set initial active state based on either string ID or numeric index
   const getInitialActive = () => yearsData[0]?.id || 0;
   const [activeYear, setActiveYear] = useState(getInitialActive());
   const [expandedSubjects, setExpandedSubjects] = useState({});
 
   useEffect(() => {
-    // Ensure FontAwesome is available
+    // Inject FontAwesome securely
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
@@ -174,225 +168,331 @@ export default function CourseRoadmap({ data }) {
       document.head.appendChild(link);
     }
 
+    // Flawless Scroll Tracker using invisible anchors
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 160;
-      yearsData.forEach((year, idx) => {
-        const idToMatch = year.id || idx;
-        const el = document.getElementById(`content-year-${idToMatch}`);
-        if (el) {
-          const top = el.offsetTop;
-          const bottom = top + el.offsetHeight;
-          if (scrollPos >= top && scrollPos < bottom) {
-            setActiveYear(idToMatch);
+      // Adjusted offset to match the new lowered positioning
+      const stickyOffset = 120; 
+      let currentActive = activeYear;
+
+      yearsData.forEach((year) => {
+        const anchor = document.getElementById(`anchor-${year.id}`);
+        if (anchor) {
+          const rect = anchor.getBoundingClientRect();
+          if (rect.top <= stickyOffset + 20) {
+            currentActive = year.id;
           }
         }
       });
+      
+      if (currentActive !== activeYear) {
+         setActiveYear(currentActive);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Trigger once on mount
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [yearsData]);
+  }, [yearsData, activeYear]);
+
+  // SMART TOGGLE: Auto-scrolls internal card content so View All Subjects is never hidden
+  const toggleSubjects = (id) => {
+    setExpandedSubjects(prev => {
+      const isExpanding = !prev[id];
+      
+      if (isExpanding) {
+        setTimeout(() => {
+          // Scroll the inner card container to the bottom so the accordion is fully visible
+          const innerCard = document.getElementById(`card-inner-${id}`);
+          if (innerCard) {
+            innerCard.scrollTo({
+              top: innerCard.scrollHeight,
+              behavior: 'smooth'
+            });
+          }
+          
+          // Also gently align the main window if it's slightly off
+          const anchor = document.getElementById(`anchor-${id}`);
+          if (anchor) {
+            const offsetPosition = anchor.getBoundingClientRect().top + window.scrollY - 100;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 100); 
+      }
+      
+      return { ...prev, [id]: isExpanding };
+    });
+  };
 
   const handleTabClick = (e, id) => {
     e.preventDefault();
-    setActiveYear(id);
-    const target = document.getElementById(`content-year-${id}`);
-    if (target) {
-         window.scrollTo({
-        top: target.offsetTop - 140, // Match your original offset
+    const anchor = document.getElementById(`anchor-${id}`);
+    if (anchor) {
+      const offsetPosition = anchor.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({
+        top: offsetPosition, 
         behavior: 'smooth'
       });
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  };
-
-  const toggleSubjects = (id) => {
-    setExpandedSubjects(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
   };
 
   if (!yearsData || yearsData.length === 0) return null;
 
   return (
-    <section id="curriculum" className="py-16 md:py-20 px-4 md:px-8 bg-white font-sans text-[#0c4088]">
-      <div className="text-center mb-10">
-        <h2 className="text-2xl md:text-[2.5rem] font-extrabold text-[#0c4088] mb-4 leading-tight">
+    <section id="curriculum" className="py-16 md:py-24 px-4 md:px-8 bg-gray-50 font-sans text-[#0c4088]">
+      <div className="max-w-6xl mx-auto mb-12 text-center lg:text-left lg:ml-[280px]">
+        <span className="text-gray-500 font-bold tracking-widest uppercase text-xs mb-2 block">
+          4-Year Journey
+        </span>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-[#0c4088] mb-3 leading-tight tracking-tight">
           {displayTitle} <span className="text-[#f1bd0e]">{highlightText}</span>
         </h2>
-        {subtitleText && <p className="text-gray-500 text-lg max-w-2xl mx-auto">{subtitleText}</p>}
+        {subtitleText && <p className="text-gray-600 text-[15px] max-w-2xl mx-auto lg:mx-0">{subtitleText}</p>}
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 lg:gap-10 max-w-[1200px] mx-auto items-start">
-        {/* TABS SIDEBAR */}
-        <div className="flex flex-row lg:flex-col gap-2 lg:gap-4 sticky top-[63px] lg:top-[40px] z-[99] bg-[#f8fbff] lg:bg-transparent p-2 lg:p-0 rounded-lg lg:rounded-none overflow-x-auto lg:overflow-visible">
-          {yearsData.map((year, idx) => {
-            const idToMatch = year.id || idx;
-            const isActive = activeYear === idToMatch;
-            return (
-              <a
-                key={`tab-${idToMatch}`}
-                href={`#content-year-${idToMatch}`}
-                onClick={(e) => handleTabClick(e, idToMatch)}
-                className={`flex-none lg:flex-auto px-3 py-2 lg:px-6 lg:py-[18px] rounded-xl border cursor-pointer flex flex-col lg:flex-row items-start lg:items-center gap-1 lg:gap-3 font-bold transition-all duration-300 text-[13px] lg:text-base no-underline 
-                ${isActive 
-                  ? 'bg-white border-[#f1bd0e] shadow-[0_5px_20px_rgba(34,172,209,0.15)] lg:translate-x-2.5 text-[#0c4088]' 
-                  : 'bg-gray-50 border-gray-200 text-inherit hover:bg-white hover:border-[#f1bd0e]'}`}
-              >
-                <span className={`text-[12px] lg:text-[0.8rem] font-extrabold uppercase tracking-widest ${isActive ? 'text-[#f1bd0e]' : 'text-gray-500'}`}>
-                  {year.tabLabel || year.yearLabel}
-                </span> 
-                {year.tabTitle}
-              </a>
-            );
-          })}
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 max-w-6xl mx-auto relative">
+        
+        {/* ==========================================
+            LEFT SIDEBAR (STICKY TRACKER)
+            LOWERED to top-[130px] for better centering
+            ========================================== */}
+        <div className="w-full lg:w-[240px] flex-shrink-0 z-50">
+          <div className="sticky top-[130px] bg-gray-50/95 lg:bg-transparent backdrop-blur-sm py-4 lg:py-0 w-full -mx-4 px-4 lg:mx-0 lg:px-0">
+            <div className="flex flex-row lg:flex-col gap-1 lg:gap-3 overflow-x-auto lg:overflow-visible hide-scrollbar border-l-0 lg:border-l-[2px] lg:border-gray-200 lg:pl-5 relative">
+              
+              {yearsData.map((year) => {
+                const isActive = activeYear === year.id;
+                
+                return (
+                  <a
+                    key={`tab-${year.id}`}
+                    href={`#anchor-${year.id}`}
+                    onClick={(e) => handleTabClick(e, year.id)}
+                    className={`group flex flex-col cursor-pointer transition-all duration-300 ease-in-out no-underline relative pr-6 lg:pr-0 lg:pl-2 py-2 whitespace-nowrap lg:whitespace-normal
+                    ${isActive ? 'opacity-100' : 'opacity-40 hover:opacity-70'}`}
+                  >
+                    {/* Desktop Active Line Indicator */}
+                    <div className={`hidden lg:block absolute left-[-22px] top-0 bottom-0 w-[3px] rounded-r-full transition-all duration-300 ease-out ${isActive ? 'bg-[#f1bd0e] h-full' : 'bg-transparent h-0 group-hover:h-1/2 group-hover:bg-gray-300'}`}></div>
+                    
+                    {/* Mobile Bottom Line Indicator */}
+                    <div className={`block lg:hidden absolute left-0 right-5 bottom-0 h-[3px] rounded-full transition-all duration-300 ${isActive ? 'bg-[#f1bd0e] w-full' : 'bg-transparent w-0'}`}></div>
+
+                    <span className={`text-[11px] font-extrabold uppercase tracking-widest mb-1 transition-colors ${isActive ? 'text-[#f1bd0e]' : 'text-gray-500'}`}>
+                      {year.tabLabel || year.yearLabel}
+                    </span>
+                    <span className={`text-[15px] font-bold transition-colors leading-snug ${isActive ? 'text-[#0c4088]' : 'text-gray-600'}`}>
+                      {year.tabTitle}
+                    </span>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
-        {/* CONTENT STACK */}
-        <div className="relative flex flex-col gap-10">
+        {/* ==========================================
+            RIGHT CONTENT (FLAWLESS STACKING CARDS)
+            ========================================== */}
+        <div className="flex-1 w-full min-w-0 flex flex-col relative pb-[20vh]">
           {yearsData.map((year, idx) => {
-            const idToMatch = year.id || idx;
-            const isActive = activeYear === idToMatch;
+            
             return (
-              <div 
-                key={`content-${idToMatch}`} 
-                id={`content-year-${idToMatch}`}
-                className={`block bg-white rounded-2xl p-4 md:p-10 shadow-[0_5px_30px_rgba(0,0,0,0.03)] border border-gray-100 ${isActive ? 'opacity-100' : 'opacity-100'}`} 
-              >
+              <React.Fragment key={`fragment-${year.id}`}>
                 
-                {/* Header */}
-                <div className="block md:flex justify-between items-start mb-8">
-                  <div>
-                    <h3 className="text-[1.6rem] md:text-[2.2rem] font-extrabold text-[#0c4088] mb-2 leading-tight mt-0">
-                      {year.contentTitle || year.mainHeading}
-                    </h3>
-                    <p className="text-base text-black max-w-[500px] leading-relaxed m-0">
-                      {year.contentDesc || year.description}
-                    </p>
-                  </div>
-                  <span className="bg-[#f1bd0e]/15 text-[#f1bd0e] px-4 py-1.5 rounded-md text-[0.85rem] font-extrabold uppercase tracking-widest inline-block mt-2 md:mt-0 w-fit h-fit">
-                    {year.badge || year.yearLabel}
-                  </span>
-                </div>
-                
-                {/* Skills Section */}
-                {year.skills && year.skills.length > 0 && (
-                  <div className="mb-8">
-                    <h4 className="text-[0.95rem] font-extrabold text-[#0c4088] mb-4 uppercase tracking-[0.5px]">
-                      {defaultConfig.labels.whatYouWillLearn}
-                    </h4>
-                    <div className="flex flex-wrap gap-2.5 mb-8">
-                      {year.skills.map((skill, sIdx) => (
-                        <span key={sIdx} className="bg-gray-50 px-4 py-2 rounded-lg text-[0.85rem] font-bold text-[#0c4088] border border-gray-200 transition-all duration-300 hover:bg-[#22acd1]/10 hover:border-[#f1bd0e] hover:text-[#f1bd0e]">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {/* AI Tools Section */}
-                {year.aiTools && year.aiTools.length > 0 && (
-                  <div className="bg-[#f8fbff] border border-[#e0f0ff] rounded-xl p-4 mb-8">
-                    <div className="flex items-center gap-2.5 mb-5">
-                      <span className="text-[#fcc032] text-[1.2rem]">
-                        <i className="fa-solid fa-sparkles"></i>
-                      </span>
-                      <h4 className="text-[1.1rem] font-extrabold text-[#0c4088] m-0">
-                        {defaultConfig.labels.aiTools}
-                      </h4>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {year.aiTools.map((tool, tIdx) => (
-                        <div key={tIdx} className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:border-[#f1bd0e]">
-                          <DynamicIcon 
-                            icon={tool.icon || tool.iconName} 
-                            color={tool.color || tool.iconColor} 
-                            size={tool.size || 26} 
-                          />
-                          <span className="font-extrabold text-[#0c4088] text-[0.95rem] mb-1.5">{tool.name}</span>
-                          <span className="text-base text-black leading-relaxed m-0">{tool.desc}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Concepts Section */}
-                {year.concepts && year.concepts.length > 0 && (
-                  <div className="mb-8">
-                    <h4 className="text-[0.95rem] font-extrabold text-[#0c4088] mb-4 uppercase tracking-[0.5px]">
-                      {defaultConfig.labels.inClassroom}
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
-                      {year.concepts.map((concept, cIdx) => (
-                        <div key={cIdx} className="border border-gray-200 p-5 rounded-xl bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#f1bd0e]">
-                          <DynamicIcon icon={concept.icon || concept.emoji} size={32} />
-                          <h5 className="font-extrabold text-[1.05rem] text-[#0c4088] mb-2.5 leading-tight">{concept.title}</h5>
-                          <p className="text-base text-black m-0 leading-relaxed">{concept.desc}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Projects Section */}
-                {year.projects && year.projects.length > 0 && (
-                  <div className="mb-8">
-                    <h4 className="text-[0.95rem] font-extrabold text-[#0c4088] mb-4 uppercase tracking-[0.5px]">
-                      {defaultConfig.labels.projects}
-                    </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-                      {year.projects.map((project, pIdx) => (
-                        <div key={pIdx} className="border border-gray-200 p-6 rounded-xl bg-white transition-all duration-300 relative overflow-hidden hover:-translate-y-1 hover:shadow-lg">
-                          <div className="absolute top-0 left-0 w-full h-1" style={{ background: project.accentColor || project.color }}></div>
-                          <h5 className="font-extrabold text-[1.15rem] text-[#0c4088] mb-2 mt-1.5">{project.name}</h5>
-                          <p className="text-[0.9rem] text-black mb-4 leading-relaxed">{project.desc}</p>
-                          <span className="block text-[0.75rem] font-extrabold text-black uppercase tracking-[0.5px]">{project.companies}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {/* Subjects Toggle Section */}
-                {year.subjects && year.subjects.length > 0 && (
-                  <div className="border border-gray-200 rounded-xl bg-white">
-                    <div 
-                      className="flex justify-between items-center p-4 lg:p-[18px_25px] cursor-pointer font-extrabold text-[#0c4088] transition-all duration-300 hover:bg-gray-50 hover:rounded-xl" 
-                      onClick={() => toggleSubjects(idToMatch)}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <span className="text-[#f1bd0e] text-[1.2rem]">☰</span>
-                        <span>{defaultConfig.labels.viewAllSubjects}</span>
-                      </div>
-                      <span className={`transition-transform duration-300 text-[0.8rem] text-gray-500 ${expandedSubjects[idToMatch] ? 'rotate-180' : ''}`}>
-                        <i className="fa-solid fa-chevron-down"></i>
-                      </span>
-                    </div>
-                    
-                    {/* Animated Dropdown Body */}
-                    <div className={`transition-all duration-300 ease-in-out ${expandedSubjects[idToMatch] ? 'max-h-[1000px] border-t border-gray-200 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-                      <div className="px-6 pb-6">
-                        <ul className="list-none m-0 pt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {year.subjects.map((subject, subIdx) => (
-                            <li key={subIdx} className="text-[0.95rem] text-gray-600 flex items-center gap-2.5 font-medium">
-                              <span className="text-[#f1bd0e] font-extrabold text-[1.2rem]">›</span>{subject}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {/* INVISIBLE ANCHOR */}
+                <div id={`anchor-${year.id}`} className="w-full h-0 pointer-events-none"></div>
 
-              </div>
+                <div 
+                  id={`card-${year.id}`}
+                  // Card sticks at top-[110px] providing spacing matching the lowered left menu
+                  className="sticky-card sticky top-[110px] w-full mb-[20vh] transition-all duration-500"
+                  style={{ zIndex: 10 + idx }}
+                >
+                  
+                  {/* INNER CARD WRAPPER: Handles viewport clipping gracefully */}
+                  {/* max-h calculates screen height minus top/bottom space, allowing internal scroll if needed */}
+                  <div 
+                    id={`card-inner-${year.id}`}
+                    className="card-inner bg-white rounded-2xl border border-gray-100 overflow-y-auto hide-scrollbar w-full flex flex-col"
+                    style={{ 
+                      maxHeight: 'calc(100vh - 130px)',
+                      boxShadow: idx > 0 ? "0 -15px 30px -10px rgba(0,0,0,0.06)" : "0 5px 20px rgba(0,0,0,0.03)"
+                    }}
+                  >
+                    
+                    <div className="p-5 md:p-7 w-full flex flex-col gap-5">
+                      
+                      {/* Header */}
+                      <div className="flex flex-col md:flex-row items-start gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-[#0c4088] text-white flex items-center justify-center font-black text-2xl shrink-0 shadow-inner">
+                          {idx + 1}
+                        </div>
+                        <div className="pt-1">
+                          <h3 className="text-xl md:text-2xl font-extrabold text-[#0c4088] mb-1.5 tracking-tight">
+                            {year.contentTitle || year.mainHeading}
+                          </h3>
+                          <p className="text-gray-600 text-sm md:text-[14px] leading-relaxed m-0 max-w-2xl">
+                            {year.contentDesc || year.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Compact Skills Pills */}
+                      {year.skills && year.skills.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-1">
+                          {year.skills.map((skill, sIdx) => (
+                            <span key={sIdx} className="bg-gray-100/80 px-3 py-1.5 rounded-md text-[12px] font-semibold text-[#0c4088] border border-gray-200/60 cursor-default hover:bg-gray-200 transition-colors">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Grid Layout for Concepts & Tools */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-1">
+                        
+                        {/* Concepts Column */}
+                        {year.concepts && year.concepts.length > 0 && (
+                          <div className="bg-gray-50/50 border border-gray-100 rounded-xl p-4 md:p-5">
+                            <h4 className="text-[11px] font-bold text-[#0c4088] mb-3 uppercase tracking-widest flex items-center gap-2">
+                              <LucideIcons.BookOpen size={13} className="text-[#22acd1]" /> 
+                              {defaultConfig.labels.inClassroom}
+                            </h4>
+                            <div className="flex flex-col gap-3">
+                              {year.concepts.map((concept, cIdx) => (
+                                <div key={cIdx} className="flex items-start gap-3">
+                                  <div className="mt-0.5 bg-white p-1.5 rounded-md border border-gray-200 shadow-sm shrink-0">
+                                    <DynamicIcon icon={concept.icon || concept.emoji} size={15} />
+                                  </div>
+                                  <div>
+                                    <h5 className="font-bold text-[#0c4088] text-[13px] mb-0.5 leading-tight">{concept.title}</h5>
+                                    <p className="text-[12px] text-gray-500 m-0 leading-snug">{concept.desc}</p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* AI Tools Column */}
+                        {year.aiTools && year.aiTools.length > 0 && (
+                          <div className="bg-[#fffdf8] border border-[#fef1c7] rounded-xl p-4 md:p-5">
+                            <h4 className="text-[11px] font-bold text-[#0c4088] mb-3 uppercase tracking-widest flex items-center gap-2">
+                              <LucideIcons.Sparkles size={13} className="text-[#f1bd0e]" /> 
+                              {defaultConfig.labels.aiTools}
+                            </h4>
+                            <div className="flex flex-col gap-3">
+                              {year.aiTools.map((tool, tIdx) => (
+                                <div key={tIdx} className="flex items-start gap-3">
+                                  <div className="mt-0.5 bg-white p-1.5 rounded-md border border-gray-200 shadow-sm shrink-0">
+                                    <DynamicIcon icon={tool.icon || tool.iconName} color={tool.color || tool.iconColor} size={15} />
+                                  </div>
+                                  <div>
+                                    <span className="font-bold text-[#0c4088] text-[13px] block mb-0.5 leading-tight">{tool.name}</span>
+                                    <span className="text-[12px] text-gray-500 block leading-snug">{tool.desc}</span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Outcomes Section */}
+                      {year.projects && year.projects.length > 0 && (
+                        <div className="bg-[#0c4088] rounded-xl p-4 md:p-5 text-white relative overflow-hidden mt-1">
+                          <div className="absolute top-0 left-0 w-full h-1 bg-[#f1bd0e]"></div>
+
+                          <h4 className="text-[10px] font-bold text-[#f1bd0e] mb-3 uppercase tracking-[0.15em] flex items-center gap-1.5">
+                            <LucideIcons.Trophy size={13} /> YEAR {year.id || idx + 1} OUTCOMES
+                          </h4>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            {year.projects.map((project, pIdx) => (
+                              <div key={pIdx} className="bg-white/10 border border-white/10 p-3 rounded-lg">
+                                <h5 className="font-bold text-white text-[13px] mb-1.5 leading-tight">{project.name}</h5>
+                                <p className="text-[12px] text-blue-100/70 mb-2.5 leading-snug line-clamp-2">{project.desc}</p>
+                                <span className="inline-block px-2 py-1 bg-white/5 rounded text-[9px] font-semibold text-[#f1bd0e] uppercase tracking-wider">{project.companies}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Expandable View All Subjects */}
+                      {year.subjects && year.subjects.length > 0 && (
+                        <div className="border border-gray-200 rounded-xl bg-white overflow-hidden mt-1 shrink-0">
+                          <div 
+                            className="flex justify-between items-center px-5 py-3.5 cursor-pointer font-medium text-[#0c4088] hover:bg-gray-50 transition-colors" 
+                            onClick={() => toggleSubjects(year.id)}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="opacity-40"><LucideIcons.List size={16} /></div>
+                              <span className="text-[13.5px] font-semibold">{defaultConfig.labels.viewAllSubjects}</span>
+                            </div>
+                            <LucideIcons.ChevronDown size={18} className={`transition-transform duration-300 text-gray-400 ${expandedSubjects[year.id] ? 'rotate-180' : ''}`} />
+                          </div>
+                          
+                          <div 
+                            className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${expandedSubjects[year.id] ? 'grid-rows-[1fr] border-t border-gray-100' : 'grid-rows-[0fr]'}`}
+                          >
+                            <div className="overflow-hidden">
+                              <div className="p-4 bg-gray-50/30">
+                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 list-none m-0">
+                                  {year.subjects.map((subject, subIdx) => (
+                                    <li key={subIdx} className="text-[12px] text-gray-600 flex items-start gap-2 font-medium">
+                                      <span className="text-gray-300 font-bold mt-0.5 text-sm leading-none">|</span>
+                                      {subject}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      
+                    </div>
+                  </div>
+                </div>
+              </React.Fragment>
             );
           })}
         </div>
       </div>
+
+      <style jsx global>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        html {
+          scroll-behavior: smooth;
+        }
+
+        /* Smooth scroll for the inner cards */
+        .card-inner {
+          scroll-behavior: smooth;
+        }
+
+        /* Mobile specific adjustments where stacking doesn't make sense */
+        @media (max-width: 768px) {
+          .sticky-card {
+             position: relative !important;
+             top: 0 !important;
+             margin-bottom: 24px !important;
+          }
+          .card-inner {
+             max-height: none !important;
+             overflow-y: visible !important;
+             box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
