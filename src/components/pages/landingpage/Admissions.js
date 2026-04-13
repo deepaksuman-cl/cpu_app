@@ -1,181 +1,189 @@
-'use client';
+"use client";
 
 import React, { useEffect, useRef, useState } from 'react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
-const stepsData = [
+const timelineSteps = [
   {
-    num: "01",
-    title: "Register & Apply Online",
-    desc: "Submit application with 10+2 marksheet and PCM details.",
-    date: "Opens March 2025"
+    id: 1,
+    number: '01',
+    title: 'Register & Apply Online',
+    desc: 'Submit application with 10+2 marksheet and PCM details.',
+    label: 'Opens March 2025',
   },
   {
-    num: "02",
-    title: "Appear for CPUEST",
-    desc: "Career Point Scholastic Aptitude Test — Maths, English & Aptitude. Online and on-campus at Kota.",
-    date: "March 28, 2026"
+    id: 2,
+    number: '02',
+    title: 'Appear for CPUEST',
+    desc: 'Career Point Scholastic Aptitude Test — Maths, English & Aptitude. Online and on-campus at Kota.',
+    label: 'March 28, 2026',
   },
   {
-    num: "03",
-    title: "Personal Interview",
-    desc: "Faculty panel interview — tests problem-solving ability and passion for building with technology.",
-    date: ""
+    id: 3,
+    number: '03',
+    title: 'Personal Interview',
+    desc: 'Faculty panel interview — tests problem-solving ability and passion for building with technology.',
+    label: '',
   },
   {
-    num: "04",
-    title: "Counselling & Seat Confirmation",
-    desc: "One-on-one counselling session. Submit documents and confirm your seat with the confirmation fee.",
-    date: "Batch begins July 2026"
+    id: 4,
+    number: '04',
+    title: 'Counselling & Seat Confirmation',
+    desc: 'One-on-one counselling session. Submit documents and confirm your seat with the confirmation fee.',
+    label: 'Batch begins July 2026',
   }
 ];
 
 export default function Admissions() {
-  const timelineRef = useRef(null);
+  const [activeStep, setActiveStep] = useState(0);
+  const containerRef = useRef(null);
+  const lineRef = useRef(null);
   const stepRefs = useRef([]);
-  const [lineHeight, setLineHeight] = useState(0);
-  const [activeStep, setActiveStep] = useState(1);
 
-  // Scroll effect logic for the yellow timeline progress bar
   useEffect(() => {
+    // 1. Scroll-based Line Fill Logic
     const handleScroll = () => {
-      if (!timelineRef.current) return;
+      if (!containerRef.current || !lineRef.current) return;
       
-      const containerRect = timelineRef.current.getBoundingClientRect();
+      const rect = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Trigger timeline fill when it hits 60% from the top of the viewport
-      const offset = windowHeight * 0.6; 
-      let scrollPosition = offset - containerRect.top;
-      let maxScroll = containerRect.height;
+      // Calculate how much of the timeline has been scrolled past the center of the screen
+      const startPoint = windowHeight * 0.7; // Start filling when card is at 70% of screen height
+      const totalHeight = rect.height;
+      const scrolled = Math.max(0, startPoint - rect.top);
+      const progress = Math.min(100, (scrolled / totalHeight) * 100);
       
-      // Ensure the progress stays within 0 and max scroll height
-      let progressHeight = Math.max(0, Math.min(maxScroll, scrollPosition));
-      let percentage = (progressHeight / maxScroll) * 100;
-      
-      setLineHeight(percentage);
-
-      // Determine active step
-      let currentStep = 1;
-      stepRefs.current.forEach((stepEl, index) => {
-        if (stepEl && timelineRef.current) {
-          const stepRect = stepEl.getBoundingClientRect();
-          // Relative top position of the step inside the container
-          const relativeTop = stepRect.top - containerRect.top;
-          
-          // If the progress line has crossed this step's relative top
-          if (progressHeight >= relativeTop - 20) { // -20 for slight visual buffer
-            currentStep = index + 1;
-          }
-        }
-      });
-      
-      setActiveStep(currentStep);
+      lineRef.current.style.height = `${progress}%`;
     };
 
+    // 2. Intersection Observer for Active Step Highlighting
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -40% 0px', // Trigger when step is in the middle-top area
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = stepRefs.current.indexOf(entry.target);
+          if (index !== -1) setActiveStep(index);
+        }
+      });
+    }, observerOptions);
+
+    stepRefs.current.forEach((el) => el && observer.observe(el));
     window.addEventListener('scroll', handleScroll);
-    // Initial check on load
-    setTimeout(handleScroll, 100); 
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
-    <section className="py-20 md:py-28 bg-white" id="admissions">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 px-6 sm:px-8 bg-[#fdfdfd] font-sans" id="admissions">
+      
+      {/* Section Header */}
+      <div className="text-center mb-[60px]">
+        <h2 className="text-[2.2rem] md:text-[2.8rem] font-[800] text-[#0c4088] leading-tight">
+          Admission Process
+        </h2>
+      </div>
+
+      {/* Main Container: 2 Columns */}
+      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.3fr] gap-[50px] items-start">
         
-        {/* Section Header */}
-        <div className="text-center mb-16 md:mb-24">
-          <h2 className="text-3xl md:text-[2.5rem] font-bold text-[#123e84]">
-            Admission Process
+        {/* Left Side: Info Box */}
+        <div className="md:sticky md:top-[120px]">
+          <h2 className="text-[2rem] font-[700] text-[#0c4088] mb-6">
+            How to join
           </h2>
+
+          {/* Dark Blue Card */}
+          <div className="bg-[#0c4088] rounded-[16px] p-[25px] border border-white/10 shadow-[0_15px_40px_rgba(12,64,136,0.2)] mb-6 transition-transform duration-300 hover:-translate-y-1">
+            <h5 className="flex items-center text-[#f1bd0e] font-[600] text-[1.15rem] mb-4 gap-2">
+              <CheckCircle2 className="w-[1.2rem] h-[1.2rem]" strokeWidth={2.5} /> 
+              Eligibility
+            </h5>
+            <p className="text-white text-[0.95rem] leading-[1.6]">
+              Class 10+2 with PCM and 50%+ marks. Admission via CPUEST and personal interview. Top 20–25% of applicants are selected.
+            </p>
+          </div>
+
+          {/* Action Button */}
+          <button className="bg-[#0c4088] text-white px-[28px] py-[12px] rounded-[8px] font-[600] text-[1rem] flex items-center gap-2 hover:bg-[#0a3570] transition-colors shadow-md">
+            Apply Now 
+            <ArrowRight className="w-5 h-5" strokeWidth={2} />
+          </button>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start relative">
+        {/* Right Side: Timeline */}
+        <div ref={containerRef} className="relative pl-[45px] mt-4 md:mt-0">
           
-          {/* Left Side (Sticky Info Box) */}
-          <div className="w-full lg:w-[40%] lg:sticky lg:top-32 z-10">
-            <h2 className="text-3xl font-bold text-[#123e84] mb-6">How to join</h2>
-            
-            <div className="bg-[#123e84] rounded-2xl p-8 mb-6 shadow-xl">
-              <h5 className="flex items-center text-xl font-bold text-[#ffcc00] mb-4">
-                <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                Eligibility
-              </h5>
-              <p className="text-white text-[15px] leading-relaxed opacity-90">
-                Class 10+2 with PCM and 50%+ marks. Admission via CPUEST and personal interview. Top 20–25% of applicants are selected.
-              </p>
-            </div>
+          {/* Vertical Track (Grey Line) */}
+          <div className="absolute left-[16px] top-[20px] bottom-0 w-[2px] bg-[#e5e7eb] z-0"></div>
+          
+          {/* Vertical Track (Active Yellow Line - Animated) */}
+          <div 
+            ref={lineRef}
+            className="absolute left-[16px] top-[20px] w-[2px] bg-[#f1bd0e] z-10 transition-all duration-300 ease-out"
+            style={{ height: '0%' }}
+          ></div>
 
-            <button className="bg-[#123e84] hover:bg-[#0d2966] text-white px-8 py-3.5 rounded-lg font-semibold flex items-center transition-colors shadow-md">
-              Apply Now 
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Right Side (Scrolling Timeline) */}
-          <div className="w-full lg:w-[60%] relative" ref={timelineRef}>
-            
-            {/* The vertical track & yellow progress line */}
-            <div className="absolute left-[23px] top-[24px] bottom-[24px] w-[2px] bg-gray-200 z-0">
+          {/* Timeline Steps */}
+          {timelineSteps.map((step, index) => {
+            const isActive = index <= activeStep;
+            return (
               <div 
-                className="w-full bg-[#ffcc00] transition-all duration-300 ease-out" 
-                style={{ height: `${lineHeight}%` }}
-              ></div>
-            </div>
+                key={step.id} 
+                ref={(el) => (stepRefs.current[index] = el)}
+                className="relative pb-[40px]"
+              >
+                
+                {/* Step Number Circle */}
+                <div 
+                  className={`absolute left-[-46px] top-[15px] w-[34px] h-[34px] rounded-full flex items-center justify-center font-[800] text-[0.9rem] z-20 border-[3px] border-white transition-all duration-500
+                  ${isActive 
+                    ? 'bg-[#f1bd0e] text-white shadow-[0_0_0_2px_#f1bd0e]' 
+                    : 'bg-white text-[#888] shadow-[0_0_0_2px_#e5e7eb]'
+                  }`}
+                >
+                  {step.number}
+                </div>
 
-            {/* Timeline Steps */}
-            <div className="space-y-12 relative z-10">
-              {stepsData.map((step, index) => {
-                const stepNumber = index + 1;
-                const isActive = activeStep >= stepNumber;
+                {/* Step Content Card */}
+                <div 
+                  className={`relative ml-[20px] p-[25px_30px] rounded-[12px] bg-white transition-all duration-500
+                  ${isActive 
+                    ? 'border border-[#f1bd0e] shadow-[0_8px_25px_rgba(241,189,14,0.12)]' 
+                    : 'border border-transparent hover:border-[#f3f4f6]'
+                  }`}
+                >
+                  {/* Horizontal Connecting Line (Only for Active Steps) */}
+                  {isActive && (
+                    <div className="absolute left-[-21px] top-[31px] w-[21px] h-[2px] bg-[#f1bd0e] z-0"></div>
+                  )}
 
-                return (
-                  <div 
-                    key={index} 
-                    className="relative pl-16 md:pl-20"
-                    ref={(el) => (stepRefs.current[index] = el)}
-                  >
-                    
-                    {/* Circle Indicator */}
-                    <div className={`absolute left-0 top-0 w-12 h-12 rounded-full border-2 flex items-center justify-center font-bold text-lg transition-all duration-500 ease-in-out ${
-                      isActive 
-                        ? 'bg-[#ffcc00] border-[#ffcc00] text-black shadow-[0_0_15px_rgba(255,204,0,0.4)]' 
-                        : 'bg-white border-gray-200 text-gray-400'
-                    }`}>
-                      {step.num}
-                    </div>
+                  <h4 className={`text-[1.25rem] font-[800] mb-2 transition-colors duration-500 ${isActive ? 'text-[#0c4088]' : 'text-[#888]'}`}>
+                    {step.title}
+                  </h4>
+                  <p className="text-[#333333] text-[0.95rem] leading-[1.6] mb-2">
+                    {step.desc}
+                  </p>
+                  {step.label && (
+                    <label className={`text-[0.9rem] font-medium block mt-2 transition-colors duration-500 ${isActive ? 'text-[#3b82f6]' : 'text-slate-400'}`}>
+                      {step.label}
+                    </label>
+                  )}
+                </div>
 
-                    {/* Step Card Content */}
-                    <div className={`bg-white p-6 md:p-8 rounded-xl border-2 transition-all duration-500 ease-in-out ${
-                      isActive 
-                        ? 'border-[#ffcc00] shadow-[0_10px_30px_rgba(255,204,0,0.1)] transform scale-[1.02]' 
-                        : 'border-gray-100 shadow-sm opacity-70'
-                    }`}>
-                      <h4 className={`text-xl font-bold mb-3 transition-colors duration-500 ${
-                        isActive ? 'text-[#123e84]' : 'text-gray-500'
-                      }`}>
-                        {step.title}
-                      </h4>
-                      <p className="text-gray-600 text-[15px] leading-relaxed mb-1">
-                        {step.desc}
-                      </p>
-                      {step.date && (
-                        <label className="text-sm font-semibold text-gray-500 block mt-3">
-                          {step.date}
-                        </label>
-                      )}
-                    </div>
+              </div>
+            );
+          })}
 
-                  </div>
-                );
-              })}
-            </div>
-
-          </div>
         </div>
       </div>
     </section>

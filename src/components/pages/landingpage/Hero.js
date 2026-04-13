@@ -1,135 +1,258 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Particles, { initParticlesEngine } from '@tsparticles/react';
-import { loadSlim } from '@tsparticles/slim';
+import { useEffect, useRef } from 'react';
 
-export default function Hero() {
-  const [init, setInit] = useState(false);
+// Custom Particles Component with Mouse Hover (Grab) Effect
+const ParticlesBackground = () => {
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const parent = canvas.parentElement;
+    
+    let animationFrameId;
+    let particles = [];
+    
+    // Mouse tracking object
+    let mouse = {
+      x: null,
+      y: null,
+      radius: 140 // Grab distance as per your HTML config
+    };
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 1.5; // Speed
+        this.vy = (Math.random() - 0.5) * 1.5;
+        this.radius = 2; // Size
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce back from edges
+        if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+        if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        // #3bc3e2 color with 0.5 opacity (59, 195, 226)
+        ctx.fillStyle = 'rgba(59, 195, 226, 0.5)'; 
+        ctx.fill();
+      }
+    }
+
+    const initParticles = () => {
+      particles = [];
+      // Fixed number of particles (80) as per your HTML config, scalable by width
+      const particleCount = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    };
+
+    const setCanvasSize = () => {
+      if (parent) {
+        canvas.width = parent.offsetWidth;
+        canvas.height = parent.offsetHeight;
+        initParticles(); // Resize hone par particles refresh karein
+      }
+    };
+
+    // Initialize Canvas Size
+    setCanvasSize();
+    window.addEventListener('resize', setCanvasSize);
+
+    // Mouse Events for Grab Effect
+    const handleMouseMove = (event) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = null;
+      mouse.y = null;
+    };
+
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseleave', handleMouseLeave);
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        // 1. Connect Particle to Particle
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 150) { // Distance from config
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(59, 195, 226, ${0.4 - distance / 375})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+
+        // 2. Connect Particle to Mouse (Grab Mode)
+        if (mouse.x != null && mouse.y != null) {
+          const dxMouse = particles[i].x - mouse.x;
+          const dyMouse = particles[i].y - mouse.y;
+          const distanceMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+
+          if (distanceMouse < mouse.radius) {
+            ctx.beginPath();
+            // Solid grab line matching the #3bc3e2 color
+            ctx.strokeStyle = `rgba(59, 195, 226, ${1 - distanceMouse / mouse.radius})`;
+            ctx.lineWidth = 1.2;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', setCanvasSize);
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      canvas.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
-    <section 
-      // MAIN FIX: 'overflow-hidden' ko 'overflow-x-hidden' kar diya hai
-      // Aur py-12 (padding top & bottom) add kiya hai taaki content top/bottom se chipke na
-      className="relative w-full min-h-[calc(100vh-80px)] flex flex-col items-center justify-center overflow-x-hidden py-12"
-      style={{
-        background: 'radial-gradient(circle at 50% 50%, #1a49a0 0%, #0d2966 50%, #071536 100%)'
-      }}
-    >
+    <canvas
+      ref={canvasRef}
+      className="absolute top-0 left-0 w-full h-full"
+    />
+  );
+};
+
+export default function App() {
+  return (
+    // Main Container
+    <div className="relative w-full bg-[#0c4088] font-sans h-[calc(100vh-120px)] min-h-[600px] flex items-center overflow-hidden">
       
-      {/* Particles Engine */}
-      {init && (
-        <Particles
-          id="tsparticles"
-          className="absolute inset-0 z-0 pointer-events-none"
-          options={{
-            background: { color: { value: "transparent" } },
-            fpsLimit: 60,
-            particles: {
-              color: { value: "#ffffff" },
-              links: {
-                color: "#ffffff",
-                distance: 180,
-                enable: true,
-                opacity: 0.15,
-                width: 1,
-              },
-              move: {
-                direction: "none",
-                enable: true,
-                outModes: { default: "bounce" },
-                random: true,
-                speed: 0.5,
-                straight: false,
-              },
-              number: {
-                density: { enable: true, area: 1200 },
-                value: 60,
-              },
-              opacity: { value: 0.3 },
-              shape: { type: "circle" },
-              size: { value: { min: 1, max: 2.5 } },
-            },
-            detectRetina: true,
-          }}
-        />
-      )}
-
-      {/* Main Content Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col items-center text-center justify-center">
-        
-        {/* Headings - Margins further compressed for smaller laptop screens */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight mb-1 text-white leading-tight">
-          AI-First
-        </h1>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight mb-4 text-[#ffcc00] leading-tight">
-          B.Tech in CS
-        </h1>
-        
-        <p className="text-base sm:text-lg md:text-xl font-normal mb-6 text-white tracking-wide max-w-3xl px-4">
-          Learn AI. Build AI. Become AI-Ready.
-        </p>
-
-        {/* Stats Row - Tighter spacing */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 xl:gap-10 mb-6 w-full px-2">
-          <div className="flex flex-col items-center min-w-0">
-            <span className="text-[10px] sm:text-xs text-white/80 uppercase tracking-widest font-medium mb-0.5">Duration</span>
-            <span className="text-sm sm:text-base md:text-lg font-bold text-white text-center break-words">4 Years</span>
-          </div>
-          
-          <div className="w-12 h-px sm:w-px sm:h-6 lg:h-8 bg-white/30 flex-shrink-0"></div>
-          
-          <div className="flex flex-col items-center min-w-0">
-            <span className="text-[10px] sm:text-xs text-white/80 uppercase tracking-widest font-medium mb-0.5">Degree</span>
-            <span className="text-sm sm:text-base md:text-lg font-bold text-white text-center break-words">B.Tech • UGC Recognised</span>
-          </div>
-          
-          <div className="w-12 h-px sm:w-px sm:h-6 lg:h-8 bg-white/30 flex-shrink-0"></div>
-          
-          <div className="flex flex-col items-center min-w-0">
-            <span className="text-[10px] sm:text-xs text-white/80 uppercase tracking-widest font-medium mb-0.5">Campus</span>
-            <span className="text-sm sm:text-base md:text-lg font-bold text-white text-center break-words">Kota, Rajasthan</span>
-          </div>
-        </div>
-
-        {/* Specializations */}
-        <div className="mb-8 flex flex-col items-center px-2 w-full">
-          <p className="text-white/90 mb-2.5 text-sm sm:text-base font-normal">Specialization:</p>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 w-full max-w-4xl">
-            <span className="px-3 md:px-4 py-1.5 border border-[#ffcc00] rounded-full text-[11px] md:text-[12px] font-medium text-[#ffcc00] flex items-center bg-[#ffcc00]/5">
-              <svg className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73A2 2 0 1 1 12 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM8 13a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
-              AI & ML
-            </span>
-            <span className="px-3 md:px-4 py-1.5 border border-[#ffcc00] rounded-full text-[11px] md:text-[12px] font-medium text-[#ffcc00] flex items-center bg-[#ffcc00]/5">
-              <svg className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-              Full Stack Dev. & Cloud Computing
-            </span>
-            <span className="px-3 md:px-4 py-1.5 border border-[#ffcc00] rounded-full text-[11px] md:text-[12px] font-medium text-[#ffcc00] flex items-center bg-[#ffcc00]/5">
-              <svg className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
-              Cyber Security & Cloud Computing
-            </span>
-          </div>
-        </div>
-
-        {/* Call to Action Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-3 px-2 w-full">
-          <button className="bg-[#ffcc00] hover:bg-[#e6b800] text-[#0a1936] px-6 md:px-8 py-2.5 rounded-md font-semibold text-sm md:text-base transition-colors duration-300 w-full sm:w-auto">
-            Apply Now
-          </button>
-          <button className="bg-transparent border border-white text-white px-6 md:px-8 py-2.5 rounded-md font-semibold text-sm md:text-base hover:bg-white/10 transition-colors duration-300 w-full sm:w-auto">
-            Download Brochure
-          </button>
-        </div>
-
+      {/* Background Particles Layer */}
+      <div className="absolute inset-0 z-0 pointer-events-auto">
+        <ParticlesBackground />
       </div>
-    </section>
+
+      {/* Hero Gradient Overlay */}
+      <div 
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{
+          background: 'linear-gradient(160deg, #00000052 37%, rgba(18, 74, 151, 0.7) 50%, rgba(18, 74, 151, 0.2) 100%)'
+        }}
+      ></div>
+
+      {/* Hero Content Container */}
+      <div className="relative z-20 w-[96%] max-w-[1400px] mx-auto px-[5%] py-10 pointer-events-none flex items-center justify-between gap-10">
+        
+        {/* Left Side Content */}
+        <div className="max-w-3xl pointer-events-auto">
+          
+          {/* Headings - Bold */}
+          <h1 className="text-[2.5rem] md:text-[3.5rem] lg:text-[68px] font-bold leading-[1.1] text-white mb-4 tracking-tight">
+            <span className="block" style={{fontWeight: 600}}>AI-First</span>
+            <span className="text-[#f1bd0e] block mt-1" style={{fontWeight: 600}} >B.Tech in CS</span>
+          </h1>
+          
+          <p className="text-[1.25rem] md:text-[1.5rem] font-medium text-white mb-8">
+            Learn AI. Build AI. Become AI-Ready.
+          </p>
+
+          {/* Info Details Grid */}
+          <div className="flex flex-wrap items-center mb-8 gap-x-8 gap-y-4">
+            <div className="flex flex-col">
+              <span className="text-[10px] font-medium text-gray-300 uppercase tracking-[0.15em] mb-1">Duration</span>
+              {/* font-normal jaisa screenshot me hai */}
+              <span className="text-[15px] font-normal text-white">4 Years</span>
+            </div>
+            
+            {/* Thin Divider */}
+            <div className="w-[1px] h-8 bg-white/20 hidden sm:block"></div>
+
+            <div className="flex flex-col">
+              <span className="text-[10px] font-medium text-gray-300 uppercase tracking-[0.15em] mb-1">Degree</span>
+              <span className="text-[15px] font-normal text-white">B.Tech • UGC Recognised</span>
+            </div>
+
+            {/* Thin Divider */}
+            <div className="w-[1px] h-8 bg-white/20 hidden sm:block"></div>
+
+            <div className="flex flex-col">
+              <span className="text-[10px] font-medium text-gray-300 uppercase tracking-[0.15em] mb-1">Campus</span>
+              <span className="text-[15px] font-normal text-white">Kota, Rajasthan</span>
+            </div>
+          </div>
+
+          {/* Specialization Section */}
+          <div className="mb-10">
+            {/* Specialization text font-normal */}
+            <p className="text-white text-[15px] font-normal mb-3">Specialization:</p>
+            <div className="flex flex-wrap gap-3">
+              
+              {/* Tag 1 - Thin border, font-normal, text-[13px] */}
+              <span className="bg-[#ffffff08] border border-[#f1bd0e] text-[#f1bd0e] text-[13px] font-normal px-4 py-1.5 rounded-full backdrop-blur-sm flex items-center gap-2">
+                <svg className="w-4 h-4 text-[#f1bd0e]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a3 3 0 013 3v2h2a1 1 0 011 1v4a1 1 0 01-1 1h-2v1a3 3 0 01-3 3H7a3 3 0 01-3-3v-1H2a1 1 0 01-1-1v-4a1 1 0 011-1h2V10a3 3 0 013-3h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2zm-3 9a1 1 0 00-1 1v2a1 1 0 002 0v-2a1 1 0 00-1-1zm6 0a1 1 0 00-1 1v2a1 1 0 002 0v-2a1 1 0 00-1-1z" />
+                </svg>
+                AI & ML
+              </span>
+              
+              {/* Tag 2 */}
+              <span className="bg-[#ffffff08] border border-[#f1bd0e] text-[#f1bd0e] text-[13px] font-normal px-4 py-1.5 rounded-full backdrop-blur-sm flex items-center gap-2">
+                <svg className="w-4 h-4 text-[#f1bd0e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                Full Stack Dev. & Cloud Computing 
+              </span>
+
+              {/* Tag 3 */}
+              <span className="bg-[#ffffff08] border border-[#f1bd0e] text-[#f1bd0e] text-[13px] font-normal px-4 py-1.5 rounded-full backdrop-blur-sm flex items-center gap-2">
+                <svg className="w-3.5 h-3.5 text-[#f1bd0e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+                Cyber Security & Cloud Computing
+              </span>
+
+            </div>
+          </div>
+
+          {/* Action Buttons - Slightly refined boldness and padding */}
+          <div className="flex flex-wrap items-center gap-4">
+            <a href="#" className="bg-[#f1bd0e] text-[#0c4088] border-2 border-[#f1bd0e] rounded-md px-8 py-2.5 font-semibold hover:bg-[#dca60b] hover:border-[#dca60b] transition-colors inline-block text-[15px]">
+              Apply Now
+            </a>
+<a
+  href="#"
+  className="inline-block w-fit bg-transparent border-2 border-white text-white rounded-md px-8 py-2.5 font-semibold hover:bg-white hover:!text-[#0c4088] transition-all duration-300 ease-in-out text-[15px]"
+>
+  Download Brochure
+</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
   );
 }

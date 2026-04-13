@@ -12,7 +12,7 @@ import FAQ from '@/components/pages/landingpage/FAQ'
 
 const page = () => {
   return (
-   <main>
+   <div>
         <Hero />
       <DarkHighlights />
       <FeaturesFlipCards />
@@ -23,7 +23,7 @@ const page = () => {
       <TeamSlider />
       <CTA />
       <FAQ />
-   </main>
+   </div>
   )
 }
 
