@@ -1,0 +1,508 @@
+{
+  "hero": {
+    "title": ["AI-First", "B.Tech in CS"],
+    "subtitle": "Learn AI. Build AI. Become AI-Ready.",
+    "stats": [
+      { "label": "Duration", "value": "4 Years" },
+      { "label": "Degree", "value": "B.Tech • UGC Recognised" },
+      { "label": "Campus", "value": "Kota, Rajasthan" }
+    ],
+    "specializations": [
+      { "icon": "Bot", "name": "AI & ML" },
+      { "icon": "Code", "name": "Full Stack Dev. & Cloud Computing" },
+      { "icon": "ShieldCheck", "name": "Cyber Security & Cloud Computing" }
+    ],
+    "cta": [
+      { "text": "Apply Now", "href": "#" },
+      { "text": "Download Brochure", "href": "#" }
+    ]
+  },
+  "highlights": [
+    { "icon": "LaptopCode", "title": "Learn by Building", "desc": "Future-proof curriculum with AI embedded from day one" },
+    { "icon": "FlaskConical", "title": "Industry Led Innovation Lab", "desc": "India's only deep tech lab for UG with funding support for startup" },
+    { "icon": "Bot", "title": "AI First", "desc": "Every semester is built around real AI tools, APIs & projects" },
+    { "icon": "Code2", "title": "70%", "desc": "Hands-on coding from Day 1 - no theory overload" },
+    { "icon": "Users2", "title": "250+", "desc": "Hiring partners across India's top tech companies" }
+  ],
+  "features": [
+    {
+      "id": 1,
+      "number": "01",
+      "title": "AI First Curriculum",
+      "desc": "Every course integrates AI tools and concepts from semester one. Build AI-powered projects that solve real problems.",
+      "icon": "BookOpen"
+    },
+    {
+      "id": 2,
+      "number": "02",
+      "title": "Coding from Day One",
+      "desc": "No theory overload. 70% hands-on coding with industry-standard tools and practices from the start.",
+      "icon": "Code"
+    },
+    {
+      "id": 3,
+      "number": "03",
+      "title": "Learn from Industry experts",
+      "desc": "Learn from engineers at Google, Microsoft, and Amazon. Real insights, real experience, real connections.",
+      "icon": "UserCog"
+    },
+    {
+      "id": 4,
+      "number": "04",
+      "title": "Campus Built for Techies",
+      "desc": "AI-powered smart classrooms, 24/7 coding labs, high-speed internet. Spaces designed for innovation.",
+      "icon": "Landmark"
+    },
+    {
+      "id": 5,
+      "number": "05",
+      "title": "Career Launch Ecosystem",
+      "desc": "250+ hiring partners, resume workshops, mock interviews. Your career journey starts from year one.",
+      "icon": "TrendingUp"
+    },
+    {
+      "id": 6,
+      "number": "06",
+      "title": "Selective Peer Group",
+      "desc": "Rigorous CPUEST selection ensures you learn alongside motivated, talented future tech leaders.",
+      "icon": "Users"
+    }
+  ],
+  "curriculum": {
+    "title": "The Curriculum",
+    "description": "8 semesters of hands-on learning. Designed by AI researchers. Updated annually.",
+    "data": [
+      {
+        "id": 1,
+        "title": "AI Foundations",
+        "subtitle": "Building future AI experts from first principles. Exploring the math, code, and thinking behind an AI-first world.",
+        "colorTheme": "blue",
+        "stats": [
+          { "value": "1*", "label": "Paid Internship", "border": "border-yellow-400", "text": "text-yellow-400", "bg": "bg-yellow-400/10" },
+          { "value": "1", "label": "Externship", "border": "border-blue-400", "text": "text-blue-400", "bg": "bg-blue-400/10" },
+          { "value": "8", "label": "Projects", "border": "border-cyan-400", "text": "text-cyan-400", "bg": "bg-cyan-400/10" }
+        ],
+        "semesters": [
+          {
+            "num": 1,
+            "badges": [{ "text": "Semester 1", "bg": "bg-blue-900/60", "textCol": "text-blue-300" }],
+            "subjects": [
+              { "name": "Mathematical Thinking for AI & Computer Science", "dot": "bg-blue-400" },
+              { "name": "Programming Foundations for AI Builders | Python", "dot": "bg-cyan-400" },
+              { "name": "Internet, Cloud & DevOps Foundations for AI Products", "dot": "bg-yellow-400" },
+              { "name": "Linear Algebra for AI", "dot": "bg-blue-400" },
+              { "name": "Product Thinking for AI Startups I: Design Thinking", "dot": "bg-yellow-400" }
+            ]
+          },
+          {
+            "num": 2,
+            "badges": [
+              { "text": "Semester 2", "bg": "bg-cyan-900/60", "textCol": "text-cyan-300" },
+              { "text": "+Externship", "bg": "bg-yellow-900/40", "textCol": "text-yellow-400" }
+            ],
+            "subjects": [
+              { "name": "Components of a Full Stack AI Product", "dot": "bg-yellow-400" },
+              { "name": "Data Structures & Algorithms in Competitive Mode", "dot": "bg-cyan-400" },
+              { "name": "Probability, Stats & Calculus for AI", "dot": "bg-blue-400" },
+              { "name": "OOPS & Clean Coding", "dot": "bg-cyan-400" },
+              { "name": "C Programming for Systems Engineering", "dot": "bg-cyan-400" },
+              { "name": "Mini-MBA 2 | Product, Market & GTM", "dot": "bg-yellow-400" },
+              { "name": "Externship 1", "dot": "bg-blue-400" }
+            ]
+          }
+        ],
+        "categories": ["AI Engineering", "AI Core", "Industry Experience", "Mini-MBA", "CS Fundamentals", "Mathematics"],
+        "outcomes": [
+          { "title": "Python mini projects", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-1/python-mini-project.png" },
+          { "title": "Personal static website", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-1/personal-static-website.png" },
+          { "title": "ML project with EDA & baseline models", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-1/ml-project-with-eda-and-baseline-models.png" },
+          { "title": "Product go-to-market brief", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-1/product%20go-to-market%20brief.png" },
+          { "title": "GitHub profile with structured commits", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-1/github-profile.png" },
+          { "title": "OOP-based software application", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-1/OOP-based%20software.png" },
+          { "title": "React-based AI product frontend", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-1/React.png" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Building AI Products",
+        "subtitle": "Turn ideas into real AI-powered products. Learn to build what the AI industry actually ships.",
+        "colorTheme": "cyan",
+        "stats": [
+          { "value": "1*", "label": "Paid Internship", "border": "border-yellow-400", "text": "text-yellow-400", "bg": "bg-yellow-400/10" },
+          { "value": "2", "label": "Externship", "border": "border-blue-400", "text": "text-blue-400", "bg": "bg-blue-400/10" },
+          { "value": "8", "label": "Projects", "border": "border-cyan-400", "text": "text-cyan-400", "bg": "bg-cyan-400/10" }
+        ],
+        "semesters": [
+          {
+            "num": 3,
+            "badges": [
+              { "text": "Semester 3", "bg": "bg-blue-900/60", "textCol": "text-blue-300" },
+              { "text": "+Externship", "bg": "bg-yellow-900/40", "textCol": "text-yellow-400" }
+            ],
+            "subjects": [
+              { "name": "Operating Systems: AI & HPC Perspective", "dot": "bg-yellow-400" },
+              { "name": "Storage, Indexing & DB Transactions for AI", "dot": "bg-cyan-400" },
+              { "name": "Classical Machine Learning", "dot": "bg-blue-400" },
+              { "name": "DSA – Advanced", "dot": "bg-cyan-400" },
+              { "name": "Mini-MBA 3 | Finance & Unit Economics", "dot": "bg-yellow-400" },
+              { "name": "Externship 2", "dot": "bg-blue-500" }
+            ]
+          },
+          {
+            "num": 4,
+            "badges": [
+              { "text": "Semester 4", "bg": "bg-cyan-900/60", "textCol": "text-cyan-300" },
+              { "text": "+Externship", "bg": "bg-yellow-900/40", "textCol": "text-yellow-400" }
+            ],
+            "subjects": [
+              { "name": "Computer Networks: Communication Across Scalable AI", "dot": "bg-cyan-400" },
+              { "name": "AI Engineering: LLM-Based Systems", "dot": "bg-yellow-400" },
+              { "name": "Building Scalable AI Products: Full Stack Design", "dot": "bg-blue-400" },
+              { "name": "Systems Programming for Low Latency Systems", "dot": "bg-yellow-400" },
+              { "name": "Product Management for AI I: Zero-to-One", "dot": "bg-yellow-400" },
+              { "name": "Externship 3", "dot": "bg-blue-500" }
+            ]
+          }
+        ],
+        "categories": ["AI Engineering", "AI Core", "Industry Experience", "Mini-MBA", "CS Fundamentals", "Mathematics"],
+        "outcomes": [
+          { "title": "Backend service with REST APIs", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-2/backend-services.png" },
+          { "title": "Database-driven application", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-2/database.png" },
+          { "title": "Vector search prototype", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-2/vecotr-search.png" },
+          { "title": "Advanced ML project", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-2/advanced-ml-projects.png" },
+          { "title": "Data pipeline & ETL project", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-2/data-pipeline.png" },
+          { "title": "RAG system", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-2/rag-system.png" },
+          { "title": "Deep learning model training", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-2/deep-learning.png" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Scaling AI Systems",
+        "subtitle": "Designing robust AI systems for millions of users and massive data.",
+        "colorTheme": "yellow",
+        "stats": [
+          { "value": "1", "label": "Paid Internship", "border": "border-yellow-400", "text": "text-yellow-400", "bg": "bg-yellow-400/10" },
+          { "value": "1", "label": "Externship", "border": "border-blue-400", "text": "text-blue-400", "bg": "bg-blue-400/10" },
+          { "value": "6", "label": "Projects", "border": "border-cyan-400", "text": "text-cyan-400", "bg": "bg-cyan-400/10" }
+        ],
+        "semesters": [
+          {
+            "num": 5,
+            "badges": [
+              { "text": "Semester 5", "bg": "bg-yellow-900/40", "textCol": "text-yellow-400" },
+              { "text": "+Internship", "bg": "bg-blue-900/60", "textCol": "text-blue-300" }
+            ],
+            "isSpecial": true,
+            "specialTitle": "Industry Internship / Research Project",
+            "specialDesc": "Full semester dedicated to real-world experience at partner companies or research institutions."
+          },
+          {
+            "num": 6,
+            "badges": [
+              { "text": "Semester 6", "bg": "bg-cyan-900/60", "textCol": "text-cyan-300" },
+              { "text": "+Externship", "bg": "bg-yellow-900/40", "textCol": "text-yellow-400" }
+            ],
+            "subjects": [
+              { "name": "Machine Learning Engineering", "dot": "bg-blue-400" },
+              { "name": "Data Engineering for Robust AI Systems", "dot": "bg-cyan-400" },
+              { "name": "Deep Learning Systems", "dot": "bg-blue-400" },
+              { "name": "Product Management for AI II: Metrics", "dot": "bg-yellow-400" },
+              { "name": "Mini-MBA 4: Operations & Org-Design", "dot": "bg-yellow-400" },
+              { "name": "Externship 4", "dot": "bg-blue-500" }
+            ]
+          }
+        ],
+        "categories": ["AI Engineering", "AI Core", "Industry Experience", "Mini-MBA", "CS Fundamentals", "Mathematics"],
+        "outcomes": [
+          { "title": "Distributed systems", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-3/distributed-systems.png" },
+          { "title": "System design case studies", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-3/system-design.png" },
+          { "title": "CI/CD pipeline for ML system", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-3/ci-cd-pipeline.png" },
+          { "title": "GenAI application (LLM / RAG)", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-3/gen-ai-application.png" },
+          { "title": "Technical design documents", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-3/technical-design.png" },
+          { "title": "Architecture documents", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-3/architecture-documents.png" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Autonomous AI & Future Systems",
+        "subtitle": "From intelligence to autonomy. Where AI learns to think, act, and adapt.",
+        "colorTheme": "blue",
+        "stats": [
+          { "value": "1", "label": "Paid Internship", "border": "border-yellow-400", "text": "text-yellow-400", "bg": "bg-yellow-400/10" },
+          { "value": "1", "label": "Capstone", "border": "border-blue-400", "text": "text-blue-400", "bg": "bg-blue-400/10" },
+          { "value": "4", "label": "Projects", "border": "border-cyan-400", "text": "text-cyan-400", "bg": "bg-cyan-400/10" }
+        ],
+        "semesters": [
+          {
+            "num": 7,
+            "badges": [
+              { "text": "Semester 7", "bg": "bg-blue-900/60", "textCol": "text-blue-300" },
+              { "text": "Capstone", "bg": "bg-yellow-900/40", "textCol": "text-yellow-400" }
+            ],
+            "subjects": [
+              { "name": "Computer Architecture for AI & Robotics", "dot": "bg-blue-400" },
+              { "name": "Building an LLM from Scratch", "dot": "bg-yellow-400" },
+              { "name": "Mini-MBA 5: AI Law, Ethics, Venture Deals", "dot": "bg-cyan-400" },
+              { "name": "Elective E1: RL & Agents OR Robotics Engineering", "dot": "bg-blue-400" }
+            ]
+          },
+          {
+            "num": 8,
+            "badges": [
+              { "text": "Semester 8", "bg": "bg-cyan-900/60", "textCol": "text-cyan-300" },
+              { "text": "Capstone", "bg": "bg-yellow-900/40", "textCol": "text-yellow-400" },
+              { "text": "+Internship", "bg": "bg-blue-900/60", "textCol": "text-blue-300" }
+            ],
+            "subjects": [
+              { "name": "Elective E2: Advanced Gen AI OR Optimization", "dot": "bg-yellow-400" },
+              { "name": "Self-Driven Capstone | AI Product Build & Demo", "dot": "bg-cyan-400" }
+            ]
+          }
+        ],
+        "categories": ["AI Engineering", "AI Core", "Industry Experience", "Mini-MBA", "CS Fundamentals", "Mathematics"],
+        "outcomes": [
+          { "title": "AI capstone project", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-4/ai-capstone.png" },
+          { "title": "Applied RL agent project", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-4/applied-rl-agent.png" },
+          { "title": "Robotics or CUDA project", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-4/robotics-or-cuda.png" },
+          { "title": "Entrepreneurship Project", "img": "https://d2q3690hqmnct4.cloudfront.net/images/curriculum-outcomes/year-4/entrepreneurship.png" }
+        ]
+      }
+    ]
+  },
+  "admissions": {
+    "title": "Admission Process",
+    "leftSide": {
+      "title": "How to join",
+      "eligibility": {
+        "title": "Eligibility",
+        "description": "Class 10+2 with PCM and 50%+ marks. Admission via CPUEST and personal interview. Top 20–25% of applicants are selected."
+      },
+      "ctaText": "Apply Now"
+    },
+    "timelineSteps": [
+      {
+        "id": 1,
+        "number": "01",
+        "title": "Register & Apply Online",
+        "desc": "Submit application with 10+2 marksheet and PCM details.",
+        "label": "Opens March 2025"
+      },
+      {
+        "id": 2,
+        "number": "02",
+        "title": "Appear for CPUEST",
+        "desc": "Career Point Scholastic Aptitude Test — Maths, English & Aptitude. Online and on-campus at Kota.",
+        "label": "March 28, 2026"
+      },
+      {
+        "id": 3,
+        "number": "03",
+        "title": "Personal Interview",
+        "desc": "Faculty panel interview — tests problem-solving ability and passion for building with technology.",
+        "label": ""
+      },
+      {
+        "id": 4,
+        "number": "04",
+        "title": "Counselling & Seat Confirmation",
+        "desc": "One-on-one counselling session. Submit documents and confirm your seat with the confirmation fee.",
+        "label": "Batch begins July 2026"
+      }
+    ]
+  },
+  "placements": {
+    "title": "Placement Ecosystem",
+    "subtitle": "Your career journey starts from Day 1 — not in the final year",
+    "pillars": [
+      {
+        "id": 1,
+        "title": "Semester Assessments",
+        "desc": "Regular evaluations every semester to track your technical growth.",
+        "icon": "FileEdit"
+      },
+      {
+        "id": 2,
+        "title": "Coding Profile Tracking",
+        "desc": "We monitor your LeetCode & Codeforces to ensure consistent practice.",
+        "icon": "Code"
+      },
+      {
+        "id": 3,
+        "title": "GitHub Project Tracking",
+        "desc": "Your projects are tracked on GitHub to build a recruiter-ready profile.",
+        "icon": "Github"
+      },
+      {
+        "id": 4,
+        "title": "MAANG Ready",
+        "desc": "DSA bootcamps, mock interviews, and resume building workshops.",
+        "icon": "Rocket"
+      }
+    ],
+    "companies": [
+      { "name": "Infosys", "url": "https://cpur.in/lp/admission-2023/assets/img/11-Infosys-BPM.webp" },
+      { "name": "Bajaj Finserv", "url": "https://cpur.in/lp/admission-2023/assets/img/22-Bajaj-Fin.webp" },
+      { "name": "Microsoft", "url": "https://cpur.in/lp/admission-2023/assets/img/5-Microsoft.webp" },
+      { "name": "TCS", "url": "https://cpur.in/lp/admission-2023/assets/img/7-TCS.webp" }
+    ]
+  },
+  "comparison": {
+    "title": "CPU Curated vs Traditional College Experience",
+    "subtitle": "Why is CPU Curated experience better than traditional colleges?",
+    "data": [
+      {
+        "id": 1,
+        "label": "Internships & Jobs",
+        "labelIcon": "Briefcase",
+        "cpu": "Programme designed to make you internship-ready by Year 2 - backed by 250+ hiring partners.",
+        "other": "<25% students receive an internship by their 3rd year"
+      },
+      {
+        "id": 2,
+        "label": "AI Tools & Learning",
+        "labelIcon": "Bot",
+        "cpu": "12+ AI tools used in real projects from Semester 1 - ChatGPT, OpenAI API, LangChain, TensorFlow & more",
+        "other": "AI introduced only in Year 3–4 as a late elective, rarely applied to real projects"
+      },
+      {
+        "id": 3,
+        "label": "Career Prep Start",
+        "labelIcon": "TrendingUp",
+        "cpu": "LeetCode, GitHub tracking, DSA bootcamps & mock interviews from Week 1, Year 1",
+        "other": "Placements and interview prep typically begin only in Year 3–4"
+      },
+      {
+        "id": 4,
+        "label": "Projects & Portfolio",
+        "labelIcon": "FolderOpen",
+        "cpu": "15 portfolio-grade, deployed projects shipped across 4 years - recruiter-ready GitHub",
+        "other": "1–2 final-year projects, rarely deployed or production-grade"
+      },
+      {
+        "id": 5,
+        "label": "Faculties & Curriculum",
+        "labelIcon": "Presentation",
+        "cpu": "Industry-relevant curriculum built and taught by experts from Google & Amazon",
+        "other": "Rarely updated curriculum, mostly academic-only faculty"
+      },
+      {
+        "id": 6,
+        "label": "Curriculum",
+        "labelIcon": "Book",
+        "cpu": "Start coding and build real projects from Day 1",
+        "other": "Build real world projects only by the end of 3rd–4th year"
+      },
+      {
+        "id": 7,
+        "label": "Entrepreneurship",
+        "labelIcon": "Lightbulb",
+        "cpu": "₹1 Cr StartX fund, expert mentors, coding events, GSOC, ICPC",
+        "other": "Good startup culture but mostly without funding support"
+      },
+      {
+        "id": 8,
+        "label": "Industry Exposure",
+        "labelIcon": "Globe",
+        "cpu": "Frequent sessions with tech leaders, CTOs, VCs and startup founders",
+        "other": "Industry exposure limited to top students only"
+      }
+    ]
+  },
+  "team": {
+    "title": "Meet the Board of Advisors",
+    "subtitle": "An accomplished panel of entrepreneurs and AI practitioners with deep industry experience. They bridge the gap between academia and real-world technology, ensuring our students learn what truly matters.",
+    "members": [
+      {
+        "id": 1,
+        "name": "Davis Zhu",
+        "desc": "AI Advisor Associated with KPMG USA",
+        "img": "https://cpur.in/lp/b-tech/assets/img/team/Davis-Zhu.jpg",
+        "logos": [
+          "https://cpur.in/lp/b-tech/assets/img/logo/kpmg_us.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/university_of_illinois_at_urbana_champaign.jpg"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Pramod Maheshwari",
+        "desc": "B.Tech., IIT Delhi | OPM, Harvard Business School, Harvard University, USA | Founder-Career Point Group",
+        "img": "https://cpur.in/lp/b-tech/assets/img/team/pm-sir.jpg",
+        "logos": [
+          "https://cpur.in/lp/b-tech/assets/img/logo/A_02.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/b_02.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/A_01.jpg"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Puneet Sharma",
+        "desc": "B.Tech., IIT Delhi, Ph.D., University of Southern California, USA, HPE Fellow & VP – Hewlett Packard Enterprise",
+        "img": "https://cpur.in/lp/b-tech/assets/img/team/puneet-sharma.jpg",
+        "logos": [
+          "https://cpur.in/lp/b-tech/assets/img/logo/b_01.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/b_02.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/b_03.jpg"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Vidushi Maheshwari",
+        "desc": "BS & MS in Computer Science, Georgia Tech | Software Engineers at Google",
+        "img": "https://cpur.in/lp/b-tech/assets/img/team/Vidushi Maheshwari.jpg",
+        "logos": [
+          "https://cpur.in/lp/b-tech/assets/img/logo/c_01.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/c_02.jpg"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Abhishek Soni",
+        "desc": "B.Tech + M.Tech, IIT Delhi | Co-Founder & CEO, Upwards | Times 40U40",
+        "img": "https://cpur.in/lp/b-tech/assets/img/team/Abhishek Soni.jpg",
+        "logos": [
+          "https://cpur.in/lp/b-tech/assets/img/logo/ibm_logo.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/go_upwards_logo.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/lendingkart_logo.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/b_02.jpg"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Shailendra Upadhyay",
+        "desc": "B.Tech + M.Tech, IIT(BHU) Varanasi | AI Engineer at IBM",
+        "img": "https://cpur.in/lp/b-tech/assets/img/team/shailendraupadhyay.jpg",
+        "logos": [
+          "https://cpur.in/lp/b-tech/assets/img/logo/iit.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/ibm_logo.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/avalara_logo.jpg"
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Avinash Raju",
+        "desc": "BE, University of Illinois Urbana-Champaign USA | AI and Tech Advisory at KPMG",
+        "img": "https://cpur.in/lp/b-tech/assets/img/team/Avinash Raju.jpg",
+        "logos": [
+          "https://cpur.in/lp/b-tech/assets/img/logo/university_of_illinois_at_urbana_champaign.jpg",
+          "https://cpur.in/lp/b-tech/assets/img/logo/aptai_systems_logo.jpg"
+        ]
+      }
+    ]
+  },
+  "cta": {
+    "title": "Plan your next step with confidence",
+    "subtitle": "Connect with our Admission Counsellor to:",
+    "points": [
+      "Understand the admission process step by step",
+      "Explore scholarships — up to 100% tuition waiver",
+      "Discover if CPU is the right fit for your goals",
+      "Learn about AI-First B.Tech curriculum & career outcomes"
+    ],
+    "buttonText": "REQUEST CALLBACK"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about CPU's AI-First B.Tech before you take the next step.",
+    "categories": ["admission", "curriculum", "placements", "fees", "campus"]
+  }
+}

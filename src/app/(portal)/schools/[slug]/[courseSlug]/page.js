@@ -20,6 +20,18 @@ import CourseScholarships from "@/components/pages/courses/CourseScholarships";
 import CourseScope from "@/components/pages/courses/CourseScope";
 import CourseUniqueFeatures from "@/components/pages/courses/CourseUniqueFeatures";
 import CourseWhyJoin from "@/components/pages/courses/CourseWhyJoin";
+
+// Specialization (AI-First) Components
+import AiHero from "@/components/pages/courses/specialization/Hero";
+import AiHighlights from "@/components/pages/courses/specialization/DarkHighlights";
+import AiFeatures from "@/components/pages/courses/specialization/FeaturesFlipCards";
+import AiCurriculum from "@/components/pages/courses/specialization/Curriculum";
+import AiAdmissions from "@/components/pages/courses/specialization/Admissions";
+import AiPlacements from "@/components/pages/courses/specialization/Placements";
+import AiComparison from "@/components/pages/courses/specialization/Comparison";
+import AiTeam from "@/components/pages/courses/specialization/TeamSlider";
+import AiCTA from "@/components/pages/courses/specialization/CTA";
+import AiFAQ from "@/components/pages/courses/specialization/FAQ";
 import { getCourseBySlug } from "@/lib/actions/courseActions";
 
 export async function generateMetadata({ params }) {
@@ -156,6 +168,37 @@ export default async function CourseSlugPage({ params }) {
       
       case 'testimonials':
         return course.testimonials && !course.testimonials.hide ? <TestimonialSection key="testimonials" data={course.testimonials} /> : null;
+      
+      // 3. Handle Specialization (AI-First) Sections
+      case 'ai_hero':
+        return course.ai_hero && !course.ai_hero.hide ? <AiHero key="ai_hero" data={course.ai_hero} /> : null;
+      
+      case 'ai_highlights':
+        return course.ai_highlights && !course.ai_highlights.hide ? <AiHighlights key="ai_highlights" data={course.ai_highlights} /> : null;
+      
+      case 'ai_features':
+        return course.ai_features && !course.ai_features.hide ? <AiFeatures key="ai_features" data={course.ai_features} /> : null;
+      
+      case 'ai_curriculum':
+        return course.ai_curriculum && !course.ai_curriculum.hide ? <AiCurriculum key="ai_curriculum" data={course.ai_curriculum} /> : null;
+      
+      case 'ai_admissions':
+        return course.ai_admissions && !course.ai_admissions.hide ? <AiAdmissions key="ai_admissions" data={course.ai_admissions} /> : null;
+      
+      case 'ai_placements':
+        return course.ai_placements && !course.ai_placements.hide ? <AiPlacements key="ai_placements" data={course.ai_placements} /> : null;
+      
+      case 'ai_comparison':
+        return course.ai_comparison && !course.ai_comparison.hide ? <AiComparison key="ai_comparison" data={course.ai_comparison} /> : null;
+      
+      case 'ai_team':
+        return course.ai_team && !course.ai_team.hide ? <AiTeam key="ai_team" data={course.ai_team} /> : null;
+      
+      case 'ai_cta':
+        return course.ai_cta && !course.ai_cta.hide ? <AiCTA key="ai_cta" data={course.ai_cta} /> : null;
+      
+      case 'ai_faq':
+        return course.ai_faq && !course.ai_faq.hide ? <AiFAQ key="ai_faq" data={course.ai_faq} /> : null;
       
       default:
         return null;

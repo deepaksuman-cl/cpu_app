@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import * as LucideIcons from 'lucide-react';
-import { Search, HelpCircle } from 'lucide-react';
+const { Search } = LucideIcons;
+const HelpCircle = LucideIcons.CircleHelp || LucideIcons.HelpCircle || LucideIcons.Info || LucideIcons.Search;
 
 // Extract valid icon names more robustly
 const allIconNames = Object.keys(LucideIcons).filter(name => {

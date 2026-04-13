@@ -8,7 +8,35 @@ import { AlertCircle, CheckCircle2, Pencil, Plus, Save, Trash2, Settings } from 
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { GripVertical, FileText, BarChart } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
+import { 
+  GripVertical, FileText, BarChart, Layers, Zap, Info, Bot, Award, Users, Target, 
+  HelpCircle, CircleHelp, Briefcase, LayoutTemplate, History, Image, Rocket, 
+  ShieldAlert, AlertShield, Cpu, RotateCcw 
+} from 'lucide-react';
+import * as AiEditors from './AiSectionEditors';
+
+// --- Ultra-Safe Component Wrapper ---
+const SafelyRenderIcon = ({ iconName, fallbackIcon: Fallback, ...props }) => {
+  // Try dynamic resolution from star import
+  let Component = LucideIcons[iconName];
+  
+  // Fallback to specific named icons if available
+  if (!Component) {
+    if (iconName === 'HelpCircle' || iconName === 'CircleHelp') Component = CircleHelp || HelpCircle;
+    if (iconName === 'Zap') Component = Zap;
+    if (iconName === 'Info') Component = Info;
+    if (iconName === 'Layers') Component = Layers;
+    if (iconName === 'Cpu') Component = Cpu;
+  }
+
+  // Final fallbacks to avoid crash
+  const ResolvedIcon = Component || Fallback || HelpCircle || Info || 'span';
+  
+  if (typeof ResolvedIcon === 'string') return <span className="w-[18px] h-[18px] bg-blue-100 flex items-center justify-center text-[10px]">?</span>;
+  
+  return <ResolvedIcon {...props} />;
+};
 
 // --- Shared Internal Components ---
 
@@ -132,10 +160,12 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
   const [isSaving, setIsSaving] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   const [formData, setFormData] = useState(() => {
     const defaults = {
       name: '', slug: '', metaTitle: '', metaDescription: '', schoolId: '', title: '', duration: '', eligibility: '', description: '',
+      courseType: 'regular',
       hero: { bgImage: '', badge: '', title: { main: '', highlight: '', skyHighlight: '' }, description: '', cta: [], quickStats: [] },
       accomplishments: { heading: '', trustBadge: '', stats: [] },
       overview: { sectionTitle: { main: 'Overview' }, subtitle: '', paragraphs: [], tags: [], gridCards: [] },
@@ -160,6 +190,17 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
         verifyLabel: 'VERIFIED STUDENT',
         testimonials: [] 
       },
+      // Specialization (AI-First) Defaults
+      ai_hero: { title: ['', ''], subtitle: '', stats: [], specializations: [], cta: [] },
+      ai_highlights: [],
+      ai_features: { title: '', subtitle: '', features: [] },
+      ai_curriculum: { title: '', description: '', data: [] },
+      ai_admissions: { title: '', leftSide: { title: '', eligibility: {}, ctaText: '' }, timelineSteps: [] },
+      ai_placements: { title: '', subtitle: '', pillars: [], companies: [] },
+      ai_comparison: { title: '', subtitle: '', data: [] },
+      ai_team: { title: '', subtitle: '', members: [] },
+      ai_cta: { title: '', subtitle: '', points: [], buttonText: '' },
+      ai_faq: { title: '', subtitle: '', categories: [] },
       breadcrumb: [],
       layoutOrder: null,
       customSections: {}
@@ -173,7 +214,10 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       'hero', 'accomplishments', 'overview', 'scope', 'curriculum', 
       'admissionFee', 'scholarships', 'whyJoin', 'uniqueFeatures', 
       'applySteps', 'faq', 'exploreDepartment', 'roadmap',
-      'placements', 'industry', 'testimonials'
+      'placements', 'industry', 'testimonials',
+      'ai_hero', 'ai_highlights', 'ai_features', 'ai_curriculum', 
+      'ai_admissions', 'ai_placements', 'ai_comparison', 
+      'ai_team', 'ai_cta', 'ai_faq'
     ];
 
     sections.forEach(sec => {
@@ -194,12 +238,20 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
 
     // Fallback logic for layoutOrder
     if (!merged.layoutOrder) {
-      merged.layoutOrder = [
-        'hero', 'accomplishments', 'overview', 'scope', 'curriculum', 
-        'roadmap', 'exploreDepartment', 'admissionFee', 'scholarships', 
-        'whyJoin', 'uniqueFeatures', 'applySteps', 'faq', 
-        'placements', 'industry', 'testimonials'
-      ];
+      if (merged.courseType === 'specialization') {
+        merged.layoutOrder = [
+          'ai_hero', 'ai_highlights', 'ai_features', 'ai_curriculum', 
+          'ai_admissions', 'ai_placements', 'ai_comparison', 
+          'ai_team', 'ai_cta', 'ai_faq'
+        ];
+      } else {
+        merged.layoutOrder = [
+          'hero', 'accomplishments', 'overview', 'scope', 'curriculum', 
+          'roadmap', 'exploreDepartment', 'admissionFee', 'scholarships', 
+          'whyJoin', 'uniqueFeatures', 'applySteps', 'faq', 
+          'placements', 'industry', 'testimonials'
+        ];
+      }
     }
     if (!merged.customSections) merged.customSections = {};
 
@@ -213,9 +265,14 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
   const handleSave = async () => {
     if (!formData.schoolId) return alert("Parent school is required.");
     if (!formData.name) return alert("Course name is required.");
+    
+    // Safety: Ensure layoutOrder contains valid values
+    const cleanLayout = formData.layoutOrder.filter(id => id);
+    const finalData = { ...formData, layoutOrder: cleanLayout };
+
     setIsSaving(true);
     try {
-      const result = initialData?.id ? await updateCourse(initialData.id, formData) : await createCourse(formData);
+      const result = initialData?.id ? await updateCourse(initialData.id, finalData) : await createCourse(finalData);
       if (result.success) {
         router.push('/admin/courses');
         router.refresh();
@@ -227,6 +284,23 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       alert("Save failed.");
       setIsSaving(false);
     }
+  };
+
+  const handleTypeChange = (newType) => {
+    if (confirm(`Switching to ${newType} will reset the layout for new courses. Proceed?`)) {
+      setFormData(prev => {
+        const newLayout = newType === 'specialization' 
+          ? ['ai_hero', 'ai_highlights', 'ai_features', 'ai_curriculum', 'ai_admissions', 'ai_placements', 'ai_comparison', 'ai_team', 'ai_cta', 'ai_faq']
+          : ['hero', 'accomplishments', 'overview', 'scope', 'curriculum', 'roadmap', 'exploreDepartment', 'admissionFee', 'scholarships', 'whyJoin', 'uniqueFeatures', 'applySteps', 'faq', 'placements', 'industry', 'testimonials'];
+        
+        return { ...prev, courseType: newType, layoutOrder: newLayout };
+      });
+    }
+  };
+
+  const addSystemSection = (sectionId) => {
+    if (formData.layoutOrder.includes(sectionId)) return alert("Section already exists in layout.");
+    setFormData(prev => ({ ...prev, layoutOrder: [...prev.layoutOrder, sectionId] }));
   };
 
   const onDragEnd = (result) => {
@@ -300,21 +374,38 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       <div className="bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 shadow-[var(--shadow-sm)] space-y-5 rounded-none">
         <div className="flex items-center gap-2 border-b border-[var(--border-light)] pb-3">
           <Settings size={18} className="text-[var(--color-primary)]" />
-          <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide">Base Config</h2>
+          <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide">Base Config & Type</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="md:col-span-3">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="md:col-span-2">
             <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Parent School *</label>
             <select 
               value={formData.schoolId?.id || formData.schoolId || ''} 
               onChange={(e) => setFormData({...formData, schoolId: e.target.value})} 
-              className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]"
+              className="w-full bg-[var(--bg-surface)] border-2 border-[var(--border-default)] text-[11px] font-bold text-[var(--text-primary)] uppercase tracking-wider px-4 py-3 appearance-none focus:border-[var(--color-primary)] transition-all outline-none rounded-none cursor-pointer pr-10 bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%20fill%3D%22none%22%20stroke%3D%22%2300588b%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:18px] bg-[right_12px_center] bg-no-repeat shadow-sm hover:border-[var(--color-primary-light)]"
             >
-              <option value="">Select School</option>
+              <option value="">Select Parent School</option>
               {schools.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
           </div>
-          <div>
+          <div className="md:col-span-2">
+            <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Course Type *</label>
+            <div className="flex bg-[var(--bg-muted)] p-1 rounded-none border border-[var(--border-default)]">
+              <button 
+                onClick={() => handleTypeChange('regular')}
+                className={`flex-1 py-2 text-[10px] font-black uppercase tracking-widest transition-all ${formData.courseType === 'regular' ? 'bg-[var(--color-primary)] text-white shadow-md' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}
+              >
+                REGULAR
+              </button>
+              <button 
+                onClick={() => handleTypeChange('specialization')}
+                className={`flex-1 py-2 text-[10px] font-black uppercase tracking-widest transition-all ${formData.courseType === 'specialization' ? 'bg-[var(--color-primary)] text-white shadow-md' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}
+              >
+                SPECIALIZATION
+              </button>
+            </div>
+          </div>
+          <div className="md:col-span-2">
             <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Course Name *</label>
             <input type="text" value={formData.name || ''} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" placeholder="e.g. B.Tech CSE" />
           </div>
@@ -347,12 +438,20 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-light)] pb-3">
           <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide">Course Layout Sections</h2>
-          <button 
-            onClick={addCustomBlock}
-            className="flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--bg-surface)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-secondary)] transition-all rounded-none w-full sm:w-auto"
-          >
-            <Plus size={14} strokeWidth={2.5} /> ADD CUSTOM CONTENT BLOCK
-          </button>
+          <div className="flex gap-2 w-full sm:w-auto">
+            <button 
+              onClick={() => setIsPickerOpen(true)}
+              className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white border-2 border-[var(--border-dark)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--bg-muted)] hover:border-[var(--color-primary)] transition-all rounded-none text-[var(--text-primary)]"
+            >
+              <Layers size={14} className="text-[var(--color-primary)]" /> ADD SYSTEM SECTION
+            </button>
+            <button 
+              onClick={addCustomBlock}
+              className="flex items-center justify-center gap-2 px-5 py-2.5 bg-[var(--text-primary)] text-[var(--bg-surface)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-secondary)] transition-all rounded-none"
+            >
+              <Plus size={14} strokeWidth={2.5} /> CUSTOM BLOCK
+            </button>
+          </div>
         </div>
 
         <DragDropContext onDragEnd={onDragEnd}>
@@ -389,7 +488,18 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                       faq: { title: "FAQs", description: "Common Q&A.", isComplete: formData.faq?.items?.length > 0, isHidden: formData.faq?.hide, onToggleHide: v => updateSection('faq', {...formData.faq, hide: v}) },
                       placements: { title: "Placements", description: "Highlights & student list.", isComplete: formData.placements?.list?.length > 0, isHidden: formData.placements?.hide, onToggleHide: v => updateSection('placements', {...formData.placements, hide: v}) },
                       industry: { title: "Partners", description: "Industry tie-ups.", isComplete: formData.industry?.partners?.length > 0, isHidden: formData.industry?.hide, onToggleHide: v => updateSection('industry', {...formData.industry, hide: v}) },
-                      testimonials: { title: "Testimonials", description: "Student reviews.", isComplete: formData.testimonials?.list?.length > 0, isHidden: formData.testimonials?.hide, onToggleHide: v => updateSection('testimonials', {...formData.testimonials, hide: v}) }
+                      testimonials: { title: "Testimonials", description: "Student reviews.", isComplete: formData.testimonials?.list?.length > 0, isHidden: formData.testimonials?.hide, onToggleHide: v => updateSection('testimonials', {...formData.testimonials, hide: v}) },
+                      // AI SPECIALIZATION MAPPINGS
+                      ai_hero: { title: "AI Hero (Special)", description: "Dynamic backdrop & stats.", isComplete: !!formData.ai_hero?.title?.[0], isHidden: formData.ai_hero?.hide, onToggleHide: v => updateSection('ai_hero', {...formData.ai_hero, hide: v}) },
+                      ai_highlights: { title: "AI Highlights", description: "Horizontal metric cards.", isComplete: formData.ai_highlights?.length > 0, isHidden: formData.ai_highlights?.hide, onToggleHide: v => updateSection('ai_highlights', {...formData.ai_highlights, hide: v}) },
+                      ai_features: { title: "AI Flip Features", description: "Hover-effect feature cards.", isComplete: formData.ai_features?.features?.length > 0, isHidden: formData.ai_features?.hide, onToggleHide: v => updateSection('ai_features', {...formData.ai_features, hide: v}) },
+                      ai_curriculum: { title: "AI Journey Map", description: "4-Year complex roadmap.", isComplete: formData.ai_curriculum?.data?.length > 0, isHidden: formData.ai_curriculum?.hide, onToggleHide: v => updateSection('ai_curriculum', {...formData.ai_curriculum, hide: v}) },
+                      ai_admissions: { title: "AI Admissions", description: "Timeline & eligibility.", isComplete: formData.ai_admissions?.timelineSteps?.length > 0, isHidden: formData.ai_admissions?.hide, onToggleHide: v => updateSection('ai_admissions', {...formData.ai_admissions, hide: v}) },
+                      ai_placements: { title: "AI Career Track", description: "Pillars & company marquee.", isComplete: formData.ai_placements?.pillars?.length > 0, isHidden: formData.ai_placements?.hide, onToggleHide: v => updateSection('ai_placements', {...formData.ai_placements, hide: v}) },
+                      ai_comparison: { title: "AI Benchmark", description: "CPU vs Traditional table.", isComplete: formData.ai_comparison?.data?.length > 0, isHidden: formData.ai_comparison?.hide, onToggleHide: v => updateSection('ai_comparison', {...formData.ai_comparison, hide: v}) },
+                      ai_team: { title: "AI Mentorship", description: "Expert board slider.", isComplete: formData.ai_team?.members?.length > 0, isHidden: formData.ai_team?.hide, onToggleHide: v => updateSection('ai_team', {...formData.ai_team, hide: v}) },
+                      ai_cta: { title: "AI CTA Banner", description: "Final conversion block.", isComplete: !!formData.ai_cta?.title, isHidden: formData.ai_cta?.hide, onToggleHide: v => updateSection('ai_cta', {...formData.ai_cta, hide: v}) },
+                      ai_faq: { title: "AI FAQ Display", description: "Specialization Q&A categories.", isComplete: formData.ai_faq?.categories?.length > 0, isHidden: formData.ai_faq?.hide, onToggleHide: v => updateSection('ai_faq', {...formData.ai_faq, hide: v}) },
                     };
                     sectionProps = { id, ...mappings[id] };
                   }
@@ -833,7 +943,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                      <div key={rIdx} className="bg-[var(--bg-muted)] p-3 border border-[var(--border-default)]">
                         <div className="flex justify-between items-center mb-3">
                            <input type="text" placeholder="Eligibility Range (e.g. Above 90%)" value={row.range} onChange={e => {
-                             const nr = [...formData.scholarships.rows]; nr[rIdx].range = e.target.value; updateSection('scholarships', {...formData.scholarships, rows: nr});
+                             const nr = [...formData.scholarships.rows]; nr[rIdx].range = e.target.value; updateSection('scholarships', {...formData.scholarships, range: nr});
                            }} className="border border-[var(--border-default)] p-2 text-xs font-bold flex-1 mr-3 focus:border-[var(--color-primary)] outline-none rounded-none bg-[var(--bg-surface)]" />
                            <button onClick={() => updateSection('scholarships', {...formData.scholarships, rows: formData.scholarships.rows.filter((_, i) => i !== rIdx)})} className="text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1.5 border border-transparent hover:border-[var(--color-danger-light)] hover:bg-[var(--color-danger-light)] rounded-none"><Trash2 size={16} /></button>
                         </div>
@@ -1271,6 +1381,105 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
             </div>
           )}
 
+          {/* AI SPECIALIZATION EDITORS */}
+          {activeSection === 'ai_hero' && <AiEditors.AiHeroEditor data={formData.ai_hero} onChange={v => updateSection('ai_hero', v)} />}
+          {activeSection === 'ai_highlights' && <AiEditors.AiHighlightsEditor data={formData.ai_highlights} onChange={v => updateSection('ai_highlights', v)} />}
+          {activeSection === 'ai_features' && <AiEditors.AiFeaturesEditor data={formData.ai_features} onChange={v => updateSection('ai_features', v)} />}
+          {activeSection === 'ai_curriculum' && <AiEditors.AiCurriculumEditor data={formData.ai_curriculum} onChange={v => updateSection('ai_curriculum', v)} />}
+          {activeSection === 'ai_admissions' && <AiEditors.AiAdmissionsEditor data={formData.ai_admissions} onChange={v => updateSection('ai_admissions', v)} />}
+          {activeSection === 'ai_placements' && <AiEditors.AiPlacementsEditor data={formData.ai_placements} onChange={v => updateSection('ai_placements', v)} />}
+          {activeSection === 'ai_comparison' && <AiEditors.AiComparisonEditor data={formData.ai_comparison} onChange={v => updateSection('ai_comparison', v)} />}
+          {activeSection === 'ai_team' && <AiEditors.AiTeamEditor data={formData.ai_team} onChange={v => updateSection('ai_team', v)} />}
+          {activeSection === 'ai_cta' && <AiEditors.AiCTAEditor data={formData.ai_cta} onChange={v => updateSection('ai_cta', v)} />}
+          {activeSection === 'ai_faq' && <AiEditors.AiFAQEditor data={formData.ai_faq} onChange={v => updateSection('ai_faq', v)} />}
+
+        </div>
+      </Modal>
+
+      {/* --- Smart Section Picker Modal --- */}
+      <Modal 
+        isOpen={isPickerOpen} 
+        onClose={() => setIsPickerOpen(false)} 
+        title="Add System Section"
+        maxWidth="max-w-4xl"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-1">
+          {/* Regular Sections */}
+          <div>
+            <div className="flex items-center gap-2 border-b-2 border-gray-100 pb-3 mb-4">
+              <LayoutTemplate size={16} className="text-gray-400" />
+              <h3 className="text-[11px] font-black text-gray-400 uppercase tracking-widest">Regular Course Sections</h3>
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+              {[
+                 { id: 'hero', label: 'Hero (Premium)', icon: 'LayoutTemplate' },
+                 { id: 'overview', label: 'Overview', icon: 'Info' },
+                 { id: 'curriculum', label: 'Syllabus', icon: 'FileText' },
+                 { id: 'roadmap', label: 'Course Path', icon: 'Rocket' },
+                 { id: 'admissionFee', label: 'Fees & Entry', icon: 'Layers' },
+                 { id: 'scholarships', label: 'Financial Aid', icon: 'Award' },
+                 { id: 'whyJoin', label: 'Value Prop', icon: 'Zap' },
+                 { id: 'uniqueFeatures', label: 'Key Pillars', icon: 'Target' },
+                 { id: 'applySteps', label: 'How to Apply', icon: 'History' },
+                 { id: 'faq', label: 'Generic FAQs', icon: 'HelpCircle' },
+                 { id: 'industry', label: 'Hiring Partners', icon: 'Briefcase' },
+                 { id: 'exploreDepartment', label: 'Dept. Wings', icon: 'Layers' },
+                 { id: 'accomplishments', label: 'Impact Data', icon: 'BarChart' },
+              ].map(sec => (
+                <button 
+                  key={sec.id}
+                  disabled={formData.layoutOrder.includes(sec.id)}
+                  onClick={() => { addSystemSection(sec.id); setIsPickerOpen(false); }}
+                  className={`flex items-center gap-3 p-3 text-left transition-all border ${formData.layoutOrder.includes(sec.id) ? 'bg-gray-50 text-gray-400 border-gray-100 cursor-not-allowed' : 'bg-white hover:bg-[var(--bg-muted)] hover:border-[var(--color-primary)] border-gray-200'}`}
+                >
+                   <SafelyRenderIcon 
+                     iconName={sec.icon} 
+                     fallbackIcon={CircleHelp} 
+                     size={18} 
+                     className={formData.layoutOrder.includes(sec.id) ? 'text-gray-300' : 'text-[var(--color-primary)]'} 
+                   />
+                   <span className="text-[10px] font-bold uppercase tracking-wide">{sec.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Specialization Sections */}
+          <div>
+            <div className="flex items-center gap-2 border-b-2 border-blue-100 pb-3 mb-4">
+              <Zap size={16} className="text-blue-500 fill-blue-500" />
+              <h3 className="text-[11px] font-black text-blue-600 uppercase tracking-widest">Specialization (AI-First)</h3>
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+              {[
+                { id: 'ai_hero', label: 'AI Particles Hero', icon: 'Cpu' },
+                { id: 'ai_highlights', label: 'Metric Pill Highlights', icon: 'Zap' },
+                { id: 'ai_features', label: 'AI Flip Cards', icon: 'RotateCcw' },
+                { id: 'ai_curriculum', label: '4-Year Journey Map', icon: 'Layers' },
+                { id: 'ai_admissions', label: 'AI Timeline Steps', icon: 'History' },
+                { id: 'ai_placements', label: 'Career Pillars', icon: 'Award' },
+                { id: 'ai_comparison', label: 'CPU vs Others Table', icon: 'ShieldAlert' },
+                { id: 'ai_team', label: 'Mentorship Board', icon: 'Users' },
+                { id: 'ai_cta', label: 'AI Call To Action', icon: 'Target' },
+                { id: 'ai_faq', label: 'AI Native FAQs', icon: 'HelpCircle' },
+              ].map(sec => (
+                <button 
+                  key={sec.id}
+                  disabled={formData.layoutOrder.includes(sec.id)}
+                  onClick={() => { addSystemSection(sec.id); setIsPickerOpen(false); }}
+                  className={`flex items-center gap-3 p-3 text-left transition-all border ${formData.layoutOrder.includes(sec.id) ? 'bg-gray-50 text-gray-400 border-gray-100 cursor-not-allowed' : 'bg-blue-50/40 hover:bg-blue-50 hover:border-blue-400 border-blue-100'}`}
+                >
+                   <SafelyRenderIcon 
+                     iconName={sec.icon} 
+                     fallbackIcon={Zap} 
+                     size={18} 
+                     className={formData.layoutOrder.includes(sec.id) ? 'text-gray-300' : 'text-blue-600'} 
+                   />
+                   <span className="text-[10px] font-bold uppercase tracking-wide text-blue-900">{sec.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </Modal>
     </div>
