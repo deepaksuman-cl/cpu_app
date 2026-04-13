@@ -113,6 +113,8 @@ export async function createCourse(data) {
       slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
     }
     
+    
+    console.log(`[createCourse] Initializing course creation for: ${data.name} (Type: ${data.courseType || 'regular'})`);
     const newCourse = await Course.create({ ...data, slug });
     
     // Sync Relational Tables
@@ -152,6 +154,8 @@ export async function updateCourse(id, data) {
       data.slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
     }
 
+    
+    console.log(`[updateCourse] Updating course ID: ${id} (Type: ${data.courseType || 'N/A'})`);
     await Course.update(data, {
       where: { id }
     });
