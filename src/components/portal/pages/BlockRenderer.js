@@ -6,6 +6,65 @@ import GalleryClient from './GalleryClient';
 import TabbedContent from './TabbedContent';
 import AdvancedSliderGrid from './AdvancedSliderGrid';
 
+// ─── Section wrapper helper ───────────────────────────────────────────────────
+// Reads sectionPaddingTop/Bottom, sectionBgColor, sectionBgImage,
+// sectionContainer from block data saved by the admin panel and returns
+// a style object + container className for the outermost section <div>.
+function useSectionStyle(block) {
+  const pt = block.sectionPaddingTop ?? '60';
+  const pb = block.sectionPaddingBottom ?? '60';
+  const bgColor = block.sectionBgColor || '';
+  const bgImage = block.sectionBgImage || '';
+  const container = block.sectionContainer || 'container';
+
+  // Build inline style for dynamic values
+  const style = {};
+  
+  // Helper to ensure value has a unit
+  const toCSS = (v) => /^\d+$/.test(String(v)) ? `${v}px` : String(v);
+  
+  // Pass padding via CSS variables so static Tailwind classes can pick them up
+  style['--s-pt'] = toCSS(pt);
+  style['--s-pb'] = toCSS(pb);
+
+  if (bgColor) style.backgroundColor = bgColor;
+  if (bgImage) {
+    style.backgroundImage = `url(${bgImage})`;
+    style.backgroundSize = 'cover';
+    style.backgroundPosition = 'center';
+    style.backgroundRepeat = 'no-repeat';
+  }
+
+  // Use STATIC Tailwind classes that reference our variables.
+  // Tailwind's compiler will see these strings and generate the utilities.
+  const paddingClasses = `pt-[var(--s-pt)] pb-[var(--s-pb)]`;
+
+  // Inner wrapper: boxed container vs full-width
+  const innerClass = container === 'full'
+    ? 'w-full'
+    : 'max-w-7xl mx-auto px-4 sm:px-6';
+
+  return { style, innerClass, paddingClasses };
+}
+
+// ─── Outer section shell ──────────────────────────────────────────────────────
+// Wraps any block content in its section div with correct padding/bg styles.
+function SectionShell({ block, children, className = '' }) {
+  const { style, innerClass, paddingClasses } = useSectionStyle(block);
+
+  return (
+    <div
+      id={block.cssId || undefined}
+      className={`w-full ${block.cssClass || ''} ${paddingClasses} ${className}`}
+      style={style}
+    >
+      <div className={innerClass}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export default function BlockRenderer({ block }) {
   const { blockType } = block;
 
@@ -13,14 +72,12 @@ export default function BlockRenderer({ block }) {
   if (blockType === 'RichTextFull') {
     const useProse = block.useProse !== false;
     return (
-      <div id={block.cssId || undefined} className={`w-full ${block.cssClass || ''}`}>
-        <div className="max-w-7xl mx-auto px-4 py-20">
-          <RichTextRenderer 
-            content={block.content} 
-            useProse={useProse}
-          />
-        </div>
-      </div>
+      <SectionShell block={block}>
+        <RichTextRenderer 
+          content={block.content} 
+          useProse={useProse}
+        />
+      </SectionShell>
     );
   }
 
@@ -41,8 +98,8 @@ export default function BlockRenderer({ block }) {
     const useProse = block.useProse !== false;
 
     return (
-      <div id={block.cssId || undefined} className={`w-full py-4 px-3 bg-white ${block.cssClass || ''}`}>
-        <div className={`max-w-7xl mx-auto flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-16 items-center`}>
+      <SectionShell block={block}>
+        <div className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-16 items-center`}>
           <div className={`w-full ${textCol}`}>
              <RichTextRenderer 
                 content={block.content} 
@@ -63,26 +120,24 @@ export default function BlockRenderer({ block }) {
              </div>
           </div>
         </div>
-      </div>
+      </SectionShell>
     );
   }
 
   // 3. Accordion / FAQ Layout
   if (blockType === 'Accordion') {
     return (
-      <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-gray-50 border-y border-gray-200 ${block.cssClass || ''}`}>
-        <div className="max-w-[full] mx-auto">
-          <AccordionClient items={block.accordionItems} useProse={block.useProse !== false} />
-        </div>
-      </div>
+      <SectionShell block={block} className="bg-gray-50 border-y border-gray-200">
+        <AccordionClient items={block.accordionItems} useProse={block.useProse !== false} />
+      </SectionShell>
     );
   }
 
   // 4. Profiles Directory Grid
   if (blockType === 'ProfileGrid') {
     return (
-      <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-white ${block.cssClass || ''}`}>
-        <div className="max-w-7xl mx-auto">
+      <SectionShell block={block}>
+        <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {block.profileItems.map((profile, idx) => {
               const cardContent = (
@@ -129,15 +184,15 @@ export default function BlockRenderer({ block }) {
             })}
           </div>
         </div>
-      </div>
+      </SectionShell>
     );
   }
 
   // 5. Statistics / Emphasized Info Grid
   if (blockType === 'StatsGrid') {
     return (
-      <div id={block.cssId || undefined} className={`w-full py-16 px-6 bg-[#00588b] text-white ${block.cssClass || ''}`}>
-        <div className="max-w-7xl mx-auto">
+      <SectionShell block={block} className="bg-[#00588b] text-white">
+        <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-[#004570]">
             {block.statsItems.map((stat, idx) => {
               const Icon = stat.icon ? LucideIcons[stat.icon] : null;
@@ -157,7 +212,7 @@ export default function BlockRenderer({ block }) {
             })}
           </div>
         </div>
-      </div>
+      </SectionShell>
     );
   }
 
@@ -167,29 +222,31 @@ export default function BlockRenderer({ block }) {
     const alignClass = align === 'left' ? 'mr-auto' : (align === 'right' ? 'ml-auto' : 'mx-auto');
     
     return (
-      <div id={block.cssId || undefined} className={`w-full bg-white overflow-hidden ${block.cssClass || ''}`}>
-        <div className="w-full">
-          <img 
-            src={path} 
-            alt="Single Media" 
-            loading="lazy"
-            style={{ width: width || '100%', height: height || 'auto', objectFit: 'cover' }}
-            className={`${alignClass} block border border-gray-300 shadow-sm rounded-none`} 
-          />
-        </div>
-      </div>
+      <SectionShell block={block}>
+        <img 
+          src={path} 
+          alt="Single Media" 
+          loading="lazy"
+          style={{ width: width || '100%', height: height || 'auto', objectFit: 'cover' }}
+          className={`${alignClass} block border border-gray-300 shadow-sm rounded-none`} 
+        />
+      </SectionShell>
     );
   }
   // 7. Interactive Gallery Block
   if (blockType === 'GalleryBlock') {
-    return <GalleryClient items={block.galleryItems} heading={block.galleryHeading} gridCols={block.gridCols} id={block.cssId} className={block.cssClass} />;
+    return (
+      <SectionShell block={block}>
+        <GalleryClient items={block.galleryItems} heading={block.galleryHeading} gridCols={block.gridCols} id={undefined} className="" />
+      </SectionShell>
+    );
   }
 
   // 8. Hero with Stats
   if (blockType === 'HeroWithStats' && block.heroStats) {
     const { badgeText, titleMain, titleHighlight, subtitle, stats } = block.heroStats;
     return (
-      <div id={block.cssId || undefined} className={`w-full ${block.cssClass || ''}`}>
+      <SectionShell block={block}>
         <section className="relative bg-[#00588b] overflow-hidden py-20 px-6">
           <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-[#ffb900]/10" />
           <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-white/5" />
@@ -231,7 +288,7 @@ export default function BlockRenderer({ block }) {
             })}
           </div>
         </section>
-      </div>
+      </SectionShell>
     );
   }
 
@@ -239,7 +296,8 @@ export default function BlockRenderer({ block }) {
   if (blockType === 'LeaderProfile' && block.leaderProfile) {
     const { image, name, role, organization, qualifications, greeting, welcomeHeadline, messageHTML, visionQuote, signatureQuals } = block.leaderProfile;
     return (
-      <section id={block.cssId || undefined} className={`max-w-5xl mx-auto px-6 py-12 ${block.cssClass || ''}`}>
+      <SectionShell block={block}>
+        <section className="max-w-5xl mx-auto">
         <div className="bg-white rounded-3xl shadow-xl border border-[#00588b]/10 overflow-hidden">
           <div className="flex flex-col lg:flex-row">
             <div className="relative lg:w-80 shrink-0 bg-gradient-to-b from-[#00588b] to-[#003d63] flex flex-col items-center pt-12 pb-8 px-6">
@@ -305,7 +363,8 @@ export default function BlockRenderer({ block }) {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      </SectionShell>
     );
   }
 
@@ -313,7 +372,8 @@ export default function BlockRenderer({ block }) {
   if (blockType === 'CTABanner' && block.ctaBanner) {
     const { badgeText, titleMain, titleHighlight, primaryBtnText, primaryBtnUrl, primaryBtnIcon, secondaryBtnText, secondaryBtnUrl, secondaryBtnIcon } = block.ctaBanner;
     return (
-      <section id={block.cssId || undefined} className={`max-w-5xl mx-auto px-6 py-12 ${block.cssClass || ''}`}>
+      <SectionShell block={block}>
+        <section className="max-w-5xl mx-auto">
         <div className="relative bg-[#00588b] rounded-3xl px-8 py-10 overflow-hidden text-center">
           <div className="absolute top-0 right-0 w-48 h-48 bg-[#ffb900]/10 rounded-full -translate-y-1/3 translate-x-1/3" />
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/3 -translate-x-1/3" />
@@ -348,22 +408,27 @@ export default function BlockRenderer({ block }) {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      </SectionShell>
     );
   }
 
   // 11. Tabbed / Accordion Block
   if (blockType === 'tabbed') {
     return (
-      <div id={block.cssId || undefined} className={`w-full ${block.cssClass || ''}`}>
+      <SectionShell block={block}>
         <TabbedContent data={{ layout: block.layout, tabs: block.tabs }} />
-      </div>
+      </SectionShell>
     );
   }
 
   // 12. Advanced Slider/Grid Block
   if (blockType === 'slider-grid') {
-    return <AdvancedSliderGrid block={block} />;
+    return (
+      <SectionShell block={block}>
+        <AdvancedSliderGrid block={block} />
+      </SectionShell>
+    );
   }
 
   return null;

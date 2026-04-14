@@ -20,7 +20,7 @@ export async function GET() {
 export async function PUT(req) {
   try {
     const { section_key, content } = await req.json();
-    
+
     if (!section_key || !content) {
       return NextResponse.json({ success: false, error: 'Missing section_key or content' }, { status: 400 });
     }

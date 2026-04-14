@@ -2,6 +2,7 @@
 
 import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
+import ColorPicker from '@/components/admin/ui/ColorPicker';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import { createPage, updatePage } from '@/lib/actions/pageActions';
 import { AlertCircle, AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, CheckCircle2, Columns, GripVertical, Image as ImageIcon, Images, Layout, Megaphone, Monitor, Plus, Save, SquareStack, Trash2, Type, Users, X } from 'lucide-react';
@@ -25,6 +26,245 @@ function Toast({ msg, type, onClose }) {
   );
 }
 
+// --- Section Settings Panel (shared across all block types) ---
+function SectionSettingsPanel({ block, index, updateBlock }) {
+  const [open, setOpen] = useState(false);
+
+  const PADDING_OPTIONS = [
+    { label: 'None (0px)', value: '0' },
+    { label: 'XS (20px)', value: '20' },
+    { label: 'SM (40px)', value: '40' },
+    { label: 'MD (60px) — Default', value: '60' },
+    { label: 'LG (80px)', value: '80' },
+    { label: 'XL (100px)', value: '100' },
+    { label: '2XL (120px)', value: '120' },
+    { label: 'Custom', value: 'custom' },
+  ];
+
+  const paddingTopVal = block.sectionPaddingTop ?? '60';
+  const paddingBottomVal = block.sectionPaddingBottom ?? '60';
+  const isPaddingTopCustom = !PADDING_OPTIONS.slice(0,-1).some(o => o.value === paddingTopVal);
+  const isPaddingBottomCustom = !PADDING_OPTIONS.slice(0,-1).some(o => o.value === paddingBottomVal);
+
+  return (
+    <div className="mb-5 border border-[var(--border-default)] rounded-none">
+      {/* Toggle Header */}
+      <button
+        type="button"
+        onClick={() => setOpen(v => !v)}
+        className="w-full flex items-center justify-between px-4 py-2.5 bg-[var(--bg-muted)] hover:bg-[var(--bg-hover)] transition-colors group"
+      >
+        <div className="flex items-center gap-2">
+          <Layout size={12} className="text-[var(--color-primary)]" strokeWidth={2.5} />
+          <span className="text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-widest group-hover:text-[var(--text-primary)]">
+            Section Settings
+          </span>
+          {/* Quick preview badges */}
+          <span className="hidden sm:flex items-center gap-1 ml-2">
+            {(paddingTopVal !== '60' || paddingBottomVal !== '60') && (
+              <span className="text-[9px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">
+                Padding: {paddingTopVal}↑ / {paddingBottomVal}↓
+              </span>
+            )}
+            {block.sectionBgColor && (
+              <span className="inline-flex items-center gap-1 text-[9px] font-bold bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded">
+                <span className="w-2.5 h-2.5 rounded-full border border-gray-300 inline-block" style={{ background: block.sectionBgColor }} />
+                BG Color
+              </span>
+            )}
+            {block.sectionBgImage && (
+              <span className="text-[9px] font-bold bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">BGImg</span>
+            )}
+            {block.sectionContainer === 'full' && (
+              <span className="text-[9px] font-bold bg-green-100 text-green-700 px-1.5 py-0.5 rounded">Full Width</span>
+            )}
+          </span>
+        </div>
+        <svg
+          className={`w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="p-4 bg-[var(--bg-surface)] border-t border-[var(--border-default)] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 animate-in fade-in slide-in-from-top-1 duration-150">
+
+          {/* --- 1. Padding Top --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Padding Top
+            </label>
+            <select
+              value={isPaddingTopCustom ? 'custom' : paddingTopVal}
+              onChange={e => {
+                if (e.target.value !== 'custom') updateBlock(index, 'sectionPaddingTop', e.target.value);
+              }}
+              className="w-full border border-gray-200 p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-white mb-1.5"
+            >
+              {PADDING_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+            </select>
+            {isPaddingTopCustom && (
+              <input
+                type="text"
+                value={paddingTopVal}
+                onChange={e => updateBlock(index, 'sectionPaddingTop', e.target.value)}
+                className="w-full border border-blue-300 p-1.5 text-xs outline-none font-mono focus:border-blue-500"
+                placeholder="e.g. 75px or 5rem"
+              />
+            )}
+            {!isPaddingTopCustom && (
+              <button
+                type="button"
+                onClick={() => updateBlock(index, 'sectionPaddingTop', paddingTopVal + 'x')}
+                className="text-[9px] text-gray-400 hover:text-blue-600 underline transition-colors"
+              >
+                Enter custom value
+              </button>
+            )}
+          </div>
+
+          {/* --- 2. Padding Bottom --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Padding Bottom
+            </label>
+            <select
+              value={isPaddingBottomCustom ? 'custom' : paddingBottomVal}
+              onChange={e => {
+                if (e.target.value !== 'custom') updateBlock(index, 'sectionPaddingBottom', e.target.value);
+              }}
+              className="w-full border border-gray-200 p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-white mb-1.5"
+            >
+              {PADDING_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+            </select>
+            {isPaddingBottomCustom && (
+              <input
+                type="text"
+                value={paddingBottomVal}
+                onChange={e => updateBlock(index, 'sectionPaddingBottom', e.target.value)}
+                className="w-full border border-blue-300 p-1.5 text-xs outline-none font-mono focus:border-blue-500"
+                placeholder="e.g. 75px or 5rem"
+              />
+            )}
+            {!isPaddingBottomCustom && (
+              <button
+                type="button"
+                onClick={() => updateBlock(index, 'sectionPaddingBottom', paddingBottomVal + 'x')}
+                className="text-[9px] text-gray-400 hover:text-blue-600 underline transition-colors"
+              >
+                Enter custom value
+              </button>
+            )}
+          </div>
+
+          {/* --- 3. Container Width --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Section Container
+            </label>
+            <div className="flex gap-1 p-1 bg-gray-100 border border-gray-200">
+              {[
+                { value: 'container', label: 'Boxed (Container)' },
+                { value: 'full', label: 'Full 100% Width' },
+              ].map(opt => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => updateBlock(index, 'sectionContainer', opt.value)}
+                  className={`flex-1 py-1.5 px-2 text-[9px] font-black uppercase tracking-wider transition-all ${
+                    (block.sectionContainer || 'container') === opt.value
+                      ? 'bg-[var(--color-primary)] text-white shadow-sm'
+                      : 'text-gray-400 hover:text-gray-600 hover:bg-white'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+            <p className="text-[9px] text-gray-400 mt-1.5 leading-tight">
+              {(block.sectionContainer || 'container') === 'full'
+                ? '⚡ Content will span full browser width (no side padding).'
+                : '📦 Content bound inside max-width container.'}
+            </p>
+          </div>
+
+          {/* --- 4. Background Color --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Background Color
+            </label>
+            <ColorPicker 
+              value={block.sectionBgColor} 
+              onChange={val => updateBlock(index, 'sectionBgColor', val)} 
+            />
+          </div>
+
+          {/* --- 5. Background Image --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Background Image
+            </label>
+            {block.sectionBgImage ? (
+              <div className="relative mb-2">
+                <img
+                  src={block.sectionBgImage}
+                  className="w-full h-20 object-cover border border-gray-200"
+                  alt="Section BG Preview"
+                />
+                <button
+                  type="button"
+                  onClick={() => updateBlock(index, 'sectionBgImage', '')}
+                  className="absolute top-1 right-1 p-1 bg-red-500 text-white shadow hover:bg-red-700 transition-colors"
+                  title="Remove background image"
+                >
+                  <X size={12} />
+                </button>
+              </div>
+            ) : (
+              <div className="w-full h-16 bg-gray-50 border border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-300 mb-2">
+                <ImageIcon size={18} />
+                <span className="text-[9px] mt-1">No image set</span>
+              </div>
+            )}
+            <MediaUploader category="pages" onUploadSuccess={url => updateBlock(index, 'sectionBgImage', url)} />
+          </div>
+
+          {/* --- 6. CSS ID & Class --- */}
+          <div className="space-y-3">
+            <div>
+              <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+                Block CSS ID
+              </label>
+              <input
+                type="text"
+                value={block.cssId || ''}
+                onChange={e => updateBlock(index, 'cssId', e.target.value)}
+                className="w-full border border-gray-200 p-2 text-xs outline-none focus:border-[var(--color-primary)] font-mono"
+                placeholder="section-unique-id"
+              />
+            </div>
+            <div>
+              <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+                Block CSS Class
+              </label>
+              <input
+                type="text"
+                value={block.cssClass || ''}
+                onChange={e => updateBlock(index, 'cssClass', e.target.value)}
+                className="w-full border border-gray-200 p-2 text-xs outline-none focus:border-[var(--color-primary)] font-mono"
+                placeholder="custom-section-class"
+              />
+            </div>
+          </div>
+
+        </div>
+      )}
+    </div>
+  );
+}
+
 const BLOCK_DEFINITIONS = [
   { type: 'RichTextFull', label: 'Rich Text Paragraph', icon: Type },
   { type: 'SplitLayout', label: '50/50 Split (Text + Image)', icon: Layout },
@@ -41,7 +281,7 @@ const BLOCK_DEFINITIONS = [
 ];
 
 const getEmptyBlock = (type) => {
-  const base = { blockType: type, content: '', useProse: true, image: '', imageHeight: '', imageWidth: '', isReversed: false, cssId: '', cssClass: '', splitConfig: '50-50', singleImage: { path: '', height: '', width: '', align: 'center' }, galleryHeading: { badge: '', title: '', highlight: '', description: '' }, accordionItems: [], profileItems: [], statsItems: [] };
+  const base = { blockType: type, content: '', useProse: true, image: '', imageHeight: '', imageWidth: '', isReversed: false, cssId: '', cssClass: '', splitConfig: '50-50', singleImage: { path: '', height: '', width: '', align: 'center' }, galleryHeading: { badge: '', title: '', highlight: '', description: '' }, accordionItems: [], profileItems: [], statsItems: [], sectionPaddingTop: '60', sectionPaddingBottom: '60', sectionBgColor: '', sectionBgImage: '', sectionContainer: 'container' };
   if (type === 'Accordion') base.accordionItems = [{ title: '', content: '' }];
   if (type === 'ProfileGrid') base.profileItems = [{ name: '', designation: '', company: '', slug: '', image: '' }];
   if (type === 'StatsGrid') base.statsItems = [{ label: '', value: '', icon: '' }];
@@ -471,17 +711,8 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
               {/* Block Body Content based on type */}
               <div className="p-5">
                 
-                {/* Block-Level Advanced Settings (ID/Class/Style) */}
-                <div className="mb-6 pb-4 border-b border-gray-100 flex flex-wrap gap-4 items-end">
-                   <div className="flex-1 min-w-[150px]">
-                      <label className="block text-[9px] font-bold text-gray-400 uppercase mb-1">Block CSS ID</label>
-                      <input type="text" value={block.cssId || ''} onChange={e => updateBlock(index, 'cssId', e.target.value)} className="w-full border border-gray-200 p-1.5 text-xs outline-none focus:border-[var(--color-primary)] font-mono" placeholder="section-unique-id" />
-                   </div>
-                   <div className="flex-1 min-w-[150px]">
-                      <label className="block text-[9px] font-bold text-gray-400 uppercase mb-1">Block CSS Class</label>
-                      <input type="text" value={block.cssClass || ''} onChange={e => updateBlock(index, 'cssClass', e.target.value)} className="w-full border border-gray-200 p-1.5 text-xs outline-none focus:border-[var(--color-primary)] font-mono" placeholder="custom-section-class" />
-                   </div>
-                </div>
+                {/* Section-Level Settings Panel */}
+                <SectionSettingsPanel block={block} index={index} updateBlock={updateBlock} />
                 
                 {block.blockType === 'RichTextFull' && (
                   <div>
