@@ -7,7 +7,7 @@ const PhoneVolume = LucideIcons.PhoneForwarded || LucideIcons.PhoneCall || Lucid
 
 export default function CTA({ data }) {
   if (!data) return null;
-  const { title, subtitle, points = [], buttonText } = data || {};
+  const { title, subtitle, points = [], buttonText, ctaImage } = data || {};
 
   return (
     <section className="py-24 px-6 sm:px-8 bg-[#0c4088] font-sans w-full relative overflow-hidden">
@@ -50,11 +50,21 @@ export default function CTA({ data }) {
         </div>
 
         <div className="relative justify-self-center lg:justify-self-end">
+          <style>{`
+            @keyframes float {
+              0% { transform: translateY(0px); }
+              50% { transform: translateY(-15px); }
+              100% { transform: translateY(0px); }
+            }
+            .animate-float {
+              animation: float 5s ease-in-out infinite;
+            }
+          `}</style>
           <div className="absolute -inset-4 bg-[#f1bd0e]/20 blur-3xl rounded-full"></div>
           <img 
-            src="https://cpur.in/lp/admission-2023/assets/img/cta.avif" 
-            alt="Counselling Session" 
-            className="relative w-full max-w-[500px] h-auto rounded-[24px] shadow-2xl border-4 border-white/10"
+            src={ctaImage || "https://cpur.in/lp/admission-2023/assets/img/cta.avif"} 
+            alt="CTA Illustration" 
+            className="relative w-full max-w-[500px] h-auto rounded-[24px] shadow-2xl border-4 border-white/10 animate-float"
           />
         </div>
       </div>

@@ -21,10 +21,10 @@ const ParticlesBackground = () => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const parent = canvas.parentElement;
-    
+
     let animationFrameId;
     let particles = [];
-    
+
     let mouse = {
       x: null,
       y: null,
@@ -50,7 +50,7 @@ const ParticlesBackground = () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(59, 195, 226, 0.5)'; 
+        ctx.fillStyle = 'rgba(59, 195, 226, 0.5)';
         ctx.fill();
       }
     }
@@ -137,7 +137,7 @@ const ParticlesBackground = () => {
 
 export default function Hero({ data }) {
   if (!data) return null;
-  const { title = [], subtitle, stats = [], specializations = [], cta = [] } = data || {};
+  const { title = [], subtitle, stats = [], specializations = [], cta = [], heroImage } = data || {};
 
   return (
     <div className="relative w-full bg-[#0c4088] font-sans h-[calc(100vh-120px)] min-h-[600px] flex items-center overflow-hidden">
@@ -145,21 +145,21 @@ export default function Hero({ data }) {
         <ParticlesBackground />
       </div>
 
-      <div 
+      <div
         className="absolute inset-0 z-10 pointer-events-none"
         style={{ background: 'linear-gradient(160deg, #00000052 37%, rgba(18, 74, 151, 0.7) 50%, rgba(18, 74, 151, 0.2) 100%)' }}
       ></div>
 
-      <div className="relative z-20 w-[96%] max-w-[1400px] mx-auto px-[5%] py-10 pointer-events-none flex items-center justify-between gap-10">
-        <div className="max-w-3xl pointer-events-auto">
+      <div className="relative z-20 w-[96%] max-w-[1400px] mx-auto px-[5%] py-10 pointer-events-none flex flex-col lg:flex-row items-center justify-between gap-10">
+        <div className="w-full lg:max-w-[60%] pointer-events-auto">
           <h1 className="text-[2.5rem] md:text-[3.5rem] lg:text-[68px] font-bold leading-[1.1] text-white mb-4 tracking-tight">
             {title.map((line, i) => (
-              <span key={i} className={`block ${i === 1 ? 'text-[#f1bd0e] mt-1' : ''}`} style={{fontWeight: 600}}>
+              <span key={i} className={`block ${i === 1 ? 'text-[#f1bd0e] mt-1' : ''}`} style={{ fontWeight: 600 }}>
                 {line}
               </span>
             ))}
           </h1>
-          
+
           <p className="text-[1.25rem] md:text-[1.5rem] font-medium text-white mb-8">
             {subtitle}
           </p>
@@ -190,9 +190,9 @@ export default function Hero({ data }) {
 
           <div className="flex flex-wrap items-center gap-4">
             {cta.map((btn, i) => (
-              <a 
+              <a
                 key={i}
-                href={btn.href} 
+                href={btn.href}
                 className={`${i === 0 ? 'bg-[#f1bd0e] text-[#0c4088] border-[#f1bd0e]' : 'bg-transparent border-white text-white hover:bg-white hover:!text-[#0c4088]'} border-2 rounded-md px-8 py-2.5 font-semibold transition-all duration-300 text-[15px]`}
               >
                 {btn.text}
@@ -200,6 +200,26 @@ export default function Hero({ data }) {
             ))}
           </div>
         </div>
+
+        {heroImage && (
+          <div className="w-full lg:max-w-[35%] pt-50 pointer-events-auto flex items-center justify-center animate-in fade-in slide-in-from-right-10 duration-1000">
+            <style>{`
+              @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+                100% { transform: translateY(0px); }
+              }
+              .animate-float {
+                animation: float 6s ease-in-out infinite;
+              }
+            `}</style>
+            <img
+              src={heroImage}
+              alt={title.join(' ')}
+              className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-h-[600px] animate-float"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

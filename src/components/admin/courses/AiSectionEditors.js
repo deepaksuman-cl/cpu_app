@@ -73,8 +73,12 @@ export const AiHeroEditor = ({ data, onChange }) => {
         <InputGroup label="Title Line 2 (Highlighted)">
           <TextInput value={data?.title?.[1]} onChange={v => update('title', [data?.title?.[0] || '', v])} />
         </InputGroup>
-        <InputGroup label="Subtitle" fullWidth>
+        <InputGroup label="Subtitle">
           <TextInput value={data?.subtitle} onChange={v => update('subtitle', v)} />
+        </InputGroup>
+        <InputGroup label="Hero Image (Optional)">
+          <MediaUploader category="courses" onUploadSuccess={url => update('heroImage', url)} />
+          <div className="mt-2 text-[9px] text-gray-400 break-all">{data?.heroImage || 'No image uploaded'}</div>
         </InputGroup>
       </div>
 
@@ -576,7 +580,11 @@ export const AiCTAEditor = ({ data, onChange }) => {
         </div>
       </InputGroup>
       <InputGroup label="Button Text">
-        <TextInput value={data.buttonText} onChange={v => update('buttonText', v)} />
+        <TextInput value={data?.buttonText} onChange={v => update('buttonText', v)} />
+      </InputGroup>
+      <InputGroup label="CTA Image (Optional)">
+        <MediaUploader category="courses" onUploadSuccess={url => update('ctaImage', url)} />
+        <div className="mt-2 text-[9px] text-gray-400 break-all">{data?.ctaImage || 'No image uploaded (Default will show)'}</div>
       </InputGroup>
     </div>
   );
