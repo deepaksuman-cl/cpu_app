@@ -59,7 +59,7 @@ export default function SchoolPlacements({ data }) {
               640: { slidesPerView: 2 }, 
               1024: { slidesPerView: 4 } 
             }}
-            loop={list.length > 4}
+            loop={list.length > 4}   
             grabCursor={true}
           >
             {list.map((p, j) => (

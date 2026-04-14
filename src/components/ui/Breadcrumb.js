@@ -43,34 +43,63 @@ export default function Breadcrumb() {
   // Always starting with Home as root
   const allItems = [{ label: "Home", link: "/", isLast: false }, ...breadcrumbItems];
 
+  // Prepared items for different views
+  const mobileItems = allItems.length <= 3 
+    ? allItems 
+    : [allItems[0], { label: "...", isEllipsis: true }, allItems[allItems.length - 1]];
+
   return (
     <nav className="bg-slate-50 border-b border-slate-200 w-full" aria-label="Breadcrumb">
-      <div className="max-w-7xl mx-auto px-4 lg:px-16 py-2.5 flex items-center gap-2 flex-wrap text-[13px] md:text-sm">
-        {allItems.map((item, index) => {
-          const isLast = index === allItems.length - 1;
-          
-          return (
-            <React.Fragment key={index}>
-              {isLast ? (
-                <span className="flex items-center gap-1.5 font-bold text-slate-800 pointer-events-none" aria-current="page">
-                  {index === 0 && <Home className="w-3.5 h-3.5" />}
-                  {item.label}
-                </span>
-              ) : (
-                <Link 
-                  href={item.link} 
-                  className="flex items-center gap-1.5 font-medium no-underline hover:text-blue-800 text-[#00588b] transition-colors"
-                >
-                  {index === 0 && <Home className="w-3.5 h-3.5" />}
-                  {item.label}
-                </Link>
-              )}
-              
-              {!isLast && <ChevronRight className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" aria-hidden="true" />}
-            </React.Fragment>
-          );
-        })}
+      {/* Desktop View: Full breadcrumbs */}
+      <div className="hidden md:flex max-w-7xl mx-auto px-4 lg:px-16 py-2.5 items-center gap-2 flex-nowrap text-sm overflow-hidden truncate">
+        {allItems.map((item, index) => (
+          <BreadcrumbItem key={index} item={item} index={index} isLast={index === allItems.length - 1} />
+        ))}
+      </div>
+
+      {/* Mobile View: Collapsed smart breadcrumbs */}
+      <div className="flex md:hidden max-w-7xl mx-auto px-4 py-2 flex-nowrap items-center gap-1.5 text-[13px] overflow-hidden">
+        {mobileItems.map((item, index) => (
+          <BreadcrumbItem 
+            key={index} 
+            item={item} 
+            index={index} 
+            isLast={index === mobileItems.length - 1} 
+            isEllipsis={item.isEllipsis}
+          />
+        ))}
       </div>
     </nav>
+  );
+}
+
+function BreadcrumbItem({ item, index, isLast, isEllipsis }) {
+  if (isEllipsis) {
+    return (
+      <>
+        <span className="text-slate-400 px-1">...</span>
+        <ChevronRight className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" aria-hidden="true" />
+      </>
+    );
+  }
+
+  return (
+    <React.Fragment>
+      {isLast ? (
+        <span className="flex items-center gap-1.5 font-bold text-slate-800 truncate" aria-current="page">
+          {index === 0 && <Home className="w-3.5 h-3.5 flex-shrink-0" />}
+          <span className="truncate">{item.label}</span>
+        </span>
+      ) : (
+        <Link 
+          href={item.link} 
+          className="flex items-center gap-1.5 font-medium no-underline hover:text-blue-800 text-[#00588b] transition-colors flex-shrink-0 max-w-[120px]"
+        >
+          {index === 0 && <Home className="w-3.5 h-3.5 flex-shrink-0" />}
+          <span className="truncate">{item.label}</span>
+        </Link>
+      )}
+      {!isLast && <ChevronRight className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" aria-hidden="true" />}
+    </React.Fragment>
   );
 }
