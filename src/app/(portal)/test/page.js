@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import {
@@ -178,8 +179,23 @@ export default function App() {
       advisorContainerRef.current.scrollBy({ left: dir === 'next' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
     }
   };
+=======
+import React from 'react'
+import Hero from '@/components/pages/landingpage/Hero'
+import DarkHighlights from '@/components/pages/landingpage/DarkHighlights'
+import FeaturesFlipCards from '@/components/pages/landingpage/FeaturesFlipCards'
+import Curriculum from '@/components/pages/landingpage/Curriculum'
+import Admissions from '@/components/pages/landingpage/Admissions'
+import Placements from '@/components/pages/landingpage/Placements'
+import Comparison from '@/components/pages/landingpage/Comparison'
+import TeamSlider from '@/components/pages/landingpage/TeamSlider'
+import CTA from '@/components/pages/landingpage/CTA'
+import FAQ from '@/components/pages/landingpage/FAQ'
+>>>>>>> 6919e1a0f87914506a2c8c05071d3ba3f9780b33
 
+const page = () => {
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-yellow-200 overflow-x-hidden">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -509,3 +525,21 @@ export default function App() {
     </div>
   );
 }
+=======
+   <div>
+        <Hero />
+      <DarkHighlights />
+      <FeaturesFlipCards />
+      <Curriculum />
+      <Admissions />
+      <Placements />
+      <Comparison />
+      <TeamSlider />
+      <CTA />
+      <FAQ />
+   </div>
+  )
+}
+
+export default page
+>>>>>>> 6919e1a0f87914506a2c8c05071d3ba3f9780b33

@@ -139,6 +139,41 @@ const Course = sequelize.define('courses', {
   customSections: {
     type: DataTypes.JSON,
   },
+  courseType: {
+    type: DataTypes.ENUM('regular', 'specialization'),
+    defaultValue: 'regular',
+    allowNull: false,
+  },
+  ai_hero: {
+    type: DataTypes.JSON,
+  },
+  ai_highlights: {
+    type: DataTypes.JSON,
+  },
+  ai_features: {
+    type: DataTypes.JSON,
+  },
+  ai_curriculum: {
+    type: DataTypes.JSON,
+  },
+  ai_admissions: {
+    type: DataTypes.JSON,
+  },
+  ai_placements: {
+    type: DataTypes.JSON,
+  },
+  ai_comparison: {
+    type: DataTypes.JSON,
+  },
+  ai_team: {
+    type: DataTypes.JSON,
+  },
+  ai_cta: {
+    type: DataTypes.JSON,
+  },
+  ai_faq: {
+    type: DataTypes.JSON,
+  },
 }, {
   timestamps: true,
   indexes: [
