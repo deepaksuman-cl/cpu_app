@@ -3,21 +3,8 @@
 import React from 'react';
 import * as LucideIcons from 'lucide-react';
 
-const ICON_MAP = {
-  Briefcase: LucideIcons.Briefcase,
-  Bot: LucideIcons.Bot,
-  TrendingUp: LucideIcons.TrendingUp,
-  FolderOpen: LucideIcons.FolderOpen,
-  Presentation: LucideIcons.Presentation,
-  Book: LucideIcons.Book,
-  Lightbulb: LucideIcons.Lightbulb,
-  Globe: LucideIcons.Globe,
-  ThumbsDown: LucideIcons.ThumbsDown,
-  ThumbsUp: LucideIcons.ThumbsUp,
-  HelpCircle: LucideIcons.CircleHelp || LucideIcons.HelpCircle,
-  CheckCircle2: LucideIcons.CircleCheckBig || LucideIcons.CheckCircle2 || LucideIcons.CheckCircle,
-  XCircle: LucideIcons.CircleX || LucideIcons.XCircle
-};
+// Use dynamic lookup instead of hardcoded map
+const HelpCircle = LucideIcons.CircleHelp || LucideIcons.HelpCircle || LucideIcons.Info;
 
 export default function Comparison({ data }) {
   if (!data) return null;
@@ -58,7 +45,7 @@ export default function Comparison({ data }) {
 
         {comparisonData.map((row, index) => {
           const isLast = index === comparisonData.length - 1;
-          const LabelIcon = ICON_MAP[row.labelIcon];
+          const LabelIcon = LucideIcons[row.labelIcon] || HelpCircle || (() => null);
           
           return (
             <div key={row.id} className="flex flex-col md:contents group mb-[25px] md:mb-0 rounded-[12px] md:rounded-none overflow-hidden bg-[#ffffff0d] md:bg-transparent mx-4 md:mx-0">

@@ -153,6 +153,83 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
   </div>
 );
 
+const SchoolPicker = ({ options = [], value, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  
+  const selected = options.find(s => s.id === (value?.id || value));
+  const filtered = options.filter(s => s.name.toLowerCase().includes(search.toLowerCase()));
+
+  const SchoolIcon = LucideIcons.School || LucideIcons.Building2 || LucideIcons.Building;
+  const SearchIcon = LucideIcons.Search;
+  const ChevronIcon = LucideIcons.ChevronDown;
+
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full bg-[var(--bg-surface)] border-2 border-[var(--border-default)] hover:border-[var(--color-primary-light)] p-3 text-[11px] font-bold text-[var(--text-primary)] uppercase tracking-wider flex items-center justify-between transition-all outline-none rounded-none group shadow-sm"
+      >
+        <div className="flex items-center gap-3">
+          <div className="p-1.5 bg-blue-50 text-[var(--color-primary)] group-hover:bg-blue-100 transition-colors">
+            <SchoolIcon size={16} />
+          </div>
+          <span className="truncate">{selected ? selected.name : 'Select Parent School'}</span>
+        </div>
+        <ChevronIcon size={16} className={`text-[var(--text-muted)] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <>
+          <div className="fixed inset-0 z-[100]" onClick={() => setIsOpen(false)} />
+          <div className="absolute z-[110] top-full mt-1 left-0 right-0 bg-white border-2 border-[var(--border-dark)] shadow-2xl animate-in fade-in zoom-in-95 duration-200 origin-top overflow-hidden">
+            <div className="p-2 border-b border-gray-100 bg-gray-50/50">
+              <div className="relative">
+                <SearchIcon size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input 
+                  type="text"
+                  placeholder="SEARCH SCHOOLS..."
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  className="w-full pl-8 pr-3 py-2 text-[10px] font-bold uppercase tracking-widest border border-gray-200 focus:border-[var(--color-primary)] outline-none bg-white transition-all"
+                  autoFocus
+                />
+              </div>
+            </div>
+            <div className="max-h-[220px] overflow-y-auto custom-scroll">
+              {filtered.length > 0 ? filtered.map(school => (
+                <button
+                  key={school.id}
+                  type="button"
+                  onClick={() => {
+                    onChange(school.id);
+                    setIsOpen(false);
+                    setSearch('');
+                  }}
+                  className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-blue-50 transition-colors group ${selected?.id === school.id ? 'bg-blue-50/50 border-r-4 border-[var(--color-primary)]' : ''}`}
+                >
+                  <div>
+                    <p className={`text-[10px] font-black uppercase tracking-wide ${selected?.id === school.id ? 'text-[var(--color-primary)]' : 'text-gray-800'}`}>
+                      {school.name}
+                    </p>
+                    <p className="text-[8px] text-gray-400 font-bold uppercase tracking-tighter mt-0.5">ID: {school.id}</p>
+                  </div>
+                  {selected?.id === school.id && <LucideIcons.Check size={14} className="text-[var(--color-primary)]" />}
+                </button>
+              )) : (
+                <div className="p-8 text-center border-t border-gray-50">
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">No Schools Found</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 // --- Main Form Component ---
 
 export default function CourseBuilderForm({ schools, initialData = null }) {
@@ -379,14 +456,11 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="md:col-span-2">
             <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Parent School *</label>
-            <select 
-              value={formData.schoolId?.id || formData.schoolId || ''} 
-              onChange={(e) => setFormData({...formData, schoolId: e.target.value})} 
-              className="w-full bg-[var(--bg-surface)] border-2 border-[var(--border-default)] text-[11px] font-bold text-[var(--text-primary)] uppercase tracking-wider px-4 py-3 appearance-none focus:border-[var(--color-primary)] transition-all outline-none rounded-none cursor-pointer pr-10 bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%20fill%3D%22none%22%20stroke%3D%22%2300588b%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:18px] bg-[right_12px_center] bg-no-repeat shadow-sm hover:border-[var(--color-primary-light)]"
-            >
-              <option value="">Select Parent School</option>
-              {schools.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-            </select>
+            <SchoolPicker 
+              options={schools}
+              value={formData.schoolId}
+              onChange={(val) => setFormData({...formData, schoolId: val})}
+            />
           </div>
           <div className="md:col-span-2">
             <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Course Type *</label>
