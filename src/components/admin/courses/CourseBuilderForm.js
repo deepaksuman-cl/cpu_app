@@ -277,7 +277,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       ai_comparison: { title: '', subtitle: '', data: [] },
       ai_team: { title: '', subtitle: '', members: [] },
       ai_cta: { title: '', subtitle: '', points: [], buttonText: '' },
-      ai_faq: { title: '', subtitle: '', categories: [] },
+      ai_faq: { title: '', subtitle: '', data: {} },
       breadcrumb: [],
       layoutOrder: null,
       customSections: {}
@@ -298,16 +298,26 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
     ];
 
     sections.forEach(sec => {
-      if (merged[sec] && typeof merged[sec] === 'object') {
-        merged[sec] = { ...defaults[sec], ...merged[sec] };
-        Object.keys(defaults[sec]).forEach(subKey => {
-          if (merged[sec][subKey] === null || merged[sec][subKey] === undefined) {
-             merged[sec][subKey] = defaults[sec][subKey];
-          }
-          if (defaults[sec][subKey] && typeof defaults[sec][subKey] === 'object' && !Array.isArray(defaults[sec][subKey])) {
-             merged[sec][subKey] = { ...defaults[sec][subKey], ...merged[sec][subKey] };
-          }
-        });
+      // Check if the section exists in current data
+      if (merged[sec] !== undefined) {
+        // CASE 1: Top-level section is a plain object - Perform deep merge
+        if (merged[sec] && typeof merged[sec] === 'object' && !Array.isArray(merged[sec])) {
+          merged[sec] = { ...defaults[sec], ...merged[sec] };
+          
+          // Deep merge sub-keys
+          Object.keys(defaults[sec]).forEach(subKey => {
+            if (merged[sec][subKey] === null || merged[sec][subKey] === undefined) {
+               merged[sec][subKey] = defaults[sec][subKey];
+            }
+            if (defaults[sec][subKey] && typeof defaults[sec][subKey] === 'object' && !Array.isArray(defaults[sec][subKey])) {
+               merged[sec][subKey] = { ...defaults[sec][subKey], ...merged[sec][subKey] };
+            }
+          });
+        } 
+        // CASE 2: Top-level section is an array (like ai_highlights) - Preserve as is from base
+        else if (Array.isArray(merged[sec])) {
+          // Do nothing, base already has the array from merged = { ...defaults, ...base }
+        }
       } else {
         merged[sec] = defaults[sec];
       }
@@ -573,7 +583,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
                       ai_comparison: { title: "AI Benchmark", description: "CPU vs Traditional table.", isComplete: formData.ai_comparison?.data?.length > 0, isHidden: formData.ai_comparison?.hide, onToggleHide: v => updateSection('ai_comparison', {...formData.ai_comparison, hide: v}) },
                       ai_team: { title: "AI Mentorship", description: "Expert board slider.", isComplete: formData.ai_team?.members?.length > 0, isHidden: formData.ai_team?.hide, onToggleHide: v => updateSection('ai_team', {...formData.ai_team, hide: v}) },
                       ai_cta: { title: "AI CTA Banner", description: "Final conversion block.", isComplete: !!formData.ai_cta?.title, isHidden: formData.ai_cta?.hide, onToggleHide: v => updateSection('ai_cta', {...formData.ai_cta, hide: v}) },
-                      ai_faq: { title: "AI FAQ Display", description: "Specialization Q&A categories.", isComplete: formData.ai_faq?.categories?.length > 0, isHidden: formData.ai_faq?.hide, onToggleHide: v => updateSection('ai_faq', {...formData.ai_faq, hide: v}) },
+                      ai_faq: { title: "AI FAQ Display", description: "Specialization Q&A categories.", isComplete: Object.keys(formData.ai_faq?.data || {}).length > 0, isHidden: formData.ai_faq?.hide, onToggleHide: v => updateSection('ai_faq', {...formData.ai_faq, hide: v}) },
                     };
                     sectionProps = { id, ...mappings[id] };
                   }
