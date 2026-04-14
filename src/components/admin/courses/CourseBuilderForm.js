@@ -268,7 +268,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
         testimonials: [] 
       },
       // Specialization (AI-First) Defaults
-      ai_hero: { title: ['', ''], subtitle: '', stats: [], specializations: [], cta: [] },
+      ai_hero: { title: ['', ''], subtitle: '', stats: [], specializations: [], cta: [], heroImage: '' },
       ai_highlights: [],
       ai_features: { title: '', subtitle: '', features: [] },
       ai_curriculum: { title: '', description: '', data: [] },
@@ -276,7 +276,7 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
       ai_placements: { title: '', subtitle: '', pillars: [], companies: [] },
       ai_comparison: { title: '', subtitle: '', data: [] },
       ai_team: { title: '', subtitle: '', members: [] },
-      ai_cta: { title: '', subtitle: '', points: [], buttonText: '' },
+      ai_cta: { title: '', subtitle: '', points: [], buttonText: '', ctaImage: '' },
       ai_faq: { title: '', subtitle: '', data: {} },
       breadcrumb: [],
       layoutOrder: null,
