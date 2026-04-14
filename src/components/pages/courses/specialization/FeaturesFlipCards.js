@@ -1,14 +1,8 @@
 import React from 'react';
 import * as LucideIcons from 'lucide-react';
 
-const ICON_MAP = {
-  BookOpen: LucideIcons.BookOpen || LucideIcons.Book,
-  Code: LucideIcons.Code || LucideIcons.Code2 || LucideIcons.Terminal,
-  UserCog: LucideIcons.UserCog || LucideIcons.UserSearch || LucideIcons.Users,
-  Landmark: LucideIcons.Landmark || LucideIcons.Building2,
-  TrendingUp: LucideIcons.TrendingUp || LucideIcons.LineChart,
-  Users: LucideIcons.Users || LucideIcons.User
-};
+// Dynamic lookup with fallbacks
+const CircleHelp = LucideIcons.CircleHelp || LucideIcons.HelpCircle || LucideIcons.Info;
 
 export default function FeaturesFlipCards({ data }) {
   if (!data) return null;
@@ -27,7 +21,7 @@ export default function FeaturesFlipCards({ data }) {
 
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[35px] mt-[30px] [perspective:1000px]">
         {features.map((item) => {
-          const IconComponent = ICON_MAP[item.icon];
+          const IconComponent = LucideIcons[item.icon] || CircleHelp || (() => null);
           return (
             <div key={item.id} className="group relative h-[180px] cursor-pointer [perspective:1000px]">
               <div className="relative w-full h-full transition-transform duration-[600ms] [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] rounded-[16px] shadow-[0_5px_20px_rgba(0,0,0,0.04)]">

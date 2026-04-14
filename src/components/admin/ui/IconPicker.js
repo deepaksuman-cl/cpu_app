@@ -2,8 +2,9 @@
 
 import React, { useState, useMemo } from 'react';
 import * as LucideIcons from 'lucide-react';
-const { Search } = LucideIcons;
-const HelpCircle = LucideIcons.CircleHelp || LucideIcons.HelpCircle || LucideIcons.Info || LucideIcons.Search;
+const Search = LucideIcons.Search || (() => null);
+// Ultra-defensive fallback component
+const HelpCircle = LucideIcons.CircleHelp || LucideIcons.HelpCircle || LucideIcons.Info || LucideIcons.Search || (() => null);
 
 // Extract valid icon names more robustly
 const allIconNames = Object.keys(LucideIcons).filter(name => {
