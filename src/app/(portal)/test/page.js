@@ -31,7 +31,7 @@ const page = () => {
         <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-12 items-center relative z-10">
           <div className="md:col-span-7 text-white">
             <div className="inline-block bg-yellow-400/20 border border-yellow-400 text-yellow-400 px-3 py-1 rounded-full text-xs font-bold mb-6 tracking-wide uppercase">
-              ✦ {DATA.hero.badge}
+              âœ¦ {DATA.hero.badge}
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6">
               <span className="text-yellow-400">AI-First</span><br />
@@ -188,7 +188,7 @@ const page = () => {
       <section className="py-24 px-4 bg-white">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-black text-[#003b71] mb-4">Placement Ecosystem</h2>
-          <p className="text-slate-500 mb-16">Your career journey starts from Day 1 — not in the final year</p>
+          <p className="text-slate-500 mb-16">Your career journey starts from Day 1 â€” not in the final year</p>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-20">
             {DATA.placements.pillars.map((p, i) => (
               <div key={i} className="bg-white border border-slate-100 p-8 rounded-3xl hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
