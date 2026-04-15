@@ -65,7 +65,7 @@ export default function SchoolAlumni({ data }) {
               <SwiperSlide key={j} className="py-5">
                 <div className="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-[0_4px_16px_rgba(0,88,139,0.07)] transition-all hover:-translate-y-2 hover:shadow-xl h-full">
                   <div className="overflow-hidden">
-                    <img src={a.image || a.img} alt={a.name} className="w-full transition-transform duration-500 hover:scale-105" />
+                    <img src={a.image || a.img} alt={a.name} className="w-full img-smart-oject transition-transform duration-500 hover:scale-105" />
                   </div>
                   <div className="p-4 text-center border-t-[3px] border-[#00588b]">
                     <h4 className="font-bold text-sm text-[#0a1628]">{a.name}</h4>
