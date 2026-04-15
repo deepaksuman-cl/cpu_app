@@ -16,7 +16,7 @@ export default function Curriculum({ data }) {
   const [cardTransforms, setCardTransforms] = useState(
     (Array.isArray(curriculumData) ? curriculumData : []).map(() => ({ scale: 1, opacity: 1 }))
   );
-  
+
   const anchorRefs = useRef([]);
   const cardRefs = useRef([]);
 
@@ -28,7 +28,7 @@ export default function Curriculum({ data }) {
         const anchor = anchorRefs.current[i];
         const card = cardRefs.current[i];
         const nextAnchor = anchorRefs.current[i + 1];
-        
+
         if (anchor) {
           const rect = anchor.getBoundingClientRect();
           if (rect.top <= 200) currentActive = i + 1;
@@ -41,18 +41,18 @@ export default function Curriculum({ data }) {
           const nextRect = nextAnchor.getBoundingClientRect();
           const windowHeight = window.innerHeight;
           const stickyTopPoint = 120;
-          
+
           if (nextRect.top < windowHeight && nextRect.top > stickyTopPoint) {
-             const scrollDistance = windowHeight - stickyTopPoint;
-             const nextCardProgress = (windowHeight - nextRect.top) / scrollDistance;
-             
-             scale = 1 - (nextCardProgress * 0.045);
-             opacity = 1 - (nextCardProgress * 1.8);
-             if (opacity < 0) opacity = 0;
-             if (opacity > 1) opacity = 1;
+            const scrollDistance = windowHeight - stickyTopPoint;
+            const nextCardProgress = (windowHeight - nextRect.top) / scrollDistance;
+
+            scale = 1 - (nextCardProgress * 0.045);
+            opacity = 1 - (nextCardProgress * 1.8);
+            if (opacity < 0) opacity = 0;
+            if (opacity > 1) opacity = 1;
           } else if (nextRect.top <= stickyTopPoint) {
-             scale = 0.955;
-             opacity = 0;
+            scale = 0.955;
+            opacity = 0;
           }
         }
         return { scale, opacity };
@@ -78,7 +78,7 @@ export default function Curriculum({ data }) {
   return (
     <section className="relative bg-gray-50 px-4 py-10 sm:p-15 md:p-20 font-sans text-[#0c4088]">
       <div className="relative max-w-7xl mx-auto flex flex-col gap-10">
-        
+
         <div className="items-center lg:items-start flex flex-col gap-2 text-center lg:text-left z-20 md:ml-[240px] xl:ml-[320px]">
           <p className="tracking-widest text-gray-500 uppercase font-bold text-xs md:text-sm">
             4-Year Journey
@@ -99,9 +99,8 @@ export default function Curriculum({ data }) {
               <button
                 key={year.id}
                 onClick={() => scrollToYear(i)}
-                className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 ${
-                  activeYear === year.id ? `bg-[#0c4088] text-white` : "text-gray-500 bg-white border border-gray-100 hover:bg-gray-50"
-                }`}
+                className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 ${activeYear === year.id ? `bg-[#0c4088] text-white` : "text-gray-500 bg-white border border-gray-100 hover:bg-gray-50"
+                  }`}
               >
                 <span className="w-4 h-4 rounded-full flex items-center justify-center font-bold text-[10px] bg-white/20 text-white">
                   {year.id}
@@ -146,10 +145,10 @@ export default function Curriculum({ data }) {
             {(Array.isArray(curriculumData) ? curriculumData : []).map((year, index) => {
               const transformState = cardTransforms[index] || { scale: 1, opacity: 1 };
               return (
-                <div 
+                <div
                   key={year.id}
                   ref={el => cardRefs.current[index] = el}
-                  className="h-screen sticky flex items-start w-full"
+                  className="h-screen sticky items-start w-full"
                   style={{ top: `calc(7rem + ${index * 12}px)`, zIndex: index + 10 }}
                 >
                   <div className="relative w-full pt-2" style={{ transformOrigin: "top center", transform: `scale(${transformState.scale})`, transition: "transform 0.1s linear" }}>
@@ -188,7 +187,7 @@ export default function Curriculum({ data }) {
                             {sem.isSpecial ? (
                               <div className="flex mt-4 flex-col justify-center items-center gap-3 py-6">
                                 <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 text-[#0c4088]">
-                                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
                                 </div>
                                 <p className="text-center leading-5 text-[#0c4088] font-black text-base md:text-lg">{sem.specialTitle}</p>
                                 <p className="text-center font-medium text-gray-500 text-xs md:text-sm leading-relaxed px-4">{sem.specialDesc}</p>
@@ -216,7 +215,7 @@ export default function Curriculum({ data }) {
                       </div>
                     </div>
                   </div>
-                  <div className="absolute bottom-12 md:bottom-20 left-0 right-0 pointer-events-auto px-4 md:px-0" style={{ opacity: transformState.opacity, transition: "opacity 0.1s linear", pointerEvents: transformState.opacity === 0 ? "none" : "auto" }}>
+                  <div className="  left-0 right-0 pointer-events-auto px-4 md:px-0" style={{ opacity: transformState.opacity, transition: "opacity 0.1s linear", pointerEvents: transformState.opacity === 0 ? "none" : "auto" }}>
                     <div className="flex flex-col gap-2 md:gap-3 rounded-2xl md:rounded-[32px] px-5 py-4 md:px-7 md:py-6 bg-white border-t-[3px] border-[#0c4088] shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
                       <h3 className="text-[#0c4088] text-xs md:text-[13px] font-black tracking-widest uppercase flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-[#f1bd0e]"></span>
