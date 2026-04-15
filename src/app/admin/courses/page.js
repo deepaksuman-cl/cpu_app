@@ -2,16 +2,18 @@ import Link from 'next/link';
 import { getCourses } from '@/lib/actions/courseActions';
 import { Plus, Edit, Eye, FolderOpen, AlertCircle } from 'lucide-react';
 import CourseList from '@/components/admin/courses/CourseList';
+import CourseSearch from '@/components/admin/courses/CourseSearch';
 
-export default async function CoursesPage() {
-  const { data: courses, error } = await getCourses();
+export default async function CoursesPage(props) {
+  const searchParams = await props.searchParams;
+  const search = searchParams?.search || '';
+  const { data: courses, error } = await getCourses(search);
 
   return (
     /* ── Parent Relative Container ── */
     <div className="relative w-full min-h-[calc(100vh-72px)] bg-[var(--bg-body)]">
       
       {/* ── Fixed/Sticky Header (Exactly 44px Height) ── */}
-      {/* Note: Used 'sticky' instead of 'fixed' so it stays glued to the top but DOES NOT overflow to the right side behind the scrollbar. */}
       <div className="sticky top-[0px] z-30 flex items-center justify-between h-[44px] w-full bg-[var(--bg-surface)] border-b border-[var(--border-default)] shadow-sm">
         
         {/* Left: Title */}
@@ -22,7 +24,9 @@ export default async function CoursesPage() {
         </div>
 
         {/* Right: Actions */}
-        <div className="flex items-center h-full px-4">
+        <div className="flex items-center h-full px-4 gap-4">
+          <CourseSearch />
+          <div className="w-[1px] h-4 bg-[var(--border-default)] hidden sm:block"></div>
           <Link 
             href="/admin/courses/create"
             className="flex items-center justify-center h-[32px] px-3 sm:px-4 bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-[var(--text-inverse)] transition-colors rounded-sm shadow-sm"
@@ -46,7 +50,7 @@ export default async function CoursesPage() {
           </div>
         ) : (
           
-          /* Data Table / Cards with Client-Side Filtering */
+          /* Data Table / Cards with Server-Side & Local Filtering */
           <div className="mt-4">
              <CourseList courses={courses} />
           </div>
@@ -54,4 +58,4 @@ export default async function CoursesPage() {
       </div>
     </div>
   );
-}
+}

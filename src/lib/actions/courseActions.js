@@ -9,12 +9,21 @@ import { cache } from 'react';
 
 
 
-export async function getCourses(schoolId = null) {
+export async function getCourses(search = '', schoolId = null) {
   try {
     console.log('[getCourses] Connecting to database...');
     await connectToDatabase();
     
     const where = schoolId ? { schoolId } : {};
+    
+    if (search) {
+      const { Op } = require('sequelize');
+      where[Op.or] = [
+        { name: { [Op.like]: `%${search}%` } },
+        { slug: { [Op.like]: `%${search}%` } }
+      ];
+    }
+
     console.log(`[getCourses] Fetching courses with where: ${JSON.stringify(where)}`);
     
     const courses = await Course.findAll({

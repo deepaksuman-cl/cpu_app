@@ -4,6 +4,7 @@ import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import ColorPicker from '@/components/admin/ui/ColorPicker';
 import IconPicker from '@/components/admin/ui/IconPicker';
+import ConfirmModal from '@/components/admin/ui/ConfirmModal';
 import { createPage, updatePage } from '@/lib/actions/pageActions';
 import { AlertCircle, AlertTriangle, ArrowDown, ArrowLeft, ArrowUp, BarChart3, CheckCircle2, Columns, GripVertical, Image as ImageIcon, Images, Layout, Megaphone, Monitor, Plus, Save, SquareStack, Trash2, Type, Users, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -364,6 +365,7 @@ export default function PageBuilderForm({ mode = 'create', initialData = null })
   const [pageCssClass, setPageCssClass] = useState(initialData?.pageCssClass || '');
   const [blocks, setBlocks] = useState(initialData?.blocks || []);
   const [showBlockMenu, setShowBlockMenu] = useState(false);
+  const [blockToDelete, setBlockToDelete] = useState(null); // { index, label }
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -704,7 +706,13 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
                   <button type="button" onClick={() => moveBlock(index, -1)} disabled={index === 0} className="p-1.5 text-[var(--text-muted)] hover:bg-[var(--bg-hover)] disabled:opacity-30 transition-colors"><ArrowUp size={14} /></button>
                   <button type="button" onClick={() => moveBlock(index, 1)} disabled={index === blocks.length - 1} className="p-1.5 text-[var(--text-muted)] hover:bg-[var(--bg-hover)] disabled:opacity-30 transition-colors"><ArrowDown size={14} /></button>
                   <div className="w-px h-5 bg-[var(--border-default)] mx-1"></div>
-                  <button type="button" onClick={() => removeBlock(index)} className="p-1.5 text-[var(--color-danger)] hover:bg-red-50 transition-colors"><Trash2 size={14} /></button>
+                  <button 
+                    type="button" 
+                    onClick={() => setBlockToDelete({ index, label: typeDef.label })} 
+                    className="p-1.5 text-[var(--color-danger)] hover:bg-red-50 transition-colors"
+                  >
+                    <Trash2 size={14} />
+                  </button>
                 </div>
               </div>
 
@@ -1838,6 +1846,21 @@ setActiveSettingsTab(prev => ({ ...prev, [blockIndex]: tab }));
 
       </form>
       {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
+
+      {/* --- Confirmation Modal for Block Deletion --- */}
+      <ConfirmModal
+        isOpen={!!blockToDelete}
+        onClose={() => setBlockToDelete(null)}
+        onConfirm={() => {
+          if (blockToDelete !== null) {
+            removeBlock(blockToDelete.index);
+            setBlockToDelete(null);
+          }
+        }}
+        title="Remove Block"
+        message={`Are you sure you want to remove the "${blockToDelete?.label}" block? All content inside this block will be lost.`}
+        confirmText="Remove Block"
+      />
     </div>
   );
 }
