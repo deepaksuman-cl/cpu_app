@@ -223,3 +223,88 @@ export async function deleteCourse(id) {
     return { success: false, message: error.message || 'Deletion failed due to database constraint.' };
   }
 }
+export async function duplicateCourse(id) {
+  try {
+    await connectToDatabase();
+    
+    // 1. Fetch original course including relations
+    const original = await Course.findByPk(id, {
+      include: [
+        { model: FAQ, as: 'faqsRel' },
+        { model: Testimonial, as: 'testimonialsRel' }
+      ]
+    });
+
+    if (!original) return { success: false, error: 'Original course not found' };
+
+    // 2. Prepare data for the new course
+    const originalData = original.get({ plain: true });
+    
+    // Generate unique slug
+    const randomStr = Math.random().toString(36).substring(2, 7);
+    const newSlug = `${originalData.slug}-${randomStr}`;
+    const newName = `${originalData.name} (Copy)`;
+
+    // Remove unique/auto-generated fields
+    const { 
+      id: oldId, 
+      createdAt, 
+      updatedAt, 
+      faqsRel, 
+      testimonialsRel,
+      school, // Don't include the nested school object in creation
+      ...cloneData 
+    } = originalData;
+
+    // 3. Create the new course
+    const newCourse = await Course.create({
+      ...cloneData,
+      name: newName,
+      slug: newSlug,
+      status: 'draft'
+    });
+
+    // 4. Replicate FAQs
+    if (faqsRel && faqsRel.length > 0) {
+      for (const faq of faqsRel) {
+        await FAQ.create({
+          question: faq.question,
+          answer: faq.answer,
+          courseId: newCourse.id
+        });
+      }
+    }
+
+    // 5. Replicate Testimonials
+    if (testimonialsRel && testimonialsRel.length > 0) {
+      for (const t of testimonialsRel) {
+        await Testimonial.create({
+          studentName: t.studentName,
+          reviewText: t.reviewText,
+          rating: t.rating,
+          image: t.image,
+          company: t.company,
+          batch: t.batch,
+          course: t.course,
+          package: t.package,
+          tag: t.tag,
+          tagColor: t.tagColor,
+          courseId: newCourse.id
+        });
+      }
+    }
+
+    revalidatePath('/', 'layout');
+    revalidatePath('/admin/courses');
+
+    return { 
+      success: true, 
+      message: 'Course duplicated successfully!', 
+      data: newCourse.get({ plain: true }) 
+    };
+
+  } catch (error) {
+    console.error(`[duplicateCourse] Error:`, error);
+    return { success: false, error: error.message || 'Duplication failed' };
+  }
+}

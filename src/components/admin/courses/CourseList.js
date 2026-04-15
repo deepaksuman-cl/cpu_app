@@ -1,6 +1,7 @@
 'use client';
 
 import DeleteCourseButton from '@/components/admin/courses/DeleteCourseButton';
+import DuplicateCourseButton from '@/components/admin/courses/DuplicateCourseButton';
 import { ChevronDown, Edit, Eye, Filter, FolderOpen } from 'lucide-react';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
@@ -158,6 +159,8 @@ export default function CourseList({ courses }) {
                           <Edit className="w-4 h-4 md:w-3.5 md:h-3.5" />
                           <span className="md:hidden text-[10px] font-bold uppercase ml-2 tracking-widest">Edit</span>
                         </Link>
+
+                        <DuplicateCourseButton id={course.id} />
                         
                         <div className="flex items-center justify-center">
                           <DeleteCourseButton id={course.id} />

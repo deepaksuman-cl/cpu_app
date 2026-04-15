@@ -102,3 +102,43 @@ export async function deletePage(id) {
     return { success: false, message: error.message || 'Deletion failed due to database constraint.' };
   }
 }
+
+export async function duplicatePage(id) {
+  try {
+    await connectToDatabase();
+    const originalPage = await Page.findByPk(id);
+    if (!originalPage) return { success: false, message: 'Original page not found' };
+
+    const data = originalPage.get({ plain: true });
+    
+    // Remove identifier and timestamps
+    delete data.id;
+    delete data.createdAt;
+    delete data.updatedAt;
+
+    // Generate new title and slug
+    data.title = `${data.title} (Copy)`;
+    let baseSlug = data.slug.replace(/-copy(-\d+)?$/, '');
+    let newSlug = `${baseSlug}-copy`;
+    
+    // Check for unique slug
+    const { Op } = require('sequelize');
+    let counter = 1;
+    let existingPage = await Page.findOne({ where: { slug: newSlug } });
+    
+    while (existingPage) {
+      newSlug = `${baseSlug}-copy-${counter}`;
+      existingPage = await Page.findOne({ where: { slug: newSlug } });
+      counter++;
+    }
+    data.slug = newSlug;
+
+    const newPage = await Page.create(data);
+    
+    revalidatePath('/', 'layout');
+    return { success: true, data: newPage.get({ plain: true }), message: 'Page duplicated successfully!' };
+  } catch (error) {
+    console.error('duplicatePage Error:', error);
+    return { success: false, message: error.message || 'Duplication failed.' };
+  }
+}

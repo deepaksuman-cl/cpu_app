@@ -2,6 +2,7 @@ import BlocksPopover from '@/components/admin/pages/BlocksPopover';
 import CompactCopyButton from '@/components/admin/pages/CompactCopyButton';
 import CopySlugButton from '@/components/admin/pages/CopySlugButton';
 import DeletePageButton from '@/components/admin/pages/DeletePageButton';
+import DuplicatePageButton from '@/components/admin/pages/DuplicatePageButton';
 import PageSearch from '@/components/admin/pages/PageSearch';
 import { getAllPages } from '@/lib/actions/pageActions';
 import { Edit, Eye, FileText, Plus } from 'lucide-react';
@@ -128,6 +129,7 @@ export default async function PagesManager({ searchParams }) {
                       >
                         <Edit size={16} />
                       </Link>
+                      <DuplicatePageButton id={page.id} title={page.title} />
                       <DeletePageButton id={page.id} title={page.title} />
                     </div>
                   </td>
