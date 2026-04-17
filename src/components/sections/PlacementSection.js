@@ -252,10 +252,10 @@ export default function PlacementSection({ data }) {
                   speed={3000}
                   autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
                   breakpoints={{
-                    0: { slidesPerView: 3, spaceBetween: 20 },
-                    480: { slidesPerView: 4, spaceBetween: 30 },
-                    768: { slidesPerView: 5, spaceBetween: 40 },
-                    1024: { slidesPerView: 5, spaceBetween: 50 },
+                    0: { slidesPerView: 3, spaceBetween: 15 },
+                    480: { slidesPerView: 4, spaceBetween: 15 },
+                    768: { slidesPerView: 5, spaceBetween: 15 },
+                    1024: { slidesPerView: 5, spaceBetween: 20 },
                   }}
                   className="w-full h-16"
                 >
