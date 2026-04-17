@@ -224,42 +224,55 @@ export default function PlacementSection({ data }) {
 
         {/* --- Recruiter Logos --- */}
         {recruiters.length > 0 && (
-          <div className="mt-20 pt-10 border-t border-white/10">
-            <p className="text-white/50 text-[20px] font-bold uppercase tracking-[0.3em] text-center mb-8">Trusted by Global Industry Leaders</p>
-            <div className="w-full relative swraper overflow-hidden pointer-events-none">
-              <style dangerouslySetInnerHTML={{__html: `
-                .swraper .swiper-wrapper {
-                  transition-timing-function: linear !important;
-                }
-              `}} />
-              <SwiperReact
-                modules={[Autoplay]}
-                spaceBetween={40}
-                slidesPerView={6}
-                loop={true}
-                speed={3000}
-                autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
-                breakpoints={{
-                  0: { slidesPerView: 3, spaceBetween: 20 },
-                  480: { slidesPerView: 4, spaceBetween: 30 },
-                  768: { slidesPerView: 5, spaceBetween: 40 },
-                  1024: { slidesPerView: 6, spaceBetween: 50 },
-                }}
-                className="w-full h-16"
-              >
-                {[...recruiters, ...recruiters, ...recruiters].map((logo, idx) => (
-                  <SwiperSlide key={idx}>
-                    <div className="flex items-center justify-center h-full w-full">
-                      <img 
-                        src={logo.img} 
-                        alt={`Recruiter ${idx + 1}`} 
-                        className="h-18 w-full home_logo_slider object-contain transition-all duration-300" 
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </SwiperReact>
+      
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mt-20 pt-10 border-t border-white/10">
+            <div className="right_col text-center">
+                <p className="text-white/50 text-[20px] font-bold uppercase tracking-[0.3em] text-center mb">Learn with Top Tech Partners</p>
+              {/* <p className="text-white">Certification programs with Red Hat, Amazon Web Services (AWS), and Oracle Corporation for real-world skills and career growth.</p> */}
+           <div className="tech_partners text-center grid grid-cols-1 lg:grid-cols-3 gap-10 mt-7">
+              <img src="https://cpur.in/api/media/media/1776428734789-93zhg-RedHat.png" alt="Red Hat" className="h-18 w-full home_logo_slider object-contain transition-all duration-300" />
+              <img src="https://cpur.in/api/media/media/1776428734780-lvkro-AWS.png" alt="AWS" className="h-18 w-full home_logo_slider object-contain transition-all duration-300" />
+              <img src="https://cpur.in/api/media/media/1776428734786-xeea4-oracle.png" alt="Oracle" className="h-18 w-full home_logo_slider object-contain transition-all duration-300"/>
+          </div>
+
             </div>
+            <div className="right_col">
+              <p className="text-white/50 text-[20px] font-bold uppercase tracking-[0.3em] text-center mb-8">Trusted by Global Industry Leaders</p>
+              <div className="w-full relative swraper overflow-hidden pointer-events-none">
+                <style dangerouslySetInnerHTML={{__html: `
+                  .swraper .swiper-wrapper {
+                    transition-timing-function: linear !important;
+                  }
+                `}} />
+                <SwiperReact
+                  modules={[Autoplay]}
+                  spaceBetween={40}
+                  slidesPerView={5}
+                  loop={true}
+                  speed={3000}
+                  autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
+                  breakpoints={{
+                    0: { slidesPerView: 3, spaceBetween: 20 },
+                    480: { slidesPerView: 4, spaceBetween: 30 },
+                    768: { slidesPerView: 5, spaceBetween: 40 },
+                    1024: { slidesPerView: 5, spaceBetween: 50 },
+                  }}
+                  className="w-full h-16"
+                >
+                  {[...recruiters, ...recruiters, ...recruiters].map((logo, idx) => (
+                    <SwiperSlide key={idx}>
+                      <div className="flex items-center justify-center h-full w-full">
+                        <img 
+                          src={logo.img} 
+                          alt={`Recruiter ${idx + 1}`} 
+                          className="h-18 w-full home_logo_slider object-contain transition-all duration-300" 
+                        />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </SwiperReact>
+              </div>
+          </div>
           </div>
         )}
       </div>
