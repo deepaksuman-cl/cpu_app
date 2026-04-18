@@ -76,23 +76,29 @@ export const AiHeroEditor = ({ data, onChange }) => {
         <InputGroup label="Subtitle">
           <TextInput value={data?.subtitle} onChange={v => update('subtitle', v)} />
         </InputGroup>
+        <InputGroup label="Specialization Label (Optional)">
+          <TextInput value={data?.specializationLabel || ''} onChange={v => update('specializationLabel', v)} placeholder="Default: Specialization:" />
+        </InputGroup>
         <InputGroup label="Hero Image (Optional)">
           <MediaUploader category="courses" onUploadSuccess={url => update('heroImage', url)} />
           <div className="mt-2 text-[9px] text-gray-400 break-all">{data?.heroImage || 'No image uploaded'}</div>
         </InputGroup>
       </div>
 
-      <EditorHeader title="Specialization Badges" onAdd={() => update('specializations', [...(data?.specializations || []), { icon: 'Bot', name: '' }])} />
+      <EditorHeader title="Specialization Badges" onAdd={() => update('specializations', [...(data?.specializations || []), { icon: 'Bot', name: '', link: '' }])} />
       <div className="space-y-2">
         {(Array.isArray(data?.specializations) ? data.specializations : []).map((spec, i) => (
           <div key={i} className="flex gap-2 items-center">
-            <div className="w-32"><IconPicker value={spec.icon} onChange={v => {
+            <div className="w-32 shrink-0"><IconPicker value={spec.icon} onChange={v => {
               const n = [...data.specializations]; n[i].icon = v; update('specializations', n);
             }} /></div>
             <TextInput value={spec.name} onChange={v => {
               const n = [...data.specializations]; n[i].name = v; update('specializations', n);
             }} placeholder="Specialization Name" />
-            <button onClick={() => update('specializations', (data?.specializations || []).filter((_, idx) => idx !== i))} className="text-red-500 p-2"><Trash2 size={16}/></button>
+            <TextInput value={spec.link || ''} onChange={v => {
+              const n = [...data.specializations]; n[i].link = v; update('specializations', n);
+            }} placeholder="Custom Link (Optional)" />
+            <button onClick={() => update('specializations', (data?.specializations || []).filter((_, idx) => idx !== i))} className="text-red-500 p-2 shrink-0"><Trash2 size={16}/></button>
           </div>
         ))}
       </div>

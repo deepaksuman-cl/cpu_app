@@ -137,7 +137,7 @@ const ParticlesBackground = () => {
 
 export default function Hero({ data }) {
   if (!data) return null;
-  const { title = [], subtitle, stats = [], specializations = [], cta = [], heroImage } = data || {};
+  const { title = [], subtitle, stats = [], specializations = [], cta = [], heroImage, specializationLabel } = data || {};
 
   return (
     <div className="relative w-full bg-[#0c4088] font-sans h-[calc(100vh-120px)] min-h-[600px] flex items-center overflow-hidden">
@@ -177,14 +177,27 @@ export default function Hero({ data }) {
           </div>
 
           <div className="mb-10">
-            <p className="text-white text-[15px] font-normal mb-3">Specialization:</p>
+            <p className="text-white text-[15px] font-normal mb-3">{specializationLabel || 'Specialization:'}</p>
             <div className="flex flex-wrap gap-3">
-              {specializations.map((spec, i) => (
-                <span key={i} className="bg-[#ffffff08] border border-[#f1bd0e] text-[#f1bd0e] text-[13px] font-normal px-4 py-1.5 rounded-full backdrop-blur-sm flex items-center gap-2">
-                  {ICON_MAP[spec.icon] || null}
-                  {spec.name}
-                </span>
-              ))}
+              {specializations.map((spec, i) => {
+                const badgeContent = (
+                  <>
+                    {ICON_MAP[spec.icon] || null}
+                    {spec.name}
+                  </>
+                );
+                const className = "bg-[#ffffff08] border border-[#f1bd0e] text-[#f1bd0e] text-[13px] font-normal px-4 py-1.5 rounded-full backdrop-blur-sm flex items-center gap-2 hover:bg-[#ffffff1a] transition-colors";
+                
+                return spec.link ? (
+                  <a key={i} href={spec.link} target="_blank" rel="noopener noreferrer" className={className}>
+                    {badgeContent}
+                  </a>
+                ) : (
+                  <span key={i} className={className}>
+                    {badgeContent}
+                  </span>
+                );
+              })}
             </div>
           </div>
 
