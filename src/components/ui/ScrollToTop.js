@@ -8,7 +8,8 @@ export default function ScrollToTop() {
 
   // Toggle visibility when scrolling
   const toggleVisibility = () => {
-    if (window.scrollY > 300) {
+    const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrolled > 200) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
@@ -24,22 +25,24 @@ export default function ScrollToTop() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    // Initial check in case page is already scrolled
+    toggleVisibility();
     return () => {
       window.removeEventListener('scroll', toggleVisibility);
     };
   }, []);
 
   return (
-    <div className="fixed bottom-20 lg:bottom-8 right-8 z-[9999]">
+    <div className="fixed bottom-24 lg:bottom-8 right-6 lg:right-8 z-[10001]">
       <button
         type="button"
         onClick={scrollToTop}
         className={`
           group relative flex h-11 w-11 items-center justify-center 
-          rounded-xl bg-white text-[#1c54a3] shadow-lg transition-all duration-300 
+          rounded-xl bg-white text-[#1c54a3] shadow-2xl transition-all duration-300 
           hover:scale-110 hover:-translate-y-1 active:scale-95 cursor-pointer
-          ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0 pointer-events-none'}
+          ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'}
         `}
         aria-label="Scroll to top"
       >

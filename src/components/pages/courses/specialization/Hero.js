@@ -140,7 +140,7 @@ export default function Hero({ data }) {
   const { title = [], subtitle, stats = [], specializations = [], cta = [], heroImage, specializationLabel } = data || {};
 
   return (
-    <div className="relative w-full bg-[#0c4088] font-sans h-[calc(100vh-120px)] min-h-[600px] flex items-center overflow-hidden">
+    <div className="relative w-full bg-[#0c4088] font-sans lg:h-[calc(100vh-120px)] min-h-[600px] flex items-center py-8 lg:py-0 overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-auto">
         <ParticlesBackground />
       </div>
@@ -150,9 +150,9 @@ export default function Hero({ data }) {
         style={{ background: 'linear-gradient(160deg, #00000052 37%, rgba(18, 74, 151, 0.7) 50%, rgba(18, 74, 151, 0.2) 100%)' }}
       ></div>
 
-      <div className="relative z-20 w-[96%] max-w-[1400px] mx-auto px-[5%] py-10 pointer-events-none flex flex-col lg:flex-row items-center justify-between gap-10">
+      <div className="relative z-20 w-[96%] max-w-[1400px] mx-auto px-[5%] py-5 lg:py-10 pointer-events-none flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10">
         <div className="w-full lg:max-w-[60%] pointer-events-auto">
-          <h1 className="text-[2.5rem] md:text-[3.5rem] lg:text-[68px] font-bold leading-[1.1] text-white mb-4 tracking-tight">
+          <h1 className="text-[2.25rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[68px] font-bold leading-[1.1] text-white mb-2 lg:mb-4 tracking-tight">
             {title.map((line, i) => (
               <span key={i} className={`block ${i === 1 ? 'text-[#f1bd0e] mt-1' : ''}`} style={{ fontWeight: 600 }}>
                 {line}
@@ -160,11 +160,11 @@ export default function Hero({ data }) {
             ))}
           </h1>
 
-          <p className="text-[1.25rem] md:text-[1.5rem] font-medium text-white mb-8">
+          <p className="text-[1rem] sm:text-[1.25rem] md:text-[1.5rem] font-medium text-white mb-4 lg:mb-8">
             {subtitle}
           </p>
 
-          <div className="flex flex-wrap items-center mb-8 gap-x-8 gap-y-4">
+          <div className="flex flex-wrap items-center mb-3 lg:mb-8 gap-x-4 lg:gap-x-8 gap-y-2 lg:gap-y-4">
             {stats.map((stat, i) => (
               <React.Fragment key={i}>
                 <div className="flex flex-col">
@@ -176,9 +176,9 @@ export default function Hero({ data }) {
             ))}
           </div>
 
-          <div className="mb-10">
-            <p className="text-white text-[15px] font-normal mb-3">{specializationLabel || 'Specialization:'}</p>
-            <div className="flex flex-wrap gap-3">
+          <div className="mb-6 lg:mb-10">
+            <p className="text-white text-[13px] lg:text-[15px] font-normal mb-1 lg:mb-3">{specializationLabel || 'Specialization:'}</p>
+            <div className="flex flex-wrap gap-2 lg:gap-3">
               {specializations.map((spec, i) => {
                 const badgeContent = (
                   <>
@@ -186,7 +186,7 @@ export default function Hero({ data }) {
                     {spec.name}
                   </>
                 );
-                const className = "bg-[#ffffff08] border border-[#f1bd0e] text-[#f1bd0e] text-[13px] font-normal px-4 py-1.5 rounded-full backdrop-blur-sm flex items-center gap-2 hover:bg-[#ffffff1a] transition-colors";
+                const className = "bg-[#ffffff08] border border-[#f1bd0e] text-[#f1bd0e] text-[11px] lg:text-[13px] font-normal px-2.5 py-1 lg:px-4 lg:py-1.5 rounded-full backdrop-blur-sm flex items-center gap-2 hover:bg-[#ffffff1a] transition-colors";
                 
                 return spec.link ? (
                   <a key={i} href={spec.link} target="_blank" rel="noopener noreferrer" className={className}>
@@ -215,7 +215,7 @@ export default function Hero({ data }) {
         </div>
 
         {heroImage && (
-          <div className="w-full lg:max-w-[35%] pt-50 pointer-events-auto flex items-center justify-center animate-in fade-in slide-in-from-right-10 duration-1000">
+          <div className="w-full lg:max-w-[35%] pt-0 lg:pt-10 pointer-events-auto flex items-center justify-center animate-in fade-in slide-in-from-right-10 duration-1000">
             <style>{`
               @keyframes float {
                 0% { transform: translateY(0px); }
@@ -229,7 +229,7 @@ export default function Hero({ data }) {
             <img
               src={heroImage}
               alt={title.join(' ')}
-              className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-h-[600px] animate-float"
+              className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] max-h-[400px] lg:max-h-[600px] animate-float"
             />
           </div>
         )}

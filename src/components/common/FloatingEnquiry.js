@@ -31,7 +31,7 @@ export default function FloatingEnquiry() {
       {/* 2. ENQUIRY FORM WIDGET (Vertically Centered) */}
       {/* top-1/2 aur -translate-y-1/2 isko exact screen ke center me rakhenge */}
       <div 
-        className={`hidden lg:block fixed top-1/2 -translate-y-1/2 right-0 z-50 transition-transform duration-500 ease-in-out ${
+        className={`fixed top-1/2 -translate-y-1/2 right-0 z-[1001] transition-transform duration-500 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-[320px]'
         }`}
       >
@@ -39,7 +39,7 @@ export default function FloatingEnquiry() {
         {/* 🔥 PROFESSIONAL TOGGLE BUTTON (Absolute positioning so it doesn't stretch) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="absolute -left-[40px] top-1/2 -translate-y-1/2 bg-[#fec53a] text-[#00588b] px-2 py-6 rounded-l-lg shadow-[-5px_0_15px_rgba(0,0,0,0.15)] hover:bg-[#00588b] hover:text-[#fec53a] transition-colors duration-300 flex items-center justify-center group border border-r-0 border-gray-200"
+          className="hidden lg:flex absolute -left-[40px] top-1/2 -translate-y-1/2 bg-[#fec53a] text-[#00588b] px-2 py-6 rounded-l-lg shadow-[-5px_0_15px_rgba(0,0,0,0.15)] hover:bg-[#00588b] hover:text-[#fec53a] transition-colors duration-300 items-center justify-center group border border-r-0 border-gray-200"
           aria-label="Toggle Enquiry Form"
         >
           <span 
