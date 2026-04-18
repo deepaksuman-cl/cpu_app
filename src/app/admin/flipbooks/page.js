@@ -2,6 +2,7 @@
 
 import MediaUploader from '@/components/admin/MediaUploader';
 import Modal from '@/components/admin/ui/Modal';
+import ConfirmModal from '@/components/admin/ui/ConfirmModal';
 import {
   BookOpen,
   Copy,
@@ -28,6 +29,8 @@ export default function FlipbookManager() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const [deleteConfirmId, setDeleteConfirmId] = useState(null);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -76,10 +79,11 @@ export default function FlipbookManager() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id) => {
-    if (!confirm('Are you sure you want to delete this flipbook?')) return;
+  const executeDelete = async () => {
+    if (!deleteConfirmId) return;
+    setIsDeleteLoading(true);
     try {
-      const res = await fetch(`/api/admin/flipbooks/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/admin/flipbooks/${deleteConfirmId}`, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
         toast.success('Deleted successfully');
@@ -89,6 +93,9 @@ export default function FlipbookManager() {
       }
     } catch (error) {
       toast.error('Failed to delete');
+    } finally {
+      setIsDeleteLoading(false);
+      setDeleteConfirmId(null);
     }
   };
 
@@ -281,7 +288,7 @@ export default function FlipbookManager() {
                           <button onClick={() => handlePreview(fb.slug)} className="p-2.5 bg-white text-gray-500 border border-gray-200 hover:text-blue-600 hover:border-blue-600 transition-all shadow-sm" title="Live Preview"><Eye size={14} /></button>
                           <button onClick={() => copyToClipboard(fb.slug)} className="p-2.5 bg-white text-gray-500 border border-gray-200 hover:text-blue-600 hover:border-blue-600 transition-all shadow-sm" title="Copy Public URL"><Copy size={14} /></button>
                           <button onClick={() => handleEdit(fb)} className="p-2.5 bg-white text-gray-500 border border-gray-200 hover:text-blue-600 hover:border-blue-600 transition-all shadow-sm" title="Edit Brochure"><Edit size={14} /></button>
-                          <button onClick={() => handleDelete(fb.id)} className="p-2.5 bg-white text-gray-500 border border-gray-200 hover:text-red-500 hover:border-red-500 transition-all shadow-sm" title="Eject Asset"><Trash2 size={14} /></button>
+                          <button onClick={() => setDeleteConfirmId(fb.id)} className="p-2.5 bg-white text-gray-500 border border-gray-200 hover:text-red-500 hover:border-red-500 transition-all shadow-sm" title="Eject Asset"><Trash2 size={14} /></button>
                         </div>
                       </td>
                     </tr>
@@ -483,6 +490,16 @@ export default function FlipbookManager() {
           </div>
         </div>
       </Modal>
+
+      <ConfirmModal
+        isOpen={!!deleteConfirmId}
+        onClose={() => setDeleteConfirmId(null)}
+        onConfirm={executeDelete}
+        title="Delete Brochure"
+        message="Are you sure you want to delete this brochure? This action cannot be undone."
+        confirmText="Delete Permanently"
+        loading={isDeleteLoading}
+      />
 
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
