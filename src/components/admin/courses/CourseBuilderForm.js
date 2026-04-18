@@ -2,6 +2,7 @@
 import MediaUploader from '@/components/admin/MediaUploader';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
+import ColorPicker from '@/components/admin/ui/ColorPicker';
 import Modal from '@/components/admin/ui/Modal';
 import { createCourse, updateCourse } from '@/lib/actions/courseActions';
 import { AlertCircle, CheckCircle2, Pencil, Plus, Save, Trash2, Settings } from 'lucide-react';
@@ -11,8 +12,8 @@ import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import * as LucideIcons from 'lucide-react';
 import { 
   GripVertical, FileText, BarChart, Layers, Zap, Info, Bot, Award, Users, Target, 
-  HelpCircle, CircleHelp, Briefcase, LayoutTemplate, History, Image, Rocket, 
-  ShieldAlert, AlertShield, Cpu, RotateCcw 
+  HelpCircle, CircleHelp, Briefcase, LayoutTemplate, History, Image as ImageIcon, Rocket, 
+  ShieldAlert, AlertShield, Cpu, RotateCcw, Layout
 } from 'lucide-react';
 import * as AiEditors from './AiSectionEditors';
 
@@ -229,6 +230,236 @@ const SchoolPicker = ({ options = [], value, onChange }) => {
     </div>
   );
 };
+
+// --- Custom Block Settings Panel ---
+function CustomBlockSettingsPanel({ block, updateBlock }) {
+  const [open, setOpen] = useState(false);
+
+  const PADDING_OPTIONS = [
+    { label: 'None (0px)', value: '0' },
+    { label: 'XS (20px)', value: '20' },
+    { label: 'SM (40px)', value: '40' },
+    { label: 'MD (60px) — Default', value: '60' },
+    { label: 'LG (80px)', value: '80' },
+    { label: 'XL (100px)', value: '100' },
+    { label: '2XL (120px)', value: '120' },
+    { label: 'Custom', value: 'custom' },
+  ];
+
+  const paddingTopVal = block?.sectionPaddingTop ?? '60';
+  const paddingBottomVal = block?.sectionPaddingBottom ?? '60';
+  const isPaddingTopCustom = !PADDING_OPTIONS.slice(0,-1).some(o => o.value === paddingTopVal);
+  const isPaddingBottomCustom = !PADDING_OPTIONS.slice(0,-1).some(o => o.value === paddingBottomVal);
+
+  return (
+    <div className="mb-5 border border-[var(--border-default)] rounded-none">
+      {/* Toggle Header */}
+      <button
+        type="button"
+        onClick={() => setOpen(v => !v)}
+        className="w-full flex items-center justify-between px-4 py-2.5 bg-blue-50 text-blue-900 hover:bg-blue-100 transition-colors group"
+      >
+        <div className="flex items-center gap-2">
+          <Layout size={14} className="text-blue-700" strokeWidth={2.5} />
+          <span className="text-[11px] font-black uppercase tracking-widest">
+            Section Settings
+          </span>
+          {/* Quick preview badges */}
+          <span className="hidden sm:flex items-center gap-1 ml-2">
+            {(paddingTopVal !== '60' || paddingBottomVal !== '60') && (
+              <span className="text-[9px] font-bold bg-white text-blue-700 px-1.5 py-0.5 rounded border border-blue-200">
+                Padding: {paddingTopVal}↑ / {paddingBottomVal}↓
+              </span>
+            )}
+            {block?.sectionContainer === 'full' && (
+              <span className="text-[9px] font-bold bg-green-100 text-green-700 px-1.5 py-0.5 rounded">Full Width</span>
+            )}
+          </span>
+        </div>
+        <svg
+          className={`w-4 h-4 text-blue-700 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="p-4 bg-[var(--bg-surface)] border-t border-blue-100 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 animate-in fade-in slide-in-from-top-1 duration-150">
+
+          {/* --- 1. Padding Top --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Padding Top
+            </label>
+            <select
+              value={isPaddingTopCustom ? 'custom' : paddingTopVal}
+              onChange={e => {
+                if (e.target.value !== 'custom') updateBlock('sectionPaddingTop', e.target.value);
+              }}
+              className="w-full border border-gray-200 p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-white mb-1.5"
+            >
+              {PADDING_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+            </select>
+            {isPaddingTopCustom && (
+              <input
+                type="text"
+                value={paddingTopVal}
+                onChange={e => updateBlock('sectionPaddingTop', e.target.value)}
+                className="w-full border border-blue-300 p-1.5 text-xs outline-none font-mono focus:border-blue-500"
+                placeholder="e.g. 75px or 5rem"
+              />
+            )}
+            {!isPaddingTopCustom && (
+              <button
+                type="button"
+                onClick={() => updateBlock('sectionPaddingTop', paddingTopVal + 'x')}
+                className="text-[9px] text-gray-400 hover:text-blue-600 underline transition-colors"
+              >
+                Enter custom value
+              </button>
+            )}
+          </div>
+
+          {/* --- 2. Padding Bottom --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Padding Bottom
+            </label>
+            <select
+              value={isPaddingBottomCustom ? 'custom' : paddingBottomVal}
+              onChange={e => {
+                if (e.target.value !== 'custom') updateBlock('sectionPaddingBottom', e.target.value);
+              }}
+              className="w-full border border-gray-200 p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-white mb-1.5"
+            >
+              {PADDING_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+            </select>
+            {isPaddingBottomCustom && (
+              <input
+                type="text"
+                value={paddingBottomVal}
+                onChange={e => updateBlock('sectionPaddingBottom', e.target.value)}
+                className="w-full border border-blue-300 p-1.5 text-xs outline-none font-mono focus:border-blue-500"
+                placeholder="e.g. 75px or 5rem"
+              />
+            )}
+            {!isPaddingBottomCustom && (
+              <button
+                type="button"
+                onClick={() => updateBlock('sectionPaddingBottom', paddingBottomVal + 'x')}
+                className="text-[9px] text-gray-400 hover:text-blue-600 underline transition-colors"
+              >
+                Enter custom value
+              </button>
+            )}
+          </div>
+
+          {/* --- 3. Container Width --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Section Container
+            </label>
+            <div className="flex gap-1 p-1 bg-gray-100 border border-gray-200">
+              {[
+                { value: 'container', label: 'Boxed (Container)' },
+                { value: 'full', label: 'Full 100% Width' },
+              ].map(opt => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => updateBlock('sectionContainer', opt.value)}
+                  className={`flex-1 py-1.5 px-2 text-[9px] font-black uppercase tracking-wider transition-all ${
+                    (block?.sectionContainer || 'container') === opt.value
+                      ? 'bg-[var(--color-primary)] text-white shadow-sm'
+                      : 'text-gray-400 hover:text-gray-600 hover:bg-white'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+            <p className="text-[9px] text-gray-400 mt-1.5 leading-tight">
+              {(block?.sectionContainer || 'container') === 'full'
+                ? '⚡ Content will span full browser width (no side padding).'
+                : '📦 Content bound inside max-width container.'}
+            </p>
+          </div>
+
+          {/* --- 4. Background Color --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Background Color
+            </label>
+            <ColorPicker 
+              value={block?.sectionBgColor} 
+              onChange={val => updateBlock('sectionBgColor', val)} 
+            />
+          </div>
+
+          {/* --- 5. Background Image --- */}
+          <div>
+            <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+              Background Image
+            </label>
+            {block?.sectionBgImage ? (
+              <div className="relative mb-2">
+                <img
+                  src={block.sectionBgImage}
+                  className="w-full h-20 object-cover border border-gray-200"
+                  alt="Section BG Preview"
+                />
+                <button
+                  type="button"
+                  onClick={() => updateBlock('sectionBgImage', '')}
+                  className="absolute top-1 right-1 p-1 bg-red-500 text-white shadow hover:bg-red-700 transition-colors"
+                  title="Remove background image"
+                >
+                  <Trash2 size={12} />
+                </button>
+              </div>
+            ) : (
+              <div className="w-full h-16 bg-gray-50 border border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-300 mb-2">
+                <ImageIcon size={18} />
+                <span className="text-[9px] mt-1">No image set</span>
+              </div>
+            )}
+            <MediaUploader category="courses" onUploadSuccess={url => updateBlock('sectionBgImage', url)} />
+          </div>
+
+          {/* --- 6. CSS ID & Class --- */}
+          <div className="space-y-3">
+            <div>
+              <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+                Block CSS ID
+              </label>
+              <input
+                type="text"
+                value={block?.cssId || ''}
+                onChange={e => updateBlock('cssId', e.target.value)}
+                className="w-full border border-gray-200 p-2 text-xs outline-none focus:border-[var(--color-primary)] font-mono"
+                placeholder="section-unique-id"
+              />
+            </div>
+            <div>
+              <label className="block text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1.5">
+                Block CSS Class
+              </label>
+              <input
+                type="text"
+                value={block?.cssClass || ''}
+                onChange={e => updateBlock('cssClass', e.target.value)}
+                className="w-full border border-gray-200 p-2 text-xs outline-none focus:border-[var(--color-primary)] font-mono"
+                placeholder="custom-section-class"
+              />
+            </div>
+          </div>
+
+        </div>
+      )}
+    </div>
+  );
+}
 
 // --- Main Form Component ---
 
@@ -641,6 +872,14 @@ export default function CourseBuilderForm({ schools, initialData = null }) {
           
           {activeSection?.startsWith('custom_') && (
             <div className="space-y-6">
+              <CustomBlockSettingsPanel 
+                block={formData.customSections[activeSection]} 
+                updateBlock={(field, value) => {
+                  const newCustoms = { ...formData.customSections };
+                  newCustoms[activeSection] = { ...newCustoms[activeSection], [field]: value };
+                  setFormData(prev => ({ ...prev, customSections: newCustoms }));
+                }}
+              />
               <div className="bg-[var(--bg-muted)] p-5 border-l-2 border-[var(--color-primary)] rounded-none">
                 <label className="block text-[10px] font-black text-[var(--text-muted)] uppercase mb-2 tracking-widest">Custom Block Header</label>
                 <input 

@@ -101,9 +101,32 @@ export default async function CourseSlugPage({ params }) {
     if (id.startsWith('custom_')) {
       const custom = course.customSections?.[id];
       if (!custom || !custom.content) return null;
+      
+      const pTop = custom.sectionPaddingTop || '60';
+      const pBottom = custom.sectionPaddingBottom || '60';
+      const pyStyle = {
+        paddingTop: isNaN(pTop) ? pTop : `${pTop}px`,
+        paddingBottom: isNaN(pBottom) ? pBottom : `${pBottom}px`,
+      };
+
+      if (custom.sectionBgColor) pyStyle.backgroundColor = custom.sectionBgColor;
+      if (custom.sectionBgImage) {
+        pyStyle.backgroundImage = `url(${custom.sectionBgImage})`;
+        pyStyle.backgroundSize = 'cover';
+        pyStyle.backgroundPosition = 'center';
+      }
+
+      const isFull = custom.sectionContainer === 'full';
+      const wrapperClass = isFull ? 'w-full' : 'max-w-7xl mx-auto px-4';
+
       return (
-        <section key={id} className="py-16 px-4 bg-white">
-          <div className="max-w-7xl mx-auto">
+        <section 
+          key={id} 
+          id={custom.cssId || undefined}
+          className={`relative ${custom.cssClass || ''}`}
+          style={pyStyle}
+        >
+          <div className={wrapperClass}>
             {custom.title && <h2 className="text-3xl font-black text-[#00588b] mb-8 uppercase tracking-tight">{custom.title}</h2>}
             <RichTextRenderer content={custom.content} useProse={custom.useProse !== false} />
           </div>
