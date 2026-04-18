@@ -22,9 +22,14 @@ export default function FeaturesFlipCards({ data }) {
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[35px] mt-[30px] [perspective:1000px]">
         {features.map((item) => {
           const IconComponent = LucideIcons[item.icon] || CircleHelp || (() => null);
+
           return (
-            <div key={item.id} className="group relative h-[180px] cursor-pointer [perspective:1000px]">
-              <div className="relative w-full h-full transition-transform duration-[600ms] [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] rounded-[16px] shadow-[0_5px_20px_rgba(0,0,0,0.04)]">
+            <div 
+              key={item.id} 
+              className="group relative h-[180px] cursor-pointer [perspective:1000px] outline-none"
+              tabIndex="0"
+            >
+              <div className="relative w-full h-full transition-transform duration-[600ms] [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus:[transform:rotateY(180deg)] rounded-[16px] shadow-[0_5px_20px_rgba(0,0,0,0.04)]">
                 {/* FRONT FACE */}
                 <div className="absolute w-full h-full [backface-visibility:hidden] bg-white border border-[#e5e7eb] flex items-center px-[30px] py-[35px] rounded-[16px]">
                   <div className="absolute -top-[12px] right-[30px] w-[42px] h-[50px] bg-[#f1bd0e] text-white flex justify-center items-center font-[800] text-[1.1rem] rounded-t-[4px] z-10 pb-[5px]">

@@ -7,9 +7,9 @@ export default function FloatingEnquiry() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const handleOpen = () => setIsOpen(true);
-    window.addEventListener('open-floating-enquiry', handleOpen);
-    return () => window.removeEventListener('open-floating-enquiry', handleOpen);
+    const handleToggle = () => setIsOpen(prev => !prev);
+    window.addEventListener('open-floating-enquiry', handleToggle);
+    return () => window.removeEventListener('open-floating-enquiry', handleToggle);
   }, []);
 
   return (
@@ -39,7 +39,7 @@ export default function FloatingEnquiry() {
         {/* 🔥 PROFESSIONAL TOGGLE BUTTON (Absolute positioning so it doesn't stretch) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="hidden lg:flex absolute -left-[40px] top-1/2 -translate-y-1/2 bg-[#fec53a] text-[#00588b] px-2 py-6 rounded-l-lg shadow-[-5px_0_15px_rgba(0,0,0,0.15)] hover:bg-[#00588b] hover:text-[#fec53a] transition-colors duration-300 items-center justify-center group border border-r-0 border-gray-200"
+          className={`${isOpen ? 'flex' : 'hidden lg:flex'} absolute -left-[40px] top-1/2 -translate-y-1/2 bg-[#fec53a] text-[#00588b] px-2 py-6 rounded-l-lg shadow-[-5px_0_15px_rgba(0,0,0,0.15)] hover:bg-[#00588b] hover:text-[#fec53a] transition-colors duration-300 items-center justify-center group border border-r-0 border-gray-200`}
           aria-label="Toggle Enquiry Form"
         >
           <span 
