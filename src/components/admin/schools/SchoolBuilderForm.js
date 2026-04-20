@@ -265,15 +265,30 @@ export default function SchoolBuilderForm({ initialData = null }) {
     });
 
     // Merge relational data if available
-    if (initialData?.testimonialsRel?.length > 0) {
+    const testimonialsArr = initialData?.testimonialsRel || [];
+    if (testimonialsArr.length > 0) {
       merged.testimonials = { 
         ...merged.testimonials, 
-        testimonials: initialData.testimonialsRel.map(t => ({
+        // We populate both for dual compatibility if needed, 
+        // but the form expects 'testimonials' based on current modal setup.
+        testimonials: testimonialsArr.map(t => ({
+          name: t.studentName, quote: t.reviewText, company: t.company, batch: t.batch, 
+          img: t.image, rating: t.rating, course: t.course, package: t.package, 
+          slug: t.slug || ''
+        })),
+        list: testimonialsArr.map(t => ({ // Also sync to 'list' for backend sync compatibility
           name: t.studentName, quote: t.reviewText, company: t.company, batch: t.batch, 
           img: t.image, rating: t.rating, course: t.course, package: t.package, 
           slug: t.slug || ''
         }))
       };
+    } else {
+      // Fallback: If no relational data, ensure JSON data is normalized
+      if (merged.testimonials && !merged.testimonials.testimonials && merged.testimonials.list) {
+        merged.testimonials.testimonials = merged.testimonials.list;
+      } else if (merged.testimonials && merged.testimonials.testimonials && !merged.testimonials.list) {
+        merged.testimonials.list = merged.testimonials.testimonials;
+      }
     }
     if (initialData?.placementPartnersRel?.length > 0) {
       merged.placements = {
