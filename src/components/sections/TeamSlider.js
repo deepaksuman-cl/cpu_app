@@ -117,7 +117,7 @@ export default function TeamSlider({ data }) {
         </Swiper>
 
         <button 
-          className="team-prev-btn absolute left-[0px] md:left-[-10px] top-[135px] -translate-y-1/2 w-[36px] h-[36px] bg-[#0c4088] text-white flex justify-center items-center rounded shadow-md z-30 hover:bg-[#f1bd0e] transition-all duration-300"
+          className="team-prev-btn absolute left-[0px] md:left-[-10px] top-[215px] -translate-y-1/2 w-[36px] h-[36px] bg-[#0c4088] text-white flex justify-center items-center rounded shadow-md z-30 hover:bg-[#f1bd0e] transition-all duration-300"
           aria-label="Previous"
         >
           <ChevronLeft className="w-6 h-6" strokeWidth={2.5} />

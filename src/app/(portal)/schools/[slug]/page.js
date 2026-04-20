@@ -13,6 +13,7 @@ import SchoolResearch from "@/components/pages/schools/SchoolResearch";
 import SchoolCommunity from "@/components/pages/schools/SchoolCommunity";
 import SchoolInfrastructure from "@/components/pages/schools/SchoolInfrastructure";
 import TestimonialSection from "@/components/sections/TestimonialSection";
+import TeamSlider from "@/components/sections/TeamSlider";
 import RichTextRenderer from "@/components/common/RichTextRenderer";
 import { getSchoolBySlug } from "@/lib/actions/schoolActions";
 
@@ -40,7 +41,7 @@ export default async function SchoolPage({ params }) {
   // --- Dynamic Layout Logic ---
   const layout = school.layoutOrder || [
     'hero', 'stats', 'about', 'programmes', 'placements', 'alumni', 
-    'industry', 'research', 'community', 'infrastructure', 'testimonials', 'exploreDepartment'
+    'industry', 'research', 'community', 'infrastructure', 'testimonials', 'exploreDepartment', 'team'
   ];
   const customSections = school.customSections || {};
 
@@ -85,6 +86,8 @@ export default async function SchoolPage({ params }) {
         return school.testimonials && !school.testimonials.hide && <TestimonialSection key={id} data={school.testimonials} />;
       case 'exploreDepartment':
         return school.exploreDepartment && !school.exploreDepartment.hide && <SchoolExploreDepartment key={id} data={school.exploreDepartment} />;
+      case 'team':
+        return school.team && !school.team.hide && (school.team.members?.length > 0) && <TeamSlider key={id} data={school.team} />;
       default:
         return null;
     }

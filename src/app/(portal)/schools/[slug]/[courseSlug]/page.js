@@ -29,7 +29,7 @@ import AiCurriculum from "@/components/pages/courses/specialization/Curriculum";
 import AiAdmissions from "@/components/pages/courses/specialization/Admissions";
 import AiPlacements from "@/components/pages/courses/specialization/Placements";
 import AiComparison from "@/components/pages/courses/specialization/Comparison";
-import AiTeam from "@/components/pages/courses/specialization/TeamSlider";
+import AiTeam from "@/components/sections/TeamSlider";
 import AiCTA from "@/components/pages/courses/specialization/CTA";
 import AiFAQ from "@/components/pages/courses/specialization/FAQ";
 import { getCourseBySlug } from "@/lib/actions/courseActions";

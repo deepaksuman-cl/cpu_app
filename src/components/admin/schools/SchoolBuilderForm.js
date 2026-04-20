@@ -53,6 +53,36 @@ const StringListEditor = ({ value = [], onChange, label }) => (
   </div>
 );
 
+const MediaListEditor = ({ value = [], onChange, label }) => (
+  <div className="space-y-2 mt-3">
+    <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">{label}</label>
+    <div className="flex flex-wrap gap-2 border-l border-[var(--border-light)] pl-3">
+      {value.map((url, idx) => (
+        <div key={idx} className="relative group w-16 h-16 border border-[var(--border-default)] bg-[var(--bg-muted)] overflow-hidden">
+          {url && <img src={url} className="w-full h-full object-contain" alt="Logo" />}
+          <button 
+            type="button"
+            onClick={() => onChange(value.filter((_, i) => i !== idx))} 
+            className="absolute top-0 right-0 bg-red-500 text-white p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <Trash2 size={10} />
+          </button>
+        </div>
+      ))}
+      <div className="w-16 h-16 border-2 border-dashed border-[var(--border-default)] flex items-center justify-center hover:border-[var(--color-primary)] transition-colors">
+        <MediaUploader 
+          multiple={true}
+          category="schools"
+          onUploadSuccess={urls => {
+             const newUrls = Array.isArray(urls) ? urls : [urls];
+             onChange([...value, ...newUrls]);
+          }}
+        />
+      </div>
+    </div>
+  </div>
+);
+
 const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate }) => {
   const imageField = fields.find(f => f.type === 'image');
   
@@ -155,6 +185,16 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                       onUpdate(newItems);
                     }} 
                   />
+                ) : field.type === 'mediaList' ? (
+                  <MediaListEditor 
+                    label={field.label} 
+                    value={item[field.key] || []} 
+                    onChange={val => {
+                      const newItems = [...normalizedItems]; 
+                      newItems[idx] = { ...newItems[idx], [field.key]: val }; 
+                      onUpdate(newItems);
+                    }} 
+                  />
                 ) : (
                   <input type={field.type || 'text'} value={item[field.key] || ''} onChange={e => {
                     const newItems = [...normalizedItems]; 
@@ -181,7 +221,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [formData, setFormData] = useState(() => {
-    const base = initialData || {
+    const defaults = {
       name: '', slug: '', metaTitle: '', metaDescription: '', breadcrumb: [],
       hero: { bgImage: '', badge: '', title: { main: '', highlight: '', skyHighlight: '' }, subtitle: '', description: '', cta: [], quickStats: [] },
       stats: [],
@@ -205,13 +245,29 @@ export default function SchoolBuilderForm({ initialData = null }) {
         packageLabel: 'OFFERED PACKAGE',
         verifyLabel: 'VERIFIED STUDENT',
         testimonials: [] 
-      }
+      },
+      team: { title: 'Meet Our Team', subtitle: 'Board of Advisors', members: [] }
     };
+
+    // Safe Merge Logic: Ensure we don't overwrite defaults with nulls from DB
+    const merged = { ...defaults, ...(initialData || {}) };
+    
+    // Explicitly restore objects if they were nullified by initialData
+    Object.keys(defaults).forEach(key => {
+       if (defaults[key] && typeof defaults[key] === 'object' && !Array.isArray(defaults[key])) {
+          if (merged[key] === null || merged[key] === undefined) {
+             merged[key] = defaults[key];
+          } else {
+             // Shallow merge the sub-object to preserve missing sub-keys
+             merged[key] = { ...defaults[key], ...merged[key] };
+          }
+       }
+    });
 
     // Merge relational data if available
     if (initialData?.testimonialsRel?.length > 0) {
-      base.testimonials = { 
-        ...base.testimonials, 
+      merged.testimonials = { 
+        ...merged.testimonials, 
         testimonials: initialData.testimonialsRel.map(t => ({
           name: t.studentName, quote: t.reviewText, company: t.company, batch: t.batch, 
           img: t.image, rating: t.rating, course: t.course, package: t.package, 
@@ -220,8 +276,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
       };
     }
     if (initialData?.placementPartnersRel?.length > 0) {
-      base.placements = {
-        ...base.placements,
+      merged.placements = {
+        ...merged.placements,
         list: initialData.placementPartnersRel.map(p => ({
           name: p.studentName, 
           company: p.companyName, 
@@ -236,8 +292,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
       };
     }
     if (initialData?.facilitiesRel?.length > 0) {
-      base.infrastructure = {
-        ...base.infrastructure,
+      merged.infrastructure = {
+        ...merged.infrastructure,
         list: initialData.facilitiesRel.map(f => ({
           title: f.name, image: f.image, desc: f.description, slug: f.slug || ''
         }))
@@ -246,13 +302,13 @@ export default function SchoolBuilderForm({ initialData = null }) {
 
     const defaultOrder = [
       'hero', 'stats', 'about', 'programmes', 'placements', 'alumni', 
-      'industry', 'research', 'community', 'infrastructure', 'testimonials', 'exploreDepartment'
+      'industry', 'research', 'community', 'infrastructure', 'testimonials', 'exploreDepartment', 'team'
     ];
 
     return {
-      ...base,
-      layoutOrder: base.layoutOrder || defaultOrder,
-      customSections: base.customSections || {}
+      ...merged,
+      layoutOrder: merged.layoutOrder || defaultOrder,
+      customSections: merged.customSections || {}
     };
   });
 
@@ -421,7 +477,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
                       community: { title: "Community", description: "Campus vibe & gallery.", isComplete: formData.community?.description?.length > 0, isHidden: formData.community?.hide, onToggleHide: (v) => updateSection('community', {...formData.community, hide: v}) },
                       infrastructure: { title: "Infrastructure", description: "Labs & facilities.", isComplete: formData.infrastructure?.list?.length > 0, isHidden: formData.infrastructure?.hide, onToggleHide: (v) => updateSection('infrastructure', {...formData.infrastructure, hide: v}) },
                       testimonials: { title: "Testimonials", description: "Student feedback.", isComplete: formData.testimonials?.list?.length > 0, isHidden: formData.testimonials?.hide, onToggleHide: (v) => updateSection('testimonials', {...formData.testimonials, hide: v}) },
-                      exploreDepartment: { title: "Department", description: "Specialized wings.", isComplete: formData.exploreDepartment?.items?.length > 0, isHidden: formData.exploreDepartment?.hide, onToggleHide: (v) => updateSection('exploreDepartment', {...formData.exploreDepartment, hide: v}) }
+                      exploreDepartment: { title: "Department", description: "Specialized wings.", isComplete: formData.exploreDepartment?.items?.length > 0, isHidden: formData.exploreDepartment?.hide, onToggleHide: (v) => updateSection('exploreDepartment', {...formData.exploreDepartment, hide: v}) },
+                      team: { title: "Team / Advisors", description: "Board of advisors slider.", isComplete: formData.team?.members?.length > 0, isHidden: formData.team?.hide, onToggleHide: (v) => updateSection('team', {...formData.team, hide: v}) }
                     };
                     sectionProps = { id, ...mappings[id] };
                   }
@@ -1020,6 +1077,33 @@ export default function SchoolBuilderForm({ initialData = null }) {
                   {key: 'slug', label: 'Slug'}
                 ]}
                 onUpdate={items => updateSection('exploreDepartment', {...formData.exploreDepartment, items: items})}
+              />
+            </div>
+          )}
+
+          {activeSection === 'team' && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Section Title</label>
+                  <input type="text" value={formData.team.title || ''} onChange={e => updateSection('team', {...formData.team, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none" placeholder="e.g. Meet Our Team" />
+                </div>
+                <div>
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Subtitle</label>
+                  <input type="text" value={formData.team.subtitle || ''} onChange={e => updateSection('team', {...formData.team, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none" placeholder="e.g. Board of Advisors" />
+                </div>
+              </div>
+              <NestedListEditor 
+                label="Team Members"
+                items={formData.team.members || []}
+                newItemTemplate={{ name: '', desc: '', img: '', logos: [] }}
+                fields={[
+                  {key: 'name', label: 'Name'},
+                  {key: 'desc', label: 'Description'},
+                  {key: 'img', label: 'Photo URL', type: 'image'},
+                  {key: 'logos', label: 'Affiliated Logos', type: 'mediaList'}
+                ]}
+                onUpdate={items => updateSection('team', {...formData.team, members: items})}
               />
             </div>
           )}
