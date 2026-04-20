@@ -114,6 +114,9 @@ const School = sequelize.define('schools', {
   exploreDepartment: {
     type: DataTypes.JSON,
   },
+  team: {
+    type: DataTypes.JSON,
+  },
   layoutOrder: {
     type: DataTypes.JSON,
   },
