@@ -39,7 +39,7 @@ export default async function SchoolPage({ params }) {
 
   // --- Dynamic Layout Logic ---
   const layout = school.layoutOrder || [
-    'hero', 'stats', 'about', 'programmes', 'placements', 'alumni', 
+    'hero', 'stats', 'about', 'programmes', 'placements', 'alumni',
     'industry', 'research', 'community', 'infrastructure', 'testimonials', 'exploreDepartment'
   ];
   const customSections = school.customSections || {};
@@ -52,8 +52,8 @@ export default async function SchoolPage({ params }) {
       return (
         <section key={id} className="py-16 md:py-24">
           <div className="container mx-auto px-4">
-             {block.title && <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[var(--text-primary)]">{block.title}</h2>}
-             <RichTextRenderer content={block.content} useProse={block.useProse !== false} />
+            {block.title && <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[var(--text-primary)]">{block.title}</h2>}
+            <RichTextRenderer content={block.content} useProse={block.useProse !== false} />
           </div>
         </section>
       );
