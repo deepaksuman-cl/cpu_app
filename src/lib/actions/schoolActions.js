@@ -115,18 +115,21 @@ export async function createSchool(data) {
     const newSchool = await School.create({ ...data, slug });
     
     // Sync Relational Tables (One-way sync from JSON to Relational on Save)
-    if (data.testimonials?.list) {
-      for (const item of data.testimonials.list) {
+    const testimonialItems = data.testimonials?.list || data.testimonials?.testimonials;
+    if (Array.isArray(testimonialItems)) {
+      for (const item of testimonialItems) {
         await Testimonial.create({
-          studentName: item.name, reviewText: item.text || '', rating: item.rating || 5,
+          studentName: item.name, reviewText: item.quote || item.text || '', rating: item.rating || 5,
           image: item.photo || item.img || null, company: item.company || null,
           batch: item.batch || null, course: item.course || null, package: item.package || null,
           tag: item.tag || null, tagColor: item.tagColor || null, schoolId: newSchool.id
         });
       }
     }
-    if (data.placements?.list) {
-      for (const item of data.placements.list) {
+
+    const placementItems = data.placements?.list || data.placements?.items;
+    if (Array.isArray(placementItems)) {
+      for (const item of placementItems) {
         await PlacementPartner.create({
           companyName: item.company, logoUrl: item.image || item.img || '',
           packageOffered: item.package || null, studentName: item.name || null,
@@ -137,8 +140,10 @@ export async function createSchool(data) {
         });
       }
     }
-    if (data.infrastructure?.list) {
-      for (const item of data.infrastructure.list) {
+
+    const infrastructureItems = data.infrastructure?.list || data.infrastructure?.items;
+    if (Array.isArray(infrastructureItems)) {
+      for (const item of infrastructureItems) {
         await Facility.create({
           name: item.title, description: item.desc || '', image: item.image || item.img || null, schoolId: newSchool.id
         });
@@ -168,20 +173,23 @@ export async function updateSchool(id, data) {
     });
 
     // Relational Sync (Hardened): Clear and Re-insert
-    if (data.testimonials?.list) {
+    const testimonialItems = data.testimonials?.list || data.testimonials?.testimonials;
+    if (Array.isArray(testimonialItems)) {
       await Testimonial.destroy({ where: { schoolId: id } });
-      for (const item of data.testimonials.list) {
+      for (const item of testimonialItems) {
         await Testimonial.create({
-          studentName: item.name, reviewText: item.text || '', rating: item.rating || 5,
+          studentName: item.name, reviewText: item.quote || item.text || '', rating: item.rating || 5,
           image: item.photo || item.img || null, company: item.company || null,
           batch: item.batch || null, course: item.course || null, package: item.package || null,
           tag: item.tag || null, tagColor: item.tagColor || null, schoolId: id
         });
       }
     }
-    if (data.placements?.list) {
+
+    const placementItems = data.placements?.list || data.placements?.items;
+    if (Array.isArray(placementItems)) {
       await PlacementPartner.destroy({ where: { schoolId: id } });
-      for (const item of data.placements.list) {
+      for (const item of placementItems) {
         await PlacementPartner.create({
           companyName: item.company, logoUrl: item.image || item.img || '',
           packageOffered: item.package || null, studentName: item.name || null,
@@ -192,9 +200,11 @@ export async function updateSchool(id, data) {
         });
       }
     }
-    if (data.infrastructure?.list) {
+
+    const infrastructureItems = data.infrastructure?.list || data.infrastructure?.items;
+    if (Array.isArray(infrastructureItems)) {
       await Facility.destroy({ where: { schoolId: id } });
-      for (const item of data.infrastructure.list) {
+      for (const item of infrastructureItems) {
         await Facility.create({
           name: item.title, description: item.desc || '', image: item.image || item.img || null, schoolId: id
         });
