@@ -4,11 +4,12 @@ import RichTextEditor from '@/components/admin/RichTextEditor';
 import IconPicker from '@/components/admin/ui/IconPicker';
 import Modal from '@/components/admin/ui/Modal';
 import { createSchool, updateSchool } from '@/lib/actions/schoolActions';
-import { AlertCircle, CheckCircle2, Image as ImageIcon, Pencil, Plus, Save, Settings, Trash2, Layers, Box, Eye } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Image as ImageIcon, Pencil, Plus, Save, Settings, Trash2, Layers, Box, Eye, Bot } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { GripVertical, FileText } from 'lucide-react';
+import { GripVertical, FileText, Users } from 'lucide-react';
+import { AiTeamEditor } from '../courses/AiSectionEditors';
 
 // --- Shared Internal Components ---
 
@@ -209,6 +210,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
   const [isSaving, setIsSaving] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   const [formData, setFormData] = useState(() => {
     const defaults = {
@@ -235,8 +237,32 @@ export default function SchoolBuilderForm({ initialData = null }) {
         packageLabel: 'OFFERED PACKAGE',
         verifyLabel: 'VERIFIED STUDENT',
         testimonials: [] 
+      },
+      team: { 
+        title: 'Mentorship Board', 
+        subtitle: 'Guided by the Best in AI & Technology', 
+        members: [] 
       }
     };
+    // Base merge for initial state
+    const merged = initialData ? { ...defaults, ...initialData } : { ...defaults };
+
+    // Ensure system sections are not null if they were null in the DB
+    if (initialData) {
+      if (initialData.team === null) merged.team = defaults.team;
+      if (initialData.hero === null) merged.hero = defaults.hero;
+      if (initialData.stats === null) merged.stats = defaults.stats;
+      if (initialData.exploreDepartment === null) merged.exploreDepartment = defaults.exploreDepartment;
+      if (initialData.about === null) merged.about = defaults.about;
+      if (initialData.programmes === null) merged.programmes = defaults.programmes;
+      if (initialData.placements === null) merged.placements = defaults.placements;
+      if (initialData.alumni === null) merged.alumni = defaults.alumni;
+      if (initialData.industry === null) merged.industry = defaults.industry;
+      if (initialData.research === null) merged.research = defaults.research;
+      if (initialData.community === null) merged.community = defaults.community;
+      if (initialData.infrastructure === null) merged.infrastructure = defaults.infrastructure;
+      if (initialData.testimonials === null) merged.testimonials = defaults.testimonials;
+    }
 
     // Merge relational data if available
     const testimonialsArr = initialData?.testimonialsRel || [];
@@ -291,12 +317,21 @@ export default function SchoolBuilderForm({ initialData = null }) {
 
     const defaultOrder = [
       'hero', 'stats', 'about', 'programmes', 'placements', 'alumni', 
-      'industry', 'research', 'community', 'infrastructure', 'testimonials', 'exploreDepartment'
+      'industry', 'research', 'community', 'infrastructure', 'testimonials', 'team', 'exploreDepartment'
     ];
+
+    // Merge layoutOrder: Start with initialData or defaultOrder
+    let finalOrder = initialData?.layoutOrder || defaultOrder;
+    
+    // Auto-inject missing system sections (like 'team') into existing layouts
+    const missingSections = defaultOrder.filter(id => !finalOrder.includes(id));
+    if (missingSections.length > 0) {
+      finalOrder = [...finalOrder, ...missingSections];
+    }
 
     return {
       ...merged,
-      layoutOrder: merged.layoutOrder || defaultOrder,
+      layoutOrder: finalOrder,
       customSections: merged.customSections || {}
     };
   });
@@ -304,6 +339,12 @@ export default function SchoolBuilderForm({ initialData = null }) {
   const updateSection = useCallback((section, data) => {
     setFormData(prev => ({ ...prev, [section]: data }));
   }, []);
+
+  const addSystemSection = (sectionId) => {
+    if (formData.layoutOrder.includes(sectionId)) return alert("Section already exists in layout.");
+    setFormData(prev => ({ ...prev, layoutOrder: [...prev.layoutOrder, sectionId] }));
+    setIsPickerOpen(false);
+  };
 
   const handleSave = async () => {
     if (!formData.name) return alert("School name is required.");
@@ -427,12 +468,20 @@ export default function SchoolBuilderForm({ initialData = null }) {
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-light)] pb-3">
           <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide">Page Layout Sections</h2>
-          <button
-            onClick={addCustomBlock}
-            className="flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--bg-surface)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-secondary)] transition-all rounded-none w-full sm:w-auto"
-          >
-            <Plus size={14} strokeWidth={2.5} /> ADD CUSTOM CONTENT BLOCK
-          </button>
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+            <button 
+              onClick={() => setIsPickerOpen(true)}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-white border-2 border-[var(--border-dark)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--bg-muted)] hover:border-[var(--color-primary)] transition-all rounded-none text-[var(--text-primary)] flex-1 sm:flex-none"
+            >
+              <Layers size={14} className="text-[var(--color-primary)]" /> ADD SYSTEM SECTION
+            </button>
+            <button 
+              onClick={addCustomBlock}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--bg-surface)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-secondary)] transition-all rounded-none flex-1 sm:flex-none"
+            >
+              <Plus size={14} strokeWidth={2.5} /> ADD CUSTOM CONTENT BLOCK
+            </button>
+          </div>
         </div>
 
         <DragDropContext onDragEnd={onDragEnd}>
@@ -466,6 +515,7 @@ export default function SchoolBuilderForm({ initialData = null }) {
                       community: { title: "Community", description: "Campus vibe & gallery.", isComplete: formData.community?.description?.length > 0, isHidden: formData.community?.hide, onToggleHide: (v) => updateSection('community', {...formData.community, hide: v}) },
                       infrastructure: { title: "Infrastructure", description: "Labs & facilities.", isComplete: formData.infrastructure?.list?.length > 0, isHidden: formData.infrastructure?.hide, onToggleHide: (v) => updateSection('infrastructure', {...formData.infrastructure, hide: v}) },
                       testimonials: { title: "Testimonials", description: "Student feedback.", isComplete: formData.testimonials?.list?.length > 0, isHidden: formData.testimonials?.hide, onToggleHide: (v) => updateSection('testimonials', {...formData.testimonials, hide: v}) },
+                      team: { title: "AI Mentorship", description: "The mentorship board.", isComplete: formData.team?.members?.length > 0, isHidden: formData.team?.hide, onToggleHide: (v) => updateSection('team', { ...formData.team, hide: v }) },
                       exploreDepartment: { title: "Department", description: "Specialized wings.", isComplete: formData.exploreDepartment?.items?.length > 0, isHidden: formData.exploreDepartment?.hide, onToggleHide: (v) => updateSection('exploreDepartment', {...formData.exploreDepartment, hide: v}) }
                     };
                     sectionProps = { id, ...mappings[id] };
@@ -533,6 +583,13 @@ export default function SchoolBuilderForm({ initialData = null }) {
         }
       >
         <div className="p-2 pb-8">
+
+          {activeSection === 'team' && (
+            <AiTeamEditor 
+              data={formData.team} 
+              onChange={val => updateSection('team', val)} 
+            />
+          )}
 
           {activeSection?.startsWith('custom_') && (
             <div className="space-y-6">
@@ -1096,6 +1153,65 @@ export default function SchoolBuilderForm({ initialData = null }) {
             </div>
           )}
 
+        </div>
+      </Modal>
+
+      {/* --- System Section Picker Modal --- */}
+      <Modal 
+        isOpen={isPickerOpen} 
+        onClose={() => setIsPickerOpen(false)}
+        title="ADD SYSTEM SECTION"
+        maxWidth="max-w-2xl"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-gray-50/30">
+          {[
+            { id: 'hero', title: 'Hero Header', desc: 'Main banner & quick stats' },
+            { id: 'stats', title: 'School Stats', desc: 'Numbers & achievements' },
+            { id: 'about', title: 'About Vision/Mission', desc: 'Core identity & icons' },
+            { id: 'programmes', title: 'Academic Programmes', desc: 'Course levels & lists' },
+            { id: 'placements', title: 'Placements', desc: 'Top students & highlights' },
+            { id: 'alumni', title: 'Notable Alumni', desc: 'Legacy & student stories' },
+            { id: 'industry', title: 'Industry Tie Ups', desc: 'Corporate partners & logos' },
+            { id: 'research', title: 'Research & Innovation', desc: 'Labs, stats & gallery' },
+            { id: 'community', title: 'Community & Life', desc: 'Campus vibe & culture' },
+            { id: 'infrastructure', title: 'Infrastructure', desc: 'Facilities & labs' },
+            { id: 'testimonials', title: 'Testimonials', desc: 'Student feedback & reviews' },
+            { id: 'team', title: 'AI Mentorship Team', desc: 'Mentors & industrial board' },
+            { id: 'exploreDepartment', title: 'Explore Department', desc: 'Specialized wings & slides' }
+          ].map(sec => (
+            <button
+              key={sec.id}
+              onClick={() => addSystemSection(sec.id)}
+              disabled={formData.layoutOrder.includes(sec.id)}
+              className={`p-4 border-2 text-left transition-all group ${
+                formData.layoutOrder.includes(sec.id) 
+                ? 'opacity-40 cursor-not-allowed border-gray-100 bg-gray-50' 
+                : 'border-white bg-white hover:border-[var(--color-primary)] hover:shadow-lg'
+              }`}
+            >
+              <div className="flex justify-between items-start mb-1">
+                <span className={`text-[11px] font-black uppercase tracking-wider ${formData.layoutOrder.includes(sec.id) ? 'text-gray-400' : 'text-[var(--text-primary)]'}`}>
+                  {sec.title}
+                </span>
+                {formData.layoutOrder.includes(sec.id) ? (
+                   <CheckCircle2 size={14} className="text-[var(--color-success)]" />
+                ) : (
+                   <Box size={14} className="text-gray-300 group-hover:text-[var(--color-primary)]" />
+                )}
+              </div>
+              <p className="text-[9px] text-gray-500 font-medium uppercase tracking-tighter leading-tight">
+                {sec.desc}
+              </p>
+              {formData.layoutOrder.includes(sec.id) && (
+                <span className="inline-block mt-2 text-[8px] font-bold text-gray-400 uppercase tracking-widest bg-gray-100 px-1.5 py-0.5">Already Added</span>
+              )}
+            </button>
+          ))}
+        </div>
+        <div className="p-4 bg-blue-50 border-t border-blue-100">
+           <p className="text-[9px] text-blue-700 font-bold uppercase tracking-widest leading-relaxed">
+             Tip: You can reorder these sections using the drag-and-drop handles in the main layout manager.
+           </p>
         </div>
       </Modal>
     </div>

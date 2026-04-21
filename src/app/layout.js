@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       {/* <body> tag hona zaroori hai error hatane ke liye */}
       <body className="min-h-screen bg-gray-100 antialiased">
  <NextTopLoader
