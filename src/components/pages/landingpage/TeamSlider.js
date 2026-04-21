@@ -93,7 +93,7 @@ const teamMembers = [
 export default function TeamSlider() {
   return (
     <section className="py-[60px] bg-[#f8f9fa] font-sans w-full overflow-hidden">
-      
+
       {/* Global CSS for Swiper Customizations & Scrollbar hiding */}
       <style>
         {`
@@ -130,7 +130,7 @@ export default function TeamSlider() {
 
       {/* Slider Container Wrapper */}
       <div className="relative max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
-        
+
         <Swiper
           modules={[Autoplay, Navigation, Pagination]}
           spaceBetween={30}
@@ -160,17 +160,17 @@ export default function TeamSlider() {
             <SwiperSlide key={member.id}>
               {/* Individual Card Layout EXACTLY as per latest screenshot */}
               <div className="group bg-white rounded-[16px] relative flex flex-col h-full shadow-[0_4px_15px_rgba(0,0,0,0.06)] hover:-translate-y-[8px] hover:shadow-[0_15px_30px_rgba(0,0,0,0.12)] transition-all duration-[400ms] overflow-hidden">
-                
+
                 {/* Solid Blue Inverted-U Background */}
                 <div className="absolute top-0 left-0 w-full h-[155px] bg-[#0c4088] z-0"></div>
 
                 {/* Content Container */}
                 <div className="relative z-10 pt-[25px] px-[25px] pb-[30px] flex flex-col h-full">
-                  
+
                   {/* Portrait Image directly embedded */}
-                  <img 
-                    src={member.img} 
-                    alt={member.name} 
+                  <img
+                    src={member.img}
+                    alt={member.name}
                     className="w-full h-[220px] object-cover object-top rounded-[12px] shadow-sm bg-gray-100"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -190,12 +190,12 @@ export default function TeamSlider() {
                     {/* Company Logos Row */}
                     <div className="flex justify-start items-center gap-[10px] flex-wrap mt-auto">
                       {member.logos.map((logoUrl, i) => (
-                        <img 
-                          key={i} 
-                          src={logoUrl} 
-                          alt="Logo" 
+                        <img
+                          key={i}
+                          src={logoUrl}
+                          alt="Logo"
                           className="h-[32px] w-auto object-contain border border-[#eaeaea] rounded-[6px] p-[4px]"
-                          onError={(e) => e.target.style.display = 'none'} 
+                          onError={(e) => e.target.style.display = 'none'}
                         />
                       ))}
                     </div>
@@ -208,16 +208,16 @@ export default function TeamSlider() {
         </Swiper>
 
         {/* Custom Left Navigation Arrow */}
-        <button 
-          className="team-prev-btn absolute left-[0px] md:left-[-10px] top-[135px] -translate-y-1/2 w-[36px] h-[36px] bg-[#0c4088] text-white flex justify-center items-center rounded shadow-md z-30 hover:bg-[#f1bd0e] transition-all duration-300"
+        <button
+          className="team-prev-btn absolute left-[0px] md:left-[-10px] top-[215px] -translate-y-1/2 w-[36px] h-[36px] bg-[#0c4088] text-white flex justify-center items-center rounded shadow-md z-30 hover:bg-[#f1bd0e] transition-all duration-300"
           aria-label="Previous"
         >
           <ChevronLeft className="w-6 h-6" strokeWidth={2.5} />
         </button>
 
         {/* Custom Right Navigation Arrow */}
-        <button 
-          className="team-next-btn absolute right-[0px] md:right-[-10px] top-[135px] -translate-y-1/2 w-[36px] h-[36px] bg-[#0c4088] text-white flex justify-center items-center rounded shadow-md z-30 hover:bg-[#f1bd0e] transition-all duration-300"
+        <button
+          className="team-next-btn absolute right-[0px] md:right-[-10px] top-[215px] -translate-y-1/2 w-[36px] h-[36px] bg-[#0c4088] text-white flex justify-center items-center rounded shadow-md z-30 hover:bg-[#f1bd0e] transition-all duration-300"
           aria-label="Next"
         >
           <ChevronRight className="w-6 h-6" strokeWidth={2.5} />

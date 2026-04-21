@@ -61,9 +61,9 @@ const MediaListEditor = ({ value = [], onChange, label }) => (
       {value.map((url, idx) => (
         <div key={idx} className="relative group w-16 h-16 border border-[var(--border-default)] bg-[var(--bg-muted)] overflow-hidden">
           {url && <img src={url} className="w-full h-full object-contain" alt="Logo" />}
-          <button 
+          <button
             type="button"
-            onClick={() => onChange(value.filter((_, i) => i !== idx))} 
+            onClick={() => onChange(value.filter((_, i) => i !== idx))}
             className="absolute top-0 right-0 bg-red-500 text-white p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
           >
             <Trash2 size={10} />
@@ -71,12 +71,12 @@ const MediaListEditor = ({ value = [], onChange, label }) => (
         </div>
       ))}
       <div className="w-16 h-16 border-2 border-dashed border-[var(--border-default)] flex items-center justify-center hover:border-[var(--color-primary)] transition-colors">
-        <MediaUploader 
+        <MediaUploader
           multiple={true}
           category="schools"
           onUploadSuccess={urls => {
-             const newUrls = Array.isArray(urls) ? urls : [urls];
-             onChange([...value, ...newUrls]);
+            const newUrls = Array.isArray(urls) ? urls : [urls];
+            onChange([...value, ...newUrls]);
           }}
         />
       </div>
@@ -84,7 +84,7 @@ const MediaListEditor = ({ value = [], onChange, label }) => (
   </div>
 );
 
-const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate }) => {
+const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate, hideBulkAdd = false }) => {
   const imageField = fields.find(f => f.type === 'image');
 
   // Normalize items to objects if they are strings (legacy support)
@@ -100,7 +100,7 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 border-b border-[var(--border-light)] pb-2">
         <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">{label}</h4>
         <div className="flex items-center gap-2">
-          {imageField && (
+          {!hideBulkAdd && imageField && (
             <MediaUploader
               multiple={true}
               category="schools"
@@ -110,97 +110,175 @@ const NestedListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate
                   const newItems = urls.map(url => ({ ...newItemTemplate, [imageField.key]: url }));
                   onUpdate([...normalizedItems, ...newItems]);
                 }
-             }}
-           />
-        )}
-        <button onClick={() => onUpdate([...normalizedItems, newItemTemplate])} className="flex items-center justify-center gap-1 text-[10px] h-[34px] font-bold text-[var(--text-inverse)] bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] transition-colors px-3 uppercase tracking-wide rounded-none">
-          <Plus size={14} /> Row
-        </button>
-      </div>
-    </div>
-    <div className="space-y-3">
-      {normalizedItems.map((item, idx) => (
-        <div key={idx} className="border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 relative group hover:border-[var(--border-dark)] transition-colors rounded-none">
-          <button onClick={() => onUpdate(normalizedItems.filter((_, i) => i !== idx))} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 transition-colors bg-[var(--bg-surface)] border border-transparent hover:border-[var(--color-danger-light)] rounded-none">
-            <Trash2 size={16} />
+              }}
+            />
+          )}
+          <button onClick={() => onUpdate([...normalizedItems, newItemTemplate])} className="flex items-center justify-center gap-1 text-[10px] h-[34px] font-bold text-[var(--text-inverse)] bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] transition-colors px-3 uppercase tracking-wide rounded-none">
+            <Plus size={14} /> Row
           </button>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-            {fields.map(field => (
-              <div key={field.key} className={field.type === 'richText' || field.type === 'stringList' ? 'md:col-span-2' : ''}>
-                <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">{field.label}</label>
-                {field.type === 'icon' ? (
-                  <IconPicker 
-                    value={item[field.key]} 
-                    onChange={val => {
-                      const newItems = [...normalizedItems]; 
-                      newItems[idx] = { ...newItems[idx], [field.key]: val }; 
-                      onUpdate(newItems);
-                    }} 
-                  />
-                ) : field.type === 'image' ? (
-                  <div className="space-y-2">
-                    <div className="border border-[var(--border-default)] bg-[var(--bg-muted)] overflow-hidden h-24 flex items-center justify-center">
-                      {typeof item[field.key] === 'string' && item[field.key] ? (
-                        <img src={item[field.key]} className="w-full h-full object-cover" alt="Preview" />
-                      ) : (
-                        <ImageIcon size={24} className="text-[var(--text-muted)]" />
-                      )}
-                    </div>
-                    <div className="flex flex-col sm:flex-row gap-2">
-                      <input type="text" value={typeof item[field.key] === 'string' ? item[field.key] : ''} onChange={e => {
-                        const newItems = [...normalizedItems]; 
-                        newItems[idx] = { ...newItems[idx], [field.key]: e.target.value }; 
+        </div>
+      </div>
+      <div className="space-y-3">
+        {normalizedItems.map((item, idx) => (
+          <div key={idx} className="border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 relative group hover:border-[var(--border-dark)] transition-colors rounded-none">
+            <button onClick={() => onUpdate(normalizedItems.filter((_, i) => i !== idx))} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 transition-colors bg-[var(--bg-surface)] border border-transparent hover:border-[var(--color-danger-light)] rounded-none">
+              <Trash2 size={16} />
+            </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+              {fields.map(field => (
+                <div key={field.key} className={field.type === 'richText' || field.type === 'stringList' ? 'md:col-span-2' : ''}>
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">{field.label}</label>
+                  {field.type === 'icon' ? (
+                    <IconPicker
+                      value={item[field.key]}
+                      onChange={val => {
+                        const newItems = [...normalizedItems];
+                        newItems[idx] = { ...newItems[idx], [field.key]: val };
                         onUpdate(newItems);
-                      }} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="Image URL..." />
-                      <div className="w-full sm:w-auto shrink-0">
-                        <MediaUploader category="schools" onUploadSuccess={url => {
-                          const newItems = [...normalizedItems]; 
-                          newItems[idx] = { ...newItems[idx], [field.key]: url }; 
+                      }}
+                    />
+                  ) : field.type === 'image' ? (
+                    <div className="space-y-2">
+                      <div className="border border-[var(--border-default)] bg-[var(--bg-muted)] overflow-hidden h-24 flex items-center justify-center">
+                        {typeof item[field.key] === 'string' && item[field.key] ? (
+                          <img src={item[field.key]} className="w-full h-full object-cover" alt="Preview" />
+                        ) : (
+                          <ImageIcon size={24} className="text-[var(--text-muted)]" />
+                        )}
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <input type="text" value={typeof item[field.key] === 'string' ? item[field.key] : ''} onChange={e => {
+                          const newItems = [...normalizedItems];
+                          newItems[idx] = { ...newItems[idx], [field.key]: e.target.value };
                           onUpdate(newItems);
-                        }} />
+                        }} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="Image URL..." />
+                        <div className="w-full sm:w-auto shrink-0">
+                          <MediaUploader category="schools" onUploadSuccess={url => {
+                            const newItems = [...normalizedItems];
+                            newItems[idx] = { ...newItems[idx], [field.key]: url };
+                            onUpdate(newItems);
+                          }} />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ) : field.type === 'richText' ? (
-                  <RichTextEditor 
-                    value={item[field.key] || ''} 
-                    onChange={val => {
-                      const newItems = [...normalizedItems]; 
-                      newItems[idx] = { ...newItems[idx], [field.key]: val }; 
+                  ) : field.type === 'richText' ? (
+                    <RichTextEditor
+                      value={item[field.key] || ''}
+                      onChange={val => {
+                        const newItems = [...normalizedItems];
+                        newItems[idx] = { ...newItems[idx], [field.key]: val };
+                        onUpdate(newItems);
+                      }}
+                      useProse={item.useProse !== false}
+                      onProseChange={val => {
+                        const newItems = [...normalizedItems];
+                        newItems[idx] = { ...newItems[idx], useProse: val };
+                        onUpdate(newItems);
+                      }}
+                    />
+                  ) : field.type === 'stringList' ? (
+                    <StringListEditor
+                      label={field.label}
+                      value={item[field.key] || []}
+                      onChange={val => {
+                        const newItems = [...normalizedItems];
+                        newItems[idx] = { ...newItems[idx], [field.key]: val };
+                        onUpdate(newItems);
+                      }}
+                    />
+                  ) : (
+                    <input type={field.type || 'text'} value={item[field.key] || ''} onChange={e => {
+                      const newItems = [...normalizedItems];
+                      newItems[idx] = { ...newItems[idx], [field.key]: e.target.value };
                       onUpdate(newItems);
-                    }} 
-                    useProse={item.useProse !== false}
-                    onProseChange={val => {
-                      const newItems = [...normalizedItems]; 
-                      newItems[idx] = { ...newItems[idx], useProse: val }; 
-                      onUpdate(newItems);
-                    }}
-                  />
-                ) : field.type === 'stringList' ? (
-                  <StringListEditor 
-                    label={field.label} 
-                    value={item[field.key] || []} 
-                    onChange={val => {
-                      const newItems = [...normalizedItems]; 
-                      newItems[idx] = { ...newItems[idx], [field.key]: val }; 
-                      onUpdate(newItems);
-                    }} 
-                  />
-                ) : (
-                  <input type={field.type || 'text'} value={item[field.key] || ''} onChange={e => {
-                    const newItems = [...normalizedItems]; 
-                    newItems[idx] = { ...newItems[idx], [field.key]: e.target.value }; 
-                    onUpdate(newItems);
-                  }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" />
-                )}
-              </div>
-            ))}
+                    }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+}
+
+const TeamMembersListEditor = ({ label, items = [], fields, onUpdate, newItemTemplate }) => {
+  const imageField = fields.find(f => f.type === 'image');
+  const normalizedItems = (items || []).map(item => {
+    if (typeof item === 'string') return { ...newItemTemplate, [imageField?.key || 'url']: item };
+    return item || newItemTemplate;
+  });
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 border-b border-[var(--border-light)] pb-2">
+        <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">{label}</h4>
+        <div className="flex items-center gap-2">
+          <button onClick={() => onUpdate([...normalizedItems, newItemTemplate])} className="flex items-center justify-center gap-1 text-[10px] h-[34px] font-bold text-[var(--text-inverse)] bg-[var(--text-primary)] hover:bg-[var(--text-secondary)] transition-colors px-3 uppercase tracking-wide rounded-none">
+            <Plus size={14} /> Row
+          </button>
+        </div>
+      </div>
+      <div className="space-y-3">
+        {normalizedItems.map((item, idx) => (
+          <div key={idx} className="border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 relative group hover:border-[var(--border-dark)] transition-colors rounded-none">
+            <button onClick={() => onUpdate(normalizedItems.filter((_, i) => i !== idx))} className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--color-danger)] p-1 transition-colors bg-[var(--bg-surface)] border border-transparent hover:border-[var(--color-danger-light)] rounded-none">
+              <Trash2 size={16} />
+            </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+              {fields.map(field => (
+                <div key={field.key} className={field.type === 'richText' || field.type === 'stringList' ? 'md:col-span-2' : ''}>
+                  <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">{field.label}</label>
+                  {field.type === 'icon' ? (
+                    <IconPicker value={item[field.key]} onChange={val => {
+                        const newItems = [...normalizedItems]; newItems[idx] = { ...newItems[idx], [field.key]: val }; onUpdate(newItems);
+                    }} />
+                  ) : field.type === 'image' ? (
+                    <div className="space-y-2">
+                      <div className="border border-[var(--border-default)] bg-[var(--bg-muted)] overflow-hidden h-24 flex items-center justify-center">
+                        {typeof item[field.key] === 'string' && item[field.key] ? (
+                          <img src={item[field.key]} className="w-full h-full object-cover" alt="Preview" />
+                        ) : ( <ImageIcon size={24} className="text-[var(--text-muted)]" /> )}
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <input type="text" value={typeof item[field.key] === 'string' ? item[field.key] : ''} onChange={e => {
+                          const newItems = [...normalizedItems]; newItems[idx] = { ...newItems[idx], [field.key]: e.target.value }; onUpdate(newItems);
+                        }} className="flex-1 border border-[var(--border-default)] p-2 text-xs outline-none focus:border-[var(--color-primary)] bg-[var(--bg-surface)] rounded-none" placeholder="Image URL..." />
+                        <div className="w-full sm:w-auto shrink-0">
+                          <MediaUploader category="schools" onUploadSuccess={url => {
+                            const newItems = [...normalizedItems]; newItems[idx] = { ...newItems[idx], [field.key]: url }; onUpdate(newItems);
+                          }} />
+                        </div>
+                      </div>
+                    </div>
+                  ) : field.type === 'richText' ? (
+                    <RichTextEditor value={item[field.key] || ''} onChange={val => {
+                        const newItems = [...normalizedItems]; newItems[idx] = { ...newItems[idx], [field.key]: val }; onUpdate(newItems);
+                    }} useProse={item.useProse !== false} onProseChange={val => {
+                        const newItems = [...normalizedItems]; newItems[idx] = { ...newItems[idx], useProse: val }; onUpdate(newItems);
+                    }} />
+                  ) : field.type === 'stringList' ? (
+                    <StringListEditor label={field.label} value={item[field.key] || []} onChange={val => {
+                        const newItems = [...normalizedItems]; newItems[idx] = { ...newItems[idx], [field.key]: val }; onUpdate(newItems);
+                    }} />
+                  ) : field.type === 'mediaList' ? (
+                    <MediaListEditor value={item[field.key] || []} onChange={val => {
+                        const newItems = [...normalizedItems]; newItems[idx] = { ...newItems[idx], [field.key]: val }; onUpdate(newItems);
+                    }} label={field.label} />
+                  ) : (
+                    <input type={field.type || 'text'} value={item[field.key] || ''} onChange={e => {
+                      const newItems = [...normalizedItems]; newItems[idx] = { ...newItems[idx], [field.key]: e.target.value }; onUpdate(newItems);
+                    }} className="w-full border border-[var(--border-default)] p-2 text-xs outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-none transition-colors" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 // --- Main Form Component ---
@@ -236,12 +314,12 @@ export default function SchoolBuilderForm({ initialData = null }) {
         location: 'LADYBIRD, DELHI',
         packageLabel: 'OFFERED PACKAGE',
         verifyLabel: 'VERIFIED STUDENT',
-        testimonials: [] 
+        testimonials: []
       },
-      team: { 
-        title: 'Mentorship Board', 
-        subtitle: 'Guided by the Best in AI & Technology', 
-        members: [] 
+      team: {
+        title: 'Mentorship Board',
+        subtitle: 'Guided by the Best in AI & Technology',
+        members: []
       }
     };
     // Base merge for initial state
@@ -267,18 +345,18 @@ export default function SchoolBuilderForm({ initialData = null }) {
     // Merge relational data if available
     const testimonialsArr = initialData?.testimonialsRel || [];
     if (testimonialsArr.length > 0) {
-      merged.testimonials = { 
-        ...merged.testimonials, 
+      merged.testimonials = {
+        ...merged.testimonials,
         // We populate both for dual compatibility if needed, 
         // but the form expects 'testimonials' based on current modal setup.
         testimonials: testimonialsArr.map(t => ({
-          name: t.studentName, quote: t.reviewText, company: t.company, batch: t.batch, 
-          img: t.image, rating: t.rating, course: t.course, package: t.package, 
+          name: t.studentName, quote: t.reviewText, company: t.company, batch: t.batch,
+          img: t.image, rating: t.rating, course: t.course, package: t.package,
           slug: t.slug || ''
         })),
         list: testimonialsArr.map(t => ({ // Also sync to 'list' for backend sync compatibility
-          name: t.studentName, quote: t.reviewText, company: t.company, batch: t.batch, 
-          img: t.image, rating: t.rating, course: t.course, package: t.package, 
+          name: t.studentName, quote: t.reviewText, company: t.company, batch: t.batch,
+          img: t.image, rating: t.rating, course: t.course, package: t.package,
           slug: t.slug || ''
         }))
       };
@@ -316,13 +394,13 @@ export default function SchoolBuilderForm({ initialData = null }) {
     }
 
     const defaultOrder = [
-      'hero', 'stats', 'about', 'programmes', 'placements', 'alumni', 
+      'hero', 'stats', 'about', 'programmes', 'placements', 'alumni',
       'industry', 'research', 'community', 'infrastructure', 'testimonials', 'team', 'exploreDepartment'
     ];
 
     // Merge layoutOrder: Start with initialData or defaultOrder
     let finalOrder = initialData?.layoutOrder || defaultOrder;
-    
+
     // Auto-inject missing system sections (like 'team') into existing layouts
     const missingSections = defaultOrder.filter(id => !finalOrder.includes(id));
     if (missingSections.length > 0) {
@@ -469,13 +547,13 @@ export default function SchoolBuilderForm({ initialData = null }) {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-light)] pb-3">
           <h2 className="text-[14px] font-black text-[var(--text-primary)] uppercase tracking-wide">Page Layout Sections</h2>
           <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-            <button 
+            <button
               onClick={() => setIsPickerOpen(true)}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-white border-2 border-[var(--border-dark)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--bg-muted)] hover:border-[var(--color-primary)] transition-all rounded-none text-[var(--text-primary)] flex-1 sm:flex-none"
             >
               <Layers size={14} className="text-[var(--color-primary)]" /> ADD SYSTEM SECTION
             </button>
-            <button 
+            <button
               onClick={addCustomBlock}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--bg-surface)] text-[10px] font-bold uppercase tracking-widest hover:bg-[var(--text-secondary)] transition-all rounded-none flex-1 sm:flex-none"
             >
@@ -506,17 +584,17 @@ export default function SchoolBuilderForm({ initialData = null }) {
                     const mappings = {
                       hero: { title: "Hero Header", description: "Top banner & title.", isComplete: !!formData.hero?.title?.main, isHidden: formData.hero?.hide, onToggleHide: (v) => updateSection('hero', { ...formData.hero, hide: v }) },
                       stats: { title: "Quick Stats", description: "University numbers.", isComplete: formData.stats?.length > 0, isHidden: formData.stats?.[0]?.hide, onToggleHide: (v) => { const n = [...(formData.stats || [])]; if (n[0]) n[0].hide = v; updateSection('stats', n); } },
-                      about: { title: "Vision & Mission", description: "School's core values.", isComplete: !!formData.about?.vision?.text, isHidden: formData.about?.hide, onToggleHide: (v) => updateSection('about', {...formData.about, hide: v}) },
-                      programmes: { title: "Programmes", description: "Course levels & links.", isComplete: formData.programmes?.levels?.length > 0, isHidden: formData.programmes?.hide, onToggleHide: (v) => updateSection('programmes', {...formData.programmes, hide: v}) },
-                      placements: { title: "Placements", description: "Student placement list.", isComplete: formData.placements?.list?.length > 0, isHidden: formData.placements?.hide, onToggleHide: (v) => updateSection('placements', {...formData.placements, hide: v}) },
-                      alumni: { title: "Alumni", description: "Alumni success stories.", isComplete: formData.alumni?.list?.length > 0, isHidden: formData.alumni?.hide, onToggleHide: (v) => updateSection('alumni', {...formData.alumni, hide: v}) },
-                      industry: { title: "Industry Partners", description: "Logos of tie-ups.", isComplete: formData.industry?.partners?.length > 0, isHidden: formData.industry?.hide, onToggleHide: (v) => updateSection('industry', {...formData.industry, hide: v}) },
-                      research: { title: "Research & Dev", description: "Patents and stats.", isComplete: formData.research?.stats?.length > 0, isHidden: formData.research?.hide, onToggleHide: (v) => updateSection('research', {...formData.research, hide: v}) },
-                      community: { title: "Community", description: "Campus vibe & gallery.", isComplete: formData.community?.description?.length > 0, isHidden: formData.community?.hide, onToggleHide: (v) => updateSection('community', {...formData.community, hide: v}) },
-                      infrastructure: { title: "Infrastructure", description: "Labs & facilities.", isComplete: formData.infrastructure?.list?.length > 0, isHidden: formData.infrastructure?.hide, onToggleHide: (v) => updateSection('infrastructure', {...formData.infrastructure, hide: v}) },
-                      testimonials: { title: "Testimonials", description: "Student feedback.", isComplete: formData.testimonials?.list?.length > 0, isHidden: formData.testimonials?.hide, onToggleHide: (v) => updateSection('testimonials', {...formData.testimonials, hide: v}) },
+                      about: { title: "Vision & Mission", description: "School's core values.", isComplete: !!formData.about?.vision?.text, isHidden: formData.about?.hide, onToggleHide: (v) => updateSection('about', { ...formData.about, hide: v }) },
+                      programmes: { title: "Programmes", description: "Course levels & links.", isComplete: formData.programmes?.levels?.length > 0, isHidden: formData.programmes?.hide, onToggleHide: (v) => updateSection('programmes', { ...formData.programmes, hide: v }) },
+                      placements: { title: "Placements", description: "Student placement list.", isComplete: formData.placements?.list?.length > 0, isHidden: formData.placements?.hide, onToggleHide: (v) => updateSection('placements', { ...formData.placements, hide: v }) },
+                      alumni: { title: "Alumni", description: "Alumni success stories.", isComplete: formData.alumni?.list?.length > 0, isHidden: formData.alumni?.hide, onToggleHide: (v) => updateSection('alumni', { ...formData.alumni, hide: v }) },
+                      industry: { title: "Industry Partners", description: "Logos of tie-ups.", isComplete: formData.industry?.partners?.length > 0, isHidden: formData.industry?.hide, onToggleHide: (v) => updateSection('industry', { ...formData.industry, hide: v }) },
+                      research: { title: "Research & Dev", description: "Patents and stats.", isComplete: formData.research?.stats?.length > 0, isHidden: formData.research?.hide, onToggleHide: (v) => updateSection('research', { ...formData.research, hide: v }) },
+                      community: { title: "Community", description: "Campus vibe & gallery.", isComplete: formData.community?.description?.length > 0, isHidden: formData.community?.hide, onToggleHide: (v) => updateSection('community', { ...formData.community, hide: v }) },
+                      infrastructure: { title: "Infrastructure", description: "Labs & facilities.", isComplete: formData.infrastructure?.list?.length > 0, isHidden: formData.infrastructure?.hide, onToggleHide: (v) => updateSection('infrastructure', { ...formData.infrastructure, hide: v }) },
+                      testimonials: { title: "Testimonials", description: "Student feedback.", isComplete: formData.testimonials?.list?.length > 0, isHidden: formData.testimonials?.hide, onToggleHide: (v) => updateSection('testimonials', { ...formData.testimonials, hide: v }) },
                       team: { title: "AI Mentorship", description: "The mentorship board.", isComplete: formData.team?.members?.length > 0, isHidden: formData.team?.hide, onToggleHide: (v) => updateSection('team', { ...formData.team, hide: v }) },
-                      exploreDepartment: { title: "Department", description: "Specialized wings.", isComplete: formData.exploreDepartment?.items?.length > 0, isHidden: formData.exploreDepartment?.hide, onToggleHide: (v) => updateSection('exploreDepartment', {...formData.exploreDepartment, hide: v}) }
+                      exploreDepartment: { title: "Department", description: "Specialized wings.", isComplete: formData.exploreDepartment?.items?.length > 0, isHidden: formData.exploreDepartment?.hide, onToggleHide: (v) => updateSection('exploreDepartment', { ...formData.exploreDepartment, hide: v }) }
                     };
                     sectionProps = { id, ...mappings[id] };
                   }
@@ -584,12 +662,6 @@ export default function SchoolBuilderForm({ initialData = null }) {
       >
         <div className="p-2 pb-8">
 
-          {activeSection === 'team' && (
-            <AiTeamEditor 
-              data={formData.team} 
-              onChange={val => updateSection('team', val)} 
-            />
-          )}
 
           {activeSection?.startsWith('custom_') && (
             <div className="space-y-6">
@@ -1131,24 +1203,24 @@ export default function SchoolBuilderForm({ initialData = null }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Section Title</label>
-                  <input type="text" value={formData.team.title || ''} onChange={e => updateSection('team', {...formData.team, title: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none" placeholder="e.g. Meet Our Team" />
+                  <input type="text" value={formData.team.title || ''} onChange={e => updateSection('team', { ...formData.team, title: e.target.value })} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none" placeholder="e.g. Meet Our Team" />
                 </div>
                 <div>
                   <label className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Subtitle</label>
-                  <input type="text" value={formData.team.subtitle || ''} onChange={e => updateSection('team', {...formData.team, subtitle: e.target.value})} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none" placeholder="e.g. Board of Advisors" />
+                  <input type="text" value={formData.team.subtitle || ''} onChange={e => updateSection('team', { ...formData.team, subtitle: e.target.value })} className="w-full border border-[var(--border-default)] p-2.5 text-xs focus:border-[var(--color-primary)] outline-none rounded-none" placeholder="e.g. Board of Advisors" />
                 </div>
               </div>
-              <NestedListEditor 
+              <TeamMembersListEditor
                 label="Team Members"
                 items={formData.team.members || []}
                 newItemTemplate={{ name: '', desc: '', img: '', logos: [] }}
                 fields={[
-                  {key: 'name', label: 'Name'},
-                  {key: 'desc', label: 'Description'},
-                  {key: 'img', label: 'Photo URL', type: 'image'},
-                  {key: 'logos', label: 'Affiliated Logos', type: 'mediaList'}
+                  { key: 'name', label: 'Name' },
+                  { key: 'desc', label: 'Description' },
+                  { key: 'img', label: 'Photo URL', type: 'image' },
+                  { key: 'logos', label: 'Affiliated Logos', type: 'mediaList' }
                 ]}
-                onUpdate={items => updateSection('team', {...formData.team, members: items})}
+                onUpdate={items => updateSection('team', { ...formData.team, members: items })}
               />
             </div>
           )}
@@ -1157,8 +1229,8 @@ export default function SchoolBuilderForm({ initialData = null }) {
       </Modal>
 
       {/* --- System Section Picker Modal --- */}
-      <Modal 
-        isOpen={isPickerOpen} 
+      <Modal
+        isOpen={isPickerOpen}
         onClose={() => setIsPickerOpen(false)}
         title="ADD SYSTEM SECTION"
         maxWidth="max-w-2xl"
@@ -1183,20 +1255,19 @@ export default function SchoolBuilderForm({ initialData = null }) {
               key={sec.id}
               onClick={() => addSystemSection(sec.id)}
               disabled={formData.layoutOrder.includes(sec.id)}
-              className={`p-4 border-2 text-left transition-all group ${
-                formData.layoutOrder.includes(sec.id) 
-                ? 'opacity-40 cursor-not-allowed border-gray-100 bg-gray-50' 
+              className={`p-4 border-2 text-left transition-all group ${formData.layoutOrder.includes(sec.id)
+                ? 'opacity-40 cursor-not-allowed border-gray-100 bg-gray-50'
                 : 'border-white bg-white hover:border-[var(--color-primary)] hover:shadow-lg'
-              }`}
+                }`}
             >
               <div className="flex justify-between items-start mb-1">
                 <span className={`text-[11px] font-black uppercase tracking-wider ${formData.layoutOrder.includes(sec.id) ? 'text-gray-400' : 'text-[var(--text-primary)]'}`}>
                   {sec.title}
                 </span>
                 {formData.layoutOrder.includes(sec.id) ? (
-                   <CheckCircle2 size={14} className="text-[var(--color-success)]" />
+                  <CheckCircle2 size={14} className="text-[var(--color-success)]" />
                 ) : (
-                   <Box size={14} className="text-gray-300 group-hover:text-[var(--color-primary)]" />
+                  <Box size={14} className="text-gray-300 group-hover:text-[var(--color-primary)]" />
                 )}
               </div>
               <p className="text-[9px] text-gray-500 font-medium uppercase tracking-tighter leading-tight">
@@ -1209,9 +1280,9 @@ export default function SchoolBuilderForm({ initialData = null }) {
           ))}
         </div>
         <div className="p-4 bg-blue-50 border-t border-blue-100">
-           <p className="text-[9px] text-blue-700 font-bold uppercase tracking-widest leading-relaxed">
-             Tip: You can reorder these sections using the drag-and-drop handles in the main layout manager.
-           </p>
+          <p className="text-[9px] text-blue-700 font-bold uppercase tracking-widest leading-relaxed">
+            Tip: You can reorder these sections using the drag-and-drop handles in the main layout manager.
+          </p>
         </div>
       </Modal>
     </div>

@@ -80,9 +80,9 @@ export default function TeamSlider({ data }) {
                 <div className="absolute top-0 left-0 w-full h-[155px] bg-[#0c4088] z-0"></div>
 
                 <div className="relative z-10 pt-[25px] px-[25px] pb-[30px] flex flex-col h-full">
-                  <img 
-                    src={member.img} 
-                    alt={member.name} 
+                  <img
+                    src={member.img}
+                    alt={member.name}
                     className="w-full h-[220px] object-cover object-top rounded-[12px] shadow-sm bg-gray-100"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -100,12 +100,12 @@ export default function TeamSlider({ data }) {
 
                     <div className="flex justify-start items-center gap-[10px] flex-wrap mt-auto">
                       {(member.logos || []).map((logoUrl, i) => (
-                        <img 
-                          key={i} 
-                          src={logoUrl} 
-                          alt="Logo" 
+                        <img
+                          key={i}
+                          src={logoUrl}
+                          alt="Logo"
                           className="h-[32px] w-auto object-contain border border-[#eaeaea] rounded-[6px] p-[4px]"
-                          onError={(e) => e.target.style.display = 'none'} 
+                          onError={(e) => e.target.style.display = 'none'}
                         />
                       ))}
                     </div>
@@ -116,15 +116,15 @@ export default function TeamSlider({ data }) {
           ))}
         </Swiper>
 
-        <button 
+        <button
           className="team-prev-btn absolute left-[0px] md:left-[-10px] top-[215px] -translate-y-1/2 w-[36px] h-[36px] bg-[#0c4088] text-white flex justify-center items-center rounded shadow-md z-30 hover:bg-[#f1bd0e] transition-all duration-300"
           aria-label="Previous"
         >
           <ChevronLeft className="w-6 h-6" strokeWidth={2.5} />
         </button>
 
-        <button 
-          className="team-next-btn absolute right-[0px] md:right-[-10px] top-[135px] -translate-y-1/2 w-[36px] h-[36px] bg-[#0c4088] text-white flex justify-center items-center rounded shadow-md z-30 hover:bg-[#f1bd0e] transition-all duration-300"
+        <button
+          className="team-next-btn absolute right-[0px] md:right-[-10px] top-[215px] -translate-y-1/2 w-[36px] h-[36px] bg-[#0c4088] text-white flex justify-center items-center rounded shadow-md z-30 hover:bg-[#f1bd0e] transition-all duration-300"
           aria-label="Next"
         >
           <ChevronRight className="w-6 h-6" strokeWidth={2.5} />
